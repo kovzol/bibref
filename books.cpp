@@ -16,6 +16,111 @@ using namespace sword;
 
 vector<Book> books;
 
+string greekToLatin(string word) {
+    string rewritten;
+    for (int i = 0; i < word.length(); i += 2) {
+        auto c1 = static_cast<unsigned char>(word[i]);
+        auto c2 = static_cast<unsigned char>(word[i + 1]);
+        char c;
+        // keep care of special characters
+        if (c1 == 0x80) {
+            i--;
+        }
+        // keep only Greek characters
+        if (c1 == 0xCE || c1 == 0xCF) {
+            switch (c1) {
+            case 0xCE:
+                switch (c2) {
+                case 0xB1:
+                    c = 'a';
+                    break;
+                case 0xB2:
+                    c = 'b';
+                    break;
+                case 0xB3:
+                    c = 'g';
+                    break;
+                case 0xB4:
+                    c = 'd';
+                    break;
+                case 0xB5:
+                    c = 'e';
+                    break;
+                case 0xB6:
+                    c = 'z';
+                    break;
+                case 0xB7:
+                    c = 'h'; // eta
+                    break;
+                case 0xB8:
+                    c = 'u'; // theta
+                    break;
+                case 0xB9:
+                    c = 'i';
+                    break;
+                case 0xBA:
+                    c = 'k';
+                    break;
+                case 0xBB:
+                    c = 'l';
+                    break;
+                case 0xBC:
+                    c = 'm';
+                    break;
+                case 0xBD:
+                    c = 'n';
+                    break;
+                case 0xBE:
+                    c = 'j'; // xi
+                    break;
+                case 0xBF:
+                    c = 'o';
+                    break;
+                }
+                break;
+            case 0xCF:
+                switch (c2) {
+                case 0x80:
+                    c = 'p';
+                    break;
+                case 0x81:
+                    c = 'r';
+                    break;
+                case 0x82:
+                    c = 'w'; // sigma at the end of the word
+                    break;
+                case 0x83:
+                    c = 's';
+                    break;
+                case 0x84:
+                    c = 't';
+                    break;
+                case 0x85:
+                    c = 'y';
+                    break;
+                case 0x86:
+                    c = 'f'; // phi
+                    break;
+                case 0x87:
+                    c = 'x'; // chi
+                    break;
+                case 0x88:
+                    c = 'c'; // psi
+                    break;
+                case 0x89:
+                    c = 'v'; // omega
+                    break;
+                }
+                break;
+            default:
+                break;
+            }
+            rewritten.push_back(c);
+        }
+    }
+    return rewritten;
+}
+
 string processWord(string word) {
     string rewritten;
     for (int i = 0; i < word.length(); i += 2) {
@@ -54,7 +159,7 @@ string processVerse(const string &verse) {
     stringstream ss(verse);
 
     while (ss >> word) {
-        word = processWord(word);
+        word = greekToLatin(processWord(word));
         out.append(word);
     }
 
