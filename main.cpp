@@ -4,8 +4,9 @@
  * and contributed by Zoltán Kovács <zoltan@geogebra.org>.
  */
 
+using namespace std;
+
 #include <iostream>
-#include "book.h"
 #include "books.h"
 
 int main(int argc, char **argv) {
