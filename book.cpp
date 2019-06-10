@@ -37,3 +37,28 @@ string Book::getVerse(string i) {
         }
     }
 }
+
+string Book::getText() {
+    return text;
+}
+
+int Book::getVerseStart(string i) {
+    for (int j=0; j<verses.size(); ++j) {
+        int match = verses[j].info.compare(i);
+        if (match == 0) {
+            int found = verses[j].start;
+            return found;
+        }
+    }
+}
+
+int Book::getVerseEnd(string i) {
+    for (int j=0; j<verses.size(); ++j) {
+        int match = verses[j].info.compare(i);
+        if (match == 0) {
+            int found = verses[j].start + verses[j].length - 1;
+            return found;
+        }
+    }
+}
+

@@ -11,6 +11,7 @@ using namespace std;
 #include "utf8greekaccents.h"
 
 #include "book.h"
+#include "fingerprint.h"
 
 using namespace sword;
 
@@ -47,7 +48,7 @@ string greekToLatin(string word) {
                     c = 'e';
                     break;
                 case 0xB6:
-                    c = 'z';
+                    c = 'q'; // it should be z (zeta) but we change it to free one letter at the end of alphabet
                     break;
                 case 0xB7:
                     c = 'h'; // eta
@@ -230,6 +231,7 @@ void addBook(string moduleName, string firstVerse, string lastVerse, bool remove
             reference = vi.reference;
             if (lastBookName.compare(bookName) != 0) {
                 books.push_back(lastBook);
+                cerr << lastBookName << " has " << lastBook.getText().length() << " characters" << endl;
                 // new book
                 Book book = Book(bookName);
                 book.setInfo(module->getBibliography().c_str());
@@ -240,6 +242,7 @@ void addBook(string moduleName, string firstVerse, string lastVerse, bool remove
             lastBook.addVerse(verseText, reference);
             if (verseInfo.compare(lastVerse)==0) {
                 books.push_back(lastBook);
+                cerr << lastBookName << " has " << lastBook.getText().length() << " characters" << endl;
             }
         }
     }
@@ -248,7 +251,7 @@ void addBook(string moduleName, string firstVerse, string lastVerse, bool remove
 
 void addBooks() {
     addBook("LXX", "Genesis 1:1", "Malachi 4:6", false);
-    addBook("SBLGNT", "Matthew 1:1", "Revelation 22:21", true);
+    addBook("SBLGNT", "Matthew 1:1", "Revelation of John 22:21", true);
 }
 
 string lookupVerse(string book, string info, string verse) {
@@ -259,3 +262,30 @@ string lookupVerse(string book, string info, string verse) {
         }
     }
 }
+
+fingerprint getTextFingerprint(string book, string info, int start, int length) {
+    for (int i=0; i<books.size(); i++) {
+        Book b = books[i];
+        if (b.getName().compare(book) == 0 && b.getInfo().compare(info) == 0) {
+            fingerprint f = getFingerprint(b, start, length);
+            return f;
+        }
+    }
+}
+
+fingerprint getTextFingerprint(string book, string info, string start, string end, int startOffset, int endOffset) {
+    for (int i=0; i<books.size(); i++) {
+        Book b = books[i];
+        if (b.getName().compare(book) == 0 && b.getInfo().compare(info) == 0) {
+            int startPos = b.getVerseStart(start) + startOffset;
+            int endPos = b.getVerseEnd(end) - endOffset;
+            fingerprint f = getFingerprint(b, startPos, endPos - startPos);
+            return f;
+        }
+    }
+}
+
+fingerprint getTextFingerprint(string book, string info, string start, string end) {
+    return getTextFingerprint(book, info, start, end, 0, 0);
+}
+

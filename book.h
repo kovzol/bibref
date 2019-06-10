@@ -24,6 +24,9 @@ public:
     string getName();
     void addVerse(string text, string verseInfo);
     string getVerse(string verseInfo);
+    string getText();
+    int getVerseStart(string verseInfo);
+    int getVerseEnd(string verseInfo);
 };
 
 #endif // BOOK_H
