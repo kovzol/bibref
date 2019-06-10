@@ -254,40 +254,6 @@ void addBooks() {
     addBook("SBLGNT", "Matthew 1:1", "Revelation of John 22:21", true);
 }
 
-string lookupVerse(string book, string info, string verse) {
-    // TODO: use getBook()
-    for (int i=0; i<books.size(); i++) {
-        Book b = books[i];
-        if (b.getName().compare(book) == 0 && b.getInfo().compare(info) == 0) {
-            return b.getVerse(verse);
-        }
-    }
-}
-
-fingerprint getTextFingerprint(string book, string info, int start, int length) {
-    // TODO: use getBook()
-    for (int i=0; i<books.size(); i++) {
-        Book b = books[i];
-        if (b.getName().compare(book) == 0 && b.getInfo().compare(info) == 0) {
-            fingerprint f = getFingerprint(b, start, length);
-            return f;
-        }
-    }
-}
-
-fingerprint getTextFingerprint(string book, string info, string start, string end, int startOffset, int endOffset) {
-    // TODO: use getBook()
-    for (int i=0; i<books.size(); i++) {
-        Book b = books[i];
-        if (b.getName().compare(book) == 0 && b.getInfo().compare(info) == 0) {
-            int startPos = b.getVerseStart(start) + startOffset;
-            int endPos = b.getVerseEnd(end) - endOffset;
-            fingerprint f = getFingerprint(b, startPos, endPos - startPos + 1);
-            return f;
-        }
-    }
-}
-
 Book getBook(string book, string info) {
     for (int i=0; i<books.size(); i++) {
         Book b = books[i];
@@ -295,6 +261,21 @@ Book getBook(string book, string info) {
             return b;
         }
     }
+}
+
+string lookupVerse(string book, string info, string verse) {
+    return getBook(book, info).getVerse(verse);
+}
+
+fingerprint getTextFingerprint(string book, string info, int start, int length) {
+    return getFingerprint(getBook(book, info), start, length);
+}
+
+fingerprint getTextFingerprint(string book, string info, string start, string end, int startOffset, int endOffset) {
+    Book b = getBook(book, info);
+    int startPos = b.getVerseStart(start) + startOffset;
+    int endPos = b.getVerseEnd(end) - endOffset;
+    return getFingerprint(b, startPos, endPos - startPos + 1);
 }
 
 fingerprint getTextFingerprint(string book, string info, string start, string end) {
