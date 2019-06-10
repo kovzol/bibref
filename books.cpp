@@ -255,6 +255,7 @@ void addBooks() {
 }
 
 string lookupVerse(string book, string info, string verse) {
+    // TODO: use getBook()
     for (int i=0; i<books.size(); i++) {
         Book b = books[i];
         if (b.getName().compare(book) == 0 && b.getInfo().compare(info) == 0) {
@@ -264,6 +265,7 @@ string lookupVerse(string book, string info, string verse) {
 }
 
 fingerprint getTextFingerprint(string book, string info, int start, int length) {
+    // TODO: use getBook()
     for (int i=0; i<books.size(); i++) {
         Book b = books[i];
         if (b.getName().compare(book) == 0 && b.getInfo().compare(info) == 0) {
@@ -274,6 +276,7 @@ fingerprint getTextFingerprint(string book, string info, int start, int length) 
 }
 
 fingerprint getTextFingerprint(string book, string info, string start, string end, int startOffset, int endOffset) {
+    // TODO: use getBook()
     for (int i=0; i<books.size(); i++) {
         Book b = books[i];
         if (b.getName().compare(book) == 0 && b.getInfo().compare(info) == 0) {
@@ -285,7 +288,34 @@ fingerprint getTextFingerprint(string book, string info, string start, string en
     }
 }
 
+Book getBook(string book, string info) {
+    for (int i=0; i<books.size(); i++) {
+        Book b = books[i];
+        if (b.getName().compare(book) == 0 && b.getInfo().compare(info) == 0) {
+            return b;
+        }
+    }
+}
+
 fingerprint getTextFingerprint(string book, string info, string start, string end) {
     return getTextFingerprint(book, info, start, end, 0, 0);
 }
 
+int compare(string book1, string info1, string verseInfo1s, string verseInfo1e, int startOffset1, int endOffset1,
+             string book2, string info2, string verseInfo2s, string verseInfo2e, int startOffset2, int endOffset2) {
+    cout << "Comparing " << book1 << " (" << info1 << ") " << verseInfo1s << "-" << verseInfo1e << " and "
+         << book2 << " (" << info2 << ") " << verseInfo2s << "-" << verseInfo2e << endl;
+    Book b1 = getBook(book1, info1);
+    Book b2 = getBook(book2, info2);
+    int verse1s = b1.getVerseStart(verseInfo1s) + startOffset1;
+    int verse1e = b1.getVerseEnd(verseInfo1e) - endOffset1;
+    string verse1part = b1.getText().substr(verse1s, verse1e - verse1s + 1);
+    int verse2s = b2.getVerseStart(verseInfo2s) + startOffset2;
+    int verse2e = b2.getVerseEnd(verseInfo2e) - endOffset2;
+    fingerprint f1 = getTextFingerprint(book1, info1, verseInfo1s, verseInfo1e, startOffset1, endOffset1);
+    fingerprint f2 = getTextFingerprint(book2, info2, verseInfo2s, verseInfo2e, startOffset2, endOffset2);
+    string verse2part = b2.getText().substr(verse2s, verse2e - verse2s + 1);
+    int d = dist(f1, f2);
+    cout << verse1part << " ~ " << verse2part << " = " << d << endl;
+    return d;
+}
