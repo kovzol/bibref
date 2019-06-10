@@ -279,7 +279,7 @@ fingerprint getTextFingerprint(string book, string info, string start, string en
         if (b.getName().compare(book) == 0 && b.getInfo().compare(info) == 0) {
             int startPos = b.getVerseStart(start) + startOffset;
             int endPos = b.getVerseEnd(end) - endOffset;
-            fingerprint f = getFingerprint(b, startPos, endPos - startPos);
+            fingerprint f = getFingerprint(b, startPos, endPos - startPos + 1);
             return f;
         }
     }
