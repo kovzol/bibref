@@ -11,6 +11,16 @@ using namespace std;
 #include "fingerprint.h"
 
 int main(int argc, char **argv) {
+
+    /* Example of direct comparison. */
+    // Hab 2:4 (01) ~ Rom 1:17 (01)
+    compare("ο δε δικαιοc εκ πιcτεωc μ ζηcεται", "ο δε δικοc εκ πιcτεωc ζηcεται");
+    // Ps 61:13 (01,03) ~ Rom 2:6 (01,03)
+    compare("αποδωσεις εκαστω κατα τα εργα αυτου", "αποδωcει εκαcτω κατα τα εργα αυτου");
+    // exit(0);
+
+    /* Example of comparison based on text modules. */
+
     addBooks();
 
     compare("Habakkuk", "LXX", "2:4", "2:4", 39, 0, "Romans", "SBLGNT", "1:17", "1:17", 68, 0);

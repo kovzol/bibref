@@ -131,6 +131,11 @@ string processWord(string word) {
         if (c1 == 0x80) {
             i--;
         }
+        if (c1 == 'c') { // Some systems do not support greek ϲ so we fall back sometimes to latin c in the input
+            i--;
+            rewritten.push_back(0xCF);
+            rewritten.push_back(0x83);
+        }
         // keep only Greek characters
         if (c1 == 0xCE || c1 == 0xCF) {
             // force lowercase
@@ -299,4 +304,9 @@ int compare(string book1, string info1, string verseInfo1s, string verseInfo1e, 
     int d = dist(f1, f2);
     cout << verse1part << " ~ " << verse2part << " = " << d << endl;
     return d;
+}
+
+int compare(string verse1, string verse2) {
+    int d = dist(processVerse(verse1), processVerse(verse2));
+    cout << "Comparing '" << verse1 << "' ~ '" << verse2 << "' = " << d << endl;
 }
