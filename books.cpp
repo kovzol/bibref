@@ -1,5 +1,10 @@
 using namespace std;
 
+#define MIN_CITATION_LENGTH 10
+// FIXME: static arrays are too big here, find a dynamic solution
+#define MAXSIZE 55
+
+#include <limits>
 #include <string>
 #include <sstream>
 #include <vector>
@@ -309,4 +314,75 @@ int compare(string book1, string info1, string verseInfo1s, string verseInfo1e, 
 int compare(string verse1, string verse2) {
     int d = dist(processVerse(verse1), processVerse(verse2));
     cout << "Comparing '" << verse1 << "' ~ '" << verse2 << "' = " << d << endl;
+}
+
+int findBestFit(string book1, string info1, string verseInfo1s, string verseInfo1e,
+                string book2, string info2, string verseInfo2s, string verseInfo2e) {
+    Book b1 = getBook(book1, info1);
+    Book b2 = getBook(book2, info2);
+    int verse1s = b1.getVerseStart(verseInfo1s);
+    int verse1e = b1.getVerseEnd(verseInfo1e);
+    int verse1len = verse1e - verse1s;
+    int verse2s = b2.getVerseStart(verseInfo2s);
+    int verse2e = b2.getVerseEnd(verseInfo2e);
+    int verse2len = verse2e - verse2s;
+    int minlen = min(verse1len, verse2len);
+    int maxlen = max(verse1len, verse2len);
+    if (maxlen - MIN_CITATION_LENGTH + 1 > MAXSIZE) {
+        cerr << "Out of memory: " << maxlen - MIN_CITATION_LENGTH + 1  << ">" << MAXSIZE << endl;
+        exit(1);
+    }
+    /*
+    int bestValues[minlen - MIN_CITATION_LENGTH + 1],
+            best1s[minlen - MIN_CITATION_LENGTH + 1],
+            best1e[minlen - MIN_CITATION_LENGTH + 1],
+            best2s[minlen - MIN_CITATION_LENGTH + 1],
+            best2e[minlen - MIN_CITATION_LENGTH + 1];
+    */
+    int bestValues[MAXSIZE], best1s[MAXSIZE], best1e[MAXSIZE], best2s[MAXSIZE], best2e[MAXSIZE];
+
+    for (int i=0; i<minlen - MIN_CITATION_LENGTH + 1; ++i) {
+        bestValues[i] = std::numeric_limits<int>::max();
+    }
+    // fingerprint f1[verse1len - MIN_CITATION_LENGTH + 1][verse1len - MIN_CITATION_LENGTH + 1];
+    // fingerprint f2[verse2len - MIN_CITATION_LENGTH + 1][verse2len - MIN_CITATION_LENGTH + 1];
+    fingerprint f1[MAXSIZE][MAXSIZE], f2[MAXSIZE][MAXSIZE];
+
+    // FIXME: this should be created dynamically
+    for (int i=0; i<verse1len - MIN_CITATION_LENGTH + 1; ++i) {
+        int jmax = min(verse1len, i+minlen);
+        for (int j=i + MIN_CITATION_LENGTH - 1; j<jmax; ++j) {
+            f1[i][j - MIN_CITATION_LENGTH + 1] = getTextFingerprint(book1, info1, verseInfo1s, verseInfo1e, i, verse1len - j);
+        }
+    }
+    for (int i=0; i<verse2len - MIN_CITATION_LENGTH + 1; ++i) {
+        int jmax = min(verse2len, i+minlen);
+        for (int j=i + MIN_CITATION_LENGTH - 1; j<jmax; ++j)
+            f2[i][j - MIN_CITATION_LENGTH + 1] = getTextFingerprint(book2, info2, verseInfo2s, verseInfo2e, i, verse2len - j);
+    }
+    for (int i=0; i<verse1len; ++i) {
+        int jmax = min(verse1len, i+minlen);
+        for (int j=i + MIN_CITATION_LENGTH - 1; j<jmax; ++j)
+            for (int k=0; k<verse2len; ++k) {
+                int lmax = min(verse2len, j+minlen);
+                for (int l=k+MIN_CITATION_LENGTH - 1; l<lmax; ++l) {
+                    int d = dist(f1[i][j - MIN_CITATION_LENGTH + 1], f2[k][l - MIN_CITATION_LENGTH + 1]);
+                    int length = min(j-i, l-k) + 1;
+                    if (d < bestValues[length - MIN_CITATION_LENGTH]) {
+                        bestValues[length - MIN_CITATION_LENGTH] = d;
+                        best1s[length - MIN_CITATION_LENGTH] = i;
+                        best1e[length - MIN_CITATION_LENGTH] = verse1len - j;
+                        best2s[length - MIN_CITATION_LENGTH] = k;
+                        best2e[length - MIN_CITATION_LENGTH] = verse2len - l;
+                    }
+                }
+            }
+    }
+    for (int i=MIN_CITATION_LENGTH; i<minlen; ++i) {
+        compare(book1, info1, verseInfo1s, verseInfo1e, best1s[i-MIN_CITATION_LENGTH],
+                best1e[i-MIN_CITATION_LENGTH],
+                book2, info2, verseInfo2s, verseInfo2s, best2s[i-MIN_CITATION_LENGTH],
+                best2e[i-MIN_CITATION_LENGTH]);
+    }
+    return 0;
 }
