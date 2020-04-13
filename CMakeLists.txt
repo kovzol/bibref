@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 project(bibref)
 
 set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_FLAGS "-pedantic-errors")
+#set(CMAKE_CXX_FLAGS "-pedantic-errors")
 
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(sword REQUIRED sword)

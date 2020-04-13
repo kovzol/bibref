@@ -1,6 +1,7 @@
 using namespace std;
 
 #include <string>
+#include <iostream>
 
 #include "book.h"
 #include "fingerprint.h"
@@ -31,6 +32,23 @@ int dist(fingerprint f1, fingerprint f2) {
             d += abs(f1.data[i][j]-f2.data[i][j]);
         }
     return d;
+}
+
+void printDist(fingerprint f1, fingerprint f2) {
+    cout << " ";
+    for (int j=0; j<N; ++j)
+        printf("%c", j + 'a');
+    cout << endl;
+    for (int i=0; i<N; ++i) {
+        printf("%c", i + 'a');
+        for (int j=0; j<N; ++j) {
+            if (f1.data[i][j] == 0 && f2.data[i][j] == 0)
+                cout << " ";
+            else
+            printf("%1d", abs(f1.data[i][j]-f2.data[i][j]));
+        }
+        cout << endl;
+    }
 }
 
 int dist(string text1, string text2) {

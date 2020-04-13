@@ -2,7 +2,7 @@ using namespace std;
 
 #define MIN_CITATION_LENGTH 10
 // FIXME: static arrays are too big here, find a dynamic solution
-#define MAXSIZE 55
+#define MAXSIZE 1000
 
 #include <limits>
 #include <string>
@@ -308,16 +308,50 @@ int compare(string book1, string info1, string verseInfo1s, string verseInfo1e, 
     string verse2part = b2.getText().substr(verse2s, verse2e - verse2s + 1);
     int d = dist(f1, f2);
     cout << verse1part << " ~ " << verse2part << " = " << d << endl;
+    float ratio = ((float) d+1) / (verse1part.length() + verse2part.length());
+    cout << "difference = " << ratio << endl;
+    // printDist(f1, f2);
     return d;
 }
 
 int compare(string verse1, string verse2) {
     int d = dist(processVerse(verse1), processVerse(verse2));
     cout << "Comparing '" << verse1 << "' ~ '" << verse2 << "' = " << d << endl;
+    float ratio = ((float) d+1) / (verse1.length() + verse2.length());
+    cout << "difference = " << ratio << endl;
 }
+
+typedef struct fingerprintInfo {
+    fingerprint fp;
+    Book *book;
+    int start, length;
+} fingerprintInfo;
+
+vector<fingerprintInfo> fingerprints;
+
+void addFingerprint(fingerprint f, Book &b, int s, int l) {
+    fingerprintInfo fpi = { f, &b, s, l };
+    fingerprints.push_back(fpi);
+}
+
+fingerprint getFingerprintCached(Book &b, int s, int l) {
+    for (int i = 0; i<fingerprints.size(); ++i) {
+        fingerprintInfo fpi = fingerprints.at(i);
+        if (fpi.book == &b)
+            if ((fpi.start == s) && (fpi.length == l))
+                return fpi.fp;
+    }
+}
+
+typedef struct int2 {
+  int coords[2];
+} int2;
 
 int findBestFit(string book1, string info1, string verseInfo1s, string verseInfo1e,
                 string book2, string info2, string verseInfo2s, string verseInfo2e) {
+    cout << "Comparing " << book1 << " (" << info1 << ") " << verseInfo1s << "-" << verseInfo1e << " and "
+         << book2 << " (" << info2 << ") " << verseInfo2s << "-" << verseInfo2e << endl;
+    fingerprints.clear();
     Book b1 = getBook(book1, info1);
     Book b2 = getBook(book2, info2);
     int verse1s = b1.getVerseStart(verseInfo1s);
@@ -328,61 +362,89 @@ int findBestFit(string book1, string info1, string verseInfo1s, string verseInfo
     int verse2len = verse2e - verse2s;
     int minlen = min(verse1len, verse2len);
     int maxlen = max(verse1len, verse2len);
-    if (maxlen - MIN_CITATION_LENGTH + 1 > MAXSIZE) {
-        cerr << "Out of memory: " << maxlen - MIN_CITATION_LENGTH + 1  << ">" << MAXSIZE << endl;
-        exit(1);
-    }
-    /*
-    int bestValues[minlen - MIN_CITATION_LENGTH + 1],
-            best1s[minlen - MIN_CITATION_LENGTH + 1],
-            best1e[minlen - MIN_CITATION_LENGTH + 1],
-            best2s[minlen - MIN_CITATION_LENGTH + 1],
-            best2e[minlen - MIN_CITATION_LENGTH + 1];
-    */
-    int bestValues[MAXSIZE], best1s[MAXSIZE], best1e[MAXSIZE], best2s[MAXSIZE], best2e[MAXSIZE];
+    int bestValues[verse1len - MIN_CITATION_LENGTH + 1][verse2len - MIN_CITATION_LENGTH + 1],
+            best1s[verse1len - MIN_CITATION_LENGTH + 1][verse2len - MIN_CITATION_LENGTH + 1],
+            best1e[verse1len - MIN_CITATION_LENGTH + 1][verse2len - MIN_CITATION_LENGTH + 1],
+            best2s[verse1len - MIN_CITATION_LENGTH + 1][verse2len - MIN_CITATION_LENGTH + 1],
+            best2e[verse1len - MIN_CITATION_LENGTH + 1][verse2len - MIN_CITATION_LENGTH + 1];
 
-    for (int i=0; i<minlen - MIN_CITATION_LENGTH + 1; ++i) {
-        bestValues[i] = std::numeric_limits<int>::max();
-    }
-    // fingerprint f1[verse1len - MIN_CITATION_LENGTH + 1][verse1len - MIN_CITATION_LENGTH + 1];
-    // fingerprint f2[verse2len - MIN_CITATION_LENGTH + 1][verse2len - MIN_CITATION_LENGTH + 1];
-    fingerprint f1[MAXSIZE][MAXSIZE], f2[MAXSIZE][MAXSIZE];
+    for (int i=0; i<verse1len - MIN_CITATION_LENGTH + 1; ++i)
+        for (int j=0; j<verse2len - MIN_CITATION_LENGTH + 1; ++j)
+        bestValues[i][j] = std::numeric_limits<int>::max();
 
-    // FIXME: this should be created dynamically
     for (int i=0; i<verse1len - MIN_CITATION_LENGTH + 1; ++i) {
-        int jmax = min(verse1len, i+minlen);
+        int jmax = verse1len;
         for (int j=i + MIN_CITATION_LENGTH - 1; j<jmax; ++j) {
-            f1[i][j - MIN_CITATION_LENGTH + 1] = getTextFingerprint(book1, info1, verseInfo1s, verseInfo1e, i, verse1len - j);
+            fingerprint f = getTextFingerprint(book1, info1, verseInfo1s, verseInfo1e, i, verse1len - j);
+            addFingerprint(f, b1, i, j-i+1);
         }
     }
     for (int i=0; i<verse2len - MIN_CITATION_LENGTH + 1; ++i) {
-        int jmax = min(verse2len, i+minlen);
-        for (int j=i + MIN_CITATION_LENGTH - 1; j<jmax; ++j)
-            f2[i][j - MIN_CITATION_LENGTH + 1] = getTextFingerprint(book2, info2, verseInfo2s, verseInfo2e, i, verse2len - j);
+        int jmax = verse2len;
+        for (int j=i + MIN_CITATION_LENGTH - 1; j<jmax; ++j) {
+            fingerprint f = getTextFingerprint(book2, info2, verseInfo2s, verseInfo2e, i, verse2len - j);
+            addFingerprint(f, b2, i, j-i+1);
+        }
     }
-    for (int i=0; i<verse1len; ++i) {
-        int jmax = min(verse1len, i+minlen);
-        for (int j=i + MIN_CITATION_LENGTH - 1; j<jmax; ++j)
-            for (int k=0; k<verse2len; ++k) {
-                int lmax = min(verse2len, j+minlen);
+    int imax = verse1len - MIN_CITATION_LENGTH + 1;
+    for (int i=0; i<imax; ++i) {
+        int jmax = verse1len;
+        cerr << (int) (i*100/imax) << "% done" << "\r";
+        for (int j=i + MIN_CITATION_LENGTH - 1; j<jmax; ++j) {
+            int kmax = verse2len - MIN_CITATION_LENGTH + 1;
+            for (int k=0; k<kmax; ++k) {
+                int lmax = verse2len;
                 for (int l=k+MIN_CITATION_LENGTH - 1; l<lmax; ++l) {
-                    int d = dist(f1[i][j - MIN_CITATION_LENGTH + 1], f2[k][l - MIN_CITATION_LENGTH + 1]);
-                    int length = min(j-i, l-k) + 1;
-                    if (d < bestValues[length - MIN_CITATION_LENGTH]) {
-                        bestValues[length - MIN_CITATION_LENGTH] = d;
-                        best1s[length - MIN_CITATION_LENGTH] = i;
-                        best1e[length - MIN_CITATION_LENGTH] = verse1len - j;
-                        best2s[length - MIN_CITATION_LENGTH] = k;
-                        best2e[length - MIN_CITATION_LENGTH] = verse2len - l;
+                    fingerprint f1 = getFingerprintCached(b1, i, j-i+1);
+                    fingerprint f2 = getFingerprintCached(b2, k, l-k+1);
+
+                    int v1start = b1.getVerseStart(verseInfo1s);
+                    string t1 = b1.getText().substr(v1start+i,j-i+1);
+                    int v2start = b2.getVerseStart(verseInfo2s);
+                    string t2 = b2.getText().substr(v2start+k,l-k+1);
+
+                    int d = dist(f1, f2);
+                    int length = max(j-i, l-k) + 1;
+                    if (d < bestValues[j-i-MIN_CITATION_LENGTH][l-k-MIN_CITATION_LENGTH]) {
+                        bestValues[j-i-MIN_CITATION_LENGTH][l-k-MIN_CITATION_LENGTH] = d;
+                        best1s[j-i-MIN_CITATION_LENGTH][l-k-MIN_CITATION_LENGTH] = i;
+                        best1e[j-i-MIN_CITATION_LENGTH][l-k-MIN_CITATION_LENGTH] = verse1len - j;
+                        best2s[j-i-MIN_CITATION_LENGTH][l-k-MIN_CITATION_LENGTH] = k;
+                        best2e[j-i-MIN_CITATION_LENGTH][l-k-MIN_CITATION_LENGTH] = verse2len - l;
                     }
                 }
             }
+        }
     }
-    for (int i=MIN_CITATION_LENGTH; i<minlen; ++i) {
-        compare(book1, info1, verseInfo1s, verseInfo1e, best1s[i-MIN_CITATION_LENGTH],
-                best1e[i-MIN_CITATION_LENGTH],
-                book2, info2, verseInfo2s, verseInfo2s, best2s[i-MIN_CITATION_LENGTH],
-                best2e[i-MIN_CITATION_LENGTH]);
+    cerr << endl;
+
+    vector<int2> candidates;
+    for (int i=0; i<verse1len-MIN_CITATION_LENGTH; ++i) {
+        for (int j=0; j<verse2len-MIN_CITATION_LENGTH; ++j) {
+            printf("%4d", bestValues[i][j]);
+            if ((i>0) && (j>0) && (i<verse1len-MIN_CITATION_LENGTH-1) && (j<verse2len-MIN_CITATION_LENGTH)) {
+                if ((bestValues[i][j] < bestValues[i-1][j]) &&
+                        (bestValues[i][j] < bestValues[i][j-1]) &&
+                        (bestValues[i][j] < bestValues[i+1][j]) &&
+                        (bestValues[i][j] < bestValues[i][j+1]) &&
+                        (bestValues[i][j] < bestValues[i+1][j+1])
+                        ) {
+                    candidates.push_back({i,j});
+                    }
+            }
+        }
+        printf("\n");
     }
+
+    for (int k=0; k<candidates.size(); ++k) {
+        int2 c = candidates.at(k);
+        int i = c.coords[0];
+        int j = c.coords[1];
+        compare(book1, info1, verseInfo1s, verseInfo1e, best1s[i][j],
+            best1e[i][j],
+            book2, info2, verseInfo2s, verseInfo2e, best2s[i][j],
+            best2e[i][j]);
+    }
+
     return 0;
 }
