@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: prerequisites
-      run: sudo apt update && sudo apt install libsword-common libsword-dev git cmake build-essential
+      run: sudo apt update && sudo apt install libsword-common libsword-dev git cmake build-essential libreadline-dev
     - name: cmake
       run: cmake .
     - name: make
