@@ -14,5 +14,6 @@ int compare(string book1, string info1, string verseInfo1s, string verseInfo1e, 
 int compare(string verse1, string verse2);
 int findBestFit(string book1, string info1, string verseInfo1s, string verseInfo1e,
                 string book2, string info2, string verseInfo2s, string verseInfo2e);
+string processVerse(const string &verse);
 
 #endif // BOOKS_H

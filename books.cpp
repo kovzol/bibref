@@ -17,6 +17,7 @@ using namespace std;
 
 #include "book.h"
 #include "fingerprint.h"
+#include "cli.h"
 
 using namespace sword;
 
@@ -200,7 +201,7 @@ void addBook(string moduleName, string firstVerse, string lastVerse, bool remove
     SWModule *module;
     module = library.getModule(moduleName.c_str());
     if (!module) {
-        cerr << "The SWORD module " << moduleName << " is not installed" << "\n";
+        cout << "The SWORD module " << moduleName << " is not installed" << endl << flush;
         exit(1);
     }
     module->setKey(firstVerse.c_str());
@@ -212,7 +213,7 @@ void addBook(string moduleName, string firstVerse, string lastVerse, bool remove
     SWOptionFilter *filter = new UTF8GreekAccents();
     filter->setOptionValue("off");
 
-    cerr << "Loading " << moduleName << "..." << flush;
+    cout << "Loading " << moduleName << "..." << endl << flush;
 
     string lastBookName = splitVerseInfo(firstVerse).bookName;
     Book lastBook = Book(lastBookName);
@@ -241,7 +242,8 @@ void addBook(string moduleName, string firstVerse, string lastVerse, bool remove
             reference = vi.reference;
             if (lastBookName.compare(bookName) != 0) {
                 books.push_back(lastBook);
-                cerr << lastBookName << " has " << lastBook.getText().length() << " characters" << endl;
+                cout << lastBookName << " contains " << lastBook.getText().length() << " characters," << endl << flush;
+                add_vocabulary_item(lastBookName);
                 // new book
                 Book book = Book(bookName);
                 book.setInfo(module->getBibliography().c_str());
@@ -252,11 +254,12 @@ void addBook(string moduleName, string firstVerse, string lastVerse, bool remove
             lastBook.addVerse(verseText, reference);
             if (verseInfo.compare(lastVerse)==0) {
                 books.push_back(lastBook);
-                cerr << lastBookName << " has " << lastBook.getText().length() << " characters" << endl;
+                cout << "and " << lastBookName << " contains " << lastBook.getText().length() << " characters." << endl << flush;
+                add_vocabulary_item(lastBookName);
             }
         }
     }
-    cerr << " done" << "\n";
+    cout << "Done loading books of " << moduleName << "." << endl << flush;
 }
 
 void addBooks() {
@@ -389,7 +392,7 @@ int findBestFit(string book1, string info1, string verseInfo1s, string verseInfo
     int imax = verse1len - MIN_CITATION_LENGTH + 1;
     for (int i=0; i<imax; ++i) {
         int jmax = verse1len;
-        cerr << (int) (i*100/imax) << "% done" << "\r";
+        cout << (int) (i*100/imax) << "% done" << "\r";
         for (int j=i + MIN_CITATION_LENGTH - 1; j<jmax; ++j) {
             int kmax = verse2len - MIN_CITATION_LENGTH + 1;
             for (int k=0; k<kmax; ++k) {
@@ -416,7 +419,7 @@ int findBestFit(string book1, string info1, string verseInfo1s, string verseInfo
             }
         }
     }
-    cerr << endl;
+    cout << endl;
 
     vector<int2> candidates;
     for (int i=0; i<verse1len-MIN_CITATION_LENGTH; ++i) {

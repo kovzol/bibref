@@ -7,11 +7,19 @@
 using namespace std;
 
 #include <iostream>
+#include <readline/readline.h>
+#include <readline/history.h>
+
 #include "books.h"
 #include "fingerprint.h"
+#include "cli.h"
+
 
 int main(int argc, char **argv) {
 
+    cli();
+
+    exit(0);
     compare("ου μοιχευσεις ου κλεψεις", "κλεπτεις ο λεγων μη μοιχευειν μοιχευεις");
     compare("ων το στομα αρας και πικριας γεμει","ου αρας το στομα αυτου γεμει και πικριας");
     compare("πατρος προς υιον και καρδιαν", "καρδιας πατερων");
@@ -20,7 +28,6 @@ int main(int argc, char **argv) {
 
     addBooks();
     compare("Psalms", "LXX", "91:11", "91:11", 0, 20, "Luke", "SBLGNT", "4:10", "4:10", 12, 0);
-    exit(0);
 
     compare("Deuteronomy", "LXX", "6:16", "6:16", 0, 33, "Luke", "SBLGNT", "4:12", "4:12", 39, 0);
     compare("Psalms", "LXX", "22:18", "22:18", 0, 0, "Matthew", "SBLGNT", "27:35", "27:35", 19, 0);
@@ -110,3 +117,21 @@ int main(int argc, char **argv) {
             "εγειρε ο καθευδων και αναστα εκ των νεκρ");
     exit(0);
 }
+
+/*
+ * Planned long term syntax:
+ * T = Habakkuk 2:4 +39 -0
+ * unique T
+ * U = Romans 1:17 +68 -0
+ * compare T U
+ *
+ * Short term:
+ * text 1 = Hab 2:4 +39 -0
+ * text 2 = Rom 1:17 +68 -0
+ * compare 1 2
+ *
+ * Now:
+ * text1 ο δε δικαιοc εκ πιcτεωc μ ζηcεται
+ * text2 ο δε δικοc εκ πιcτεωc ζηcεται
+ * compare12
+ */
