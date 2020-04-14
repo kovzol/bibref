@@ -67,7 +67,7 @@ char** completer(const char* text, int start, int end) {
 
 void cli() {
     rl_attempted_completion_function = completer;
-    cout << "This is bibref-cli 2020Apr13, nice to meet you." << endl << flush;
+    cout << "This is bibref-cli 2020Apr14, nice to meet you." << endl << flush;
 
     char* buf;
     while ((buf = readline(">> ")) != nullptr) {
@@ -131,7 +131,7 @@ void cli() {
               string rest = input.substr(input.find(" ") + 1);
               typedef vector<string> Tokens;
               Tokens tokens;
-              boost::split( tokens, rest, boost::is_any_of(" ") );
+              boost::split(tokens, rest, boost::is_any_of(" "));
               int restSize = tokens.size();
               if (restSize == 3) {
                   string verse = "";
@@ -143,8 +143,29 @@ void cli() {
                   } catch (exception &e) {
                       cout << e.what() << endl << flush;
                   }
+              }
+              else if (restSize == 4) {
+                  string verse = "";
+                  try {
+                      Tokens tokens2, tokens3;
+                      int start = 0, end = 0;
+                      boost::split(tokens2, tokens[2], boost::is_any_of("+"));
+                      if (tokens2.size() > 1) {
+                          start = stoi(tokens2[1]);
+                      }
+                      boost::split(tokens3, tokens[3], boost::is_any_of("-"));
+                      if (tokens3.size() > 1) {
+                          end = stoi(tokens3[1]);
+                      }
+                      verse = getText(tokens[0], tokens[1], tokens2.at(0), tokens3.at(0), start, end);
+                      text[index] = verse;
+                      textset[index] = true;
+                      cout << "Stored internally as " << verse << "." << endl << flush;
+                  } catch (exception &e) {
+                      cout << e.what() << endl << flush;
+                  }
               } else {
-                  cerr << "Sorry, the command you entered was not recognized." << endl << flush;
+              cerr << "Sorry, the command you entered was not recognized." << endl << flush;
               }
           }
       }
@@ -155,7 +176,7 @@ void cli() {
               cerr << "Text 1 or 2 is not set." << endl << flush;
           }
       }
-      else {
+      else if (input.length() != 0) {
           cerr << "Sorry, the command you entered was not recognized." << endl << flush;
       }
 

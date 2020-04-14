@@ -35,6 +35,14 @@ class InvalidVerse: public exception
   }
 } InvalidVerse;
 
+class InvalidPassage: public exception
+{
+  virtual const char* what() const throw()
+  {
+    return "Invalid passage.";
+  }
+} InvalidPassage;
+
 using namespace sword;
 
 vector<Book> books;
@@ -343,6 +351,17 @@ int compare(string book1, string info1, string verseInfo1s, string verseInfo1e, 
     cout << "difference = " << ratio << endl;
     // printDist(f1, f2);
     return d;
+}
+
+string getText(string book, string info, string verseInfoS, string verseInfoE, int startOffset, int endOffset) {
+    Book b = getBook(book, info);
+    int verseS = b.getVerseStart(verseInfoS) + startOffset;
+    int verseE = b.getVerseEnd(verseInfoE) - endOffset;
+    if (verseS > verseE) {
+        throw InvalidPassage;
+    }
+    string text = b.getText().substr(verseS, verseE - verseS + 1);
+    return text;
 }
 
 int compareLatin(string verse1, string verse2) {

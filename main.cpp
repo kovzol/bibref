@@ -135,6 +135,7 @@ int main(int argc, char **argv) {
  * text2 ο δε δικοc εκ πιcτεωc ζηcεται
  * compare12
  *
+ * More examples:
  * addbooks
  * ...
  * >> lookup1 Psalms LXX 118:22
@@ -144,6 +145,7 @@ int main(int argc, char **argv) {
  * >> compare12
  * Comparing 'liuononapedokimasanoioikodomoyntewoytowegenhuheiwkefalhngvniaw' ~ 'oytowestinoliuowoejoyuenhueiwyfymvntvnoikodomvnogenomenoweiwkefalhngvniaw' = 57
  * difference = 0.42963
+ *
  * >> lookup1 Psalms LXX 117:1
  * Stored internally as allhloyiaaineitetonkyrionpantataeunhepainesateaytonpantewoilaoi.
  * >> lookup2 Romans SBLGNT 15:11
@@ -151,5 +153,21 @@ int main(int argc, char **argv) {
  * >> compare12
  * Comparing 'allhloyiaaineitetonkyrionpantataeunhepainesateaytonpantewoilaoi' ~ 'kaipalinaineiteantataeunhtonkyrionkaiepainesatvsanaytonpantewoilaoi' = 28
  * difference = 0.223077
+ *
+ * >> lookup1 Psalms LXX 117:1+9 117:1-0
+ * Stored internally as aineitetonkyrionpantataeunhepainesateaytonpantewoilaoi.
+ * >> lookup2 Romans SBLGNT 15:11+8 15:11
+ * Stored internally as aineiteantataeunhtonkyrionkaiepainesatvsanaytonpantewoilaoi.
+ * >> compare12
+ * Comparing 'aineitetonkyrionpantataeunhepainesateaytonpantewoilaoi' ~ 'aineiteantataeunhtonkyrionkaiepainesatvsanaytonpantewoilaoi' = 15
+ * difference = 0.141593
+ *
+ * >> lookup1 Habakkuk LXX 2:4+39 2:4
+ * Stored internally as odedikaiowekpistevwmoyqhsetai.
+ * >> lookup2 Romans SBLGNT 1:17+68 1:17
+ * Stored internally as odedikaiowekpistevwqhsetai.
+ * >> compare12
+ * Comparing 'odedikaiowekpistevwmoyqhsetai' ~ 'odedikaiowekpistevwqhsetai' = 5
+ * difference = 0.109091
  *
  */

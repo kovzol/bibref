@@ -16,5 +16,6 @@ int compareLatin(string verse1, string verse2);
 int findBestFit(string book1, string info1, string verseInfo1s, string verseInfo1e,
                 string book2, string info2, string verseInfo2s, string verseInfo2e);
 string processVerse(const string &verse);
+string getText(string book, string info, string VerseInfoS, string VerseInfoE, int startOffset, int endOffset);
 
 #endif // BOOKS_H
