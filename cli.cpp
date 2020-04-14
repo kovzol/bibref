@@ -7,6 +7,7 @@
 #include <readline/history.h>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/predicate.hpp>
+#include <boost/algorithm/string/split.hpp>
 
 #include "books.h"
 #include "cli.h"
@@ -16,7 +17,7 @@ bool booksAdded = false;
 string text[2];
 vector<bool> textset = {false, false};
 
-vector<string> vocabulary {"addbooks", "compare12", "text1", "text2", "quit"};
+vector<string> vocabulary {"addbooks", "compare12", "text1", "text2", "lookup1", "lookup2", "quit"};
 
 void add_vocabulary_item(string item) {
     replace(item.begin(), item.end(), ' ', '_');
@@ -90,28 +91,66 @@ void cli() {
       }
       else if (boost::starts_with(input, "text")) {
           int index;
-          if (input.at(4) == '1') {
+          int commandLength = string("text").length();
+          if (input.at(commandLength) == '1') {
               index = 0;
           }
-          else if (input.at(4) ==  '2') {
+          else if (input.at(commandLength) ==  '2') {
               index = 1;
           } else {
               cerr << "Either text1 or text2 must be used." << endl << flush;
           }
-
-          string rest = input.substr(input.find(" ") + 1);
-          string processed = processVerse(rest);
-          if (processed.length() == 0) {
-              cerr << "Text does not contain Greek letters, ignored." << endl << flush;
+          if (input.at(commandLength + 1) != ' ') {
+              cerr << "Either text1 or text2 must be used." << endl << flush;
           } else {
-              text[index] = rest;
-              textset[index] = true;
-              cout << "Stored internally as " << processed << "." << endl << flush;
+              string rest = input.substr(input.find(" ") + 1);
+              string processed = processVerse(rest);
+              if (processed.length() == 0) {
+                  cerr << "Text does not contain Greek letters, ignored." << endl << flush;
+              } else {
+                  text[index] = processed;
+                  textset[index] = true;
+                  cout << "Stored internally as " << processed << "." << endl << flush;
+              }
+          }
+      }
+      else if (boost::starts_with(input, "lookup")) {
+          int commandLength = string("lookup").length();
+          int index;
+          if (input.at(commandLength) == '1') {
+              index = 0;
+          }
+          else if (input.at(commandLength) ==  '2') {
+              index = 1;
+          } else {
+              cerr << "Either lookup1 or lookup2 must be used." << endl << flush;
+          }
+          if (input.at(commandLength + 1) != ' ') {
+              cerr << "Either lookup1 or lookup2 must be used." << endl << flush;
+          } else {
+              string rest = input.substr(input.find(" ") + 1);
+              typedef vector<string> Tokens;
+              Tokens tokens;
+              boost::split( tokens, rest, boost::is_any_of(" ") );
+              int restSize = tokens.size();
+              if (restSize == 3) {
+                  string verse = "";
+                  try {
+                      verse = lookupVerse(tokens[0], tokens[1], tokens[2]);
+                      text[index] = verse;
+                      textset[index] = true;
+                      cout << "Stored internally as " << verse << "." << endl << flush;
+                  } catch (exception &e) {
+                      cout << e.what() << endl << flush;
+                  }
+              } else {
+                  cerr << "Sorry, the command you entered was not recognized." << endl << flush;
+              }
           }
       }
       else if (boost::starts_with(input, "compare12")) {
           if (textset.at(0) && textset.at(1)) {
-              compare(text[0], text[1]);
+              compareLatin(text[0], text[1]);
           } else {
               cerr << "Text 1 or 2 is not set." << endl << flush;
           }

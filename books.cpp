@@ -19,6 +19,22 @@ using namespace std;
 #include "fingerprint.h"
 #include "cli.h"
 
+class InvalidBook: public exception
+{
+  virtual const char* what() const throw()
+  {
+    return "Invalid book.";
+  }
+} InvalidBook;
+
+class InvalidVerse: public exception
+{
+  virtual const char* what() const throw()
+  {
+    return "Invalid verse.";
+  }
+} InvalidVerse;
+
 using namespace sword;
 
 vector<Book> books;
@@ -214,6 +230,7 @@ void addBook(string moduleName, string firstVerse, string lastVerse, bool remove
     filter->setOptionValue("off");
 
     cout << "Loading " << moduleName << "..." << endl << flush;
+    add_vocabulary_item(moduleName);
 
     string lastBookName = splitVerseInfo(firstVerse).bookName;
     Book lastBook = Book(lastBookName);
@@ -274,10 +291,21 @@ Book getBook(string book, string info) {
             return b;
         }
     }
+    throw InvalidBook;
 }
 
 string lookupVerse(string book, string info, string verse) {
-    return getBook(book, info).getVerse(verse);
+    try {
+        Book b = getBook(book, info);
+        string ret = b.getVerse(verse);
+        if (ret.length() == 0) {
+            throw InvalidVerse;
+        }
+        return ret;
+    } catch (exception &e) {
+        cerr << e.what() << endl << flush;
+        throw InvalidVerse;
+    }
 }
 
 fingerprint getTextFingerprint(string book, string info, int start, int length) {
@@ -315,6 +343,13 @@ int compare(string book1, string info1, string verseInfo1s, string verseInfo1e, 
     cout << "difference = " << ratio << endl;
     // printDist(f1, f2);
     return d;
+}
+
+int compareLatin(string verse1, string verse2) {
+    int d = dist(verse1, verse2);
+    cout << "Comparing '" << verse1 << "' ~ '" << verse2 << "' = " << d << endl;
+    float ratio = ((float) d+1) / (verse1.length() + verse2.length());
+    cout << "difference = " << ratio << endl;
 }
 
 int compare(string verse1, string verse2) {

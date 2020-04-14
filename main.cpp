@@ -134,4 +134,22 @@ int main(int argc, char **argv) {
  * text1 ο δε δικαιοc εκ πιcτεωc μ ζηcεται
  * text2 ο δε δικοc εκ πιcτεωc ζηcεται
  * compare12
+ *
+ * addbooks
+ * ...
+ * >> lookup1 Psalms LXX 118:22
+ * Stored internally as liuononapedokimasanoioikodomoyntewoytowegenhuheiwkefalhngvniaw.
+ * >> lookup2 Acts SBLGNT 4:11
+ * Stored internally as oytowestinoliuowoejoyuenhueiwyfymvntvnoikodomvnogenomenoweiwkefalhngvniaw.
+ * >> compare12
+ * Comparing 'liuononapedokimasanoioikodomoyntewoytowegenhuheiwkefalhngvniaw' ~ 'oytowestinoliuowoejoyuenhueiwyfymvntvnoikodomvnogenomenoweiwkefalhngvniaw' = 57
+ * difference = 0.42963
+ * >> lookup1 Psalms LXX 117:1
+ * Stored internally as allhloyiaaineitetonkyrionpantataeunhepainesateaytonpantewoilaoi.
+ * >> lookup2 Romans SBLGNT 15:11
+ * Stored internally as kaipalinaineiteantataeunhtonkyrionkaiepainesatvsanaytonpantewoilaoi.
+ * >> compare12
+ * Comparing 'allhloyiaaineitetonkyrionpantataeunhepainesateaytonpantewoilaoi' ~ 'kaipalinaineiteantataeunhtonkyrionkaiepainesatvsanaytonpantewoilaoi' = 28
+ * difference = 0.223077
+ *
  */

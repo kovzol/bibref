@@ -1,5 +1,6 @@
-#include "book.h"
 #include <iostream>
+
+#include "book.h"
 
 using namespace std;
 
@@ -28,6 +29,14 @@ void Book::addVerse(string n, string i) {
     text += n;
 }
 
+class InvalidVerseReference: public exception
+{
+  virtual const char* what() const throw()
+  {
+    return "Invalid verse reference.";
+  }
+} InvalidVerseReference;
+
 string Book::getVerse(string i) {
     for (int j=0; j<verses.size(); ++j) {
         int match = verses[j].info.compare(i);
@@ -36,6 +45,7 @@ string Book::getVerse(string i) {
             return found;
         }
     }
+    throw InvalidVerseReference;
 }
 
 string Book::getText() {
