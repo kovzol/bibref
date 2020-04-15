@@ -20,9 +20,15 @@ vector<bool> textset = {false, false};
 string textCmd = "text";
 string lookupCmd = "lookup";
 
-string errorNotRecognized = "Sorry, the command you entered was not recognized.";
+string errorNotRecognized = "Sorry, the command you entered was not recognized or its syntax is invalid.";
+string errorTextIncomplete = "Either " + textCmd + "1 or " + textCmd + "2 must be used.";
+string errorTextParameters = textCmd + " requires at least one parameter.";
+string errorLookupIncomplete = "Either " + lookupCmd + "1 or " + lookupCmd + "2 must be used.";
+string errorLookupParameters = lookupCmd + " requires 3 or 4 parameters.";
 
-vector<string> vocabulary {"addbooks", "compare12", textCmd + "1", textCmd + "2", lookupCmd + "1", lookupCmd + "2", "quit"};
+vector<string> vocabulary {"addbooks", "compare12",
+                           textCmd + "1", textCmd + "2", lookupCmd + "1", lookupCmd + "2", "quit",
+                                   "help"};
 
 void add_vocabulary_item(string item) {
     replace(item.begin(), item.end(), ' ', '_');
@@ -97,113 +103,133 @@ void cli() {
                 addBooks();
                 booksAdded = true;
             }
+            goto end;
         }
-        else if (input.compare("quit") == 0) {
+
+        if (input.compare("quit") == 0) {
             info("Goodbye.");
             exit(0);
         }
-        else if (boost::starts_with(input, textCmd)) {
+
+        if (input.compare("help") == 0) {
+            info("Please visit https://github.com/kovzol/bibref to get online help.");
+            goto end;
+        }
+
+        if (boost::starts_with(input, textCmd)) {
             int index;
             int commandLength = textCmd.length();
+            if (input.length() == commandLength) {
+                error(errorTextIncomplete);
+                goto end;
+            }
             if (input.at(commandLength) == '1') {
                 index = 0;
             }
             else if (input.at(commandLength) ==  '2') {
                 index = 1;
             } else {
-                error("Either " + textCmd + "1 or " + textCmd + "2 must be used.");
+                error(errorTextIncomplete);
+                goto end;
             }
             if (input.length() < textCmd.length() + 2) {
-                error(input + " requires at least two parameters.");
-            } else {
-                if (input.at(commandLength + 1) != ' ') {
-                    error("Either " + textCmd + "1 or " + textCmd + "2 must be used.");
-                } else {
-                    string rest = input.substr(input.find(" ") + 1);
-                    string processed = processVerse(rest);
-                    if (processed.length() == 0) {
-                        error("Text does not contain Greek letters, ignored.");
-                    } else {
-                        text[index] = processed;
-                        textset[index] = true;
-                        info("Stored internally as " + processed + ".");
-                    }
-                }
+                error(errorTextParameters);
+                goto end;
             }
+            if (input.at(commandLength + 1) != ' ') {
+                error("Either " + textCmd + "1 or " + textCmd + "2 must be used.");
+                goto end;
+            }
+            string rest = input.substr(input.find(" ") + 1);
+            string processed = processVerse(rest);
+            if (processed.length() == 0) {
+                error("Text does not contain Greek letters, ignored.");
+                goto end;
+            }
+            text[index] = processed;
+            textset[index] = true;
+            info("Stored internally as " + processed + ".");
+            goto end;
         }
-        else if (boost::starts_with(input, lookupCmd)) {
-            int commandLength = lookupCmd.length();
+
+        if (boost::starts_with(input, lookupCmd)) {
             int index;
+            int commandLength = lookupCmd.length();
+            if (input.length() == commandLength) {
+                error(errorLookupIncomplete);
+                goto end;
+            }
             if (input.at(commandLength) == '1') {
                 index = 0;
             }
             else if (input.at(commandLength) ==  '2') {
                 index = 1;
             } else {
-                error("Either " + lookupCmd + "1 or " + lookupCmd + "2 must be used.");
+                error(errorLookupIncomplete);
                 goto end;
             }
             if (input.length() < lookupCmd.length() + 2) {
-                error(input + " requires at least two parameters.");
-            } else {
-                if (input.at(commandLength + 1) != ' ') {
-                    error("Either " + lookupCmd + "1 or " + lookupCmd + "2 must be used.");
-                    goto end;
-                } else {
-                    string rest = input.substr(input.find(" ") + 1);
-                    typedef vector<string> Tokens;
-                    Tokens tokens;
-                    boost::split(tokens, rest, boost::is_any_of(" "));
-                    int restSize = tokens.size();
-                    if (restSize == 3) {
-                        string verse = "";
-                        try {
-                            verse = lookupVerse(tokens[0], tokens[1], tokens[2]);
-                            text[index] = verse;
-                            textset[index] = true;
-                            info("Stored internally as " + verse + ".");
-                        } catch (exception &e) {
-                            error(e.what());
-                        }
-                    }
-                    else if (restSize == 4) {
-                        string verse = "";
-                        try {
-                            Tokens tokens2, tokens3;
-                            int start = 0, end = 0;
-                            boost::split(tokens2, tokens[2], boost::is_any_of("+"));
-                            if (tokens2.size() > 1) {
-                                start = stoi(tokens2[1]);
-                            }
-                            boost::split(tokens3, tokens[3], boost::is_any_of("-"));
-                            if (tokens3.size() > 1) {
-                                end = stoi(tokens3[1]);
-                            }
-                            verse = getText(tokens[0], tokens[1], tokens2.at(0), tokens3.at(0), start, end);
-                            text[index] = verse;
-                            textset[index] = true;
-                            info("Stored internally as " + verse + ".");
-                        } catch (exception &e) {
-                            error(e.what());
-                        }
-                    } else {
-                        error(errorNotRecognized);
-                    }
-                }
+                error(errorLookupParameters);
+                goto end;
             }
+            if (input.at(commandLength + 1) != ' ') {
+                error(errorLookupIncomplete);
+                goto end;
+            }
+            string rest = input.substr(input.find(" ") + 1);
+            typedef vector<string> Tokens;
+            Tokens tokens;
+            boost::split(tokens, rest, boost::is_any_of(" "));
+            int restSize = tokens.size();
+            if (restSize == 3) {
+                string verse = "";
+                try {
+                    verse = lookupVerse(tokens[0], tokens[1], tokens[2]);
+                    text[index] = verse;
+                    textset[index] = true;
+                    info("Stored internally as " + verse + ".");
+                } catch (exception &e) {
+                    error(e.what());
+                }
+                goto end;
+            }
+            if (restSize == 4) {
+                string verse = "";
+                try {
+                    Tokens tokens2, tokens3;
+                    int start = 0, end = 0;
+                    boost::split(tokens2, tokens[2], boost::is_any_of("+"));
+                    if (tokens2.size() > 1) {
+                        start = stoi(tokens2[1]);
+                    }
+                    boost::split(tokens3, tokens[3], boost::is_any_of("-"));
+                    if (tokens3.size() > 1) {
+                        end = stoi(tokens3[1]);
+                    }
+                    verse = getText(tokens[0], tokens[1], tokens2.at(0), tokens3.at(0), start, end);
+                    text[index] = verse;
+                    textset[index] = true;
+                    info("Stored internally as " + verse + ".");
+                } catch (exception &e) {
+                    error(e.what());
+                }
+                goto end;
+            }
+            error(errorLookupParameters);
+            goto end;
         }
-        else if (boost::starts_with(input, "compare12")) {
+        if (boost::starts_with(input, "compare12")) {
             if (textset.at(0) && textset.at(1)) {
                 compareLatin(text[0], text[1]);
             } else {
                 error("Text 1 or 2 is not set.");
             }
+            goto end;
         }
-        else if (input.length() != 0) {
+        if (input.length() != 0) {
             error(errorNotRecognized);
         }
-
-        end:
+end:
         // readline malloc's a new buffer every time.
         free(buf);
     }
