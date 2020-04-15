@@ -19,6 +19,7 @@ vector<bool> textset = {false, false};
 
 string textCmd = "text";
 string lookupCmd = "lookup";
+string findCmd = "find";
 
 string errorNotRecognized = "Sorry, the command you entered was not recognized or its syntax is invalid.";
 string errorTextIncomplete = "Either " + textCmd + "1 or " + textCmd + "2 must be used.";
@@ -28,7 +29,7 @@ string errorLookupParameters = lookupCmd + " requires 3 or 4 parameters.";
 
 vector<string> vocabulary {"addbooks", "compare12",
                            textCmd + "1", textCmd + "2", lookupCmd + "1", lookupCmd + "2", "quit",
-                                   "help"};
+                                   "help", findCmd + "1"};
 
 void add_vocabulary_item(string item) {
     replace(item.begin(), item.end(), ' ', '_');
@@ -184,7 +185,7 @@ void cli() {
             if (restSize == 3) {
                 string verse = "";
                 try {
-                    verse = lookupVerse(tokens[0], tokens[1], tokens[2]);
+                    verse = lookupVerse(tokens[1], tokens[0], tokens[2]);
                     text[index] = verse;
                     textset[index] = true;
                     info("Stored internally as " + verse + ".");
@@ -206,7 +207,7 @@ void cli() {
                     if (tokens3.size() > 1) {
                         end = stoi(tokens3[1]);
                     }
-                    verse = getText(tokens[0], tokens[1], tokens2.at(0), tokens3.at(0), start, end);
+                    verse = getText(tokens[1], tokens[0], tokens2.at(0), tokens3.at(0), start, end);
                     text[index] = verse;
                     textset[index] = true;
                     info("Stored internally as " + verse + ".");

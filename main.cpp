@@ -138,33 +138,33 @@ int main(int argc, char **argv) {
  * More examples:
  * addbooks
  * ...
- * >> lookup1 Psalms LXX 118:22
+ * >> lookup1 LXX Psalms 118:22
  * Stored internally as liuononapedokimasanoioikodomoyntewoytowegenhuheiwkefalhngvniaw.
- * >> lookup2 Acts SBLGNT 4:11
+ * >> lookup2 SBLGNT Acts 4:11
  * Stored internally as oytowestinoliuowoejoyuenhueiwyfymvntvnoikodomvnogenomenoweiwkefalhngvniaw.
  * >> compare12
  * Comparing 'liuononapedokimasanoioikodomoyntewoytowegenhuheiwkefalhngvniaw' ~ 'oytowestinoliuowoejoyuenhueiwyfymvntvnoikodomvnogenomenoweiwkefalhngvniaw' = 57
  * difference = 0.42963
  *
- * >> lookup1 Psalms LXX 117:1
+ * >> lookup1 LXX Psalms 117:1
  * Stored internally as allhloyiaaineitetonkyrionpantataeunhepainesateaytonpantewoilaoi.
- * >> lookup2 Romans SBLGNT 15:11
+ * >> lookup2 SBLGNT Romans 15:11
  * Stored internally as kaipalinaineiteantataeunhtonkyrionkaiepainesatvsanaytonpantewoilaoi.
  * >> compare12
  * Comparing 'allhloyiaaineitetonkyrionpantataeunhepainesateaytonpantewoilaoi' ~ 'kaipalinaineiteantataeunhtonkyrionkaiepainesatvsanaytonpantewoilaoi' = 28
  * difference = 0.223077
  *
- * >> lookup1 Psalms LXX 117:1+9 117:1-0
+ * >> lookup1 LXX Psalms 117:1+9 117:1-0
  * Stored internally as aineitetonkyrionpantataeunhepainesateaytonpantewoilaoi.
- * >> lookup2 Romans SBLGNT 15:11+8 15:11
+ * >> lookup2 SBLGNT Romans 15:11+8 15:11
  * Stored internally as aineiteantataeunhtonkyrionkaiepainesatvsanaytonpantewoilaoi.
  * >> compare12
  * Comparing 'aineitetonkyrionpantataeunhepainesateaytonpantewoilaoi' ~ 'aineiteantataeunhtonkyrionkaiepainesatvsanaytonpantewoilaoi' = 15
  * difference = 0.141593
  *
- * >> lookup1 Habakkuk LXX 2:4+39 2:4
+ * >> lookup1 LXX Habakkuk 2:4+39 2:4
  * Stored internally as odedikaiowekpistevwmoyqhsetai.
- * >> lookup2 Romans SBLGNT 1:17+68 1:17
+ * >> lookup2 SBLGNT Romans 1:17+68 1:17
  * Stored internally as odedikaiowekpistevwqhsetai.
  * >> compare12
  * Comparing 'odedikaiowekpistevwmoyqhsetai' ~ 'odedikaiowekpistevwqhsetai' = 5
