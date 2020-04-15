@@ -284,7 +284,7 @@ void addBook(string moduleName, string firstVerse, string lastVerse, bool remove
             }
         }
     }
-    cout << "Done loading books of " << moduleName << "." << endl << flush;
+    info("Done loading books of " + moduleName + ".");
 }
 
 void addBooks() {
@@ -311,7 +311,7 @@ string lookupVerse(string book, string info, string verse) {
         }
         return ret;
     } catch (exception &e) {
-        cerr << e.what() << endl << flush;
+        error(e.what());
         throw InvalidVerse;
     }
 }
@@ -333,8 +333,8 @@ fingerprint getTextFingerprint(string book, string info, string start, string en
 
 int compare(string book1, string info1, string verseInfo1s, string verseInfo1e, int startOffset1, int endOffset1,
              string book2, string info2, string verseInfo2s, string verseInfo2e, int startOffset2, int endOffset2) {
-    cout << "Comparing " << book1 << " (" << info1 << ") " << verseInfo1s << "-" << verseInfo1e << " and "
-         << book2 << " (" << info2 << ") " << verseInfo2s << "-" << verseInfo2e << endl;
+    info("Comparing " + book1 + " (" + info1 + ") " + verseInfo1s + "-" + verseInfo1e + " and "
+         + book2 + " (" + info2 + ") " + verseInfo2s + "-" + verseInfo2e);
     Book b1 = getBook(book1, info1);
     Book b2 = getBook(book2, info2);
     int verse1s = b1.getVerseStart(verseInfo1s) + startOffset1;
@@ -346,9 +346,9 @@ int compare(string book1, string info1, string verseInfo1s, string verseInfo1e, 
     fingerprint f2 = getTextFingerprint(book2, info2, verseInfo2s, verseInfo2e, startOffset2, endOffset2);
     string verse2part = b2.getText().substr(verse2s, verse2e - verse2s + 1);
     int d = dist(f1, f2);
-    cout << verse1part << " ~ " << verse2part << " = " << d << endl;
+    info(verse1part + " ~ " + verse2part + " = " + to_string(d));
     float ratio = ((float) d+1) / (verse1part.length() + verse2part.length());
-    cout << "difference = " << ratio << endl;
+    info("difference = " + to_string(ratio));
     // printDist(f1, f2);
     return d;
 }
@@ -366,16 +366,16 @@ string getText(string book, string info, string verseInfoS, string verseInfoE, i
 
 int compareLatin(string verse1, string verse2) {
     int d = dist(verse1, verse2);
-    cout << "Comparing '" << verse1 << "' ~ '" << verse2 << "' = " << d << endl;
+    info("Comparing '" + verse1 + "' ~ '" + verse2 + "' = " + to_string(d));
     float ratio = ((float) d+1) / (verse1.length() + verse2.length());
-    cout << "difference = " << ratio << endl;
+    info("difference = " + to_string(ratio));
 }
 
 int compare(string verse1, string verse2) {
     int d = dist(processVerse(verse1), processVerse(verse2));
-    cout << "Comparing '" << verse1 << "' ~ '" << verse2 << "' = " << d << endl;
+    info("Comparing '" + verse1 + "' ~ '" + verse2 + "' = " + to_string(d));
     float ratio = ((float) d+1) / (verse1.length() + verse2.length());
-    cout << "difference = " << ratio << endl;
+    info("difference = " + to_string(ratio));
 }
 
 typedef struct fingerprintInfo {
@@ -406,8 +406,8 @@ typedef struct int2 {
 
 int findBestFit(string book1, string info1, string verseInfo1s, string verseInfo1e,
                 string book2, string info2, string verseInfo2s, string verseInfo2e) {
-    cout << "Comparing " << book1 << " (" << info1 << ") " << verseInfo1s << "-" << verseInfo1e << " and "
-         << book2 << " (" << info2 << ") " << verseInfo2s << "-" << verseInfo2e << endl;
+    info("Comparing " + book1 + " (" + info1 + ") " + verseInfo1s + "-" + verseInfo1e + " and "
+         + book2 + " (" + info2 + ") " + verseInfo2s + "-" + verseInfo2e);
     fingerprints.clear();
     Book b1 = getBook(book1, info1);
     Book b2 = getBook(book2, info2);
