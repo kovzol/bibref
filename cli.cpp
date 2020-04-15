@@ -20,16 +20,20 @@ vector<bool> textset = {false, false};
 string textCmd = "text";
 string lookupCmd = "lookup";
 string findCmd = "find";
+string lengthCmd = "length";
 
 string errorNotRecognized = "Sorry, the command you entered was not recognized or its syntax is invalid.";
 string errorTextIncomplete = "Either " + textCmd + "1 or " + textCmd + "2 must be used.";
 string errorTextParameters = textCmd + " requires at least one parameter.";
 string errorLookupIncomplete = "Either " + lookupCmd + "1 or " + lookupCmd + "2 must be used.";
 string errorLookupParameters = lookupCmd + " requires 3 or 4 parameters.";
+string errorFindIncomplete = "Either " + textCmd + "1 or " + textCmd + "2 must be used.";
+string errorFindParameters = findCmd + " requires at least one parameter.";
+string errorLengthIncomplete = "Either " + lengthCmd + "1 or " + lengthCmd + "2 must be used.";
 
 vector<string> vocabulary {"addbooks", "compare12",
                            textCmd + "1", textCmd + "2", lookupCmd + "1", lookupCmd + "2", "quit",
-                                   "help", findCmd + "1"};
+                                   "help", findCmd + "1", lengthCmd + "1", lengthCmd + "2"};
 
 void add_vocabulary_item(string item) {
     replace(item.begin(), item.end(), ' ', '_');
@@ -87,7 +91,7 @@ char** completer(const char* text, int start, int end) {
 
 void cli() {
     rl_attempted_completion_function = completer;
-    info("This is bibref-cli 2020Apr14, nice to meet you.");
+    info("This is bibref-cli 2020Apr15, nice to meet you.");
 
     char* buf;
     while ((buf = readline(">> ")) != nullptr) {
@@ -219,6 +223,53 @@ void cli() {
             error(errorLookupParameters);
             goto end;
         }
+
+        if (boost::starts_with(input, findCmd)) {
+            int index;
+            int commandLength = findCmd.length();
+            if (input.length() == commandLength) {
+                error(errorFindIncomplete);
+                goto end;
+            }
+            if (input.at(commandLength) == '1') {
+                index = 0;
+            }
+            else if (input.at(commandLength) ==  '2') {
+                index = 1;
+            } else {
+                error(errorFindIncomplete);
+                goto end;
+            }
+            if (input.length() < lookupCmd.length() + 2) {
+                error(errorFindParameters);
+                goto end;
+            }
+            string rest = input.substr(input.find(" ") + 1);
+            find(text[index], rest, 100);
+            goto end;
+        }
+
+        if (boost::starts_with(input, lengthCmd)) {
+            int index;
+            int commandLength = lengthCmd.length();
+            if (input.length() == commandLength) {
+                error(errorLengthIncomplete);
+                goto end;
+            }
+            if (input.at(commandLength) == '1') {
+                index = 0;
+            }
+            else if (input.at(commandLength) ==  '2') {
+                index = 1;
+            } else {
+                error(errorLengthIncomplete);
+                goto end;
+            }
+            info("Length of text " + to_string(index + 1) + " is "
+                 + to_string(text[index].length()) + ".");
+            goto end;
+        }
+
         if (boost::starts_with(input, "compare12")) {
             if (textset.at(0) && textset.at(1)) {
                 compareLatin(text[0], text[1]);

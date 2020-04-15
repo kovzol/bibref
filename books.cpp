@@ -21,26 +21,26 @@ using namespace std;
 
 class InvalidBook: public exception
 {
-  virtual const char* what() const throw()
-  {
-    return "Invalid book.";
-  }
+    virtual const char* what() const throw()
+    {
+        return "Invalid book.";
+    }
 } InvalidBook;
 
 class InvalidVerse: public exception
 {
-  virtual const char* what() const throw()
-  {
-    return "Invalid verse.";
-  }
+    virtual const char* what() const throw()
+    {
+        return "Invalid verse.";
+    }
 } InvalidVerse;
 
 class InvalidPassage: public exception
 {
-  virtual const char* what() const throw()
-  {
-    return "Invalid passage.";
-  }
+    virtual const char* what() const throw()
+    {
+        return "Invalid passage.";
+    }
 } InvalidPassage;
 
 using namespace sword;
@@ -118,7 +118,8 @@ string greekToLatin(string word) {
                     c = 'r';
                     break;
                 case 0x82:
-                    c = 'w'; // sigma at the end of the word
+                    // c = 'w'; // sigma at the end of the word
+                    c = 's'; // no difference to normal sigma is made
                     break;
                 case 0x83:
                     c = 's';
@@ -332,7 +333,7 @@ fingerprint getTextFingerprint(string book, string info, string start, string en
 }
 
 int compare(string book1, string info1, string verseInfo1s, string verseInfo1e, int startOffset1, int endOffset1,
-             string book2, string info2, string verseInfo2s, string verseInfo2e, int startOffset2, int endOffset2) {
+            string book2, string info2, string verseInfo2s, string verseInfo2e, int startOffset2, int endOffset2) {
     info("Comparing " + book1 + " (" + info1 + ") " + verseInfo1s + "-" + verseInfo1e + " and "
          + book2 + " (" + info2 + ") " + verseInfo2s + "-" + verseInfo2e);
     Book b1 = getBook(book1, info1);
@@ -401,7 +402,7 @@ fingerprint getFingerprintCached(Book &b, int s, int l) {
 }
 
 typedef struct int2 {
-  int coords[2];
+    int coords[2];
 } int2;
 
 int findBestFit(string book1, string info1, string verseInfo1s, string verseInfo1e,
@@ -427,7 +428,7 @@ int findBestFit(string book1, string info1, string verseInfo1s, string verseInfo
 
     for (int i=0; i<verse1len - MIN_CITATION_LENGTH + 1; ++i)
         for (int j=0; j<verse2len - MIN_CITATION_LENGTH + 1; ++j)
-        bestValues[i][j] = std::numeric_limits<int>::max();
+            bestValues[i][j] = std::numeric_limits<int>::max();
 
     for (int i=0; i<verse1len - MIN_CITATION_LENGTH + 1; ++i) {
         int jmax = verse1len;
@@ -487,7 +488,7 @@ int findBestFit(string book1, string info1, string verseInfo1s, string verseInfo
                         (bestValues[i][j] < bestValues[i+1][j+1])
                         ) {
                     candidates.push_back({i,j});
-                    }
+                }
             }
         }
         printf("\n");
@@ -498,10 +499,34 @@ int findBestFit(string book1, string info1, string verseInfo1s, string verseInfo
         int i = c.coords[0];
         int j = c.coords[1];
         compare(book1, info1, verseInfo1s, verseInfo1e, best1s[i][j],
-            best1e[i][j],
-            book2, info2, verseInfo2s, verseInfo2e, best2s[i][j],
-            best2e[i][j]);
+                best1e[i][j],
+                book2, info2, verseInfo2s, verseInfo2e, best2s[i][j],
+                best2e[i][j]);
     }
 
     return 0;
+}
+
+void find(string text, string moduleName, int maxFound) {
+    int found = 0;
+    for (int i=0; i<books.size(); i++) {
+        Book b = books[i];
+        if (b.getInfo().compare(moduleName) == 0) {
+            string book = b.getName();
+            string bookText = b.getText();
+            size_t pos = bookText.find(text);
+            while(pos != std::string::npos) {
+                info("Found in " + book + " " + b.getVerse(pos)
+                     + " (book position " + to_string(pos + 1) + ")");
+                maxFound--;
+                found++;
+                if (maxFound == 0) {
+                    goto end;
+                }
+                pos = bookText.find(text, pos + text.size());
+            }
+        }
+    }
+end:
+    info(to_string(found) + " occurrences.");
 }
