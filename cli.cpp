@@ -21,6 +21,7 @@ string textCmd = "text";
 string lookupCmd = "lookup";
 string findCmd = "find";
 string lengthCmd = "length";
+string minuniqueCmd = "minunique";
 
 string errorNotRecognized = "Sorry, the command you entered was not recognized or its syntax is invalid.";
 string errorTextIncomplete = "Either " + textCmd + "1 or " + textCmd + "2 must be used.";
@@ -28,12 +29,16 @@ string errorTextParameters = textCmd + " requires at least one parameter.";
 string errorLookupIncomplete = "Either " + lookupCmd + "1 or " + lookupCmd + "2 must be used.";
 string errorLookupParameters = lookupCmd + " requires 3 or 4 parameters.";
 string errorFindIncomplete = "Either " + textCmd + "1 or " + textCmd + "2 must be used.";
-string errorFindParameters = findCmd + " requires at least one parameter.";
+string errorFindParameters = findCmd + " requires one parameter.";
 string errorLengthIncomplete = "Either " + lengthCmd + "1 or " + lengthCmd + "2 must be used.";
+string errorMinuniqueParameters = minuniqueCmd + " requires one parameter";
+
 
 vector<string> vocabulary {"addbooks", "compare12",
                            textCmd + "1", textCmd + "2", lookupCmd + "1", lookupCmd + "2", "quit",
-                                   "help", findCmd + "1", lengthCmd + "1", lengthCmd + "2"};
+                                   "help", findCmd + "1", lengthCmd + "1", lengthCmd + "2",
+                                   minuniqueCmd + "1"
+                          };
 
 void add_vocabulary_item(string item) {
     replace(item.begin(), item.end(), ' ', '_');
@@ -91,7 +96,7 @@ char** completer(const char* text, int start, int end) {
 
 void cli() {
     rl_attempted_completion_function = completer;
-    info("This is bibref-cli 2020Apr15, nice to meet you.");
+    info("This is bibref-cli 2020Apr16, nice to meet you.");
 
     char* buf;
     while ((buf = readline(">> ")) != nullptr) {
@@ -246,7 +251,7 @@ void cli() {
                 goto end;
             }
             string rest = input.substr(input.find(" ") + 1);
-            find(text[index], rest, 100);
+            find(text[index], rest, 100, 1);
             goto end;
         }
 
@@ -279,6 +284,22 @@ void cli() {
             }
             goto end;
         }
+
+        if (boost::starts_with(input, minuniqueCmd + "1")) {
+            int commandLength = minuniqueCmd.length();
+            if (input.length() == commandLength) {
+                error(errorMinuniqueParameters);
+                goto end;
+            }
+            if (input.length() < minuniqueCmd.length() + 2) {
+                error(errorMinuniqueParameters);
+                goto end;
+            }
+            string rest = input.substr(input.find(" ") + 1);
+            find_min_unique(text[0], rest);
+            goto end;
+        }
+
         if (input.length() != 0) {
             error(errorNotRecognized);
         }

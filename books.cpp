@@ -514,7 +514,7 @@ int findBestFit(string book1, string info1, string verseInfo1s, string verseInfo
     return 0;
 }
 
-void find(string text, string moduleName, int maxFound) {
+int find(string text, string moduleName, int maxFound, int verb) {
     int found = 0;
     for (int i=0; i<books.size(); i++) {
         Book b = books[i];
@@ -523,8 +523,10 @@ void find(string text, string moduleName, int maxFound) {
             string bookText = b.getText();
             size_t pos = bookText.find(text);
             while(pos != std::string::npos) {
-                info("Found in " + book + " " + b.getVerse(pos)
-                     + " (book position " + to_string(pos + 1) + ")");
+                if (verb == 1) {
+                    info("Found in " + book + " " + b.getVerse(pos)
+                         + " (book position " + to_string(pos + 1) + ")");
+                }
                 maxFound--;
                 found++;
                 if (maxFound == 0) {
@@ -535,5 +537,41 @@ void find(string text, string moduleName, int maxFound) {
         }
     }
 end:
-    info(to_string(found) + " occurrences.");
+    if (verb == 1) {
+        info(to_string(found) + " occurrences.");
+    }
+    return found;
+}
+
+int find_min_unique(string text, string moduleName) {
+    int l = text.length();
+    vector<vector<int>> is_unique(l, vector<int> (l)); // TODO: improve this to use just the half
+    // Initialization:
+    for (int i = 0; i < l; ++i) {
+        for (int j = 0; j < l; ++j) {
+            is_unique[i][j] = -1; // no info yet
+        }
+    }
+    for (int i = 0; i < l; ++i) {
+        for (int j = 0; j < l - i; ++j) {
+            if (i > 0) {
+                if (is_unique[i - 1][j + 1] == 1 || is_unique[i - 1][j] == 1 ||
+                    // a one-letter shorter part of this text is a min_unique text
+                        is_unique[i - 1][j + 1] == 2 || is_unique[i - 1][j] == 2)
+                        // a one-letter shorter part of this text is a unique (but not min) text
+                {
+                    is_unique[i][j] = 2;
+                } else {
+                    string subtext = text.substr(j, i+1);
+                    int unique = find(subtext, moduleName, 2, 0);
+                    if (unique == 1) {
+                        is_unique[i][j] = 1;
+                        info("Text " + subtext + " is minimal unique.");
+                    } else {
+                        is_unique[i][j] = 0;
+                    }
+                }
+            }
+        }
+    }
 }
