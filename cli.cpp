@@ -18,6 +18,7 @@ string text[2];
 vector<bool> textset = {false, false};
 
 string textCmd = "text";
+string latintextCmd = "latintext";
 string lookupCmd = "lookup";
 string findCmd = "find";
 string lengthCmd = "length";
@@ -26,6 +27,8 @@ string minuniqueCmd = "minunique";
 string errorNotRecognized = "Sorry, the command you entered was not recognized or its syntax is invalid.";
 string errorTextIncomplete = "Either " + textCmd + "1 or " + textCmd + "2 must be used.";
 string errorTextParameters = textCmd + " requires at least one parameter.";
+string errorLatintextIncomplete = "Either " + latintextCmd + "1 or " + latintextCmd + "2 must be used.";
+string errorLatintextParameters = latintextCmd + " requires at least one parameter.";
 string errorLookupIncomplete = "Either " + lookupCmd + "1 or " + lookupCmd + "2 must be used.";
 string errorLookupParameters = lookupCmd + " requires 3 or 4 parameters.";
 string errorFindIncomplete = "Either " + textCmd + "1 or " + textCmd + "2 must be used.";
@@ -36,8 +39,8 @@ string errorMinuniqueParameters = minuniqueCmd + " requires one parameter";
 
 vector<string> vocabulary {"addbooks", "compare12",
                            textCmd + "1", textCmd + "2", lookupCmd + "1", lookupCmd + "2", "quit",
-                                   "help", findCmd + "1", lengthCmd + "1", lengthCmd + "2",
-                                   minuniqueCmd + "1"
+                                   "help", findCmd + "1", findCmd + "2", lengthCmd + "1", lengthCmd + "2",
+                                   minuniqueCmd + "1", latintextCmd + "1", latintextCmd + "2"
                           };
 
 void add_vocabulary_item(string item) {
@@ -160,6 +163,37 @@ void cli() {
             text[index] = processed;
             textset[index] = true;
             info("Stored internally as " + processed + ".");
+            goto end;
+        }
+
+        if (boost::starts_with(input, latintextCmd)) {
+            int index;
+            int commandLength = latintextCmd.length();
+            if (input.length() == commandLength) {
+                error(errorLatintextIncomplete);
+                goto end;
+            }
+            if (input.at(commandLength) == '1') {
+                index = 0;
+            }
+            else if (input.at(commandLength) ==  '2') {
+                index = 1;
+            } else {
+                error(errorLatintextIncomplete);
+                goto end;
+            }
+            if (input.length() < textCmd.length() + 2) {
+                error(errorLatintextParameters);
+                goto end;
+            }
+            if (input.at(commandLength + 1) != ' ') {
+                error("Either " + latintextCmd + "1 or " + latintextCmd + "2 must be used.");
+                goto end;
+            }
+            string rest = input.substr(input.find(" ") + 1);
+            text[index] = rest;
+            textset[index] = true;
+            info("Stored.");
             goto end;
         }
 
