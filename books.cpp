@@ -548,17 +548,14 @@ int find_min_unique(string text, string moduleName) {
     vector<vector<int>> is_unique(l, vector<int> (l)); // TODO: improve this to use just the half
     // Initialization:
     for (int i = 0; i < l; ++i) {
-        for (int j = 0; j < l; ++j) {
+        for (int j = 0; j < l - i; ++j) {
             is_unique[i][j] = -1; // no info yet
         }
     }
     for (int i = 0; i < l; ++i) {
         for (int j = 0; j < l - i; ++j) {
             if (i > 0) {
-                if (is_unique[i - 1][j + 1] == 1 || is_unique[i - 1][j] == 1 ||
-                    // a one-letter shorter part of this text is a min_unique text
-                        is_unique[i - 1][j + 1] == 2 || is_unique[i - 1][j] == 2)
-                        // a one-letter shorter part of this text is a unique (but not min) text
+                if (is_unique[i - 1][j + 1] > 0 || is_unique[i - 1][j] > 0)
                 {
                     is_unique[i][j] = 2;
                 } else {
