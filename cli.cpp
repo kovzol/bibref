@@ -105,8 +105,9 @@ void cli() {
             if (booksAdded) {
                 cerr << "Books already added." << endl << flush;
             } else {
-                addBooks();
-                booksAdded = true;
+                if (addBooks() == 0) {
+                    booksAdded = true;
+                }
             }
             goto end;
         }

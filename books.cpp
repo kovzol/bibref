@@ -221,13 +221,13 @@ VerseInfo splitVerseInfo(string verseInfo) {
     }
 }
 
-void addBook(string moduleName, string firstVerse, string lastVerse, bool removeAccents) {
+int addBook(string moduleName, string firstVerse, string lastVerse, bool removeAccents) {
     SWMgr library(new MarkupFilterMgr(FMT_PLAIN));
     SWModule *module;
     module = library.getModule(moduleName.c_str());
     if (!module) {
-        cout << "The SWORD module " << moduleName << " is not installed" << endl << flush;
-        exit(1);
+        error("The SWORD module " + moduleName + " is not installed.");
+        return 1;
     }
     module->setKey(firstVerse.c_str());
     int bookStart = module->getIndex();
@@ -238,7 +238,7 @@ void addBook(string moduleName, string firstVerse, string lastVerse, bool remove
     SWOptionFilter *filter = new UTF8GreekAccents();
     filter->setOptionValue("off");
 
-    cout << "Loading " << moduleName << "..." << endl << flush;
+    info("Loading " + moduleName + "...");;
     add_vocabulary_item(moduleName);
 
     string lastBookName = splitVerseInfo(firstVerse).bookName;
@@ -268,7 +268,7 @@ void addBook(string moduleName, string firstVerse, string lastVerse, bool remove
             reference = vi.reference;
             if (lastBookName.compare(bookName) != 0) {
                 books.push_back(lastBook);
-                cout << lastBookName << " contains " << lastBook.getText().length() << " characters," << endl << flush;
+                info(lastBookName + " contains " + to_string(lastBook.getText().length()) + " characters,");
                 add_vocabulary_item(lastBookName);
                 // new book
                 Book book = Book(bookName);
@@ -280,17 +280,24 @@ void addBook(string moduleName, string firstVerse, string lastVerse, bool remove
             lastBook.addVerse(verseText, reference);
             if (verseInfo.compare(lastVerse)==0) {
                 books.push_back(lastBook);
-                cout << "and " << lastBookName << " contains " << lastBook.getText().length() << " characters." << endl << flush;
+                info("and " + lastBookName + " contains " + to_string(lastBook.getText().length()) + " characters.");
                 add_vocabulary_item(lastBookName);
             }
         }
     }
     info("Done loading books of " + moduleName + ".");
+    return 0;
 }
 
-void addBooks() {
-    addBook("LXX", "Genesis 1:1", "Malachi 4:6", false);
-    addBook("SBLGNT", "Matthew 1:1", "Revelation of John 22:21", true);
+int addBooks() {
+    int success = 0;
+    if (addBook("LXX", "Genesis 1:1", "Malachi 4:6", false) !=0 ) {
+        success = 1;
+    }
+    if (addBook("SBLGNT", "Matthew 1:1", "Revelation of John 22:21", true) != 0) {
+        success = 1;
+    }
+    return success;
 }
 
 Book getBook(string book, string info) {
