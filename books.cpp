@@ -6,8 +6,12 @@ using namespace std;
 
 #include <limits>
 #include <string>
+#include <string.h>
 #include <sstream>
 #include <vector>
+#include <boost/algorithm/string/trim.hpp>
+#include <boost/algorithm/string/predicate.hpp>
+#include <boost/algorithm/string/split.hpp>
 
 #include "swmgr.h"
 #include "swmodule.h"
@@ -42,6 +46,14 @@ class InvalidPassage: public exception
         return "Invalid passage.";
     }
 } InvalidPassage;
+
+class NoCitation: public exception
+{
+    virtual const char* what() const throw()
+    {
+        return "Passage is not a citation.";
+    }
+} NoCitation;
 
 using namespace sword;
 
@@ -514,18 +526,23 @@ int findBestFit(string book1, string info1, string verseInfo1s, string verseInfo
     return 0;
 }
 
-int find(string text, string moduleName, int maxFound, int verb) {
+string _find(string text, string moduleName, int maxFound, int verb) {
     int found = 0;
+    size_t pos;
+    string book;
     for (int i=0; i<books.size(); i++) {
         Book b = books[i];
         if (b.getInfo().compare(moduleName) == 0) {
-            string book = b.getName();
+            book = b.getName();
             string bookText = b.getText();
-            size_t pos = bookText.find(text);
-            while(pos != std::string::npos) {
+            pos = bookText.find(text);
+            while (pos != std::string::npos) {
                 if (verb == 1) {
-                    info("Found in " + book + " " + b.getVerse(pos)
-                         + " (book position " + to_string(pos + 1) + ")");
+                    info("Found in " + book + " " + b.getVerseInfoStart(pos) + " "
+                         + b.getVerseInfoEnd(pos + text.length() - 1)
+                         + " (book position " + to_string(pos + 1)
+                         + "-" + to_string(pos + text.length())
+                         + ")");
                 }
                 maxFound--;
                 found++;
@@ -540,7 +557,23 @@ end:
     if (verb == 1) {
         info(to_string(found) + " occurrences.");
     }
-    return found;
+    return to_string(found) + "," + book + "," + to_string(pos);
+}
+
+int find(string text, string moduleName, int maxFound, int verb) {
+    string f = _find(text, moduleName, maxFound, verb);
+    typedef vector<string> Tokens;
+    Tokens tokens;
+    boost::split(tokens, f, boost::is_any_of(","));
+    return stoi(tokens[0]);
+}
+
+string find(string text, string moduleName) {
+    string f = _find(text, moduleName, 1, 0);
+    typedef vector<string> Tokens;
+    Tokens tokens;
+    boost::split(tokens, f, boost::is_any_of(","));
+    return tokens[1] + "," + tokens[2];
 }
 
 int find_min_unique(string text, string moduleName) {
@@ -571,4 +604,56 @@ int find_min_unique(string text, string moduleName) {
             }
         }
     }
+}
+
+void extend(string moduleName1, string moduleName2, string book2, string verse2S,
+            int start, string verse2E, int end) {
+    Book b2 = getBook(book2, moduleName2);
+    int pos2S = b2.getVerseStart(verse2S) + start;
+    int pos2E = b2.getVerseEnd(verse2E) - end;
+
+    string text = b2.getText().substr(pos2S, pos2E - pos2S + 1);
+
+    // checking the input
+    if (find(text, moduleName1, 2, 0) != 1) {
+        throw NoCitation;
+    }
+
+    bool citation = true;
+    string found = find(text, moduleName1);
+    typedef vector<string> Tokens;
+    Tokens tokens;
+    boost::split(tokens, found, boost::is_any_of(","));
+    string book1 = tokens[0];
+    Book b1 = getBook(book1, moduleName1);
+    int pos1S = stoi(tokens[1]);
+
+    string text1 = b1.getText();
+    string text2 = b2.getText();
+
+    while (citation && pos1S > 0 && pos2S > 0) {
+        pos1S--;
+        pos2S--;
+        citation = text1.at(pos1S) == text2.at(pos2S);
+    }
+    pos1S++;
+    pos2S++;
+    citation = true;
+    int pos1E = pos1S + pos2E - pos2S;
+    while (citation && pos1E < text1.length() - 1 && pos2E < text2.length() - 1) {
+        pos1E++;
+        pos2E++;
+        citation = text1.at(pos1E) == text2.at(pos2E);
+    }
+    pos1E--;
+    pos2E--;
+    string verse1infoS = b1.getVerseInfoStart(pos1S);
+    string verse1infoE = b1.getVerseInfoEnd(pos1E);
+    string verse2infoS = b2.getVerseInfoStart(pos2S);
+    string verse2infoE = b2.getVerseInfoEnd(pos2E);
+    info("Extended match is " + moduleName1 + " " + book1 + " "
+         + verse1infoS + " " + verse1infoE + " = " + moduleName2
+         + book2 + " " + verse2infoS + " (" + verse2infoE
+         + text1.substr(pos1S, pos1E - pos1S + 1) + ", length "
+         + to_string(pos1E - pos1S + 1) + ").");
 }

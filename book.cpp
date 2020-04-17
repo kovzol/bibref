@@ -80,21 +80,33 @@ int Book::getVerseEnd(string i) {
     }
 }
 
-string Book::getVerse(int position) {
+string Book::getVerseInfoStart(int position) {
     for (int j=0; j<verses.size(); ++j) {
         if (verses[j].start <= position && verses[j].start + verses[j].length > position) {
             int plus = position - verses[j].start;
-            int minus = verses[j].length - position - 1;
             string retVal = verses[j].info;
-            if (plus == 0 && minus == 0) {
+            if (plus == 0) {
                 return retVal;
             }
             if (plus > 0) {
                 retVal += "+" + to_string(plus);
             }
-            retVal += " " + verses[j].info;
+            return retVal;
+        }
+    }
+    throw InvalidPosition;
+}
+
+string Book::getVerseInfoEnd(int position) {
+    for (int j=0; j<verses.size(); ++j) {
+        if (verses[j].start <= position && verses[j].start + verses[j].length > position) {
+            int minus = verses[j].start + verses[j].length - position - 1;
+            string retVal = verses[j].info;
+            if (minus == 0) {
+                return retVal;
+            }
             if (minus > 0) {
-                retVal += "-" + to_string(plus);
+                retVal += "-" + to_string(minus);
             }
             return retVal;
         }

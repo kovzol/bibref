@@ -24,7 +24,8 @@ public:
     string getName();
     void addVerse(string text, string verseInfo);
     string getVerse(string verseInfo);
-    string getVerse(int position);
+    string getVerseInfoStart(int position);
+    string getVerseInfoEnd(int position);
     string getText();
     int getVerseStart(string verseInfo);
     int getVerseEnd(string verseInfo);

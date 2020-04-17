@@ -17,12 +17,15 @@ bool booksAdded = false;
 string text[2];
 vector<bool> textset = {false, false};
 
+string addbooksCmd = "addbooks";
+string compareCmd = "compare";
 string textCmd = "text";
 string latintextCmd = "latintext";
 string lookupCmd = "lookup";
 string findCmd = "find";
 string lengthCmd = "length";
 string minuniqueCmd = "minunique";
+string extendCmd = "extend";
 
 string errorNotRecognized = "Sorry, the command you entered was not recognized or its syntax is invalid.";
 string errorTextIncomplete = "Either " + textCmd + "1 or " + textCmd + "2 must be used.";
@@ -35,12 +38,14 @@ string errorFindIncomplete = "Either " + textCmd + "1 or " + textCmd + "2 must b
 string errorFindParameters = findCmd + " requires one parameter.";
 string errorLengthIncomplete = "Either " + lengthCmd + "1 or " + lengthCmd + "2 must be used.";
 string errorMinuniqueParameters = minuniqueCmd + " requires one parameter";
+string errorExtendParameters = extendCmd + " requires 4 or 5 parameters.";
 
 
-vector<string> vocabulary {"addbooks", "compare12",
+vector<string> vocabulary {addbooksCmd, compareCmd + "12",
                            textCmd + "1", textCmd + "2", lookupCmd + "1", lookupCmd + "2", "quit",
                                    "help", findCmd + "1", findCmd + "2", lengthCmd + "1", lengthCmd + "2",
-                                   minuniqueCmd + "1", latintextCmd + "1", latintextCmd + "2"
+                                   minuniqueCmd + "1", latintextCmd + "1", latintextCmd + "2",
+                                   extendCmd
                           };
 
 void add_vocabulary_item(string item) {
@@ -109,7 +114,7 @@ void cli() {
 
         string input(buf);
         boost::algorithm::trim(input);
-        if (input.compare("addbooks") == 0) {
+        if (input.compare(addbooksCmd) == 0) {
             if (booksAdded) {
                 cerr << "Books already added." << endl << flush;
             } else {
@@ -310,7 +315,7 @@ void cli() {
             goto end;
         }
 
-        if (boost::starts_with(input, "compare12")) {
+        if (boost::starts_with(input, compareCmd + "12")) {
             if (textset.at(0) && textset.at(1)) {
                 compareLatin(text[0], text[1]);
             } else {
@@ -331,6 +336,54 @@ void cli() {
             }
             string rest = input.substr(input.find(" ") + 1);
             find_min_unique(text[0], rest);
+            goto end;
+        }
+
+        if (boost::starts_with(input, extendCmd)) {
+            int commandLength = extendCmd.length();
+            if (input.length() == commandLength) {
+                error(errorExtendParameters);
+                goto end;
+            }
+            if (input.at(commandLength) != ' ') {
+                error(errorExtendParameters);
+                goto end;
+            }
+            string rest = input.substr(input.find(" ") + 1);
+            typedef vector<string> Tokens;
+            Tokens tokens;
+            boost::split(tokens, rest, boost::is_any_of(" "));
+            int restSize = tokens.size();
+            string moduleName1 = tokens[0];
+            string moduleName2 = tokens[1];
+            string book2 = tokens[2];
+            string verse2S, verse2E;
+            if (restSize == 4) {
+                verse2S = tokens[3] + "+0";
+                verse2E = tokens[3] + "+0";
+            } else if (restSize == 5) {
+                verse2S = tokens[3];
+                verse2E = tokens[4];
+            } else {
+                error(errorExtendParameters);
+                goto end;
+            }
+
+            Tokens verse2ST, verse2ET;
+            int start = 0, end = 0;
+            boost::split(verse2ST, verse2S, boost::is_any_of("+"));
+            if (verse2ST.size() > 1) {
+                start = stoi(verse2ST[1]);
+            }
+            boost::split(verse2ET, verse2E, boost::is_any_of("-"));
+            if (verse2ET.size() > 1) {
+                end = stoi(verse2ET[1]);
+            }
+            try {
+                extend(moduleName1, moduleName2, book2, verse2ST[0], start, verse2ET[0], end);
+            } catch (exception &e) {
+                error(e.what());
+            }
             goto end;
         }
 

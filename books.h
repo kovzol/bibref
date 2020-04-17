@@ -19,5 +19,7 @@ string processVerse(const string &verse);
 string getText(string book, string info, string VerseInfoS, string VerseInfoE, int startOffset, int endOffset);
 int find(string text, string info, int maxFound, int verb);
 int find_min_unique(string text, string moduleName);
+void extend(string moduleName1, string moduleName2, string book2, string verse2S,
+            int start, string verse2E, int end);
 
 #endif // BOOKS_H
