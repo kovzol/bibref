@@ -174,3 +174,28 @@ Found in John 10:34+58 10:34 (book position 35754)
 >> quit
 Goodbye.
 ```
+
+### Available commands
+
+For most commands two clipboards can be used. They are numbered with 1 and 2.
+These clipboards store the Latin transcription of the Greek texts to work with.
+
+* `addbooks`: Load the books of LXX and SBLGNT.
+* `textN` *text*: Define a Greek *text* and puts its Latin transcription in clipboard N.
+* `latintextN` *text*: Put the Latin transcription *text* in clipboard N.
+* `findN` *Bible*: Searches for the text of clipboard N in the given *Bible*.
+* `lengthN`: Compute the length of the text in clipboard N.
+* `lookupN` *Bible* *book* *verse*: Searches for the given *verse* in the given *book* in the given *Bible*.
+* `lookupN` *Bible* *book* *verse1* *verse2*: Searches for the given passage between *verse1* and *verse2*
+   in the given *book* in the given *Bible*.
+   - If *verse1* contains a `+M` modifier (where M is a non-negative integer)
+     then the first M characters will be removed from text.
+   - If *verse2* contains a `-M` modifier (where M is a non-negative integer)
+     then the last M characters will be removed from text.
+* `minunique1` *Bible*: Searches for minimal unique passages in clipboard 1 in the given *Bible*.
+* `quit`: Exit program.
+* `help`: Show some hints on usage.
+
+The *Bible* parameter can be either `LXX` or `SBLGNT`.
+
+There may be other commands available that are not documented yet.
