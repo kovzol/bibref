@@ -360,7 +360,7 @@ void cli() {
             string verse2S, verse2E;
             if (restSize == 4) {
                 verse2S = tokens[3] + "+0";
-                verse2E = tokens[3] + "+0";
+                verse2E = tokens[3] + "-0";
             } else if (restSize == 5) {
                 verse2S = tokens[3];
                 verse2E = tokens[4];

@@ -1,8 +1,0 @@
-addbooks
-lookup1 LXX Psalms 117:1 117:2
-minunique1 LXX
-latintext2 painesa
-find2 SBLGNT
-lookup2 SBLGNT Romans 15:11+38 15:11-22
-extend LXX SBLGNT Romans 15:11+38 15:11-22
-lookup1 LXX Psalms 117:1+36 117:1-18
