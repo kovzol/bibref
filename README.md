@@ -179,6 +179,8 @@ Goodbye.
 
 For most commands two clipboards can be used. They are numbered with 1 and 2.
 These clipboards store the Latin transcription of the Greek texts to work with.
+Typically clipboard 1 is used to store a passage from the LXX and clipboard 2
+for the SBLGNT. Therefore some commands can work only with one of the clipboards.
 
 * `addbooks`: Load the books of LXX and SBLGNT.
 * `textN` *text*: Define a Greek *text* and puts its Latin transcription in clipboard N.
