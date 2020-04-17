@@ -652,8 +652,8 @@ void extend(string moduleName1, string moduleName2, string book2, string verse2S
     string verse2infoS = b2.getVerseInfoStart(pos2S);
     string verse2infoE = b2.getVerseInfoEnd(pos2E);
     info("Extended match is " + moduleName1 + " " + book1 + " "
-         + verse1infoS + " " + verse1infoE + " = " + moduleName2
-         + book2 + " " + verse2infoS + " (" + verse2infoE
+         + verse1infoS + " " + verse1infoE + " = " + moduleName2 + " "
+         + book2 + " " + verse2infoS + " " + verse2infoE + " ("
          + text1.substr(pos1S, pos1E - pos1S + 1) + ", length "
          + to_string(pos1E - pos1S + 1) + ").");
 }
