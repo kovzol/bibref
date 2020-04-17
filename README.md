@@ -169,7 +169,7 @@ Text cistoypan is minimal unique.
 >> latintext2 eipaueo
 Stored.
 >> find2 SBLGNT 
-Found in John 10:34+58 10:34 (book position 35754)
+Found in John 10:34+58 10:34-5 (book position 35754-35760)
 1 occurrences.
 >> quit
 Goodbye.
@@ -188,13 +188,15 @@ for the SBLGNT. Therefore some commands can work only with one of the clipboards
 * `findN` *Bible*: Searches for the text of clipboard N in the given *Bible*.
 * `lengthN`: Compute the length of the text in clipboard N.
 * `lookupN` *Bible* *book* *verse*: Searches for the given *verse* in the given *book* in the given *Bible*.
-* `lookupN` *Bible* *book* *verse1* *verse2*: Searches for the given passage between *verse1* and *verse2*
+* `lookupN` *Bible* *book* *verseStart* *verseEnd*: Searches for the given passage between *verseStart* and *verseEnd*
    in the given *book* in the given *Bible*.
    - If *verse1* contains a `+M` modifier (where M is a non-negative integer)
      then the first M characters will be removed from text.
    - If *verse2* contains a `-M` modifier (where M is a non-negative integer)
      then the last M characters will be removed from text.
 * `minunique1` *Bible*: Searches for minimal unique passages in clipboard 1 in the given *Bible*.
+* `extend` *Bible1* *Bible2* *book2* *verse2Start* *verse2End*: Extends the given passage in *Bible2* according to the longest possible citation from *Bible1*, based on the text of *book2* between *verse2Start* and *verse2End*. In most cases `LXX` is used for *Bible1* and `SBLGNT` for *Bible2*.
+* `extend` *Bible1* *Bible2* *book2* *verse*: Extends the given passage in *Bible2* according to the longest possible citation from *Bible1*, based on the text of *book2* in *verse*. In most cases `LXX` is used for *Bible1* and `SBLGNT` for *Bible2*.
 * `quit`: Exit program.
 * `help`: Show some hints on usage.
 
