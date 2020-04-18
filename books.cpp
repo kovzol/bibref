@@ -588,22 +588,19 @@ vector<string> find_min_unique(string text, string moduleName, int verb) {
     }
     for (int i = 0; i < l; ++i) {
         for (int j = 0; j < l - i; ++j) {
-            if (i > 0) {
-                if (is_unique[i - 1][j + 1] > 0 || is_unique[i - 1][j] > 0)
-                {
-                    is_unique[i][j] = 2;
-                } else {
-                    string subtext = text.substr(j, i+1);
-                    int unique = find(subtext, moduleName, 2, 0);
-                    if (unique == 1) {
-                        is_unique[i][j] = 1;
-                        if (verb == 1) {
-                            info("Text " + subtext + " is minimal unique.");
-                        }
-                        retval.push_back(subtext);
-                    } else {
-                        is_unique[i][j] = 0;
+            if (i > 0 && (is_unique[i - 1][j + 1] > 0 || is_unique[i - 1][j] > 0)) {
+                is_unique[i][j] = 2;
+            } else {
+                string subtext = text.substr(j, i+1);
+                int unique = find(subtext, moduleName, 2, 0);
+                if (unique == 1) {
+                    is_unique[i][j] = 1;
+                    if (verb == 1) {
+                        info("Text " + subtext + " is minimal unique.");
                     }
+                    retval.push_back(subtext);
+                } else {
+                    is_unique[i][j] = 0;
                 }
             }
         }
