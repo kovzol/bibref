@@ -84,93 +84,17 @@ This is bibref-cli 2020Apr16, nice to meet you.
 >> addbooks
 Loading LXX...
 Genesis contains 150801 characters,
-Exodus contains 120175 characters,
-Leviticus contains 91277 characters,
-Numbers contains 124091 characters,
-Deuteronomy contains 108557 characters,
-Joshua contains 72453 characters,
-Judges contains 77028 characters,
-Ruth contains 9726 characters,
-I Samuel contains 95731 characters,
-II Samuel contains 85020 characters,
-I Kings contains 92493 characters,
-II Kings contains 91602 characters,
-I Chronicles contains 78325 characters,
-II Chronicles contains 104678 characters,
-Ezra contains 27920 characters,
-Nehemiah contains 37955 characters,
-Esther contains 20224 characters,
-Job contains 66243 characters,
-Psalms contains 171874 characters,
-Proverbs contains 59753 characters,
-Ecclesiastes contains 21570 characters,
-Song of Solomon contains 10129 characters,
-Isaiah contains 133267 characters,
-Jeremiah contains 143763 characters,
-Lamentations contains 12859 characters,
-Ezekiel contains 142524 characters,
-Daniel contains 45876 characters,
-Hosea contains 19882 characters,
-Joel contains 7986 characters,
-Amos contains 16132 characters,
-Obadiah contains 2332 characters,
-Jonah contains 5097 characters,
-Micah contains 11806 characters,
-Nahum contains 4904 characters,
-Habakkuk contains 5557 characters,
-Zephaniah contains 6192 characters,
-Haggai contains 4518 characters,
-Zechariah contains 24831 characters,
+...
 and Malachi contains 7250 characters.
 Done loading books of LXX.
 Loading SBLGNT...
 Matthew contains 89148 characters,
-Mark contains 55157 characters,
-Luke contains 94627 characters,
-John contains 69675 characters,
-Acts contains 94673 characters,
-Romans contains 33946 characters,
-I Corinthians contains 32357 characters,
-II Corinthians contains 22139 characters,
-Galatians contains 10990 characters,
-Ephesians contains 11894 characters,
-Philippians contains 7914 characters,
-Colossians contains 7856 characters,
-I Thessalonians contains 7389 characters,
-II Thessalonians contains 4034 characters,
-I Timothy contains 8808 characters,
-II Timothy contains 6484 characters,
-Titus contains 3712 characters,
-Philemon contains 1558 characters,
-Hebrews contains 26187 characters,
-James contains 8741 characters,
-I Peter contains 9001 characters,
-II Peter contains 6039 characters,
-I John contains 9418 characters,
-II John contains 1125 characters,
-III John contains 1107 characters,
+...
 Jude contains 2550 characters,
 and Revelation of John contains 45581 characters.
 Done loading books of SBLGNT.
->> lookup1 LXX Psalms 82:6
-Stored internally as egveipaueoiestekaiyioiycistoypantes.
->> minunique1 LXX
-Text eipau is minimal unique.
-Text ipaue is minimal unique.
-Text paueo is minimal unique.
-Text aueoie is minimal unique.
-Text yioiyc is minimal unique.
-Text stekaiy is minimal unique.
-Text aiyioiy is minimal unique.
-Text eoiestek is minimal unique.
-Text stoypant is minimal unique.
-Text iycistoyp is minimal unique.
-Text cistoypan is minimal unique.
->> latintext2 eipaueo
-Stored.
->> find2 SBLGNT 
-Found in John 10:34+58 10:34-5 (book position 35754-35760)
-1 occurrences.
+>> getrefs SBLGNT LXX Psalms 2:1
+LXX Psalms 2:1 2:2-8 = SBLGNT Acts 4:25+54 4:26 (length=131, pos1=11491)
 >> quit
 Goodbye.
 ```
@@ -182,24 +106,35 @@ These clipboards store the Latin transcription of the Greek texts to work with.
 Typically clipboard 1 is used to store a passage from the LXX and clipboard 2
 for the SBLGNT. Therefore some commands can work only with one of the clipboards.
 
+In all commands where *passage* is given as a parameter, it can be either one
+verse with the classic notation (e.g. `1:2`), or it can be fine tuned by entering
+two positions: a *verseStart* and a *verseEnd*. These can be also given
+with the classic notation or a modifier can be appended:
+
+* If *verseStart* is appended by a `+M` modifier (where M is a non-negative integer)
+  then the first M characters will be removed from the passage.
+* If *verseEnd* is appended by a `-M` modifier (where M is a non-negative integer)
+  then the last M characters will be removed from the passage.
+
+For example, `Genesis 1:1`, `Genesis 1:1+0 1:1-0`, `Genesis 1:1+0 1:1`, `Genesis 1:1 1:1-0` define the same first verse
+of Genesis. On the other hand, `Genesis 1:1+2 1:1-3` defines the first verse of Genesis without the first two and the last three letters.
+
+The available commands are:
+
 * `addbooks`: Load the books of LXX and SBLGNT.
-* `textN` *text*: Define a Greek *text* and puts its Latin transcription in clipboard N.
+* `textN` *text*: Define a Greek *text* and put its Latin transcription in clipboard N.
 * `latintextN` *text*: Put the Latin transcription *text* in clipboard N.
-* `findN` *Bible*: Searches for the text of clipboard N in the given *Bible*.
+* `findN` *Bible*: Search for the text of clipboard N in the given *Bible*.
 * `lengthN`: Compute the length of the text in clipboard N.
-* `lookupN` *Bible* *book* *verse*: Searches for the given *verse* in the given *book* in the given *Bible*.
-* `lookupN` *Bible* *book* *verseStart* *verseEnd*: Searches for the given passage between *verseStart* and *verseEnd*
-   in the given *book* in the given *Bible*.
-   - If *verse1* contains a `+M` modifier (where M is a non-negative integer)
-     then the first M characters will be removed from text.
-   - If *verse2* contains a `-M` modifier (where M is a non-negative integer)
-     then the last M characters will be removed from text.
-* `minunique1` *Bible*: Searches for minimal unique passages in clipboard 1 in the given *Bible*.
-* `extend` *Bible1* *Bible2* *book2* *verse2Start* *verse2End*: Extends the given passage in *Bible2* according to the longest possible citation from *Bible1*, based on the text of *book2* between *verse2Start* and *verse2End*. In most cases `LXX` is used for *Bible1* and `SBLGNT` for *Bible2*.
-* `extend` *Bible1* *Bible2* *book2* *verse*: Extends the given passage in *Bible2* according to the longest possible citation from *Bible1*, based on the text of *book2* in *verse*. In most cases `LXX` is used for *Bible1* and `SBLGNT` for *Bible2*.
+* `lookupN` *Bible* *book* *passage*: Search for the given *passage* in the given *book* in the given *Bible*.
+* `minunique1` *Bible*: Search for minimal unique passages in clipboard 1 in the given *Bible*.
+* `extend` *Bible1* *Bible2* *book2* *passage2*: Extend the given passage in *Bible2* according to the longest possible citation from *Bible1*, based on the text of *book2* in *passage2*. In most cases `LXX` is used for *Bible1* and `SBLGNT` for *Bible2*.
+* `getrefs` *Bible2* *Bible1* *book1* *passage1*: Search for references in *Bible2* on the passage in *Bible1* in book *book1* in *passage1*. Usually `SBLGNT` stands for *Bible2* and `LXX` for *Bible1*.
 * `quit`: Exit program.
 * `help`: Show some hints on usage.
 
 The *Bible* parameter can be either `LXX` or `SBLGNT`.
 
 There may be other commands available that are not documented yet.
+
+Some [examples](/examples) are also available.
