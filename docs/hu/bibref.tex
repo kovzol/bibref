@@ -1,0 +1,940 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+
+\usepackage[magyar,greek,english,german]{babel}
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage[hyphens]{url}
+\usepackage{hyphenat}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+
+\floatname{algorithm}{Algoritmus}
+\algrenewcommand\algorithmicwhile{\textbf{amíg}}
+\algrenewcommand\algorithmicdo{\textbf{végezd el}}
+\algrenewcommand\algorithmicend{\textbf{vége}}
+\algrenewcommand\algorithmicif{\textbf{ha}}
+\algrenewcommand\algorithmicthen{\textbf{akkor}}
+\algrenewcommand\algorithmicelse{\textbf{különben}}
+\algrenewcommand\algorithmicprocedure{\textbf{eljárás}}
+\algrenewcommand\algorithmicfor{\textbf{ciklus}}
+\algrenewtext{EndWhile}{\algorithmicwhile\ \algorithmicend}
+
+\lstset{
+  basicstyle=\footnotesize\ttfamily,
+  mathescape,
+  morekeywords={*,text1,text2,lookup1,lookup2,find1,find2,getrefs,extend,minunique1,latintext1,latintext2},
+  keywordstyle=\color{blue},
+  breaklines=true,
+  breakatwhitespace=true
+}
+
+\tolerance10000
+\newcommand\gr{\selectlanguage{greek}\frenchspacing}
+\newcommand\hu{\selectlanguage{magyar}\frenchspacing}
+\newcommand\en{\selectlanguage{english}\frenchspacing}
+\newcommand\de{\selectlanguage{german}\frenchspacing}
+
+\newtheorem{theorem}{Tétel}
+
+\begin{document}
+
+\hu
+\title{Ószövetségi idézetek \\automatikus azonosítása\\ az Újszövetségben\\
+\textsc{(félkész vázlat)}}
+\author{Kovács Zoltán\\ \de Private Pädagogische Hochschule der Diözese Linz\\
+Salesianumweg 3, 4020 Linz,\hu\ Ausztria}
+\maketitle
+
+\section{Bevezetés}
+Keresztény hitünk egyik fontos eleme a Biblia belső hivatkozásainak rendszere.
+Az evangéliumok híradása szerint Jézus számos alkalommal idéz az Ószövetségből, de
+a többi újszövetségi szerzőnél is gyakran találunk ószövetségi idézeteket.
+
+Jézus saját misszióját az ószövetségi előzménybe helyezi be:
+\begin{itemize}
+\item \textit{Ne gondoljátok, hogy azért jöttem, hogy érvénytelenné tegyem a törvényt
+vagy a próféták tanítását. Nem azért jöttem, hogy érvénytelenné tegyem, hanem hogy betöltsem azokat.
+Mert bizony mondom néktek, hogy amíg az ég és a föld el nem múlik, egy ióta vagy egy vessző
+sem vész el a törvényből, míg minden be nem teljesedik.} (Mt 5:17-18)\footnote{Ahol külön
+nem jelöltük, ott a bibliai idézeteket az \cite{UFO} fordításból vettük.}
+\item \textit{Mert ha hinnétek Mózesnek, hinnétek nekem: mert énrólam írt ő.} (Jn 5:46)
+\item \textit{$\ldots$az Emberfián beteljesedik az, amit a próféták megírtak.} (Lk 18:31)
+\item \textit{$\ldots$be kell teljesednie mindannak, ami meg van írva rólam a Mózes törvényében,
+a próféták könyvében és a zsoltárokban.} (Lk 24:44)
+\end{itemize}
+Jézus többször hivatkozik a \textit{törvényre} és a \textit{prófétákra} (Mt 7:12, Mt 22:40), valamint
+a \textit{zsoltárokra} (Lk 24:44, Mt 26:30, Mk 14:26). Ezekre a szövegekre néhol egészen hosszan utal
+(mint pl. a Mt 21:42-ben), máshol csak pár szóban (mint pl. a Lk 22,37-ben).
+
+Az időrendet követve Jézus halála és feltámadása után bizonyos újszövetségi szerzőknél hosszú gondolatmeneteket olvasunk,
+melyek ószövetségi alapokon állnak. Az egyik kiemelkedő szerző Pál apostol, aki a Római levélben
+mintegy 60 ószövetségi szakaszt idéz, többnyire betű szerint. Ez egybevág azzal, ahogyan
+Az apostolok cselekedeteiben megismerjük őt, amint --- például --- Thesszalonikában a zsidók zsinagógájában
+vitázik:
+\begin{quote}
+\textit{Pál pedig szokása szerint bement hozzájuk, és három szombaton is vitába
+szállt velük az Írások alapján. Megmagyarázta és bizonyította nekik, hogy
+Krisztusnak szenvednie kellett, és fel kellett támadnia a halálból.} (ApCsel 17:2-3)
+\end{quote}
+Az Apostolok cselekedetei feljegyzéseinek alapján azonban nemcsak Pál, hanem munkatársa,
+Apollós is \textit{a nyilvánosság előtt bizonyította az Írások alapján, hogy Jézus a Krisztus}
+(ApCsel 18:28). 
+
+Az Ószövetség használata tehát a keresztény érvelésben aligha elkerülhető. De milyen módon lehet
+az Ószövetséget korrekt módon alkalmazni? Még a Sátánról is olvassuk, hogy Jézus megkísértése
+során egy zsoltárt idéz: 
+\begin{quote}
+\textit{``Ha Isten Fia vagy, vesd le magadat innen, mert meg van írva:
+Angyalainak megparancsolta, hogy őrizzenek téged; 
+és tenyerükön hordoznak, hogy meg ne üsd lábadat a kőben.''
+Jézus így válaszolt neki: ``Megmondatott: Ne kísértsd az Urat, a te Istenedet.''} (Lk 4:9-12)
+\end{quote}
+A Sátán a 91. zsoltár 11-12. verseit idézi, míg Jézus az 5Móz 6:16-ot. S itt megjegyezzük,
+hogy Jézus a Sátán másik kísértő gondolatára (l. Mt 4:1-9 ill. Lk 4:1-13) is ószövetségi idézetekkel
+(ti. az 5Móz 8:3-mal, valamint az 5Móz 6:13-mal és az 5Móz 10:20-szal) felel.
+
+A modern bibliaolvasó emberben azonban kíváncsiság támadhat, hogy vajon az újszövetségi idézetek
+valóban az Ószövetségen alapulnak-e. Vajon minden esetben beazonosítható, hogy a törvény mely
+részéből ill. melyik prófétától, esetleg melyik zsoltárból származik a kérdéses idézet?
+Továbbá, az idézet pontos-e? Valamint: Nem lehetséges-e, hogy bizonyos újszövetségi szerzők az egyes
+idézeteket a saját érvelésük előnyére átalakították, arról nem is beszélve, hogy változatás
+nélkül átvéve gondolatokat a saját kontextusukba helyezve esetleg új értelmet adtak a szövegnek?
+
+Ezekre a kérdésekre válaszolni olyannyira nem egyszerű, hogy a témának óriási teológiai irodalma
+van, amelyben egészen apró kérdések, akár konkrét igehelyek pontosabb értelmezése is
+hosszú tanulmányok központi gondolata lehet. Ebben az írásban is csak néhány konkrét kérdéssel
+foglalkozunk, főként olyanokkal, amelyek számítógépes vizsgálatokkal megközelíthetőek.
+
+\subsection{Szövegkritikai háttér}
+
+Amikor Bibliáról beszélünk, nehéz pontosan megmondanunk, hogy mire is gondolunk. Legtöbbször
+egy bibliafordítást tartunk a kezünkben, ami egy vagy több korábbi dokumentumon alapul,
+melyek jórészt még korábbi dokumentumoknak a másolatai, gyakran másolási hibákat vagy
+több lehetséges szövegvariációt magukon hordozva. Ezeket a korábbi dokumentumokat
+(melyeket kézzel írtak) kéziratoknak nevezzük.
+
+Számos kéziratnak létezik számítógépes feldolgozása, amelyek a szöveget
+digitálisan kódolt formában tartalmazzák, esetlegesen az egyes szövegvariációkat
+is megtartva. Amikor tehát arra vagyunk kíváncsiak, hogy Jézus valóban az 5Móz 6:16-ot idézi-e
+a Lk 4,12-ben, akkor legalább a következő kérdéseket fel kell, hogy tegyük:
+\begin{enumerate}
+\item Milyen nyelven beszélt Jézus és milyen nyelven jegyezték le? --- Ismereteink szerint
+Jézus arámi nyelven beszélt, de Lukács (ill. Máté, Márk és János) görögül jegyezték le a szavait.
+\item Milyen nyelven íródott az Ószövetség? --- Az Ószövetség héber nyelven íródott,
+de az I. században, vagyis az első keresztények számára rendelkezésre állt annak
+görög nyelvű fordítása, amelynek kisebb-nagyobb részleteit későbbre datálható kéziratokból
+ismerjük. Így rendelkezésünkre áll többek között
+\begin{itemize}
+\item a Sínai-félszigeti kódex,
+a Codex Sinaiticus, hivatalos számozással $\boldsymbol{\aleph}$ vagy \textbf{01}, ami 330 és 360 között keletkezhetett,
+\item a Vatikáni kódex, a Codex Vaticanus, hivatalos számozással \textbf{B} vagy \textbf{03} (a mai ismereteink szerint 300 és 325 között keletkezett),
+\item az Alexandriai kódex, a Codex Alexandrinus, melynek keletkezése 400 és 440 közé tehető,
+hivatalos kódja \textbf{A} vagy \textbf{02},
+\end{itemize}
+melyek a ma ismert Bibliának nagy részét tartalmazzák, kisebb-nagyobb különbségekkel.
+\end{enumerate}
+Habár Jézus és közvetlen tanítványai között a kommunikáció valószínűleg arámi nyelven zajlott,
+az akkori események feljegyzésére görögül került sor. A héber nyelvű Ószövetség
+görög fordítása Kr. e. 300 körül készült az egyiptomi Alexandriában, II. Ptolemaiosz fáraó idején.
+Erre a fordításra \textit{Septuaginta} néven hivatkozunk.
+A latin nyelvű ``septuaginta'' szó 70-et jelent, és arra utal, hogy a fordítást hetvenkét zsidó bölcs
+készítette, akik tizenkét zsidó törzs tagjai voltak: minden törzset hatan képviseltek a fordítás elkészítésekor.
+Jogos azonban a kérdés, hogy ez a fordítás hűen tükrözi-e az eredeti tartalmat. A kétkedők
+gyorsan találhatnak olyan példát, ahol a görög fordítás más árnyalatot, netalántán valamelyest
+új tartalmat is hordoz.
+
+\subsubsection{A maszoréta szöveg és a Holt tengeri tekercsek}
+
+Hiába tehát a legendás háttértörténet, sokak számára a Septuaginta csak másodlagos forrása
+Isten Igéjének. Fontos tény továbbá, hogy a Septuaginta nem ad vissza olyan, csak a héber szövegben feltűnő
+jellegzetességeket, mint pl. a 119. zsoltár 22 versszaka, amelyekben a 8-ból minden egyes vers
+ugyanazzal a héber betűvel kezdődik. Az ilyen jellegzetességeket nem csupán a Septuaginta, hanem lényegében
+egyetlen más fordítás sem őrzi, így joggal kijelenthetjük, hogy a héber szöveg
+ebben a tekintetben is egyedülálló.
+
+Sok bibliafordítás (főként a protestáns fordítások) az Ószövetség szövegénél egyértelműen a héber szöveget
+részesíti előnyben. Még akkor is, ha a legrégebbi teljes héber nyelvű Ószövetség,
+az Aleppói kódex jóval fiatalabb, mint a legrégebbi teljes görög nyelvű Ószövetség-fordítás:
+a héber szöveg 10. századi, míg a görög a 4. századból való. Fontos érv azonban a héber szöveg
+használata mellett, hogy a szöveget nemzedékeken át továbbadó maszoréták igen szakszerűen és pontosan
+másolták a szöveget, és a korábbi tekercseket szántszándékkal mindig eltemették. A maszoréták
+gondos munkája mellett szól az az érv is, hogy az 1. századból származó héber nyelvű Holt tengeri tekercsek tartalma
+kevés eltérést mutat az Aleppói kódextől. Mindazonáltal meg kell jegyeznünk, hogy
+az eltérések nagyságának megítélése az irodalomban elég szubjektív.
+
+Így pl. Burrows szerint \cite[304. o.]{Burrows} bizonyos ószövetségi könyveknél kevés különbség van 1000 év távlatában,
+más könyveknél azonban a különbség elég jelentős. Burrows itt Geisler és Nix széles körben
+elterjedt és gyakran említett eredményét idézi, mely szerint
+\begin{quote}
+Az Ézsaiás 53-ban 166 \textit{szó}
+található, melyekben 17 \textit{betű}nyi eltérés van a két szöveg között.
+Ezek közül 10 csupán helyesírási variáns, melyeknek ugyanaz a jelentése.
+4 további betű apró stilisztikai különbséget takar (pl. kötőszavakat).
+A maradék 3 betű egy betoldott szóban, a 11. versben található, ennek jelentése: ``fény'',
+és ez sem változtatja meg a szöveg értelmét jelentősen. \cite[263. o.]{GeislerNix}
+\end{quote}
+Nemrégiben azonban Jeff Benner maga is nekilátott, hogy ellenőrizze ezeket az információkat
+\cite{Benner}. Weboldalán részletesen közzéadja, hogy mire jutott:
+\begin{quote}Az 53. fejezet 1. versével kezdve hamar megtaláljuk az első 17 betűt,
+melyben eltér az Ézsaiás-tekercs és a maszoréta szöveg. Csak az első 3 versben ---
+melyekben összesen 23 szó szerepel a maszoréta szövegben ill. 24 a nagy Ézsaiás-tekercsben ---
+19 betűt találtam, amelyben a két szöveg különbözik.
+\end{quote}
+Bennerről egyáltalán nem mondható el, hogy ne lelkesedne az ószövetségi iratokért,
+így eredményének ellenőrzése nélkül is hitelt adhatunk számításainak; munkáját azonban
+részletesen dokumentálta. A fenti ellentmondás
+feloldásaképpen nyilvánvalóan konkrétan ellenőrizni kéne a két szöveget \textit{gépi algoritmussal},
+olyan módon, hogy bárki számára reprodukálható legyen az ellenőrzés, akár az utolsó
+betűkig. Ehhez elsődleges,
+hogy mind a szövegek, mind a számítógépes program ill. annak működése nyilvánosan
+hozzáférhető legyen.
+
+Más könyveket vizsgálva Fagan és Beck is kiemelik, hogy 
+a Holt-tengeri tekercsek ill. az Aleppói kódex bizonyos könyvei között egészen komoly különbségek is
+kimutathatóak \cite{FaganBeck}: ``Egy 1996-os archeológiai kötet szerint pl. a 2Mózes és
+Sámuel könyvei olyannyira eltérnek egymástól 1000 év távlatában, hogy
+arra a következtetésre kell jutni: a krisztusi idők előtt az Ószövetség
+szövege egyáltalán nem szilárdult még meg.''
+
+Ennél is messzebb megy Joseph Gleason, aki arra jut, hogy a maszoréta szövegből lényeges
+elemek hiányoznak, és emögött akár szándékos mulasztás is állhat \cite{Gleason}.
+Gleason több fontos újszövetségi idézetet is felsorol Jézussal kapcsolatosan, amelyek ószövetségi
+referenciáiból valamilyen
+részlet nyilvánvalóan hiányzik a maszoréta szövegben, holott az információ a Septuagintában
+egyértelműen jelen van. Többek között a Zsid 10:5-öt, a Mt 1:23-at, a Zsid 1:6-ot, a Lk 4:18-at
+vagy a Mt 12:21-et említi, és ezek a példák az olvasó számára is könnyen leellenőrizhetőek.
+
+A maszoréták védelmében azonban meg kell jegyeznünk, hogy előfordulhat,
+hogy ezek a különbségek már az első századokban bekerültek a héber szövegbe, és
+az írnokok --- hiába igyekeztek hiba nélkül másolni --- már egy hiányos vagy pontatlan
+változatot másoltak tovább. S még ha a maszoréta szövegről kiderül, hogy nem ér fel
+a Septuaginta pontosságával, akkor is adható lenne egy numerikus érték, hogy összességében mekkora
+eltéréssel kell számolnunk. Vélhetően feltűnően kicsivel. Tehát a maszoréta szöveg
+még esetleges tökéletlenségében is elegendően tökéletes ahhoz, hogy Isten üzenetét hordozza.
+
+\subsubsection{A Septuaginta}
+
+Talán a fenti problémák is hozzájárultak ahhoz, hogy
+az elmúlt évtizedekben a kutatások egy komoly része a Septuaginta irányába fordult,
+különösen a Sínai-félszigeti kódexszel a középpontban. Világossá vált, hogy
+az újszövetségi szerzőkre a görög fordítás komoly hatást gyakorolt, sőt, mi több:
+letagadhatatlan a betű szerinti egyezés igen hosszú görög ószövetségi és
+újszövetségi szakaszok között. Hogy csak egy példát említsünk, a Zsid 2:6-8
+egyértelműen a Septuaginta-szövegre utal, amely segítségével Jézusról azt vezeti le
+a szerző, hogy nagyobb az angyaloknál --- ez a gondolat a héber eredetiből nehezen olvasható ki.
+
+Az ortodox egyházakban valójában már a kezdetektől a Septuaginta-fordítás a mérvadó,
+viszont a protestáns fordításokban továbbra is a maszoréta szöveg a meghatározó.
+Ennek ellenére Robert Henry Pfeiffer (1892-1958) metodista teológus már 1948-ban azt állította, hogy
+az újszövetségi idézetek 80\%-a Septuagintán alapul \cite{Pfeiffer}. A téma mai aktualitását
+mutatja, hogy
+de Vries és Karrer egy nemrégiben írt könyvbevezetőben \cite[3. o.]{deVriesKarrer} arról számolnak be,
+hogy a 2010-es években igen aktív Wuppertal projekt Septuaginta-adatbázisában 357 idézett ószövetségi igeverset
+azonosítottak be,
+melyek az Újszövetségben 449 helyen jelennek meg.
+
+Könnyen lehet azonban pontatlan következtetésekre
+jutnunk, amire többek között A. Perry \selectlanguage{english}\textit{Did the NT writers ``quote''
+the Septuagint?}\hu\ írása \cite{Perry} is figyelmeztet. Így tehát az a kijelentés, hogy
+az újszövetségi szerzők a Septuagintából idéztek (és nem a héber szövegből), már
+abban is pontatlan lehet, hogy a Septuaginta mint olyan akár nem is létezik, mivel nem bizonyítható,
+hogy a héber szöveg görög fordítását bárki is így nevezte volna a 2. század előtt (l.
+\cite[32., 89. o.]{JobesSilva}). Perry arra jut, hogy Isten \textit{Szelleme} az, aki idéz, és nem a Septuagintát,
+hanem a saját \textit{Szavát}, mely héberül és arámi nyelven lett kijelentve --- viszont a kommunikáció az újszövetségi szerzőkben
+testet öltve görögül történik. Ez a vélemény teológiailag megalapozottnak tűnik,
+gyakorlati szempontból azonban mégis nehezen megfogható. Árnyaltabb eredményre jut de Vries és Karrer \cite[16. o.]{deVriesKarrer},
+akik szerint sok korai keresztény író tudatosan és gondosan idézte az Ószövetséget, habár nem mindegyikük
+figyelt a pontos fogalmazásra.
+
+A jelenlegi kutatások számos további kérdést vetnek fel, de ebben az írásban csak azokra szorítkozunk,
+amelyeket számítógépes vizsgálattal meg lehet válaszolni. Egy számítógépes algoritmus számára
+csak maga a nyers szöveg létezik: a mögöttes tartalom nem vizsgálható.
+Nyilvánvaló, hogy gépi (azaz mechanikus,
+a szöveg értelmét nagyrészt vagy teljes egészében figyelmen kívül hagyó) összehasonlítást csak
+azonos nyelvű szövegeken érdemes végezni. Ez pedig csupán a (görög) Septuaginta és a görög nyelvű
+Újszövetség között hajtható végre.
+
+Az első gyakorlati probléma a fenti kódexek digitális elérhetősége:
+\begin{itemize}
+\item A Sínai-félszigeti kódex (a továbbiakban: \textbf{01})
+elektronikus változata 2009 júliusa óta digitálisan is hozzáférhető a \url{www.codexsinaiticus.org} webcímen.
+\item Másrészt a Vatikáni Kódex (a továbbiakban: \textbf{03}), mely
+2015 óta a \url{https://digi.vatlib.it/view/MSS_Vat.gr.1209} címen elektronikusan is elérhető, nem férhető hozzá
+digitalizált formában, vagyis csak a kódexlapok fényképei láthatók.
+\item Az Alexandria kódexet a \url{www.bl.uk/manuscripts/Viewer.aspx?ref=royal_ms_1_d_viii_fs001r}
+webcímen érhetjük el, de ott is csak fényképekkel.
+\end{itemize}
+
+Ezen kívül vannak további lehetőségeink is, ha a görög nyelvű szövegeket digitális formában kívánjuk
+elemezni. Mi ebben a tanulmányban két szöveget használunk, amelyek a nagyközönség számára könnyen
+elérhetőek a Sword elektronikus könyvtárban, de egyik sem azonos a fenti kéziratok szövegével:
+\begin{itemize}
+\item Az általunk LXX néven említett elektronikus szövegen egy 2008-ban készült Sword-modult fogunk érteni,
+mely Alfred Rahlfs 1935-ös Septuaginta-szövegén alapul. Ez részint idejétmúlt, de ennél újabb, ingyenesen
+elérhető digitális Sword-modul e tanulmány írásakor nem áll rendelkezésre. Ez lesz tehát az ószövetségi
+rész tanulmányozásához használt digitális adatforrásunk.
+\item Az Újszövetséghez a Society of Biblical Literature's Greek New Testament
+(SBLGNT) kiadást fogjuk használni.
+\end{itemize}
+Fontos kiemelni, hogy ezek az adatforrások egy-egy \textit{plauzibilis}, valószínűsíthető változatát adják
+az eredeti görög szövegnek. Sok esetben teljesen vagy majdnem betű szerint egyeznek a \textbf{01} ill.
+a \textbf{03} szövegével, így kiválóan alkalmasak gépi algoritmusok tesztelésére. Pontosabb következtetések
+levonására azonban célszerű más elektronikus adatforrásokat is kipróbálni.
+
+\subsection{Az összehasonlítás nehézsége}
+
+Példaként vegyük a Lk 4:10-12-ben már említett két idézetet, melyet az SBLGNT-ben ebben a formában találunk:
+\begin{quote}
+\selectlanguage{greek}
+γεγραπται γαρ οτι Τοις αγγελοις αυτου εντελειται περι σου του διαφυλαξαι σε, /
+και οτι Επι χειρων αρουσιν σε μηποτε προσκοψης προς λιθον τον ποδα σου. /
+και αποκριθεις ειπεν αυτω ο Ιησους οτι Ειρηται Ουκ εκπειρασεις κυριον τον θεον σου.
+\end{quote}
+\selectlanguage{magyar}
+A vershatárokat / (``osztás'') jellel jelöltük, habár tanulmányunkban későbbiekben a modern
+versfelosztásnak nem lesz jelentősége. A Biblia eredeti szövege sem fejezetekre,
+sem versekre sincs felosztva, a fejezet- és verszámozás csupán a XIII. századtól (Stephen Langton munkája nyomán),
+majd később a XVI. században (Santes Pagnino és Robertus Stephanus,
+valamint az első bibliakiadók munkájaként) váltak általánossá és
+elfogadottá.
+
+Az LXX-ben a következő szöveget találjuk a Zsolt 91:11-12 helyen:
+\begin{quote}
+\selectlanguage{greek}
+οτι τοις αγγελοις αυτου εντελειται περι σου του διαφυλαξαι σε εν πασαις ταις οδοις σου /
+επι χειρων αρουσιν σε μηποτε προσκοψης προς λιθον τον ποδα σου
+\end{quote}
+\selectlanguage{magyar}
+Láthatóan itt még központozás sincs, és a kis- és nagybetűk között sincs
+különbségtétel. Valójában a kéziratokban még a szóközöket sem
+mindig jelzik, és az új sor sem mindig két szó közé esik.
+Így célszerű feltételeznünk, hogy informatikai szempontból az egyes
+bibliai könyvek egy, csupán a görög ábécé $24+1$ betűjéből álló nyers karakterláncot
+képeznek, amelyekben sem szóköz, sem más karakter nem jelenik meg. (A $+1$ a szó végi
+\selectlanguage{greek}ς\selectlanguage{magyar}-nek felel meg.) Az egyszerűség
+kedvéért a továbbiakban minden digitális formában lévő görög igeverset kisbetűvel
+és központozás nélkül írunk, azonban a könnyebb áttekinthetőség kedvéért
+a plauzibilis szóközt megtartjuk. Ez azonban nem jelenti azt, hogy a szóhatárokat
+fixnek vesszük.
+
+Miből gondolhatjuk, hogy a Sátán ill. Jézus idézetet mond? A Lk 4:10 elején a Sátán
+a \selectlanguage{greek}γεγραπται γαρ\selectlanguage{magyar} szófordulatot használja
+(\textbf{hiszen meg van írva} --- a félkövéren szedett szövegeknél Csia Lajos
+szó szerinti \cite{Csia} fordítására hivatkozunk), mire Jézus a Lk 4:12-ben az
+\gr ειρηται\selectlanguage{magyar} (\textbf{azt mondják})
+kifejezéssel indítja válaszát.
+
+Honnan tudhatjuk, hogy a Sátán a Zsoltárokból idéz? Vegyünk egy tipikus szót az SBLGNT-szövegből,
+lehetőleg elegendően hosszút, és keressük meg, hogy megtalálható-e az LXX-ben. A BibleTime
+c. programban (ez a Sword adatbázist használja) az egyes keresőszavak szó szerint indexelve
+vannak, így az \gr αγγελοις\hu\ szóra 4 találatot kapunk: a 4Móz 24:12-t, az 1Sám 11:9-et,
+az 1Kir 20:9-et, s végül a Zsolt 91:11-et. Ha a keresésbe felvesszük a \gr αυτου\hu\ szót is
+(ez követi az \gr αγγελοις\hu\ szót az SBLGNT-ben), akkor a találat már egyértelmű.
+
+Az LXX-beli találat beazonosítása után következhet az idézet pontosságának meghatározása.
+\begin{center}
+\begin{tabular}{p{5cm} p{5cm}}
+LXX Zsolt 91:11-12 & SBLGNT Lk 4:10-11\\
+\hline
+{\hfill\break\gr οτι \textcolor{red}{τοις αγγελοις αυτου εντελειται περι σου του διαφυλαξαι σε}\hfill\break
+εν πασαις ταις οδοις σου
+\hfill\break \textcolor{blue}{επι χειρων αρουσιν σε μηποτε προσκοψης προς λιθον τον ποδα σου}} &
+{\gr γεγραπται γαρ\hfill\break οτι \textcolor{red}{τοις αγγελοις αυτου εντελειται περι σου του διαφυλαξαι σε}\hfill\break
+και οτι\hfill\break \textcolor{blue}{επι χειρων αρουσιν σε μηποτε προσκοψης προς λιθον τον ποδα σου}}
+\end{tabular}
+\end{center}
+\hu\
+
+Megfigyelhetjük, hogy az LXX-beli idézet középső (feketén hagyott) részét nem idézi a Sátán,
+hanem helyette a \gr και οτι\hu\ szerkezettel jelzi a kihagyást. Fontos, hogy az indító \gr οτι\hu\ 
+szócska a görög nyelv szabályai szerint nem része az idézetnek, de mivel ez a szó mindkét
+szakaszban ott van a bevezetőben, egy gépi keresés során a találatot ezzel a szóval együtt kapnánk meg.
+
+A Jézus által idézett válasz leghosszabb szavára rákeresve az LXX-ben egyetlen találatot kapunk,
+és láthatóan az eredményül kapott szakasz betű szerint egyezik az SBLGNT-ben lévővel:
+\begin{center}
+\begin{tabular}{p{5cm} p{5cm}}
+LXX 5Móz 6:16 & SBLGNT Lk 4:12\\
+\hline
+& {\gr και αποκριθεις ειπεν αυτω ο ιησους οτι ειρηται}\\
+\gr \textcolor{red}{ουκ εκπειρασεις κυριον τον θεον σου} &
+\gr \textcolor{red}{ουκ εκπειρασεις κυριον τον θεον σου} \\
+\gr ον τροπον εξεπειρασασθε εν τω πειρασμω &
+\end{tabular}
+\end{center}
+\hu
+Ezek a találatok több fontos részletre világítanak rá:
+\begin{itemize}
+\item Egy idézett szöveg lehet \textit{egyedi}, vagyis csak egyetlen egyszer szerepel
+az Ószövetségben. Ez nem jelenti azt, hogy az Újszövetségben is feltétlenül csak egyszer szerepel, itt például
+a Máté-féle párhuzamos helyen is megtaláljuk mindkét szakaszt, habár Máté a 91. zsoltár első szakaszát
+két szóval rövidebben idézi, mint Lukács.
+\item Az idézet lehet \textit{pontos}, vagyis az ószövetségi idézett szöveg és az újszövetségi idézet megegyezhet
+betű szerint teljes egészében.
+\item Az idézet átnyúlhat modern beosztású igeverseken. Valójában a versbeosztás teljesen irreleváns,
+és a későbbiekben egy ezen felül álló jelölésrendszert fogunk használni, ami egy digitális dokumentumhoz kapcsolt
+modern beosztáshoz képest megadott \textit{relatív helyzetét} adja majd meg az idézett szövegnek ill. idézetnek.
+Ha a modern beosztástól elvonatkoztatunk, akkor a digitális dokumentumban \textit{abszolút pozícióról} is beszélhetünk.
+Ez a pozíció viszont mindig függ a digitális dokumentumtól.
+\end{itemize}
+
+A nehézségek viszont akkor kezdődnek, amikor egy digitális dokumentumból több variáció is létezik.
+A \textbf{01}-ben a Lk 4,10 két variációt is említ: a \gr γεγραπται\hu\ szó után az egyik
+korrektor szerint megjelenik a \gr γαρ\hu\ szócska (\ref{Lk4:10-gar}. ábra). Ettől eltekintve a szöveg
+teljes egészében megegyezik az SBLGNT szövegével --- attól az apróságtól eltekintve, hogy ebben a kódexben
+(hasonlóan a többi ez időtájban készült irathoz) a görög szigma betűt a szó közepén és végén is
+egységesen félholdszerűen írták, akárcsak a ma használatos c betűt.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.5\textwidth]{../common/Lk4:10-gar}
+\caption{Részlet a Lk 4:10-ből a Sínai-félszigeti kódexben}
+\label{Lk4:10-gar}
+\end{center}
+\end{figure}
+
+A \textbf{01}-ben megtalálható a 91. zsoltár is, de 90. sorszámon. Az idézett szöveghez kapcsolódó
+tartalma teljes egészében megegyezik az LXX szövegével, azzal az egy különbséggel, hogy az
+\gr επι\hu\ szó elé egy \gr και\hu\ (és) szócska is bekerül.
+
+%οτι τοιϲ αγγελοιϲ αυτου εντελειται περι ϲου του διαφυλαξαι
+%ϲε εν παϲαιϲ ταιϲ οδοιϲ ϲου 
+%και επι χειρων αρουϲιν ϲε μηποτε προϲκοψηϲ προϲ λιθον τον ποδα ϲου
+
+Az 5Móz 6:16 viszont nem található meg a \textbf{01}-ben. Az 5Móz-nek csupán néhány fejezete
+maradt meg ebben a kéziratban, nevezetesen a 3., 4., 28., 29. és 30. fejezetek egy része
+(és ezek is csak töredékesen, mert a kódexlapok megsérültek).
+
+A \textbf{03} általában teljesebb, mint a \textbf{01}, azonban a kódex fényképeit nem
+lehet gyorsan végigfutni, hanem részletesen ``át kell betűzni'' az oldalakat, ha egy
+igeszakaszt meg akarunk találni. Esetünkben a Lk 4:10-11 az 1310. oldal jobb alsó sarkában
+található (\ref{03-Lk4:10-11}. ábra), és egyetlen betűnyi eltérés van benne az SBLGNT-hez képest:
+az \gr αρου{\hu c}ιν \hu\ szó végén lévő nű hiányzik. Ezt az apróságot nem könnyű észrevenni,
+mert a szövegnek ez a része igen nehezen olvasható (az ábrán alulról a 3. sor elején található).
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{../common/03_1310rb-Lk4:10-11}
+\caption{A Lk 4:10-11 a Vatikáni kódexben}
+\label{03-Lk4:10-11}
+\end{center}
+\end{figure}
+
+Az írnok azonban felhívja figyelmünket arra, hogy idézetről van szó, és az akkori
+szokásnak megfelelően a szöveg bal oldalán minden sorban egy $>$ jelet ír. (Ez a jelölés
+gyakori a \textbf{01}-ben is, de ennél a szakasznál éppen hiányzik.)
+
+A 91. zsoltárt ugyancsak megtaláljuk a \textbf{03}-ban (l. \ref{03-Ps90:11-12}. ábra),
+itt is 90-es sorszámmal. Hasznunkra
+lehet, hogy a zsoltárokat görög számokkal látták el, itt egy ún. \textit{koppa} szimbólum áll, ami
+egy q-hoz hasonlít. Ez a része a kódexnek igen jól olvasható. Kiderül, hogy a \gr πασαις\hu\ szó
+hiányzik a szövegből. Ezt a szót azonban a Lukács-szöveg sem tartalmazza a vizsgált
+dokumentumok egyikében sem. Így ennek a szónak a hiánya az idézetek szempontjából irreleváns.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{../common/03_684lt-Ps90:11-12}
+\caption{A 90/91. zsoltár 11-12. verse a Vatikáni kódexben, a 684. oldalon}
+\label{03-Ps90:11-12}
+\end{center}
+\end{figure}
+
+Végül az 5Móz 6:16-t keressük meg a lefényképezett kódexlapok között, melyet a 201. oldal
+középső hasábjának közepén találunk (\ref{03-Deut6:16}. ábra). Arra lehetünk figyelmesek,
+hogy a szöveg az ``Isten'' és ``Úr'' szavakat nem teljes alakjukban, csak első és utolsó
+betűjükkel adja meg, fölöttük pedig egy vonallal köti össze őket. Ez is bevett szokás
+a korabeli kéziratoknál. Egyéb különbség pedig nincsen az LXX szövegéhez képest.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{../common/03_201mc-Deut6:16}
+\caption{Az 5Móz 6:16 a Vatikáni kódexben}
+\label{03-Deut6:16}
+\end{center}
+\end{figure}
+
+\subsection{Az összehasonlítás haszna}
+
+E bevezető fejezet végén kiemeljük, hogy a Septuaginta és a görög Újszövetség idézeteinek
+objektív összehasonlítására tudományos és gyakorlati szempontból is igény van. Egy nemrégiben
+készült doktori disszertáció \cite{SungKukKim} a Zsoltárok és a Jelenések közötti
+idézeteket gyűjti csokorba, felhívva a figyelmet arra, hogy a Jelenésekben nincs ugyan
+\textit{formálisan idézett} zsoltár (2. o.), mégis számos gondolatra valamiféle
+\textit{célzás} történik, melyeket a szerző \ref{celzas}. táblázat szerint osztályoz.
+\begin{table}
+\begin{tabular}{l | c | c}
+& Szöveges egyezés & Kontextusbeli egyezés \\
+\hline
+Erős célzás & Nyilvánvaló & Nyilvánvaló\\
+Valószínű célzás & Nem teljesen nyilvánvaló & Nyilvánvaló\\
+Lehetséges célzás & Nem teljesen nyilvánvaló & Nem teljesen nyilvánvaló\\
+Hatás & Megtalálható & Nem nyilvánvaló
+\end{tabular}
+\caption{Célzások kategorizálása S. K. Kim rendszerében}
+\label{celzas}
+\end{table}
+A dolgozatban a szöveges egyezések mértékének meghatározására azonban nem találunk konkrét módszert.
+Írásunk ebben az irányban próbál hiánypótló lenni, ill. az ehhez tartozó matematikai
+és informatikai hátteret valamelyest megalapozni.
+
+A Biblia megbízhatósága keresztény hitünk egyik alappilére. Tény, hogy Jézus és az ő követői is ---
+függetlenül attól, hogy korábban alapos teológiai képzésben részesültek (mint Pál) vagy nem
+(mint a többi apostol) --- az Ószövetségre alapozták mondandójuk egy komoly részét.
+A kereszténység hitelességének ezért az egyik próbája az, hogy írásos emlékeink összhangban
+vannak-e egymással. Nem jelenti ez a kéziratok feltétlen betű szerinti egyezését, hiszen az isteni
+tervnek része lehet az emberi tévesztés is, ami pl. másolási hibákat eredményezhet. De az is világos, hogy
+a nyelv időbeli változása is hatással lehet az egyes kéziratok közötti eltérésekre. Az Írás
+egyrészt tökéletességre int (Mt 5:48),
+másrészt az emberi tökéletlenség nem akadálya annak, hogy Krisztus ereje megmutatkozzék
+(2Kor 12:9). Harmadrészt Jézus kijelenti, hogy \textit{ég és föld elmúlnak, de az én igéim
+nem múlnak el} (Lk 21:33), amint Ézsaiás is előre jelzi, hogy \textit{Istenünk beszéde
+mindörökre megmarad} (Ézs 40:8).
+
+Éppen ezért minden keresztény számára fontos, hogy a Biblia belső hivatkozásainak rendszeréről világos képünk legyen:
+olyan, ami a tényeknek megfelel és tudományos szempontból is helytálló.
+
+\section{Szövegek gépi összehasonlítása}
+
+Hasznos lesz, ha a \gr σ  \hu\ és \gr ς\hu\ betűket nem különböztetjük meg. Így csak 24 betűvel kell dolgoznunk.
+Ezt megtehetjük, mivel a korai kéziratokban nincs különbség eközött a két betű között.
+
+Bibliai \textit{könyv}ön a továbbiakban egy olyan karaktersorozatot értünk, amely a görög ábécé 24
+betűjéből áll. Egy könyvnek tekintjük a szokásosan könyvként ismert bibliai szövegeket,
+így az 1Móz-t, 2Móz-t és így tovább. A Zsoltárok könyvét 150 külön könyvként fogjuk tekinteni,
+mivel ezekre az Újszövetség is külön egységenként tekint (l. ApCsel 13:33).
+Erre az alapvetésre azért van szükség, mert feltételezzük, hogy egy idézet csupán egy és nem több
+könyvből származik --- ugyanez nem feltétlenül lenne elmondható akkor, ha fejezetekre osztva
+vizsgálnánk a szövegeket: ez önkényes döntés lenne, és az idézetek akár fejezethatárokon is átívelhetnének.
+
+Egy pillanatra eszünkbe juthat, hogy a Biblia esetében bizonyos héber nyelvű könyvekben van értelme vershatárokról is
+beszélni, hiszen vagy azonos, vagy egymást követő betűkkel kezdődnek bizonyos versek vagy rész-versek a héber
+eredetiben. Ahogyan a korábbiakban már utaltunk rá: a zsoltárok közül többek között a 119. és a 145.,
+továbbá a Jeremiás siralmai egy része, valamint a Példabeszédek könyvének utolsó versei is ilyenek jellegzetességet
+hordoznak.
+A görög nyelvű szövegben azonban ezek a szabályosságok hiányoznak, így a vershatároknak
+a jelentősége kevésbé tűnik fontosnak. Ezért ezeknek a jelölését a továbbiakban teljesen figyelmen kívül hagyjuk.
+
+Legyen tehát adott egy $A$ ábécé: $A=\{\alpha,\beta,\ldots,\omega\}$. Tekintsünk egy adott bibliát
+vagy bibliafordítást, és vegyük annak egy könyvét a fent leírt módon. Amennyiben korrektor módosította
+a szöveget egy vagy több helyen, minden esetben döntsük el, hogy melyik szövegvariánst használjuk.
+(Egy vizsgálat során tehát mindig egyetlen szövegvariánssal dolgozunk. A plauzibilis bibliák esetében
+mindig egyetlen szövegvariáns van, ilyen biblia lesz az általunk használt LXX és SBLGNT is.)
+A kiválasztott könyvet $B$-vel fogjuk jelölni,
+ahol $B\in A^n$, ahol $A^n$ egy $n$ szorzatból álló Descartes-hatvány. Feltesszük tehát, hogy a könyv
+$n$ karakterből áll. Vagyis $B=(b_1,b_2,\ldots,b_n)$, ahol minden $b_i$ elem $A$-beli:
+$b_i\in A$, $i=1,2,\ldots,n$.
+
+Legyen adott továbbá a $B$ könyvnek egy bizonyos $m$ hosszú $T$ szövege ($m\in\mathbb{N}$), valamely $T\in A^m$, ahol
+$T=(t_1,t_2,\ldots,t_m)$, melyre $t_1=b_k,t_2=b_{k+1},\ldots,t_m=b_{k+m-1}$ valamely $k\in\mathbb{N}$-re. A
+$T$ szövegre jellemző $k$ számot $T$-nek $B$-beli pozíciójának nevezzük és $p(T,B)$-vel jelöljük.
+Az $m$ hosszot $|T|$-vel jelöljük.
+
+\subsection{Pontos egyezés}
+
+\subsubsection{Alapfogalmak}
+
+Először a pontos egyezés matematikai hátterét írjuk le.
+
+Azt mondjuk, hogy egy $T_1=(u_1,u_2,\ldots,u_m)\in A^{m}$ szöveg megegyezik egy
+egy $T_2=(v_1,v_2,\ldots,v_m)\in A^{m}$ szöveggel, ha $u_1=v_1, u_2=v_2, \ldots u_m=v_m$.
+Ezt úgy jelöljük, hogy $T_1=T_2$.
+
+Azt mondjuk, hogy egy $T_1=(u_1,u_2,\ldots,u_{m_1})\in A^{m_1}$ szöveg része
+egy $T_2=(v_1,v_2,\ldots,v_{m_1})\in A^{m_2}$ szövegnek ($m_1,m_2\in\mathbb{N}$),
+ha $m_1\leq m_2$, valamint $u_1=v_{k},u_2=v_{k+1},\ldots,u_{m_1}=v_{k+m_1-1}$ valamely $k\in\mathbb{N}$-re.
+A ``része lenni'' relációt $T_1\subseteq T_2$-vel jelöljük. Triviálisan fennáll minden
+$T$ szövegre, hogy $T\subseteq B$, amennyiben a $B$ könyvnek egy szövege $T$.
+Amennyiben $m_1<m_2$, úgy a $T\subset B$ jelölést is használjuk.
+A $T_1\equiv T_2$ jelölést alkalmazzuk továbbá, ha $m_1=m_2$.
+
+Tekintsünk egy ószövetségi $B$ könyvet és abban egy $T$ szöveget. Azt mondjuk, hogy egy $T\subset B$ szöveg
+egyedi a $B$ könyvben, ha valamely $T'\subset B$-ból $p(T',B)=p(T,B)$ következik.
+
+Legyen $T_1,T_2\in B$, ahol $B$ egy adott ószövetségi könyv. Azt mondjuk, hogy $T_1$ a $T_2$ igehelyen
+belül van, ha $T_1\subset T_2$, $p(T_1,B)\geq p(T_2,B)$ és $p(T_1,B)+|T_1|\leq p(T_2,B)+|T_2|$.
+Az ``igehelyen belül lenni'' relációt $T_1\leq T_2$-vel jelöljük. Triviálisan fennáll minden
+$T$ szövegre, hogy $T\leq B$, amennyiben $T\subseteq B$. Amennyiben $T_1\not\equiv T_2$, úgy
+a $T_1<T_2$ jelölést is alkalmazzuk. Világos, hogy $T\subset B$-ből $T<B$ is következik.
+
+Tekintsük most az ószövetségi könyvek $O=\{B_1,B_2,\ldots,B_l\}$ halmazát ($l\in\mathbb{N}$) egy adott kéziraton
+vagy bibliafordításon belül.
+Tekintsünk ezen kívül egy ószövetségi $B$ könyvet ($B\in O$) és abban egy $T$ szöveget ($T\in B$). Azt mondjuk, hogy
+$T$ egyedi az $O$ ószövetségi könyvekben, ha egyedi a $B$ könyvben, valamint egyetlen más $B'$ könyvben
+sem áll fenn $T\subseteq B'$.
+
+Legyen adott ószövetségi könyvek $O=\{B_1,B_2,\ldots,B_l\}$ halmaza ($l\in\mathbb{N}$) egy adott kéziraton 
+vagy bibliafordításon belül.
+Legyen $T$ a $B\in O$ könyv valamely szövege, valamint tegyük fel, hogy $T$ egyedi az $O$ ószövetségi könyvekben.
+Legyen továbbá adott egy $N$ újszövetségi könyv és annak egy $U\subseteq N$ szövege.
+Azt mondjuk, hogy $U$ idézet, továbbá $U$ idézi a $T$ idézett szöveget, ha $T=U$. Azt mondjuk továbbá, hogy $U$ maximális idézet,
+ha minden olyan $U'$-re, amelyre $U<U'$, $U'$ nem idézet.
+
+\paragraph{Példák}
+
+\begin{enumerate}
+\item Tekintsük az LXX-et. Ebben legyen $B$ az 5Móz-hez tartozó matematikai objektum. $|B|=108557$, vagyis ennyi
+karakterből áll a kérdéses könyv. A $T=\textrm{\gr ουκεκπειρασειςκυριοντονθεονσου\hu}$ szöveg a 23212.
+pozíción kezdődik $B$-ben, vagyis $p(T,B)=23212$, hossza 30 karakter, tehát $|T|=30$. $T$ egyedi $B$-ben,
+de az egész LXX-ben is.
+
+Legyen ezen kívül $N$ a Lk-hoz tartozó matematikai objektum az SBLGNT-ből. $|N|=94627$. $p(T,N)=13792$. $T$ tehát idézet,
+valamint maximális idézet, mert a Lk 4:12-nek ezt a néhány szavát tartalmazó, az igehelyet magát
+is befoglaló szakasz nincs a Lukácsban, ami az Ószövetségben is jelen lenne.
+
+A fentieket a \texttt{bibref} szoftverben az olvasó is ellenőrizheti.
+
+\begin{lstlisting}
+>> addbooks
+>> lookup1 LXX Deuteronomy 6:16 6:16-33
+Stored internally as oykekpeiraseiskyriontonueonsoy.
+>> length1
+Length of text 1 is 30.
+>> find1 LXX
+Found in Deuteronomy 6:16 6:16 (book position 23212)
+1 occurrences.
+>> find1 SBLGNT 
+Found in Matthew 4:7+28 4:7 (book position 6621)
+Found in Luke 4:12+39 4:12 (book position 13792)
+2 occurrences.
+\end{lstlisting}
+
+\item Tekintsük az LXX-et. Ebben legyen $B$ a 91. zsoltár, valamint
+$$T=\textrm{\gr τοιςαγγελοιςαυτουεντελειταιπερισουτουδιαφυλαξαισε\hu}.$$ $|T|=49$. $T$ egyedi az egész LXX-ben.
+
+Legyen továbbá $N$ ismét a Lk-hoz tartozó objektum az SBLGNT-ből. $p(T,N)=13646$. $T$ tehát idézet,
+de nem maximális, ugyanis a Lk 4:10-nek ezt a szakaszát tartalmazó
+$$T'=\textrm{\gr οτιτοιςαγγελοιςαυτουεντελειταιπερισουτουδιαφυλαξαισε\hu}$$
+szövegre $T<T'$ teljesül, továbbá $T'$ idézet $B$-ben. $T'$ azonban már maximális.
+
+Ez a példa a \texttt{bibref} programmal így ellenőrizhető:
+
+\begin{lstlisting}
+>> lookup1 LXX Psalms 91:11+3 91:11-20
+Stored internally as toisaggeloisaytoyenteleitaiperisoytoydiafylajaise.
+>> find1 LXX
+Found in Psalms 91:11+3 91:11 (book position 107359)
+1 occurrences.
+>> find1 SBLGNT
+Found in Luke 4:10+15 4:10 (book position 13646)
+1 occurrences.
+>> extend LXX SBLGNT Luke 4:10+15 4:10
+Extended match is LXX Psalms 91:11 91:11-20 = SBLGNT Luke 4:10+12 4:10 (otitoisaggeloisaytoyenteleitaiperisoytoydiafylajaise, length 52).
+\end{lstlisting}
+
+\end{enumerate}
+
+\subsubsection{Pontos idézetek}
+
+Legyen adott ószövetségi könyvek $O=\{B_1,B_2,\ldots,B_l\}$ halmaza ($l\in\mathbb{N}$) egy adott kéziraton 
+vagy bibliafordításon belül.
+Legyen $T$ a $B\in O$ könyv valamely szövege, valamint tegyük fel, hogy $T$ egyedi az $O$ ószövetségi könyvekben.
+Ekkor világos, hogy létezik egy olyan $T'<T$ szöveg, mely már nem egyedi: szélsőséges esetben $T'$ egyetlen
+betűből áll, és mivel feltételezhetően minden betű szerepel minden bibliában, ilyen $T'$ megadható.
+Mindebből az is következik, hogy lesz olyan $T''<T$, amely minimálisan egyedi, vagyis bármely
+$T'''<T''$ esetén $T'''$ nem egyedi, de $T''$ igen.
+
+\paragraph{Példa}
+
+Tekintsük az LXX-ben lévő 82. zsoltár 6. versét. Ismert, hogy ennek elejét a Jn 10:34 vége idézi:
+\gr εγω ειπα θεοι εστε\hu. Ez a szöveg egyedi az LXX-ben, de csak önmagában a második két szó még nem az,
+mert az Ézs 41:23 végén is jelen van:
+\begin{lstlisting}
+>> lookup1 LXX Psalms 82:6+7 82:6-20
+Stored internally as ueoieste.
+>> find1 LXX
+Found in Psalms 82:6+7 82:6 (book position 96144)
+Found in Isaiah 41:23+51 41:23 (book position 82752)
+2 occurrences.
+\end{lstlisting}
+Azonban még egy betűt hozzávéve ehhez a két szóhoz már egyedi szöveget kapunk:
+\begin{lstlisting}
+>> lookup1 LXX Psalms 82:6+6 82:6-20
+Stored internally as aueoieste.
+>> find1 LXX
+Found in Psalms 82:6+6 82:6 (book position 96143)
+1 occurrences.
+\end{lstlisting}
+A fenti jelölésekhez igazodva itt $T=\textrm{\gr εγωειπαθεοιεστε\hu}$,
+$T'=\textrm{\gr θεοιεστε\hu}$, $T''=\textrm{\gr αθεοιεστε\hu}$.
+
+A minimálisan egyedi szövegek megtalálása nagy segítséget fog nyújtani az idézetek beazonosításában.
+Tekintsünk ugyanis egy $T\subseteq B\in O$ szöveget. Az ebben lévő minimálisan egyedi szövegeket
+az \ref{algo-min-egyedi}. algoritmussal találhatjuk meg.
+
+\begin{algorithm}
+\caption{Algoritmus egy $T=(t_1,t_2,\ldots,t_\ell)$ szöveg összes minimálisan egyedi szövegének megtalálásához}
+\label{algo-min-egyedi}
+\begin{algorithmic}[1]
+\Procedure{minunique}{$T$}
+ \State $\ell \gets |T|$
+ \For {$i \gets 1$-től $\ell$-ig}
+  \For {$j \gets 1$-től $\ell-i$-ig}
+   \State {$U_{i,j}=-1$}
+  \EndFor
+ \EndFor
+
+ \For {$i \gets 1$-től $\ell$-ig}
+  \For {$j \gets 1$-től $\ell-i$-ig}
+   \If {$i>1 \wedge (U_{i-1,j}>0 \vee U_{i-1,j+1}>0$)}
+    \State {$U_{i,j} \gets \textcolor{blue}{2}$}
+   \Else
+    \State {$T' \gets (t_j,t_{j+1},\ldots,t_{j+i-1})$}
+    \If {$T'$ egyedi}
+      \State {$U_{i,j} \gets \textcolor{red}{1}$}
+      \State \textbf{írd ki} {$T'$}-t
+    \Else
+     \State {$U_{i,j} \gets 0$}
+    \EndIf
+   \EndIf
+  \EndFor
+ \EndFor
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+Az algoritmus áttekintéséhez tekintsük az \textit{abcdef} szöveget, melyről tudjuk, hogy \textit{ab}
+ill. \textit{cde} minimálisan egyediek. Készítsük el az alábbi táblázatot:
+\begin{center}
+\begin{tabular}{r|lc|clc|clc|l|l|l|}
+  & 1 & & & 2&  & & 3 & & 4 & 5 & 6\\
+\hline
+1 & a & & & b & & & c & & d & e & f\\
+\hline
+2 & \textcolor{red}{ab} & \textcolor{red}{$\downarrow$} & & bc & & & cd & & de & ef & \\
+\hline
+3 & \textcolor{blue}{abc} & \textcolor{blue}{$\downarrow$} & & bcd & & \textcolor{red}{$\swarrow$} & \textcolor{red}{cde} &  \textcolor{red}{$\downarrow$} & def & & \\
+\hline
+4 & \textcolor{blue}{abcd} & \textcolor{blue}{$\downarrow$} & \textcolor{blue}{$\swarrow$} & \textcolor{blue}{bcde} & \textcolor{blue}{$\downarrow$} & \textcolor{blue}{$\swarrow$} & \textcolor{blue}{cdef} & & & & \\
+\hline
+5 & \textcolor{blue}{abcde} & \textcolor{blue}{$\downarrow$} & \textcolor{blue}{$\swarrow$} & \textcolor{blue}{bcdef} & & & & & & & \\
+\hline
+6 & \textcolor{blue}{abcdef} & & & & & & & & & & \\
+\hline
+\end{tabular}
+\end{center}
+%\label{abcde}
+Általánosan igaz, hogy minden egyedi szöveg alatt és a tőle balra-le álló cella szintén egyedi szöveget takar. Így a táblázatot
+fentről-lefelé, ezen belül balról-jobbra kitöltve csak a minimálisan egyedi szövegek ismeretében gyorsan megadható, hogy
+mely szövegek egyediek: a pirosak (melyek minimálisak) és a kékek (melyek nem-minimálisak).
+A fenti táblázat egy alternatív, ``kisebb helyen elférő'' változata a következő:
+\begin{center}
+\begin{tabular}{c c c c c c}
+\textcolor{green}{a} & b & \textcolor{green}{c} & d & e & f \\
+\textcolor{red}{b} & c & \textcolor{green}{d} & e & f & \\
+\textcolor{blue}c & d & \textcolor{red}{e} & f & & \\
+\textcolor{blue}d & \textcolor{blue}e & \textcolor{blue}f& & &\\
+\textcolor{blue}e & \textcolor{blue}f & & & &\\
+\textcolor{blue}f & & & & &
+\end{tabular}
+\end{center}
+Itt a függőlegesen kell kiolvasnunk az egyes szövegeket, fentről lefele, a piros betűvel bezárólag.
+A fenti módszernek megfelelően elkészítjük a 
+a Zsolt 82:5-6 versének közbülső, \gr γης
+εγω ειπα θεοι εστε και\hu\ szavaihoz tartozó táblázatot (a könnyebb olvashatóság
+kedvéért latin betűkkel):
+
+\begin{center}
+\scalebox{0.8}{
+\begin{tabular}{c c c c c c c c c c c c c c c c c c c c c}
+g&\textcolor{green}h&\textcolor{green}s&e&g&v&\textcolor{green}e&\textcolor{green}i&\textcolor{green}p&\textcolor{green}a&u&\textcolor{green}e&o&i&e&s&t&e&k&a&i \\
+h&\textcolor{green}s&\textcolor{green}e&g&v&e&\textcolor{green}i&\textcolor{green}p&\textcolor{green}a&\textcolor{green}u&e&\textcolor{green}o&i&e&s&t&e&k&a&i& \\
+s&\textcolor{green}e&\textcolor{green}g&v&e&i&\textcolor{green}p&\textcolor{green}a&\textcolor{green}u&\textcolor{green}e&o&\textcolor{green}i&e&s&t&e&k&a&i&& \\
+e&\textcolor{green}g&\textcolor{green}v&e&i&p&\textcolor{green}a&\textcolor{green}u&\textcolor{green}e&\textcolor{green}o&i&\textcolor{green}e&s&t&e&k&a&i&&& \\
+g&\textcolor{green}v&\textcolor{green}e&i&p&a&\textcolor{red}u&\textcolor{red}e&\textcolor{red}o&\textcolor{green}i&e&\textcolor{green}s&t&e&k&a&i&&&& \\
+v&\textcolor{green}e&\textcolor{green}i&p&a&\textcolor{blue}u&\textcolor{blue}e&\textcolor{blue}o&\textcolor{blue}i&\textcolor{red}e&s&\textcolor{green}t&e&k&a&i&&&&& \\
+e&\textcolor{green}i&\textcolor{green}p&a&\textcolor{blue}u&\textcolor{blue}e&\textcolor{blue}o&\textcolor{blue}i&\textcolor{blue}e&\textcolor{blue}s&t&\textcolor{green}e&k&a&i&&&&&& \\
+i&\textcolor{red}p&\textcolor{red}a&\textcolor{blue}u&\textcolor{blue}e&\textcolor{blue}o&\textcolor{blue}i&\textcolor{blue}e&\textcolor{blue}s&\textcolor{blue}t&e&\textcolor{red}k&a&i&&&&&&& \\
+\textcolor{blue}p&\textcolor{blue}a&\textcolor{blue}u&\textcolor{blue}e&\textcolor{blue}o&\textcolor{blue}i&\textcolor{blue}e&\textcolor{blue}s&\textcolor{blue}t&\textcolor{blue}e&\textcolor{blue}k&\textcolor{blue}a&i&&&&&&&& \\
+\textcolor{blue}a&\textcolor{blue}u&\textcolor{blue}e&\textcolor{blue}o&\textcolor{blue}i&\textcolor{blue}e&\textcolor{blue}s&\textcolor{blue}t&\textcolor{blue}e&\textcolor{blue}k&\textcolor{blue}a&\textcolor{blue}i&&&&&&&&& \\
+\textcolor{blue}u&\textcolor{blue}e&\textcolor{blue}o&\textcolor{blue}i&\textcolor{blue}e&\textcolor{blue}s&\textcolor{blue}t&\textcolor{blue}e&\textcolor{blue}k&\textcolor{blue}a&\textcolor{blue}i&&&&&&&&&& \\
+\textcolor{blue}e&\textcolor{blue}o&\textcolor{blue}i&\textcolor{blue}e&\textcolor{blue}s&\textcolor{blue}t&\textcolor{blue}e&\textcolor{blue}k&\textcolor{blue}a&\textcolor{blue}i&&&&&&&&&&& \\
+\textcolor{blue}o&\textcolor{blue}i&\textcolor{blue}e&\textcolor{blue}s&\textcolor{blue}t&\textcolor{blue}e&\textcolor{blue}k&\textcolor{blue}a&\textcolor{blue}i&&&&&&&&&&&& \\
+\textcolor{blue}i&\textcolor{blue}e&\textcolor{blue}s&\textcolor{blue}t&\textcolor{blue}e&\textcolor{blue}k&\textcolor{blue}a&\textcolor{blue}i&&&&&&&&&&&&& \\
+\textcolor{blue}e&\textcolor{blue}s&\textcolor{blue}t&\textcolor{blue}e&\textcolor{blue}k&\textcolor{blue}a&\textcolor{blue}i&&&&&&&&&&&&&& \\
+\textcolor{blue}s&\textcolor{blue}t&\textcolor{blue}e&\textcolor{blue}k&\textcolor{blue}a&\textcolor{blue}i&&&&&&&&&&&&&&& \\
+\textcolor{blue}t&\textcolor{blue}e&\textcolor{blue}k&\textcolor{blue}a&\textcolor{blue}i&&&&&&&&&&&&&&&& \\
+\textcolor{blue}e&\textcolor{blue}k&\textcolor{blue}a&\textcolor{blue}i&&&&&&&&&&&&&&&&& \\
+\textcolor{blue}k&\textcolor{blue}a&\textcolor{blue}i&&&&&&&&&&&&&&&&&& \\
+\textcolor{blue}a&\textcolor{blue}i&&&&&&&&&&&&&&&&&&& \\
+\textcolor{blue}i&&&&&&&&&&&&&&&&&&&& \\
+\end{tabular}
+}
+\end{center}
+
+Ezt az eredményt a \texttt{bibref} programmal is ellenőrizhetjük:
+
+\begin{lstlisting}
+>> lookup1 LXX Psalms 82:5+72 82:6-17
+Stored internally as ghsegveipaueoiestekai.
+>> minunique1 LXX
+Text eipau is minimal unique.
+Text ipaue is minimal unique.
+Text paueo is minimal unique.
+Text aueoie is minimal unique.
+Text hsegveip is minimal unique.
+Text segveipa is minimal unique.
+Text eoiestek is minimal unique.
+\end{lstlisting}
+
+Ebben a fázisban már megkereshetőek azok a potenciális újszövetségi igehelyek,
+amelyek a kapott minimálisan egyedi szövegeket idézik. A \texttt{bibref} program
+ebben is segítséget ad, pl. a latin írással megadott ``eipau'' szöveg az
+Újszövetségben 4 helyen is előfordul.
+
+\begin{lstlisting}
+>> latintext2 eipau
+Stored.
+>> find2 SBLGNT 
+Found in Luke 24:26+11 24:26 (book position 92671)
+Found in John 10:34+58 10:34 (book position 35754)
+Found in Acts 17:3+40 17:3 (book position 55405)
+Found in Acts 26:23 26:23 (book position 86624)
+4 occurrences.
+\end{lstlisting}
+
+Ezek közül a János 10:34 találatra számítottunk is. A másik 3 viszont véletlen egybeesés,
+és csak erre az 5 betűre vonatkozik.
+A későbbiekben látni fogjuk, hogy a tényleges idézetek 5 betűnél általában jóval hosszabbak,
+így ezek a téves találatok többnyire gépi úton is kiszűrhetőek.
+
+E szakasz végén röviden igazoljuk az algoritmus helyességét:
+\begin{theorem}
+Az \ref{algo-min-egyedi}. algoritmus pontosan azonosítja a $T$ szöveg összes egyedi rész-szövegét,
+mind az egyedieket és azon belül a minimálisakat.
+\end{theorem}
+\begin{proof}
+Megmutatjuk, hogy az algoritmus végén $U_{i,j}$ a helyes értéket
+tartalmazza minden $1\leq i\leq |T|$, $1\leq j\leq |T|$, $i+j\leq |T|+1$ esetén,
+vagyis 0-t tartalmaz, ha a $(t_j,t_{j+1},\ldots,t_{j+i-1})$ szöveg nem egyedi,
+\textcolor{red}{1}-et, ha minimálisan egyedi, és \textcolor{blue}{2}-t, ha egyedi (de nem minimálisan).
+
+$i$ szerinti teljes indukciót alkalmazunk. Legyen $i=1$, ekkor $U_{1,j}$ az algoritmus
+13. ill. 16. sora szerint \textcolor{red}{1}-et vagy 0-t vesz fel a $t_j$ betű egyediségének
+megfelelően. Legyen most $1<i\leq |T|$ tetszőleges. Az $U_{i,j}$ által leírt
+$(t_j,t_{j+1},\ldots,t_{j+i-1})$ szöveg akkor és csak akkor
+egyedi, ha az $U_{i-1,j}$ vagy $U_{i-1,j+1}$ által leírt
+$(t_j,t_{j+1},\ldots,t_{j+i-2})$ vagy $(t_{j+1},t_{j+2},\ldots,t_{j+i-1})$
+szövegek
+\begin{itemize}
+\item valamelyike egyedi, ebben az esetben az algoritmus 9. sora szerint
+$(t_j,t_{j+1},\ldots,t_{j+i-1})$ egyedi, de nem minimálisan, így
+az $U_{i,j}=\textcolor{blue}{2}$ érték helyes,
+\item egyike sem egyedi, de a $(t_j,t_{j+1},\ldots,t_{j+i-1})$ szöveg már egyedi,
+így ezen szöveg minimálisan is egyedi, tehát az $U_{i,j}=\textcolor{red}{1}$
+érték helyes (13. sor).
+\end{itemize}
+A maradék esetben a 16. sor szerint $U_{i,j}$-be 0 kell kerüljön, mert a
+hozzá tartozó szöveg nem egyedi.
+\end{proof}
+
+Az \ref{algo-min-egyedi}. algoritmus jelentősége abban áll, hogy a nem minimálisan egyedi
+szövegeknél nem kell az általában nagy számítási igénnyel járó egyediség-ellenőrzést
+végigfuttatni. A 82. zsoltárban fent ellenőrzött 21 betűs szakasz esetében a 231 egyediség-ellenőrzésből
+csak 124-re kellett végigszámolni. A további számításokat pedig a 114 egyedi szöveg helyett
+csak a 7 minimálisan egyedi szövegre kell elvégezni.
+
+A fentiek segítségével egy további algoritmus adható, hogy egy ószövetségi szövegben megkeressük
+az összes olyan szövegrészt, amelyeket az Újszövetség idéz. A találatok között lehetnek
+ugyan véletlen egybeesések, azonban a módszer teljes abban az értelemben, hogy egyetlen
+idézet sem marad ki. A módszert a \ref{algo-osz-uszi-ref}. algoritmus részletezi, melyben a már korábban
+említett \textsc{extend} eljárással egy idézetet maximálizálunk 
+
+\begin{algorithm}
+\caption{Algoritmus egy $T$ ószövetségi ($O$) szöveg összes lehetséges
+újszövetségi ($N$) idézetének megtalálásához}
+\label{algo-osz-uszi-ref}
+\begin{algorithmic}[1]
+\Procedure{getrefs}{$T$}
+ \For {$m \gets \textsc{minunique}(T)$}
+  \For {$B_2\in N$}
+   \For {$T'\subseteq B_2$}
+    \If {$T'=T$}
+     \State {$T'' \gets \textsc{extend}(T')$}
+      \For {$B_1\in O$}
+       \For {$T'''\subseteq B_1$}
+        \If {$T'''=T''$}
+         \State \textbf{írd ki} {$T''$}-t
+        \EndIf
+       \EndFor
+      \EndFor
+    \EndIf
+   \EndFor
+  \EndFor
+ \EndFor
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+Az algoritmust (ill. annak rendezett eredményét) az alábbi \texttt{bibref}-kimenet mutatja:
+
+\begin{lstlisting}
+>> getrefs SBLGNT LXX Psalms 91:11
+LXX Psalms 91:11+24 91:11-41 = SBLGNT Revelation of John 11:8+54 11:8-55 (length=7, pos1=20150)
+LXX Psalms 91:11+24 91:11-40 = SBLGNT Acts 10:32+45 10:32-51 (length=8, pos1=33631)
+LXX Psalms 91:11+24 91:11-40 = SBLGNT Acts 10:5+47 10:5-4 (length=8, pos1=31365)
+LXX Psalms 91:11 91:11-63 = SBLGNT Romans 8:28+9 8:28-62 (length=9, pos1=17129)
+LXX Psalms 91:11+25 91:11-38 = SBLGNT Luke 17:2+27 17:2-70 (length=9, pos1=65552)
+LXX Psalms 91:11+2 91:11-51 = SBLGNT Matthew 25:41+95 25:42-56 (length=19, pos1=75927)
+LXX Psalms 91:11 91:11-35 = SBLGNT Matthew 4:6+54 4:6-55 (length=37, pos1=6524)
+LXX Psalms 91:11 91:11-20 = SBLGNT Luke 4:10+12 4:10 (length=52, pos1=13672)
+\end{lstlisting}
+
+Örvendetes, hogy a Lk 4:10 mint maximális idézet jelent meg, azonban vannak további találatok is,
+amelyek rövidebbek, és kétségkívük csak véletlen egyezések. A 37 hosszú Mt 4:6-beli egyezés viszont
+helyes, mivel Máté szövege ugyancsak idézi a 91. zsoltárt. A Mt 25:41-ben található 19
+betűnyi egyezés azonban tartalmilag csak annyiban egyezik, hogy az ``Ő angyalai''-ról szól.
+
+Nehéz dolog annak meghatározása, hogy hány betűnél húzzuk meg a határt, ami fölött már biztos
+egyezésről van szó. A Zsolt 82:6-ra való hivatkozásra keresés a 15 betűs Jn 10:34 igehelyet
+jól beazonosítja, ám ez a Mt 25:41-hez tévesen kapcsolt Zsolt 91:11 részszövegnél rövidebb:
+\begin{lstlisting}
+>> getrefs SBLGNT LXX Psalms 82:6
+LXX Psalms 82:6+3 82:6-27 = SBLGNT Acts 26:23 26:23-80 (length=5, pos1=86623)
+LXX Psalms 82:6+4 82:6-26 = SBLGNT Luke 24:46+30 24:46-44 (length=5, pos1=94113)
+LXX Psalms 82:6+3 82:6-26 = SBLGNT Acts 17:3+40 17:3-71 (length=6, pos1=55404)
+LXX Psalms 82:6+3 82:6-26 = SBLGNT Luke 24:26+11 24:26-40 (length=6, pos1=92671)
+LXX Psalms 82:6+6 82:6-23 = SBLGNT Ephesians 2:12+117 2:12-8 (length=6, pos1=3014)
+LXX Psalms 82:6+11 82:6-16 = SBLGNT Romans 1:6+5 1:6-22 (length=8, pos1=356)
+LXX Psalms 82:6+25 82:6-2 = SBLGNT II Thessalonians 1:3+112 1:3-17 (length=8, pos1=267)
+LXX Psalms 82:6+24 82:6-2 = SBLGNT Colossians 1:3+43 1:3-24 (length=9, pos1=195)
+LXX Psalms 82:6+24 82:6-2 = SBLGNT Colossians 4:12+35 4:12-97 (length=9, pos1=7333)
+LXX Psalms 82:6+11 82:6-13 = SBLGNT I Thessalonians 5:5+23 5:5-31 (length=11, pos1=6042)
+LXX Psalms 82:6+18 82:6-6 = SBLGNT Luke 6:35+102 6:35-48 (length=11, pos1=23362)
+LXX Psalms 82:6 82:6-20 = SBLGNT John 10:34+55 10:34 (length=15, pos1=35755)
+\end{lstlisting}
+Jézus azonban egyértelműen kifejezi, hogy Ő itt az Ószövetségből idézett (\textit{Nincs-e
+megírva a ti törvényetekben$\ldots$?}), így az idézet hosszára való tekintet
+nélkül biztosak vagyunk benne, hogy a gépi módon megtalált idézet helyes.
+
+Ez azonban csak az egyik probléma a \ref{algo-osz-uszi-ref}. algoritmussal.
+A másik probléma abból fakad, hogy az idézetek az SBLGNT-ben nem mindig teljesen egyeznek meg
+az LXX-szel. Néha egy-két betű hiányzik, felcserélődik, vagy akár szavak hiányoznak, esetleg
+felcserélődnek. Ezek a pontatlanságok számos okra visszavezethetőek, részint másolási
+hibára, de akár az újszövetségi szerző szándékára is.
+Egy példa erre a Zsolt 117:1-re adott gépi találat:
+\begin{lstlisting}
+>> getrefs SBLGNT LXX Psalms 117:1
+LXX Psalms 117:1+36 117:1-18 = SBLGNT Romans 15:11+37 15:11-21 (length=9, pos1=30105)
+LXX Psalms 117:1+46 117:1 = SBLGNT Romans 15:11+50 15:11 (length=17, pos1=30119)
+\end{lstlisting}
+
+Itt az algoritmus jól azonosítja be az újszövetségi kapcsolatot, azonban a találatot
+két részletben adja, mivel a Róm 15:11-ben az LXX-beli \gr επαινεσατε\hu\ szó helyett az
+\gr επαινεσατωσαν\hu-t (\textit{dicsőítsék}) használja Pál.
+
+%επαινεσατε αυτον παντες οι λαοι
+%επαινεσατωσαν αυτον παντες οι λαοι
+
+Az ilyen típusú problémákat egy, a plagiátumok kiszűrésében is használatos technikával
+fogjuk tudni kezelni. Plagiátumok keresésekor két szöveg eltérésének mérésére speciális módszerek léteznek.
+
+\subsection{Nem pontos egyezés}
+
+\textcolor{red}{A szöveg hátralévő része megírásra vár.}
+
+\bibliographystyle{unsrt}
+\bibliography{../common/bibref}
+\end{document}
