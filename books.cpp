@@ -576,7 +576,8 @@ string find(string text, string moduleName) {
     return tokens[1] + "," + tokens[2];
 }
 
-int find_min_unique(string text, string moduleName) {
+vector<string> find_min_unique(string text, string moduleName, int verb) {
+    vector<string> retval;
     int l = text.length();
     vector<vector<int>> is_unique(l, vector<int> (l)); // TODO: improve this to use just the half
     // Initialization:
@@ -596,7 +597,10 @@ int find_min_unique(string text, string moduleName) {
                     int unique = find(subtext, moduleName, 2, 0);
                     if (unique == 1) {
                         is_unique[i][j] = 1;
-                        info("Text " + subtext + " is minimal unique.");
+                        if (verb == 1) {
+                            info("Text " + subtext + " is minimal unique.");
+                        }
+                        retval.push_back(subtext);
                     } else {
                         is_unique[i][j] = 0;
                     }
@@ -604,14 +608,11 @@ int find_min_unique(string text, string moduleName) {
             }
         }
     }
+    return retval;
 }
 
-void extend(string moduleName1, string moduleName2, string book2, string verse2S,
-            int start, string verse2E, int end) {
+string _extend(string moduleName1, string moduleName2, string book2, int pos2S, int pos2E, int verb) {
     Book b2 = getBook(book2, moduleName2);
-    int pos2S = b2.getVerseStart(verse2S) + start;
-    int pos2E = b2.getVerseEnd(verse2E) - end;
-
     string text = b2.getText().substr(pos2S, pos2E - pos2S + 1);
 
     // checking the input
@@ -651,9 +652,97 @@ void extend(string moduleName1, string moduleName2, string book2, string verse2S
     string verse1infoE = b1.getVerseInfoEnd(pos1E);
     string verse2infoS = b2.getVerseInfoStart(pos2S);
     string verse2infoE = b2.getVerseInfoEnd(pos2E);
-    info("Extended match is " + moduleName1 + " " + book1 + " "
-         + verse1infoS + " " + verse1infoE + " = " + moduleName2 + " "
-         + book2 + " " + verse2infoS + " " + verse2infoE + " ("
-         + text1.substr(pos1S, pos1E - pos1S + 1) + ", length "
-         + to_string(pos1E - pos1S + 1) + ").");
+    if (verb == 1) {
+        info("Extended match is " + moduleName1 + " " + book1 + " "
+            + verse1infoS + " " + verse1infoE + " = " + moduleName2 + " "
+            + book2 + " " + verse2infoS + " " + verse2infoE + " ("
+            + text1.substr(pos1S, pos1E - pos1S + 1) + ", length "
+            + to_string(pos1E - pos1S + 1) + ").");
+    }
+    return moduleName1 + " " + book1 + " "
+            + verse1infoS + " " + verse1infoE + " = " + moduleName2 + " "
+            + book2 + " " + verse2infoS + " " + verse2infoE + ","
+            + to_string(pos1E - pos1S + 1);
+}
+
+void extend(string moduleName1, string moduleName2, string book2, string verse2S,
+            int start, string verse2E, int end) {
+    Book b2 = getBook(book2, moduleName2);
+    int pos2S = b2.getVerseStart(verse2S) + start;
+    int pos2E = b2.getVerseEnd(verse2E) - end;
+    _extend(moduleName1, moduleName2, book2, pos2S, pos2E, 1);
+}
+
+vector<string> find_all(string text, string moduleName, int maxFound) {
+    vector<string> retval;
+    int found = 0;
+    size_t pos;
+    string book;
+    for (int i=0; i<books.size(); i++) {
+        Book b = books[i];
+        if (b.getInfo().compare(moduleName) == 0) {
+            book = b.getName();
+            string bookText = b.getText();
+            pos = bookText.find(text);
+            while (pos != std::string::npos) {
+                retval.push_back(book + "," + to_string(pos));
+                maxFound--;
+                found++;
+                if (maxFound == 0) {
+                    goto end;
+                }
+                pos = bookText.find(text, pos + text.size());
+            }
+        }
+    }
+end:
+    return retval;
+}
+
+struct Reference {
+    int pos1;
+    int length;
+    string text;
+};
+
+// Sort references.
+bool compareReference(Reference r1, Reference r2) {
+    return ((r1.length == r2.length) && r1.text.compare(r2.text) < 0)
+            || r1.length < r2.length;
+}
+
+bool equalReference(Reference r1, Reference r2) {
+    return (r1.text.compare(r2.text) == 0);
+}
+
+void getrefs(string moduleName2, string moduleName1, string book1, string verse1S,
+            int start, string verse1E, int end) {
+    vector<Reference> refs;
+    Book b1 = getBook(book1, moduleName1);
+    int pos1S = b1.getVerseStart(verse1S) + start;
+    int pos1E = b1.getVerseEnd(verse1E) - end;
+    string text = b1.getText().substr(pos1S, pos1E - pos1S + 1);
+    vector<string> minunique = find_min_unique(text, moduleName1, 0);
+    for (string m : minunique) {
+        vector<string> found = find_all(m, moduleName2, 100);
+        for (string f : found) {
+            typedef vector<string> Tokens;
+            Tokens tokens1;
+            boost::split(tokens1, f, boost::is_any_of(","));
+            string book2 = tokens1[0];
+            int pos = stoi(tokens1[1]);
+            string ext = _extend(moduleName1, moduleName2, book2, pos, pos + m.length() - 1, 0);
+            Tokens tokens2;
+            boost::split(tokens2, ext, boost::is_any_of(","));
+            Reference r = {pos, stoi(tokens2[1]), tokens2[0]};
+            refs.push_back(r);
+        }
+    }
+    sort(refs.begin(), refs.end(), compareReference);
+    vector<Reference>::iterator it;
+    it = unique(refs.begin(), refs.end(), equalReference);
+    refs.resize(distance(refs.begin(), it));
+    for (Reference r : refs) {
+        info(r.text + " (length=" + to_string(r.length) + ", pos1=" + to_string(r.pos1) + ")");
+    }
 }

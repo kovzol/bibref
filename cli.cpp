@@ -26,6 +26,7 @@ string findCmd = "find";
 string lengthCmd = "length";
 string minuniqueCmd = "minunique";
 string extendCmd = "extend";
+string getrefsCmd = "getrefs";
 
 string errorNotRecognized = "Sorry, the command you entered was not recognized or its syntax is invalid.";
 string errorTextIncomplete = "Either " + textCmd + "1 or " + textCmd + "2 must be used.";
@@ -39,13 +40,14 @@ string errorFindParameters = findCmd + " requires one parameter.";
 string errorLengthIncomplete = "Either " + lengthCmd + "1 or " + lengthCmd + "2 must be used.";
 string errorMinuniqueParameters = minuniqueCmd + " requires one parameter";
 string errorExtendParameters = extendCmd + " requires 4 or 5 parameters.";
+string errorGetrefsParameters = getrefsCmd + " requires 3, 4 or 5 parameters.";
 
 
 vector<string> vocabulary {addbooksCmd, compareCmd + "12",
                            textCmd + "1", textCmd + "2", lookupCmd + "1", lookupCmd + "2", "quit",
                                    "help", findCmd + "1", findCmd + "2", lengthCmd + "1", lengthCmd + "2",
                                    minuniqueCmd + "1", latintextCmd + "1", latintextCmd + "2",
-                                   extendCmd
+                                   extendCmd, getrefsCmd
                           };
 
 void add_vocabulary_item(string item) {
@@ -61,6 +63,7 @@ void info(string message) {
     cerr << message << endl << flush;
 }
 
+// readline related code was taken mostly from https://eli.thegreenplace.net/2016/basics-of-using-the-readline-library/
 char* completion_generator(const char* text, int state) {
     // This function is called with state=0 the first time; subsequent calls are
     // with a nonzero state. state=0 can be used to perform one-time
@@ -335,7 +338,7 @@ void cli() {
                 goto end;
             }
             string rest = input.substr(input.find(" ") + 1);
-            find_min_unique(text[0], rest);
+            find_min_unique(text[0], rest, 1);
             goto end;
         }
 
@@ -368,7 +371,6 @@ void cli() {
                 error(errorExtendParameters);
                 goto end;
             }
-
             Tokens verse2ST, verse2ET;
             int start = 0, end = 0;
             boost::split(verse2ST, verse2S, boost::is_any_of("+"));
@@ -381,6 +383,57 @@ void cli() {
             }
             try {
                 extend(moduleName1, moduleName2, book2, verse2ST[0], start, verse2ET[0], end);
+            } catch (exception &e) {
+                error(e.what());
+            }
+            goto end;
+        }
+
+        if (boost::starts_with(input, getrefsCmd)) {
+            int commandLength = getrefsCmd.length();
+            if (input.length() == commandLength) {
+                error(errorGetrefsParameters);
+                goto end;
+            }
+            if (input.at(commandLength) != ' ') {
+                error(errorGetrefsParameters);
+                goto end;
+            }
+            string rest = input.substr(input.find(" ") + 1);
+            typedef vector<string> Tokens;
+            Tokens tokens;
+            boost::split(tokens, rest, boost::is_any_of(" "));
+            int restSize = tokens.size();
+            string moduleName2 = tokens[0];
+            string moduleName1 = tokens[1];
+            string book1 = tokens[2];
+            string verse1S, verse1E;
+            if (restSize == 3) { // TODO: implement this
+                error("Getting references from full books is not yet implemented, sorry.");
+                goto end;
+            }
+            if (restSize == 4) {
+                verse1S = tokens[3] + "+0";
+                verse1E = tokens[3] + "-0";
+            } else if (restSize == 5) {
+                verse1S = tokens[3];
+                verse1E = tokens[4];
+            } else {
+                error(errorExtendParameters);
+                goto end;
+            }
+            Tokens verse1ST, verse1ET;
+            int start = 0, end = 0;
+            boost::split(verse1ST, verse1S, boost::is_any_of("+"));
+            if (verse1ST.size() > 1) {
+                start = stoi(verse1ST[1]);
+            }
+            boost::split(verse1ET, verse1E, boost::is_any_of("-"));
+            if (verse1ET.size() > 1) {
+                end = stoi(verse1ET[1]);
+            }
+            try {
+                getrefs(moduleName2, moduleName1, book1, verse1ST[0], start, verse1ET[0], end);
             } catch (exception &e) {
                 error(e.what());
             }
