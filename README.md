@@ -55,6 +55,8 @@ on many other systems.
 
 ### Installation
 
+![build](https://github.com/kovzol/bibref/workflows/build/badge.svg)
+
 The following commands
 should be entered on command line:
 ```commandline
