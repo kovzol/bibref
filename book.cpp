@@ -68,6 +68,7 @@ int Book::getVerseStart(string i) {
             return found;
         }
     }
+    throw InvalidVerseReference;
 }
 
 int Book::getVerseEnd(string i) {
@@ -78,6 +79,7 @@ int Book::getVerseEnd(string i) {
             return found;
         }
     }
+    throw InvalidVerseReference;
 }
 
 string Book::getVerseInfoStart(int position) {
