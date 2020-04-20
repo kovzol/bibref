@@ -17,10 +17,10 @@ target_link_libraries(bibref sword readline)
 
 # Download and install LXX and SBLGNT
 set(ENV{SWORD_PATH} "$ENV{HOME}/.sword")
-execute_process (COMMAND bash -c "mkdir -p \"$SWORD_PATH/mods.d\" \
-    && echo yes | installmgr -init \
-    && echo yes | installmgr -sc \
-    && echo yes | installmgr -r CrossWire \
-    && echo yes | installmgr -ri CrossWire LXX \
-    && echo yes | installmgr -ri CrossWire SBLGNT")
-# Sometimes a second run messes ~/.sword up, in such cases first a removal is required.
+execute_process (COMMAND bash -c "test -d \"$SWORD_PATH/mods.d\" || \
+    (mkdir -p \"$SWORD_PATH/mods.d\"; echo yes | installmgr -init)")
+execute_process (COMMAND bash -c "installmgr -s | grep \"\\[CrossWire\\]\" || echo yes | installmgr -sc")
+execute_process (COMMAND bash -c "echo yes | installmgr -r CrossWire")
+execute_process (COMMAND bash -c "installmgr -l | grep \"\\[LXX\\]\" || echo yes | installmgr -ri CrossWire LXX")
+execute_process (COMMAND bash -c "installmgr -l | grep \"\\[SBLGNT\\]\" || echo yes | installmgr -ri CrossWire SBLGNT")
+
