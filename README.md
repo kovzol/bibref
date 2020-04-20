@@ -50,10 +50,12 @@ This project is a work in progress.
 ## Using the software tool
 
 At the moment the project was tested on
-Ubuntu Linux 18.04 but it should work
+Ubuntu Linux 18.04 and 19.10 but it should work
 on many other systems.
 
 ### Installation
+
+![build](https://github.com/kovzol/bibref/workflows/build/badge.svg)
 
 The following commands
 should be entered on command line:
@@ -64,10 +66,6 @@ cd bibref
 cmake .
 make
 ```
-Then the modules LXX and SBLGNT need to be downloaded from
-[The SWORD Project](https://www.crosswire.org/sword/modules/ModDisp.jsp?modType=Bibles).
-Finally the steps at the [For Linux](https://www.crosswire.org/sword/docs/moduleinstall.jsp)
-section on the website of The SWORD Project should be followed.
 
 ### Running
 
@@ -121,7 +119,7 @@ of Genesis. On the other hand, `Genesis 1:1+2 1:1-3` defines the first verse of 
 
 The available commands are:
 
-* `addbooks`: Load the books of LXX and SBLGNT.
+* `addbooks`: Load the books of LXX and SBLGNT. Most commands require that these books are already loaded.
 * `textN` *text*: Define a Greek *text* and put its Latin transcription in clipboard N.
 * `latintextN` *text*: Put the Latin transcription *text* in clipboard N.
 * `findN` *Bible*: Search for the text of clipboard N in the given *Bible*.
@@ -137,4 +135,4 @@ The *Bible* parameter can be either `LXX` or `SBLGNT`.
 
 There may be other commands available that are not documented yet.
 
-Some [examples](/examples) are also available.
+Some [examples](/examples) are also available. See also [an incomplete draft (in Hungarian)](docs/hu/bibref.pdf) on the purpose of the commands.
