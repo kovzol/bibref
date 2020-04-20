@@ -115,8 +115,14 @@ void cli() {
             add_history(buf);
         }
 
-        string input(buf);
+        string rawinput(buf);
+        boost::algorithm::trim(rawinput);
+        typedef vector<string> Tokens;
+        Tokens commentTokens;
+        boost::split(commentTokens, rawinput, boost::is_any_of("#"));
+        string input = commentTokens[0];
         boost::algorithm::trim(input);
+
         if (input.compare(addbooksCmd) == 0) {
             if (booksAdded) {
                 cerr << "Books already added." << endl << flush;
