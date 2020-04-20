@@ -1,0 +1,37 @@
+addbooks
+
+getrefs SBLGNT LXX Psalms 2:1
+# LXX Psalms 2:1 2:2-8 = SBLGNT Acts 4:25+54 4:26 (length=131, pos1=11491)
+
+getrefs SBLGNT LXX Psalms 2:7
+# ... (lengths<=11)
+# LXX Psalms 2:7+44 2:7 = SBLGNT Acts 13:33+83 13:33 (length=32, pos1=43437)
+# LXX Psalms 2:7+44 2:7 = SBLGNT Hebrews 1:5+26 1:5-53 (length=32, pos1=433)
+# LXX Psalms 2:7+44 2:7 = SBLGNT Hebrews 5:5+70 5:5 (length=32, pos1=6245)
+
+getrefs SBLGNT LXX Psalms 2:9
+# ... (lengths<=12)
+# LXX Psalms 2:9+15 2:9-32 = SBLGNT Revelation of John 12:5+47 12:5-55 (length=13, pos1=22139)
+# LXX Psalms 2:9+9 2:9-32 = SBLGNT Revelation of John 19:15+81 19:15-68 (length=19, pos1=38040)
+# LXX Psalms 2:9+9 2:9-30 = SBLGNT Revelation of John 2:27+11 2:27-28 (length=21, pos1=4756)
+
+
+getrefs SBLGNT LXX Psalms 4:4 # MT 4:5
+# ... (lengths<=20)
+# LXX Psalms 4:4 4:4-63 = SBLGNT Ephesians 4:26 4:26-33 (length=24, pos1=7297)
+
+
+getrefs SBLGNT LXX Psalms 8:2 # MT 8:3
+# ... (lengths<=9)
+# LXX Psalms 8:2 8:2-47 = SBLGNT Matthew 21:16+76 21:16 (length=43, pos1=59620)
+
+
+getrefs SBLGNT LXX Psalms 8:4 # MT 8:5
+# LXX Psalms 8:4 8:5 = SBLGNT Hebrews 2:6+25 2:7 (length=120, pos1=1772)
+
+getrefs SBLGNT LXX Psalms 8:6 # MT 8:7
+# ... (lengths<=12)
+# LXX Psalms 8:6+39 8:6 = SBLGNT Hebrews 2:8 2:8-84 (length=33, pos1=1876)
+
+
+# To be continued...
