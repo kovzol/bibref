@@ -12,6 +12,7 @@ using namespace std;
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/algorithm/string/split.hpp>
+#include <boost/algorithm/string/replace.hpp>
 
 #include "swmgr.h"
 #include "swmodule.h"
@@ -313,6 +314,7 @@ int addBooks() {
 }
 
 Book getBook(string book, string info) {
+    boost::replace_all(book, "_", " ");
     for (int i=0; i<books.size(); i++) {
         Book b = books[i];
         if (b.getName().compare(book) == 0 && b.getInfo().compare(info) == 0) {
