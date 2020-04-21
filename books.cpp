@@ -659,7 +659,7 @@ string _extend(string moduleName1, string moduleName2, string book2, int pos2S, 
     return moduleName1 + " " + book1 + " "
             + verse1infoS + " " + verse1infoE + " = " + moduleName2 + " "
             + book2 + " " + verse2infoS + " " + verse2infoE + ","
-            + to_string(pos1E - pos1S + 1);
+            + to_string(pos1S) + "," + to_string(pos1E - pos1S + 1);
 }
 
 void extend(string moduleName1, string moduleName2, string book2, string verse2S,
@@ -731,7 +731,7 @@ void getrefs(string moduleName2, string moduleName1, string book1, string verse1
             string ext = _extend(moduleName1, moduleName2, book2, pos, pos + m.length() - 1, 0);
             Tokens tokens2;
             boost::split(tokens2, ext, boost::is_any_of(","));
-            Reference r = {pos, stoi(tokens2[1]), tokens2[0]};
+            Reference r = {stoi(tokens2[1]), stoi(tokens2[2]), tokens2[0]};
             refs.push_back(r);
         }
     }
