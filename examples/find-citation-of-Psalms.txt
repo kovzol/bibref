@@ -85,4 +85,97 @@ getrefs SBLGNT LXX Psalms 32:1
 # LXX Psalms 32:1+15 32:2-29 = SBLGNT Romans 4:7 4:9-101 (length=97, pos1=7476)
 
 
+getrefs SBLGNT LXX Psalms 34:8 # MT 34:9
+# ... (lengths<=10)
+LXX Psalms 34:8+15 34:8-28 = SBLGNT I Peter 2:3+10 2:3 (length=18, pos1=2364)
+
+getrefs SBLGNT LXX Psalms 34:12 34:16 # MT 34:13-17
+# ... (lengths<=8)
+# LXX Psalms 34:12+43 34:13-51 = SBLGNT I Peter 3:10+33 3:10-46 (length=10, pos1=5211)
+# LXX Psalms 34:15+29 34:15-11 = SBLGNT Luke 7:1+26 7:1-36 (length=10, pos1=24933)
+# LXX Psalms 34:14+26 34:14-23 = SBLGNT I Peter 3:11+30 3:11-25 (length=11, pos1=5296)
+# LXX Psalms 34:16+19 34:16-39 = SBLGNT Romans 16:17+87 16:17-17 (length=11, pos1=33332)
+# LXX Psalms 34:12+17 34:12-19 = SBLGNT I Peter 3:10+4 3:10-72 (length=13, pos1=5183)
+# LXX Psalms 34:14+39 34:14-7 = SBLGNT I Peter 3:11+44 3:11-8 (length=14, pos1=5313)
+# LXX Psalms 34:15+14 34:15-22 = SBLGNT Matthew 5:45+96 5:45-7 (length=14, pos1=11819)
+# LXX Psalms 34:13+19 34:13-20 = SBLGNT I Peter 3:10+56 3:10-17 (length=16, pos1=5235)
+# LXX Psalms 34:13+38 34:14-54 = SBLGNT I Peter 3:10+72 3:11-60 (length=23, pos1=5258)
+# LXX Psalms 34:15 34:16-37 = SBLGNT I Peter 3:12+3 3:12 (length=82, pos1=5381)
+## The union of the last three and three other former ones should be one citation.
+
+
+getrefs SBLGNT LXX Psalms 40:6 40:8 # MT 40:7-9
+# ... (lengths<=8)
+# LXX Psalms 40:7+8 40:7-34 = SBLGNT Hebrews 10:9+10 10:9-54 (length=8, pos1=44214)
+# LXX Psalms 40:6+55 40:6-17 = SBLGNT Colossians 4:3+14 4:3-76 (length=9, pos1=44180)
+# LXX Psalms 40:6+8 40:6-64 = SBLGNT Hebrews 10:18+23 10:18-12 (length=9, pos1=44133)
+# LXX Psalms 40:6+9 40:6-63 = SBLGNT Ephesians 5:2+75 5:2-29 (length=9, pos1=44134)
+# LXX Psalms 40:7+42 40:8-70 = SBLGNT Luke 22:37+82 22:37-8 (length=9, pos1=44248)
+# LXX Psalms 40:8+29 40:8-33 = SBLGNT II John 1:12+23 1:12-92 (length=9, pos1=44285)
+# LXX Psalms 40:7+33 40:7-7 = SBLGNT Luke 10:26+27 10:26-14 (length=10, pos1=44239)
+# LXX Psalms 40:7+33 40:7-7 = SBLGNT Luke 24:46+22 24:46-47 (length=10, pos1=44239)
+# LXX Psalms 40:7+33 40:7-7 = SBLGNT Mark 14:27+49 14:27-43 (length=10, pos1=44239)
+# LXX Psalms 40:7+40 40:7 = SBLGNT John 5:39+82 5:39 (length=10, pos1=44246)
+# LXX Psalms 40:7+42 40:8-69 = SBLGNT Luke 24:44+131 24:45-43 (length=10, pos1=44248)
+# LXX Psalms 40:6+18 40:6-52 = SBLGNT Hebrews 10:8+58 10:8-41 (length=11, pos1=44143)
+# LXX Psalms 40:6+2 40:6-68 = SBLGNT Ephesians 3:12+17 3:12-36 (length=11, pos1=44127)
+# LXX Psalms 40:6+6 40:6-64 = SBLGNT Hebrews 10:8+16 10:8-83 (length=11, pos1=44131)
+# LXX Psalms 40:6+5 40:6-64 = SBLGNT Acts 24:17+46 24:17-1 (length=12, pos1=44130)
+# LXX Psalms 40:7+30 40:7-8 = SBLGNT Luke 7:27+13 7:27-76 (length=12, pos1=44236)
+# LXX Psalms 40:7+30 40:7-8 = SBLGNT Matthew 11:10+13 11:10-79 (length=12, pos1=44236)
+# LXX Psalms 40:7+33 40:7-4 = SBLGNT Mark 14:21+33 14:21-95 (length=13, pos1=44239)
+# LXX Psalms 40:7+33 40:7-4 = SBLGNT Matthew 26:24+30 26:24-97 (length=13, pos1=44239)
+# LXX Psalms 40:7+33 40:7-4 = SBLGNT Romans 2:24+53 2:25-81 (length=13, pos1=44239)
+# LXX Psalms 40:6+56 40:6-6 = SBLGNT Hebrews 10:6+11 10:6-9 (length=19, pos1=44181)
+# LXX Psalms 40:6+56 40:6-5 = SBLGNT Hebrews 10:8+42 10:8-48 (length=20, pos1=44181)
+# LXX Psalms 40:8 40:8-50 = SBLGNT Hebrews 10:9+18 10:9-33 (length=21, pos1=44256)
+# LXX Psalms 40:6+32 40:6-24 = SBLGNT Hebrews 10:5+64 10:6-29 (length=25, pos1=44157)
+# LXX Psalms 40:6 40:6-52 = SBLGNT Hebrews 10:5+32 10:5-18 (length=29, pos1=44125)
+# LXX Psalms 40:6+77 40:8-61 = SBLGNT Hebrews 10:6+35 10:7-16 (length=64, pos1=44202)
+## The union of the last six and four other former ones should be one citation.
+
+
+getrefs SBLGNT LXX Psalms 44:22 # MT 44:23
+# ... (lengths<=7)
+# LXX Psalms 44:22+8 44:22 = SBLGNT Romans 8:36+23 8:36 (length=53, pos1=49276)
+
+
+getrefs SBLGNT LXX Psalms 45:6 45:7 # MT 45:7-8
+# ... (lengths<=7)
+# LXX Psalms 45:6+33 45:6-31 = SBLGNT Hebrews 1:8+65 1:8-15 (length=8, pos1=50109)
+# LXX Psalms 45:7+39 45:7-56 = SBLGNT Revelation of John 2:6+3 2:6-40 (length=8, pos1=50187)
+# LXX Psalms 45:7+88 45:7-7 = SBLGNT Mark 3:5+19 3:5-111 (length=8, pos1=50236)
+# LXX Psalms 45:7+92 45:7-3 = SBLGNT Hebrews 6:4+68 6:4-24 (length=8, pos1=50240)
+# LXX Psalms 45:6+40 45:6-22 = SBLGNT Hebrews 1:8+57 1:8-21 (length=10, pos1=50116)
+# LXX Psalms 45:7+37 45:7-56 = SBLGNT II Corinthians 4:1 4:1-50 (length=10, pos1=50185)
+# LXX Psalms 45:7+37 45:7-56 = SBLGNT Philemon 1:15+7 1:15-35 (length=10, pos1=50185)
+# LXX Psalms 45:6+48 45:6-12 = SBLGNT Hebrews 1:8+46 1:8-30 (length=12, pos1=50124)
+# LXX Psalms 45:6 45:6-37 = SBLGNT Hebrews 1:8+13 1:8-40 (length=35, pos1=50076)
+# LXX Psalms 45:6+51 45:7 = SBLGNT Hebrews 1:8+67 1:9 (length=124, pos1=50127)
+## The union of the last three and three other former ones should be one citation.
+
+
+getrefs SBLGNT LXX Psalms 51:4
+# ... (lengths<=10)
+# LXX Psalms 51:4+82 51:4 = SBLGNT Romans 3:4+103 3:4 (length=16, pos1=56595)
+# LXX Psalms 51:4+43 51:4-17 = SBLGNT Romans 3:4+63 3:4-18 (length=38, pos1=56556)
+
+
+getrefs SBLGNT LXX Psalms 55:21 55:23
+# ... (lengths<=11)
+# LXX Psalms 55:22+17 55:22-53 = SBLGNT I Peter 5:7+4 5:7-42 (length=12, pos1=61018)
+# LXX Psalms 55:22+55 55:22-13 = SBLGNT John 4:14+40 4:14-67 (length=14, pos1=61056)
+# LXX Psalms 55:22+55 55:22-13 = SBLGNT John 6:51+65 6:51-53 (length=14, pos1=61056)
+# LXX Psalms 55:22+55 55:22-13 = SBLGNT John 6:58+89 6:58 (length=14, pos1=61056)
+lookup1 LXX Psalms 55:22 55:22-43
+# Stored internally as epirriconepikyrionthnmerimnansoykaiayto.
+lookup2 SBLGNT I_Peter 5:7+4 5:7-21
+# Stored internally as nthnmerimnanymvnepiricantesepayto.
+compare12 
+# Comparing 'epirriconepikyrionthnmerimnansoykaiayto' ~ 'nthnmerimnanymvnepiricantesepayto' = 28
+# difference = 0.402778
+## Seemingly just an allusion with I Peter, not a quotation.
+## The references in John seem to be false positive, too.
+
+
 # To be continued...
