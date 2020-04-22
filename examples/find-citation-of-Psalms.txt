@@ -178,4 +178,8 @@ compare12
 ## The references in John seem to be false positive, too.
 
 
+getrefs SBLGNT LXX Psalms 68:18 # MT 68:19
+# ... (lengths<=14)
+# LXX Psalms 68:18+5 68:18-86 = SBLGNT Ephesians 4:8+13 4:8-38 (length=18, pos1=5771)
+
 # To be continued...

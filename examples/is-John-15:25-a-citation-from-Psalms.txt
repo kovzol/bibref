@@ -1,0 +1,60 @@
+addbooks
+lookup1 LXX Psalms 69:4+40 69:4-69
+# Stored internally as misoyntesmedvrean.
+lookup1 LXX Psalms 35:19+42 35:19-23
+# Stored internally as misoyntesmedvrean.
+lookup2 SBLGNT John 15:25+45 15:25
+# Stored internally as emishsanmedvrean.
+compare12 
+# Comparing 'misoyntesmedvrean' ~ 'emishsanmedvrean' = 13
+# difference = 0.424242
+minunique1 LXX
+#
+
+lookup1 SBLGNT John 15:25+45 15:25
+# Stored internally as emishsanmedvrean.
+minunique1 LXX
+# Text shsanm is minimal unique.
+# Text sanmed is minimal unique.
+latintext1 shsanm
+# Stored.
+find1 LXX
+# Found in Psalms 25:19+49 25:19-1 (book position 24953-24958)
+# 1 occurrences.
+latintext1 sanmed
+# Stored.
+find1 LXX
+# Found in Psalms 109:3+36 109:3-5 (book position 130562-130567)
+# 1 occurrences.
+getrefs SBLGNT LXX Psalms 25:19
+# LXX Psalms 25:19+49 25:19-1 = SBLGNT Luke 9:30+36 9:30-13 (length=6, pos1=37337)
+# LXX Psalms 25:19+27 25:19-20 = SBLGNT Revelation of John 15:4+124 15:5-58 (length=9, pos1=28809)
+# LXX Psalms 25:19+46 25:19 = SBLGNT John 15:25+45 15:25-6 (length=10, pos1=52047)
+getrefs SBLGNT LXX Psalms 109:3
+# LXX Psalms 109:3+35 109:3 = SBLGNT John 15:25+49 15:25 (length=12, pos1=52049)
+lookup2 SBLGNT John 15:25+49 15:25
+# Stored internally as hsanmedvrean.
+lookup1 LXX Psalms 109:3+35 109:3
+# Stored internally as hsanmedvrean.
+lookup1 LXX Psalms 25:19+46 25:19
+# Stored internally as emishsanme.
+latintext2 emishsanmedvrean
+# Stored.
+lookup1 LXX Psalms 109:3+33 109:3
+# Stored internally as emhsanmedvrean.
+compare12
+# Comparing 'emishsanme' ~ 'emishsanmedvrean' = 6
+# difference = 0.269231
+lookup1 LXX Psalms 109:3+33 109:3
+# Stored internally as emhsanmedvrean.
+compare12
+# Comparing 'emhsanmedvrean' ~ 'emishsanmedvrean' = 4
+# difference = 0.166667
+lookup1 LXX Psalms 109:3+35 109:3
+# Stored internally as hsanmedvrean.
+compare12
+# Comparing 'hsanmedvrean' ~ 'emishsanmedvrean' = 4
+# difference = 0.178571
+
+## Conclusion. It seems the idea from John 15:25 is mentioned in four different psalms as well,
+## but the best match is in Psalm 109.
