@@ -182,4 +182,111 @@ getrefs SBLGNT LXX Psalms 68:18 # MT 68:19
 # ... (lengths<=14)
 # LXX Psalms 68:18+5 68:18-86 = SBLGNT Ephesians 4:8+13 4:8-38 (length=18, pos1=5771)
 
+
+getrefs SBLGNT LXX Psalms 69:9 # MT 69:10
+# ... (lengths<=6)
+# LXX Psalms 69:9+3 69:9-53 = SBLGNT John 2:17+43 2:17-10 (length=20, pos1=5116)
+# LXX Psalms 69:9+32 69:9 = SBLGNT Romans 15:3+44 15:3 (length=44, pos1=29490)
+## Two citations in one verse.
+
+getrefs SBLGNT LXX Psalms 69:22 # MT 69:23
+# ... (lengths<=10)
+# LXX Psalms 69:22+42 69:22-18 = SBLGNT Romans 11:9+69 11:9-8 (length=14, pos1=22768)
+# LXX Psalms 69:22+19 69:22-40 = SBLGNT Luke 24:43+6 24:43-5 (length=15, pos1=93880)
+# LXX Psalms 69:22+58 69:22 = SBLGNT Romans 11:9+53 11:9-22 (length=16, pos1=22750)
+# LXX Psalms 69:22+28 69:22-26 = SBLGNT Romans 11:9+29 11:9-42 (length=20, pos1=22736)
+# LXX Psalms 69:22 69:22-52 = SBLGNT Romans 11:9+13 11:9-56 (length=22, pos1=22723)
+## The union of the last three ones and one other former one should be one citation.
+
+getrefs SBLGNT LXX Psalms 69:25 # MT 69:26
+# ... (lengths<=9)
+# LXX Psalms 69:25+54 69:25 = SBLGNT Acts 1:20+55 1:20-38 (length=15, pos1=2062)
+# LXX Psalms 69:25 69:25-50 = SBLGNT Acts 1:20+25 1:20-64 (length=19, pos1=2034)
+## The union of the last two ones should be one citation.
+
+
+getrefs SBLGNT LXX Psalms 78:2
+# ... (lengths<=15)
+# LXX Psalms 78:2 78:2-26 = SBLGNT Matthew 13:35+40 13:35-31 (length=28, pos1=37113)
+
+
+getrefs SBLGNT LXX Psalms 82:6
+# ... (lengths<=11)
+LXX Psalms 82:6 82:6-20 = SBLGNT John 10:34+55 10:34 (length=15, pos1=35755)
+
+
+getrefs SBLGNT LXX Psalms 86:9
+# LXX Psalms 86:9+56 86:9-15 = SBLGNT Revelation of John 15:4+13 15:4-103 (length=13, pos1=28700)
+# LXX Psalms 86:9+22 86:9-28 = SBLGNT Revelation of John 15:4+65 15:4-30 (length=34, pos1=28750)
+## The union of the last two ones should be one citation. (The part inside of them is not cited.)
+
+
+getrefs SBLGNT LXX Psalms 91:11 91:12
+# ... (lengths<=19)
+# LXX Psalms 91:11 91:11-35 = SBLGNT Matthew 4:6+54 4:6-55 (length=37, pos1=6526)
+# LXX Psalms 91:11 91:11-20 = SBLGNT Luke 4:10+12 4:10 (length=52, pos1=13676)
+# LXX Psalms 91:12 91:12 = SBLGNT Luke 4:11+6 4:11 (length=52, pos1=13710)
+# LXX Psalms 91:12 91:13-59 = SBLGNT Matthew 4:6+94 4:7-57 (length=53, pos1=6563)
+## The unions of both two citations should be one, respectively.
+## (The part inside, namely, the last 20 characters of the Psalm 91:11 is not cited in either of the gospels.)
+
+
+getrefs SBLGNT LXX Psalms 94:11
+# ... (lengths<=11)
+LXX Psalms 94:11+39 94:11 = SBLGNT I Corinthians 3:20+44 3:20 (length=17, pos1=5070)
+LXX Psalms 94:11+12 94:11-26 = SBLGNT Luke 6:8+9 6:8-75 (length=18, pos1=20980)
+LXX Psalms 94:10+45 94:11-23 = SBLGNT I Corinthians 3:20+6 3:20-20 (length=35, pos1=5038)
+## The union of the last one and a former one should be one citation.
+
+lookup1 LXX Psalms 94:14
+# Stored internally as otioykapvsetaikyriostonlaonaytoykaithnklhronomianaytoyoykegkataleicei.
+lookup2 SBLGNT Romans 11:1 11:2
+# Stored internally as legvoynmhapvsatooueostonlaonaytoymhgenoitokaigaregvisrahlithseimiekspermatosabraamfylhsbeniaminoykapvsatooueostonlaonaytoyonproegnvhoykoidateenhliatilegeihgrafhvsentygxaneitvuevkatatoyisrahl.
+minunique1 LXX
+# Text mianaytoyo is minimal unique.
+# Text anaytoyoyk is minimal unique.
+# Text ytoyoykegk is minimal unique.
+# Text toyoykegkata is minimal unique.
+# Text stonlaonaytoykaith is minimal unique.
+# Text iostonlaonaytoykait is minimal unique.
+# Text aikyriostonlaonaytoyk is minimal unique.
+lookup1 LXX Psalms 94:14+6 94:14-37
+# Stored internally as apvsetaikyriostonlaonaytoy.
+lookup2 SBLGNT Romans 11:1+9 11:2-157
+# Stored internally as apvsatooueostonlaonaytoy.
+compare12
+# Comparing 'apvsetaikyriostonlaonaytoy' ~ 'apvsatooueostonlaonaytoy' = 16
+# difference = 0.340000
+lookup2 SBLGNT Romans 11:2
+# Stored internally as oykapvsatooueostonlaonaytoyonproegnvhoykoidateenhliatilegeihgrafhvsentygxaneitvuevkatatoyisrahl.
+lookup1 LXX Psalms 94:14+3 94:14-37
+# Stored internally as oykapvsetaikyriostonlaonaytoy.
+lookup2 SBLGNT Romans 11:2 11:2-68
+# Stored internally as oykapvsatooueostonlaonaytoy.
+compare12
+# Comparing 'oykapvsetaikyriostonlaonaytoy' ~ 'oykapvsatooueostonlaonaytoy' = 16
+# difference = 0.303571
+## The difference is partly because of the word change kyrios-ueos:
+latintext2 oykapvsatookyriostonlaonaytoy
+# Stored.
+compare12
+# Comparing 'oykapvsetaikyriostonlaonaytoy' ~ 'oykapvsatookyriostonlaonaytoy' = 10
+# difference = 0.189655
+
+
+getrefs SBLGNT LXX Psalms 95:7 95:11
+# ... (lengths<=12)
+# LXX Psalms 95:9+43 95:10-90 = SBLGNT Hebrews 3:9+40 3:10-92 (length=14, pos1=3544)
+# LXX Psalms 95:10+15 95:10-62 = SBLGNT Hebrews 3:10+18 3:10-61 (length=17, pos1=3573)
+# LXX Psalms 95:11+31 95:11-3 = SBLGNT Hebrews 3:18+26 3:18-24 (length=18, pos1=4219)
+# LXX Psalms 95:10+45 95:10-29 = SBLGNT Hebrews 3:10+48 3:10-28 (length=20, pos1=3601)
+# LXX Psalms 95:11+18 95:11 = SBLGNT Hebrews 4:5+15 4:5 (length=34, pos1=4782)
+# LXX Psalms 95:11 95:11 = SBLGNT Hebrews 4:3+53 4:3-42 (length=52, pos1=4588)
+# LXX Psalms 95:7+65 95:8-52 = SBLGNT Hebrews 4:7+73 4:7 (length=57, pos1=5005)
+# LXX Psalms 95:10+73 95:11 = SBLGNT Hebrews 3:10+75 3:11 (length=73, pos1=3657)
+# LXX Psalms 95:7+65 95:8-34 = SBLGNT Hebrews 3:15+12 3:15 (length=75, pos1=4038)
+# LXX Psalms 95:7+65 95:9-29 = SBLGNT Hebrews 3:7+28 3:9-26 (length=133, pos1=3502)
+## The union of the last three ones and four former ones should be one citation.
+## Also, the union of three other ones is another citation.
+
 # To be continued...
