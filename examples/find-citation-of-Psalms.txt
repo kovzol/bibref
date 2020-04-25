@@ -1,3 +1,27 @@
+## This file demonstrates that the getrefs command can do a remarkable work on
+## collecting the quotations between the Psalms and the New Testament.
+## Many outputs are the result of clear identification.
+##
+## In several cases, however, a fuzzy match would be more adequate,
+## see e.g. Psalms 16:8-11, 18:49, 31:5, 34:12-16, 40:6-8, 45:6-7, 69:22, 69:25,
+## 86:9, 91:11-12, 94:11, 95:7-11, 110:4, 117:1.
+##
+## Also, in some cases false positive results are reported, see e.g. Psalms 146:1.
+##
+## Further research questions:
+##
+## 1. Consider the database of verified quotations that has length M and the next non-quotation has length N (M>N).
+## Now let m and n be the results of an arbitrary search with the getrefs algorithm.
+## Is it possible to claim something about the result, i.e. can it be surely a quotation?
+## Clearly, if m is large enough, then the result should be a quotation. But how large it should be?
+## Psalms 146:1 shows that m=20 is still too low. But Psalms 24:1, among others, shows that for m=20 the
+## match can still be a verified quotation.
+##
+## 2. Psalms 109:3, 25:19, 35:19 and 69:5 have a short passage that is cited in John 15:25.
+## The longest match is in 109:3, but this is also just 12 letters long. Should the uniqueness of a passage
+## be a requirement when accepting it as quoted text? Some repeated laws in the Exodus/Deuteronomy
+## could also be subject for such a review.
+
 addbooks
 
 getrefs SBLGNT LXX Psalms 2:1
@@ -340,4 +364,56 @@ getrefs SBLGNT LXX Psalms 110:4
 ## contains the same text twice.
 
 
-# To be continued...
+getrefs SBLGNT LXX Psalms 112:9
+# ... (lengths<=13)
+# LXX Psalms 112:9 112:9-37 = SBLGNT II Corinthians 9:9+9 9:9 (length=59, pos1=134163)
+
+
+getrefs SBLGNT LXX Psalms 116:10
+# ... (lengths<=9)
+# LXX Psalms 116:10+9 116:10-22 = SBLGNT II Corinthians 4:13+48 4:13-32 (length=19, pos1=136803)
+
+
+getrefs SBLGNT LXX Psalms 116:11
+# LXX Psalms 116:11+25 116:11 = SBLGNT Romans 3:4+34 3:4-70 (length=15, pos1=136869)
+
+
+getrefs SBLGNT LXX Psalms 117:1
+# LXX Psalms 117:1+36 117:1-18 = SBLGNT Romans 15:11+37 15:11-21 (length=9, pos1=137243)
+# LXX Psalms 117:1+46 117:1 = SBLGNT Romans 15:11+50 15:11 (length=17, pos1=137253)
+## The union of the two should be one citation.
+
+
+getrefs SBLGNT LXX Psalms 118:6
+# LXX Psalms 118:5+55 118:6 = SBLGNT Hebrews 13:6+23 13:6 (length=50, pos1=137636)
+
+
+getrefs SBLGNT LXX Psalms 118:22
+# ... (lengths<=10)
+# LXX Psalms 118:22+46 118:22 = SBLGNT Acts 4:11+57 4:11 (length=16, pos1=138540)
+# LXX Psalms 118:22+5 118:22 = SBLGNT I Peter 2:7+44 2:7 (length=57, pos1=138499)
+# LXX Psalms 118:22 118:23-50 = SBLGNT Luke 20:17+50 20:18-62 (length=64, pos1=138494)
+# LXX Psalms 118:22 118:23 = SBLGNT Mark 12:10+27 12:11 (length=114, pos1=138494)
+# LXX Psalms 118:22 118:23 = SBLGNT Matthew 21:42+47 21:42 (length=114, pos1=138494)
+
+
+getrefs SBLGNT LXX Psalms 118:26
+# ... (lengths<=11)
+# LXX Psalms 118:26 118:26-43 = SBLGNT Luke 19:38+8 19:38-52 (length=21, pos1=138697)
+# LXX Psalms 118:26 118:26-28 = SBLGNT John 12:13+68 12:13-18 (length=36, pos1=138697)
+# LXX Psalms 118:26 118:26-28 = SBLGNT Luke 13:35+53 13:35 (length=36, pos1=138697)
+# LXX Psalms 118:26 118:26-28 = SBLGNT Matthew 21:9+75 21:9-20 (length=36, pos1=138697)
+# LXX Psalms 118:26 118:26-28 = SBLGNT Matthew 23:39+39 23:39 (length=36, pos1=138697)
+# LXX Psalms 118:26 118:26-22 = SBLGNT Mark 11:9+46 11:10-59 (length=42, pos1=138697)
+
+
+getrefs SBLGNT LXX Psalms 132:5
+# ... (lengths<=6)
+# LXX Psalms 132:5+21 132:5 = SBLGNT Acts 7:46+42 7:46 (length=17, pos1=154254)
+
+
+getrefs SBLGNT LXX Psalms 146:1 146:10
+# ... (lengths<=16)
+# LXX Psalms 146:5+37 146:5-2 = SBLGNT Luke 1:16+33 1:16-2 (length=19, pos1=167820)
+# LXX Psalms 146:1+29 146:1 = SBLGNT Luke 1:46+20 1:46 (length=20, pos1=167565)
+## These are, however, seemingly not quotations but allusions. So they seem to be false positive.
