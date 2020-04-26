@@ -1,0 +1,56 @@
+addbooks
+
+getrefs SBLGNT LXX Habakkuk 2:4
+# ... (lengths<=11)
+# LXX Habakkuk 2:4+42 2:4-10 = SBLGNT Galatians 3:11+45 3:11-7 (length=16, pos1=2129)
+# LXX Habakkuk 2:4+39 2:4-10 = SBLGNT Romans 1:17+68 1:17-7 (length=19, pos1=2126)
+# LXX Habakkuk 2:4 2:4-29 = SBLGNT Hebrews 10:38+32 10:38 (length=39, pos1=2087)
+
+## Romans 2:6 is to be found!
+
+getrefs SBLGNT LXX Isaiah 52:5
+# ... (lengths<=11)
+# LXX Isaiah 52:5+115 52:5 = SBLGNT Romans 2:24+23 2:24-14 (length=25, pos1=106381)
+
+getrefs SBLGNT LXX Psalms 51:4
+# ... (lengths<=10)
+# LXX Psalms 51:4+82 51:4 = SBLGNT Romans 3:4+103 3:4 (length=16, pos1=56595)
+# LXX Psalms 51:4+43 51:4-17 = SBLGNT Romans 3:4+63 3:4-18 (length=38, pos1=56556)
+## The union of the last two ones should be one citation.
+
+## Romans 3:10 is to be found!
+
+getrefs SBLGNT LXX Psalms 14:3
+# ... (lengths<=8)
+# LXX Psalms 14:2+71 14:4-100 = SBLGNT Romans 3:11+23 3:19-91 (length=318, pos1=10911)
+
+getrefs SBLGNT LXX Genesis 15:6
+# ... (lengths<=14)
+# LXX Genesis 15:6+18 15:6 = SBLGNT Galatians 3:6+21 3:6 (length=34, pos1=34473)
+# LXX Genesis 15:6+16 15:6 = SBLGNT James 2:23+41 2:23-18 (length=36, pos1=34471)
+# LXX Genesis 15:6+16 15:6 = SBLGNT Romans 4:3+32 4:3 (length=36, pos1=34471)
+
+## Romans 4:9,4:22 and 4:23 should be found!
+
+getrefs SBLGNT LXX Psalms 32:1
+# ... (lengths<=10)
+# LXX Psalms 32:1+15 32:2-29 = SBLGNT Romans 4:7 4:9-101 (length=97, pos1=31468)
+
+getrefs SBLGNT LXX Genesis 17:5
+# ... (lengths<=8)
+# LXX Genesis 17:5+60 17:5-9 = SBLGNT Romans 4:18+47 4:18-36 (length=17, pos1=37725)
+# LXX Genesis 17:5+57 17:6-65 = SBLGNT Romans 4:17+14 4:17-75 (length=31, pos1=37722)
+
+getrefs SBLGNT LXX Genesis 15:5
+# ... (lengths<=18)
+# LXX Genesis 15:5+21 15:5-92 = SBLGNT Luke 18:42+10 18:42-19 (length=18, pos1=34345)
+# LXX Genesis 15:5+109 15:6-49 = SBLGNT Romans 4:18+78 4:19-104 (length=25, pos1=34433)
+
+getrefs SBLGNT LXX Psalms 44:22
+# ... (length=7)
+# LXX Psalms 44:22+8 44:22 = SBLGNT Romans 8:36+23 8:36 (length=53, pos1=49276)
+
+getrefs SBLGNT LXX Genesis 21:12
+# ... (lengths<=14)
+# LXX Genesis 21:12+127 21:12 = SBLGNT Romans 9:7+37 9:7 (length=26, pos1=50388)
+# LXX Genesis 21:12+124 21:12 = SBLGNT Hebrews 11:18+13 11:18 (length=29, pos1=50385)
