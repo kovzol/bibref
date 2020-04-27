@@ -54,3 +54,89 @@ getrefs SBLGNT LXX Genesis 21:12
 # ... (lengths<=14)
 # LXX Genesis 21:12+127 21:12 = SBLGNT Romans 9:7+37 9:7 (length=26, pos1=50388)
 # LXX Genesis 21:12+124 21:12 = SBLGNT Hebrews 11:18+13 11:18 (length=29, pos1=50385)
+
+getrefs SBLGNT LXX Genesis 18:10
+# ... (lengths<=14)
+# LXX Genesis 18:10+28 18:10-79 = SBLGNT Romans 9:9+24 9:9-27 (length=20, pos1=40961)
+
+getrefs SBLGNT LXX Genesis 18:14
+# ... (lengths<=10)
+# LXX Genesis 18:14+63 18:14 = SBLGNT Romans 9:9+52 9:9 (length=19, pos1=41367)
+
+getrefs SBLGNT LXX Genesis 25:23
+# ... (lengths<=11)
+# LXX Genesis 25:23+103 25:24-64 = SBLGNT Romans 9:12+39 9:13-43 (length=29, pos1=65834)
+
+getrefs SBLGNT LXX Malachi 1:2 1:3
+# ... (lengths<=11)
+# LXX Malachi 1:3 1:3-68 = SBLGNT Romans 9:13+29 9:13 (length=16, pos1=173)
+
+getrefs SBLGNT LXX Exodus 33:19
+# ... (lengths<=9)
+# LXX Exodus 33:19+86 33:19 = SBLGNT Romans 9:15+9 9:15 (length=38, pos1=99824)
+
+getrefs SBLGNT LXX Exodus 9:16
+# ... (lengths<=9)
+# LXX Exodus 9:16+28 9:16-43 = SBLGNT Romans 9:17+50 9:17-45 (length=18, pos1=24277)
+# LXX Exodus 9:16+50 9:16 = SBLGNT Romans 9:17+74 9:17 (length=39, pos1=24299)
+## The union of the last two ones should be one citation.
+
+getrefs SBLGNT LXX Isaiah 29:16
+# ... (lengths<=8)
+# LXX Isaiah 29:16+100 29:17-88 = SBLGNT Romans 9:20+70 9:20-3 (length=12, pos1=55964)
+# LXX Isaiah 29:16+79 29:16-19 = SBLGNT Hebrews 3:2+9 3:2-29 (length=12, pos1=55943)
+# LXX Isaiah 29:16+34 29:16-52 = SBLGNT Romans 9:20+44 9:20-17 (length=24, pos1=55898)
+## The union of the last and a former one should be one citation.
+
+getrefs SBLGNT LXX Hosea 1:9 1:10
+# ... (lengths<=15)
+# LXX Hosea 1:10+5 1:10-110 = SBLGNT Romans 9:27+31 9:27-20 (length=40, pos1=977)
+# LXX Hosea 1:10+82 1:10 = SBLGNT Romans 9:26 9:26 (length=73, pos1=1054)
+
+getrefs SBLGNT LXX Jeremiah 12:7
+# ... (lengths<=6)
+# LXX Jeremiah 12:7+54 12:7-28 = SBLGNT Romans 9:25+52 9:25-10 (length=10, pos1=32507)
+# LXX Jeremiah 12:7+52 12:7-28 = SBLGNT Romans 9:25+60 9:25 (length=12, pos1=32505)
+# LXX Jeremiah 12:7+51 12:7-28 = SBLGNT Revelation of John 20:9+73 20:9-40 (length=13, pos1=32504)
+## This requires more research.
+
+getrefs SBLGNT LXX Isaiah 10:22
+# ... (lengths<=14)
+# LXX Isaiah 10:22+18 10:22-64 = SBLGNT Romans 9:27+46 9:27-18 (length=27, pos1=22156)
+# LXX Isaiah 10:22+60 10:22-12 = SBLGNT Romans 9:27+82 9:28-22 (length=37, pos1=22198)
+## The union of the last two ones should be one citation.
+
+getrefs SBLGNT LXX Isaiah 1:9
+# ... (lengths<=13)
+# LXX Isaiah 1:9+3 1:9 = SBLGNT Romans 9:29+24 9:29 (length=81, pos1=808)
+
+getrefs SBLGNT LXX Isaiah 8:14
+# ... (lengths<=8)
+# LXX Isaiah 8:14+53 8:14-95 = SBLGNT I Peter 2:8+8 2:8-66 (length=10, pos1=16775)
+# LXX Isaiah 8:14+53 8:14-95 = SBLGNT Romans 14:13+58 14:13-17 (length=10, pos1=16775)
+# LXX Isaiah 8:14+53 8:14-95 = SBLGNT Romans 14:20+74 14:20-10 (length=10, pos1=16775)
+# LXX Isaiah 8:14+53 8:14-95 = SBLGNT Romans 9:33+35 9:33-56 (length=10, pos1=16775)
+# LXX Isaiah 8:14+51 8:14-95 = SBLGNT Romans 9:32+49 9:32-2 (length=12, pos1=16773)
+## Short matches of the word "proskommat..." (stumbling). Here a fuzzy match would be more useful.
+
+getrefs SBLGNT LXX Isaiah 28:16
+# ... (lengths<=9)
+# LXX Isaiah 28:16+113 28:16-20 = SBLGNT I John 5:10 5:10-141 (length=10, pos1=52804)
+# LXX Isaiah 28:16+113 28:16-20 = SBLGNT John 11:25+40 11:25-22 (length=10, pos1=52804)
+# LXX Isaiah 28:16+113 28:16-20 = SBLGNT John 12:44+23 12:44-41 (length=10, pos1=52804)
+# LXX Isaiah 28:16+113 28:16-20 = SBLGNT John 12:46+31 12:46-22 (length=10, pos1=52804)
+# LXX Isaiah 28:16+113 28:16-20 = SBLGNT John 14:12+16 14:12-85 (length=10, pos1=52804)
+# LXX Isaiah 28:16+113 28:16-20 = SBLGNT John 3:16+64 3:16-35 (length=10, pos1=52804)
+# LXX Isaiah 28:16+113 28:16-20 = SBLGNT John 3:18 3:18-91 (length=10, pos1=52804)
+# LXX Isaiah 28:16+113 28:16-20 = SBLGNT John 3:36 3:36-79 (length=10, pos1=52804)
+# LXX Isaiah 28:16+113 28:16-20 = SBLGNT John 6:47+16 6:47-14 (length=10, pos1=52804)
+# LXX Isaiah 28:16+113 28:16-20 = SBLGNT John 7:38 7:38-66 (length=10, pos1=52804)
+# LXX Isaiah 28:16+49 28:16-84 = SBLGNT Romans 9:33+26 9:33-65 (length=10, pos1=52740)
+# LXX Isaiah 28:16+74 28:16-58 = SBLGNT Ephesians 2:20+56 2:20-11 (length=11, pos1=52765)
+# LXX Isaiah 28:16+110 28:16-20 = SBLGNT John 6:35+66 6:35-22 (length=13, pos1=52801)
+# LXX Isaiah 28:16+113 28:16-13 = SBLGNT Romans 10:11+17 10:11-16 (length=17, pos1=52804)
+# LXX Isaiah 28:16+110 28:16-13 = SBLGNT Romans 9:33+65 9:33-16 (length=20, pos1=52801)
+# LXX Isaiah 28:16+110 28:16 = SBLGNT I Peter 2:6+56 2:6 (length=33, pos1=52801)
+## This requires more study.
+
+## To be continued...
