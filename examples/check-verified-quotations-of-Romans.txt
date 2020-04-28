@@ -139,4 +139,64 @@ getrefs SBLGNT LXX Isaiah 28:16
 # LXX Isaiah 28:16+110 28:16 = SBLGNT I Peter 2:6+56 2:6 (length=33, pos1=52801)
 ## This requires more study.
 
+getrefs SBLGNT LXX Leviticus 18:5
+# ... (lengths<=9)
+# LXX Leviticus 18:5+69 18:5-21 = SBLGNT Romans 10:5+43 10:5-1 (length=27, pos1=57052)
+
+getrefs SBLGNT LXX Deuteronomy 30:14
+# ... (lengths<=8)
+# LXX Deuteronomy 30:14+25 30:14-28 = SBLGNT Romans 10:8+30 10:8-36 (length=30, pos1=94464)
+
+getrefs SBLGNT LXX Joel 2:32
+# ... (lengths<=19)
+# LXX Joel 2:32+13 2:32-103 = SBLGNT Acts 2:21+14 2:21 (length=36, pos1=5578)
+# LXX Joel 2:32+11 2:32-103 = SBLGNT Romans 10:13+6 10:13 (length=38, pos1=5576)
+
+## Romans 10:15 is to be found!
+
+getrefs SBLGNT LXX Isaiah 53:1
+# ... (lengths<=12)
+# LXX Isaiah 53:1 53:1-31 = SBLGNT Romans 10:16+45 10:16 (length=28, pos1=107400)
+# LXX Isaiah 52:15+123 53:1 = SBLGNT John 12:38+39 12:38 (length=60, pos1=107399)
+
+getrefs SBLGNT LXX Psalms 19:4
+# ... (lengths<=9)
+# LXX Psalms 19:4 19:4-27 = SBLGNT Romans 10:18+28 10:18 (length=74, pos1=17756)
+
+getrefs SBLGNT LXX Deuteronomy 32:21
+# ... (lengths<=7)
+# LXX Deuteronomy 32:21+60 32:21-45 = SBLGNT Romans 11:11+82 11:11-8 (length=9, pos1=101517)
+# LXX Deuteronomy 32:21+60 32:21-44 = SBLGNT Romans 11:14+5 11:14-30 (length=10, pos1=101517)
+# LXX Deuteronomy 32:21+58 32:21-44 = SBLGNT Romans 10:19+35 10:19-40 (length=12, pos1=101515)
+# LXX Deuteronomy 32:21+75 32:21-6 = SBLGNT Romans 10:19+50 10:19-4 (length=33, pos1=101532)
+## The union of the last two ones should be one citation.
+
+getrefs SBLGNT LXX Isaiah 65:1 65:2
+# ... (lengths<=5)
+# LXX Isaiah 65:1+32 65:1-61 = SBLGNT II Peter 3:14+60 3:14-10 (length=7, pos1=127359)
+# LXX Isaiah 65:1+32 65:1-61 = SBLGNT Romans 10:20+24 10:20-53 (length=7, pos1=127359)
+# LXX Isaiah 65:1+53 65:1-39 = SBLGNT Luke 19:24+12 19:24-47 (length=8, pos1=127380)
+# LXX Isaiah 65:2+38 65:2-70 = SBLGNT Acts 4:17+32 4:17-57 (length=8, pos1=127465)
+# LXX Isaiah 65:2+58 65:2-50 = SBLGNT Acts 7:59+40 7:59-26 (length=8, pos1=127485)
+# LXX Isaiah 65:2+58 65:2-50 = SBLGNT Luke 23:2+95 23:2-24 (length=8, pos1=127485)
+# LXX Isaiah 65:2+58 65:2-50 = SBLGNT Matthew 21:15+90 21:15-28 (length=8, pos1=127485)
+# LXX Isaiah 65:2+59 65:2-49 = SBLGNT Mark 3:11+57 3:11-18 (length=8, pos1=127486)
+# LXX Isaiah 65:2+47 65:2-60 = SBLGNT Acts 3:9+27 3:9-14 (length=9, pos1=127474)
+# LXX Isaiah 65:2+58 65:2-49 = SBLGNT Luke 4:41+43 4:41-75 (length=9, pos1=127485)
+# LXX Isaiah 65:1+48 65:1-42 = SBLGNT Mark 7:5+3 7:5-124 (length=10, pos1=127375)
+# LXX Isaiah 65:2+27 65:2-78 = SBLGNT Acts 17:17+77 17:17-19 (length=11, pos1=127454)
+# LXX Isaiah 65:2+27 65:2-78 = SBLGNT Acts 27:33+91 27:33-42 (length=11, pos1=127454)
+# LXX Isaiah 65:2+54 65:2-51 = SBLGNT Acts 28:18+77 28:19-78 (length=11, pos1=127481)
+# LXX Isaiah 65:2+54 65:2-51 = SBLGNT Luke 20:27+34 20:27-33 (length=11, pos1=127481)
+# LXX Isaiah 65:2+55 65:2-50 = SBLGNT Titus 1:9+96 1:9-9 (length=11, pos1=127482)
+# LXX Isaiah 65:2+55 65:2-50 = SBLGNT Titus 2:9+58 2:9-1 (length=11, pos1=127482)
+# LXX Isaiah 65:1+7 65:1-81 = SBLGNT I Corinthians 9:20+3 9:20-97 (length=12, pos1=127334)
+# LXX Isaiah 65:1+6 65:1-81 = SBLGNT I Corinthians 9:21+70 9:22-76 (length=13, pos1=127333)
+# LXX Isaiah 65:1+14 65:1-67 = SBLGNT Romans 10:20+32 10:20-33 (length=19, pos1=127341)
+# LXX Isaiah 65:1+37 65:1-42 = SBLGNT Romans 10:20+63 10:20 (length=21, pos1=127364)
+# LXX Isaiah 65:2 65:2-95 = SBLGNT Romans 10:21+33 10:21-32 (length=21, pos1=127427)
+# LXX Isaiah 65:1 65:1-76 = SBLGNT Romans 10:20+50 10:20-10 (length=24, pos1=127327)
+# LXX Isaiah 65:2+34 65:2-50 = SBLGNT Romans 10:21+54 10:21 (length=32, pos1=127461)
+## This requires more study.
+
 ## To be continued...
