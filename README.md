@@ -117,6 +117,8 @@ with the classic notation or a modifier can be appended:
 For example, `Genesis 1:1`, `Genesis 1:1+0 1:1-0`, `Genesis 1:1+0 1:1`, `Genesis 1:1 1:1-0` define the same first verse
 of Genesis. On the other hand, `Genesis 1:1+2 1:1-3` defines the first verse of Genesis without the first two and the last three letters.
 
+In all commands the *Bible* parameter can be either `LXX` or `SBLGNT`, except for the command `lookup`.
+
 The available commands are:
 
 * `addbooks`: Load the books of LXX and SBLGNT. Most commands require that these books are already loaded.
@@ -124,14 +126,13 @@ The available commands are:
 * `latintextN` *text*: Put the Latin transcription *text* in clipboard N.
 * `findN` *Bible*: Search for the text of clipboard N in the given *Bible*.
 * `lengthN`: Compute the length of the text in clipboard N.
-* `lookupN` *Bible* *book* *passage*: Search for the given *passage* in the given *book* in the given *Bible*.
+* `lookup` *Bible* *book* *verse*: Search for the given *passage* in the given *book* in the given *Bible*. Here *Bible* can be any translation that is already [installed as a module](https://www.crosswire.org/sword/modules/ModDisp.jsp?modType=Bibles) on the computer.
+* `lookupN` *Bible* *book* *passage*: Search for the given *passage* in the given *book* in the given *Bible* and put its Latin transcription in clipboard N.
 * `minunique1` *Bible*: Search for minimal unique passages in clipboard 1 in the given *Bible*.
 * `extend` *Bible1* *Bible2* *book2* *passage2*: Extend the given passage in *Bible2* according to the longest possible citation from *Bible1*, based on the text of *book2* in *passage2*. In most cases `LXX` is used for *Bible1* and `SBLGNT` for *Bible2*.
 * `getrefs` *Bible2* *Bible1* *book1* *passage1*: Search for references in *Bible2* on the passage in *Bible1* in book *book1* in *passage1*. Usually `SBLGNT` stands for *Bible2* and `LXX` for *Bible1*.
 * `quit`: Exit program.
 * `help`: Show some hints on usage.
-
-The *Bible* parameter can be either `LXX` or `SBLGNT`.
 
 There may be other commands available that are not documented yet.
 
