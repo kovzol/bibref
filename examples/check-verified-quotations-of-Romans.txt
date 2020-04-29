@@ -199,4 +199,15 @@ getrefs SBLGNT LXX Isaiah 65:1 65:2
 # LXX Isaiah 65:2+34 65:2-50 = SBLGNT Romans 10:21+54 10:21 (length=32, pos1=127461)
 ## This requires more study.
 
+## Romans 11:2 may refer to I_Kings 12:22 and Psalms 94:14 (Wuppertal). They are not found here.
+
+## Romans 11:3 may refer to I_Kings 19:14. It is not found here.
+
+getrefs SBLGNT LXX I_Kings 19:10
+# LXX I_Kings 19:10+72 19:10-94 = SBLGNT Romans 11:3+30 11:3-39 (length=28, pos1=75873)
+lookup KJV I_Kings 19:10
+# And he said, I have been very jealous for the LORD God of hosts: for the children of Israel have forsaken thy covenant, thrown down thine altars, and slain thy prophets with the sword; and I, even I only, am left; and they seek my life, to take it away.
+lookup KJV Romans 11:3
+# Lord, they have killed thy prophets, and digged down thine altars; and I am left alone, and they seek my life.
+
 ## To be continued...
