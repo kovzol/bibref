@@ -42,12 +42,11 @@ string errorMinuniqueParameters = minuniqueCmd + " requires one parameter";
 string errorExtendParameters = extendCmd + " requires 4 or 5 parameters.";
 string errorGetrefsParameters = getrefsCmd + " requires 3, 4 or 5 parameters.";
 
-
 vector<string> vocabulary {addbooksCmd, compareCmd + "12",
                            textCmd + "1", textCmd + "2", lookupCmd + "1", lookupCmd + "2", "quit",
                                    "help", findCmd + "1", findCmd + "2", lengthCmd + "1", lengthCmd + "2",
                                    minuniqueCmd + "1", latintextCmd + "1", latintextCmd + "2",
-                                   extendCmd, getrefsCmd
+                                   extendCmd, getrefsCmd, lookupCmd
                           };
 
 void add_vocabulary_item(string item) {
@@ -215,6 +214,18 @@ void cli() {
             int commandLength = lookupCmd.length();
             if (input.length() == commandLength) {
                 error(errorLookupIncomplete);
+                goto end;
+            }
+            if (input.at(commandLength) == ' ') {
+                string rest = input.substr(input.find(" ") + 1);
+                vector<string> tokens;
+                boost::split(tokens, rest, boost::is_any_of(" "));
+                int restSize = tokens.size();
+                if (restSize == 3) {
+                    lookupTranslation(tokens[0], tokens[1], tokens[2]);
+                } else {
+                    error(errorLookupParameters);
+                }
                 goto end;
             }
             if (input.at(commandLength) == '1') {

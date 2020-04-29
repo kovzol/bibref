@@ -234,6 +234,22 @@ VerseInfo splitVerseInfo(string verseInfo) {
     }
 }
 
+int lookupTranslation(string moduleName, string book, string verse) {
+    SWMgr library(new MarkupFilterMgr(FMT_PLAIN));
+    SWModule *module;
+    module = library.getModule(moduleName.c_str());
+    if (!module) {
+        error("The SWORD module " + moduleName + " is not installed.");
+        return 1;
+    }
+    boost::replace_all(book, "_", " ");
+    string lookupString = book + " " + verse;
+    module->setKey(lookupString.c_str());
+    string text = module->renderText().c_str();
+    info(text);
+    return 0;
+}
+
 int addBook(string moduleName, string firstVerse, string lastVerse, bool removeAccents) {
     SWMgr library(new MarkupFilterMgr(FMT_PLAIN));
     SWModule *module;
@@ -278,6 +294,8 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
             string bookName;
             VerseInfo vi = splitVerseInfo(verseInfo);
             bookName = vi.bookName;
+            // Use I_Peter instead of "I Peter" on all occurrences:
+            boost::replace_all(bookName, " ", "_");
             reference = vi.reference;
             if (lastBookName.compare(bookName) != 0) {
                 books.push_back(lastBook);
@@ -307,14 +325,13 @@ int addBooks() {
     if (addBook("LXX", "Genesis 1:1", "Malachi 4:6", false) !=0 ) {
         success = 1;
     }
-    if (addBook("SBLGNT", "Matthew 1:1", "Revelation of John 22:21", true) != 0) {
+    if (addBook("SBLGNT", "Matthew 1:1", "Revelation_of_John 22:21", true) != 0) {
         success = 1;
     }
     return success;
 }
 
 Book getBook(string book, string info) {
-    boost::replace_all(book, "_", " ");
     for (int i=0; i<books.size(); i++) {
         Book b = books[i];
         if (b.getName().compare(book) == 0 && b.getInfo().compare(info) == 0) {
