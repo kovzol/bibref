@@ -107,7 +107,7 @@ char** completer(const char* text, int start, int end) {
 
 void cli() {
     rl_attempted_completion_function = completer;
-    info("This is bibref-cli 2020Apr16, nice to meet you.");
+    info("This is bibref-cli 2020Apr29, nice to meet you.");
 
     char* buf;
     while ((buf = readline(">> ")) != nullptr) {
