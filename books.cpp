@@ -564,18 +564,16 @@ end:
 
 int find(string text, string moduleName, int maxFound, int verb) {
     string f = _find(text, moduleName, maxFound, verb);
-    typedef vector<string> Tokens;
-    Tokens tokens;
-    boost::split(tokens, f, boost::is_any_of(","));
-    return stoi(tokens[0]);
+    vector<string> info;
+    boost::split(info, f, boost::is_any_of(","));
+    return stoi(info[0]);
 }
 
 string find(string text, string moduleName) {
     string f = _find(text, moduleName, 1, 0);
-    typedef vector<string> Tokens;
-    Tokens tokens;
-    boost::split(tokens, f, boost::is_any_of(","));
-    return tokens[1] + "," + tokens[2];
+    vector<string> info;
+    boost::split(info, f, boost::is_any_of(","));
+    return info[1] + "," + info[2];
 }
 
 vector<string> find_min_unique(string text, string moduleName, int verb) {
@@ -621,12 +619,11 @@ string _extend(string moduleName1, string moduleName2, string book2, int pos2S, 
 
     bool citation = true;
     string found = find(text, moduleName1);
-    typedef vector<string> Tokens;
-    Tokens tokens;
-    boost::split(tokens, found, boost::is_any_of(","));
-    string book1 = tokens[0];
+    vector<string> info1;
+    boost::split(info1, found, boost::is_any_of(","));
+    string book1 = info1[0];
     Book b1 = getBook(book1, moduleName1);
-    int pos1S = stoi(tokens[1]);
+    int pos1S = stoi(info1[1]);
 
     string text1 = b1.getText();
     string text2 = b2.getText();
@@ -725,15 +722,13 @@ void getrefs(string moduleName2, string moduleName1, string book1, string verse1
     for (string m : minunique) {
         vector<string> found = find_all(m, moduleName2, 100);
         for (string f : found) {
-            typedef vector<string> Tokens;
-            Tokens tokens1;
-            boost::split(tokens1, f, boost::is_any_of(","));
-            string book2 = tokens1[0];
-            int pos = stoi(tokens1[1]);
+            vector<string> info1, info2;
+            boost::split(info1, f, boost::is_any_of(","));
+            string book2 = info1[0];
+            int pos = stoi(info1[1]);
             string ext = _extend(moduleName1, moduleName2, book2, pos, pos + m.length() - 1, 0);
-            Tokens tokens2;
-            boost::split(tokens2, ext, boost::is_any_of(","));
-            Reference r = {stoi(tokens2[1]), stoi(tokens2[2]), tokens2[0]};
+            boost::split(info2, ext, boost::is_any_of(","));
+            Reference r = {stoi(info2[1]), stoi(info2[2]), info2[0]};
             refs.push_back(r);
         }
     }

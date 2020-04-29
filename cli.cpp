@@ -117,8 +117,7 @@ void cli() {
 
         string rawinput(buf);
         boost::algorithm::trim(rawinput);
-        typedef vector<string> Tokens;
-        Tokens commentTokens;
+        vector<string> commentTokens;
         boost::split(commentTokens, rawinput, boost::is_any_of("#"));
         string input = commentTokens[0];
         boost::algorithm::trim(input);
@@ -236,8 +235,7 @@ void cli() {
                 goto end;
             }
             string rest = input.substr(input.find(" ") + 1);
-            typedef vector<string> Tokens;
-            Tokens tokens;
+            vector<string> tokens;
             boost::split(tokens, rest, boost::is_any_of(" "));
             int restSize = tokens.size();
             if (restSize == 3) {
@@ -255,7 +253,7 @@ void cli() {
             if (restSize == 4) {
                 string verse = "";
                 try {
-                    Tokens tokens2, tokens3;
+                    vector<string> tokens2, tokens3;
                     int start = 0, end = 0;
                     boost::split(tokens2, tokens[2], boost::is_any_of("+"));
                     if (tokens2.size() > 1) {
@@ -359,8 +357,7 @@ void cli() {
                 goto end;
             }
             string rest = input.substr(input.find(" ") + 1);
-            typedef vector<string> Tokens;
-            Tokens tokens;
+            vector<string> tokens;
             boost::split(tokens, rest, boost::is_any_of(" "));
             int restSize = tokens.size();
             string moduleName1 = tokens[0];
@@ -377,7 +374,7 @@ void cli() {
                 error(errorExtendParameters);
                 goto end;
             }
-            Tokens verse2ST, verse2ET;
+            vector<string> verse2ST, verse2ET;
             int start = 0, end = 0;
             boost::split(verse2ST, verse2S, boost::is_any_of("+"));
             if (verse2ST.size() > 1) {
@@ -406,8 +403,7 @@ void cli() {
                 goto end;
             }
             string rest = input.substr(input.find(" ") + 1);
-            typedef vector<string> Tokens;
-            Tokens tokens;
+            vector<string> tokens;
             boost::split(tokens, rest, boost::is_any_of(" "));
             int restSize = tokens.size();
             string moduleName2 = tokens[0];
@@ -428,7 +424,7 @@ void cli() {
                 error(errorExtendParameters);
                 goto end;
             }
-            Tokens verse1ST, verse1ET;
+            vector<string> verse1ST, verse1ET;
             int start = 0, end = 0;
             boost::split(verse1ST, verse1S, boost::is_any_of("+"));
             if (verse1ST.size() > 1) {
