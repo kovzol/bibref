@@ -210,4 +210,42 @@ lookup KJV I_Kings 19:10
 lookup KJV Romans 11:3
 # Lord, they have killed thy prophets, and digged down thine altars; and I am left alone, and they seek my life.
 
+getrefs SBLGNT LXX I_Kings 19:18
+# LXX I_Kings 19:18+48 19:18-47 = SBLGNT II_Corinthians 12:4+44 12:4-18 (length=7, pos1=76988)
+# LXX I_Kings 19:18+60 19:18-35 = SBLGNT Romans 11:4+77 11:4-5 (length=7, pos1=77000)
+lookup KJV I_Kings 19:18
+# Yet I have left me seven thousand in Israel, all the knees which have not bowed unto Baal, and every mouth which hath not kissed him.
+lookup KJV Romans 11:4
+# But what saith the answer of God unto him? I have reserved to myself seven thousand men, who have not bowed the knee to the image of Baal.
+lookup LXX I_Kings 19:18
+# και καταλειψεις εν ισραηλ επτα χιλιαδας ανδρων παντα γονατα α ουκ ωκλασαν γονυ τω βααλ και παν στομα ο ου προσεκυνησεν αυτω
+lookup SBLGNT Romans 11:4
+# ἀλλὰ τί λέγει αὐτῷ ὁ χρηματισμός; Κατέλιπον ἐμαυτῷ ἑπτακισχιλίους ἄνδρας, οἵτινες οὐκ ἔκαμψαν γόνυ τῇ Βάαλ.
+lookup1 LXX I_Kings 19:18+60 19:18-35
+# Stored internally as angonyt.
+lookup1 LXX I_Kings 19:18+3 19:18-30
+# Stored internally as kataleiceisenisrahleptaxiliadasandrvnpantagonataaoykvklasangonytvbaal.
+lookup2 SBLGNT Romans 11:4+27 11:4
+# Stored internally as kateliponemaytveptakisxilioysandrasoitinesoykekamcangonythbaal.
+compare12
+# Comparing 'kataleiceisenisrahleptaxiliadasandrvnpantagonataaoykvklasangonytvbaal' ~ 'kateliponemaytveptakisxilioysandrasoitinesoykekamcangonythbaal' = 73
+# difference = 0.564885
+## This match is evident for a human, but it is difficult to identify it correctly in the mechanical way.
+## The number 7000, Baal and some other words (e.g. knee, bow) are of evidence.
+## Still, the wordings are quite different.
+## Even though, the match "angonyt" is found.
+
+## Romans 11:8 may refer to Deuteronomy 29:3 and Isaiah 29:10. It is not found here.
+
+getrefs SBLGNT LXX Psalms 69:22 69:23
+# ... (lengths<=10)
+# LXX Psalms 69:22+42 69:22-18 = SBLGNT Romans 11:9+69 11:9-8 (length=14, pos1=76427)
+# LXX Psalms 69:22+19 69:22-40 = SBLGNT Luke 24:43+6 24:43-5 (length=15, pos1=76404)
+# LXX Psalms 69:23+28 69:23-31 = SBLGNT Romans 11:8+56 11:8-34 (length=15, pos1=76487)
+# LXX Psalms 69:22+58 69:22 = SBLGNT Romans 11:9+53 11:9-22 (length=16, pos1=76443)
+# LXX Psalms 69:22+28 69:22-26 = SBLGNT Romans 11:9+29 11:9-42 (length=20, pos1=76413)
+# LXX Psalms 69:22 69:22-52 = SBLGNT Romans 11:9+13 11:9-56 (length=22, pos1=76385)
+# LXX Psalms 69:23 69:23 = SBLGNT Romans 11:10 11:10 (length=74, pos1=76459)
+## This requires more study.
+
 ## To be continued...
