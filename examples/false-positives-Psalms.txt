@@ -1,0 +1,16 @@
+## This is a list of results that are long matches but clearly not explicitly cited.
+
+addbooks
+
+getrefs SBLGNT LXX Psalms 1:1 1:6
+# ...
+# LXX Psalms 1:3+113 1:3-19 = SBLGNT Matthew 21:21+153 21:22-39 (length=19, pos1=277)
+## Accidental match.
+
+getrefs SBLGNT LXX Psalms 2:1 2:12
+# ...
+# LXX Psalms 2:2+38 2:2-41 = SBLGNT Matthew 22:34+49 22:35-41 (length=22, pos1=577)
+# LXX Psalms 2:2+7 2:2-72 = SBLGNT Revelation_of_John 17:2+12 17:2-57 (length=22, pos1=546)
+# ...
+## These are longer matches than for 2:9, but they are just usages of long expressions.
+
