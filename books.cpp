@@ -325,7 +325,7 @@ int addBooks() {
     if (addBook("LXX", "Genesis 1:1", "Malachi 4:6", false) !=0 ) {
         success = 1;
     }
-    if (addBook("SBLGNT", "Matthew 1:1", "Revelation_of_John 22:21", true) != 0) {
+    if (addBook("SBLGNT", "Matthew 1:1", "Revelation of John 22:21", true) != 0) {
         success = 1;
     }
     return success;
