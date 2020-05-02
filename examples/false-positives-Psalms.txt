@@ -14,3 +14,13 @@ getrefs SBLGNT LXX Psalms 2:1 2:12
 # ...
 ## These are longer matches than for 2:9, but they are just usages of long expressions.
 
+getrefs SBLGNT LXX Psalms 5:1 5:12
+# ...
+# LXX Psalms 5:3+7 5:3-32 = SBLGNT Revelation_of_John 3:20+33 3:20-75 (length=19, pos1=2688)
+## Accidental match.
+
+getrefs SBLGNT LXX Psalms 7:1 7:17
+# ... (length<=13)
+# LXX Psalms 7:5+70 7:5-30 = SBLGNT Matthew 4:8+87 4:8-5 (length=14, pos1=4595)
+## The expressions "honour of it" and "glory of it" are of this length, so this is
+## just an accidental match.

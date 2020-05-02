@@ -54,6 +54,13 @@ getrefs SBLGNT LXX Psalms 4:4 # MT 4:5
 ## The same result is given for the full Psalm. So getrefs is safe here.
 
 
+getrefs SBLGNT LXX Psalms 6:1 6:10
+# ... (lengths<=11)
+# LXX Psalms 6:8 6:8-64 = SBLGNT Luke 13:27+32 13:27-14 (length=20, pos1=3985)
+## Unexpected result. The context is not really supporting, but the
+## match can be theoretically possible.
+
+
 getrefs SBLGNT LXX Psalms 8:2 # MT 8:3
 # ... (lengths<=9)
 # LXX Psalms 8:2 8:2-47 = SBLGNT Matthew 21:16+76 21:16 (length=43, pos1=59620)
