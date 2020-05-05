@@ -40,17 +40,42 @@ getrefs SBLGNT LXX Psalms 18:1 18:50
 # LXX Psalms 18:9+35 18:10-52 = SBLGNT Ephesians 1:22+16 1:22-37 (length=20, pos1=14791)
 ## The expression "υπο τους ποδας αυτου, και" (under the feet of him) is an accidental match.
 
-## Psalm | Longest (quasi-)match | Verified?
-## ------+-----------------------+----------
-##    11 | 13                    | No
-##    12 | 21                    | No
-##    13 | 10                    | No
-##    14 | 318                   | Yes
-##    15 | 25                    | No
-##    16 | 202                   | Yes
-##    17 | 12                    | No
-##    18 | 33                    | Yes
-##    19 | 74                    | Yes
-##    20 | 17                    | No
-##    21 | 13                    | No
+## Psalm | Longest (quasi-)matches | Verified?
+## ------+-------------------------+----------
+##     1 | 19                      | No
+##     2 | 22                      | No
+##     3 | 12                      | No
+##     4 | 24                      | Yes
+##     5 | 19                      | No
+##     6 | 20                      | No/Maybe
+##     7 | 14                      | No
+##     8 | 120+33, 43              | Yes
+##     9 | 18                      | No
+##    10 | 19                      | No
+##    11 | 13                      | No
+##    12 | 21                      | No
+##    13 | 10                      | No
+##    14 | 318                     | Yes
+##    15 | 25                      | No
+##    16 | 202, 80, 31             | Yes
+##    17 | 12                      | No
+##    18 | 33+19                   | Yes
+##    19 | 74                      | Yes
+##    20 | 17                      | No
+##    21 | 13                      | No
+##    22 | 63, 48, 20              | Yes
+##    23 | 18                      | No
+##    24 | 20                      | Yes
+##    25 | 14                      | No
+##    26 | 13                      | No
+##    27 | 16                      | No
+##    28 | 21                      | No
+##    29 | 16                      | No
+##    30 | 15                      | No
+##    31 | 18                      | No
 
+getrefs SBLGNT LXX Psalms 31:1 31:24
+# LXX Psalms 31:5 31:5-49 = SBLGNT Luke 23:46+37 23:46-35 (length=16, pos1=29824)
+# LXX Psalms 31:20+99 31:21-41 = SBLGNT Luke 1:67+61 1:68-55 (length=18, pos1=31102)
+## The longer match is "ευλογητος κυριος" (blessed be, Lord), the shorter is
+## a verified one (Jesus' words on the cross).
