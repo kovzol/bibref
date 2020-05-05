@@ -24,3 +24,33 @@ getrefs SBLGNT LXX Psalms 7:1 7:17
 # LXX Psalms 7:5+70 7:5-30 = SBLGNT Matthew 4:8+87 4:8-5 (length=14, pos1=4595)
 ## The expressions "honour of it" and "glory of it" are of this length, so this is
 ## just an accidental match.
+
+getrefs SBLGNT LXX Psalms 9:1 9:20
+# ... (length<=15)
+# LXX Psalms 9:7+42 9:8-57 = SBLGNT Revelation_of_John 13:2+121 13:2-15 (length=18, pos1=6648)
+## The expression "throne of him" is just an accidental match.
+
+getrefs SBLGNT LXX Psalms 10:1 10:18
+# ... (length<=15)
+# LXX Psalms 10:3+21 10:3-34 = SBLGNT Romans 1:24+21 1:24-62 (length=19, pos1=7757)
+# LXX Psalms 10:3+23 10:3-32 = SBLGNT Ephesians 2:3+35 2:3-88 (length=19, pos1=7759)
+## The expression "ἐν ταῖς ἐπιθυμίαις τῆς" (in the desires of the) is an accidental match.
+
+getrefs SBLGNT LXX Psalms 18:1 18:50
+# LXX Psalms 18:9+35 18:10-52 = SBLGNT Ephesians 1:22+16 1:22-37 (length=20, pos1=14791)
+## The expression "υπο τους ποδας αυτου, και" (under the feet of him) is an accidental match.
+
+## Psalm | Longest (quasi-)match | Verified?
+## ------+-----------------------+----------
+##    11 | 13                    | No
+##    12 | 21                    | No
+##    13 | 10                    | No
+##    14 | 318                   | Yes
+##    15 | 25                    | No
+##    16 | 202                   | Yes
+##    17 | 12                    | No
+##    18 | 33                    | Yes
+##    19 | 74                    | Yes
+##    20 | 17                    | No
+##    21 | 13                    | No
+

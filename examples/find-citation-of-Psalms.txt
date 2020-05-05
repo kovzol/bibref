@@ -72,6 +72,10 @@ getrefs SBLGNT LXX Psalms 8:6 # MT 8:7
 # ... (lengths<=12)
 # LXX Psalms 8:6+39 8:6 = SBLGNT Hebrews 2:8 2:8-84 (length=33, pos1=1876)
 
+## The next match is LXX Psalms 8:7+41 8:8-52 = SBLGNT Mark 4:32+96 4:32-9 (length=23, pos1=5999),
+## "πετεινα του ουρανου" (birds of the air), is a kind of long expression.
+## Other matches are below of length 19.
+
 
 getrefs SBLGNT LXX Psalms 14:3
 # ... (lengths<=8)
