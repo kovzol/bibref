@@ -24,5 +24,6 @@ void extend(string moduleName1, string moduleName2, string book2, string verse2S
 void getrefs(string moduleName2, string moduleName1, string book1, string verse1S,
             int start, string verse1E, int end);
 int lookupTranslation(string moduleName, string book, string verse);
+void showAvailableBibles();
 
 #endif // BOOKS_H
