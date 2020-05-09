@@ -73,9 +73,34 @@ getrefs SBLGNT LXX Psalms 18:1 18:50
 ##    29 | 16                      | No
 ##    30 | 15                      | No
 ##    31 | 18                      | No
+##    32 | 97                      | Yes
+##    33 | 27                      | No
 
 getrefs SBLGNT LXX Psalms 31:1 31:24
 # LXX Psalms 31:5 31:5-49 = SBLGNT Luke 23:46+37 23:46-35 (length=16, pos1=29824)
 # LXX Psalms 31:20+99 31:21-41 = SBLGNT Luke 1:67+61 1:68-55 (length=18, pos1=31102)
 ## The longer match is "ευλογητος κυριος" (blessed be, Lord), the shorter is
 ## a verified one (Jesus' words on the cross).
+
+getrefs SBLGNT LXX Psalms 33:1 33:22
+# ...
+# (length<=17)
+# LXX Psalms 33:6+38 33:6-17 = SBLGNT II_Thessalonians 2:8+49 2:8-41 (length=27, pos1=32657)
+lookup KJV II_Thessalonians 2:8
+# And then shall that Wicked be revealed, whom the Lord shall consume with the spirit of his mouth, and shall destroy with the brightness of his coming:
+lookup SBLGNT II_Thessalonians 2:8
+# καὶ τότε ἀποκαλυφθήσεται ὁ ἄνομος, ὃν ὁ κύριος ⸀Ἰησοῦς ⸀ἀνελεῖ τῷ πνεύματι τοῦ στόματος αὐτοῦ καὶ καταργήσει τῇ ἐπιφανείᾳ τῆς παρουσίας αὐτοῦ,
+lookup2 SBLGNT II_Thessalonians 2:8+49 2:8-41
+# Stored internally as itvpneymatitoystomatosaytoy.
+lookup LXX Psalms 33:6
+# τω λογω του κυριου οι ουρανοι εστερεωθησαν και τω πνευματι του στοματος αυτου πασα η δυναμις αυτων
+lookup KJV Isaiah 11:4
+# But with righteousness shall he judge the poor, and reprove with equity for the meek of the earth: and he shall smite the earth with the rod of his mouth, and with the breath of his lips shall he slay the wicked.
+lookup KJV Psalms 33:6
+# By the word of the LORD were the heavens made; and all the host of them by the breath of his mouth.
+## Conclusion: the expression "τω πνευματι του στοματος αυτου" (by the breath of his mouth) is unique
+## in Psalms, however, a similar epression, "by the breath of his lips", is present in Isaiah as well.
+## In fact the context in II Thessalonians (destruction) is different than in Psalms (creation).
+## The context is, on the other hand, more similar to II Thessalonians in Isaiah (destruction).
+## That is, here the identification as citation is not supported, but just as using the same wording.
+## Note that the length of the expression is 27.
