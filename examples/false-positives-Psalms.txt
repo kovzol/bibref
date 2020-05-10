@@ -75,6 +75,11 @@ getrefs SBLGNT LXX Psalms 18:1 18:50
 ##    31 | 18                      | No
 ##    32 | 97                      | Yes
 ##    33 | 27                      | No
+##    34 | 82+23+16+14+13+11, 18   | Yes
+##    35 | 18                      | No
+##    36 | 13                      | No
+##    37 | 23                      | Maybe
+
 
 getrefs SBLGNT LXX Psalms 31:1 31:24
 # LXX Psalms 31:5 31:5-49 = SBLGNT Luke 23:46+37 23:46-35 (length=16, pos1=29824)
@@ -104,3 +109,19 @@ lookup KJV Psalms 33:6
 ## The context is, on the other hand, more similar to II Thessalonians in Isaiah (destruction).
 ## That is, here the identification as citation is not supported, but just as using the same wording.
 ## Note that the length of the expression is 27.
+
+getrefs SBLGNT LXX Psalms 37:1 37:40
+# LXX Psalms 37:1+44 37:1 = SBLGNT Matthew 13:41+93 13:41 (length=23, pos1=38177)
+lookup SBLGNT Matthew 13:41
+# ἀποστελεῖ ὁ υἱὸς τοῦ ἀνθρώπου τοὺς ἀγγέλους αὐτοῦ, καὶ συλλέξουσιν ἐκ τῆς βασιλείας αὐτοῦ πάντα τὰ σκάνδαλα καὶ τοὺς ποιοῦντας τὴν ἀνομίαν,
+lookup LXX Psalms 37:1
+# του δαυιδ μη παραζηλου εν πονηρευομενοις μηδε ζηλου τους ποιουντας την ανομιαν
+lookup2 SBLGNT Matthew 13:41+93 13:41
+# Stored internally as toyspoioyntasthnanomian.
+lookup KJV Matthew 13:41
+# The Son of man shall send forth his angels, and they shall gather out of his kingdom all things that offend, and them which do iniquity;
+lookup KJV Psalms 37:1
+# Fret not thyself because of evildoers, neither be thou envious against the workers of iniquity.
+## Here the expression "τους ποιουντας την ανομιαν" (those practicing lawlessness, i.e. workers of iniquity)
+## is the matching one. In fact, both texts are unique so it can be supported that Jesus intentionally
+## refers to the Psalm in Matthew, because the context is also related.
