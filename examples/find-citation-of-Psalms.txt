@@ -179,6 +179,20 @@ getrefs SBLGNT LXX Psalms 40:6 40:8 # MT 40:7-9
 ## The union of the last six and four other former ones should be one citation.
 
 
+## The connection between Psalm 41:9 and John 13:18 should be found!
+lookup1 LXX Psalms 41:9+45 41:9-5
+# Stored internally as artoysmoyemegalynenepemeptern.
+lookup2 SBLGNT John 13:18+68 13:18-7
+# Stored internally as moytonartonephrenepemethnptern.
+compare12
+# Comparing 'artoysmoyemegalynenepemeptern' ~ 'moytonartonephrenepemethnptern' = 23
+# difference = 0.406780
+## Conclusion: The tools we use here are not suitable to detect or confirm the quotation.
+## Traditionally, this is a verified match (Jesus mentions that the "scripture may be fulfilled"),
+## no other parts of the Old Testament seems to match better, and the "old familiar friend"
+## is identified as Ahitophel who finally "hanged himself" (II Samuel 17:23).
+
+
 getrefs SBLGNT LXX Psalms 44:22 # MT 44:23
 # ... (lengths<=7)
 # LXX Psalms 44:22+8 44:22 = SBLGNT Romans 8:36+23 8:36 (length=53, pos1=49276)
