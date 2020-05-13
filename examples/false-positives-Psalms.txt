@@ -1,44 +1,14 @@
-## This is a list of results that are long matches but clearly not explicitly cited.
-
-addbooks
-
-getrefs SBLGNT LXX Psalms 1:1 1:6
-# ...
-# LXX Psalms 1:3+113 1:3-19 = SBLGNT Matthew 21:21+153 21:22-39 (length=19, pos1=277)
-## Accidental match.
-
-getrefs SBLGNT LXX Psalms 2:1 2:12
-# ...
-# LXX Psalms 2:2+38 2:2-41 = SBLGNT Matthew 22:34+49 22:35-41 (length=22, pos1=577)
-# LXX Psalms 2:2+7 2:2-72 = SBLGNT Revelation_of_John 17:2+12 17:2-57 (length=22, pos1=546)
-# ...
-## These are longer matches than for 2:9, but they are just usages of long expressions.
-
-getrefs SBLGNT LXX Psalms 5:1 5:12
-# ...
-# LXX Psalms 5:3+7 5:3-32 = SBLGNT Revelation_of_John 3:20+33 3:20-75 (length=19, pos1=2688)
-## Accidental match.
-
-getrefs SBLGNT LXX Psalms 7:1 7:17
-# ... (length<=13)
-# LXX Psalms 7:5+70 7:5-30 = SBLGNT Matthew 4:8+87 4:8-5 (length=14, pos1=4595)
-## The expressions "honour of it" and "glory of it" are of this length, so this is
-## just an accidental match.
-
-getrefs SBLGNT LXX Psalms 9:1 9:20
-# ... (length<=15)
-# LXX Psalms 9:7+42 9:8-57 = SBLGNT Revelation_of_John 13:2+121 13:2-15 (length=18, pos1=6648)
-## The expression "throne of him" is just an accidental match.
-
-getrefs SBLGNT LXX Psalms 10:1 10:18
-# ... (length<=15)
-# LXX Psalms 10:3+21 10:3-34 = SBLGNT Romans 1:24+21 1:24-62 (length=19, pos1=7757)
-# LXX Psalms 10:3+23 10:3-32 = SBLGNT Ephesians 2:3+35 2:3-88 (length=19, pos1=7759)
-## The expression "ἐν ταῖς ἐπιθυμίαις τῆς" (in the desires of the) is an accidental match.
-
-getrefs SBLGNT LXX Psalms 18:1 18:50
-# LXX Psalms 18:9+35 18:10-52 = SBLGNT Ephesians 1:22+16 1:22-37 (length=20, pos1=14791)
-## The expression "υπο τους ποδας αυτου, και" (under the feet of him) is an accidental match.
+## This is a list of results that are long matches but clearly not quotations.
+## Accordingly to current research the longest match is in Psalm 33:6 (but this is checked
+## until Psalm 62 right now) and the used expression is 27 characters long.
+## In the table below the lengths of the longest (quasi-)matches are shown.
+## The meaning of column "Verified?" is that tradition assumes or contextual evidence is given
+## whether the passage is indeed a quotation.
+## If there are more verified quotations in a psalm, all of them are listed (separated by commas).
+## Some shorter longest matches (e.g. Psalm 37 or 61) are traditionally not verified
+## or there is no further evidence of being a quotation, so they can be in a kind of grey zone:
+## maybe they are cited in the New Testament, but this may require further research.
+## They are perhaps just allusions but not quotations---this could be the most probable assumption.
 
 ## Psalm | Longest (quasi-)matches | Verified?
 ## ------+-------------------------+----------
@@ -95,6 +65,55 @@ getrefs SBLGNT LXX Psalms 18:1 18:50
 ##    51 | 38                      | Yes
 ##    52 | 17                      | No
 ##    53 | 14                      | No
+##    54 | 17                      | No
+##    55 | 18                      | No
+##    56 | 17                      | No
+##    57 | 19                      | No
+##    58 | 18                      | No
+##    59 | 20                      | No
+##    60 | 15                      | No
+##    61 | 25                      | Maybe
+##    62 | 14                      | No
+
+addbooks
+
+getrefs SBLGNT LXX Psalms 1:1 1:6
+# ...
+# LXX Psalms 1:3+113 1:3-19 = SBLGNT Matthew 21:21+153 21:22-39 (length=19, pos1=277)
+## Accidental match.
+
+getrefs SBLGNT LXX Psalms 2:1 2:12
+# ...
+# LXX Psalms 2:2+38 2:2-41 = SBLGNT Matthew 22:34+49 22:35-41 (length=22, pos1=577)
+# LXX Psalms 2:2+7 2:2-72 = SBLGNT Revelation_of_John 17:2+12 17:2-57 (length=22, pos1=546)
+# ...
+## These are longer matches than for 2:9, but they are just usages of long expressions.
+
+getrefs SBLGNT LXX Psalms 5:1 5:12
+# ...
+# LXX Psalms 5:3+7 5:3-32 = SBLGNT Revelation_of_John 3:20+33 3:20-75 (length=19, pos1=2688)
+## Accidental match.
+
+getrefs SBLGNT LXX Psalms 7:1 7:17
+# ... (length<=13)
+# LXX Psalms 7:5+70 7:5-30 = SBLGNT Matthew 4:8+87 4:8-5 (length=14, pos1=4595)
+## The expressions "honour of it" and "glory of it" are of this length, so this is
+## just an accidental match.
+
+getrefs SBLGNT LXX Psalms 9:1 9:20
+# ... (length<=15)
+# LXX Psalms 9:7+42 9:8-57 = SBLGNT Revelation_of_John 13:2+121 13:2-15 (length=18, pos1=6648)
+## The expression "throne of him" is just an accidental match.
+
+getrefs SBLGNT LXX Psalms 10:1 10:18
+# ... (length<=15)
+# LXX Psalms 10:3+21 10:3-34 = SBLGNT Romans 1:24+21 1:24-62 (length=19, pos1=7757)
+# LXX Psalms 10:3+23 10:3-32 = SBLGNT Ephesians 2:3+35 2:3-88 (length=19, pos1=7759)
+## The expression "ἐν ταῖς ἐπιθυμίαις τῆς" (in the desires of the) is an accidental match.
+
+getrefs SBLGNT LXX Psalms 18:1 18:50
+# LXX Psalms 18:9+35 18:10-52 = SBLGNT Ephesians 1:22+16 1:22-37 (length=20, pos1=14791)
+## The expression "υπο τους ποδας αυτου, και" (under the feet of him) is an accidental match.
 
 
 getrefs SBLGNT LXX Psalms 31:1 31:24
@@ -127,6 +146,7 @@ lookup KJV Psalms 33:6
 ## Note that the length of the expression is 27.
 
 getrefs SBLGNT LXX Psalms 37:1 37:40
+# ...
 # LXX Psalms 37:1+44 37:1 = SBLGNT Matthew 13:41+93 13:41 (length=23, pos1=38177)
 lookup SBLGNT Matthew 13:41
 # ἀποστελεῖ ὁ υἱὸς τοῦ ἀνθρώπου τοὺς ἀγγέλους αὐτοῦ, καὶ συλλέξουσιν ἐκ τῆς βασιλείας αὐτοῦ πάντα τὰ σκάνδαλα καὶ τοὺς ποιοῦντας τὴν ἀνομίαν,
@@ -141,3 +161,20 @@ lookup KJV Psalms 37:1
 ## Here the expression "τους ποιουντας την ανομιαν" (those practicing lawlessness, i.e. workers of iniquity)
 ## is the matching one. In fact, both texts are unique so it can be supported that Jesus intentionally
 ## refers to the Psalm in Matthew, because the context is also related.
+
+getrefs SBLGNT LXX Psalms 61:1 61:8
+# ...
+# LXX Psalms 61:5+48 61:5 = SBLGNT Revelation_of_John 11:18+123 11:18-58 (length=25, pos1=66555)
+lookup1 LXX Psalms 61:5+48 61:5
+# Stored internally as toisfoboymenoistoonomasoy.
+lookup LXX Psalms 61:5
+# οτι συ ο θεος εισηκουσας των ευχων μου εδωκας κληρονομιαν τοις φοβουμενοις το ονομα σου
+lookup SBLGNT Revelation_of_John 11:18
+# καὶ τὰ ἔθνη ὠργίσθησαν, καὶ ἦλθεν ἡ ὀργή σου καὶ ὁ καιρὸς τῶν νεκρῶν κριθῆναι καὶ δοῦναι τὸν μισθὸν τοῖς δούλοις σου τοῖς προφήταις καὶ τοῖς ἁγίοις καὶ τοῖς φοβουμένοις τὸ ὄνομά σου, ⸂τοὺς μικροὺς καὶ τοὺς μεγάλους⸃, καὶ διαφθεῖραι τοὺς διαφθείροντας τὴν γῆν. 
+lookup KJV Psalms 61:5
+# For thou, O God, hast heard my vows: thou hast given me the heritage of those that fear thy name.
+lookup KJV Revelation_of_John 11:18
+# And the nations were angry, and thy wrath is come, and the time of the dead, that they should be judged, and that thou shouldest give reward unto thy servants the prophets, and to the saints, and them that fear thy name, small and great; and shouldest destroy them which destroy the earth.
+## Here the expression "τοις φοβουμενοις το ονομα σου" (them that fear thy name)
+## is the matching one. In fact, both texts are unique so it can be supported that the 24 elders intentionally
+## refer to the Psalm in Revelation, because the context is also related.
