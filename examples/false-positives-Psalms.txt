@@ -74,6 +74,8 @@
 ##    60 | 15                      | No
 ##    61 | 25                      | Maybe
 ##    62 | 14                      | No
+##    63 | 21                      | No
+##    64 | 19                      | No
 
 addbooks
 
@@ -178,3 +180,9 @@ lookup KJV Revelation_of_John 11:18
 ## Here the expression "τοις φοβουμενοις το ονομα σου" (them that fear thy name)
 ## is the matching one. In fact, both texts are unique so it can be supported that the 24 elders intentionally
 ## refer to the Psalm in Revelation, because the context is also related.
+
+getrefs SBLGNT LXX Psalms 63:1 63:11
+# ... (length<=13)
+# LXX Psalms 63:1+26 63:1-90 = SBLGNT Matthew 3:1+58 3:1 (length=21, pos1=67686)
+## The matching expression is "εν τη ερημω της ιουδαιας" (in the wilderness of Judaea) is
+## just a geographical reference but not a quotation.
