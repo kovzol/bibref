@@ -1,6 +1,6 @@
 ## This is a list of results that are long matches but clearly not quotations.
-## Accordingly to current research the longest match is in Psalm 33:6 (but this is checked
-## until Psalm 62 right now) and the used expression is 27 characters long.
+## Accordingly to current research the longest match is in Psalm 33:6 (but this is checked only
+## until Psalm 68 right now) and the used expression is 27 characters long.
 ## In the table below the lengths of the longest (quasi-)matches are shown.
 ## The meaning of column "Verified?" is that tradition assumes or contextual evidence is given
 ## whether the passage is indeed a quotation.
@@ -76,6 +76,10 @@
 ##    62 | 14                      | No
 ##    63 | 21                      | No
 ##    64 | 19                      | No
+##    65 | 18                      | No
+##    66 | 19                      | No
+##    67 | 16                      | No
+##    68 | 18                      | Yes
 
 addbooks
 
@@ -186,3 +190,17 @@ getrefs SBLGNT LXX Psalms 63:1 63:11
 # LXX Psalms 63:1+26 63:1-90 = SBLGNT Matthew 3:1+58 3:1 (length=21, pos1=67686)
 ## The matching expression is "εν τη ερημω της ιουδαιας" (in the wilderness of Judaea) is
 ## just a geographical reference but not a quotation.
+
+getrefs SBLGNT LXX Psalms 66:1 66:20
+# ... (length<=16)
+# LXX Psalms 66:16+34 66:16-20 = SBLGNT Acts 13:26+40 13:26-37 (length=17, pos1=71303)
+# LXX Psalms 66:16+32 66:16-20 = SBLGNT Acts 13:16+59 13:16-8 (length=19, pos1=71301)
+## The longer matching expression is "οι φοβουμενοι τον θεον" (those fearing God),
+## the shorter one is then expanded by two other words: "οι εν υμιν φοβουμενοι τον θεον" (those among you
+## fearing God). Actually, the search φοβουμενοι* in the LXX gives 21 matches, and, in addition,
+## the search φοβουμενοι* τον results in 11 matches. Moreover, the exact search for
+## οι φοβουμενοι τον κυριον gives 5 exact matches (Psalms 115:11, 118:4, 128:1, 135:20 and Malachi 3:16).
+## Here we also acknowledge that the words θεον and κυριον are assumed to used as synonyms.
+## Conclusion: There is no evidence here that Paul wanted to cite Psalm 66:16 when he used the
+## matching phrase. It is more probable that the expression was widely used 
+
