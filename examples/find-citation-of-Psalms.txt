@@ -247,14 +247,18 @@ getrefs SBLGNT LXX Psalms 69:9 # MT 69:10
 # LXX Psalms 69:9+32 69:9 = SBLGNT Romans 15:3+44 15:3 (length=44, pos1=29490)
 ## Two citations in one verse.
 
-getrefs SBLGNT LXX Psalms 69:22 # MT 69:23
+getrefs SBLGNT LXX Psalms 69:22 69:23 # MT 69:23-24
 # ... (lengths<=10)
-# LXX Psalms 69:22+42 69:22-18 = SBLGNT Romans 11:9+69 11:9-8 (length=14, pos1=22768)
-# LXX Psalms 69:22+19 69:22-40 = SBLGNT Luke 24:43+6 24:43-5 (length=15, pos1=93880)
-# LXX Psalms 69:22+58 69:22 = SBLGNT Romans 11:9+53 11:9-22 (length=16, pos1=22750)
-# LXX Psalms 69:22+28 69:22-26 = SBLGNT Romans 11:9+29 11:9-42 (length=20, pos1=22736)
-# LXX Psalms 69:22 69:22-52 = SBLGNT Romans 11:9+13 11:9-56 (length=22, pos1=22723)
-## The union of the last three ones and one other former one should be one citation.
+# LXX Psalms 69:22+42 69:22-18 = SBLGNT Romans 11:9+69 11:9-8 (length=14, pos1=76427)
+# LXX Psalms 69:22+19 69:22-40 = SBLGNT Luke 24:43+6 24:43-5 (length=15, pos1=76404)
+# LXX Psalms 69:23+28 69:23-31 = SBLGNT Romans 11:8+56 11:8-34 (length=15, pos1=76487)
+# LXX Psalms 69:22+58 69:22 = SBLGNT Romans 11:9+53 11:9-22 (length=16, pos1=76443)
+# LXX Psalms 69:22+28 69:22-26 = SBLGNT Romans 11:9+29 11:9-42 (length=20, pos1=76413)
+# LXX Psalms 69:22 69:22-52 = SBLGNT Romans 11:9+13 11:9-56 (length=22, pos1=76385)
+# LXX Psalms 69:23 69:23 = SBLGNT Romans 11:10 11:10 (length=74, pos1=76459)
+## The union of the last four ones and one other former one should be one citation.
+## Interestingly, Romans 11:8 is shown here, since the passage from the Psalm
+## "του μη βλεπειν και" (not to see and) is present also in Romans 11:8.
 
 getrefs SBLGNT LXX Psalms 69:25 # MT 69:26
 # ... (lengths<=9)
