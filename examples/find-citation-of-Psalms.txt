@@ -274,7 +274,31 @@ getrefs SBLGNT LXX Psalms 78:2
 
 getrefs SBLGNT LXX Psalms 82:6
 # ... (lengths<=11)
-LXX Psalms 82:6 82:6-20 = SBLGNT John 10:34+55 10:34 (length=15, pos1=35755)
+# LXX Psalms 82:6 82:6-20 = SBLGNT John 10:34+55 10:34 (length=15, pos1=35755)
+
+
+getrefs SBLGNT LXX Psalms 84:1 84:12
+# ... (lengths<=15)
+# LXX Psalms 84:4+33 84:4-20 = SBLGNT Revelation_of_John 10:6+16 10:6-95 (length=22, pos1=97709)
+# LXX Psalms 84:4+33 84:4-20 = SBLGNT Revelation_of_John 11:15+137 11:15 (length=22, pos1=97709)
+# LXX Psalms 84:4+33 84:4-20 = SBLGNT Revelation_of_John 15:7+92 15:7 (length=22, pos1=97709)
+# LXX Psalms 84:4+33 84:4-20 = SBLGNT Revelation_of_John 19:3+51 19:3 (length=22, pos1=97709)
+# LXX Psalms 84:4+33 84:4-20 = SBLGNT Revelation_of_John 1:18+38 1:18-34 (length=22, pos1=97709)
+# LXX Psalms 84:4+33 84:4-20 = SBLGNT Revelation_of_John 20:10+124 20:10 (length=22, pos1=97709)
+# LXX Psalms 84:4+33 84:4-20 = SBLGNT Revelation_of_John 22:5+100 22:5 (length=22, pos1=97709)
+# LXX Psalms 84:4+33 84:4-20 = SBLGNT Revelation_of_John 4:10+91 4:10-53 (length=22, pos1=97709)
+# LXX Psalms 84:4+33 84:4-20 = SBLGNT Revelation_of_John 4:9+72 4:9 (length=22, pos1=97709)
+# LXX Psalms 84:4+33 84:4-20 = SBLGNT Revelation_of_John 5:13+163 5:13 (length=22, pos1=97709)
+# LXX Psalms 84:4+33 84:4-19 = SBLGNT Galatians 1:5+6 1:5-3 (length=23, pos1=97709)
+# LXX Psalms 84:4+33 84:4-19 = SBLGNT II_Timothy 4:18+84 4:18-3 (length=23, pos1=97709)
+# LXX Psalms 84:4+33 84:4-19 = SBLGNT I_Peter 4:11+119 4:11-3 (length=23, pos1=97709)
+# LXX Psalms 84:4+33 84:4-19 = SBLGNT I_Timothy 1:17+51 1:17-3 (length=23, pos1=97709)
+# LXX Psalms 84:4+33 84:4-19 = SBLGNT Philippians 4:20+24 4:20-3 (length=23, pos1=97709)
+# LXX Psalms 84:4+33 84:4-19 = SBLGNT Revelation_of_John 7:12+88 7:12-3 (length=23, pos1=97709)
+## The same LXX-unique expression "εις τους αιωνας των αιωνων" (to the ages of the ages)
+## is used in several parts of the SBLGNT, mostly in Revelation (11 times), but also by
+## Paul (4 times) and Peter (once). The non-Revelation occurrences are always followed by
+## "ἀμήν" (amen), and also one of the Revelation occurrences (7:12) is extended by that word.
 
 
 getrefs SBLGNT LXX Psalms 86:9
