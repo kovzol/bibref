@@ -1,0 +1,50 @@
+## This example compares Psalm 68:18 and Ephesians 4:8. The psalm is cited by Paul,
+## but it is far from literal quotation. In fact, tradition and also manual textual
+## investigation give evidence that Paul indeed quotes Psalm 68:18.
+## Technically, however, it is difficult to confirm the match automatically,
+## because some letters are changed and also a word is changed by Paul
+## ("ελαβες"/"ἔδωκεν": "received"/"gave").
+
+lookup KJV Psalms 68:18
+# Thou hast ascended on high, thou hast led captivity captive: thou hast received gifts for men; yea, for the rebellious also, that the LORD God might dwell among them.
+lookup KJV Ephesians 4:8
+# Wherefore he saith, When he ascended up on high, he led captivity captive, and gave gifts unto men.
+
+addbooks
+
+getrefs SBLGNT LXX Psalms 68:18
+# LXX Psalms 68:18+20 68:18-82 = SBLGNT Jude 1:7+62 1:7-72 (length=7, pos1=73416)
+# LXX Psalms 68:18+43 68:18-59 = SBLGNT Philippians 4:3+114 4:3-9 (length=7, pos1=73439)
+# LXX Psalms 68:18+43 68:18-59 = SBLGNT Revelation_of_John 3:4+11 3:4-79 (length=7, pos1=73439)
+# LXX Psalms 68:18+67 68:18-34 = SBLGNT Revelation_of_John 14:4+67 14:4-63 (length=8, pos1=73463)
+# LXX Psalms 68:18+96 68:19-72 = SBLGNT Romans 9:5+49 9:5-16 (length=14, pos1=73492)
+# LXX Psalms 68:18+5 68:18-86 = SBLGNT Ephesians 4:8+13 4:8-38 (length=18, pos1=73401)
+
+lookup LXX Psalms 68:18
+# ανεβης εις υψος ηχμαλωτευσας αιχμαλωσιαν ελαβες δοματα εν ανθρωπω και γαρ απειθουντες του κατασκηνωσαι κυριος ο θεος ευλογητος
+lookup SBLGNT Ephesians 4:8
+# διὸ λέγει· Ἀναβὰς εἰς ὕψος ᾐχμαλώτευσεν αἰχμαλωσίαν, ⸀ἔδωκεν δόματα τοῖς ἀνθρώποις.
+
+lookup1 LXX Psalms 68:18 68:18-52
+# Stored internally as anebhseisycoshxmalvteysasaixmalvsianelabesdomataenanurvpv.
+lookup2 SBLGNT Ephesians 4:8+8 4:8
+# Stored internally as anabaseisycoshxmalvteysenaixmalvsianedvkendomatatoisanurvpois.
+compare12
+# Comparing 'anebhseisycoshxmalvteysasaixmalvsianelabesdomataenanurvpv' ~ 'anabaseisycoshxmalvteysenaixmalvsianedvkendomatatoisanurvpois' = 28
+# difference = 0.245763
+
+lookup1 LXX Psalms 68:18 68:18-53
+# Stored internally as anebhseisycoshxmalvteysasaixmalvsianelabesdomataenanurvp.
+lookup2 SBLGNT Ephesians 4:8+8 4:8-3
+# Stored internally as anabaseisycoshxmalvteysenaixmalvsianedvkendomatatoisanurvp.
+compare12
+# Comparing 'anebhseisycoshxmalvteysasaixmalvsianelabesdomataenanurvp' ~ 'anabaseisycoshxmalvteysenaixmalvsianedvkendomatatoisanurvp' = 24
+# difference = 0.219298
+
+lookup1 LXX Psalms 68:18+5 68:18-53
+# Stored internally as seisycoshxmalvteysasaixmalvsianelabesdomataenanurvp.
+lookup2 SBLGNT Ephesians 4:8+13 4:8-3
+# Stored internally as seisycoshxmalvteysenaixmalvsianedvkendomatatoisanurvp.
+compare12
+# Comparing 'seisycoshxmalvteysasaixmalvsianelabesdomataenanurvp' ~ 'seisycoshxmalvteysenaixmalvsianedvkendomatatoisanurvp' = 20
+# difference = 0.201923
