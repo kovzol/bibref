@@ -307,6 +307,33 @@ getrefs SBLGNT LXX Psalms 86:9
 ## The union of the last two ones should be one citation. (The part inside of them is not cited.)
 
 
+## The connection between Psalm 90:4 and II_Peter 3:8 should be found!
+getrefs SBLGNT LXX Psalms 90:4
+# LXX Psalms 90:4+3 90:4-55 = SBLGNT II_Peter 3:8+54 3:8-21 (length=8, pos1=105753)
+# LXX Psalms 90:4+3 90:4-55 = SBLGNT Revelation_of_John 20:2+75 20:2 (length=8, pos1=105753)
+# LXX Psalms 90:4+3 90:4-55 = SBLGNT Revelation_of_John 20:3+95 20:3-29 (length=8, pos1=105753)
+# LXX Psalms 90:4+3 90:4-55 = SBLGNT Revelation_of_John 20:4+261 20:4 (length=8, pos1=105753)
+# LXX Psalms 90:4+3 90:4-55 = SBLGNT Revelation_of_John 20:5+39 20:5-20 (length=8, pos1=105753)
+# LXX Psalms 90:4+3 90:4-55 = SBLGNT Revelation_of_John 20:6+146 20:6 (length=8, pos1=105753)
+# LXX Psalms 90:4+3 90:4-55 = SBLGNT Revelation_of_John 20:7+16 20:7-34 (length=8, pos1=105753)
+# LXX Psalms 90:4+2 90:4-55 = SBLGNT II_Peter 3:8+64 3:8-10 (length=9, pos1=105752)
+# LXX Psalms 90:4+50 90:4-7 = SBLGNT Revelation_of_John 18:2+118 18:2-62 (length=9, pos1=105800)
+# LXX Psalms 90:4+49 90:4-7 = SBLGNT Hebrews 11:36+50 11:36-1 (length=10, pos1=105799)
+# LXX Psalms 90:4+49 90:4-7 = SBLGNT Matthew 14:3+38 14:3-51 (length=10, pos1=105799)
+# LXX Psalms 90:4+49 90:4-7 = SBLGNT Revelation_of_John 18:2+84 18:2-95 (length=10, pos1=105799)
+## This is not the expected output. Traditionally II_Peter 3:8 cites this verse but
+## it is shorter (length=9) than the longest matches (length=10) for this verse.
+lookup1 LXX Psalms 90:4+3 90:4-33
+# Stored internally as xiliaethenofualmoissoyvshhmera.
+lookup2 SBLGNT II_Peter 3:8+65 3:8-3
+# Stored internally as xiliaethvshmera.
+compare12
+# Comparing 'xiliaethenofualmoissoyvshhmera' ~ 'xiliaethvshmera' = 17
+# difference = 0.400000
+## Technically this might be considered an almost begin...end match:
+## xiliaeth...vshmmera
+
+
 getrefs SBLGNT LXX Psalms 91:11 91:12
 # ... (lengths<=19)
 # LXX Psalms 91:11 91:11-35 = SBLGNT Matthew 4:6+54 4:6-55 (length=37, pos1=6526)
