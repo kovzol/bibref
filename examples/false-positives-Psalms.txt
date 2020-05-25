@@ -1,6 +1,6 @@
 ## This is a list of results that are long matches but clearly not quotations.
 ## Accordingly to current research the longest match is in Psalm 33:6 (but this is checked only
-## until Psalm 90 right now) and the used expression is 27 characters long.
+## until Psalm 100 right now) and the used expression is 27 characters long.
 ## In the table below the lengths of the longest (quasi-)matches are shown.
 ## The meaning of column "Verified?" is that tradition assumes or contextual evidence is given
 ## whether the passage is indeed a quotation.
@@ -103,6 +103,15 @@
 ##    89 | 22                            | No
 ##    90 | 21                            | Maybe
 ##    91 | 53+37/52+52                   | Yes
+##    92 | 14                            | No
+##    93 | 12                            | No
+##    94 | 35                            | Yes
+##    95 | 133+73+20+17+14               | Yes
+##    96 | 14                            | No
+##    97 | 18                            | No
+##    98 | 15                            | No
+##    99 | 26                            | No/Maybe
+###  100 | 17                            | No
 
 addbooks
 
@@ -124,18 +133,18 @@ getrefs SBLGNT LXX Psalms 5:1 5:12
 ## Accidental match.
 
 getrefs SBLGNT LXX Psalms 7:1 7:17
-# ... (length<=13)
+# ... (lengths<=13)
 # LXX Psalms 7:5+70 7:5-30 = SBLGNT Matthew 4:8+87 4:8-5 (length=14, pos1=4595)
 ## The expressions "honour of it" and "glory of it" are of this length, so this is
 ## just an accidental match.
 
 getrefs SBLGNT LXX Psalms 9:1 9:20
-# ... (length<=15)
+# ... (lengths<=15)
 # LXX Psalms 9:7+42 9:8-57 = SBLGNT Revelation_of_John 13:2+121 13:2-15 (length=18, pos1=6648)
 ## The expression "throne of him" is just an accidental match.
 
 getrefs SBLGNT LXX Psalms 10:1 10:18
-# ... (length<=15)
+# ... (lengths<=15)
 # LXX Psalms 10:3+21 10:3-34 = SBLGNT Romans 1:24+21 1:24-62 (length=19, pos1=7757)
 # LXX Psalms 10:3+23 10:3-32 = SBLGNT Ephesians 2:3+35 2:3-88 (length=19, pos1=7759)
 ## The expression "ἐν ταῖς ἐπιθυμίαις τῆς" (in the desires of the) is an accidental match.
@@ -153,7 +162,7 @@ getrefs SBLGNT LXX Psalms 31:1 31:24
 
 getrefs SBLGNT LXX Psalms 33:1 33:22
 # ...
-# (length<=17)
+# (lengths<=17)
 # LXX Psalms 33:6+38 33:6-17 = SBLGNT II_Thessalonians 2:8+49 2:8-41 (length=27, pos1=32657)
 lookup KJV II_Thessalonians 2:8
 # And then shall that Wicked be revealed, whom the Lord shall consume with the spirit of his mouth, and shall destroy with the brightness of his coming:
@@ -209,13 +218,13 @@ lookup KJV Revelation_of_John 11:18
 ## refer to the Psalm in Revelation, because the context is also related.
 
 getrefs SBLGNT LXX Psalms 63:1 63:11
-# ... (length<=13)
+# ... (lengths<=13)
 # LXX Psalms 63:1+26 63:1-90 = SBLGNT Matthew 3:1+58 3:1 (length=21, pos1=67686)
 ## The matching expression is "εν τη ερημω της ιουδαιας" (in the wilderness of Judaea) is
 ## just a geographical reference but not a quotation.
 
 getrefs SBLGNT LXX Psalms 66:1 66:20
-# ... (length<=16)
+# ... (lengths<=16)
 # LXX Psalms 66:16+34 66:16-20 = SBLGNT Acts 13:26+40 13:26-37 (length=17, pos1=71303)
 # LXX Psalms 66:16+32 66:16-20 = SBLGNT Acts 13:16+59 13:16-8 (length=19, pos1=71301)
 ## The longer matching expression is "οι φοβουμενοι τον θεον" (those fearing God),
@@ -228,7 +237,7 @@ getrefs SBLGNT LXX Psalms 66:1 66:20
 ## matching phrase. It is more probable that the expression was widely used 
 
 getrefs SBLGNT LXX Psalms 90:1 90:17
-# ... (length<=15)
+# ... (lengths<=15)
 # LXX Psalms 90:14+63 90:14 = SBLGNT Luke 1:75+35 1:75 (length=20, pos1=106508)
 ## (Actually length=21, as of 2020-05-23 there is a bug in bibref that ignores the letter π in Luke.)
 lookup1 LXX Psalms 90:14+62 90:14
@@ -241,3 +250,21 @@ lookup SBLGNT Luke 1:75
 ## Seemingly this is a simple expression that could be used many times, but, in fact,
 ## this is a unique match. Also, the contexts are similar. So, even if it is not an
 ## intentional quotation, it seems more than an allusion.
+
+getrefs SBLGNT LXX Psalms 99:1 99:9
+# ... (lengths<=13)
+# LXX Psalms 99:6+44 99:6-47 = SBLGNT I_Corinthians 1:2+65 1:2-48 (length=26, pos1=114146)
+lookup2 SBLGNT I_Corinthians 1:2+65 1:2-48
+# Stored internally as ntoisepikaloymenoistoonoma.
+lookup LXX Psalms 99:6
+# μωυσης και ααρων εν τοις ιερευσιν αυτου και σαμουηλ εν τοις επικαλουμενοις το ονομα αυτου επεκαλουντο τον κυριον και αυτος επηκουσεν αυτων
+lookup SBLGNT I_Corinthians 1:2
+# τῇ ἐκκλησίᾳ τοῦ θεοῦ, ⸂ἡγιασμένοις ἐν Χριστῷ Ἰησοῦ, τῇ οὔσῃ ἐν Κορίνθῳ,⸃ κλητοῖς ἁγίοις, σὺν πᾶσιν τοῖς ἐπικαλουμένοις τὸ ὄνομα τοῦ κυρίου ἡμῶν Ἰησοῦ Χριστοῦ ἐν παντὶ τόπῳ ⸀αὐτῶν καὶ ἡμῶν·
+lookup KJV Psalms 99:6
+# Moses and Aaron among his priests, and Samuel among them that call upon his name; they called upon the LORD, and he answered them.
+lookup KJV I_Corinthians 1:2
+# Unto the church of God which is at Corinth, to them that are sanctified in Christ Jesus, called to be saints, with all that in every place call upon the name of Jesus Christ our Lord, both theirs and ours:
+## The matching text is "τοις επικαλουμενοις το ονομα" (those calling on the name) seems to be
+## an allusion, but still, this is the only match in the New Testament.
+## Similar phrases exist in some other psalms: the word "επικαλουμενοις" is present
+## in Psalms 86, 145 and 147 as well.

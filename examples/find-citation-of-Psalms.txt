@@ -399,8 +399,9 @@ getrefs SBLGNT LXX Psalms 95:7 95:11
 # LXX Psalms 95:10+73 95:11 = SBLGNT Hebrews 3:10+75 3:11 (length=73, pos1=3657)
 # LXX Psalms 95:7+65 95:8-34 = SBLGNT Hebrews 3:15+12 3:15 (length=75, pos1=4038)
 # LXX Psalms 95:7+65 95:9-29 = SBLGNT Hebrews 3:7+28 3:9-26 (length=133, pos1=3502)
-## The union of the last three ones and four former ones should be one citation.
-## Also, the union of three other ones is another citation.
+## Verses 7-11 are cited as one block in Hebrews 3:7-11, and partly in Hebrews 3:15, 3:18,
+## 4:3, 4:5 and 4:7. So the last and four former ones should be one citation, and some
+## others should be identified as repetitions.
 
 
 getrefs SBLGNT LXX Psalms 102:25 # MT 102:26
