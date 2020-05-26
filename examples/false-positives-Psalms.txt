@@ -1,6 +1,6 @@
 ## This is a list of results that are long matches but clearly not quotations.
 ## Accordingly to current research the longest match is in Psalm 33:6 (but this is checked only
-## until Psalm 100 right now) and the used expression is 27 characters long.
+## until Psalm 103 right now) and the used expression is 27 characters long.
 ## In the table below the lengths of the longest (quasi-)matches are shown.
 ## The meaning of column "Verified?" is that tradition assumes or contextual evidence is given
 ## whether the passage is indeed a quotation.
@@ -111,7 +111,10 @@
 ##    97 | 18                            | No
 ##    98 | 15                            | No
 ##    99 | 26                            | No/Maybe
-###  100 | 17                            | No
+##   100 | 17                            | No
+##   101 | 13                            | No
+##   102 | 133+52                        | Yes
+##   103 | 20                            | No
 
 addbooks
 

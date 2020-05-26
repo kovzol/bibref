@@ -404,9 +404,11 @@ getrefs SBLGNT LXX Psalms 95:7 95:11
 ## others should be identified as repetitions.
 
 
-getrefs SBLGNT LXX Psalms 102:25 # MT 102:26
-# ... (lengths<=9)
+getrefs SBLGNT LXX Psalms 102:1 102:28
+# ... (lengths<=15)
+# LXX Psalms 102:26+92 102:27 = SBLGNT Hebrews 1:12+38 1:12 (length=52, pos1=117207)
 # LXX Psalms 102:25+10 102:26-29 = SBLGNT Hebrews 1:10+13 1:12-72 (length=133, pos1=117060)
+## The union of the two last ones should be one citation.
 
 
 getrefs SBLGNT LXX Psalms 104:4
