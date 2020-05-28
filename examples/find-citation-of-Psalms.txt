@@ -423,6 +423,13 @@ getrefs SBLGNT LXX Psalms 106:20
 # LXX Psalms 106:20+25 106:20-20 = SBLGNT Romans 8:3+67 8:3-58 (length=11, pos1=125029)
 # LXX Psalms 106:20+23 106:20-20 = SBLGNT Philippians 2:7+33 2:7-45 (length=13, pos1=125027)
 ## This may be a possible match with Romans 1:23, maybe just an allusion and not a quotation.
+lookup1 LXX Psalms 106:20 106:20-20
+# Stored internally as kaihllajantothndojanaytvnenomoivmati.
+lookup2 SBLGNT Romans 1:23 1:23-56
+# Stored internally as kaihllajanthndojantoyafuartoyueoyenomoivmati.
+compare12
+# Comparing 'kaihllajantothndojanaytvnenomoivmati' ~ 'kaihllajanthndojantoyafuartoyueoyenomoivmati' = 22
+# difference = 0.287500
 
 
 getrefs SBLGNT LXX Psalms 109:3

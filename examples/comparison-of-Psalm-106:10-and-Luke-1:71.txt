@@ -1,0 +1,19 @@
+## This is maybe just an allusion.
+
+lookup1 LXX Psalms 106:10+23 106:10
+# Stored internally as misoyntvnkaielytrvsatoaytoysekxeirosexuroy.
+lookup2 SBLGNT Luke 1:71+20 1:71-4
+# Stored internally as kaiekxeirospantvntvnmisoyntvn.
+compare12
+# Comparing 'misoyntvnkaielytrvsatoaytoysekxeirosexuroy' ~ 'kaiekxeirospantvntvnmisoyntvn' = 33
+# difference = 0.478873
+lookup2 SBLGNT Luke 1:71+10 1:71-4
+# Stored internally as exurvnhmvnkaiekxeirospantvntvnmisoyntvn.
+compare12
+# Comparing 'misoyntvnkaielytrvsatoaytoysekxeirosexuroy' ~ 'exurvnhmvnkaiekxeirospantvntvnmisoyntvn' = 33
+# difference = 0.419753
+lookup1 LXX Psalms 106:10+23 106:10-2
+# Stored internally as misoyntvnkaielytrvsatoaytoysekxeirosexur.
+compare12
+# Comparing 'misoyntvnkaielytrvsatoaytoysekxeirosexur' ~ 'exurvnhmvnkaiekxeirospantvntvnmisoyntvn' = 31
+# difference = 0.405063
