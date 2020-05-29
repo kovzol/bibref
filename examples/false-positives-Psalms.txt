@@ -1,6 +1,6 @@
 ## This is a list of results that are long matches but clearly not quotations.
 ## Accordingly to current research the longest match is in Psalm 104:12 (but this is checked only
-## until Psalm 106 right now) and the used expression is 31 characters long.
+## until Psalm 107 right now) and the used expression is 31 characters long.
 ## (See also Psalm 33:6 that has a match of 27 characters in a similar manner.)
 ##
 ## In the table below the lengths of the longest (quasi-)matches are shown.
@@ -120,6 +120,7 @@
 ##   104 | 57                            | Yes
 ##   105 | 21                            | No
 ##   106 | 25                            | No
+##   107 | 23                            | No/Maybe
 
 addbooks
 
@@ -297,3 +298,23 @@ lookup KJV Matthew 8:20
 
 ## Note that the getrefs command returns a false positive for Psalm 106 for the longest match (25).
 ## In fact there are two shorter matches that seem to be allusions (or, at least, weak quotations).
+
+getrefs SBLGNT LXX Psalms 107:1 107:43
+# ... (lengths<=20)
+# LXX Psalms 107:10+9 107:10-30 = SBLGNT Luke 1:79+11 1:79-50 (length=23, pos1=127475)
+# LXX Psalms 107:3+25 107:3-16 = SBLGNT Luke 13:29+10 13:29-52 (length=23, pos1=127056)
+lookup SBLGNT Luke 13:29
+# καὶ ἥξουσιν ἀπὸ ἀνατολῶν καὶ δυσμῶν καὶ ⸀ἀπὸ βορρᾶ καὶ νότου καὶ ἀνακλιθήσονται ἐν τῇ βασιλείᾳ τοῦ θεοῦ.
+lookup2 SBLGNT Luke 13:29+10 13:29-52
+# Stored internally as apoanatolvnkaidysmvnkai.
+lookup LXX Psalms 107:3
+# εκ των χωρων συνηγαγεν αυτους απο ανατολων και δυσμων και βορρα και θαλασσης
+lookup KJV Psalms 107:3
+# And gathered them out of the lands, from the east, and from the west, from the north, and from the south.
+lookup KJV Luke 13:29
+# And they shall come from the east, and from the west, and from the north, and from the south, and shall sit down in the kingdom of God.
+## Only the directions east, west and north match here literally because in Psalm 107 "south" is called "the sea".
+## But still, these three directions are mentioned only in these two verses in the Bible,
+## and in the same order. So maybe this is more than an allusion.
+## The other match between Psalm 107:10 and Luke 1:79 does not seem to be unique since the expression
+## "σκια θανατου" (shadow of death) is used at a couple of other places in LXX.
