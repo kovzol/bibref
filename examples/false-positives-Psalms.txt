@@ -1,6 +1,6 @@
 ## This is a list of results that are long matches but clearly not quotations.
 ## Accordingly to current research the longest match is in Psalm 104:12 (but this is checked only
-## until Psalm 107 right now) and the used expression is 31 characters long.
+## until Psalm 110 right now) and the used expression is 31 characters long.
 ## (See also Psalm 33:6 that has a match of 27 characters in a similar manner.)
 ##
 ## In the table below the lengths of the longest (quasi-)matches are shown.
@@ -12,115 +12,118 @@
 ## maybe they are cited in the New Testament, but this may require further research.
 ## They are perhaps just allusions but not quotations---this could be the most probable assumption.
 
-## Psalm | Longest (quasi-)matches       | Verified?
-## ------+-------------------------------+----------
-##     1 | 19                            | No
-##     2 | 22                            | No
-##     3 | 12                            | No
-##     4 | 24                            | Yes
-##     5 | 19                            | No
-##     6 | 20                            | No/Maybe
-##     7 | 14                            | No
-##     8 | 120+33, 43                    | Yes
-##     9 | 18                            | No
-##    10 | 19                            | No
-##    11 | 13                            | No
-##    12 | 21                            | No
-##    13 | 10                            | No
-##    14 | 318                           | Yes
-##    15 | 25                            | No
-##    16 | 202, 80, 31                   | Yes
-##    17 | 12                            | No
-##    18 | 33+19                         | Yes
-##    19 | 74                            | Yes
-##    20 | 17                            | No
-##    21 | 13                            | No
-##    22 | 63, 48, 20                    | Yes
-##    23 | 18                            | No
-##    24 | 20                            | Yes
-##    25 | 14                            | No
-##    26 | 13                            | No
-##    27 | 16                            | No
-##    28 | 21                            | No
-##    29 | 16                            | No
-##    30 | 15                            | No
-##    31 | 18                            | No
-##    32 | 97                            | Yes
-##    33 | 27                            | No
-##    34 | 82+23+16+14+13+11, 18         | Yes
-##    35 | 18                            | No
-##    36 | 13                            | No
-##    37 | 23                            | Maybe
-##    38 | 22                            | No
-##    39 | 15                            | No
-##    40 | 64+29+25+21+20+19+11+11+9+8   | Yes
-##    41 | 15                            | No
-##    42 | 20                            | No
-##    43 | 19                            | No
-##    44 | 53                            | Yes
-##    45 | 124+35                        | Yes
-##    46 | 13                            | No
-##    47 | 20                            | No
-##    48 | 16                            | No
-##    49 | 17                            | No
-##    50 | 15                            | No
-##    51 | 38                            | Yes
-##    52 | 17                            | No
-##    53 | 14                            | No
-##    54 | 17                            | No
-##    55 | 18                            | No
-##    56 | 17                            | No
-##    57 | 19                            | No
-##    58 | 18                            | No
-##    59 | 20                            | No
-##    60 | 15                            | No
-##    61 | 25                            | Maybe
-##    62 | 14                            | No
-##    63 | 21                            | No
-##    64 | 19                            | No
-##    65 | 18                            | No
-##    66 | 19                            | No
-##    67 | 16                            | No
-##    68 | 18                            | Yes
-##    69 | 74+22+20+16+14, 44, 19+15, 20 | Yes
-##    70 | 13                            | No
-##    71 | 15                            | No
-##    72 | 19                            | No
-##    73 | 18                            | No
-##    74 | 13                            | No
-##    75 | 18                            | No
-##    76 | 14                            | No
-##    77 | 18                            | No
-##    78 | 28                            | Yes
-##    79 | 15                            | No
-##    80 | 15                            | No
-##    81 | 11                            | No
-##    82 | 15                            | Yes
-##    83 | 14                            | No
-##    84 | 23                            | Should be
-##    85 | 21                            | No
-##    86 | 34+14                         | Yes
-##    87 | 13                            | No
-##    88 | 13                            | No
-##    89 | 22                            | No
-##    90 | 21                            | Maybe
-##    91 | 53+37/52+52                   | Yes
-##    92 | 14                            | No
-##    93 | 12                            | No
-##    94 | 35                            | Yes
-##    95 | 133+73+20+17+14               | Yes
-##    96 | 14                            | No
-##    97 | 18                            | No
-##    98 | 15                            | No
-##    99 | 26                            | No/Maybe
-##   100 | 17                            | No
-##   101 | 13                            | No
-##   102 | 133+52                        | Yes
-##   103 | 20                            | No
-##   104 | 57                            | Yes
-##   105 | 21                            | No
-##   106 | 25                            | No
-##   107 | 23                            | No/Maybe
+## Psalm | Longest (quasi-)matches                    | Verified?
+## ------+--------------------------------------------+----------
+##     1 | 19                                         | No
+##     2 | 22                                         | No
+##     3 | 12                                         | No
+##     4 | 24                                         | Yes
+##     5 | 19                                         | No
+##     6 | 20                                         | No/Maybe
+##     7 | 14                                         | No
+##     8 | 120+33, 43                                 | Yes
+##     9 | 18                                         | No
+##    10 | 19                                         | No
+##    11 | 13                                         | No
+##    12 | 21                                         | No
+##    13 | 10                                         | No
+##    14 | 318                                        | Yes
+##    15 | 25                                         | No
+##    16 | 202, 80, 31                                | Yes
+##    17 | 12                                         | No
+##    18 | 33+19                                      | Yes
+##    19 | 74                                         | Yes
+##    20 | 17                                         | No
+##    21 | 13                                         | No
+##    22 | 63, 48, 20                                 | Yes
+##    23 | 18                                         | No
+##    24 | 20                                         | Yes
+##    25 | 14                                         | No
+##    26 | 13                                         | No
+##    27 | 16                                         | No
+##    28 | 21                                         | No
+##    29 | 16                                         | No
+##    30 | 15                                         | No
+##    31 | 18                                         | No
+##    32 | 97                                         | Yes
+##    33 | 27                                         | No
+##    34 | 82+23+16+14+13+11, 18                      | Yes
+##    35 | 18                                         | No
+##    36 | 13                                         | No
+##    37 | 23                                         | Maybe
+##    38 | 22                                         | No
+##    39 | 15                                         | No
+##    40 | 64+29+25+21+20+19+11+11+9+8                | Yes
+##    41 | 15                                         | No
+##    42 | 20                                         | No
+##    43 | 19                                         | No
+##    44 | 53                                         | Yes
+##    45 | 124+35                                     | Yes
+##    46 | 13                                         | No
+##    47 | 20                                         | No
+##    48 | 16                                         | No
+##    49 | 17                                         | No
+##    50 | 15                                         | No
+##    51 | 38                                         | Yes
+##    52 | 17                                         | No
+##    53 | 14                                         | No
+##    54 | 17                                         | No
+##    55 | 18                                         | No
+##    56 | 17                                         | No
+##    57 | 19                                         | No
+##    58 | 18                                         | No
+##    59 | 20                                         | No
+##    60 | 15                                         | No
+##    61 | 25                                         | Maybe
+##    62 | 14                                         | No
+##    63 | 21                                         | No
+##    64 | 19                                         | No
+##    65 | 18                                         | No
+##    66 | 19                                         | No
+##    67 | 16                                         | No
+##    68 | 18                                         | Yes
+##    69 | 74+22+20+16+14, 44, 19+15, 20              | Yes
+##    70 | 13                                         | No
+##    71 | 15                                         | No
+##    72 | 19                                         | No
+##    73 | 18                                         | No
+##    74 | 13                                         | No
+##    75 | 18                                         | No
+##    76 | 14                                         | No
+##    77 | 18                                         | No
+##    78 | 28                                         | Yes
+##    79 | 15                                         | No
+##    80 | 15                                         | No
+##    81 | 11                                         | No
+##    82 | 15                                         | Yes
+##    83 | 14                                         | No
+##    84 | 23                                         | Should be
+##    85 | 21                                         | No
+##    86 | 34+14                                      | Yes
+##    87 | 13                                         | No
+##    88 | 13                                         | No
+##    89 | 22                                         | No
+##    90 | 21                                         | Maybe
+##    91 | 53+37/52+52                                | Yes
+##    92 | 14                                         | No
+##    93 | 12                                         | No
+##    94 | 35                                         | Yes
+##    95 | 133+73+20+17+14                            | Yes
+##    96 | 14                                         | No
+##    97 | 18                                         | No
+##    98 | 15                                         | No
+##    99 | 26                                         | No/Maybe
+##   100 | 17                                         | No
+##   101 | 13                                         | No
+##   102 | 133+52                                     | Yes
+##   103 | 20                                         | No
+##   104 | 57                                         | Yes
+##   105 | 21                                         | No
+##   106 | 25                                         | No
+##   107 | 23                                         | No/Maybe
+##   108 | 13                                         | No
+##   109 | 23                                         | Yes
+##   110 | 81/73/57/56/56/19, 39/39/34+22/23/22/22/12 | Yes
 
 addbooks
 
