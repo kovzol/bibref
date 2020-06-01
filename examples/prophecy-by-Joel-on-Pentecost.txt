@@ -1,0 +1,44 @@
+## A comparison of the texts in Joel and Acts about Joel's prophecy on Pentecost.
+
+getrefs SBLGNT LXX Joel 2:28 2:32
+# ... (lengths<=13)
+# LXX Joel 2:29+17 2:29-44 = SBLGNT Acts 2:18+22 2:18-64 (length=15, pos1=5357)
+# LXX Joel 2:32+115 2:32-21 = SBLGNT Acts 14:15+66 14:15-107 (length=16, pos1=5680)
+# LXX Joel 2:28+56 2:28-103 = SBLGNT Acts 2:18+84 2:18 (length=17, pos1=5220)
+# LXX Joel 2:28+56 2:28-103 = SBLGNT Revelation_of_John 11:3+27 11:3-50 (length=17, pos1=5220)
+# LXX Joel 2:32+113 2:32-22 = SBLGNT Luke 20:1+55 20:1-55 (length=17, pos1=5678)
+# LXX Joel 2:32+113 2:32-22 = SBLGNT Luke 8:1+62 8:1-38 (length=17, pos1=5678)
+# LXX Joel 2:28+128 2:28-29 = SBLGNT Acts 2:17+181 2:18-98 (length=19, pos1=5292)
+# LXX Joel 2:32+112 2:32-21 = SBLGNT Acts 15:35+49 15:35-36 (length=19, pos1=5677)
+# LXX Joel 2:32+112 2:32-21 = SBLGNT Acts 5:42+53 5:42-13 (length=19, pos1=5677)
+# LXX Joel 2:30 2:30-37 = SBLGNT Acts 2:19 2:19-50 (length=23, pos1=5416)
+# LXX Joel 2:29+52 2:29 = SBLGNT Acts 2:17+38 2:17-135 (length=24, pos1=5392)
+# LXX Joel 2:28+101 2:28-49 = SBLGNT Acts 2:17+152 2:17-19 (length=26, pos1=5265)
+# LXX Joel 2:28+144 2:29-73 = SBLGNT Acts 2:17+120 2:17-42 (length=35, pos1=5308)
+# LXX Joel 2:32+13 2:32-103 = SBLGNT Acts 2:21+14 2:21 (length=36, pos1=5578)
+# LXX Joel 2:32+11 2:32-103 = SBLGNT Romans 10:13+6 10:13 (length=38, pos1=5576)
+# LXX Joel 2:29+32 2:30-57 = SBLGNT Acts 2:18+40 2:18-14 (length=47, pos1=5372)
+# LXX Joel 2:31+51 2:32-139 = SBLGNT Acts 2:20+52 2:21-37 (length=51, pos1=5527)
+# LXX Joel 2:30+35 2:31-38 = SBLGNT Acts 2:19+48 2:20-39 (length=76, pos1=5451)
+# LXX Joel 2:28+20 2:28-70 = SBLGNT Acts 2:17+39 2:17-72 (length=86, pos1=5184)
+## (The quotation in Romans is also correctly identified.)
+lookup1 LXX Joel 2:28 2:32
+# Stored internally as kaiestaimetataytakaiekxevapotoypneymatosmoyepipasansarkakaiprofhteysoysinoiyioiymvnkaiaiuygateresymvnkaioipresbyteroiymvnenypniaenypniasuhsontaikaioineaniskoiymvnoraseisocontaikaiepitoysdoyloyskaiepitasdoylasentaishmeraisekeinaisekxevapotoypneymatosmoykaidvsvterataentvoyranvkaiepithsghsaimakaipyrkaiatmidakapnoyohliosmetastrafhsetaieisskotoskaihselhnheisaimaprinelueinhmerankyrioythnmegalhnkaiepifanhkaiestaipasosanepikaleshtaitoonomakyrioysvuhsetaiotientvoreisivnkaienieroysalhmestaianasvqomenoskauotieipenkyrioskaieyaggeliqomenoioyskyriosproskeklhtai.
+length1
+# Length of text 1 is 553.
+lookup2 SBLGNT Acts 2:17 2:21
+# Stored internally as kaiestaientaisesxataishmeraislegeioueosekxevapotoypneymatosmoyepipasansarkakaiprofhteysoysinoiyioiymvnkaiaiuygateresymvnkaioineaniskoiymvnoraseisocontaikaioipresbyteroiymvnenypnioisenypniasuhsontaikaigeepitoysdoyloysmoykaiepitasdoylasmoyentaishmeraisekeinaisekxevapotoypneymatosmoykaiprofhteysoysinkaidvsvterataentvoyranvanvkaishmeiaepithsghskatvaimakaipyrkaiatmidakapnoyohliosmetastrafhsetaieisskotoskaihselhnheisaimaprinhelueinhmerankyrioythnmegalhnkaiepifanhkaiestaipasoseanepikaleshtaitoonomakyrioysvuhsetai.
+length2
+# Length of text 2 is 511.
+compare12
+# Comparing 'kaiestaimetataytakaiekxevapotoypneymatosmoyepipasansarkakaiprofhteysoysinoiyioiymvnkaiaiuygateresymvnkaioipresbyteroiymvnenypniaenypniasuhsontaikaioineaniskoiymvnoraseisocontaikaiepitoysdoyloyskaiepitasdoylasentaishmeraisekeinaisekxevapotoypneymatosmoykaidvsvterataentvoyranvkaiepithsghsaimakaipyrkaiatmidakapnoyohliosmetastrafhsetaieisskotoskaihselhnheisaimaprinelueinhmerankyrioythnmegalhnkaiepifanhkaiestaipasosanepikaleshtaitoonomakyrioysvuhsetaiotientvoreisivnkaienieroysalhmestaianasvqomenoskauotieipenkyrioskaieyaggeliqomenoioyskyriosproskeklhtai' ~ 'kaiestaientaisesxataishmeraislegeioueosekxevapotoypneymatosmoyepipasansarkakaiprofhteysoysinoiyioiymvnkaiaiuygateresymvnkaioineaniskoiymvnoraseisocontaikaioipresbyteroiymvnenypnioisenypniasuhsontaikaigeepitoysdoyloysmoykaiepitasdoylasmoyentaishmeraisekeinaisekxevapotoypneymatosmoykaiprofhteysoysinkaidvsvterataentvoyranvanvkaishmeiaepithsghskatvaimakaipyrkaiatmidakapnoyohliosmetastrafhsetaieisskotoskaihselhnheisaimaprinhelueinhmerankyrioythnmegalhnkaiepifanhkaiestaipasoseanepikaleshtaitoonomakyrioysvuhsetai' = 124
+# difference = 0.117481
+lookup1 LXX Joel 2:28 2:32-103
+# Stored internally as kaiestaimetataytakaiekxevapotoypneymatosmoyepipasansarkakaiprofhteysoysinoiyioiymvnkaiaiuygateresymvnkaioipresbyteroiymvnenypniaenypniasuhsontaikaioineaniskoiymvnoraseisocontaikaiepitoysdoyloyskaiepitasdoylasentaishmeraisekeinaisekxevapotoypneymatosmoykaidvsvterataentvoyranvkaiepithsghsaimakaipyrkaiatmidakapnoyohliosmetastrafhsetaieisskotoskaihselhnheisaimaprinelueinhmerankyrioythnmegalhnkaiepifanhkaiestaipasosanepikaleshtaitoonomakyrioysvuhsetai.
+length1
+# Length of text 1 is 450.
+compare12
+# Comparing 'kaiestaimetataytakaiekxevapotoypneymatosmoyepipasansarkakaiprofhteysoysinoiyioiymvnkaiaiuygateresymvnkaioipresbyteroiymvnenypniaenypniasuhsontaikaioineaniskoiymvnoraseisocontaikaiepitoysdoyloyskaiepitasdoylasentaishmeraisekeinaisekxevapotoypneymatosmoykaidvsvterataentvoyranvkaiepithsghsaimakaipyrkaiatmidakapnoyohliosmetastrafhsetaieisskotoskaihselhnheisaimaprinelueinhmerankyrioythnmegalhnkaiepifanhkaiestaipasosanepikaleshtaitoonomakyrioysvuhsetai' ~ 'kaiestaientaisesxataishmeraislegeioueosekxevapotoypneymatosmoyepipasansarkakaiprofhteysoysinoiyioiymvnkaiaiuygateresymvnkaioineaniskoiymvnoraseisocontaikaioipresbyteroiymvnenypnioisenypniasuhsontaikaigeepitoysdoyloysmoykaiepitasdoylasmoyentaishmeraisekeinaisekxevapotoypneymatosmoykaiprofhteysoysinkaidvsvterataentvoyranvanvkaishmeiaepithsghskatvaimakaipyrkaiatmidakapnoyohliosmetastrafhsetaieisskotoskaihselhnheisaimaprinhelueinhmerankyrioythnmegalhnkaiepifanhkaiestaipasoseanepikaleshtaitoonomakyrioysvuhsetai' = 83
+# difference = 0.087409
+
+## This is clearly a quotation (maybe the longest one in the Bible), even if there are several literal changes.
