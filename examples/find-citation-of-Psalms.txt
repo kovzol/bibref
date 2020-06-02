@@ -472,7 +472,6 @@ getrefs SBLGNT LXX Psalms 116:10
 # ... (lengths<=9)
 # LXX Psalms 116:10+9 116:10-22 = SBLGNT II Corinthians 4:13+48 4:13-32 (length=19, pos1=136803)
 
-
 getrefs SBLGNT LXX Psalms 116:11
 # LXX Psalms 116:11+25 116:11 = SBLGNT Romans 3:4+34 3:4-70 (length=15, pos1=136869)
 

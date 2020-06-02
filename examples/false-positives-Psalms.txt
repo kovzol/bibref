@@ -1,7 +1,7 @@
 ## This is a list of results that are long matches but clearly not quotations.
 ## Accordingly to current research the longest match is in Psalm 104:12 (but this is checked only
-## until Psalm 110 right now) and the used expression is 31 characters long.
-## (See also Psalm 33:6 that has a match of 27 characters in a similar manner.)
+## until Psalm 115 right now) and the used expression is 31 characters long.
+## (See also Psalm 115:15 and Psalm 33:6 that have a match of 28 and 27 characters in a similar manner.)
 ##
 ## In the table below the lengths of the longest (quasi-)matches are shown.
 ## The meaning of column "Verified?" is that tradition assumes or contextual evidence is given
@@ -124,6 +124,11 @@
 ##   108 | 13                                         | No
 ##   109 | 23                                         | Yes
 ##   110 | 81/73/57/56/56/19, 39/39/34+22/23/22/22/12 | Yes
+##   111 | 20                                         | No
+##   112 | 59                                         | Yes
+##   113 | 11                                         | No
+##   114 | 17                                         | No
+##   115 | 28                                         | Maybe
 
 addbooks
 
@@ -321,3 +326,19 @@ lookup KJV Luke 13:29
 ## and in the same order. So maybe this is more than an allusion.
 ## The other match between Psalm 107:10 and Luke 1:79 does not seem to be unique since the expression
 ## "σκια θανατου" (shadow of death) is used at a couple of other places in LXX.
+
+getrefs SBLGNT LXX Psalms 115:1 115:18
+# ... (lengths<=18)
+# LXX Psalms 115:15+25 115:15 = SBLGNT Revelation_of_John 14:7+90 14:7-25 (length=28, pos1=136095)
+lookup KJV Psalms 115:15
+# Ye are blessed of the LORD which made heaven and earth.
+lookup KJV Revelation_of_John 14:7
+# Saying with a loud voice, Fear God, and give glory to him; for the hour of his judgment is come: and worship him that made heaven, and earth, and the sea, and the fountains of waters.
+lookup1 LXX Psalms 115:15+25 115:15
+# Stored internally as poihsantitonoyranonkaithnghn.
+lookup LXX Psalms 115:15
+# ευλογημενοι υμεις τω κυριω τω ποιησαντι τον ουρανον και την γην
+lookup SBLGNT Revelation_of_John 14:7
+# λέγων ἐν φωνῇ μεγάλῃ· Φοβήθητε τὸν ⸀θεὸν καὶ δότε αὐτῷ δόξαν, ὅτι ἦλθεν ἡ ὥρα τῆς κρίσεως αὐτοῦ, καὶ προσκυνήσατε ⸂τῷ ποιήσαντι⸃ τὸν οὐρανὸν καὶ τὴν γῆν ⸀καὶ θάλασσαν καὶ πηγὰς ὑδάτων.
+## This is, however, maybe just an allusion. The psalm mentions only heaven and earth (but not the sea
+## and the fountains of waters). On the other hand, this is clearly a literal match.
