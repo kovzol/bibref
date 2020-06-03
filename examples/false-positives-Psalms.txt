@@ -1,6 +1,6 @@
 ## This is a list of results that are long matches but clearly not quotations.
 ## Accordingly to current research the longest match is in Psalm 104:12 (but this is checked only
-## until Psalm 115 right now) and the used expression is 31 characters long.
+## until Psalm 117 right now) and the used expression is 31 characters long.
 ## (See also Psalm 115:15 and Psalm 33:6 that have a match of 28 and 27 characters in a similar manner.)
 ##
 ## In the table below the lengths of the longest (quasi-)matches are shown.
@@ -129,6 +129,8 @@
 ##   113 | 11                                         | No
 ##   114 | 17                                         | No
 ##   115 | 28                                         | Maybe
+##   116 | 19                                         | Yes
+##   117 | 17+9                                       | Yes
 
 addbooks
 
@@ -342,3 +344,40 @@ lookup SBLGNT Revelation_of_John 14:7
 # λέγων ἐν φωνῇ μεγάλῃ· Φοβήθητε τὸν ⸀θεὸν καὶ δότε αὐτῷ δόξαν, ὅτι ἦλθεν ἡ ὥρα τῆς κρίσεως αὐτοῦ, καὶ προσκυνήσατε ⸂τῷ ποιήσαντι⸃ τὸν οὐρανὸν καὶ τὴν γῆν ⸀καὶ θάλασσαν καὶ πηγὰς ὑδάτων.
 ## This is, however, maybe just an allusion. The psalm mentions only heaven and earth (but not the sea
 ## and the fountains of waters). On the other hand, this is clearly a literal match.
+
+getrefs SBLGNT LXX Psalms 116:1 116:19
+# ... (lengths<=14)
+# LXX Psalms 116:11+25 116:11 = SBLGNT Romans 3:4+34 3:4-70 (length=15, pos1=136869)
+# LXX Psalms 116:5+21 116:5-4 = SBLGNT Revelation_of_John 4:11+11 4:11-91 (length=15, pos1=136551)
+# LXX Psalms 116:2+23 116:2-15 = SBLGNT Luke 17:26+40 17:26-18 (length=17, pos1=136383)
+# LXX Psalms 116:10+9 116:10-22 = SBLGNT II_Corinthians 4:13+48 4:13-32 (length=19, pos1=136803)
+## The last match is correct, the next two ones are false positives.
+## The match between 116:11 and Romans 3:4+34 3:4-70 can be disputed. Some bibles
+## (among them, the Orthodox Jewish Bible) assumes this match to be valid. The context is,
+## however, not supportive.
+
+getrefs SBLGNT LXX Psalms 117:1 117:2
+# LXX Psalms 117:2+39 117:2-21 = SBLGNT Colossians 2:8+99 2:8-21 (length=7, pos1=137309)
+# LXX Psalms 117:2+39 117:2-21 = SBLGNT Galatians 4:3+36 4:3-22 (length=7, pos1=137309)
+# LXX Psalms 117:2+39 117:2-21 = SBLGNT Revelation_of_John 11:15+81 11:15-71 (length=7, pos1=137309)
+# LXX Psalms 117:1+36 117:1-18 = SBLGNT Romans 15:11+37 15:11-21 (length=9, pos1=137243)
+# LXX Psalms 117:2+34 117:2-22 = SBLGNT Galatians 2:5+34 2:5-26 (length=11, pos1=137304)
+# LXX Psalms 117:2+34 117:2-22 = SBLGNT Romans 3:7+4 3:7-75 (length=11, pos1=137304)
+# LXX Psalms 117:2+30 117:2-25 = SBLGNT John 14:6+27 14:6-43 (length=12, pos1=137300)
+# LXX Psalms 117:2+30 117:2-25 = SBLGNT John 1:17+29 1:17-22 (length=12, pos1=137300)
+# LXX Psalms 117:1+46 117:1 = SBLGNT Romans 15:11+50 15:11 (length=17, pos1=137253)
+# LXX Psalms 117:2+45 117:2 = SBLGNT I_Peter 1:25+8 1:25-39 (length=22, pos1=137315)
+lookup KJV I_Peter 1:25
+# But the word of the Lord endureth for ever. And this is the word which by the gospel is preached unto you. 
+lookup KJV Psalms 117:2
+# For his merciful kindness is great toward us: and the truth of the LORD endureth for ever. Praise ye the LORD. 
+lookup2 SBLGNT I_Peter 1:25+8 1:25-39
+# Stored internally as kyrioymeneieistonaivna.
+lookup LXX Psalms 117:2
+# οτι εκραταιωθη το ελεος αυτου εφ ημας και η αληθεια του κυριου μενει εις τον αιωνα
+lookup SBLGNT I_Peter 1:25
+# τὸ δὲ ῥῆμα κυρίου μένει εἰς τὸν αἰῶνα. τοῦτο δέ ἐστιν τὸ ῥῆμα τὸ εὐαγγελισθὲν εἰς ὑμᾶς.
+## The matching text is "κυριου μενει εις τον αιωνα" ("of the Lord endureth for ever",
+## literally "of the Lord abides to the age"). This seems to be just an allusion.
+## The second match (Romans 15:11) consists of two parts, so the full length is 17+9=26>22.
+## To detect this as the most relevant match, however, a fuzzy search would be needed.
