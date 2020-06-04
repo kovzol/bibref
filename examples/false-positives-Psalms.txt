@@ -1,6 +1,6 @@
 ## This is a list of results that are long matches but clearly not quotations.
 ## Accordingly to current research the longest match is in Psalm 104:12 (but this is checked only
-## until Psalm 117 right now) and the used expression is 31 characters long.
+## until Psalm 121 right now) and the used expression is 31 characters long.
 ## (See also Psalm 115:15 and Psalm 33:6 that have a match of 28 and 27 characters in a similar manner.)
 ##
 ## In the table below the lengths of the longest (quasi-)matches are shown.
@@ -131,6 +131,10 @@
 ##   115 | 28                                         | Maybe
 ##   116 | 19                                         | Yes
 ##   117 | 17+9                                       | Yes
+##   118 | 114/114/64/57/16, 50, 42/36/36/36/36/21    | Yes
+##   119 | 17                                         | No
+##   120 | 11                                         | No
+##   121 | 9                                          | No
 
 addbooks
 
