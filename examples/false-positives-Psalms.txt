@@ -1,6 +1,6 @@
 ## This is a list of results that are long matches but clearly not quotations.
 ## Accordingly to current research the longest match is in Psalm 104:12 (but this is checked only
-## until Psalm 121 right now) and the used expression is 31 characters long.
+## until Psalm 129 right now) and the used expression is 31 characters long.
 ## (See also Psalm 115:15 and Psalm 33:6 that have a match of 28 and 27 characters in a similar manner.)
 ##
 ## In the table below the lengths of the longest (quasi-)matches are shown.
@@ -135,6 +135,14 @@
 ##   119 | 17                                         | No
 ##   120 | 11                                         | No
 ##   121 | 9                                          | No
+##   122 | 20                                         | No
+##   123 | 15                                         | No
+##   124 | 12                                         | No
+##   125 | 14                                         | No
+##   126 | 13                                         | No
+##   127 | 13                                         | No
+##   128 | 16                                         | No
+##   129 | 11                                         | No
 
 addbooks
 
@@ -175,7 +183,6 @@ getrefs SBLGNT LXX Psalms 10:1 10:18
 getrefs SBLGNT LXX Psalms 18:1 18:50
 # LXX Psalms 18:9+35 18:10-52 = SBLGNT Ephesians 1:22+16 1:22-37 (length=20, pos1=14791)
 ## The expression "υπο τους ποδας αυτου, και" (under the feet of him) is an accidental match.
-
 
 getrefs SBLGNT LXX Psalms 31:1 31:24
 # LXX Psalms 31:5 31:5-49 = SBLGNT Luke 23:46+37 23:46-35 (length=16, pos1=29824)
@@ -385,3 +392,28 @@ lookup SBLGNT I_Peter 1:25
 ## literally "of the Lord abides to the age"). This seems to be just an allusion.
 ## The second match (Romans 15:11) consists of two parts, so the full length is 17+9=26>22.
 ## To detect this as the most relevant match, however, a fuzzy search would be needed.
+
+getrefs SBLGNT LXX Psalms 122:1 122:9
+# ... (lengths<=13)
+# LXX Psalms 122:2+37 122:3-43 = SBLGNT Luke 13:33+82 13:34-167 (length=20, pos1=149933)
+# LXX Psalms 122:2+37 122:3-43 = SBLGNT Luke 13:34 13:34-157 (length=20, pos1=149933)
+# LXX Psalms 122:2+37 122:3-43 = SBLGNT Matthew 23:37 23:37-162 (length=20, pos1=149933)
+## There are a couple of automatically detected quasi-matches because of the word "Jerusalem".
+## It is written twice consecutively at the end of 122:2 and the beginning of 122:3.
+## Accidentally the same happens in the above three longer quasi-matches (actually, in Luke
+## the city is mentioned three times after each other, but this is again, a kind of accident).
+
+getrefs SBLGNT LXX Psalms 129:1 129:8
+# ... (lengths<=10)
+# LXX Psalms 129:8+17 129:8-44 = SBLGNT Luke 19:38+2 19:38-68 (length=11, pos1=153229)
+lookup LXX Psalms 129:8
+# και ουκ ειπαν οι παραγοντες ευλογια κυριου εφ υμας ευλογηκαμεν υμας εν ονοματι κυριου
+lookup SBLGNT Luke 19:38
+# λέγοντες· Εὐλογημένος ὁ ἐρχόμενος ⸀βασιλεὺς ἐν ὀνόματι κυρίου· ⸂ἐν οὐρανῷ εἰρήνη⸃ καὶ δόξα ἐν ὑψίστοις.
+lookup KJV Psalms 129:8
+# Neither do they which go by say, The blessing of the LORD be upon you: we bless you in the name of the LORD. 
+lookup KJV Luke 19:38
+# Saying, Blessed be the King that cometh in the name of the Lord: peace in heaven, and glory in the highest.
+## Luke 19:38 quotes Psalms 118:26, and here is a kind of negative formulation of something similar
+## for those "that hate Zion" (Psalm 129:5, KJV). Clearly there is some correspondence here,
+## but not a quotation.
