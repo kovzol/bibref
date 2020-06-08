@@ -1,6 +1,6 @@
 ## This is a list of results that are long matches but clearly not quotations.
 ## Accordingly to current research the longest match is in Psalm 104:12 (but this is checked only
-## until Psalm 129 right now) and the used expression is 31 characters long.
+## until Psalm 130 right now) and the used expression is 31 characters long.
 ## (See also Psalm 115:15 and Psalm 33:6 that have a match of 28 and 27 characters in a similar manner.)
 ##
 ## In the table below the lengths of the longest (quasi-)matches are shown.
@@ -143,6 +143,7 @@
 ##   127 | 13                                         | No
 ##   128 | 16                                         | No
 ##   129 | 11                                         | No
+##   130 | 13                                         | No
 
 addbooks
 
@@ -417,3 +418,41 @@ lookup KJV Luke 19:38
 ## Luke 19:38 quotes Psalms 118:26, and here is a kind of negative formulation of something similar
 ## for those "that hate Zion" (Psalm 129:5, KJV). Clearly there is some correspondence here,
 ## but not a quotation.
+
+getrefs SBLGNT LXX Psalms 130:1 130:8
+# ... (lengths<=12)
+# LXX Psalms 130:1+33 130:2-68 = SBLGNT Matthew 7:21+14 7:21-80 (length=13, pos1=153317)
+## Maybe this is an accidental match because of the double appearance of the word "κυριε" (Lord),
+## in the New Testament on purpose, and in the Old Testament it is questionable if
+## the text is on purpose or just accidentally doubled.
+lookup1 LXX Psalms 130:1+33 130:2-68
+# Stored internally as kyriekyrieeis.
+latintext1 kyriekyrie
+# Stored.
+find1 LXX
+# Found in Deuteronomy 3:24 3:24-176 (book position 11649-11658)
+# Found in Deuteronomy 9:26+28 9:26-176 (book position 33054-33063)
+# Found in Judges 6:22+51 6:22-44 (book position 20022-20031)
+# Found in Judges 16:28+34 16:28-104 (book position 57781-57790)
+# Found in I_Kings 8:53+138 8:53-211 (book position 35133-35142)
+# Found in I_Chronicles 17:24+8 17:24-66 (book position 47480-47489)
+# Found in Psalms 69:6+36 69:6-58 (book position 75212-75221)
+# Found in Psalms 109:21+5 109:21-59 (book position 131775-131784)
+# Found in Psalms 130:1+33 130:2-71 (book position 153318-153327)
+# Found in Psalms 130:3+20 130:3-14 (book position 153419-153428)
+# Found in Psalms 140:7 140:7-61 (book position 161895-161904)
+# Found in Psalms 141:8+9 141:8-46 (book position 163031-163040)
+# Found in Jeremiah 51:62+8 51:62-127 (book position 140067-140076)
+# Found in Ezekiel 20:49+14 20:49-48 (book position 53429-53438)
+# Found in Amos 7:2+55 7:2-47 (book position 11003-11012)
+# Found in Amos 7:5+7 7:5-46 (book position 11224-11233)
+# 16 occurrences.
+## By checking some of these occurrences we indeed find non-accidental doubling of "κυριε",
+## e.g. in Psalm 109:21. The Hebrew text is here "Yahwe Adonay", so instead of doubling,
+## two different names of God appears.
+## Since the New Testament does not have this piece of information any longer, we can just
+## guess that Jesus points on the same Hebrew wording here. But, anyway, this seems to make sense.
+## On the other hand, the phrase "κυριε κυριε" in Psalm 130, is not what is exclusively quoted
+## by Jesus, if it is a quotation at all. If Jesus quotes some texts in Matthew 7:21,
+## then the texts could be a set of appearances of "Yahwe Adonay" that are present at
+## several other places, not just in Psalm 130.
