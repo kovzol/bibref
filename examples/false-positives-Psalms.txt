@@ -1,7 +1,7 @@
 ## This is a list of results that are long matches but clearly not quotations.
 ## Accordingly to current research the longest match is in Psalm 104:12 (but this is checked only
-## until Psalm 130 right now) and the used expression is 31 characters long.
-## (See also Psalm 115:15 and Psalm 33:6 that have a match of 28 and 27 characters in a similar manner.)
+## until Psalm 134 right now) and the used expression is 31 characters long.
+## (See also Psalm 115:15, Psalm 134:3 and Psalm 33:6 that have a match of 28, 28 and 27 characters in a similar manner.)
 ##
 ## In the table below the lengths of the longest (quasi-)matches are shown.
 ## The meaning of column "Verified?" is that tradition assumes or contextual evidence is given
@@ -128,7 +128,7 @@
 ##   112 | 59                                         | Yes
 ##   113 | 11                                         | No
 ##   114 | 17                                         | No
-##   115 | 28                                         | Maybe
+##   115 | 28                                         | No/Maybe
 ##   116 | 19                                         | Yes
 ##   117 | 17+9                                       | Yes
 ##   118 | 114/114/64/57/16, 50, 42/36/36/36/36/21    | Yes
@@ -144,6 +144,10 @@
 ##   128 | 16                                         | No
 ##   129 | 11                                         | No
 ##   130 | 13                                         | No
+##   131 | 9                                          | No
+##   132 | 17                                         | Yes
+##   133 | 14                                         | No
+##   134 | 28                                         | No/Maybe
 
 addbooks
 
@@ -356,6 +360,7 @@ lookup SBLGNT Revelation_of_John 14:7
 # λέγων ἐν φωνῇ μεγάλῃ· Φοβήθητε τὸν ⸀θεὸν καὶ δότε αὐτῷ δόξαν, ὅτι ἦλθεν ἡ ὥρα τῆς κρίσεως αὐτοῦ, καὶ προσκυνήσατε ⸂τῷ ποιήσαντι⸃ τὸν οὐρανὸν καὶ τὴν γῆν ⸀καὶ θάλασσαν καὶ πηγὰς ὑδάτων.
 ## This is, however, maybe just an allusion. The psalm mentions only heaven and earth (but not the sea
 ## and the fountains of waters). On the other hand, this is clearly a literal match.
+## See also Psalm 134 below.
 
 getrefs SBLGNT LXX Psalms 116:1 116:19
 # ... (lengths<=14)
@@ -456,3 +461,33 @@ find1 LXX
 ## by Jesus, if it is a quotation at all. If Jesus quotes some texts in Matthew 7:21,
 ## then the texts could be a set of appearances of "Yahwe Adonay" that are present at
 ## several other places, not just in Psalm 130.
+
+getrefs SBLGNT LXX Psalms 134:1 134:3
+# ... (lengths<=11)
+# LXX Psalms 134:3+23 134:3 = SBLGNT Acts 4:24+61 4:24-32 (length=27, pos1=155594)
+lookup KJV Psalms 134:3
+# The LORD that made heaven and earth bless thee out of Zion. 
+lookup KJV Acts 4:24
+# And when they heard that, they lifted up their voice to God with one accord, and said, Lord, thou art God, which hast made heaven, and earth, and the sea, and all that in them is:
+lookup1 LXX Psalms 134:3+23 134:3
+# Stored internally as opoihsastonoyranonkaithnghn.
+lookup2 LXX Psalms 115:15+25 115:15
+# Stored internally as poihsantitonoyranonkaithnghn.
+compare12
+# Comparing 'opoihsastonoyranonkaithnghn' ~ 'poihsantitonoyranonkaithnghn' = 7
+# difference = 0.145455
+lookup1 LXX Psalms 134:3+24 134:3
+# Stored internally as poihsastonoyranonkaithnghn.
+compare12
+# Comparing 'poihsastonoyranonkaithnghn' ~ 'poihsantitonoyranonkaithnghn' = 6
+# difference = 0.129630
+## The matching text "ο ποιησας τον ουρανον και την γην" (the one making heaven and the earth)
+## is very similar to the match from Psalm 115:15 "τω ποιησαντι τον ουρανον και την γην" (the one making
+## the heaven and the earth).
+## An important question if these two texts should be considered identical or not. They are
+## literally not identical, but the difference is very little and in the meaning there may be
+## no difference. In Hebrew both texts are "oseh shamayim waaretz", so this argument can be
+## convincing to consider the two identical.
+## If these two are considered identical, then the minunique algorithm should be improved
+## to find fuzzy matches.
+## See also Psalm 115 above.
