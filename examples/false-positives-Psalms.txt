@@ -1,6 +1,6 @@
 ## This is a list of results that are long matches but clearly not quotations.
 ## Accordingly to current research the longest match is in Psalm 104:12 (but this is checked only
-## until Psalm 134 right now) and the used expression is 31 characters long.
+## until Psalm 143 right now) and the used expression is 31 characters long.
 ## (See also Psalm 115:15, Psalm 134:3 and Psalm 33:6 that have a match of 28, 28 and 27 characters in a similar manner.)
 ##
 ## In the table below the lengths of the longest (quasi-)matches are shown.
@@ -148,6 +148,15 @@
 ##   132 | 17                                         | Yes
 ##   133 | 14                                         | No
 ##   134 | 28                                         | No/Maybe
+##   135 | 18                                         | No
+##   136 | 13                                         | No
+##   137 | 13                                         | No
+##   138 | 13                                         | No
+##   139 | 15                                         | No
+##   140 | 12                                         | No
+##   141 | 15                                         | No
+##   142 | 12                                         | No
+##   143 | 23                                         | No
 
 addbooks
 
@@ -491,3 +500,27 @@ compare12
 ## If these two are considered identical, then the minunique algorithm should be improved
 ## to find fuzzy matches.
 ## See also Psalm 115 above.
+
+getrefs SBLGNT LXX Psalms 143:1 143:12
+# ... (lengths<=15)
+# LXX Psalms 143:6+2 143:6-32 = SBLGNT Romans 10:21+35 10:21-28 (length=23, pos1=164256)
+lookup2 SBLGNT Romans 10:21+35 10:21-28
+# Stored internally as epetasatasxeirasmoypros.
+lookup SBLGNT Romans 10:21
+# πρὸς δὲ τὸν Ἰσραὴλ λέγει· Ὅλην τὴν ἡμέραν ἐξεπέτασα τὰς χεῖράς μου πρὸς λαὸν ἀπειθοῦντα καὶ ἀντιλέγοντα.  
+lookup LXX Isaiah 65:2
+# εξεπετασα τας χειρας μου ολην την ημεραν προς λαον απειθουντα και αντιλεγοντα οι ουκ επορευθησαν οδω αληθινη αλλ οπισω των αμαρτιων αυτων
+lookup KJV Romans 10:21
+# But to Israel he saith, All day long I have stretched forth my hands unto a disobedient and gainsaying people. 
+lookup KJV Psalms 143:6
+# I stretch forth my hands unto thee: my soul thirsteth after thee, as a thirsty land. Selah.
+lookup KJV Isaiah 65:2
+# I have spread out my hands all the day unto a rebellious people, which walketh in a way that was not good, after their own thoughts;
+getrefs SBLGNT LXX Isaiah 65:2
+# ... (lengths<=11)
+# LXX Isaiah 65:2 65:2-95 = SBLGNT Romans 10:21+33 10:21-32 (length=21, pos1=127427)
+# LXX Isaiah 65:2+34 65:2-50 = SBLGNT Romans 10:21+54 10:21 (length=32, pos1=127461)
+## Romans 10:21 clearly refers to Isaiah 65:2. The text in Isaiah is much longer than the one in Psalm 143
+## (and also the context fits much better).
+## This example shows that the getrefs command should be improved by using a further step, namely, to
+## search back in the LXX if there is a longer match, and if yes, use the longer match as output.
