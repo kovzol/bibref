@@ -515,3 +515,55 @@ getrefs SBLGNT LXX Psalms 146:1 146:10
 # LXX Psalms 146:5+37 146:5-2 = SBLGNT Luke 1:16+33 1:16-2 (length=19, pos1=167820)
 # LXX Psalms 146:1+29 146:1 = SBLGNT Luke 1:46+20 1:46 (length=20, pos1=167565)
 ## These are, however, seemingly not quotations but allusions. So they seem to be false positive.
+
+lookup LXX Psalms 146:6
+# τον ποιησαντα τον ουρανον και την γην την θαλασσαν και παντα τα εν αυτοις τον φυλασσοντα αληθειαν εις τον αιωνα
+lookup SBLGNT Acts 4:24
+# οἱ δὲ ἀκούσαντες ὁμοθυμαδὸν ἦραν φωνὴν πρὸς τὸν θεὸν καὶ εἶπαν· Δέσποτα, ⸀σὺ ὁ ποιήσας τὸν οὐρανὸν καὶ τὴν γῆν καὶ τὴν θάλασσαν καὶ πάντα τὰ ἐν αὐτοῖς,
+lookup SBLGNT Acts 14:15
+# καὶ λέγοντες· Ἄνδρες, τί ταῦτα ποιεῖτε; καὶ ἡμεῖς ὁμοιοπαθεῖς ἐσμεν ὑμῖν ἄνθρωποι, εὐαγγελιζόμενοι ὑμᾶς ἀπὸ τούτων τῶν ματαίων ἐπιστρέφειν ἐπὶ ⸀θεὸν ζῶντα ὃς ἐποίησεν τὸν οὐρανὸν καὶ τὴν γῆν καὶ τὴν θάλασσαν καὶ πάντα τὰ ἐν αὐτοῖς·
+lookup1 LXX Psalms 146:6+3 146:6-32
+# Stored internally as poihsantatonoyranonkaithnghnthnualassankaipantataenaytois.
+lookup2 SBLGNT Acts 4:24+62 4:24
+# Stored internally as poihsastonoyranonkaithnghnkaithnualassankaipantataenaytois.
+compare12
+# Comparing 'poihsantatonoyranonkaithnghnthnualassankaipantataenaytois' ~ 'poihsastonoyranonkaithnghnkaithnualassankaipantataenaytois' = 11
+# difference = 0.104348
+lookup2 SBLGNT Acts 14:15+131 14:15
+# Stored internally as poihsentonoyranonkaithnghnkaithnualassankaipantataenaytois.
+compare12
+# Comparing 'poihsantatonoyranonkaithnghnthnualassankaipantataenaytois' ~ 'poihsentonoyranonkaithnghnkaithnualassankaipantataenaytois' = 11
+# difference = 0.104348
+## Actually Acts 4:24 and 14:15 are literally same in the matching passage (length=58).
+minunique1 LXX
+# Text ghnthnu is minimal unique.
+# Text hnthnua is minimal unique.
+# Text atonoyranonkait is minimal unique.
+# Text nthnualassankaip is minimal unique.
+# Text noyranonkaithnghnthn is minimal unique.
+## It seems that Psalms 146:6 is quoted in Acts 4:24 and Acts 14:15, but none of its minimal unique texts
+## are present in the SBLGNT. A fuzzy match would be useful here when checking the connection between LXX and SBLGNT.
+latintext1 noyranonkaithnghn
+# Stored.
+find1 SBLGNT
+# Found in Luke 16:17+20 16:17-35 (book position 64120-64136)
+# Found in Acts 4:24+71 4:24-32 (book position 11382-11398)
+# Found in Acts 14:15+140 14:15-32 (book position 46396-46412)
+# Found in Revelation_of_John 14:7+101 14:7-25 (book position 26578-26594)
+# 4 occurrences.
+## A shortened version of the longest minimal unique texts (length=17) already matches, but in 4 occurrences.
+## By checking the contexts, we learn the following:
+##
+## Text           \  Presence of... | heaven | earth | sea | all the things in them | fountains of waters
+## ----------------\----------------|--------+-------+-----+------------------------+--------------------
+## LXX Psalms 115:15                |   X    |   X   |     |                        |
+## LXX Psalms 134:3                 |   X    |   X   |     |                        |
+## LXX Psalms 146:6                 |   X    |   X   |  X  |            X           |
+## SBLGNT Acts 4:24                 |   X    |   X   |  X  |            X           |
+## SBLGNT Acts 14:14                |   X    |   X   |  X  |            X           |
+## SBLGNT Revelations_of_John 14:7  |   X    |   X   |  X  |                        |           X
+##
+## Here Luke 16:17 is missing because its context is different.
+##
+## Conclusion: Psalms 146:6 is indeed quoted in Acts (twice). But to find this match a literal check is
+## not helpful.

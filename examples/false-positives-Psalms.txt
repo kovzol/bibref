@@ -1,7 +1,8 @@
 ## This is a list of results that are long matches but clearly not quotations.
 ## Accordingly to current research the longest match is in Psalm 104:12 (but this is checked only
-## until Psalm 143 right now) and the used expression is 31 characters long.
-## (See also Psalm 115:15, Psalm 134:3 and Psalm 33:6 that have a match of 28, 28 and 27 characters in a similar manner.)
+## until Psalm 146 right now) and the used expression is 31 characters long.
+## (See also Psalm 115:15, Psalm 134:3, Psalm 33:6 and Psalm 145:17 that have
+## a match of 28, 28, 27 and 26 characters in a similar manner.)
 ##
 ## In the table below the lengths of the longest (quasi-)matches are shown.
 ## The meaning of column "Verified?" is that tradition assumes or contextual evidence is given
@@ -157,6 +158,9 @@
 ##   141 | 15                                         | No
 ##   142 | 12                                         | No
 ##   143 | 23                                         | No
+##   144 | 14                                         | No
+##   145 | 26                                         | No
+##   146 | 20                                         | No (but the real quotation is not found)
 
 addbooks
 
@@ -369,7 +373,7 @@ lookup SBLGNT Revelation_of_John 14:7
 # λέγων ἐν φωνῇ μεγάλῃ· Φοβήθητε τὸν ⸀θεὸν καὶ δότε αὐτῷ δόξαν, ὅτι ἦλθεν ἡ ὥρα τῆς κρίσεως αὐτοῦ, καὶ προσκυνήσατε ⸂τῷ ποιήσαντι⸃ τὸν οὐρανὸν καὶ τὴν γῆν ⸀καὶ θάλασσαν καὶ πηγὰς ὑδάτων.
 ## This is, however, maybe just an allusion. The psalm mentions only heaven and earth (but not the sea
 ## and the fountains of waters). On the other hand, this is clearly a literal match.
-## See also Psalm 134 below.
+## See also Psalm 134 (below) and Psalm 146.
 
 getrefs SBLGNT LXX Psalms 116:1 116:19
 # ... (lengths<=14)
@@ -499,7 +503,7 @@ compare12
 ## convincing to consider the two identical.
 ## If these two are considered identical, then the minunique algorithm should be improved
 ## to find fuzzy matches.
-## See also Psalm 115 above.
+## See also Psalm 115 (above) and Psalm 146.
 
 getrefs SBLGNT LXX Psalms 143:1 143:12
 # ... (lengths<=15)
@@ -524,3 +528,9 @@ getrefs SBLGNT LXX Isaiah 65:2
 ## (and also the context fits much better).
 ## This example shows that the getrefs command should be improved by using a further step, namely, to
 ## search back in the LXX if there is a longer match, and if yes, use the longer match as output.
+
+getrefs SBLGNT LXX Psalms 145:1 145:21
+# ... (lengths<=23)
+# LXX Psalms 145:17+11 145:17-28 = SBLGNT James 1:8+20 1:9-38 (length=26, pos1=167157)
+## The expression "εν πασαις ταις οδοις αυτου" (in all the ways of him) is an accidental match.
+## In the psalm it is used to describe God's goodness, in James it is about double-minded man. Completely different.
