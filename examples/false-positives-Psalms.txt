@@ -290,8 +290,7 @@ getrefs SBLGNT LXX Psalms 66:1 66:20
 
 getrefs SBLGNT LXX Psalms 90:1 90:17
 # ... (lengths<=15)
-# LXX Psalms 90:14+63 90:14 = SBLGNT Luke 1:75+35 1:75 (length=20, pos1=106508)
-## (Actually length=21, as of 2020-05-23 there is a bug in bibref that ignores the letter π in Luke.)
+# LXX Psalms 90:14+62 90:14 = SBLGNT Luke 1:75+35 1:75 (length=21, pos1=106507)
 lookup1 LXX Psalms 90:14+62 90:14
 # Stored internally as pasaistaishmeraishmvn.
 lookup LXX Psalms 90:14
