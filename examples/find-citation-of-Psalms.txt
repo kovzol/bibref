@@ -25,19 +25,19 @@
 addbooks
 
 getrefs SBLGNT LXX Psalms 2:1
-# LXX Psalms 2:1 2:2-8 = SBLGNT Acts 4:25+54 4:26 (length=131, pos1=11491)
+# LXX Psalms 2:1 2:2-8 = SBLGNT Acts 4:25+54 4:26 (length=131, pos1=501)
 
 getrefs SBLGNT LXX Psalms 2:7
 # ... (lengths<=11)
-# LXX Psalms 2:7+44 2:7 = SBLGNT Acts 13:33+83 13:33 (length=32, pos1=43437)
-# LXX Psalms 2:7+44 2:7 = SBLGNT Hebrews 1:5+26 1:5-53 (length=32, pos1=433)
-# LXX Psalms 2:7+44 2:7 = SBLGNT Hebrews 5:5+70 5:5 (length=32, pos1=6245)
+# LXX Psalms 2:7+44 2:7 = SBLGNT Acts 13:33+83 13:33 (length=32, pos1=921)
+# LXX Psalms 2:7+44 2:7 = SBLGNT Hebrews 1:5+26 1:5-53 (length=32, pos1=921)
+# LXX Psalms 2:7+44 2:7 = SBLGNT Hebrews 5:5+70 5:5 (length=32, pos1=921)
 
 getrefs SBLGNT LXX Psalms 2:9
 # ... (lengths<=12)
-# LXX Psalms 2:9+15 2:9-32 = SBLGNT Revelation of John 12:5+47 12:5-55 (length=13, pos1=22139)
-# LXX Psalms 2:9+9 2:9-32 = SBLGNT Revelation of John 19:15+81 19:15-68 (length=19, pos1=38040)
-# LXX Psalms 2:9+9 2:9-30 = SBLGNT Revelation of John 2:27+11 2:27-28 (length=21, pos1=4756)
+# LXX Psalms 2:9+15 2:9-32 = SBLGNT Revelation of John 12:5+47 12:5-55 (length=13, pos1=1046)
+# LXX Psalms 2:9+9 2:9-32 = SBLGNT Revelation of John 19:15+81 19:15-68 (length=19, pos1=1040)
+# LXX Psalms 2:9+9 2:9-30 = SBLGNT Revelation of John 2:27+11 2:27-28 (length=21, pos1=1040)
 
 
 getrefs SBLGNT LXX Psalms 3:1 3:8
@@ -50,7 +50,7 @@ getrefs SBLGNT LXX Psalms 3:1 3:8
 
 getrefs SBLGNT LXX Psalms 4:4 # MT 4:5
 # ... (lengths<=20)
-# LXX Psalms 4:4 4:4-63 = SBLGNT Ephesians 4:26 4:26-33 (length=24, pos1=7297)
+# LXX Psalms 4:4 4:4-63 = SBLGNT Ephesians 4:26 4:26-33 (length=24, pos1=2163)
 ## The same result is given for the full Psalm. So getrefs is safe here.
 
 
@@ -63,14 +63,14 @@ getrefs SBLGNT LXX Psalms 6:1 6:10
 
 getrefs SBLGNT LXX Psalms 8:2 # MT 8:3
 # ... (lengths<=9)
-# LXX Psalms 8:2 8:2-47 = SBLGNT Matthew 21:16+76 21:16 (length=43, pos1=59620)
+# LXX Psalms 8:2 8:2-47 = SBLGNT Matthew 21:16+76 21:16 (length=43, pos1=5606)
 
 getrefs SBLGNT LXX Psalms 8:4 # MT 8:5
-# LXX Psalms 8:4 8:5 = SBLGNT Hebrews 2:6+25 2:7 (length=120, pos1=1772)
+# LXX Psalms 8:4 8:5 = SBLGNT Hebrews 2:6+25 2:7 (length=120, pos1=5766)
 
 getrefs SBLGNT LXX Psalms 8:6 # MT 8:7
 # ... (lengths<=12)
-# LXX Psalms 8:6+39 8:6 = SBLGNT Hebrews 2:8 2:8-84 (length=33, pos1=1876)
+# LXX Psalms 8:6+39 8:6 = SBLGNT Hebrews 2:8 2:8-84 (length=33, pos1=5925)
 
 ## The next match is LXX Psalms 8:7+41 8:8-52 = SBLGNT Mark 4:32+96 4:32-9 (length=23, pos1=5999),
 ## "πετεινα του ουρανου" (birds of the air), is a kind of long expression.
@@ -79,72 +79,70 @@ getrefs SBLGNT LXX Psalms 8:6 # MT 8:7
 
 getrefs SBLGNT LXX Psalms 14:3
 # ... (lengths<=8)
-# LXX Psalms 14:2+71 14:4-100 = SBLGNT Romans 3:11+23 3:19-91 (length=318, pos1=5932)
+# LXX Psalms 14:2+71 14:4-100 = SBLGNT Romans 3:11+23 3:19-91 (length=318, pos1=10911)
 
 
 getrefs SBLGNT LXX Psalms 16:8 16:11
 # ... (lengths<=14)
-# LXX Psalms 16:10+41 16:10 = SBLGNT Acts 13:35+22 13:35 (length=31, pos1=43599)
-# LXX Psalms 16:8+4 16:9-70 = SBLGNT Acts 2:25+25 2:26-69 (length=80, pos1=4855)
-# LXX Psalms 16:9+16 16:11-31 = SBLGNT Acts 2:26+15 2:28 (length=202, pos1=5035)
-## The union of the last two should be one citation.
+# LXX Psalms 16:10+41 16:10 = SBLGNT Acts 13:35+22 13:35 (length=31, pos1=12687)
+# LXX Psalms 16:8+4 16:11-31 = SBLGNT Acts 2:25+25 2:28 (length=282, pos1=12496)
 
 
 getrefs SBLGNT LXX Psalms 18:49
 # ... (lengths<=9)
-# LXX Psalms 18:49+39 18:49 = SBLGNT Romans 15:9+79 15:9 (length=19, pos1=30005)
-# LXX Psalms 18:49 18:49-25 = SBLGNT Romans 15:9+46 15:9-19 (length=33, pos1=29993)
+# LXX Psalms 18:49+39 18:49 = SBLGNT Romans 15:9+79 15:9 (length=19, pos1=17448)
+# LXX Psalms 18:49 18:49-25 = SBLGNT Romans 15:9+46 15:9-19 (length=33, pos1=17409)
 ## The union of the last two should be one citation.
 
 
 getrefs SBLGNT LXX Psalms 19:4
 # ... (lengths<=9)
-# LXX Psalms 19:4 19:4-27 = SBLGNT Romans 10:18+28 10:18 (length=74, pos1=21731)
+# LXX Psalms 19:4 19:4-27 = SBLGNT Romans 10:18+28 10:18 (length=74, pos1=17756)
 
 
 getrefs SBLGNT LXX Psalms 22:18 # MT 22:19
 # ... (lengths<=11)
-# LXX Psalms 22:18 22:18-43 = SBLGNT Matthew 27:35+19 27:35-20 (length=20, pos1=85036)
-# LXX Psalms 22:18 22:18 = SBLGNT John 19:24+88 19:24-31 (length=63, pos1=62780)
+# LXX Psalms 22:18 22:18-43 = SBLGNT Matthew 27:35+19 27:35-20 (length=20, pos1=21363)
+# LXX Psalms 22:18 22:18 = SBLGNT John 19:24+88 19:24-31 (length=63, pos1=21363)
 
 getrefs SBLGNT LXX Psalms 22:22 # MT 22:23
-# ... (lengths<=7)
-# LXX Psalms 22:22+10 22:22 = SBLGNT Hebrews 2:12+13 2:12 (length=48, pos1=2374)
+# ... (lengths<=11)
+# LXX Psalms 22:22+10 22:22 = SBLGNT Hebrews 2:12+13 2:12 (length=48, pos1=21616)
 
 
 getrefs SBLGNT LXX Psalms 24:1
 # ... (lengths<=12)
-# LXX Psalms 24:1+37 24:1-39 = SBLGNT I Corinthians 10:26+6 10:26 (length=20, pos1=17593)
+# LXX Psalms 24:1+37 24:1-39 = SBLGNT I Corinthians 10:26+6 10:26 (length=20, pos1=23000)
 
 
 getrefs SBLGNT LXX Psalms 31:5 # MT 31:6
 # ... (lengths<=13)
-# LXX Psalms 31:5+20 31:5-31 = SBLGNT Luke 23:46+57 23:46-17 (length=14, pos1=89866)
-# LXX Psalms 31:5 31:5-49 = SBLGNT Luke 23:46+37 23:46-35 (length=16, pos1=89847)
+# LXX Psalms 31:5+20 31:5-31 = SBLGNT Luke 23:46+57 23:46-17 (length=14, pos1=29844)
+# LXX Psalms 31:5 31:5-49 = SBLGNT Luke 23:46+37 23:46-35 (length=16, pos1=29824)
 ## The union of the last two should be one citation.
 
 
 getrefs SBLGNT LXX Psalms 32:1
 # ... (lengths<=10)
-# LXX Psalms 32:1+15 32:2-29 = SBLGNT Romans 4:7 4:9-101 (length=97, pos1=7476)
+# LXX Psalms 32:1+15 32:2-29 = SBLGNT Romans 4:7 4:9-101 (length=97, pos1=31468)
 
 
 getrefs SBLGNT LXX Psalms 34:8 # MT 34:9
 # ... (lengths<=10)
-LXX Psalms 34:8+15 34:8-28 = SBLGNT I Peter 2:3+10 2:3 (length=18, pos1=2364)
+# LXX Psalms 34:8+15 34:8-28 = SBLGNT I Peter 2:3+10 2:3 (length=18, pos1=34264)
 
 getrefs SBLGNT LXX Psalms 34:12 34:16 # MT 34:13-17
 # ... (lengths<=8)
-# LXX Psalms 34:12+43 34:13-51 = SBLGNT I Peter 3:10+33 3:10-46 (length=10, pos1=5211)
-# LXX Psalms 34:15+29 34:15-11 = SBLGNT Luke 7:1+26 7:1-36 (length=10, pos1=24933)
-# LXX Psalms 34:14+26 34:14-23 = SBLGNT I Peter 3:11+30 3:11-25 (length=11, pos1=5296)
-# LXX Psalms 34:16+19 34:16-39 = SBLGNT Romans 16:17+87 16:17-17 (length=11, pos1=33332)
-# LXX Psalms 34:12+17 34:12-19 = SBLGNT I Peter 3:10+4 3:10-72 (length=13, pos1=5183)
-# LXX Psalms 34:14+39 34:14-7 = SBLGNT I Peter 3:11+44 3:11-8 (length=14, pos1=5313)
-# LXX Psalms 34:15+14 34:15-22 = SBLGNT Matthew 5:45+96 5:45-7 (length=14, pos1=11819)
-# LXX Psalms 34:13+19 34:13-20 = SBLGNT I Peter 3:10+56 3:10-17 (length=16, pos1=5235)
-# LXX Psalms 34:13+38 34:14-54 = SBLGNT I Peter 3:10+72 3:11-60 (length=23, pos1=5258)
-# LXX Psalms 34:15 34:16-37 = SBLGNT I Peter 3:12+3 3:12 (length=82, pos1=5381)
+# LXX Psalms 34:12+43 34:13-51 = SBLGNT I Peter 3:10+33 3:10-46 (length=10, pos1=34554)
+# LXX Psalms 34:15+29 34:15-11 = SBLGNT Luke 7:1+26 7:1-36 (length=10, pos1=34704)
+# LXX Psalms 34:14+26 34:14-23 = SBLGNT I Peter 3:11+30 3:11-25 (length=11, pos1=34641)
+# LXX Psalms 34:16+19 34:16-39 = SBLGNT Romans 16:17+87 16:17-17 (length=11, pos1=34744)
+# LXX Psalms 34:12+17 34:12-19 = SBLGNT I Peter 3:10+4 3:10-72 (length=13, pos1=34528)
+# LXX Psalms 34:14+39 34:14-7 = SBLGNT I Peter 3:11+44 3:11-8 (length=14, pos1=34654)
+# LXX Psalms 34:15+14 34:15-22 = SBLGNT Matthew 5:45+96 5:45-7 (length=14, pos1=34689)
+# LXX Psalms 34:13+19 34:13-20 = SBLGNT I Peter 3:10+56 3:10-17 (length=16, pos1=34579)
+# LXX Psalms 34:13+38 34:14-54 = SBLGNT I Peter 3:10+72 3:11-60 (length=23, pos1=34598)
+# LXX Psalms 34:15 34:16-37 = SBLGNT I Peter 3:12+3 3:12 (length=82, pos1=34675)
 ## The union of the last three and three other former ones should be one citation.
 
 
@@ -238,13 +236,13 @@ compare12
 
 getrefs SBLGNT LXX Psalms 68:18 # MT 68:19
 # ... (lengths<=14)
-# LXX Psalms 68:18+5 68:18-86 = SBLGNT Ephesians 4:8+13 4:8-38 (length=18, pos1=5771)
+# LXX Psalms 68:18+5 68:18-86 = SBLGNT Ephesians 4:8+13 4:8-38 (length=18, pos1=73401)
 
 
 getrefs SBLGNT LXX Psalms 69:9 # MT 69:10
 # ... (lengths<=6)
-# LXX Psalms 69:9+3 69:9-53 = SBLGNT John 2:17+43 2:17-10 (length=20, pos1=5116)
-# LXX Psalms 69:9+32 69:9 = SBLGNT Romans 15:3+44 15:3 (length=44, pos1=29490)
+# LXX Psalms 69:9+3 69:9-53 = SBLGNT John 2:17+43 2:17-10 (length=20, pos1=75406)
+# LXX Psalms 69:9+32 69:9 = SBLGNT Romans 15:3+44 15:3 (length=44, pos1=75435)
 ## Two citations in one verse.
 
 getrefs SBLGNT LXX Psalms 69:22 69:23 # MT 69:23-24
@@ -262,19 +260,19 @@ getrefs SBLGNT LXX Psalms 69:22 69:23 # MT 69:23-24
 
 getrefs SBLGNT LXX Psalms 69:25 # MT 69:26
 # ... (lengths<=9)
-# LXX Psalms 69:25+54 69:25 = SBLGNT Acts 1:20+55 1:20-38 (length=15, pos1=2062)
-# LXX Psalms 69:25 69:25-50 = SBLGNT Acts 1:20+25 1:20-64 (length=19, pos1=2034)
+# LXX Psalms 69:25+54 69:25 = SBLGNT Acts 1:20+55 1:20-38 (length=15, pos1=76647)
+# LXX Psalms 69:25 69:25-50 = SBLGNT Acts 1:20+25 1:20-64 (length=19, pos1=76593)
 ## The union of the last two ones should be one citation.
 
 
 getrefs SBLGNT LXX Psalms 78:2
 # ... (lengths<=15)
-# LXX Psalms 78:2 78:2-26 = SBLGNT Matthew 13:35+40 13:35-31 (length=28, pos1=37113)
+# LXX Psalms 78:2 78:2-26 = SBLGNT Matthew 13:35+40 13:35-31 (length=28, pos1=87283)
 
 
 getrefs SBLGNT LXX Psalms 82:6
 # ... (lengths<=11)
-# LXX Psalms 82:6 82:6-20 = SBLGNT John 10:34+55 10:34 (length=15, pos1=35755)
+# LXX Psalms 82:6 82:6-20 = SBLGNT John 10:34+55 10:34 (length=15, pos1=96136)
 
 
 getrefs SBLGNT LXX Psalms 84:1 84:12
@@ -301,10 +299,24 @@ getrefs SBLGNT LXX Psalms 84:1 84:12
 ## "ἀμήν" (amen), and also one of the Revelation occurrences (7:12) is extended by that word.
 
 
-getrefs SBLGNT LXX Psalms 86:9
-# LXX Psalms 86:9+56 86:9-15 = SBLGNT Revelation of John 15:4+13 15:4-103 (length=13, pos1=28700)
-# LXX Psalms 86:9+22 86:9-28 = SBLGNT Revelation of John 15:4+65 15:4-30 (length=34, pos1=28750)
-## The union of the last two ones should be one citation. (The part inside of them is not cited.)
+getrefs SBLGNT LXX Psalms 86:1 86:17
+# ... (lengths<=12)
+# LXX Psalms 86:11+34 86:11-45 = SBLGNT John 8:44+101 8:44-94 (length=13, pos1=99852)
+# LXX Psalms 86:8+29 86:8-11 = SBLGNT Revelation_of_John 17:11+14 17:11-54 (length=13, pos1=99662)
+# LXX Psalms 86:8+29 86:8-11 = SBLGNT Revelation_of_John 17:8+16 17:8-190 (length=13, pos1=99662)
+# LXX Psalms 86:8+29 86:8-11 = SBLGNT Revelation_of_John 17:8+197 17:8-9 (length=13, pos1=99662)
+# LXX Psalms 86:9+56 86:9-15 = SBLGNT Revelation_of_John 15:4+13 15:4-103 (length=13, pos1=99742)
+# LXX Psalms 86:17+91 86:17-3 = SBLGNT Luke 8:32+41 8:32-61 (length=14, pos1=100375)
+# LXX Psalms 86:9+74 86:10-44 = SBLGNT Revelation_of_John 15:4+28 15:4-87 (length=14, pos1=99760)
+# LXX Psalms 86:9+22 86:9-31 = SBLGNT Revelation_of_John 3:9+106 3:9-35 (length=31, pos1=99708)
+# LXX Psalms 86:9+22 86:9-28 = SBLGNT Revelation_of_John 15:4+65 15:4-30 (length=34, pos1=99708)
+## The text in Revelation_of_John 15:4 contains three shorter matches from Psalm 86:9,
+## in the order "2"-"3"-"1" (86:9+56 86:9-15, 86:9+74 86:10-44, 86:9+22 86:9-28). In fact,
+## there is a shorter text between "2" and "3" that is not quoted.
+## In the middle it is difficult to decide if it is just an allusion: "ηξουσιν και προσκυνησουσιν ενωπιον"
+## (they will come and will worship before) or a quotation, because John speaks about the synagogue
+## of Satan, so the context is different from Psalm 86 (where all nations are mentioned and
+## the context is fully positive).
 
 
 ## The connection between Psalm 90:4 and II_Peter 3:8 should be found!
@@ -336,19 +348,19 @@ compare12
 
 getrefs SBLGNT LXX Psalms 91:11 91:12
 # ... (lengths<=19)
-# LXX Psalms 91:11 91:11-35 = SBLGNT Matthew 4:6+54 4:6-55 (length=37, pos1=6526)
-# LXX Psalms 91:11 91:11-20 = SBLGNT Luke 4:10+12 4:10 (length=52, pos1=13676)
-# LXX Psalms 91:12 91:12 = SBLGNT Luke 4:11+6 4:11 (length=52, pos1=13710)
-# LXX Psalms 91:12 91:13-59 = SBLGNT Matthew 4:6+94 4:7-57 (length=53, pos1=6563)
+# LXX Psalms 91:11 91:11-35 = SBLGNT Matthew 4:6+54 4:6-55 (length=37, pos1=107355)
+# LXX Psalms 91:11 91:11-20 = SBLGNT Luke 4:10+12 4:10 (length=52, pos1=107355)
+# LXX Psalms 91:12 91:12 = SBLGNT Luke 4:11+6 4:11 (length=52, pos1=107427)
+# LXX Psalms 91:12 91:13-59 = SBLGNT Matthew 4:6+94 4:7-57 (length=53, pos1=107427)
 ## The unions of both two citations should be one, respectively.
 ## (The part inside, namely, the last 20 characters of the Psalm 91:11 is not cited in either of the gospels.)
 
 
 getrefs SBLGNT LXX Psalms 94:11
 # ... (lengths<=11)
-LXX Psalms 94:11+39 94:11 = SBLGNT I Corinthians 3:20+44 3:20 (length=17, pos1=5070)
-LXX Psalms 94:11+12 94:11-26 = SBLGNT Luke 6:8+9 6:8-75 (length=18, pos1=20980)
-LXX Psalms 94:10+45 94:11-23 = SBLGNT I Corinthians 3:20+6 3:20-20 (length=35, pos1=5038)
+LXX Psalms 94:11+39 94:11 = SBLGNT I Corinthians 3:20+44 3:20 (length=17, pos1=109683)
+LXX Psalms 94:11+12 94:11-26 = SBLGNT Luke 6:8+9 6:8-75 (length=18, pos1=109656)
+LXX Psalms 94:10+45 94:11-23 = SBLGNT I Corinthians 3:20+6 3:20-20 (length=35, pos1=109642)
 ## The union of the last one and a former one should be one citation.
 
 lookup1 LXX Psalms 94:14
@@ -389,16 +401,16 @@ compare12
 
 getrefs SBLGNT LXX Psalms 95:7 95:11
 # ... (lengths<=12)
-# LXX Psalms 95:9+43 95:10-90 = SBLGNT Hebrews 3:9+40 3:10-92 (length=14, pos1=3544)
-# LXX Psalms 95:10+15 95:10-62 = SBLGNT Hebrews 3:10+18 3:10-61 (length=17, pos1=3573)
-# LXX Psalms 95:11+31 95:11-3 = SBLGNT Hebrews 3:18+26 3:18-24 (length=18, pos1=4219)
-# LXX Psalms 95:10+45 95:10-29 = SBLGNT Hebrews 3:10+48 3:10-28 (length=20, pos1=3601)
-# LXX Psalms 95:11+18 95:11 = SBLGNT Hebrews 4:5+15 4:5 (length=34, pos1=4782)
-# LXX Psalms 95:11 95:11 = SBLGNT Hebrews 4:3+53 4:3-42 (length=52, pos1=4588)
-# LXX Psalms 95:7+65 95:8-52 = SBLGNT Hebrews 4:7+73 4:7 (length=57, pos1=5005)
-# LXX Psalms 95:10+73 95:11 = SBLGNT Hebrews 3:10+75 3:11 (length=73, pos1=3657)
-# LXX Psalms 95:7+65 95:8-34 = SBLGNT Hebrews 3:15+12 3:15 (length=75, pos1=4038)
-# LXX Psalms 95:7+65 95:9-29 = SBLGNT Hebrews 3:7+28 3:9-26 (length=133, pos1=3502)
+# LXX Psalms 95:9+43 95:10-90 = SBLGNT Hebrews 3:9+40 3:10-92 (length=14, pos1=111096)
+# LXX Psalms 95:10+15 95:10-62 = SBLGNT Hebrews 3:10+18 3:10-61 (length=17, pos1=111121)
+# LXX Psalms 95:11+31 95:11-3 = SBLGNT Hebrews 3:18+26 3:18-24 (length=18, pos1=111231)
+# LXX Psalms 95:10+45 95:10-29 = SBLGNT Hebrews 3:10+48 3:10-28 (length=20, pos1=111151)
+# LXX Psalms 95:11+18 95:11 = SBLGNT Hebrews 4:5+15 4:5 (length=34, pos1=111218)
+# LXX Psalms 95:11 95:11 = SBLGNT Hebrews 4:3+53 4:3-42 (length=52, pos1=111200)
+# LXX Psalms 95:7+65 95:8-52 = SBLGNT Hebrews 4:7+73 4:7 (length=57, pos1=110944)
+# LXX Psalms 95:10+73 95:11 = SBLGNT Hebrews 3:10+75 3:11 (length=73, pos1=111179)
+# LXX Psalms 95:7+65 95:8-34 = SBLGNT Hebrews 3:15+12 3:15 (length=75, pos1=110944)
+# LXX Psalms 95:7+65 95:9-29 = SBLGNT Hebrews 3:7+28 3:9-26 (length=133, pos1=110944)
 ## Verses 7-11 are cited as one block in Hebrews 3:7-11, and partly in Hebrews 3:15, 3:18,
 ## 4:3, 4:5 and 4:7. So the last and four former ones should be one citation, and some
 ## others should be identified as repetitions.
