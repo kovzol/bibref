@@ -1,6 +1,5 @@
 ## This is a list of results that are long matches but clearly not quotations.
-## Accordingly to current research the longest match is in Psalm 104:12 (but this is checked only
-## until Psalm 146 right now) and the used expression is 31 characters long.
+## The longest one is in Psalm 104:12 and the used expression is 31 characters long.
 ## (See also Psalm 115:15, Psalm 134:3, Psalm 33:6 and Psalm 145:17 that have
 ## a match of 28, 28, 27 and 26 characters in a similar manner.)
 ##
@@ -161,6 +160,11 @@
 ##   144 | 14                                         | No
 ##   145 | 26                                         | No
 ##   146 | 20                                         | No (but the real quotation is not found)
+##   147 | 14                                         | No
+##   148 | 17                                         | No
+##   149 | 13                                         | No
+##   150 | 11                                         | No
+## (151) | 15                                         | No
 
 addbooks
 
@@ -534,3 +538,12 @@ getrefs SBLGNT LXX Psalms 145:1 145:21
 # LXX Psalms 145:17+11 145:17-28 = SBLGNT James 1:8+20 1:9-38 (length=26, pos1=167157)
 ## The expression "εν πασαις ταις οδοις αυτου" (in all the ways of him) is an accidental match.
 ## In the psalm it is used to describe God's goodness, in James it is about double-minded man. Completely different.
+
+getrefs SBLGNT LXX Psalms 150:1 150:6-575
+# We ignore the end of the psalm that contains Psalms 151 (apocryphal).
+# ... (lengths<=10)
+# LXX Psalms 150:1+15 150:1-51 = SBLGNT I_Peter 4:16+37 4:16-13 (length=11, pos1=170957)
+
+getrefs SBLGNT LXX Psalms 150:6+25 150:6 # Psalm 151 (apocryphal)
+# ... (lengths<=13)
+# LXX Psalms 150:6+340 150:6-245 = SBLGNT John 10:26+26 10:26-6 (length=15, pos1=171614)
