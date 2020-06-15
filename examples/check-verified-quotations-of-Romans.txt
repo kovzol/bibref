@@ -247,5 +247,14 @@ getrefs SBLGNT LXX Psalms 69:22 69:23
 # LXX Psalms 69:22 69:22-52 = SBLGNT Romans 11:9+13 11:9-56 (length=22, pos1=76385)
 # LXX Psalms 69:23 69:23 = SBLGNT Romans 11:10 11:10 (length=74, pos1=76459)
 ## This requires more study.
+lookup SBLGNT Romans 11:9
+# καὶ Δαυὶδ λέγει· Γενηθήτω ἡ τράπεζα αὐτῶν εἰς παγίδα καὶ εἰς θήραν καὶ εἰς σκάνδαλον καὶ εἰς ἀνταπόδομα αὐτοῖς,
+lookup SBLGNT Romans 11:10
+# σκοτισθήτωσαν οἱ ὀφθαλμοὶ αὐτῶν τοῦ μὴ βλέπειν, καὶ τὸν νῶτον αὐτῶν διὰ παντὸς σύγκαμψον.
+## The text "παγίδα καὶ εἰς θήραν" (a snare and a trap) cannot be literally found in LXX, some similar
+## matches are in Psalm 91:3 ("παγιδος θηρευτων"), Psalm 124:7 ("παγιδος των θηρευοντων") and
+## Ecclesiastes 9:12 ("θηρευομενα εν παγιδι").
+
+
 
 ## To be continued...
