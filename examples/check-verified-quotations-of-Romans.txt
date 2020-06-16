@@ -255,6 +255,40 @@ lookup SBLGNT Romans 11:10
 ## matches are in Psalm 91:3 ("παγιδος θηρευτων"), Psalm 124:7 ("παγιδος των θηρευοντων") and
 ## Ecclesiastes 9:12 ("θηρευομενα εν παγιδι").
 
-
+getrefs SBLGNT LXX Isaiah 59:20 59:21
+# ... (lengths<=12)
+# LXX Isaiah 59:20+13 59:20-29 = SBLGNT Romans 11:26+46 11:26-26 (length=13, pos1=119273)
+# LXX Isaiah 59:21+63 59:21-113 = SBLGNT John 15:7+14 15:7-49 (length=13, pos1=119378)
+# LXX Isaiah 59:21+67 59:21-107 = SBLGNT John 17:8+2 17:8-93 (length=15, pos1=119382)
+# LXX Isaiah 59:21+124 59:21-49 = SBLGNT Matthew 15:11+62 15:11-19 (length=16, pos1=119439)
+# LXX Isaiah 59:21+124 59:21-49 = SBLGNT Revelation_of_John 16:13+8 16:13-96 (length=16, pos1=119439)
+# LXX Isaiah 59:21+121 59:21-49 = SBLGNT Revelation_of_John 16:13+33 16:13-68 (length=19, pos1=119436)
+# LXX Isaiah 59:21+119 59:21-49 = SBLGNT Revelation_of_John 16:13+56 16:13-43 (length=21, pos1=119434)
+# LXX Isaiah 59:20+29 59:21-161 = SBLGNT Romans 11:26+59 11:27-28 (length=54, pos1=119289)
+## The union of the last and first match should be one
+getrefs SBLGNT LXX Isaiah 27:9
+# ... (lengths<=10)
+# LXX Isaiah 27:9+59 27:9-147 = SBLGNT Romans 11:27+28 11:27-16 (length=12, pos1=50476)
+# LXX Isaiah 27:9+76 27:9-130 = SBLGNT Romans 7:14+65 7:15-62 (length=12, pos1=50493)
+# LXX Isaiah 27:9+76 27:9-130 = SBLGNT Romans 7:7+38 7:7-74 (length=12, pos1=50493)
+lookup1 LXX Isaiah 27:9+59 27:9-147
+# Stored internally as otanafelvmai.
+lookup2 SBLGNT Romans 11:27+28 11:27-16
+# Stored internally as otanafelvmai.
+lookup2 SBLGNT Romans 11:27+28 11:27
+# Stored internally as otanafelvmaitasamartiasaytvn.
+lookup1 LXX Isaiah 27:9+59 27:9-132
+# Stored internally as otanafelvmaiaytoythnamartia.
+compare12
+# Comparing 'otanafelvmaiaytoythnamartia' ~ 'otanafelvmaitasamartiasaytvn' = 15
+# difference = 0.290909
+lookup2 SBLGNT Romans 11:27+28 11:27-2
+# Stored internally as otanafelvmaitasamartiasayt.
+compare12
+# Comparing 'otanafelvmaiaytoythnamartia' ~ 'otanafelvmaitasamartiasayt' = 13
+# difference = 0.264151
+## Seemingly Romans 7:7 and Romans 7:14 are just accidental matches, but
+## Romans 11:27 is indeed a real match. However, the wording order is different
+## and the match cannot be easily found without fuzzy comparison.
 
 ## To be continued...
