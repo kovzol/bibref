@@ -291,4 +291,59 @@ compare12
 ## Romans 11:27 is indeed a real match. However, the wording order is different
 ## and the match cannot be easily found without fuzzy comparison.
 
+getrefs SBLGNT LXX Job 3:23
+# ... (lengths<=12)
+# LXX Job 3:23+20 3:23-8 = SBLGNT Romans 11:32 11:32-41 (length=19, pos1=6091)
+
+getrefs SBLGNT LXX Isaiah 40:13
+# ... (lengths<=10)
+# LXX Isaiah 40:13+3 40:13-41 = SBLGNT I_Corinthians 2:16+6 2:16-41 (length=14, pos1=79030)
+# LXX Isaiah 40:13+3 40:13-41 = SBLGNT Romans 11:34+6 11:34-25 (length=14, pos1=79030)
+
+getrefs SBLGNT LXX Deuteronomy 32:35
+# LXX Deuteronomy 32:35+40 32:35-55 = SBLGNT Acts 16:28+17 16:28-53 (length=5, pos1=102610)
+# This is a false positive (but short).
+lookup LXX Deuteronomy 32:35
+# εν ημερα εκδικησεως ανταποδωσω εν καιρω οταν σφαλη ο πους αυτων οτι εγγυς ημερα απωλειας αυτων και παρεστιν ετοιμα υμιν
+lookup SBLGNT Romans 12:19
+# μὴ ἑαυτοὺς ἐκδικοῦντες, ἀγαπητοί, ἀλλὰ δότε τόπον τῇ ὀργῇ, γέγραπται γάρ· Ἐμοὶ ἐκδίκησις, ἐγὼ ἀνταποδώσω, λέγει κύριος.
+lookup1 LXX Deuteronomy 32:35+7 32:35-73
+# Stored internally as ekdikhsevsantapodvsv.
+lookup2 SBLGNT Romans 12:19+63 12:19-11
+# Stored internally as ekdikhsisegvantapodvsv.
+compare12
+# Comparing 'ekdikhsevsantapodvsv' ~ 'ekdikhsisegvantapodvsv' = 8
+# difference = 0.214286
+lookup KJV Deuteronomy 32:35
+# To me belongeth vengeance, and recompence; their foot shall slide in due time: for the day of their calamity is at hand, and the things that shall come upon them make haste.
+lookup KJV Romans 12:19
+# Dearly beloved, avenge not yourselves, but rather give place unto wrath: for it is written, Vengeance is mine; I will repay, saith the Lord.
+## Fuzzy comparison gives an acceptable result.
+
+getrefs SBLGNT LXX Proverbs 25:21 25:22
+# ... (lengths<=7)
+# LXX Proverbs 25:21+38 25:21 = SBLGNT Romans 12:20+25 12:20-71 (length=8, pos1=47278)
+# LXX Proverbs 25:21+20 25:21-17 = SBLGNT Matthew 12:26+31 12:26-37 (length=9, pos1=47260)
+# LXX Proverbs 25:22 25:22-72 = SBLGNT Acts 27:34+31 27:34-69 (length=9, pos1=47286)
+# LXX Proverbs 25:22 25:22-68 = SBLGNT I_Timothy 4:16+39 4:16-35 (length=13, pos1=47286)
+# LXX Proverbs 25:21 25:21-28 = SBLGNT Romans 12:20+4 12:20-82 (length=18, pos1=47240)
+# LXX Proverbs 25:21+22 25:22-28 = SBLGNT Romans 12:20+27 12:20 (length=77, pos1=47262)
+## The last two parts can be considered as one fuzzy match. The first occurrence is just accidental:
+## the matching parts in "ποτιζε αυτον" (LXX) and "ψώμιζε αὐτόν" (SBLGNT) are no real matches.
+
+getrefs SBLGNT LXX Exodus 20:13 20:17
+## This gives no result. A fuzzy search should be used to get the relationship with Romans 13:9.
+
+getrefs SBLGNT LXX Leviticus 19:18
+# ... (length=9)
+# LXX Leviticus 19:18+57 19:18-22 = SBLGNT Matthew 5:43+17 5:43-23 (length=22, pos1=60911)
+# LXX Leviticus 19:18+66 19:18-12 = SBLGNT Luke 10:27+120 10:28-41 (length=23, pos1=60920)
+# LXX Leviticus 19:18+57 19:18-13 = SBLGNT James 2:8+42 2:8-12 (length=31, pos1=60911)
+# LXX Leviticus 19:18+57 19:18-13 = SBLGNT Mark 12:31+11 12:31-30 (length=31, pos1=60911)
+# LXX Leviticus 19:18+57 19:18-13 = SBLGNT Romans 13:9+102 13:9 (length=31, pos1=60911)
+# LXX Leviticus 19:18+57 19:18-12 = SBLGNT Galatians 5:14+35 5:15-58 (length=32, pos1=60911)
+# LXX Leviticus 19:18+57 19:18-12 = SBLGNT Matthew 22:39+18 22:40-56 (length=32, pos1=60911)
+# LXX Leviticus 19:18+54 19:18-13 = SBLGNT Matthew 19:19+25 19:19 (length=34, pos1=60908)
+## All seem to be correct matches here. They include Romans 13:9, as expected.
+
 ## To be continued...
