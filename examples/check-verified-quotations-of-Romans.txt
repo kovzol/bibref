@@ -346,4 +346,39 @@ getrefs SBLGNT LXX Leviticus 19:18
 # LXX Leviticus 19:18+54 19:18-13 = SBLGNT Matthew 19:19+25 19:19 (length=34, pos1=60908)
 ## All seem to be correct matches here. They include Romans 13:9, as expected.
 
+## The first part of Romans 14:11.
+lookup SBLGNT Romans 14:11
+# γέγραπται γάρ· Ζῶ ἐγώ, λέγει κύριος, ὅτι ἐμοὶ κάμψει πᾶν γόνυ, καὶ ⸂πᾶσα γλῶσσα ἐξομολογήσεται⸃ τῷ θεῷ.
+lookup2 SBLGNT Romans 14:11+12 14:11-52
+# Stored internally as qvegvlegeikyrios.
+find2 LXX
+# Found in Numbers 14:28+11 14:28-48 (book position 51128-51143)
+# Found in Isaiah 49:18+67 49:18-52 (book position 100764-100779)
+# Found in Jeremiah 22:24 22:24-102 (book position 57838-57853)
+# Found in Jeremiah 46:18 46:18-62 (book position 119451-119466)
+# Found in Ezekiel 5:11+8 5:11-99 (book position 10208-10223)
+# Found in Ezekiel 14:16+35 14:16-70 (book position 30885-30900)
+# Found in Ezekiel 14:18+32 14:18-50 (book position 31102-31117)
+# Found in Ezekiel 14:20+32 14:20-74 (book position 31311-31326)
+# Found in Ezekiel 16:48 16:48-85 (book position 37793-37808)
+# Found in Ezekiel 17:16 17:16-115 (book position 41470-41485)
+# Found in Ezekiel 18:3 18:3-44 (book position 42729-42744)
+# Found in Ezekiel 20:31+138 20:31-54 (book position 51361-51376)
+# Found in Ezekiel 20:33+8 20:33-64 (book position 51529-51544)
+# Found in Ezekiel 34:8 34:8-222 (book position 93549-93564)
+# Found in Ezekiel 35:6+8 35:6-42 (book position 96705-96720)
+# Found in Ezekiel 35:11+8 35:11-59 (book position 97119-97134)
+# Found in Zephaniah 2:9+8 2:9-212 (book position 2926-2941)
+# 17 occurrences.
+## It is remarkable that there is not just a single match, but a lot.
+
+## The second part of Romans 14:11.
+getrefs SBLGNT LXX Isaiah 45:23
+# LXX Isaiah 45:23+97 45:23-30 = SBLGNT Philippians 2:10+19 2:10-38 (length=9, pos1=93634)
+# LXX Isaiah 45:23+119 45:23-5 = SBLGNT Philippians 2:11+1 2:11-54 (length=12, pos1=93656)
+# LXX Isaiah 45:23+119 45:23-5 = SBLGNT Romans 14:11+49 14:11-19 (length=12, pos1=93656)
+# LXX Isaiah 45:23+84 45:23-29 = SBLGNT Romans 14:11+28 14:11-29 (length=23, pos1=93621)
+## The last two matches can be considered as one.
+## The first two matches together is not a quotation but an important comparison of God and Jesus.
+
 ## To be continued...
