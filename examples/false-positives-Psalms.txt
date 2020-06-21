@@ -288,6 +288,17 @@ getrefs SBLGNT LXX Psalms 66:1 66:20
 ## Conclusion: There is no evidence here that Paul wanted to cite Psalm 66:16 when he used the
 ## matching phrase. It is more probable that the expression was widely used 
 
+getrefs SBLGNT LXX Psalms 85:10 # MT 85:11
+# ... (lengths<=13)
+# LXX Psalms 85:10+25 85:10-9 = SBLGNT Romans 14:17+44 14:17-19 (length=21, pos1=99007)
+lookup LXX Psalms 85:10
+# ελεος και αληθεια συνηντησαν δικαιοσυνη και ειρηνη κατεφιλησαν
+lookup SBLGNT Romans 14:17
+# οὐ γάρ ἐστιν ἡ βασιλεία τοῦ θεοῦ βρῶσις καὶ πόσις, ἀλλὰ δικαιοσύνη καὶ εἰρήνη καὶ χαρὰ ἐν πνεύματι ἁγίῳ·
+## The expression "δικαιοσυνη και ειρηνη" (righteousness and peace) is unique in LXX in this form,
+## but with different word ordering it is present in Isaiah 39:8. On the other hand,
+## the last part from Romans "χαρὰ ἐν πνεύματι ἁγίῳ" (joy in the Holy Spirit) is missing from LXX.
+
 getrefs SBLGNT LXX Psalms 90:1 90:17
 # ... (lengths<=15)
 # LXX Psalms 90:14+62 90:14 = SBLGNT Luke 1:75+35 1:75 (length=21, pos1=106507)
