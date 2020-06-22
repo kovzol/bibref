@@ -381,4 +381,29 @@ getrefs SBLGNT LXX Isaiah 45:23
 ## The last two matches can be considered as one.
 ## The first two matches together is not a quotation but an important comparison of God and Jesus.
 
+getrefs SBLGNT LXX Psalms 69:9 # MT 69:10
+# ... (lengths<=6)
+# LXX Psalms 69:9+3 69:9-53 = SBLGNT John 2:17+43 2:17-10 (length=20, pos1=75406)
+# LXX Psalms 69:9+32 69:9 = SBLGNT Romans 15:3+44 15:3 (length=44, pos1=75435)
+## Two citations in one verse, the longer (second) one is quoted in Romans.
+
+getrefs SBLGNT LXX Psalms 18:49
+# ... (lengths<=9)
+# LXX Psalms 18:49+39 18:49 = SBLGNT Romans 15:9+79 15:9 (length=19, pos1=17448)
+# LXX Psalms 18:49 18:49-25 = SBLGNT Romans 15:9+46 15:9-19 (length=33, pos1=17409)
+## The union of the last two should be one citation.
+
+getrefs SBLGNT LXX Deuteronomy 32:43
+# ... (lengths<=12)
+# LXX Deuteronomy 32:43+24 32:43-210 = SBLGNT Hebrews 1:6+53 1:6-11 (length=28, pos1=103421)
+# LXX Deuteronomy 32:43+99 32:43-135 = SBLGNT Hebrews 1:6+64 1:6 (length=28, pos1=103496)
+# LXX Deuteronomy 32:43+60 32:43-169 = SBLGNT Romans 15:10+13 15:11-65 (length=33, pos1=103457)
+## The longer match is "ευφρανθητε εθνη μετα του λαου αυτου" (be glad, O heavens, together with him).
+## The other two matches are parts of a different begin-end reference: In Deuteronomy the text is read as
+## "και προσκυνησατωσαν αυτω παντες υιοι θεου ευφρανθητε εθνη μετα του λαου αυτου και ενισχυσατωσαν αυτω παντες αγγελοι θεου",
+## and this is quoted as "Καὶ προσκυνησάτωσαν αὐτῷ πάντες ἄγγελοι θεοῦ" in Hebrews, so the latter
+## text could be interpreted as "Καὶ προσκυνησάτωσαν αὐτῷ πάντες... ἄγγελοι θεοῦ" or
+## "Καὶ προσκυνησάτωσαν αὐτῷ... πάντες ἄγγελοι θεοῦ".
+## Anyway, the match with Romans 15:10 is correct.
+
 ## To be continued...
