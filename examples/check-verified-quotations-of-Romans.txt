@@ -406,4 +406,15 @@ getrefs SBLGNT LXX Deuteronomy 32:43
 ## "Καὶ προσκυνησάτωσαν αὐτῷ... πάντες ἄγγελοι θεοῦ".
 ## Anyway, the match with Romans 15:10 is correct.
 
-## To be continued...
+getrefs SBLGNT LXX Psalms 117:1
+# LXX Psalms 117:1+36 117:1-18 = SBLGNT Romans 15:11+37 15:11-21 (length=9, pos1=137243)
+# LXX Psalms 117:1+46 117:1 = SBLGNT Romans 15:11+50 15:11 (length=17, pos1=137253)
+## The union of the two should be one citation.
+
+getrefs SBLGNT LXX Isaiah 11:10
+# ... (lengths<=10)
+# LXX Isaiah 11:10+23 11:10-27 = SBLGNT Romans 15:12+24 15:12 (length=59, pos1=24106)
+
+getrefs SBLGNT LXX Isaiah 52:15
+# ... (lengths<=13)
+# LXX Isaiah 52:15+66 52:15 = SBLGNT Romans 15:21+17 15:21 (length=58, pos1=107342)
