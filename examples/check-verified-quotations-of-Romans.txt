@@ -2,31 +2,32 @@
 ## in Romans. A "verified quotation" is that has evidence by tradition of textual evidence.
 ## The following verified quotations can be found automatically with the getrefs algorithm:
 ##
-## Romans | Match length | Found? | Problem
-## -------+--------------+--------+--------
-## 1:17   | 19           | Yes    |
-## 2:6    |              | No     | TBD
-## 2:24   | 39           | Yes    |
-## 3:4    | 38+16        | Yes    |
-## 3:10   |              | No     | TBD
-## 3:11   | 318          | Yes    |
-## 4:3    | 36           | Yes    |
-## 4:9    |              | No     | TBD
-## 4:22   |              | No     | TBD
-## 4:23   |              | No     | TBD
-## 4:7    | 97           | Yes    |
-## 4:17   | 31           | Yes    |
-## 4:18   | 17, 25       | Yes    |
-## 8:36   | 53           | Yes    |
-## 9:7    | 26           | Yes    |
-## 9:9    | 20, 19       | Yes    |
-## 9:12   | 29           | Yes    |
-## 9:13   | 16           | Yes    |
-## 9:15   | 38           | Yes    |
-## 9:17   | 39+18        | Yes    |
-## 9:20   | 24+12        | Yes    |
-## 9:26   | 73           | Yes    |
-## 9:27   | 40           | Yes    |
+## Romans  | Match length | Found? | Problem
+## --------+--------------+--------+-----------------------------------------------------------------------
+## 1:17    | 19           | Yes    |
+## 2:6     |              | No     | TBD
+## 2:24    | 39           | Yes    |
+## 3:4     | 38+16        | Yes    |
+## 3:10    |              | No     | TBD
+## 3:11    | 318          | Yes    |
+## 4:3     | 36           | Yes    |
+## 4:9     |              | No     | TBD
+## 4:22    |              | No     | TBD
+## 4:23    |              | No     | TBD
+## 4:7     | 97           | Yes    |
+## 4:17    | 31           | Yes    |
+## 4:18    | 17, 25       | Yes    |
+## 8:36    | 53           | Yes    |
+## 9:7     | 26           | Yes    |
+## 9:9     | 20, 19       | Yes    |
+## 9:12    | 29           | Yes    |
+## 9:13    | 16           | Yes    |
+## 9:15    | 38           | Yes    |
+## 9:17    | 39+18        | Yes    |
+## 9:20    | 24+12        | Yes    |
+## 9:25-26 | 10           | Yes    | Wording in LXX is different, ABPGRK seems to be better for the match
+## 9:26    | 73           | Yes    |
+## 9:27    | 40           | Yes    |
 ##
 ## This table is to be continued and completed.
 
@@ -130,7 +131,26 @@ getrefs SBLGNT LXX Jeremiah 12:7
 # LXX Jeremiah 12:7+54 12:7-28 = SBLGNT Romans 9:25+52 9:25-10 (length=10, pos1=32507)
 # LXX Jeremiah 12:7+52 12:7-28 = SBLGNT Romans 9:25+60 9:25 (length=12, pos1=32505)
 # LXX Jeremiah 12:7+51 12:7-28 = SBLGNT Revelation of John 20:9+73 20:9-40 (length=13, pos1=32504)
-## This requires more research.
+## The matching text is "την ηγαπημενην" (the one being loved), it is unique in LXX.
+## The contexts in Jeremiah and Romans, however, differ.
+## Jeremiah is not mentioned in Romans (but Hosea). The text is too short. So, this does not seem to be
+## a quotation.
+## Traditionally, Hosea 2:23 (MT 2:25) is considered as one of the quotation sources of Romans 9:25.
+## In LXX, however, the text seems different:
+lookup LXX Hosea 2:23
+# και σπερω αυτην εμαυτω επι της γης και ελεησω την ουκηλεημενην και ερω τω ουλαωμου λαος μου ει συ και αυτος ερει κυριος ο θεος μου ει συ
+## In ABPGRK it reads differently:
+lookup ABPGRK Hosea 2:23
+# και σπερώ αυτήν εμαυτώ επί της γης και αγαπήσω την ουκ ηγαπημένην και ερώ τω ου λαώ μου λαός μου ει συ και αυτός ερεί κύριος ο θεός μου ει συ
+## The expression "ηγαπημενην" (being loved) is shown here.
+## Actually, the getrefs algorithm still finds some short match between Hosea 2:23 and Romans 9:25:
+getrefs SBLGNT LXX Hosea 2:23
+# ... (lengths<=9)
+# LXX Hosea 2:23+46 2:23-53 = SBLGNT Romans 9:25+66 9:26-69 (length=10, pos1=3797)
+lookup1 LXX Hosea 2:23+46 2:23-53
+# Stored internally as hmenhnkaie.
+## Conclusion. This may require more study, the text of ABPGRK would be helpful to have a more detailed comparison.
+## An algorithm based on exact match seems to be problematic when using LXX.
 
 getrefs SBLGNT LXX Isaiah 10:22
 # ... (lengths<=14)
