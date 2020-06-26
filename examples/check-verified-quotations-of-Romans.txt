@@ -28,6 +28,8 @@
 ## 9:25-26 | 10           | Yes    | Wording in LXX is different, ABPGRK seems to be better for the match
 ## 9:26    | 73           | Yes    |
 ## 9:27    | 40           | Yes    |
+## 9:29    | 81           | Yes    |
+## 9:33    | 12           | Yes    | There is one letter of difference, a fuzzy search would be more useful
 ##
 ## This table is to be continued and completed.
 
@@ -170,6 +172,9 @@ getrefs SBLGNT LXX Isaiah 8:14
 # LXX Isaiah 8:14+53 8:14-95 = SBLGNT Romans 9:33+35 9:33-56 (length=10, pos1=16775)
 # LXX Isaiah 8:14+51 8:14-95 = SBLGNT Romans 9:32+49 9:32-2 (length=12, pos1=16773)
 ## Short matches of the word "proskommat..." (stumbling). Here a fuzzy match would be more useful.
+## The text "λιθου προσκομματι" (stone of stumbling) is unique in LXX and therefore
+## the fact of quotation in Romans 9:33 is clear. But there is one letter difference,
+## so a fuzzy match is a requirement here to identify the whole match, not just the second word.
 
 getrefs SBLGNT LXX Isaiah 28:16
 # ... (lengths<=9)
