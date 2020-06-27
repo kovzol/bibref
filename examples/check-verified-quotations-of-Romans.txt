@@ -29,7 +29,8 @@
 ## 9:26    | 73           | Yes    |
 ## 9:27    | 40           | Yes    |
 ## 9:29    | 81           | Yes    |
-## 9:33    | 12           | Yes    | There is one letter of difference, a fuzzy search would be more useful
+## 9:33a   | 12           | Yes    | There is one letter of difference, a fuzzy search would be more useful
+## 9:33b   | 20           | Yes    | Two letters are removed by Paul, a fuzzy search would be more useful
 ##
 ## This table is to be continued and completed.
 
@@ -195,6 +196,23 @@ getrefs SBLGNT LXX Isaiah 28:16
 # LXX Isaiah 28:16+110 28:16-13 = SBLGNT Romans 9:33+65 9:33-16 (length=20, pos1=52801)
 # LXX Isaiah 28:16+110 28:16 = SBLGNT I Peter 2:6+56 2:6 (length=33, pos1=52801)
 ## This requires more study.
+## Here are the texts from LXX and SBLGNT:
+lookup LXX Isaiah 28:16
+# δια τουτο ουτως λεγει κυριος ιδου εγω εμβαλω εις τα θεμελια σιων λιθον πολυτελη εκλεκτον ακρογωνιαιον εντιμον εις τα θεμελια αυτης και ο πιστευων επ αυτω ου μη καταισχυνθη
+lookup SBLGNT Romans 9:33
+# καθὼς γέγραπται· Ἰδοὺ τίθημι ἐν Σιὼν λίθον προσκόμματος καὶ πέτραν σκανδάλου, ⸀καὶ ὁ πιστεύων ἐπʼ αὐτῷ οὐ καταισχυνθήσεται. 
+## We learn that the shorter (10-long) match is accidental (grammatially the words "σιων" and "λιθον" have different roles
+## in the two contexts), and the longer (20-long) one could be extended by 13 characters if Paul did not remove two letters: "μη" (not).
+## (Paul's removal does not really change the context.)
+## The texts are just partly matching literally, namely, in the words "και ο πιστευων επ αυτω ου" (and the one believing on Him, never...),
+## but some other literal matches ("ιδου", "σιων", "λιθον", "καταισχυνθη...") give evidence that here is something more
+## than just an allusion. Moreover, Paul writes "καθὼς γέγραπται" (as it has been written).
+## In fact, the text "λιθου προσκομματι" (stone of stumbling) in Romans surely refers to another part of Isaiah,
+## so Paul's words in the whole verse cannot be quoted from a single part of Isaiah. On the other hand, the wording "πέτραν σκανδάλου"
+## (a rock of offense) cannot be found in LXX, so this can be a kind of additional reference or added explanation
+## inserted by Paul. (Here we assume that the texts are preserved in an error-free version, and this is, of course, not the case.)
+## It seems Romans 9:33 is a short summary of more ideas with the inclusion of more than one short quotation
+## and this leads to difficulties when using automated methods.
 
 getrefs SBLGNT LXX Leviticus 18:5
 # ... (lengths<=9)
