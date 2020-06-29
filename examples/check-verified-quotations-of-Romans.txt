@@ -31,6 +31,14 @@
 ## 9:29    | 81           | Yes    |
 ## 9:33a   | 12           | Yes    | There is one letter of difference, a fuzzy search would be more useful
 ## 9:33b   | 20           | Yes    | Two letters are removed by Paul, a fuzzy search would be more useful
+## 10:5    | 27           | Yes    |
+## 10:8    | 30           | Yes    |
+## 10:11   | 17           | Yes    |
+## 10:13   | 38           | Yes    |
+## 10:15   |              | No     | The quotation is far from being literal.
+## 10:16   | 28           | Yes    |
+## 10:18   | 74           | Yes    |
+## 10:19   | 33+12        | Yes    |
 ##
 ## This table is to be continued and completed.
 
@@ -213,6 +221,7 @@ lookup SBLGNT Romans 9:33
 ## inserted by Paul. (Here we assume that the texts are preserved in an error-free version, and this is, of course, not the case.)
 ## It seems Romans 9:33 is a short summary of more ideas with the inclusion of more than one short quotation
 ## and this leads to difficulties when using automated methods.
+## Finally, Romans 10:11 is a correct match also.
 
 getrefs SBLGNT LXX Leviticus 18:5
 # ... (lengths<=9)
@@ -227,7 +236,23 @@ getrefs SBLGNT LXX Joel 2:32
 # LXX Joel 2:32+13 2:32-103 = SBLGNT Acts 2:21+14 2:21 (length=36, pos1=5578)
 # LXX Joel 2:32+11 2:32-103 = SBLGNT Romans 10:13+6 10:13 (length=38, pos1=5576)
 
-## Romans 10:15 is to be found!
+## Finding the match between Isaiah 52:7 and Romans 10:15 is difficult:
+lookup LXX Isaiah 52:7
+# ως ωρα επι των ορεων ως ποδες ευαγγελιζομενου ακοην ειρηνης ως ευαγγελιζομενος αγαθα οτι ακουστην ποιησω την σωτηριαν σου λεγων σιων βασιλευσει σου ο θεος
+lookup SBLGNT Romans 10:15
+# πῶς δὲ ⸀κηρύξωσιν ἐὰν μὴ ἀποσταλῶσιν; ⸀καθὼς γέγραπται· Ὡς ὡραῖοι οἱ πόδες τῶν ⸀εὐαγγελιζομένων ⸀τὰ ἀγαθά.
+lookup1 LXX Isaiah 52:7 52:7-58
+# Stored internally as vsvraepitvnorevnvspodeseyaggeliqomenoyakohneirhnhsvseyaggeliqomenosagaua.
+lookup2 SBLGNT Romans 10:15+44 10:15
+# Stored internally as vsvraioioipodestvneyaggeliqomenvntaagaua.
+compare12
+# Comparing 'vsvraepitvnorevnvspodeseyaggeliqomenoyakohneirhnhsvseyaggeliqomenosagaua' ~ 'vsvraioioipodestvneyaggeliqomenvntaagaua' = 52
+# difference = 0.473214
+## The match, without automated checking, is quite clear: the expressions "ως ωρα..." (as an hour),
+## "ποδες"  (feet), "ευαγγελιζομεν..." (announcing good news), "αγαθα" (good things) are present only
+## in Isaiah 52:7. The quotation by Paul is, however, not literal. Even a fuzzy comparison has problems
+## with the identification. It is clear, however, that Paul 1) just removes some words,
+## 2) he does not insert other words than short conjunctives.
 
 getrefs SBLGNT LXX Isaiah 53:1
 # ... (lengths<=12)
