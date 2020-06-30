@@ -39,6 +39,8 @@
 ## 10:16   | 28           | Yes    |
 ## 10:18   | 74           | Yes    |
 ## 10:19   | 33+12        | Yes    |
+## 10:20   | 24+21+19+7   | Yes    |
+## 10:21   | 32+21        | Yes    |
 ##
 ## This table is to be continued and completed.
 
@@ -297,7 +299,40 @@ getrefs SBLGNT LXX Isaiah 65:1 65:2
 # LXX Isaiah 65:2 65:2-95 = SBLGNT Romans 10:21+33 10:21-32 (length=21, pos1=127427)
 # LXX Isaiah 65:1 65:1-76 = SBLGNT Romans 10:20+50 10:20-10 (length=24, pos1=127327)
 # LXX Isaiah 65:2+34 65:2-50 = SBLGNT Romans 10:21+54 10:21 (length=32, pos1=127461)
-## This requires more study.
+## For the first look, Romans 10:20 is split into four parts, and 10:21 into two. While these are correct,
+## fuzzy comparison will help here a lot.
+## On one hand, Isaiah 65:1 begins with "εμφανης εγενομην τοις εμε μη ζητουσιν ευρεθην τοις εμε μη επερωτωσιν",
+## and this is quoted as "Εὑρέθην ⸀ἐν τοῖς ἐμὲ μὴ ζητοῦσιν, ἐμφανὴς ⸀ἐγενόμην τοῖς ἐμὲ μὴ ἐπερωτῶσιν",
+## which is not completely literal because of changing the order of words from 1-2-3-4-5-6-7-8-9-10-11
+## to 7-X-3-4-5-6-1-2-8-9-10-11 (X means no match from LXX, it is inserted by Paul).
+lookup LXX Isaiah 65:1
+# εμφανης εγενομην τοις εμε μη ζητουσιν ευρεθην τοις εμε μη επερωτωσιν ειπα ιδου ειμι τω εθνει οι ουκ εκαλεσαν μου το ονομα
+lookup LXX Isaiah 65:2
+# εξεπετασα τας χειρας μου ολην την ημεραν προς λαον απειθουντα και αντιλεγοντα οι ουκ επορευθησαν οδω αληθινη αλλ οπισω των αμαρτιων αυτων
+lookup SBLGNT Romans 10:20
+# Ἠσαΐας δὲ ἀποτολμᾷ καὶ λέγει· Εὑρέθην ⸀ἐν τοῖς ἐμὲ μὴ ζητοῦσιν, ἐμφανὴς ⸀ἐγενόμην τοῖς ἐμὲ μὴ ἐπερωτῶσιν.
+lookup SBLGNT Romans 10:21
+# πρὸς δὲ τὸν Ἰσραὴλ λέγει· Ὅλην τὴν ἡμέραν ἐξεπέτασα τὰς χεῖράς μου πρὸς λαὸν ἀπειθοῦντα καὶ ἀντιλέγοντα.  
+lookup1 LXX Isaiah 65:1 65:1-42
+# Stored internally as emfanhsegenomhntoisememhqhtoysineyreuhntoisememhepervtvsin.
+lookup2 SBLGNT Romans 10:20+24 10:20
+# Stored internally as eyreuhnentoisememhqhtoysinemfanhsegenomhntoisememhepervtvsin.
+compare12
+# Comparing 'emfanhsegenomhntoisememhqhtoysineyreuhntoisememhepervtvsin' ~ 'eyreuhnentoisememhqhtoysinemfanhsegenomhntoisememhepervtvsin' = 2
+# difference = 0.025424
+## Finding this match shows the power of the fuzzy comparison algorithm (that is based on checking plagiarism).
+## On the other hand, Isaiah 65:2 begins with "εξεπετασα τας χειρας μου ολην την ημεραν προς λαον απειθουντα και αντιλεγοντα"
+## and is quoted as "Ὅλην τὴν ἡμέραν ἐξεπέτασα τὰς χεῖράς μου πρὸς λαὸν ἀπειθοῦντα καὶ ἀντιλέγοντα",
+## which is, again, not completely literal because word ordering 1-2-3-4-5-6-7-8-9-10-11-12 to
+## 5-6-7-1-2-3-4-8-9-10-11-12.
+lookup1 LXX Isaiah 65:2 65:2-50
+# Stored internally as ejepetasatasxeirasmoyolhnthnhmeranproslaonapeiuoyntakaiantilegonta.
+lookup2 SBLGNT Romans 10:21+20 10:21
+# Stored internally as olhnthnhmeranejepetasatasxeirasmoyproslaonapeiuoyntakaiantilegonta.
+compare12
+# Comparing 'ejepetasatasxeirasmoyolhnthnhmeranproslaonapeiuoyntakaiantilegonta' ~ 'olhnthnhmeranejepetasatasxeirasmoyproslaonapeiuoyntakaiantilegonta' = 4
+# difference = 0.037879
+## Again, this is a clear evidence on how useful a fuzzy comparison algorithm can be.
 
 ## Romans 11:2 may refer to I_Kings 12:22 and Psalms 94:14 (Wuppertal). They are not found here.
 
