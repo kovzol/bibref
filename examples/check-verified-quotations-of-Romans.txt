@@ -334,7 +334,13 @@ compare12
 # difference = 0.037879
 ## Again, this is a clear evidence on how useful a fuzzy comparison algorithm can be.
 
-## Romans 11:2 may refer to I_Kings 12:22 and Psalms 94:14 (Wuppertal). They are not found here.
+## Romans 11:2 may refer to I_Samuel 12:22 and Psalms 94:14 (both are listed in the Wuppertal Bible project).
+## They cannot be found with the getrefs command, but their common text "ουκ απωσεται κυριος τον λαον αυτου"
+## (the Lord shall not thrust away his people) is similar to "οὐκ ἀπώσατο ὁ θεὸς τὸν λαὸν αὐτοῦ".
+## See the research at Psalm 94:14.
+## There are two problems here: 1) The text is not unique in LXX. So a main principle here does not hold.
+## 2) The words κυριος and θεὸς are here synonyms.
+## Therefore, this match seems here more like an allusion than a quotation.
 
 ## Romans 11:3 may refer to I_Kings 19:14. It is not found here.
 

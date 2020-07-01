@@ -397,6 +397,8 @@ latintext2 oykapvsatookyriostonlaonaytoy
 compare12
 # Comparing 'oykapvsetaikyriostonlaonaytoy' ~ 'oykapvsatookyriostonlaonaytoy' = 10
 # difference = 0.189655
+## This text appears also in 1_Samuel 12:22. So maybe this is just an allusion.
+## See also the research for Romans.
 
 
 getrefs SBLGNT LXX Psalms 95:7 95:11
