@@ -740,7 +740,7 @@ void getrefs(string moduleName2, string moduleName1, string book1, string verse1
     string text = b1.getText().substr(pos1S, pos1E - pos1S + 1);
     vector<string> minunique = find_min_unique(text, moduleName1, 0);
     for (string m : minunique) {
-        vector<string> found = find_all(m, moduleName2, 100);
+        vector<string> found = find_all(m, moduleName2, maxresults);
         for (string f : found) {
             vector<string> info1, info2;
             boost::split(info1, f, boost::is_any_of(","));

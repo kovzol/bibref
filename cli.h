@@ -9,6 +9,6 @@ void cli();
 void add_vocabulary_item(string item);
 void error(string message);
 void info(string message);
-
+static int maxresults;
 
 #endif // CLI_H

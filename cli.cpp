@@ -27,6 +27,7 @@ string lengthCmd = "length";
 string minuniqueCmd = "minunique";
 string extendCmd = "extend";
 string getrefsCmd = "getrefs";
+string maxresultsCmd = "maxresults";
 
 string errorNotRecognized = "Sorry, the command you entered was not recognized or its syntax is invalid.";
 string errorTextIncomplete = "Either " + textCmd + "1 or " + textCmd + "2 must be used.";
@@ -41,12 +42,13 @@ string errorLengthIncomplete = "Either " + lengthCmd + "1 or " + lengthCmd + "2 
 string errorMinuniqueParameters = minuniqueCmd + " requires one parameter";
 string errorExtendParameters = extendCmd + " requires 4 or 5 parameters.";
 string errorGetrefsParameters = getrefsCmd + " requires 3, 4 or 5 parameters.";
+string errorMaxresultsParameters = maxresultsCmd + " requires one parameter.";
 
 vector<string> vocabulary {addbooksCmd, compareCmd + "12",
                            textCmd + "1", textCmd + "2", lookupCmd + "1", lookupCmd + "2", "quit",
                                    "help", findCmd + "1", findCmd + "2", lengthCmd + "1", lengthCmd + "2",
                                    minuniqueCmd + "1", latintextCmd + "1", latintextCmd + "2",
-                                   extendCmd, getrefsCmd, lookupCmd
+                                   extendCmd, getrefsCmd, lookupCmd, maxresultsCmd
                           };
 
 void add_vocabulary_item(string item) {
@@ -106,8 +108,10 @@ char** completer(const char* text, int start, int end) {
 
 void cli() {
     rl_attempted_completion_function = completer;
-    info("This is bibref-cli 2020May07, nice to meet you.");
+    info("This is bibref-cli 2020Jul03, nice to meet you.");
     showAvailableBibles();
+
+    maxresults = 100;
 
     char* buf;
     while ((buf = readline(">> ")) != nullptr) {
@@ -309,7 +313,7 @@ void cli() {
                 goto end;
             }
             string rest = input.substr(input.find(" ") + 1);
-            find(text[index], rest, 100, 1);
+            find(text[index], rest, maxresults, 1);
             goto end;
         }
 
@@ -331,6 +335,19 @@ void cli() {
             }
             info("Length of text " + to_string(index + 1) + " is "
                  + to_string(text[index].length()) + ".");
+            goto end;
+        }
+
+        if (boost::starts_with(input, maxresultsCmd)) {
+            int index;
+            int commandLength = maxresultsCmd.length();
+            if (input.length() == commandLength) {
+                error(errorMaxresultsParameters);
+                goto end;
+            }
+            string rest = input.substr(input.find(" ") + 1);
+            maxresults = stoi(rest);
+            info("Set to " + to_string(maxresults) + ".");
             goto end;
         }
 
