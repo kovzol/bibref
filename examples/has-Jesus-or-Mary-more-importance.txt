@@ -1,6 +1,6 @@
 ## This example shows statistics can be helpful to decide theological questions.
 ## In the New Testament there are 1056 occurrences of "Jesus" or "Christ", but only
-## 26 for "Mary". As a conclusion we learn that Jesus has more importance than Mary.
+## 54 for "Mary". As a conclusion we learn that Jesus has more importance than Mary.
 
 ## You need at least version 2020Jul03 to make this work. Otherwise the amount
 ## of results is limited to 100.
@@ -119,36 +119,64 @@ find1 SBLGNT
 # Found in Revelation_of_John 1:2+43 1:2-8 (book position 198-209)
 # Found in Revelation_of_John 1:5+6 1:5-120 (book position 450-461)
 # 106 occurrences.
-latintext2 mariam
+latintext2 maria
 # Stored.
 find2 SBLGNT
-# Found in Matthew 13:55+50 13:55-49 (book position 39204-39209)
-# Found in Matthew 27:61+8 27:61-48 (book position 87803-87808)
-# Found in Matthew 28:1+46 28:1-39 (book position 88349-88354)
-# Found in Luke 1:27+74 1:27 (book position 2314-2319)
-# Found in Luke 1:30+27 1:30-22 (book position 2463-2468)
-# Found in Luke 1:34+7 1:34-45 (book position 2726-2731)
-# Found in Luke 1:38+7 1:38-64 (book position 3048-3053)
-# Found in Luke 1:39+10 1:39-65 (book position 3128-3133)
-# Found in Luke 1:46+8 1:46-26 (book position 3667-3672)
-# Found in Luke 1:56+9 1:56-48 (book position 4217-4222)
-# Found in Luke 2:5+15 2:5-27 (book position 6250-6255)
-# Found in Luke 2:16+33 2:16-39 (book position 7147-7152)
-# Found in Luke 2:34+36 2:34-92 (book position 8538-8543)
-# Found in Luke 10:39+24 10:39-58 (book position 44085-44090)
-# Found in Luke 10:42+23 10:42-52 (book position 44375-44380)
-# Found in John 11:2+4 11:2-86 (book position 36769-36774)
-# Found in John 11:19+48 11:19-36 (book position 37994-37999)
-# Found in John 11:28+33 11:28-56 (book position 38560-38565)
-# Found in John 11:31+69 11:31-83 (book position 38807-38812)
-# Found in John 11:32+4 11:32-101 (book position 38900-38905)
-# Found in John 11:45+39 11:45-40 (book position 39949-39954)
-# Found in John 12:3+4 12:3-139 (book position 41245-41250)
-# Found in John 20:16+15 20:16-56 (book position 66363-66368)
-# Found in John 20:18+7 20:18-67 (book position 66585-66590)
-# Found in Acts 1:14+65 1:14-38 (book position 1475-1480)
-# Found in Romans 16:6+9 16:6-25 (book position 32684-32689)
-# 26 occurrences.
+# Found in Matthew 1:16+32 1:16-36 (book position 1203-1207)
+# Found in Matthew 1:18+59 1:18-64 (book position 1469-1473)
+# Found in Matthew 1:20+95 1:20-54 (book position 1711-1715)
+# Found in Matthew 2:11+41 2:11-118 (book position 3122-3126)
+# Found in Matthew 13:55+50 13:55-50 (book position 39204-39208)
+# Found in Matthew 27:56+7 27:56-67 (book position 87411-87415)
+# Found in Matthew 27:56+25 27:56-49 (book position 87429-87433)
+# Found in Matthew 27:61+8 27:61-49 (book position 87803-87807)
+# Found in Matthew 27:61+32 27:61-25 (book position 87827-87831)
+# Found in Matthew 28:1+46 28:1-40 (book position 88349-88353)
+# Found in Matthew 28:1+70 28:1-16 (book position 88373-88377)
+# Found in Mark 6:3+28 6:3-105 (book position 15981-15985)
+# Found in Mark 15:40+45 15:40-59 (book position 53897-53901)
+# Found in Mark 15:40+63 15:40-41 (book position 53915-53919)
+# Found in Mark 15:47+3 15:47-45 (book position 54526-54530)
+# Found in Mark 15:47+21 15:47-27 (book position 54544-54548)
+# Found in Mark 16:1+26 16:1-78 (book position 54602-54606)
+# Found in Mark 16:1+44 16:1-60 (book position 54620-54624)
+# Found in Mark 16:9+37 16:9-38 (book position 55497-55501)
+# Found in Luke 1:27+74 1:27-1 (book position 2314-2318)
+# Found in Luke 1:30+27 1:30-23 (book position 2463-2467)
+# Found in Luke 1:34+7 1:34-46 (book position 2726-2730)
+# Found in Luke 1:38+7 1:38-65 (book position 3048-3052)
+# Found in Luke 1:39+10 1:39-66 (book position 3128-3132)
+# Found in Luke 1:41+33 1:41-76 (book position 3284-3288)
+# Found in Luke 1:46+8 1:46-27 (book position 3667-3671)
+# Found in Luke 1:56+9 1:56-49 (book position 4217-4221)
+# Found in Luke 2:5+15 2:5-28 (book position 6250-6254)
+# Found in Luke 2:16+33 2:16-40 (book position 7147-7151)
+# Found in Luke 2:19+3 2:19-53 (book position 7337-7341)
+# Found in Luke 2:34+36 2:34-93 (book position 8538-8542)
+# Found in Luke 8:2+67 8:2-45 (book position 29819-29823)
+# Found in Luke 10:39+24 10:39-59 (book position 44085-44089)
+# Found in Luke 10:42+23 10:42-53 (book position 44375-44379)
+# Found in Luke 24:10+16 24:10-74 (book position 92470-92474)
+# Found in Luke 24:10+33 24:10-57 (book position 92487-92491)
+# Found in John 11:1+42 11:1-25 (book position 36735-36739)
+# Found in John 11:2+4 11:2-87 (book position 36769-36773)
+# Found in John 11:19+48 11:19-37 (book position 37994-37998)
+# Found in John 11:20+47 11:20-19 (book position 38083-38087)
+# Found in John 11:28+33 11:28-57 (book position 38560-38564)
+# Found in John 11:31+69 11:31-84 (book position 38807-38811)
+# Found in John 11:32+4 11:32-102 (book position 38900-38904)
+# Found in John 11:45+39 11:45-41 (book position 39949-39953)
+# Found in John 12:3+4 12:3-140 (book position 41245-41249)
+# Found in John 19:25+68 19:25-27 (book position 63593-63597)
+# Found in John 19:25+85 19:25-10 (book position 63610-63614)
+# Found in John 20:1+18 20:1-86 (book position 65112-65116)
+# Found in John 20:11 20:11-68 (book position 65875-65879)
+# Found in John 20:16+15 20:16-57 (book position 66363-66367)
+# Found in John 20:18+7 20:18-68 (book position 66585-66589)
+# Found in Acts 1:14+65 1:14-39 (book position 1475-1479)
+# Found in Acts 12:12+29 12:12-81 (book position 39432-39436)
+# Found in Romans 16:6+9 16:6-26 (book position 32684-32688)
+# 54 occurrences.
 
 ## In fact, the number of occurrences of "Jesus" is much more:
 latintext1 ihsoy
@@ -160,5 +188,5 @@ latintext1 xristoy
 # 249 occurrences
 ## By using the inclusion-exclusion principle, the exact amount of
 ## the occurrences for "Jesus", "Christ" or "Jesus Christ" is
-## 913+249-106=1056. This is more than 40 times more than
+## 913+249-106=1056. This is almost 20 times more than
 ## the number of occurrences for "Mary".
