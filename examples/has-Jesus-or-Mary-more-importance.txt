@@ -1,0 +1,164 @@
+## This example shows statistics can be helpful to decide theological questions.
+## In the New Testament there are 1056 occurrences of "Jesus" or "Christ", but only
+## 26 for "Mary". As a conclusion we learn that Jesus has more importance than Mary.
+
+## You need at least version 2020Jul03 to make this work. Otherwise the amount
+## of results is limited to 100.
+
+# This is bibref-cli 2020Jul03, nice to meet you.
+addbooks
+maxresults 1000
+# Set to 1000.
+lookup1 SBLGNT Matthew 1:1+14 1:1-19
+# Stored internally as ihsoyxristoy.
+find1 SBLGNT
+# Found in Matthew 1:1+14 1:1-19 (book position 15-26)
+# Found in Matthew 1:18+5 1:18-111 (book position 1415-1426)
+# Found in Mark 1:1+17 1:1 (book position 28-39)
+# Found in John 1:17+44 1:17-7 (book position 1027-1038)
+# Found in Acts 2:38+65 2:38-61 (book position 6005-6016)
+# Found in Acts 3:6+75 3:6-21 (book position 7326-7337)
+# Found in Acts 4:10+53 4:10-90 (book position 10111-10122)
+# Found in Acts 8:12+75 8:12-30 (book position 24684-24695)
+# Found in Acts 10:36+60 10:36-22 (book position 34365-34376)
+# Found in Acts 10:48+29 10:48-48 (book position 35494-35505)
+# Found in Acts 15:26+62 15:26 (book position 50661-50672)
+# Found in Acts 16:18+97 16:18-34 (book position 53677-53688)
+# Found in Acts 28:31+53 28:31-26 (book position 95614-95625)
+# Found in Romans 1:4+67 1:4-13 (book position 249-260)
+# Found in Romans 1:6+23 1:6 (book position 381-392)
+# Found in Romans 1:7+90 1:7 (book position 483-494)
+# Found in Romans 1:8+29 1:8-53 (book position 524-535)
+# Found in Romans 3:22+26 3:22-42 (book position 6409-6420)
+# Found in Romans 5:1+64 5:1 (book position 9131-9142)
+# Found in Romans 5:11+49 5:11-28 (book position 9892-9903)
+# Found in Romans 5:15+135 5:15-26 (book position 10387-10398)
+# Found in Romans 5:17+155 5:17 (book position 10687-10698)
+# Found in Romans 5:21+91 5:21-13 (book position 11113-11124)
+# Found in Romans 7:25+13 7:25-71 (book position 14971-14982)
+# Found in Romans 15:6+62 15:6 (book position 29937-29948)
+# Found in Romans 15:30+37 15:30-79 (book position 31955-31966)
+# Found in Romans 16:20+78 16:20-7 (book position 33878-33889)
+# Found in Romans 16:24+19 16:24-18 (book position 34147-34158)
+# Found in I_Corinthians 1:2+115 1:2-23 (book position 199-210)
+# Found in I_Corinthians 1:3+44 1:3 (book position 278-289)
+# Found in I_Corinthians 1:7+78 1:7 (book position 537-548)
+# Found in I_Corinthians 1:8+60 1:8 (book position 609-620)
+# Found in I_Corinthians 1:9+47 1:9-13 (book position 668-679)
+# Found in I_Corinthians 1:10+48 1:10-86 (book position 741-752)
+# Found in I_Corinthians 15:57+48 15:57 (book position 30971-30982)
+# Found in II_Corinthians 1:2+44 1:2 (book position 193-204)
+# Found in II_Corinthians 1:3+35 1:3-41 (book position 240-251)
+# Found in II_Corinthians 8:9+33 8:9-63 (book position 12204-12215)
+# Found in II_Corinthians 13:13+15 13:13-59 (book position 22197-22208)
+# Found in Galatians 1:1+49 1:1-39 (book position 61-72)
+# Found in Galatians 1:3+44 1:3 (book position 206-217)
+# Found in Galatians 1:12+65 1:12 (book position 930-941)
+# Found in Galatians 2:16+59 2:16-122 (book position 3257-3268)
+# Found in Galatians 3:22+61 3:22-19 (book position 5507-5518)
+# Found in Galatians 6:14+51 6:14-33 (book position 10772-10783)
+# Found in Galatians 6:18+19 6:18-31 (book position 11039-11050)
+# Found in Ephesians 1:2+44 1:2 (book position 147-158)
+# Found in Ephesians 1:3+35 1:3-62 (book position 194-205)
+# Found in Ephesians 1:5+28 1:5-40 (book position 385-396)
+# Found in Ephesians 1:17+21 1:17-63 (book position 1341-1352)
+# Found in Ephesians 5:20+53 5:20-13 (book position 9102-9113)
+# Found in Ephesians 6:23+59 6:23 (book position 11918-11929)
+# Found in Philippians 1:2+44 1:2 (book position 169-180)
+# Found in Philippians 1:11+35 1:11-22 (book position 849-860)
+# Found in Philippians 1:19+82 1:19 (book position 1515-1526)
+# Found in Philippians 2:21+31 2:21 (book position 3901-3912)
+# Found in Philippians 4:23+15 4:23-20 (book position 7967-7978)
+# Found in Colossians 1:3+36 1:3-28 (book position 195-206)
+# Found in I_Thessalonians 1:3+92 1:3-29 (book position 295-306)
+# Found in I_Thessalonians 5:9+70 5:9 (book position 6381-6392)
+# Found in I_Thessalonians 5:23+116 5:23-8 (book position 7197-7208)
+# Found in I_Thessalonians 5:28+19 5:28-7 (book position 7393-7404)
+# Found in II_Thessalonians 1:2+40 1:2 (book position 144-155)
+# Found in II_Thessalonians 1:12+90 1:12 (book position 1172-1183)
+# Found in II_Thessalonians 2:1+50 2:1-26 (book position 1234-1245)
+# Found in II_Thessalonians 2:14+68 2:14 (book position 2442-2453)
+# Found in II_Thessalonians 3:6+48 3:6-91 (book position 3102-3113)
+# Found in II_Thessalonians 3:18+19 3:18-14 (book position 4032-4043)
+# Found in I_Timothy 6:3+69 6:3-27 (book position 7209-7220)
+# Found in I_Timothy 6:14+69 6:14 (book position 8246-8257)
+# Found in II_Timothy 1:10+47 1:10-70 (book position 885-896)
+# Found in Titus 1:1+27 1:1-57 (book position 37-48)
+# Found in Titus 2:13+79 2:13 (book position 2300-2311)
+# Found in Titus 3:6+26 3:6-14 (book position 2987-2998)
+# Found in Philemon 1:3+44 1:3 (book position 199-210)
+# Found in Philemon 1:25+15 1:25-20 (book position 1541-1552)
+# Found in Hebrews 10:10+51 10:10-6 (book position 15977-15988)
+# Found in Hebrews 13:21+88 13:21-23 (book position 26018-26029)
+# Found in James 1:1+20 1:1-45 (book position 28-39)
+# Found in James 2:1+56 2:1-8 (book position 2232-2243)
+# Found in I_Peter 1:1+15 1:1-71 (book position 23-34)
+# Found in I_Peter 1:2+70 1:2-28 (book position 176-187)
+# Found in I_Peter 1:3+35 1:3-82 (book position 251-262)
+# Found in I_Peter 1:3+109 1:3-8 (book position 325-336)
+# Found in I_Peter 1:7+128 1:7 (book position 690-701)
+# Found in I_Peter 1:13+98 1:13 (book position 1278-1289)
+# Found in I_Peter 2:5+111 2:5 (book position 2579-2590)
+# Found in I_Peter 3:21+103 3:21 (book position 6255-6266)
+# Found in I_Peter 4:11+85 4:11-48 (book position 7196-7207)
+# Found in II_Peter 1:1+30 1:1-75 (book position 38-49)
+# Found in II_Peter 1:1+105 1:1 (book position 113-124)
+# Found in II_Peter 1:8+85 1:8-9 (book position 740-751)
+# Found in II_Peter 1:11+89 1:11 (book position 1033-1044)
+# Found in II_Peter 1:16+71 1:16-62 (book position 1430-1441)
+# Found in II_Peter 2:20+65 2:20-70 (book position 3993-4004)
+# Found in II_Peter 3:18+50 3:18-37 (book position 6033-6044)
+# Found in I_John 1:3+127 1:3 (book position 351-362)
+# Found in I_John 3:23+59 3:23-41 (book position 5506-5517)
+# Found in II_John 1:3+49 1:3-33 (book position 227-238)
+# Found in Jude 1:1+6 1:1-80 (book position 12-23)
+# Found in Jude 1:17+76 1:17 (book position 1938-1949)
+# Found in Jude 1:21+59 1:21-14 (book position 2229-2240)
+# Found in Jude 1:25+20 1:25-93 (book position 2477-2488)
+# Found in Revelation_of_John 1:1+10 1:1-115 (book position 28-39)
+# Found in Revelation_of_John 1:2+43 1:2-8 (book position 198-209)
+# Found in Revelation_of_John 1:5+6 1:5-120 (book position 450-461)
+# 106 occurrences.
+latintext2 mariam
+# Stored.
+find2 SBLGNT
+# Found in Matthew 13:55+50 13:55-49 (book position 39204-39209)
+# Found in Matthew 27:61+8 27:61-48 (book position 87803-87808)
+# Found in Matthew 28:1+46 28:1-39 (book position 88349-88354)
+# Found in Luke 1:27+74 1:27 (book position 2314-2319)
+# Found in Luke 1:30+27 1:30-22 (book position 2463-2468)
+# Found in Luke 1:34+7 1:34-45 (book position 2726-2731)
+# Found in Luke 1:38+7 1:38-64 (book position 3048-3053)
+# Found in Luke 1:39+10 1:39-65 (book position 3128-3133)
+# Found in Luke 1:46+8 1:46-26 (book position 3667-3672)
+# Found in Luke 1:56+9 1:56-48 (book position 4217-4222)
+# Found in Luke 2:5+15 2:5-27 (book position 6250-6255)
+# Found in Luke 2:16+33 2:16-39 (book position 7147-7152)
+# Found in Luke 2:34+36 2:34-92 (book position 8538-8543)
+# Found in Luke 10:39+24 10:39-58 (book position 44085-44090)
+# Found in Luke 10:42+23 10:42-52 (book position 44375-44380)
+# Found in John 11:2+4 11:2-86 (book position 36769-36774)
+# Found in John 11:19+48 11:19-36 (book position 37994-37999)
+# Found in John 11:28+33 11:28-56 (book position 38560-38565)
+# Found in John 11:31+69 11:31-83 (book position 38807-38812)
+# Found in John 11:32+4 11:32-101 (book position 38900-38905)
+# Found in John 11:45+39 11:45-40 (book position 39949-39954)
+# Found in John 12:3+4 12:3-139 (book position 41245-41250)
+# Found in John 20:16+15 20:16-56 (book position 66363-66368)
+# Found in John 20:18+7 20:18-67 (book position 66585-66590)
+# Found in Acts 1:14+65 1:14-38 (book position 1475-1480)
+# Found in Romans 16:6+9 16:6-25 (book position 32684-32689)
+# 26 occurrences.
+
+## In fact, the number of occurrences of "Jesus" is much more:
+latintext1 ihsoy
+# ...
+# 913 occurrences
+## Also, we can search for "Christ" only:
+latintext1 xristoy
+# ...
+# 249 occurrences
+## By using the inclusion-exclusion principle, the exact amount of
+## the occurrences for "Jesus", "Christ" or "Jesus Christ" is
+## 913+249-106=1056. This is more than 40 times more than
+## the number of occurrences for "Mary".
