@@ -42,6 +42,9 @@
 ## 10:20   | 24+21+19+7   | Yes    |
 ## 10:21   | 32+21        | Yes    |
 ## 11:3    | 28           | Yes    | Maybe the minunique algorithm should be changed. (Also for 11:2, not listed here.)
+## 11:4    | 7            | Yes    | Some wording in the quotation are synonyms instead of being literal matches.
+## 11:8a   |              | No     | Two letters are removed by Paul, a fuzzy search would be more useful.
+## 11:8b   | 13+13        | Yes    | A clever fuzzy search would be more successful.
 ##
 ## This table is to be continued and completed.
 
@@ -435,7 +438,63 @@ compare12
 ## Still, the wordings are quite different.
 ## Even though, the match "angonyt" is found.
 
-## Romans 11:8 may refer to Deuteronomy 29:3 and Isaiah 29:10. It is not found here.
+## Romans 11:8 refers to Isaiah 29:10 and Deuteronomy 29:4, respectively its first and second part.
+## The getrefs algorithm does not find the first match (the result does not contain Romans 11:8).
+## First part.
+lookup LXX Isaiah 29:10
+# οτι πεποτικεν υμας κυριος πνευματι κατανυξεως και καμμυσει τους οφθαλμους αυτων και των προφητων αυτων και των αρχοντων αυτων οι ορωντες τα κρυπτα
+lookup SBLGNT Romans 11:8
+# ⸀καθὼς γέγραπται· Ἔδωκεν αὐτοῖς ὁ θεὸς πνεῦμα κατανύξεως, ὀφθαλμοὺς τοῦ μὴ βλέπειν καὶ ὦτα τοῦ μὴ ἀκούειν, ἕως τῆς σήμερον ἡμέρας.
+## The Sword search "πνευμα* κατανυ*" on LXX gives only one result. A part of this text is also listed
+## in the minunique results:
+minunique1 LXX
+# Text ikamm is minimal unique.
+# Text mmyse is minimal unique.
+# Text mysei is minimal unique.
+# Text yjevsk is minimal unique.
+# Text ikatany is minimal unique.
+# Text ymatikat is minimal unique.
+# Text jevskaik is minimal unique.
+# Text vskaikam is minimal unique.
+# Text matikatan is minimal unique.
+# Text yseitoyso is minimal unique.
+lookup1 LXX Isaiah 29:10+22 29:10-61
+# Stored internally as pneymatikatanyjevskaikammyseitoysofualmoy.
+lookup2 SBLGNT Romans 11:8+31 11:8-46
+# Stored internally as pneymakatanyjevsofualmoystoy.
+compare12
+# Comparing 'pneymatikatanyjevskaikammyseitoysofualmoy' ~ 'pneymakatanyjevsofualmoystoy' = 17
+# difference = 0.260870
+## Here we can conclude that Isaiah 29:10 is indeed quoted, but the text is short, there are some literal
+## changes and removals by Paul. With a clever fuzzy match (that can handle, maybe, removals as well)
+## the detection could be automatized.
+## Second part.
+getrefs SBLGNT LXX Deuteronomy 29:4
+# ... (lengths<=11)
+# LXX Deuteronomy 29:4+53 29:4-25 = SBLGNT Romans 11:8+61 11:8-31 (length=13, pos1=89880)
+# LXX Deuteronomy 29:4+66 29:4-12 = SBLGNT Romans 11:8+79 11:8-13 (length=13, pos1=89893)
+lookup LXX Deuteronomy 29:4
+# και ουκ εδωκεν κυριος ο θεος υμιν καρδιαν ειδεναι και οφθαλμους βλεπειν και ωτα ακουειν εως της ημερας ταυτης
+lookup SBLGNT Romans 11:8
+# ⸀καθὼς γέγραπται· Ἔδωκεν αὐτοῖς ὁ θεὸς πνεῦμα κατανύξεως, ὀφθαλμοὺς τοῦ μὴ βλέπειν καὶ ὦτα τοῦ μὴ ἀκούειν, ἕως τῆς σήμερον ἡμέρας.
+## In fact, Deuteronomy 29:4 is quite similar to Romans 11:8:
+lookup1 LXX Deuteronomy 29:4+6 29:4-6
+# Stored internally as edvkenkyriosoueosyminkardianeidenaikaiofualmoysblepeinkaivtaakoyeinevsthshmeras.
+lookup2 SBLGNT Romans 11:8+14 11:8
+# Stored internally as edvkenaytoisoueospneymakatanyjevsofualmoystoymhblepeinkaivtatoymhakoyeinevsthsshmeronhmeras.
+compare12
+# Comparing 'edvkenkyriosoueosyminkardianeidenaikaiofualmoysblepeinkaivtaakoyeinevsthshmeras' ~ 'edvkenaytoisoueospneymakatanyjevsofualmoystoymhblepeinkaivtatoymhakoyeinevsthsshmeronhmeras' = 62
+# difference = 0.370588
+## There are, however, some words from Isaiah 29:10 inserted (see above), and the ordering of the words
+## are sometimes different, some words are removed and the word "σήμερον" (today) is added by Paul. Interestingly,
+## the closing words "εως της σημερον ημερας" (unto the today day) appears several times in the LXX (18 times),
+## but in Deuteronomy 29:4 not (the word "σημερον" is missing).
+## Conclusion. Romans 11:8 can also be considered as a combination of more than two verses,
+## if we assume that the closing words refer to a third passage (but that would be not unique).
+## Anyway, the starting word "εδωκεν" (gave) seems to be taken from Deuteronomy, so
+## the cited text from Isaiah is somehow in the middle of the quotation from Deuteronomy.
+## This means that Paul combined the two texts, not just concatenated them. This fact makes
+## Romans 11:8 very difficult for machine identification.
 
 getrefs SBLGNT LXX Psalms 69:22 69:23
 # ... (lengths<=10)
