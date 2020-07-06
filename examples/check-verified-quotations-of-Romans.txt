@@ -2,49 +2,50 @@
 ## in Romans. A "verified quotation" is that has evidence by tradition of textual evidence.
 ## The following verified quotations can be found automatically with the getrefs algorithm:
 ##
-## Romans  | Match length | Found? | Problem
-## --------+--------------+--------+-----------------------------------------------------------------------
-## 1:17    | 19           | Yes    |
-## 2:6     |              | No     | TBD
-## 2:24    | 39           | Yes    |
-## 3:4     | 38+16        | Yes    |
-## 3:10    |              | No     | TBD
-## 3:11    | 318          | Yes    |
-## 4:3     | 36           | Yes    |
-## 4:9     |              | No     | TBD
-## 4:22    |              | No     | TBD
-## 4:23    |              | No     | TBD
-## 4:7     | 97           | Yes    |
-## 4:17    | 31           | Yes    |
-## 4:18    | 17, 25       | Yes    |
-## 8:36    | 53           | Yes    |
-## 9:7     | 26           | Yes    |
-## 9:9     | 20, 19       | Yes    |
-## 9:12    | 29           | Yes    |
-## 9:13    | 16           | Yes    |
-## 9:15    | 38           | Yes    |
-## 9:17    | 39+18        | Yes    |
-## 9:20    | 24+12        | Yes    |
-## 9:25-26 | 10           | Yes    | Wording in LXX is different, ABPGRK seems to be better for the match
-## 9:26    | 73           | Yes    |
-## 9:27    | 40           | Yes    |
-## 9:29    | 81           | Yes    |
-## 9:33a   | 12           | Yes    | There is one letter of difference, a fuzzy search would be more useful
-## 9:33b   | 20           | Yes    | Two letters are removed by Paul, a fuzzy search would be more useful
-## 10:5    | 27           | Yes    |
-## 10:8    | 30           | Yes    |
-## 10:11   | 17           | Yes    |
-## 10:13   | 38           | Yes    |
-## 10:15   |              | No     | The quotation is far from being literal.
-## 10:16   | 28           | Yes    |
-## 10:18   | 74           | Yes    |
-## 10:19   | 33+12        | Yes    |
-## 10:20   | 24+21+19+7   | Yes    |
-## 10:21   | 32+21        | Yes    |
-## 11:3    | 28           | Yes    | Maybe the minunique algorithm should be changed. (Also for 11:2, not listed here.)
-## 11:4    | 7            | Yes    | Some wording in the quotation are synonyms instead of being literal matches.
-## 11:8a   |              | No     | Two letters are removed by Paul, a fuzzy search would be more useful.
-## 11:8b   | 13+13        | Yes    | A clever fuzzy search would be more successful.
+## Romans  | Match length   | Found? | Problem
+## --------+----------------+--------+-----------------------------------------------------------------------
+## 1:17    | 19             | Yes    |
+## 2:6     |                | No     | TBD
+## 2:24    | 39             | Yes    |
+## 3:4     | 38+16          | Yes    |
+## 3:10    |                | No     | TBD
+## 3:11    | 318            | Yes    |
+## 4:3     | 36             | Yes    |
+## 4:9     |                | No     | TBD
+## 4:22    |                | No     | TBD
+## 4:23    |                | No     | TBD
+## 4:7     | 97             | Yes    |
+## 4:17    | 31             | Yes    |
+## 4:18    | 17, 25         | Yes    |
+## 8:36    | 53             | Yes    |
+## 9:7     | 26             | Yes    |
+## 9:9     | 20, 19         | Yes    |
+## 9:12    | 29             | Yes    |
+## 9:13    | 16             | Yes    |
+## 9:15    | 38             | Yes    |
+## 9:17    | 39+18          | Yes    |
+## 9:20    | 24+12          | Yes    |
+## 9:25-26 | 10             | Yes    | Wording in LXX is different, ABPGRK seems to be better for the match
+## 9:26    | 73             | Yes    |
+## 9:27    | 40             | Yes    |
+## 9:29    | 81             | Yes    |
+## 9:33a   | 12             | Yes    | There is one letter of difference, a fuzzy search would be more useful
+## 9:33b   | 20             | Yes    | Two letters are removed by Paul, a fuzzy search would be more useful
+## 10:5    | 27             | Yes    |
+## 10:8    | 30             | Yes    |
+## 10:11   | 17             | Yes    |
+## 10:13   | 38             | Yes    |
+## 10:15   |                | No     | The quotation is far from being literal.
+## 10:16   | 28             | Yes    |
+## 10:18   | 74             | Yes    |
+## 10:19   | 33+12          | Yes    |
+## 10:20   | 24+21+19+7     | Yes    |
+## 10:21   | 32+21          | Yes    |
+## 11:3    | 28             | Yes    | Maybe the minunique algorithm should be changed. (Also for 11:2, not listed here.)
+## 11:4    | 7              | Yes    | Some wording in the quotation are synonyms instead of being literal matches.
+## 11:8a   |                | No     | Two letters are removed by Paul, a fuzzy search would be more useful.
+## 11:8b   | 13+13          | Yes    | A clever fuzzy search would be more successful.
+## 11:9-10 | 74+22+20+16+14 | Yes    |
 ##
 ## This table is to be continued and completed.
 
@@ -494,7 +495,7 @@ compare12
 ## Anyway, the starting word "εδωκεν" (gave) seems to be taken from Deuteronomy, so
 ## the cited text from Isaiah is somehow in the middle of the quotation from Deuteronomy.
 ## This means that Paul combined the two texts, not just concatenated them. This fact makes
-## Romans 11:8 very difficult for machine identification.
+## Romans 11:8 very difficult for machine identification. (See also the match between Psalm 69:23 and Romans 11:8 below.)
 
 getrefs SBLGNT LXX Psalms 69:22 69:23
 # ... (lengths<=10)
@@ -505,7 +506,8 @@ getrefs SBLGNT LXX Psalms 69:22 69:23
 # LXX Psalms 69:22+28 69:22-26 = SBLGNT Romans 11:9+29 11:9-42 (length=20, pos1=76413)
 # LXX Psalms 69:22 69:22-52 = SBLGNT Romans 11:9+13 11:9-56 (length=22, pos1=76385)
 # LXX Psalms 69:23 69:23 = SBLGNT Romans 11:10 11:10 (length=74, pos1=76459)
-## This requires more study.
+## Even if the longest match is literal, a fuzzy match would detect the whole quotation
+## and not just its parts.
 lookup SBLGNT Romans 11:9
 # καὶ Δαυὶδ λέγει· Γενηθήτω ἡ τράπεζα αὐτῶν εἰς παγίδα καὶ εἰς θήραν καὶ εἰς σκάνδαλον καὶ εἰς ἀνταπόδομα αὐτοῖς,
 lookup SBLGNT Romans 11:10
@@ -513,6 +515,16 @@ lookup SBLGNT Romans 11:10
 ## The text "παγίδα καὶ εἰς θήραν" (a snare and a trap) cannot be literally found in LXX, some similar
 ## matches are in Psalm 91:3 ("παγιδος θηρευτων"), Psalm 124:7 ("παγιδος των θηρευοντων") and
 ## Ecclesiastes 9:12 ("θηρευομενα εν παγιδι").
+## A fuzzy comparison shows that the matches above are correct:
+lookup1 LXX Psalms 69:22 69:23
+# Stored internally as genhuhtvhtrapeqaaytvnenvpionaytvneispagidakaieisantapodosinkaieisskandalonskotisuhtvsanoiofualmoiaytvntoymhblepeinkaitonnvtonaytvndiapantossygkamcon.
+lookup2 SBLGNT Romans 11:9+13 11:10
+# Stored internally as genhuhtvhtrapeqaaytvneispagidakaieisuhrankaieisskandalonkaieisantapodomaaytoisskotisuhtvsanoiofualmoiaytvntoymhblepeinkaitonnvtonaytvndiapantossygkamcon.
+compare12
+# Comparing 'genhuhtvhtrapeqaaytvnenvpionaytvneispagidakaieisantapodosinkaieisskandalonskotisuhtvsanoiofualmoiaytvntoymhblepeinkaitonnvtonaytvndiapantossygkamcon' ~ 'genhuhtvhtrapeqaaytvneispagidakaieisuhrankaieisskandalonkaieisantapodomaaytoisskotisuhtvsanoiofualmoiaytvntoymhblepeinkaitonnvtonaytvndiapantossygkamcon' = 32
+# difference = 0.110000
+## There is a short expression "του μη βλεπειν και" (to not see and) that appears also in Romans 11:8,
+## but this is not a quotation but the words that are required to express Paul's message.
 
 getrefs SBLGNT LXX Isaiah 59:20 59:21
 # ... (lengths<=12)
