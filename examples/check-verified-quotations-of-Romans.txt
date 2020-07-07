@@ -2,50 +2,51 @@
 ## in Romans. A "verified quotation" is that has evidence by tradition of textual evidence.
 ## The following verified quotations can be found automatically with the getrefs algorithm:
 ##
-## Romans  | Match length   | Found? | Problem
-## --------+----------------+--------+-----------------------------------------------------------------------
-## 1:17    | 19             | Yes    |
-## 2:6     |                | No     | TBD
-## 2:24    | 39             | Yes    |
-## 3:4     | 38+16          | Yes    |
-## 3:10    |                | No     | TBD
-## 3:11    | 318            | Yes    |
-## 4:3     | 36             | Yes    |
-## 4:9     |                | No     | TBD
-## 4:22    |                | No     | TBD
-## 4:23    |                | No     | TBD
-## 4:7     | 97             | Yes    |
-## 4:17    | 31             | Yes    |
-## 4:18    | 17, 25         | Yes    |
-## 8:36    | 53             | Yes    |
-## 9:7     | 26             | Yes    |
-## 9:9     | 20, 19         | Yes    |
-## 9:12    | 29             | Yes    |
-## 9:13    | 16             | Yes    |
-## 9:15    | 38             | Yes    |
-## 9:17    | 39+18          | Yes    |
-## 9:20    | 24+12          | Yes    |
-## 9:25-26 | 10             | Yes    | Wording in LXX is different, ABPGRK seems to be better for the match
-## 9:26    | 73             | Yes    |
-## 9:27    | 40             | Yes    |
-## 9:29    | 81             | Yes    |
-## 9:33a   | 12             | Yes    | There is one letter of difference, a fuzzy search would be more useful
-## 9:33b   | 20             | Yes    | Two letters are removed by Paul, a fuzzy search would be more useful
-## 10:5    | 27             | Yes    |
-## 10:8    | 30             | Yes    |
-## 10:11   | 17             | Yes    |
-## 10:13   | 38             | Yes    |
-## 10:15   |                | No     | The quotation is far from being literal.
-## 10:16   | 28             | Yes    |
-## 10:18   | 74             | Yes    |
-## 10:19   | 33+12          | Yes    |
-## 10:20   | 24+21+19+7     | Yes    |
-## 10:21   | 32+21          | Yes    |
-## 11:3    | 28             | Yes    | Maybe the minunique algorithm should be changed. (Also for 11:2, not listed here.)
-## 11:4    | 7              | Yes    | Some wording in the quotation are synonyms instead of being literal matches.
-## 11:8a   |                | No     | Two letters are removed by Paul, a fuzzy search would be more useful.
-## 11:8b   | 13+13          | Yes    | A clever fuzzy search would be more successful.
-## 11:9-10 | 74+22+20+16+14 | Yes    |
+## Romans    | Match length   | Found? | Problem
+## ----------+----------------+--------+-----------------------------------------------------------------------
+## 1:17      | 19             | Yes    |
+## 2:6       |                | No     | TBD
+## 2:24      | 39             | Yes    |
+## 3:4       | 38+16          | Yes    |
+## 3:10      |                | No     | TBD
+## 3:11      | 318            | Yes    |
+## 4:3       | 36             | Yes    |
+## 4:9       |                | No     | TBD
+## 4:22      |                | No     | TBD
+## 4:23      |                | No     | TBD
+## 4:7       | 97             | Yes    |
+## 4:17      | 31             | Yes    |
+## 4:18      | 17, 25         | Yes    |
+## 8:36      | 53             | Yes    |
+## 9:7       | 26             | Yes    |
+## 9:9       | 20, 19         | Yes    |
+## 9:12      | 29             | Yes    |
+## 9:13      | 16             | Yes    |
+## 9:15      | 38             | Yes    |
+## 9:17      | 39+18          | Yes    |
+## 9:20      | 24+12          | Yes    |
+## 9:25-26   | 10             | Yes    | Wording in LXX is different, ABPGRK seems to be better for the match
+## 9:26      | 73             | Yes    |
+## 9:27      | 40             | Yes    |
+## 9:29      | 81             | Yes    |
+## 9:33a     | 12             | Yes    | There is one letter of difference, a fuzzy search would be more useful
+## 9:33b     | 20             | Yes    | Two letters are removed by Paul, a fuzzy search would be more useful
+## 10:5      | 27             | Yes    |
+## 10:8      | 30             | Yes    |
+## 10:11     | 17             | Yes    |
+## 10:13     | 38             | Yes    |
+## 10:15     |                | No     | The quotation is far from being literal.
+## 10:16     | 28             | Yes    |
+## 10:18     | 74             | Yes    |
+## 10:19     | 33+12          | Yes    |
+## 10:20     | 24+21+19+7     | Yes    |
+## 10:21     | 32+21          | Yes    |
+## 11:3      | 28             | Yes    | Maybe the minunique algorithm should be changed. (Also for 11:2, not listed here.)
+## 11:4      | 7              | Yes    | Some wording in the quotation are synonyms instead of being literal matches.
+## 11:8a     |                | No     | Two letters are removed by Paul, a fuzzy search would be more useful.
+## 11:8b     | 13+13          | Yes    | A clever fuzzy search would be more successful.
+## 11:9-10   | 74+22+20+16+14 | Yes    |
+## 11:26-27a | 54+13          | Yes    |
 ##
 ## This table is to be continued and completed.
 
@@ -536,7 +537,27 @@ getrefs SBLGNT LXX Isaiah 59:20 59:21
 # LXX Isaiah 59:21+121 59:21-49 = SBLGNT Revelation_of_John 16:13+33 16:13-68 (length=19, pos1=119436)
 # LXX Isaiah 59:21+119 59:21-49 = SBLGNT Revelation_of_John 16:13+56 16:13-43 (length=21, pos1=119434)
 # LXX Isaiah 59:20+29 59:21-161 = SBLGNT Romans 11:26+59 11:27-28 (length=54, pos1=119289)
-## The union of the last and first match should be one
+## The union of the last and first match should be one.
+lookup LXX Isaiah 59:20
+# και ηξει ενεκεν σιων ο ρυομενος και αποστρεψει ασεβειας απο ιακωβ
+# και αυτη αυτοις η παρ εμου διαθηκη ειπεν κυριος το πνευμα το εμον ο εστιν επι σοι και τα ρηματα α εδωκα εις το στομα σου ου μη εκλιπη εκ του στοματος σου και εκ του στοματος του σπερματος σου ειπεν γαρ κυριος απο του νυν και εις τον αιωνα
+lookup SBLGNT Romans 11:26
+# καὶ οὕτως πᾶς Ἰσραὴλ σωθήσεται· καθὼς γέγραπται· Ἥξει ἐκ Σιὼν ὁ ⸀ῥυόμενος, ἀποστρέψει ἀσεβείας ἀπὸ Ἰακώβ.
+lookup SBLGNT Romans 11:27
+# καὶ αὕτη αὐτοῖς ἡ παρʼ ἐμοῦ διαθήκη, ὅταν ἀφέλωμαι τὰς ἁμαρτίας αὐτῶν.
+lookup1 LXX Isaiah 59:20+3 59:21-161
+# Stored internally as hjeienekensivnoryomenoskaiapostreceiasebeiasapoiakvbkaiaythaytoishparemoydiauhkh.
+lookup2 SBLGNT Romans 11:26+40 11:27-28
+# Stored internally as hjeieksivnoryomenosapostreceiasebeiasapoiakvbkaiaythaytoishparemoydiauhkh.
+compare12
+# Comparing 'hjeienekensivnoryomenoskaiapostreceiasebeiasapoiakvbkaiaythaytoishparemoydiauhkh' ~ 'hjeieksivnoryomenosapostreceiasebeiasapoiakvbkaiaythaytoishparemoydiauhkh' = 11
+# difference = 0.078431
+length1
+# Length of text 1 is 80.
+length2
+# Length of text 2 is 73.
+## With a fuzzy search a bit longer match can be identified.
+
 getrefs SBLGNT LXX Isaiah 27:9
 # ... (lengths<=10)
 # LXX Isaiah 27:9+59 27:9-147 = SBLGNT Romans 11:27+28 11:27-16 (length=12, pos1=50476)
