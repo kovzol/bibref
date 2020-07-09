@@ -50,6 +50,8 @@
 ## 11:27b    | 12             | Yes    | The quotation is too short: the correct identification is difficult. A fuzzy search would be more useful.
 ## 11:32     | 19             | Yes    |
 ## 11:34     | 14             | Yes    |
+## 12:19     |                | No     | The short quotation is far from being literal. A fuzzy match helps finding the traditional match.
+## 12:20     | 77+18          | Yes    |
 ##
 ## This table is to be continued and completed.
 
@@ -619,7 +621,38 @@ lookup KJV Deuteronomy 32:35
 # To me belongeth vengeance, and recompence; their foot shall slide in due time: for the day of their calamity is at hand, and the things that shall come upon them make haste.
 lookup KJV Romans 12:19
 # Dearly beloved, avenge not yourselves, but rather give place unto wrath: for it is written, Vengeance is mine; I will repay, saith the Lord.
-## Fuzzy comparison gives an acceptable result.
+## Fuzzy comparison gives an acceptable result. The match is, however, still short, and
+## some other passages also match with the Sword search "εκδικησ* ανταποδ*", namely:
+## Deuteronomy 32:43, Jeremiah 51:6, Hosea 4:9, Hosea 9:7, Hosea 12:2.
+lookup1 LXX Deuteronomy 32:43+160 32:43-80
+# Stored internally as ekdikhseikaiantapodvse.
+compare12
+# Comparing 'ekdikhseikaiantapodvse' ~ 'ekdikhsisegvantapodvsv' = 12
+# difference = 0.295455
+lookup1 LXX Jeremiah 51:6+94 51:6-25
+# Stored internally as ekdikhsevsaythsestinparakyrioyantapod.
+compare12
+# Comparing 'ekdikhsevsaythsestinparakyrioyantapod' ~ 'ekdikhsisegvantapodvsv' = 29
+# difference = 0.508475
+lookup1 LXX Hosea 4:9+36 4:9-5
+# Stored internally as ekdikhsvepaytontasodoysaytoykaitadiaboyliaaytoyantapodvs.
+compare12
+# Comparing 'ekdikhsvepaytontasodoysaytoykaitadiaboyliaaytoyantapodvs' ~ 'ekdikhsisegvantapodvsv' = 46
+# difference = 0.602564
+lookup1 LXX Hosea 9:7+17 9:7-120
+# Stored internally as ekdikhsevshkasinaihmeraithsantapod.
+compare12
+# Comparing 'ekdikhsevshkasinaihmeraithsantapod' ~ 'ekdikhsisegvantapodvsv' = 24
+# difference = 0.446429
+lookup1 LXX Hosea 12:2+29 12:2-6
+# Stored internally as ekdikhsaitoniakvbkatatasodoysaytoykaikatataepithdeymataaytoyantapodvs.
+compare12
+# Comparing 'ekdikhsaitoniakvbkatatasodoysaytoykaikatataepithdeymataaytoyantapodvs' ~ 'ekdikhsisegvantapodvsv' = 61
+# difference = 0.681319
+## Conclusion. The best fuzzy match is the traditional one (Deuteronomy 32:35), but Deuteronomy 32:43
+## is also quite close. The other quasi-matches are contextually somewhat more different.
+## Still, it seems difficult to completely agree that Paul quotes LXX Deuteronomy 32:35, because
+## Paul's short quotation is far from being literal.
 
 getrefs SBLGNT LXX Proverbs 25:21 25:22
 # ... (lengths<=7)
