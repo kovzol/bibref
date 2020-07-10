@@ -52,6 +52,8 @@
 ## 11:34     | 14             | Yes    |
 ## 12:19     |                | No     | The short quotation is far from being literal. A fuzzy match helps finding the traditional match.
 ## 12:20     | 77+18          | Yes    |
+## 13:9a     |                | No     | Maybe the minunique algorithm should be changed. Then, also a fuzzy match could be helpful.
+## 13:9b     | 31             | Yes    |
 ##
 ## This table is to be continued and completed.
 
@@ -666,7 +668,38 @@ getrefs SBLGNT LXX Proverbs 25:21 25:22
 ## the matching parts in "ποτιζε αυτον" (LXX) and "ψώμιζε αὐτόν" (SBLGNT) are no real matches.
 
 getrefs SBLGNT LXX Exodus 20:13 20:17
-## This gives no result. A fuzzy search should be used to get the relationship with Romans 13:9.
+minunique1 LXX Exodus 20:13 20:17
+## These give no result. The reason is just because these texts are repeated in Deuteronomy 5:17-21.
+lookup1 LXX Exodus 20:13 20:15
+# Stored internally as oyfoneyseisoymoixeyseisoykleceis.
+lookup2 LXX Deuteronomy 5:17 5:19
+Stored internally as oyfoneyseisoymoixeyseisoykleceis.
+compare12
+Comparing 'oyfoneyseisoymoixeyseisoykleceis' ~ 'oyfoneyseisoymoixeyseisoykleceis' = 0
+difference = 0.015625
+## A fuzzy search can be used to get the relationship with Romans 13:9.
+lookup2 SBLGNT Romans 13:9+5 13:9-96
+# Stored internally as oymoixeyseisoyfoneyseisoykleceis.
+compare12
+# Comparing 'oyfoneyseisoymoixeyseisoykleceis' ~ 'oymoixeyseisoyfoneyseisoykleceis' = 0
+# difference = 0.015625
+## In fact, Exodus 20:13-17 and Deuteronomy 5:17-21 are literally the same:
+lookup2 LXX Deuteronomy 5:17 5:21
+# Stored internally as oyfoneyseisoymoixeyseisoykleceisoyceydomartyrhseiskatatoyplhsionsoymartyrianceydhoykepiuymhseisthngynaikatoyplhsionsoyoykepiuymhseisthnoikiantoyplhsionsoyoytetonagronaytoyoytetonpaidaaytoyoytethnpaidiskhnaytoyoytetoyboosaytoyoytetoyypoqygioyaytoyoytepantoskthnoysaytoyoyteosatvplhsionsoyestin.
+lookup1 LXX Exodus 20:13 20:17
+# Stored internally as oyfoneyseisoymoixeyseisoykleceisoyceydomartyrhseiskatatoyplhsionsoymartyrianceydhoykepiuymhseisthngynaikatoyplhsionsoyoykepiuymhseisthnoikiantoyplhsionsoyoytetonagronaytoyoytetonpaidaaytoyoytethnpaidiskhnaytoyoytetoyboosaytoyoytetoyypoqygioyaytoyoytepantoskthnoysaytoyoyteosatvplhsionsoyestin.
+compare12
+# Comparing 'oyfoneyseisoymoixeyseisoykleceisoyceydomartyrhseiskatatoyplhsionsoymartyrianceydhoykepiuymhseisthngynaikatoyplhsionsoyoykepiuymhseisthnoikiantoyplhsionsoyoytetonagronaytoyoytetonpaidaaytoyoytethnpaidiskhnaytoyoytetoyboosaytoyoytetoyypoqygioyaytoyoytepantoskthnoysaytoyoyteosatvplhsionsoyestin' ~ 'oyfoneyseisoymoixeyseisoykleceisoyceydomartyrhseiskatatoyplhsionsoymartyrianceydhoykepiuymhseisthngynaikatoyplhsionsoyoykepiuymhseisthnoikiantoyplhsionsoyoytetonagronaytoyoytetonpaidaaytoyoytethnpaidiskhnaytoyoytetoyboosaytoyoytetoyypoqygioyaytoyoytepantoskthnoysaytoyoyteosatvplhsionsoyestin' = 0
+# difference = 0.001712
+## Furthermore, this can be slightly extended to the previous verse to keep the literal
+## match, and completely, to have a fuzzy match. E.g.:
+lookup1 LXX Exodus 20:12+28 20:17
+# Stored internally as inaeysoigenhtaikaiinamakroxroniosgenhepithsghsthsagauhshskyriosoueossoydidvsinsoioyfoneyseisoymoixeyseisoykleceisoyceydomartyrhseiskatatoyplhsionsoymartyrianceydhoykepiuymhseisthngynaikatoyplhsionsoyoykepiuymhseisthnoikiantoyplhsionsoyoytetonagronaytoyoytetonpaidaaytoyoytethnpaidiskhnaytoyoytetoyboosaytoyoytetoyypoqygioyaytoyoytepantoskthnoysaytoyoyteosatvplhsionsoyestin.
+lookup2 LXX Deuteronomy 5:16+66 5:21
+# Stored internally as inaeysoigenhtaikaiinamakroxroniosgenhepithsghshskyriosoueossoydidvsinsoioyfoneyseisoymoixeyseisoykleceisoyceydomartyrhseiskatatoyplhsionsoymartyrianceydhoykepiuymhseisthngynaikatoyplhsionsoyoykepiuymhseisthnoikiantoyplhsionsoyoytetonagronaytoyoytetonpaidaaytoyoytethnpaidiskhnaytoyoytetoyboosaytoyoytetoyypoqygioyaytoyoytepantoskthnoysaytoyoyteosatvplhsionsoyestin.
+compare12
+# Comparing 'inaeysoigenhtaikaiinamakroxroniosgenhepithsghsthsagauhshskyriosoueossoydidvsinsoioyfoneyseisoymoixeyseisoykleceisoyceydomartyrhseiskatatoyplhsionsoymartyrianceydhoykepiuymhseisthngynaikatoyplhsionsoyoykepiuymhseisthnoikiantoyplhsionsoyoytetonagronaytoyoytetonpaidaaytoyoytethnpaidiskhnaytoyoytetoyboosaytoyoytetoyypoqygioyaytoyoytepantoskthnoysaytoyoyteosatvplhsionsoyestin' ~ 'inaeysoigenhtaikaiinamakroxroniosgenhepithsghshskyriosoueossoydidvsinsoioyfoneyseisoymoixeyseisoykleceisoyceydomartyrhseiskatatoyplhsionsoymartyrianceydhoykepiuymhseisthngynaikatoyplhsionsoyoykepiuymhseisthnoikiantoyplhsionsoyoytetonagronaytoyoytetonpaidaaytoyoytethnpaidiskhnaytoyoytetoyboosaytoyoytetoyypoqygioyaytoyoytepantoskthnoysaytoyoyteosatvplhsionsoyestin' = 9
+# difference = 0.013569
 
 getrefs SBLGNT LXX Leviticus 19:18
 # ... (length=9)
