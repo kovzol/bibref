@@ -3,9 +3,9 @@
 ## The following verified quotations can be found automatically with the getrefs algorithm:
 ##
 ## Romans    | Match length   | Found? | Problem
-## ----------+----------------+--------+-----------------------------------------------------------------------
+## ----------+----------------+--------+----------------------------------------------------------------------------
 ## 1:17      | 19             | Yes    |
-## 2:6       |                | No     | TBD
+## 2:6       |                | No     | Maybe the minunique algorithm should be changed (there are two LXX matches)
 ## 2:24      | 39             | Yes    |
 ## 3:4       | 38+16          | Yes    |
 ## 3:10      |                | No     | TBD
@@ -72,7 +72,22 @@ getrefs SBLGNT LXX Habakkuk 2:4
 # LXX Habakkuk 2:4+39 2:4-10 = SBLGNT Romans 1:17+68 1:17-7 (length=19, pos1=2126)
 # LXX Habakkuk 2:4 2:4-29 = SBLGNT Hebrews 10:38+32 10:38 (length=39, pos1=2087)
 
-## Romans 2:6 is to be found!
+## Finding the quotation in Romans 2:6 is difficult, because the minunique algorithm
+## cannot handle the situation that there are two very close matches.
+## Traditionally there are two close matches known in LXX: Psalms 62:12 and Proverbs 24:12.
+lookup2 SBLGNT Romans 2:6+2 2:6
+# Stored internally as apodvseiekastvkatataergaaytoy.
+lookup1 LXX Psalms 62:12+41 62:12
+# Stored internally as apodvseisekastvkatataergaaytoy.
+compare12 
+# Comparing 'apodvseisekastvkatataergaaytoy' ~ 'apodvseiekastvkatataergaaytoy' = 3
+# difference = 0.067797
+lookup1 LXX Proverbs 24:12+95 24:12
+# Stored internally as osapodidvsinekastvkatataergaaytoy.
+compare12
+# Comparing 'osapodidvsinekastvkatataergaaytoy' ~ 'apodvseiekastvkatataergaaytoy' = 10
+# difference = 0.177419
+## A Sword search "αποδ* εκασ* εργ*" on LXX does not give any other results.
 
 getrefs SBLGNT LXX Isaiah 52:5
 # ... (lengths<=11)
