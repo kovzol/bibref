@@ -54,6 +54,13 @@
 ## 12:20     | 77+18          | Yes    |
 ## 13:9a     |                | No     | Maybe the minunique algorithm should be changed. Then, also a fuzzy match could be helpful.
 ## 13:9b     | 31             | Yes    |
+## 14:11a    |                | No     | 16 characters long match with 17 passages in the LXX.
+## 14:11b    | 23+12          | Yes    |
+## 15:3      | 44             | Yes    |
+## 15:10     | 33             | Yes    |
+## 15:11     | 17+9           | Yes    |
+## 15:12     | 59             | Yes    |
+## 15:21     | 58             | Yes    |
 ##
 ## This table is to be continued and completed.
 
