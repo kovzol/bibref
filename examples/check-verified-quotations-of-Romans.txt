@@ -3,12 +3,12 @@
 ## The following verified quotations can be found automatically with the getrefs algorithm:
 ##
 ## Romans    | Match length   | Found? | Problem
-## ----------+----------------+--------+----------------------------------------------------------------------------
+## ----------+----------------+--------+-----------------------------------------------------------------------------
 ## 1:17      | 19             | Yes    |
-## 2:6       |                | No     | Maybe the minunique algorithm should be changed (there are two LXX matches)
+## 2:6       |                | No     | Maybe the minunique algorithm should be changed (there are two LXX matches).
 ## 2:24      | 39             | Yes    |
 ## 3:4       | 38+16          | Yes    |
-## 3:10      |                | No     | TBD
+## 3:10      |                | No     | Paul's text cannot be identified, either manually.
 ## 3:11      | 318            | Yes    |
 ## 4:3       | 36             | Yes    |
 ## 4:9       |                | No     | TBD
@@ -25,12 +25,12 @@
 ## 9:15      | 38             | Yes    |
 ## 9:17      | 39+18          | Yes    |
 ## 9:20      | 24+12          | Yes    |
-## 9:25-26   | 10             | Yes    | Wording in LXX is different, ABPGRK seems to be better for the match
+## 9:25-26   | 10             | Yes    | Wording in LXX is different, ABPGRK seems to be better for the match.
 ## 9:26      | 73             | Yes    |
 ## 9:27      | 40             | Yes    |
 ## 9:29      | 81             | Yes    |
-## 9:33a     | 12             | Yes    | There is one letter of difference, a fuzzy search would be more useful
-## 9:33b     | 20             | Yes    | Two letters are removed by Paul, a fuzzy search would be more useful
+## 9:33a     | 12             | Yes    | There is one letter of difference, a fuzzy search would be more useful.
+## 9:33b     | 20             | Yes    | Two letters are removed by Paul, a fuzzy search would be more useful.
 ## 10:5      | 27             | Yes    |
 ## 10:8      | 30             | Yes    |
 ## 10:11     | 17             | Yes    |
@@ -99,7 +99,24 @@ getrefs SBLGNT LXX Psalms 51:4
 # LXX Psalms 51:4+43 51:4-17 = SBLGNT Romans 3:4+63 3:4-18 (length=38, pos1=56556)
 ## The union of the last two ones should be one citation.
 
-## Romans 3:10 is to be found!
+## The quoted text in Romans 3:10 cannot be found. Traditionally, Ecclesiastes 7:20 is
+## identified as the source of quotation. In fact, the first three words
+## are present in two passages:
+latintext1 oykestindikaios
+# Stored.
+find1 LXX
+# Found in I_Samuel 2:2+27 2:2-31 (book position 3508-3522)
+# Found in Ecclesiastes 7:20+11 7:20-38 (book position 12724-12738)
+# 2 occurrences.
+find1 SBLGNT 
+# Found in Romans 3:10+17 3:10-7 (book position 5770-5784)
+# 1 occurrences.
+## The Sword search "ουκ* εστιν* δικαι*" does not give better candidates, and the
+## final two words in Paul's text ("οὐδὲ εἷς", not even one), are completely missing
+## in all candidates. On the other hand, the matching words in Ecclesiastes 7:20
+## are too short to be an evidence of quotation, even if the context is somewhat
+## identical. (The passage in I_Samuel does not seem to be closer in its context.)
+## Conclusion. It is not possible to identify the last 5 words in Romans 3:10.
 
 getrefs SBLGNT LXX Psalms 14:3
 # ... (lengths<=8)
