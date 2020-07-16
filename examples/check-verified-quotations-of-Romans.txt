@@ -11,9 +11,9 @@
 ## 3:10      |                | No     | Paul's text cannot be identified, either manually.
 ## 3:11      | 318            | Yes    |
 ## 4:3       | 36             | Yes    |
-## 4:9       |                | No     | TBD
-## 4:22      |                | No     | TBD
-## 4:23      |                | No     | TBD
+## 4:9       |                | No     | This is a repetition of a quotation with some variations.
+## 4:22      | 26             | No     | This is only a part of the quotation that is higlighted, so it is too short.
+## 4:23      | 12             | No     | This is only a part of the quotation that is higlighted, so it is too short.
 ## 4:7       | 97             | Yes    |
 ## 4:17      | 31             | Yes    |
 ## 4:18      | 17, 25         | Yes    |
@@ -61,8 +61,6 @@
 ## 15:11     | 17+9           | Yes    |
 ## 15:12     | 59             | Yes    |
 ## 15:21     | 58             | Yes    |
-##
-## This table is to be continued and completed.
 
 addbooks
 
@@ -128,7 +126,41 @@ getrefs SBLGNT LXX Genesis 15:6
 # LXX Genesis 15:6+16 15:6 = SBLGNT James 2:23+41 2:23-18 (length=36, pos1=34471)
 # LXX Genesis 15:6+16 15:6 = SBLGNT Romans 4:3+32 4:3 (length=36, pos1=34471)
 
-## Romans 4:9,4:22 and 4:23 should be found!
+## The getrefs algorithm does not find the citations in Romans 4:9, 4:22 and 4:23.
+## For Romans 4:9 there is a fuzzy comparison that is still somewhat far:
+lookup1 LXX Genesis 15:6+3 15:6
+# Stored internally as episteysenabramtvuevkaielogisuhaytveisdikaiosynhn.
+lookup2 SBLGNT Romans 4:9+65 4:9
+# Stored internally as elogisuhtvabraamhpistiseisdikaiosynhn.
+compare12
+# Comparing 'episteysenabramtvuevkaielogisuhaytveisdikaiosynhn' ~ 'elogisuhtvabraamhpistiseisdikaiosynhn' = 26
+# difference = 0.313953
+
+## For Romans 4:22 we find exact match.
+lookup1 LXX Genesis 15:6+26 15:6
+# Stored internally as elogisuhaytveisdikaiosynhn.
+lookup2 SBLGNT Romans 4:22+3 4:22
+# Stored internally as elogisuhaytveisdikaiosynhn.
+find1 LXX
+# Found in Genesis 15:6+26 15:6 (book position 34482-34507)
+# Found in Psalms 106:31+3 106:31-30 (book position 125688-125713)
+# 2 occurrences.
+lookup KJV Psalms 106:31
+# And that was counted unto him for righteousness unto all generations for evermore.
+## This is written about Phinehas: "Then stood up Phinehas, and executed judgment: and so the plague was stayed." (Psalm 106:30)
+length1
+# Length of text 1 is 26.
+# Psalm 106:31 seems to be an accidental match for the first look since the context differs.
+# But maybe it is on purpose: to highlight that Abraham's faith and Phinehas' deed
+# are on a similar level.
+
+## For Romans 4:23 we find a short exact match.
+lookup2 SBLGNT Romans 4:23+26 4:23
+# Stored internally as elogisuhaytv.
+## Conclusion for Romans 4:3, 4:9, 4:22 and 4:23: 4:3 is a well-identified match, and all of the
+## other three ones are just repetitions of it. 4:9 is a variation---it is required for Paul to
+## reword the quotation. In 4:22 and 4:23 the text is literally same as in Genesis 15:6.
+## Paul works here as a faithful scientist.
 
 getrefs SBLGNT LXX Psalms 32:1
 # ... (lengths<=10)
