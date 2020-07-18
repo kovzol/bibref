@@ -167,7 +167,7 @@ az eltérések nagyságának megítélése az irodalomban elég szubjektív.
 
 Így pl. Burrows szerint \cite[304. o.]{Burrows} bizonyos ószövetségi könyveknél kevés különbség van 1000 év távlatában,
 más könyveknél azonban a különbség elég jelentős. Burrows itt Geisler és Nix széles körben
-elterjedt és gyakran említett eredményét idézi, mely szerint
+elterjedt és gyakran említett eredményét idézi, mely szerint:
 \begin{quote}
 Az Ézsaiás 53-ban 166 \textit{szó}
 található, melyekben 17 \textit{betű}nyi eltérés van a két szöveg között.
@@ -381,7 +381,7 @@ Ha a modern beosztástól elvonatkoztatunk, akkor a digitális dokumentumban \te
 Ez a pozíció viszont mindig függ a digitális dokumentumtól.
 \end{itemize}
 
-A nehézségek viszont akkor kezdődnek, amikor egy digitális dokumentumból több variáció is létezik.
+A nehézségek akkor kezdődnek csak igazán, amikor egy digitális dokumentumból több variáció is létezik.
 A \textbf{01}-ben a Lk 4,10 két variációt is említ: a \gr γεγραπται\hu\ szó után az egyik
 korrektor szerint megjelenik a \gr γαρ\hu\ szócska (\ref{Lk4:10-gar}. ábra). Ettől eltekintve a szöveg
 teljes egészében megegyezik az SBLGNT szövegével --- attól az apróságtól eltekintve, hogy ebben a kódexben
@@ -508,6 +508,7 @@ mivel ezekre az Újszövetség is külön egységenként tekint (l. ApCsel 13:33
 Erre az alapvetésre azért van szükség, mert feltételezzük, hogy egy idézet csupán egy és nem több
 könyvből származik --- ugyanez nem feltétlenül lenne elmondható akkor, ha fejezetekre osztva
 vizsgálnánk a szövegeket: ez önkényes döntés lenne, és az idézetek akár fejezethatárokon is átívelhetnének.
+(Valójában a fejezethatárok nem is feltétlenül egységesek a különböző bibliafordításokban.)
 
 Egy pillanatra eszünkbe juthat, hogy a Biblia esetében bizonyos héber nyelvű könyvekben van értelme vershatárokról is
 beszélni, hiszen vagy azonos, vagy egymást követő betűkkel kezdődnek bizonyos versek vagy rész-versek a héber
@@ -557,7 +558,7 @@ Amennyiben $m_1<m_2$, úgy a $T\subset B$ jelölést is használjuk.
 A $T_1\equiv T_2$ jelölést alkalmazzuk továbbá, ha $m_1=m_2$.
 
 Tekintsünk egy ószövetségi $B$ könyvet és abban egy $T$ szöveget. Azt mondjuk, hogy egy $T\subset B$ szöveg
-egyedi a $B$ könyvben, ha valamely $T'\subset B$-ból $p(T',B)=p(T,B)$ következik.
+egyedi a $B$ könyvben, ha valamely $T'\subset B$-ből $p(T',B)=p(T,B)$ következik.
 
 Legyen $T_1,T_2\in B$, ahol $B$ egy adott ószövetségi könyv. Azt mondjuk, hogy $T_1$ a $T_2$ igehelyen
 belül van, ha $T_1\subset T_2$, $p(T_1,B)\geq p(T_2,B)$ és $p(T_1,B)+|T_1|\leq p(T_2,B)+|T_2|$.
@@ -739,8 +740,8 @@ A fenti táblázat egy alternatív, ``kisebb helyen elférő'' változata a köv
 \textcolor{blue}f & & & & &
 \end{tabular}
 \end{center}
-Itt a függőlegesen kell kiolvasnunk az egyes szövegeket, fentről lefele, a piros betűvel bezárólag.
-A fenti módszernek megfelelően elkészítjük a 
+Itt függőlegesen kell kiolvasnunk az egyes szövegeket, fentről lefele, a piros betűvel bezárólag.
+A fenti módszernek megfelelően elkészítjük
 a Zsolt 82:5-6 versének közbülső, \gr γης
 εγω ειπα θεοι εστε και\hu\ szavaihoz tartozó táblázatot (a könnyebb olvashatóság
 kedvéért latin betűkkel):
@@ -849,7 +850,7 @@ A fentiek segítségével egy további algoritmus adható, hogy egy ószövetsé
 az összes olyan szövegrészt, amelyeket az Újszövetség idéz. A találatok között lehetnek
 ugyan véletlen egybeesések, azonban a módszer teljes abban az értelemben, hogy egyetlen
 idézet sem marad ki. A módszert a \ref{algo-osz-uszi-ref}. algoritmus részletezi, melyben a már korábban
-említett \textsc{extend} eljárással egy idézetet maximálizálunk 
+említett \textsc{extend} eljárással egy idézetet maximálizálunk.
 
 \begin{algorithm}
 \caption{Algoritmus egy $T$ ószövetségi ($O$) szöveg összes lehetséges
@@ -881,14 +882,14 @@ Az algoritmust (ill. annak rendezett eredményét) az alábbi \texttt{bibref}-ki
 
 \begin{lstlisting}
 >> getrefs SBLGNT LXX Psalms 91:11
-LXX Psalms 91:11+24 91:11-41 = SBLGNT Revelation of John 11:8+54 11:8-55 (length=7, pos1=20150)
-LXX Psalms 91:11+24 91:11-40 = SBLGNT Acts 10:32+45 10:32-51 (length=8, pos1=33631)
-LXX Psalms 91:11+24 91:11-40 = SBLGNT Acts 10:5+47 10:5-4 (length=8, pos1=31365)
-LXX Psalms 91:11 91:11-63 = SBLGNT Romans 8:28+9 8:28-62 (length=9, pos1=17129)
-LXX Psalms 91:11+25 91:11-38 = SBLGNT Luke 17:2+27 17:2-70 (length=9, pos1=65552)
-LXX Psalms 91:11+2 91:11-51 = SBLGNT Matthew 25:41+95 25:42-56 (length=19, pos1=75927)
-LXX Psalms 91:11 91:11-35 = SBLGNT Matthew 4:6+54 4:6-55 (length=37, pos1=6524)
-LXX Psalms 91:11 91:11-20 = SBLGNT Luke 4:10+12 4:10 (length=52, pos1=13672)
+LXX Psalms 91:11+24 91:11-41 = SBLGNT Revelation_of_John 11:8+54 11:8-55 (length=7, pos1=107379)
+LXX Psalms 91:11+24 91:11-40 = SBLGNT Acts 10:32+45 10:32-51 (length=8, pos1=107379)
+LXX Psalms 91:11+24 91:11-40 = SBLGNT Acts 10:5+57 10:5-4 (length=8, pos1=107379)
+LXX Psalms 91:11 91:11-63 = SBLGNT Romans 8:28+9 8:28-62 (length=9, pos1=107355)
+LXX Psalms 91:11+25 91:11-38 = SBLGNT Luke 17:2+32 17:2-73 (length=9, pos1=107380)
+LXX Psalms 91:11+2 91:11-51 = SBLGNT Matthew 25:41+95 25:42-56 (length=19, pos1=107357)
+LXX Psalms 91:11 91:11-35 = SBLGNT Matthew 4:6+54 4:6-55 (length=37, pos1=107355)
+LXX Psalms 91:11 91:11-20 = SBLGNT Luke 4:10+12 4:10 (length=52, pos1=107355)
 \end{lstlisting}
 
 Örvendetes, hogy a Lk 4:10 mint maximális idézet jelent meg, azonban vannak további találatok is,
@@ -901,18 +902,18 @@ egyezésről van szó. A Zsolt 82:6-ra való hivatkozásra keresés a 15 betűs 
 jól beazonosítja, ám ez a Mt 25:41-hez tévesen kapcsolt Zsolt 91:11 részszövegnél rövidebb:
 \begin{lstlisting}
 >> getrefs SBLGNT LXX Psalms 82:6
-LXX Psalms 82:6+3 82:6-27 = SBLGNT Acts 26:23 26:23-80 (length=5, pos1=86623)
-LXX Psalms 82:6+4 82:6-26 = SBLGNT Luke 24:46+30 24:46-44 (length=5, pos1=94113)
-LXX Psalms 82:6+3 82:6-26 = SBLGNT Acts 17:3+40 17:3-71 (length=6, pos1=55404)
-LXX Psalms 82:6+3 82:6-26 = SBLGNT Luke 24:26+11 24:26-40 (length=6, pos1=92671)
-LXX Psalms 82:6+6 82:6-23 = SBLGNT Ephesians 2:12+117 2:12-8 (length=6, pos1=3014)
-LXX Psalms 82:6+11 82:6-16 = SBLGNT Romans 1:6+5 1:6-22 (length=8, pos1=356)
-LXX Psalms 82:6+25 82:6-2 = SBLGNT II Thessalonians 1:3+112 1:3-17 (length=8, pos1=267)
-LXX Psalms 82:6+24 82:6-2 = SBLGNT Colossians 1:3+43 1:3-24 (length=9, pos1=195)
-LXX Psalms 82:6+24 82:6-2 = SBLGNT Colossians 4:12+35 4:12-97 (length=9, pos1=7333)
-LXX Psalms 82:6+11 82:6-13 = SBLGNT I Thessalonians 5:5+23 5:5-31 (length=11, pos1=6042)
-LXX Psalms 82:6+18 82:6-6 = SBLGNT Luke 6:35+102 6:35-48 (length=11, pos1=23362)
-LXX Psalms 82:6 82:6-20 = SBLGNT John 10:34+55 10:34 (length=15, pos1=35755)
+LXX Psalms 82:6+3 82:6-27 = SBLGNT Acts 26:23 26:23-80 (length=5, pos1=96139)
+LXX Psalms 82:6+4 82:6-26 = SBLGNT Luke 24:46+30 24:46-44 (length=5, pos1=96140)
+LXX Psalms 82:6+3 82:6-26 = SBLGNT Acts 17:3+40 17:3-72 (length=6, pos1=96139)
+LXX Psalms 82:6+3 82:6-26 = SBLGNT Luke 24:26+11 24:26-40 (length=6, pos1=96139)
+LXX Psalms 82:6+6 82:6-23 = SBLGNT Ephesians 2:12+117 2:12-8 (length=6, pos1=96142)
+LXX Psalms 82:6+11 82:6-16 = SBLGNT Romans 1:6+5 1:6-22 (length=8, pos1=96147)
+LXX Psalms 82:6+25 82:6-2 = SBLGNT II_Thessalonians 1:3+112 1:3-17 (length=8, pos1=96161)
+LXX Psalms 82:6+24 82:6-2 = SBLGNT Colossians 1:3+43 1:3-24 (length=9, pos1=96160)
+LXX Psalms 82:6+24 82:6-2 = SBLGNT Colossians 4:12+35 4:12-97 (length=9, pos1=96160)
+LXX Psalms 82:6+11 82:6-13 = SBLGNT I_Thessalonians 5:5+23 5:5-31 (length=11, pos1=96147)
+LXX Psalms 82:6+18 82:6-6 = SBLGNT Luke 6:35+102 6:35-48 (length=11, pos1=96154)
+LXX Psalms 82:6 82:6-20 = SBLGNT John 10:34+55 10:34 (length=15, pos1=96136)
 \end{lstlisting}
 Jézus azonban egyértelműen kifejezi, hogy Ő itt az Ószövetségből idézett (\textit{Nincs-e
 megírva a ti törvényetekben$\ldots$?}), így az idézet hosszára való tekintet
