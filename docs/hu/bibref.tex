@@ -274,7 +274,10 @@ elérhetőek a Sword \cite{Sword} elektronikus könyvtárban, de egyik sem azono
 \begin{itemize}
 \item Az általunk LXX néven említett elektronikus szövegen egy 2008-ban készült Sword-modult fogunk érteni,
 mely Alfred Rahlfs 1935-ös Septuaginta-szövegén alapul. Ez részint idejétmúlt, de ennél újabb, ingyenesen
-elérhető digitális Sword-modul e tanulmány írásakor nem áll rendelkezésre. Ez lesz tehát az ószövetségi
+elérhető digitális Sword-modul e tanulmány írásának kezdetén nem állt rendelkezésre.\footnote{
+Az olvasó figyelmébe ajánljuk a \url{https://www.crosswire.org/sword/modules/ModDisp.jsp?modType=Bibles}
+weboldalt, ahol időközben néhány újabb modul is elérhető. Ilyen pl. az ABPGRK, az \textit{Apostolic Bible Polyglot}
+elektronikus kiadása.} Ez lesz tehát az ószövetségi
 rész tanulmányozásához használt digitális adatforrásunk.
 \item Az Újszövetséghez a Society of Biblical Literature's Greek New Testament
 (SBLGNT) kiadást fogjuk használni.
@@ -941,9 +944,44 @@ két részletben adja, mivel a Róm 15:11-ben az LXX-beli \gr επαινεσατ
 %επαινεσατωσαν αυτον παντες οι λαοι
 
 Az ilyen típusú problémákat egy, a plagiátumok kiszűrésében is használatos technikával
-fogjuk tudni kezelni. Plagiátumok keresésekor két szöveg eltérésének mérésére speciális módszerek léteznek.
+fogjuk tudni kezelni. A fent ismertetett módszer azonban számos idézetet jól azonosít be.
+Ezt elemezzük a következőkben.
+
+\subsubsection{A pontos egyezés statisztikai elemzése}
+
+Amikor egyezéseket keresünk ó- és újszövetségi szövegszakaszok között, akkor
+számos bibliafordítás segítségünkre lehet. Gyakori, hogy a fordítók-szerkesztők
+lábjegyzetekkel hívják fel az olvasó figyelmét arra, ha egy bibliai szakasz
+kapcsolatban áll valamely másikkal. Az ilyen jellegű lábjegyzetek persze
+minden kiadásban más és más összefüggésekre világíthatnak rá. A szerkesztőknek
+céljuk lehet, hogy a fontosabb idézetekre vagy célzásokra felhívják a figyelmet,
+a pontosság és teljesség azonban nem feltétlenül központi elv a bibliakiadások szerkesztésénél.
+
+A továbbiakban úgy fogunk ezekre a többségében lábjegyzetekben található
+összefüggésekre utalni mint \textit{hagyományosan elfogadott} összefüggésekre.
+Nagyobb kutatómunkával pontosíthatóak lennének, hogy mely összefüggéseket
+mely teológus vagy teológiai iskola fedezte fel, és hogy az összefüggés
+mennyiben fedheti a valóságot. Ez a vizsgálat azonban kívül esik tanulmányunk célkitűzésein.
+
+A fenti módszer pontosságát a következő módon fogjuk mérni. Az első kérdés, hogy
+minden hagyományosan elfogadott idézet beazonosítható-e vele. Látni fogjuk, hogy a válasz nemleges,
+de a módszer sok esetben nagyon pozitív eredményt ad.
+A második kérdés, hogy a módszer ad-e olyan találatot, ami nincs a hagyományosan elfogadott
+idézetek között, és a józan ész logikája szerint sem pozitív találat. Látjuk majd, hogy
+a válasz részben igenlő, de ennek ellenére a módszer --- bizonyos megszorításokkal --- általában jól alkalmazható.
+
+Méréseinket két könyvön végezzük. Az első mérés A zsoltárok könyvének 150 zsoltárának az elemzése lesz.
+A második mérés Pálnak a rómaiakhoz írt levelén alapul.
+
+A két mérés kétfajta stratégiát feltételez. A Zsoltárok esetében egy automatikus keresést hajtunk végre
+a \ref{algo-osz-uszi-ref}. algoritmus alkalmazásával. A római levél esetében viszont segítségül hívjuk
+a hagyományosan elfogadott összefüggések listáját, és az abban található ószövetségi igeversekre
+futtatjuk le a \ref{algo-osz-uszi-ref}. algoritmust.
 
 \subsection{Nem pontos egyezés}
+
+ Plagiátumok keresésekor két szöveg eltérésének mérésére speciális módszerek léteznek.
+
 
 \textcolor{red}{A szöveg hátralévő része megírásra vár.}
 
