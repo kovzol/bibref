@@ -1,0 +1,2 @@
+#!/bin/sh
+echo ".read psalms.sql" | sqlite3 psalms.sqlite3
