@@ -37,6 +37,7 @@ insert into found_methods (name, info) values ('getrefs', 'found by the getrefs 
 insert into found_methods (name, info) values ('manual', 'confirmed manually');
 
 insert into books (name, author, info) values ('Romans', 'Paul', 'Epistle to the Romans');
+insert into books (name, author, info) values ('Ephesians', 'Paul', 'Epistle to the Ephesians');
 insert into books (name, author, info) values ('Hebrews', 'Unknown', 'Epistle to the Hebrews');
 insert into books (name, author, info) values ('Acts', 'Luke', 'Acts of the Apostles');
 
@@ -65,3 +66,10 @@ insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot
  (2, 3, 2, 'LXX Psalms 2:7+44 2:7', 'Hebrews', 'SBLGNT Hebrews 5:5+70 5:5', 921, 32, null, 32, 'getrefs');
 insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2, 3, 2, 'LXX Psalms 2:7+44 2:7', 'Hebrews', 'SBLGNT Hebrews 5:5+70 5:5', 921, 32, null, 32, 'manual');
+
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (3, 1, 4, 'Psalms 4:4', 'Ephesians', 'Ephesians 4:26', null, null, null, null, 'traditional');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (3, 1, 4, 'LXX Psalms 4:4 4:4-63', 'Ephesians', 'SBLGNT Ephesians 4:26 4:26-33', 2163, 24, null, 24, 'getrefs');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (3, 1, 4, 'LXX Psalms 4:4 4:4-63', 'Ephesians', 'SBLGNT Ephesians 4:26 4:26-33', 2163, 24, null, 24, 'manual');
