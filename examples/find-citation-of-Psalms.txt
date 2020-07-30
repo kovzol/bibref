@@ -7,6 +7,7 @@
 ## 86:9, 91:11-12, 94:11, 95:7-11, 110:4, 117:1.
 ##
 ## Also, in some cases false positive results are reported, see e.g. Psalms 146:1.
+## Some non-traditional matches are found, e.g. Psalms 6:8.
 ##
 ## Further research questions:
 ##
@@ -59,14 +60,25 @@ getrefs SBLGNT LXX Psalms 8:2 # MT 8:3
 
 getrefs SBLGNT LXX Psalms 8:4 # MT 8:5
 # LXX Psalms 8:4 8:5 = SBLGNT Hebrews 2:6+25 2:7 (length=120, pos1=5766)
-
 getrefs SBLGNT LXX Psalms 8:6 # MT 8:7
 # ... (lengths<=12)
 # LXX Psalms 8:6+39 8:6 = SBLGNT Hebrews 2:8 2:8-84 (length=33, pos1=5925)
+## In fact these should be considered as one quotation, but the beginning of LXX Psalms 8:6 is skipped.
+lookup1 LXX Psalms 8:4 8:6
+# Stored internally as tiestinanurvposotimimnhskhaytoyhyiosanurvpoyotiepiskepthaytonhlattvsasaytonbraxytiparaggeloysdojhkaitimhestefanvsasaytonkaikatesthsasaytonepitaergatvnxeirvnsoypantaypetajasypokatvtvnpodvnaytoy.
+lookup2 SBLGNT Hebrews 2:6+25 2:8-86
+# Stored internally as tiestinanurvposotimimnhskhaytoyhyiosanurvpoyotiepiskepthaytonhlattvsasaytonbraxytiparaggeloysdojhkaitimhestefanvsasaytonpantaypetajasypokatvtvnpodvnaytoy.
+length1
+# Length of text 1 is 192.
+length2
+# Length of text 2 is 153.
+compare12
+# Comparing 'tiestinanurvposotimimnhskhaytoyhyiosanurvpoyotiepiskepthaytonhlattvsasaytonbraxytiparaggeloysdojhkaitimhestefanvsasaytonkaikatesthsasaytonepitaergatvnxeirvnsoypantaypetajasypokatvtvnpodvnaytoy' ~ 'tiestinanurvposotimimnhskhaytoyhyiosanurvpoyotiepiskepthaytonhlattvsasaytonbraxytiparaggeloysdojhkaitimhestefanvsasaytonpantaypetajasypokatvtvnpodvnaytoy' = 41
+# difference = 0.121739
 
 ## The next match is LXX Psalms 8:7+41 8:8-52 = SBLGNT Mark 4:32+96 4:32-9 (length=23, pos1=5999),
 ## "πετεινα του ουρανου" (birds of the air), is a kind of long expression.
-## Other matches are below of length 19.
+## The other matches are below of length 19.
 
 
 getrefs SBLGNT LXX Psalms 14:3
