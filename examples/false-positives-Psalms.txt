@@ -180,6 +180,13 @@ getrefs SBLGNT LXX Psalms 2:1 2:12
 # ...
 ## These are longer matches than for 2:9, but they are just usages of long expressions.
 
+getrefs SBLGNT LXX Psalms 3:1 3:8
+# ... (lengths<=10)
+# LXX Psalms 3:7+6 3:7-79 = SBLGNT Matthew 14:30+70 14:30 (length=12, pos1=1722)
+## This coincidence is maybe just random.
+## The quotation "κυριε σωσον με" appears in Psalms 12:1 with a different word order:
+## "σωσον με κυριε".
+
 getrefs SBLGNT LXX Psalms 5:1 5:12
 # ...
 # LXX Psalms 5:3+7 5:3-32 = SBLGNT Revelation_of_John 3:20+33 3:20-75 (length=19, pos1=2688)
