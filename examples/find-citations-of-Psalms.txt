@@ -84,6 +84,24 @@ compare12
 getrefs SBLGNT LXX Psalms 14:3
 # ... (lengths<=8)
 # LXX Psalms 14:2+71 14:4-100 = SBLGNT Romans 3:11+23 3:19-91 (length=318, pos1=10911)
+## Manual check gives some more refined results:
+lookup1 LXX Psalms 14:2+59 14:3
+# Stored internally as estinsynivnhekqhtvntonueonpantesejeklinanamahxrevuhsanoykestinpoivnxrhstothtaoykestinevsenostafosanevgmenosolarygjaytvntaisglvssaisaytvnedolioysaniosaspidvnypotaxeilhaytvnvntostomaaraskaipikriasgemeiojeisoipodesaytvnekxeaiaimasyntrimmakaitalaipvriaentaisodoisaytvnkaiodoneirhnhsoykegnvsanoykestinfobosueoyapenantitvnofualmvnaytvn.
+lookup2 SBLGNT Romans 3:11+3 3:19-91
+# Stored internally as estinosynivnoykestinoekqhtvntonueonpantesejeklinanamahxrevuhsanoykestinpoivnxrhstothtaoykestinevsenostafosanevgmenosolarygjaytvntaisglvssaisaytvnedolioysaniosaspidvnypotaxeilhaytvnvntostomaaraskaipikriasgemeiojeisoipodesaytvnekxeaiaimasyntrimmakaitalaipvriaentaisodoisaytvnkaiodoneirhnhsoykegnvsanoykestinfobosueoyapenantitvnofualmvnaytvno.
+compare12
+# Comparing 'estinsynivnhekqhtvntonueonpantesejeklinanamahxrevuhsanoykestinpoivnxrhstothtaoykestinevsenostafosanevgmenosolarygjaytvntaisglvssaisaytvnedolioysaniosaspidvnypotaxeilhaytvnvntostomaaraskaipikriasgemeiojeisoipodesaytvnekxeaiaimasyntrimmakaitalaipvriaentaisodoisaytvnkaiodoneirhnhsoykegnvsanoykestinfobosueoyapenantitvnofualmvnaytvn' ~ 'estinosynivnoykestinoekqhtvntonueonpantesejeklinanamahxrevuhsanoykestinpoivnxrhstothtaoykestinevsenostafosanevgmenosolarygjaytvntaisglvssaisaytvnedolioysaniosaspidvnypotaxeilhaytvnvntostomaaraskaipikriasgemeiojeisoipodesaytvnekxeaiaimasyntrimmakaitalaipvriaentaisodoisaytvnkaiodoneirhnhsoykegnvsanoykestinfobosueoyapenantitvnofualmvnaytvno' = 16
+# difference = 0.025449
+length1
+# Length of text 1 is 329.
+length2
+# Length of text 2 is 339.
+find1 LXX
+# Found in Psalms 14:2+59 14:3 (book position 10900-11228)
+# 1 occurrences.
+find2 SBLGNT
+# Found in Romans 3:11+3 3:19-91 (book position 5795-6133)
+# 1 occurrences.
 
 
 getrefs SBLGNT LXX Psalms 16:8 16:11
