@@ -36,9 +36,33 @@ getrefs SBLGNT LXX Psalms 2:7
 
 getrefs SBLGNT LXX Psalms 2:9
 # ... (lengths<=12)
-# LXX Psalms 2:9+15 2:9-32 = SBLGNT Revelation of John 12:5+47 12:5-55 (length=13, pos1=1046)
-# LXX Psalms 2:9+9 2:9-32 = SBLGNT Revelation of John 19:15+81 19:15-68 (length=19, pos1=1040)
-# LXX Psalms 2:9+9 2:9-30 = SBLGNT Revelation of John 2:27+11 2:27-28 (length=21, pos1=1040)
+# LXX Psalms 2:9+15 2:9-32 = SBLGNT Revelation_of_John 12:5+47 12:5-55 (length=13, pos1=1046)
+# LXX Psalms 2:9+9 2:9-32 = SBLGNT Revelation_of_John 19:15+81 19:15-68 (length=19, pos1=1040)
+# LXX Psalms 2:9+9 2:9-30 = SBLGNT Revelation_of_John 2:27+11 2:27-28 (length=21, pos1=1040)
+## Longer matches will be found with fuzzy search:
+lookup1 LXX Psalms 2:9 2:9-10
+# Stored internally as poimaneisaytoysenrabdvsidhravsskeyoskeramevssyntri.
+lookup2 SBLGNT Revelation_of_John 2:27+3 2:27-5
+# Stored internally as poimaneiaytoysenrabdvsidhravstaskeyhtakeramikasyntri.
+compare12
+# Comparing 'poimaneisaytoysenrabdvsidhravsskeyoskeramevssyntri' ~ 'poimaneiaytoysenrabdvsidhravstaskeyhtakeramikasyntri' = 22
+# difference = 0.225490
+lookup1 LXX Psalms 2:9 2:9-32
+# Stored internally as poimaneisaytoysenrabdvsidhra.
+length1
+# Length of text 1 is 28.
+lookup2 SBLGNT Revelation_of_John 12:5+26 12:5-55
+# Stored internally as poimaineinpantataeunhenrabdvsidhra.
+length2
+Length of text 2 is 34.
+compare12
+# Comparing 'poimaneisaytoysenrabdvsidhra' ~ 'poimaineinpantataeunhenrabdvsidhra' = 22
+# difference = 0.370968
+lookup2 SBLGNT Revelation_of_John 19:15+73 19:15-68
+# Stored internally as poimaneiaytoysenrabdvsidhra.
+compare12
+# Comparing 'poimaneisaytoysenrabdvsidhra' ~ 'poimaneiaytoysenrabdvsidhra' = 3
+# difference = 0.072727
 
 
 getrefs SBLGNT LXX Psalms 4:4 # MT 4:5
@@ -245,7 +269,7 @@ getrefs SBLGNT LXX Psalms 44:22 # MT 44:23
 getrefs SBLGNT LXX Psalms 45:6 45:7 # MT 45:7-8
 # ... (lengths<=7)
 # LXX Psalms 45:6+33 45:6-31 = SBLGNT Hebrews 1:8+65 1:8-15 (length=8, pos1=50109)
-# LXX Psalms 45:7+39 45:7-56 = SBLGNT Revelation of John 2:6+3 2:6-40 (length=8, pos1=50187)
+# LXX Psalms 45:7+39 45:7-56 = SBLGNT Revelation_of_John 2:6+3 2:6-40 (length=8, pos1=50187)
 # LXX Psalms 45:7+88 45:7-7 = SBLGNT Mark 3:5+19 3:5-111 (length=8, pos1=50236)
 # LXX Psalms 45:7+92 45:7-3 = SBLGNT Hebrews 6:4+68 6:4-24 (length=8, pos1=50240)
 # LXX Psalms 45:6+40 45:6-22 = SBLGNT Hebrews 1:8+57 1:8-21 (length=10, pos1=50116)
