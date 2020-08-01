@@ -108,6 +108,30 @@ getrefs SBLGNT LXX Psalms 16:8 16:11
 # ... (lengths<=14)
 # LXX Psalms 16:10+41 16:10 = SBLGNT Acts 13:35+22 13:35 (length=31, pos1=12687)
 # LXX Psalms 16:8+4 16:11-31 = SBLGNT Acts 2:25+25 2:28 (length=282, pos1=12496)
+## Checking the longer match:
+lookup1 LXX Psalms 16:8 16:11-31
+# Stored internally as provrvmhntonkyrionenvpionmoydiapantosotiekdejivnmoyestininamhsaleyuvdiatoytohyfranuhhkardiamoykaihgalliasatohglvssamoyetidekaihsarjmoykataskhnvseiepelpidiotioykegkataleiceisthncyxhnmoyeisadhnoydedvseistonosionsoyideindiafuoranegnvrisasmoiodoysqvhsplhrvseismeeyfrosynhsmetatoyprosvpoysoy.
+lookup2 SBLGNT Acts 2:25+21 2:28
+# Stored internally as proorvmhntonkyrionenvpionmoydiapantosotiekdejivnmoyestininamhsaleyuvdiatoytohyfranuhhkardiamoykaihgalliasatohglvssamoyetidekaihsarjmoykataskhnvseiepelpidiotioykegkataleiceisthncyxhnmoyeisadhnoydedvseistonosionsoyideindiafuoranegnvrisasmoiodoysqvhsplhrvseismeeyfrosynhsmetatoyprosvpoysoy.
+compare12
+# Comparing 'provrvmhntonkyrionenvpionmoydiapantosotiekdejivnmoyestininamhsaleyuvdiatoytohyfranuhhkardiamoykaihgalliasatohglvssamoyetidekaihsarjmoykataskhnvseiepelpidiotioykegkataleiceisthncyxhnmoyeisadhnoydedvseistonosionsoyideindiafuoranegnvrisasmoiodoysqvhsplhrvseismeeyfrosynhsmetatoyprosvpoysoy' ~ 'proorvmhntonkyrionenvpionmoydiapantosotiekdejivnmoyestininamhsaleyuvdiatoytohyfranuhhkardiamoykaihgalliasatohglvssamoyetidekaihsarjmoykataskhnvseiepelpidiotioykegkataleiceisthncyxhnmoyeisadhnoydedvseistonosionsoyideindiafuoranegnvrisasmoiodoysqvhsplhrvseismeeyfrosynhsmetatoyprosvpoysoy' = 4
+# difference = 0.008741
+length1
+# Length of text 1 is 286.
+length2
+# Length of text 2 is 286.
+## Checking the shorter match:
+lookup1 LXX Psalms 16:10+37 16:10
+# Stored internally as oydedvseistonosionsoyideindiafuoran.
+lookup2 SBLGNT Acts 13:35+20 13:35
+# Stored internally as oydvseistonosionsoyideindiafuoran.
+compare12
+# Comparing 'oydedvseistonosionsoyideindiafuoran' ~ 'oydvseistonosionsoyideindiafuoran' = 2
+# difference = 0.044118
+length1
+# Length of text 1 is 35.
+length2
+# Length of text 2 is 33.
 
 
 getrefs SBLGNT LXX Psalms 18:49
