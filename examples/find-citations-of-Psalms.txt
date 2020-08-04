@@ -71,6 +71,25 @@ getrefs SBLGNT LXX Psalms 4:4 # MT 4:5
 ## The same result is given for the full Psalm. So getrefs is safe here.
 
 
+## The getrefs algorithm does not find the match between Psalm 5:9 and Romans 3:13.
+## The reason is that a longer match exists that contains this text (namely, in Psalm 14:3).
+lookup1 LXX Psalms 5:9+52 5:9
+# Stored internally as tafosanevgmenosolarygjaytvntaisglvssaisaytvnedolioysan.
+lookup2 SBLGNT Romans 3:13 3:13-25
+# Stored internally as tafosanevgmenosolarygjaytvntaisglvssaisaytvnedolioysan.
+compare12
+# Comparing 'tafosanevgmenosolarygjaytvntaisglvssaisaytvnedolioysan' ~ 'tafosanevgmenosolarygjaytvntaisglvssaisaytvnedolioysan' = 0
+# difference = 0.009259
+length1
+# Length of text 1 is 54.
+find1 LXX
+# Found in Psalms 5:9+52 5:9 (book position 3173-3226)
+# Found in Psalms 14:3+66 14:3-183 (book position 10992-11045)
+# 2 occurrences.
+find1 SBLGNT 
+# Found in Romans 3:13 3:13-25 (book position 5896-5949)
+# 1 occurrences.
+
 getrefs SBLGNT LXX Psalms 6:1 6:10
 # ... (lengths<=11)
 # LXX Psalms 6:8 6:8-64 = SBLGNT Luke 13:27+32 13:27-14 (length=20, pos1=3985)
