@@ -124,6 +124,28 @@ compare12
 ## The other matches are below of length 19.
 
 
+## The getrefs algorithm does not find the match between Psalm 10:7 and Romans 3:14.
+## The reason is that a longer match exists that contains this text (namely, in Psalm 14:3),
+## in a more literally accurate version.
+lookup1 LXX Psalms 10:7+2 10:7-39
+# Stored internally as arastostomaaytoygemeikaipikrias.
+lookup2 SBLGNT Romans 3:14+2 3:14
+# Stored internally as tostomaaraskaipikriasgemei.
+compare12
+# Comparing 'arastostomaaytoygemeikaipikrias' ~ 'tostomaaraskaipikriasgemei' = 9
+# difference = 0.175439
+find1 LXX
+# Found in Psalms 10:7+2 10:7-39 (book position 8070-8100)
+# 1 occurrences.
+find2 SBLGNT
+# Found in Romans 3:14+2 3:14 (book position 5977-6002)
+# 1 occurrences.
+length1
+# Length of text 1 is 31.
+length2
+# Length of text 2 is 26.
+
+
 getrefs SBLGNT LXX Psalms 14:3
 # ... (lengths<=8)
 # LXX Psalms 14:2+71 14:4-100 = SBLGNT Romans 3:11+23 3:19-91 (length=318, pos1=10911)
