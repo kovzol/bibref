@@ -199,11 +199,12 @@ length2
 # Length of text 2 is 33.
 
 
-getrefs SBLGNT LXX Psalms 18:49
+getrefs SBLGNT LXX Psalms 18:49 # MT 18:50
 # ... (lengths<=9)
 # LXX Psalms 18:49+39 18:49 = SBLGNT Romans 15:9+79 15:9 (length=19, pos1=17448)
 # LXX Psalms 18:49 18:49-25 = SBLGNT Romans 15:9+46 15:9-19 (length=33, pos1=17409)
 ## The union of the last two should be one citation.
+## The word "κυριε" ("Lord") is missing from Romans.
 
 
 getrefs SBLGNT LXX Psalms 19:4
