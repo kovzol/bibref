@@ -59,7 +59,9 @@ insert into found_methods (name, info) values ('manual', 'confirmed manually (wi
 insert into found_methods (name, info) values ('manual-mechanical', 'confirmed manually (with no understanding of Greek)');
 
 insert into books (name, author, info) values ('Matthew', 'Matthew', 'Gospel of Matthew');
+insert into books (name, author, info) values ('Mark', 'Mark', 'Gospel of Mark');
 insert into books (name, author, info) values ('Luke', 'Luke', 'Gospel of Luke');
+insert into books (name, author, info) values ('John', 'John', 'Gospel of John');
 insert into books (name, author, info) values ('Acts', 'Luke', 'Acts of the Apostles');
 insert into books (name, author, info) values ('Romans', 'Paul', 'Epistle to the Romans');
 insert into books (name, author, info) values ('Ephesians', 'Paul', 'Epistle to the Ephesians');
