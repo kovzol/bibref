@@ -216,6 +216,14 @@ getrefs SBLGNT LXX Psalms 22:18 # MT 22:19
 # ... (lengths<=11)
 # LXX Psalms 22:18 22:18-43 = SBLGNT Matthew 27:35+19 27:35-20 (length=20, pos1=21363)
 # LXX Psalms 22:18 22:18 = SBLGNT John 19:24+88 19:24-31 (length=63, pos1=21363)
+lookup1 LXX Psalms 22:18
+# Stored internally as diemerisantotaimatiamoyeaytoiskaiepitonimatismonmoyebalonklhron.
+lookup2 SBLGNT Matthew 27:35+19 27:35
+# Stored internally as diemerisantotaimatiaaytoyballontesklhron.
+compare12
+# Comparing 'diemerisantotaimatiamoyeaytoiskaiepitonimatismonmoyebalonklhron' ~ 'diemerisantotaimatiaaytoyballontesklhron' = 35
+# difference = 0.349515
+## The first match (with Matthew) seems to be just a strong allusion.
 
 getrefs SBLGNT LXX Psalms 22:22 # MT 22:23
 # ... (lengths<=11)

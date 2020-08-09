@@ -278,3 +278,25 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (13, 1, null, 'μενουνγε'); -- μενουνγε = indeed
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (13, 1, 'quotation', 'literal', 'Z.K.');
+
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (14, 1, 22, 'Psalms 22:18', 'Matthew', 'Matthew 27:35', null, null, null, null, 'traditional');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (14, 1, 22, 'LXX Psalms 22:18 22:18-43', 'Matthew', 'SBLGNT Matthew 27:35+19 27:35-20', 21363, 20, 85881, 20, 'getrefs');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (14, 1, 22, 'LXX Psalms 22:18 22:18', 'Matthew', 'SBLGNT Matthew 27:35+19 27:35', 21363, 63, 85881, 40, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (14, 1, null, null);
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (14, 1, 'strong allusion', 'literal, superset', 'Z.K.');
+
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (14, 2, 22, 'Psalms 22:18', 'John', 'John 19:24', null, null, null, null, 'traditional');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (14, 2, 22, 'LXX Psalms 22:18', 'John', 'SBLGNT John 19:24+88 19:24-31', 21363, 63, 63431, 63, 'getrefs');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (14, 2, 22, 'LXX Psalms 22:18', 'John', 'SBLGNT John 19:24+88 19:24-31', 21363, 63, 63431, 63, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (14, 2, null, 'τινος εσται ινα η γραφη πληρωθη η λεγουσα'); -- τινος εσται ινα η γραφη πληρωθη η λεγουσα = whose it shall be: that the scripture might be fulfilled, which saith (KJV)
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (14, 2, 'quotation', 'exact, literal', 'Z.K.');
