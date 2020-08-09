@@ -78,6 +78,7 @@ insert into classification_subtypes (name, info) values ('exact', 'full literal 
 insert into classification_subtypes (name, info) values ('literal', 'full or almost full literal match');
 insert into classification_subtypes (name, info) values ('superset', 'NT text is a superset of the OT text');
 insert into classification_subtypes (name, info) values ('subset', 'NT text is a subset of the OT text');
+insert into classification_subtypes (name, info) values ('synonym', 'some parts are changed to synonyms');
 -- The entries are given as a comma separated list. This could be improved.
 
 insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
@@ -300,3 +301,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (14, 2, null, 'τινος εσται ινα η γραφη πληρωθη η λεγουσα'); -- τινος εσται ινα η γραφη πληρωθη η λεγουσα = whose it shall be: that the scripture might be fulfilled, which saith (KJV)
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (14, 2, 'quotation', 'exact, literal', 'Z.K.');
+
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (15, 1, 22, 'Psalms 22:22', 'Hebrews', 'Hebrews 2:12', null, null, null, null, 'traditional');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (15, 1, 22, 'Psalms 22:22+10 22:22', 'Hebrews', 'SBLGNT Hebrews 2:12+13 2:12', 21616, 48, 2353, 48, 'getrefs');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (15, 1, 22, 'Psalms 22:22+10 22:22', 'Hebrews', 'SBLGNT Hebrews 2:12+13 2:12', 21616, 48, 2353, 48, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (15, 1, null, 'λεγων'); -- λεγων = saying
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (15, 1, 'quotation', 'exact, literal, synonym', 'Z.K.');
