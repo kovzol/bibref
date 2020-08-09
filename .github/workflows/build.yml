@@ -10,8 +10,10 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: prerequisites
-      run: sudo apt update && sudo apt install libsword-common libsword-dev git cmake build-essential libreadline-dev libboost-dev
+      run: sudo apt update && sudo apt install libsword-common libsword-dev git cmake build-essential libreadline-dev libboost-dev sqlite3 python3
     - name: cmake
       run: cmake .
     - name: make
       run: make
+    - name: db
+      run: cd docs/common; ./createdb; python3 visualize.py
