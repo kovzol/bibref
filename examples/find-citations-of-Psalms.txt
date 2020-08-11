@@ -233,6 +233,17 @@ getrefs SBLGNT LXX Psalms 22:22 # MT 22:23
 getrefs SBLGNT LXX Psalms 24:1
 # ... (lengths<=12)
 # LXX Psalms 24:1+37 24:1-39 = SBLGNT I Corinthians 10:26+6 10:26 (length=20, pos1=23000)
+lookup1 LXX Psalms 24:1+28 24:1-39
+# Stored internally as toykyrioyhghkaitoplhrvmaayths.
+lookup2 SBLGNT I_Corinthians 10:26
+# Stored internally as toykyrioygarhghkaitoplhrvmaayths.
+compare12
+# Comparing 'toykyrioyhghkaitoplhrvmaayths' ~ 'toykyrioygarhghkaitoplhrvmaayths' = 5
+# difference = 0.098361
+length1
+# Length of text 1 is 29.
+length2
+# Length of text 2 is 32.
 
 
 getrefs SBLGNT LXX Psalms 31:5 # MT 31:6
