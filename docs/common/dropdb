@@ -1,2 +1,2 @@
 #!/bin/sh
-rm -i psalms.sqlite3
+rm -f psalms.sqlite3
