@@ -64,6 +64,7 @@ insert into books (name, author, info) values ('Luke', 'Luke', 'Gospel of Luke')
 insert into books (name, author, info) values ('John', 'John', 'Gospel of John');
 insert into books (name, author, info) values ('Acts', 'Luke', 'Acts of the Apostles');
 insert into books (name, author, info) values ('Romans', 'Paul', 'Epistle to the Romans');
+insert into books (name, author, info) values ('I_Corinthians', 'Paul', 'First Epistle to the Corinthians');
 insert into books (name, author, info) values ('Ephesians', 'Paul', 'Epistle to the Ephesians');
 insert into books (name, author, info) values ('Hebrews', 'Unknown', 'Epistle to the Hebrews');
 insert into books (name, author, info) values ('Revelation_of_John', 'John', 'Revelation of John');
@@ -314,3 +315,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (15, 1, null, 'λεγων'); -- λεγων = saying
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (15, 1, 'quotation', 'exact, literal, synonym', 'Z.K.');
+
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (16, 1, 24, 'Psalms 24:1', 'I_Corinthians', 'I_Corinthians 10:26', null, null, null, null, 'traditional');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (16, 1, 24, 'LXX Psalms 24:1+37 24:1-39', 'I_Corinthians', 'SBLGNT I_Corinthians 10:26+6 10:26', 23000, 20, 17817, 20, 'getrefs');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (16, 1, 24, 'LXX Psalms 24:1+28 24:1-39', 'I_Corinthians', 'SBLGNT I_Corinthians 10:26+6 10:26', 22992, 29, 17811, 32, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (16, 1, null, 'γαρ'); -- γαρ = for
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (16, 1, 'quotation', 'literal, subtext', 'Z.K.');
