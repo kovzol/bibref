@@ -248,9 +248,16 @@ length2
 
 getrefs SBLGNT LXX Psalms 31:5 # MT 31:6
 # ... (lengths<=13)
-# LXX Psalms 31:5+20 31:5-31 = SBLGNT Luke 23:46+57 23:46-17 (length=14, pos1=29844)
-# LXX Psalms 31:5 31:5-49 = SBLGNT Luke 23:46+37 23:46-35 (length=16, pos1=29824)
+# LXX Psalms 31:5+20 31:5-31 = SBLGNT Luke 23:46+57 23:46-22 (length=14, pos1=29844)
+# LXX Psalms 31:5 31:5-49 = SBLGNT Luke 23:46+37 23:46-40 (length=16, pos1=29824)
 ## The union of the last two should be one citation.
+lookup1 LXX Psalms 31:5 31:5-31
+# Stored internally as eisxeirassoyparauhsomaitopneymamoy.
+lookup2 SBLGNT Luke 23:46+37 23:46-22
+# Stored internally as eisxeirassoyparatiuemaitopneymamoy.
+compare12
+# Comparing 'eisxeirassoyparauhsomaitopneymamoy' ~ 'eisxeirassoyparatiuemaitopneymamoy' = 10
+# difference = 0.161765
 
 
 getrefs SBLGNT LXX Psalms 32:1
