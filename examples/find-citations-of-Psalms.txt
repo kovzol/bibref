@@ -293,6 +293,17 @@ getrefs SBLGNT LXX Psalms 34:12 34:16 # MT 34:13-17
 # LXX Psalms 34:13+38 34:14-54 = SBLGNT I Peter 3:10+72 3:11-60 (length=23, pos1=34598)
 # LXX Psalms 34:15 34:16-37 = SBLGNT I Peter 3:12+3 3:12 (length=82, pos1=34675)
 ## The union of the last three and three other former ones should be one citation.
+lookup1 LXX Psalms 34:12+17 34:16-37
+# Stored internally as uelvnqvhnagapvnhmerasideinagauaspaysonthnglvssansoyapokakoykaixeilhsoytoymhlalhsaidolonekklinonapokakoykaipoihsonagauonqhthsoneirhnhnkaidivjonaythnofualmoikyrioyepidikaioyskaivtaaytoyeisdehsinaytvnprosvpondekyrioyepipoioyntaskaka.
+lookup2 SBLGNT I_Peter 3:10+4 3:12
+# Stored internally as uelvnqvhnagapankaiideinhmerasagauaspaysatvthnglvssanapokakoykaixeilhtoymhlalhsaidolonekklinatvdeapokakoykaipoihsatvagauonqhthsatveirhnhnkaidivjatvaythnotiofualmoikyrioyepidikaioyskaivtaaytoyeisdehsinaytvnprosvpondekyrioyepipoioyntaskaka.
+compare12
+# Comparing 'uelvnqvhnagapvnhmerasideinagauaspaysonthnglvssansoyapokakoykaixeilhsoytoymhlalhsaidolonekklinonapokakoykaipoihsonagauonqhthsoneirhnhnkaidivjonaythnofualmoikyrioyepidikaioyskaivtaaytoyeisdehsinaytvnprosvpondekyrioyepipoioyntaskaka' ~ 'uelvnqvhnagapankaiideinhmerasagauaspaysatvthnglvssanapokakoykaixeilhtoymhlalhsaidolonekklinatvdeapokakoykaipoihsatvagauonqhthsatveirhnhnkaidivjatvaythnotiofualmoikyrioyepidikaioyskaivtaaytoyeisdehsinaytvnprosvpondekyrioyepipoioyntaskaka' = 57
+# difference = 0.124731
+length1
+# Length of text 1 is 229.
+length2
+# Length of text 2 is 236.
 
 
 getrefs SBLGNT LXX Psalms 40:6 40:8 # MT 40:7-9
