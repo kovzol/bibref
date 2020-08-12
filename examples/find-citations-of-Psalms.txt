@@ -268,6 +268,17 @@ getrefs SBLGNT LXX Psalms 32:1
 getrefs SBLGNT LXX Psalms 34:8 # MT 34:9
 # ... (lengths<=10)
 # LXX Psalms 34:8+15 34:8-28 = SBLGNT I Peter 2:3+10 2:3 (length=18, pos1=34264)
+lookup1 LXX Psalms 34:8 34:8-28
+# Stored internally as geysasuekaiideteotixrhstosokyrios.
+lookup2 SBLGNT I_Peter 2:3+3 2:3
+# Stored internally as geysasueotixrhstosokyrios.
+compare12
+# Comparing 'geysasuekaiideteotixrhstosokyrios' ~ 'geysasueotixrhstosokyrios' = 8
+# difference = 0.155172
+length1
+# Length of text 1 is 33.
+length2
+# Length of text 2 is 25.
 
 getrefs SBLGNT LXX Psalms 34:12 34:16 # MT 34:13-17
 # ... (lengths<=8)

@@ -67,6 +67,7 @@ insert into books (name, author, info) values ('Romans', 'Paul', 'Epistle to the
 insert into books (name, author, info) values ('I_Corinthians', 'Paul', 'First Epistle to the Corinthians');
 insert into books (name, author, info) values ('Ephesians', 'Paul', 'Epistle to the Ephesians');
 insert into books (name, author, info) values ('Hebrews', 'Unknown', 'Epistle to the Hebrews');
+insert into books (name, author, info) values ('I_Peter', 'Peter', 'First Epistle of Peter');
 insert into books (name, author, info) values ('Revelation_of_John', 'John', 'Revelation of John');
 
 insert into classifications (name, info) values ('quotation', 'direct reference given');
@@ -350,3 +351,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (18, 1, 'Δαυιδ', 'λεγει'); -- λεγει = says
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (18, 1, 'quotation', 'literal', 'Z.K.');
+
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (19, 1, 34, 'Psalms 34:8', 'I_Peter', 'I_Peter 2:3', null, null, null, null, 'traditional');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (19, 1, 34, 'LXX Psalms 34:8+15 34:8-28', 'I_Peter', 'SBLGNT I Peter 2:3+10 2:3', 34264, 18, 2366, 18, 'getrefs');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (19, 1, 34, 'LXX Psalms 34:8 34:8-28', 'I_Peter', 'SBLGNT I Peter 2:3+3 2:3', 34250, 33, 2359, 25, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (19, 1, null, 'ει'); -- ει = if indeed
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (19, 1, 'strong allusion', 'literal, supertext', 'Z.K.');
