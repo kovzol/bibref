@@ -320,6 +320,7 @@ getrefs SBLGNT LXX Psalms 40:6 40:8 # MT 40:7-9
 # LXX Psalms 40:7+40 40:7 = SBLGNT John 5:39+82 5:39 (length=10, pos1=44246)
 # LXX Psalms 40:7+42 40:8-69 = SBLGNT Luke 24:44+131 24:45-43 (length=10, pos1=44248)
 # LXX Psalms 40:6+18 40:6-52 = SBLGNT Hebrews 10:8+58 10:8-41 (length=11, pos1=44143)
+## This one above seems to be just an accidental match (ουκ ηθελησας).
 # LXX Psalms 40:6+2 40:6-68 = SBLGNT Ephesians 3:12+17 3:12-36 (length=11, pos1=44127)
 # LXX Psalms 40:6+6 40:6-64 = SBLGNT Hebrews 10:8+16 10:8-83 (length=11, pos1=44131)
 # LXX Psalms 40:6+5 40:6-64 = SBLGNT Acts 24:17+46 24:17-1 (length=12, pos1=44130)
@@ -334,7 +335,40 @@ getrefs SBLGNT LXX Psalms 40:6 40:8 # MT 40:7-9
 # LXX Psalms 40:6+32 40:6-24 = SBLGNT Hebrews 10:5+64 10:6-29 (length=25, pos1=44157)
 # LXX Psalms 40:6 40:6-52 = SBLGNT Hebrews 10:5+32 10:5-18 (length=29, pos1=44125)
 # LXX Psalms 40:6+77 40:8-61 = SBLGNT Hebrews 10:6+35 10:7-16 (length=64, pos1=44202)
-## The union of the last six and four other former ones should be one citation.
+## Some subsets of the union of the last six and two other former ones should be different quotations.
+## The first one:
+lookup1 LXX Psalms 40:6 40:8-45
+# Stored internally as uysiankaiprosforanoykhuelhsasvtiadekathrtisvmoiolokaytvmakaiperiamartiasoykhthsastoteeiponidoyhkvenkefalidibiblioygegraptaiperiemoytoypoihsaitouelhmasoyoueos.
+lookup2 SBLGNT Hebrews 10:5+32 10:7
+# Stored internally as uysiankaiprosforanoykhuelhsassvmadekathrtisvmoiolokaytvmatakaiperiamartiasoykeydokhsastoteeiponidoyhkvenkefalidibiblioygegraptaiperiemoytoypoihsaioueostouelhmasoy.
+compare12
+# Comparing 'uysiankaiprosforanoykhuelhsasvtiadekathrtisvmoiolokaytvmakaiperiamartiasoykhthsastoteeiponidoyhkvenkefalidibiblioygegraptaiperiemoytoypoihsaitouelhmasoyoueos' ~ 'uysiankaiprosforanoykhuelhsassvmadekathrtisvmoiolokaytvmatakaiperiamartiasoykeydokhsastoteeiponidoyhkvenkefalidibiblioygegraptaiperiemoytoypoihsaioueostouelhmasoy' = 19
+# difference = 0.062696
+## The second one:
+lookup1 LXX Psalms 40:6
+# Stored internally as uysiankaiprosforanoykhuelhsasvtiadekathrtisvmoiolokaytvmakaiperiamartiasoykhthsas.
+lookup2 SBLGNT Hebrews 10:8+16 10:8-41
+# Stored internally as uysiaskaiprosforaskaiolokaytvmatakaiperiamartiasoykhuelhsas.
+compare12
+# Comparing 'uysiankaiprosforanoykhuelhsasvtiadekathrtisvmoiolokaytvmakaiperiamartiasoykhthsas' ~ 'uysiaskaiprosforaskaiolokaytvmatakaiperiamartiasoykhuelhsas' = 32
+# difference = 0.235714
+length1
+# Length of text 1 is 81.
+length2
+# Length of text 2 is 59.
+## The third one:
+lookup1 LXX Psalms 40:7+9 40:8-50
+# Stored internally as idoyhkvenkefalidibiblioygegraptaiperiemoytoypoihsaitouelhmasoy.
+length1
+# Length of text 1 is 62.
+lookup2 SBLGNT Hebrews 10:9+11 10:9-33
+# Stored internally as idoyhkvtoypoihsaitouelhmasoy.
+length2
+# Length of text 2 is 28.
+compare12
+# Comparing 'idoyhkvenkefalidibiblioygegraptaiperiemoytoypoihsaitouelhmasoy' ~ 'idoyhkvtoypoihsaitouelhmasoy' = 36
+# difference = 0.411111
+## Clearly, the command compare12 is unable to detect this type of match.
 
 
 ## The connection between Psalm 41:9 and John 13:18 should be found!
