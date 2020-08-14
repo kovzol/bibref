@@ -71,6 +71,7 @@ insert into books (name, author, info) values ('I_Peter', 'Peter', 'First Epistl
 insert into books (name, author, info) values ('Revelation_of_John', 'John', 'Revelation of John');
 
 insert into classifications (name, info) values ('quotation', 'direct reference given');
+-- Quotations are claimed if and only if there is a direct mentioning of an OT quotation in the NT part.
 insert into classifications (name, info) values ('secondary quotation', 'direct reference given, but not longest match');
 -- See Sung Kuk Kim: Psalms in the book of Revelation (PhD thesis, Univ. of Edinburgh, 2013), p. 12
 insert into classifications (name, info) values ('strong allusion', 'textual affinity: clear, contextual affinity: clear');
@@ -83,6 +84,7 @@ insert into classification_subtypes (name, info) values ('literal', 'full or alm
 insert into classification_subtypes (name, info) values ('superset', 'NT text is a superset of the OT text');
 insert into classification_subtypes (name, info) values ('subset', 'NT text is a subset of the OT text');
 insert into classification_subtypes (name, info) values ('synonym', 'some parts are changed to synonyms');
+insert into classification_subtypes (name, info) values ('far-fuzzy', 'fuzzy match that cannot be identified easily');
 -- The entries are given as a comma separated list. This could be improved.
 
 insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
@@ -426,3 +428,12 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (21, 3, null, 'τοτε ειρηκεν'); -- τοτε ειρηκεν = then he said
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (21, 3, 'quotation', 'literal, supertext', 'Z.K.');
+
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (22, 1, 41, 'Psalms 41:9', 'John', 'John 13:18', null, null, null, null, 'traditional');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (22, 1, 41, 'LXX Psalms 41:9+45 41:9-5', 'John', 'SBLGNT John 13:18+68 13:18-7', 45860, 29, 46586, 30, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (22, 1, null, 'αλλ ινα η γραφη πληρωθη'); -- αλλ ινα η γραφη πληρωθη = but the Scripture may be fulfilled
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (22, 1, 'quotation', 'far-fuzzy', 'Z.K.');
