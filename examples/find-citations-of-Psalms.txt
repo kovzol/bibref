@@ -403,17 +403,35 @@ length2
 
 getrefs SBLGNT LXX Psalms 45:6 45:7 # MT 45:7-8
 # ... (lengths<=7)
-# LXX Psalms 45:6+33 45:6-31 = SBLGNT Hebrews 1:8+65 1:8-15 (length=8, pos1=50109)
+# LXX Psalms 45:6+33 45:6-31 = SBLGNT Hebrews 1:8+68 1:8-15 (length=8, pos1=50109)
 # LXX Psalms 45:7+39 45:7-56 = SBLGNT Revelation_of_John 2:6+3 2:6-40 (length=8, pos1=50187)
 # LXX Psalms 45:7+88 45:7-7 = SBLGNT Mark 3:5+19 3:5-111 (length=8, pos1=50236)
 # LXX Psalms 45:7+92 45:7-3 = SBLGNT Hebrews 6:4+68 6:4-24 (length=8, pos1=50240)
-# LXX Psalms 45:6+40 45:6-22 = SBLGNT Hebrews 1:8+57 1:8-21 (length=10, pos1=50116)
-# LXX Psalms 45:7+37 45:7-56 = SBLGNT II Corinthians 4:1 4:1-50 (length=10, pos1=50185)
+# LXX Psalms 45:6+40 45:6-22 = SBLGNT Hebrews 1:8+60 1:8-21 (length=10, pos1=50116)
+# LXX Psalms 45:6+50 45:6-12 = SBLGNT Hebrews 1:8+51 1:8-30 (length=10, pos1=50126)
+# LXX Psalms 45:7+37 45:7-56 = SBLGNT II_Corinthians 4:1 4:1-50 (length=10, pos1=50185)
 # LXX Psalms 45:7+37 45:7-56 = SBLGNT Philemon 1:15+7 1:15-35 (length=10, pos1=50185)
-# LXX Psalms 45:6+48 45:6-12 = SBLGNT Hebrews 1:8+46 1:8-30 (length=12, pos1=50124)
-# LXX Psalms 45:6 45:6-37 = SBLGNT Hebrews 1:8+13 1:8-40 (length=35, pos1=50076)
-# LXX Psalms 45:6+51 45:7 = SBLGNT Hebrews 1:8+67 1:9 (length=124, pos1=50127)
-## The union of the last three and three other former ones should be one citation.
+# LXX Psalms 45:6 45:6-37 = SBLGNT Hebrews 1:8+13 1:8-43 (length=35, pos1=50076)
+# LXX Psalms 45:6+51 45:7 = SBLGNT Hebrews 1:8+70 1:9 (length=124, pos1=50127)
+## The union of the last two and two other former ones should be one citation.
+## (The one that has 8 characters is an accidental match.)
+lookup1 LXX Psalms 45:6 45:7
+# Stored internally as ouronossoyoueoseistonaivnatoyaivnosrabdoseyuythtoshrabdosthsbasileiassoyhgaphsasdikaiosynhnkaiemishsasanomiandiatoytoexrisenseoueosoueossoyelaionagalliasevsparatoysmetoxoyssoy.
+length1
+# Length of text 1 is 175.
+lookup2 SBLGNT Hebrews 1:8+13 1:9
+# Stored internally as ouronossoyoueoseistonaivnatoyaivnoskaihrabdosthseyuythtosrabdosthsbasileiassoyhgaphsasdikaiosynhnkaiemishsasanomiandiatoytoexrisenseoueosoueossoyelaionagalliasevsparatoysmetoxoyssoy.
+length2
+# Length of text 2 is 181.
+find1 LXX
+# Found in Psalms 45:6 45:7 (book position 50077-50251)
+# 1 occurrences.
+find2 SBLGNT 
+# Found in Hebrews 1:8+13 1:9 (book position 713-893)
+# 1 occurrences.
+compare12
+# Comparing 'ouronossoyoueoseistonaivnatoyaivnosrabdoseyuythtoshrabdosthsbasileiassoyhgaphsasdikaiosynhnkaiemishsasanomiandiatoytoexrisenseoueosoueossoyelaionagalliasevsparatoysmetoxoyssoy' ~ 'ouronossoyoueoseistonaivnatoyaivnoskaihrabdosthseyuythtosrabdosthsbasileiassoyhgaphsasdikaiosynhnkaiemishsasanomiandiatoytoexrisenseoueosoueossoyelaionagalliasevsparatoysmetoxoyssoy' = 8
+# difference = 0.025281
 
 
 getrefs SBLGNT LXX Psalms 51:4
