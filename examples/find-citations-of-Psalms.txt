@@ -438,6 +438,18 @@ getrefs SBLGNT LXX Psalms 51:4
 # ... (lengths<=10)
 # LXX Psalms 51:4+82 51:4 = SBLGNT Romans 3:4+103 3:4 (length=16, pos1=56595)
 # LXX Psalms 51:4+43 51:4-17 = SBLGNT Romans 3:4+63 3:4-18 (length=38, pos1=56556)
+## The union of them should be one citation.
+lookup1 LXX Psalms 51:4+43 51:4
+# Stored internally as opvsandikaivuhsentoislogoissoykainikhshsentvkrinesuaise.
+length1
+# Length of text 1 is 55.
+lookup2 SBLGNT Romans 3:4+63 3:4
+# Stored internally as opvsandikaivuhsentoislogoissoykainikhseisentvkrinesuaise.
+length2
+# Length of text 2 is 56.
+compare12
+# Comparing 'opvsandikaivuhsentoislogoissoykainikhshsentvkrinesuaise' ~ 'opvsandikaivuhsentoislogoissoykainikhseisentvkrinesuaise' = 5
+# difference = 0.054054
 
 
 getrefs SBLGNT LXX Psalms 55:21 55:23
