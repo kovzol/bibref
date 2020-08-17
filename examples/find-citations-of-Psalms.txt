@@ -472,6 +472,17 @@ compare12
 getrefs SBLGNT LXX Psalms 68:18 # MT 68:19
 # ... (lengths<=14)
 # LXX Psalms 68:18+5 68:18-86 = SBLGNT Ephesians 4:8+13 4:8-38 (length=18, pos1=73401)
+lookup1 LXX Psalms 68:18 68:18-52
+# Stored internally as anebhseisycoshxmalvteysasaixmalvsianelabesdomataenanurvpv.
+lookup2 SBLGNT Ephesians 4:8+8 4:8
+# Stored internally as anabaseisycoshxmalvteysenaixmalvsianedvkendomatatoisanurvpois.
+compare12
+# Comparing 'anebhseisycoshxmalvteysasaixmalvsianelabesdomataenanurvpv' ~ 'anabaseisycoshxmalvteysenaixmalvsianedvkendomatatoisanurvpois' = 28
+# difference = 0.245763
+length1
+# Length of text 1 is 57.
+length2
+# Length of text 2 is 61.
 
 
 getrefs SBLGNT LXX Psalms 69:9 # MT 69:10

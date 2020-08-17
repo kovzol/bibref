@@ -84,7 +84,9 @@ insert into classification_subtypes (name, info) values ('literal', 'full or alm
 insert into classification_subtypes (name, info) values ('superset', 'NT text is a superset of the OT text');
 insert into classification_subtypes (name, info) values ('subset', 'NT text is a subset of the OT text');
 insert into classification_subtypes (name, info) values ('synonym', 'some parts are changed to synonyms');
+insert into classification_subtypes (name, info) values ('fuzzy', 'fuzzy match');
 insert into classification_subtypes (name, info) values ('far-fuzzy', 'fuzzy match that cannot be identified easily');
+insert into classification_subtypes (name, info) values ('change', 'some parts are changed to have different meaning');
 -- The entries are given as a comma separated list. This could be improved.
 
 insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
@@ -478,3 +480,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (25, 1, null, 'καθως γεγραπται'); -- καθως γεγραπται = as it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (25, 1, 'quotation', 'literal', 'Z.K.');
+
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (26, 1, 68, 'Psalms 68:18', 'Ephesians', 'Ephesians 4:8', null, null, null, null, 'traditional');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (26, 1, 68, 'LXX Psalms 68:18+5 68:18-86', 'Ephesians', 'SBLGNT Ephesians 4:8+13 4:8-38', 73401, 18, 5810, 18, 'getrefs');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (26, 1, 68, 'LXX Psalms 68:18 68:18-52', 'Ephesians', 'SBLGNT Ephesians 4:8+8 4:8', 73397, 57, 5805, 61, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (26, 1, null, 'λεγει'); -- λεγει = says
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (26, 1, 'quotation', 'fuzzy, change', 'Z.K.');

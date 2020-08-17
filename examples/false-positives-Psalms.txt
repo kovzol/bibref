@@ -1,3 +1,6 @@
+## Warning: This file contains contradictory data with psalms.sql. Quotations should be
+## identified in a different way and the data should be fixed accordingly. FIXME.
+##
 ## This is a list of results that are long matches but clearly not quotations.
 ## The longest one is in Psalm 104:12 and the used expression is 31 characters long.
 ## (See also Psalm 115:15, Psalm 134:3, Psalm 33:6 and Psalm 145:17 that have
@@ -15,7 +18,7 @@
 ## Psalm | Longest (quasi-)matches                    | Verified?
 ## ------+--------------------------------------------+----------
 ##     1 | 19                                         | No
-##     2 | 22                                         | No
+##     2 | 131, 32                                    | Yes
 ##     3 | 12                                         | No
 ##     4 | 24                                         | Yes
 ##     5 | 19                                         | No
