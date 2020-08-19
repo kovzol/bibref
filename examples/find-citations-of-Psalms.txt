@@ -490,6 +490,17 @@ getrefs SBLGNT LXX Psalms 69:9 # MT 69:10
 # LXX Psalms 69:9+3 69:9-53 = SBLGNT John 2:17+43 2:17-10 (length=20, pos1=75406)
 # LXX Psalms 69:9+32 69:9 = SBLGNT Romans 15:3+44 15:3 (length=44, pos1=75435)
 ## Two citations in one verse.
+lookup1 LXX Psalms 69:9+3 69:9-45
+# Stored internally as oqhlostoyoikoysoykatefagenme.
+lookup2 SBLGNT John 2:17+43 2:17
+# Stored internally as oqhlostoyoikoysoykatafagetaime.
+compare12
+# Comparing 'oqhlostoyoikoysoykatefagenme' ~ 'oqhlostoyoikoysoykatafagetaime' = 10
+# difference = 0.189655
+length1
+# Length of text 1 is 28.
+length2
+# Length of text 2 is 30.
 
 getrefs SBLGNT LXX Psalms 69:22 69:23 # MT 69:23-24
 # ... (lengths<=10)
