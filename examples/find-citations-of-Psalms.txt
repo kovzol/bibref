@@ -514,6 +514,17 @@ getrefs SBLGNT LXX Psalms 69:22 69:23 # MT 69:23-24
 ## The union of the last four ones and one other former one should be one citation.
 ## Interestingly, Romans 11:8 is shown here, since the passage from the Psalm
 ## "του μη βλεπειν και" (not to see and) is present also in Romans 11:8.
+lookup1 LXX Psalms 69:22 69:23
+# Stored internally as genhuhtvhtrapeqaaytvnenvpionaytvneispagidakaieisantapodosinkaieisskandalonskotisuhtvsanoiofualmoiaytvntoymhblepeinkaitonnvtonaytvndiapantossygkamcon.
+lookup2 SBLGNT Romans 11:9+13 11:10
+# Stored internally as genhuhtvhtrapeqaaytvneispagidakaieisuhrankaieisskandalonkaieisantapodomaaytoisskotisuhtvsanoiofualmoiaytvntoymhblepeinkaitonnvtonaytvndiapantossygkamcon.
+compare12
+# Comparing 'genhuhtvhtrapeqaaytvnenvpionaytvneispagidakaieisantapodosinkaieisskandalonskotisuhtvsanoiofualmoiaytvntoymhblepeinkaitonnvtonaytvndiapantossygkamcon' ~ 'genhuhtvhtrapeqaaytvneispagidakaieisuhrankaieisskandalonkaieisantapodomaaytoisskotisuhtvsanoiofualmoiaytvntoymhblepeinkaitonnvtonaytvndiapantossygkamcon' = 32
+# difference = 0.110000
+length1
+# Length of text 1 is 148.
+length2
+# Length of text 2 is 152.
 
 getrefs SBLGNT LXX Psalms 69:25 # MT 69:26
 # ... (lengths<=9)
