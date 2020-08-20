@@ -531,6 +531,17 @@ getrefs SBLGNT LXX Psalms 69:25 # MT 69:26
 # LXX Psalms 69:25+54 69:25 = SBLGNT Acts 1:20+55 1:20-38 (length=15, pos1=76647)
 # LXX Psalms 69:25 69:25-50 = SBLGNT Acts 1:20+25 1:20-64 (length=19, pos1=76593)
 ## The union of the last two ones should be one citation.
+lookup1 LXX Psalms 69:25
+# Stored internally as genhuhtvhepaylisaytvnhrhmvmenhkaientoisskhnvmasinaytvnmhestvokatoikvn.
+lookup2 SBLGNT Acts 1:20+25 1:20-38
+# Stored internally as genhuhtvhepaylisaytoyerhmoskaimhestvokatoikvn.
+length1
+# Length of text 1 is 69.
+length2
+# Length of text 2 is 45.
+compare12
+# Comparing 'genhuhtvhepaylisaytvnhrhmvmenhkaientoisskhnvmasinaytvnmhestvokatoikvn' ~ 'genhuhtvhepaylisaytoyerhmoskaimhestvokatoikvn' = 36
+# difference = 0.324561
 
 
 getrefs SBLGNT LXX Psalms 78:2
