@@ -633,6 +633,24 @@ getrefs SBLGNT LXX Psalms 91:11 91:12
 # LXX Psalms 91:12 91:13-59 = SBLGNT Matthew 4:6+94 4:7-57 (length=53, pos1=107427)
 ## The unions of both two citations should be one, respectively.
 ## (The part inside, namely, the last 20 characters of the Psalm 91:11 is not cited in either of the gospels.)
+lookup1 LXX Psalms 91:11 91:12
+# Stored internally as otitoisaggeloisaytoyenteleitaiperisoytoydiafylajaiseenpasaistaisodoissoyepixeirvnaroysinsemhpoteproskochsprosliuontonpodasoy.
+lookup2 SBLGNT Matthew 4:6+54 4:6
+# Stored internally as otitoisaggeloisaytoyenteleitaiperisoykaiepixeirvnaroysinsemhpoteproskochsprosliuontonpodasoy.
+compare12
+# Comparing 'otitoisaggeloisaytoyenteleitaiperisoytoydiafylajaiseenpasaistaisodoissoyepixeirvnaroysinsemhpoteproskochsprosliuontonpodasoy' ~ 'otitoisaggeloisaytoyenteleitaiperisoykaiepixeirvnaroysinsemhpoteproskochsprosliuontonpodasoy' = 38
+# difference = 0.180556
+length1
+# Length of text 1 is 124.
+length2
+# Length of text 2 is 92.
+lookup2 SBLGNT Luke 4:10+12 4:11
+# Stored internally as otitoisaggeloisaytoyenteleitaiperisoytoydiafylajaisekaiotiepixeirvnaroysinsemhpoteproskochsprosliuontonpodasoy.
+length2
+# Length of text 2 is 110.
+compare12
+# Comparing 'otitoisaggeloisaytoyenteleitaiperisoytoydiafylajaiseenpasaistaisodoissoyepixeirvnaroysinsemhpoteproskochsprosliuontonpodasoy' ~ 'otitoisaggeloisaytoyenteleitaiperisoytoydiafylajaisekaiotiepixeirvnaroysinsemhpoteproskochsprosliuontonpodasoy' = 26
+# difference = 0.115385
 
 
 getrefs SBLGNT LXX Psalms 94:11
