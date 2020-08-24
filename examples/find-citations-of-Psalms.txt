@@ -232,7 +232,7 @@ getrefs SBLGNT LXX Psalms 22:22 # MT 22:23
 
 getrefs SBLGNT LXX Psalms 24:1
 # ... (lengths<=12)
-# LXX Psalms 24:1+37 24:1-39 = SBLGNT I Corinthians 10:26+6 10:26 (length=20, pos1=23000)
+# LXX Psalms 24:1+37 24:1-39 = SBLGNT I_Corinthians 10:26+6 10:26 (length=20, pos1=23000)
 lookup1 LXX Psalms 24:1+28 24:1-39
 # Stored internally as toykyrioyhghkaitoplhrvmaayths.
 lookup2 SBLGNT I_Corinthians 10:26
@@ -267,7 +267,7 @@ getrefs SBLGNT LXX Psalms 32:1
 
 getrefs SBLGNT LXX Psalms 34:8 # MT 34:9
 # ... (lengths<=10)
-# LXX Psalms 34:8+15 34:8-28 = SBLGNT I Peter 2:3+10 2:3 (length=18, pos1=34264)
+# LXX Psalms 34:8+15 34:8-28 = SBLGNT I_Peter 2:3+10 2:3 (length=18, pos1=34264)
 lookup1 LXX Psalms 34:8 34:8-28
 # Stored internally as geysasuekaiideteotixrhstosokyrios.
 lookup2 SBLGNT I_Peter 2:3+3 2:3
@@ -282,16 +282,16 @@ length2
 
 getrefs SBLGNT LXX Psalms 34:12 34:16 # MT 34:13-17
 # ... (lengths<=8)
-# LXX Psalms 34:12+43 34:13-51 = SBLGNT I Peter 3:10+33 3:10-46 (length=10, pos1=34554)
+# LXX Psalms 34:12+43 34:13-51 = SBLGNT I_Peter 3:10+33 3:10-46 (length=10, pos1=34554)
 # LXX Psalms 34:15+29 34:15-11 = SBLGNT Luke 7:1+26 7:1-36 (length=10, pos1=34704)
-# LXX Psalms 34:14+26 34:14-23 = SBLGNT I Peter 3:11+30 3:11-25 (length=11, pos1=34641)
+# LXX Psalms 34:14+26 34:14-23 = SBLGNT I_Peter 3:11+30 3:11-25 (length=11, pos1=34641)
 # LXX Psalms 34:16+19 34:16-39 = SBLGNT Romans 16:17+87 16:17-17 (length=11, pos1=34744)
-# LXX Psalms 34:12+17 34:12-19 = SBLGNT I Peter 3:10+4 3:10-72 (length=13, pos1=34528)
-# LXX Psalms 34:14+39 34:14-7 = SBLGNT I Peter 3:11+44 3:11-8 (length=14, pos1=34654)
+# LXX Psalms 34:12+17 34:12-19 = SBLGNT I_Peter 3:10+4 3:10-72 (length=13, pos1=34528)
+# LXX Psalms 34:14+39 34:14-7 = SBLGNT I_Peter 3:11+44 3:11-8 (length=14, pos1=34654)
 # LXX Psalms 34:15+14 34:15-22 = SBLGNT Matthew 5:45+96 5:45-7 (length=14, pos1=34689)
-# LXX Psalms 34:13+19 34:13-20 = SBLGNT I Peter 3:10+56 3:10-17 (length=16, pos1=34579)
-# LXX Psalms 34:13+38 34:14-54 = SBLGNT I Peter 3:10+72 3:11-60 (length=23, pos1=34598)
-# LXX Psalms 34:15 34:16-37 = SBLGNT I Peter 3:12+3 3:12 (length=82, pos1=34675)
+# LXX Psalms 34:13+19 34:13-20 = SBLGNT I_Peter 3:10+56 3:10-17 (length=16, pos1=34579)
+# LXX Psalms 34:13+38 34:14-54 = SBLGNT I_Peter 3:10+72 3:11-60 (length=23, pos1=34598)
+# LXX Psalms 34:15 34:16-37 = SBLGNT I_Peter 3:12+3 3:12 (length=82, pos1=34675)
 ## The union of the last three and three other former ones should be one citation.
 lookup1 LXX Psalms 34:12+17 34:16-37
 # Stored internally as uelvnqvhnagapvnhmerasideinagauaspaysonthnglvssansoyapokakoykaixeilhsoytoymhlalhsaidolonekklinonapokakoykaipoihsonagauonqhthsoneirhnhnkaidivjonaythnofualmoikyrioyepidikaioyskaivtaaytoyeisdehsinaytvnprosvpondekyrioyepipoioyntaskaka.
@@ -454,7 +454,7 @@ compare12
 
 getrefs SBLGNT LXX Psalms 55:21 55:23
 # ... (lengths<=11)
-# LXX Psalms 55:22+17 55:22-53 = SBLGNT I Peter 5:7+4 5:7-42 (length=12, pos1=61018)
+# LXX Psalms 55:22+17 55:22-53 = SBLGNT I_Peter 5:7+4 5:7-42 (length=12, pos1=61018)
 # LXX Psalms 55:22+55 55:22-13 = SBLGNT John 4:14+40 4:14-67 (length=14, pos1=61056)
 # LXX Psalms 55:22+55 55:22-13 = SBLGNT John 6:51+65 6:51-53 (length=14, pos1=61056)
 # LXX Psalms 55:22+55 55:22-13 = SBLGNT John 6:58+89 6:58 (length=14, pos1=61056)
@@ -465,7 +465,7 @@ lookup2 SBLGNT I_Peter 5:7+4 5:7-21
 compare12 
 # Comparing 'epirriconepikyrionthnmerimnansoykaiayto' ~ 'nthnmerimnanymvnepiricantesepayto' = 28
 # difference = 0.402778
-## Seemingly just an allusion with I Peter, not a quotation.
+## Seemingly just an allusion with I_Peter, not a quotation.
 ## The references in John seem to be false positive, too.
 
 
@@ -655,10 +655,21 @@ compare12
 
 getrefs SBLGNT LXX Psalms 94:11
 # ... (lengths<=11)
-LXX Psalms 94:11+39 94:11 = SBLGNT I Corinthians 3:20+44 3:20 (length=17, pos1=109683)
+LXX Psalms 94:11+39 94:11 = SBLGNT I_Corinthians 3:20+44 3:20 (length=17, pos1=109683)
 LXX Psalms 94:11+12 94:11-26 = SBLGNT Luke 6:8+9 6:8-75 (length=18, pos1=109656)
-LXX Psalms 94:10+45 94:11-23 = SBLGNT I Corinthians 3:20+6 3:20-20 (length=35, pos1=109642)
+LXX Psalms 94:10+45 94:11-23 = SBLGNT I_Corinthians 3:20+6 3:20-20 (length=35, pos1=109642)
 ## The union of the last one and a former one should be one citation.
+lookup1 LXX Psalms 94:11
+# Stored internally as kyriosginvskeitoysdialogismoystvnanurvpvnotieisinmataioi.
+lookup2 SBLGNT I_Corinthians 3:20+8 3:20
+# Stored internally as kyriosginvskeitoysdialogismoystvnsofvnotieisinmataioi.
+compare12
+# Comparing 'kyriosginvskeitoysdialogismoystvnanurvpvnotieisinmataioi' ~ 'kyriosginvskeitoysdialogismoystvnsofvnotieisinmataioi' = 11
+# difference = 0.110092
+length1
+# Length of text 1 is 56.
+length2
+# Length of text 2 is 53.
 
 lookup1 LXX Psalms 94:14
 # Stored internally as otioykapvsetaikyriostonlaonaytoykaithnklhronomianaytoyoykegkataleicei.
@@ -728,7 +739,7 @@ getrefs SBLGNT LXX Psalms 104:4
 
 
 getrefs SBLGNT LXX Psalms 106:20
-# LXX Psalms 106:20+4 106:20-44 = SBLGNT II Corinthians 5:18+25 5:18-58 (length=8, pos1=125008)
+# LXX Psalms 106:20+4 106:20-44 = SBLGNT II_Corinthians 5:18+25 5:18-58 (length=8, pos1=125008)
 # LXX Psalms 106:20+8 106:20-40 = SBLGNT Acts 22:9+29 22:9-31 (length=8, pos1=125012)
 # LXX Psalms 106:20+25 106:20-20 = SBLGNT Romans 1:23+33 1:23-56 (length=11, pos1=125029)
 # LXX Psalms 106:20+25 106:20-20 = SBLGNT Romans 8:3+67 8:3-58 (length=11, pos1=125029)
@@ -776,12 +787,12 @@ getrefs SBLGNT LXX Psalms 110:4
 
 getrefs SBLGNT LXX Psalms 112:9
 # ... (lengths<=13)
-# LXX Psalms 112:9 112:9-37 = SBLGNT II Corinthians 9:9+9 9:9 (length=59, pos1=134163)
+# LXX Psalms 112:9 112:9-37 = SBLGNT II_Corinthians 9:9+9 9:9 (length=59, pos1=134163)
 
 
 getrefs SBLGNT LXX Psalms 116:10
 # ... (lengths<=9)
-# LXX Psalms 116:10+9 116:10-22 = SBLGNT II Corinthians 4:13+48 4:13-32 (length=19, pos1=136803)
+# LXX Psalms 116:10+9 116:10-22 = SBLGNT II_Corinthians 4:13+48 4:13-32 (length=19, pos1=136803)
 
 getrefs SBLGNT LXX Psalms 116:11
 # LXX Psalms 116:11+25 116:11 = SBLGNT Romans 3:4+34 3:4-70 (length=15, pos1=136869)
@@ -800,7 +811,7 @@ getrefs SBLGNT LXX Psalms 118:6
 getrefs SBLGNT LXX Psalms 118:22
 # ... (lengths<=10)
 # LXX Psalms 118:22+46 118:22 = SBLGNT Acts 4:11+57 4:11 (length=16, pos1=138540)
-# LXX Psalms 118:22+5 118:22 = SBLGNT I Peter 2:7+44 2:7 (length=57, pos1=138499)
+# LXX Psalms 118:22+5 118:22 = SBLGNT I_Peter 2:7+44 2:7 (length=57, pos1=138499)
 # LXX Psalms 118:22 118:23-50 = SBLGNT Luke 20:17+50 20:18-62 (length=64, pos1=138494)
 # LXX Psalms 118:22 118:23 = SBLGNT Mark 12:10+27 12:11 (length=114, pos1=138494)
 # LXX Psalms 118:22 118:23 = SBLGNT Matthew 21:42+47 21:42 (length=114, pos1=138494)
