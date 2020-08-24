@@ -724,6 +724,28 @@ getrefs SBLGNT LXX Psalms 95:7 95:11
 ## Verses 7-11 are cited as one block in Hebrews 3:7-11, and partly in Hebrews 3:15, 3:18,
 ## 4:3, 4:5 and 4:7. So the last and four former ones should be one citation, and some
 ## others should be identified as repetitions.
+lookup1 LXX Psalms 95:7+65 95:11
+# Stored internally as shmeroneanthsfvnhsaytoyakoyshtemhsklhrynhtetaskardiasymvnvsentvparapikrasmvkatathnhmerantoypeirasmoyentherhmvoyepeirasanoipateresymvnedokimasankaieidosantaergamoytessarakontaethprosvxuisathgeneaekeinhkaieipaaeiplanvntaithkardiakaiaytoioykegnvsantasodoysmoyvsvmosaenthorghmoyeieiseleysontaieisthnkatapaysinmoy.
+length1
+# Length of text 1 is 308.
+lookup2 SBLGNT Hebrews 3:7+28 3:11
+# Stored internally as shmeroneanthsfvnhsaytoyakoyshtemhsklhrynhtetaskardiasymvnvsentvparapikrasmvkatathnhmerantoypeirasmoyentherhmvoyepeirasanoipateresymvnendokimasiakaieidontaergamoytesserakontaethdioprosvxuisathgeneataythkaieiponaeiplanvntaithkardiaaytoideoykegnvsantasodoysmoyvsvmosaenthorghmoyeieiseleysontaieisthnkatapaysinmoy.
+length2
+# Length of text 2 is 309.
+compare12
+# Comparing 'shmeroneanthsfvnhsaytoyakoyshtemhsklhrynhtetaskardiasymvnvsentvparapikrasmvkatathnhmerantoypeirasmoyentherhmvoyepeirasanoipateresymvnedokimasankaieidosantaergamoytessarakontaethprosvxuisathgeneaekeinhkaieipaaeiplanvntaithkardiakaiaytoioykegnvsantasodoysmoyvsvmosaenthorghmoyeieiseleysontaieisthnkatapaysinmoy' ~ 'shmeroneanthsfvnhsaytoyakoyshtemhsklhrynhtetaskardiasymvnvsentvparapikrasmvkatathnhmerantoypeirasmoyentherhmvoyepeirasanoipateresymvnendokimasiakaieidontaergamoytesserakontaethdioprosvxuisathgeneataythkaieiponaeiplanvntaithkardiaaytoideoykegnvsantasodoysmoyvsvmosaenthorghmoyeieiseleysontaieisthnkatapaysinmoy' = 39
+# difference = 0.064830
+lookup1 LXX Psalms 95:11+2 95:11-3
+# Stored internally as vmosaenthorghmoyeieiseleysontaieisthnkatapaysin.
+lookup2 SBLGNT Hebrews 3:18+7 3:18-24
+# Stored internally as vmosenmheiseleysesuaieisthnkatapaysin.
+compare12
+# Comparing 'vmosaenthorghmoyeieiseleysontaieisthnkatapaysin' ~ 'vmosenmheiseleysesuaieisthnkatapaysin' = 26
+# difference = 0.321429
+length1
+# Length of text 1 is 47.
+length2
+# Length of text 2 is 37.
 
 
 getrefs SBLGNT LXX Psalms 102:1 102:28
