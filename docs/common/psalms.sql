@@ -82,8 +82,8 @@ insert into classifications (name, info) values ('influence', 'textual affinity:
 
 insert into classification_subtypes (name, info) values ('exact', 'full literal match');
 insert into classification_subtypes (name, info) values ('literal', 'full or almost full literal match');
-insert into classification_subtypes (name, info) values ('superset', 'NT text is a superset of the OT text');
-insert into classification_subtypes (name, info) values ('subset', 'NT text is a subset of the OT text');
+insert into classification_subtypes (name, info) values ('superset', 'OT text is a superset of the NT text');
+insert into classification_subtypes (name, info) values ('subset', 'OT text is a subset of the NT text');
 insert into classification_subtypes (name, info) values ('synonym', 'some parts are changed to synonyms');
 insert into classification_subtypes (name, info) values ('fuzzy', 'fuzzy match');
 insert into classification_subtypes (name, info) values ('far-fuzzy', 'fuzzy match that cannot be identified easily');
@@ -675,3 +675,16 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (35, 6, 'Δαυιδ', 'καθως προειρηται'); -- καθως προειρηται = just as it has been said
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (35, 6, 'quotation', 'literal, exact', 'Z.K.');
+
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (36, 1, 102, 'Psalms 102:25-27', 'Hebrews', 'Hebrews 1:10-12', null, null, null, null, 'traditional');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (36, 1, 102, 'LXX Psalms 102:25+10 102:26-29', 'Hebrews', 'SBLGNT Hebrews 1:10+13 1:12-72', 117060, 133, 907, 133, 'getrefs');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (36, 1, 102, 'LXX Psalms 102:26+92 102:27', 'Hebrews', 'SBLGNT Hebrews 1:12+38 1:12', 117207, 52, 1060, 52, 'getrefs');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (36, 1, 102, 'LXX Psalms 102:25 102:27', 'Hebrews', 'SBLGNT Hebrews 1:10+3 1:12', 117060, 209, 907, 217, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (36, 1, 'θεος', 'προς δε τον υιον ... και'); -- προς δε τον υιον ... και = unto however the Son ... and
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (36, 1, 'quotation', 'literal, subset', 'Z.K.');

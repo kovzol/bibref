@@ -4,7 +4,7 @@
 ##
 ## In several cases, however, a fuzzy match would be more adequate,
 ## see e.g. Psalms 16:8-11, 18:49, 31:5, 34:12-16, 40:6-8, 45:6-7, 69:22, 69:25,
-## 86:9, 91:11-12, 94:11, 95:7-11, 110:4, 117:1.
+## 86:9, 91:11-12, 94:11, 95:7-11, 102:25-27, 110:4, 117:1.
 ##
 ## Also, in some cases false positive results are reported, see e.g. Psalms 146:1.
 ## Some non-traditional matches are found, e.g. Psalms 6:8.
@@ -753,6 +753,17 @@ getrefs SBLGNT LXX Psalms 102:1 102:28
 # LXX Psalms 102:26+92 102:27 = SBLGNT Hebrews 1:12+38 1:12 (length=52, pos1=117207)
 # LXX Psalms 102:25+10 102:26-29 = SBLGNT Hebrews 1:10+13 1:12-72 (length=133, pos1=117060)
 ## The union of the two last ones should be one citation.
+lookup1 LXX Psalms 102:25 102:27
+# Stored internally as katarxassykyriethnghneuemelivsaskaiergatvnxeirvnsoyeisinoioyranoiaytoiapoloyntaisydediameneiskaipantesvsimationpalaivuhsontaikaivseiperibolaionallajeisaytoyskaiallaghsontaisydeoaytoseikaitaethsoyoykekleicoysin.
+lookup2 SBLGNT Hebrews 1:10+3 1:12
+# Stored internally as sykatarxaskyriethnghneuemelivsaskaiergatvnxeirvnsoyeisinoioyranoiaytoiapoloyntaisydediameneiskaipantesvsimationpalaivuhsontaikaivseiperibolaionelijeisaytoysvsimationkaiallaghsontaisydeoaytoseikaitaethsoyoykekleicoysin.
+compare12
+# Comparing 'katarxassykyriethnghneuemelivsaskaiergatvnxeirvnsoyeisinoioyranoiaytoiapoloyntaisydediameneiskaipantesvsimationpalaivuhsontaikaivseiperibolaionallajeisaytoyskaiallaghsontaisydeoaytoseikaitaethsoyoykekleicoysin' ~ 'sykatarxaskyriethnghneuemelivsaskaiergatvnxeirvnsoyeisinoioyranoiaytoiapoloyntaisydediameneiskaipantesvsimationpalaivuhsontaikaivseiperibolaionelijeisaytoysvsimationkaiallaghsontaisydeoaytoseikaitaethsoyoykekleicoysin' = 20
+# difference = 0.049296
+length1
+# Length of text 1 is 209.
+length2
+# Length of text 2 is 217.
 
 
 getrefs SBLGNT LXX Psalms 104:4
