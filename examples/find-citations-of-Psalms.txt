@@ -769,6 +769,17 @@ length2
 getrefs SBLGNT LXX Psalms 104:4
 # ... (lengths<=11)
 # LXX Psalms 104:4 104:4-6 = SBLGNT Hebrews 1:7+27 1:7-7 (length=57, pos1=119058)
+lookup1 LXX Psalms 104:4
+# Stored internally as opoivntoysaggeloysaytoypneymatakaitoysleitoyrgoysaytoypyrflegon.
+lookup2 SBLGNT Hebrews 1:7+27 1:7
+# Stored internally as opoivntoysaggeloysaytoypneymatakaitoysleitoyrgoysaytoypyrosfloga.
+compare12
+# Comparing 'opoivntoysaggeloysaytoypneymatakaitoysleitoyrgoysaytoypyrflegon' ~ 'opoivntoysaggeloysaytoypneymatakaitoysleitoyrgoysaytoypyrosfloga' = 11
+# difference = 0.094488
+length1
+# Length of text 1 is 63.
+length2
+# Length of text 2 is 64.
 
 
 getrefs SBLGNT LXX Psalms 106:20
