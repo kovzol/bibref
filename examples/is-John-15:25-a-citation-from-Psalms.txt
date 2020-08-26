@@ -1,6 +1,14 @@
 addbooks
+lookup1 LXX Psalms 120:7+56 120:7
+# Stored internally as epolemoynmedvrean.
+lookup1 LXX Psalms 119:161+13 119:161-37
+Stored internally as katedivjanmedvrean.
+lookup1 LXX Psalms 109:3+29 109:3
+# Stored internally as epolemhsanmedvrean.
 lookup1 LXX Psalms 69:4+40 69:4-69
 # Stored internally as misoyntesmedvrean.
+lookup1 LXX Psalms 25:19+46 25:19
+# Stored internally as emishsanme.
 lookup1 LXX Psalms 35:19+42 35:19-23
 # Stored internally as misoyntesmedvrean.
 lookup2 SBLGNT John 15:25+45 15:25
@@ -56,5 +64,8 @@ compare12
 # Comparing 'hsanmedvrean' ~ 'emishsanmedvrean' = 4
 # difference = 0.178571
 
-## Conclusion. It seems the idea from John 15:25 is mentioned in four different psalms as well,
+## Conclusion. It seems the idea from John 15:25 is mentioned in 6 different psalms as well,
 ## but the best match is in Psalm 109.
+## Alternatively, John 15:25 quotes the unique match in Psalm 25:19 ("emishsanme")
+## and the 5 non-unique ones in the other psalms ("dvrean").
+## Note that the word "dvrean" appears at many other places (not in Psalms), but usually with a different meaning.

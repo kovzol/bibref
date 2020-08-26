@@ -246,6 +246,11 @@ length2
 # Length of text 2 is 32.
 
 
+getrefs SBLGNT LXX Psalms 25:19
+# ... (lengths<=9)
+# LXX Psalms 25:19+46 25:19 = SBLGNT John 15:25+47 15:25-6 (length=10, pos1=24949)
+
+
 getrefs SBLGNT LXX Psalms 31:5 # MT 31:6
 # ... (lengths<=13)
 # LXX Psalms 31:5+20 31:5-31 = SBLGNT Luke 23:46+57 23:46-22 (length=14, pos1=29844)
@@ -801,6 +806,13 @@ compare12
 getrefs SBLGNT LXX Psalms 109:3
 # LXX Psalms 109:3+35 109:3 = SBLGNT John 15:25+49 15:25 (length=12, pos1=130560)
 ## Very similar to Psalms 25:19, 35:19 and 69:5.
+lookup1 LXX Psalms 109:3+29 109:3
+# Stored internally as epolemhsanmedvrean.
+lookup2 SBLGNT John 15:25+47 15:25
+# Stored internally as emishsanmedvrean.
+compare12
+# Comparing 'epolemhsanmedvrean' ~ 'emishsanmedvrean' = 8
+# difference = 0.264706
 
 
 getrefs SBLGNT LXX Psalms 110:1
