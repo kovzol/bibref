@@ -5,7 +5,8 @@ create table authors (
 create table books (
  name text not null primary key,
  author text,
- info text);
+ info text,
+ number int);
 
 create table found_methods (
  name text not null primary key,
@@ -58,17 +59,17 @@ insert into found_methods (name, info) values ('getrefs', 'found by the getrefs 
 insert into found_methods (name, info) values ('manual', 'confirmed manually (with understanding of Greek)');
 insert into found_methods (name, info) values ('manual-mechanical', 'confirmed manually (with no understanding of Greek)');
 
-insert into books (name, author, info) values ('Matthew', 'Matthew', 'Gospel of Matthew');
-insert into books (name, author, info) values ('Mark', 'Mark', 'Gospel of Mark');
-insert into books (name, author, info) values ('Luke', 'Luke', 'Gospel of Luke');
-insert into books (name, author, info) values ('John', 'John', 'Gospel of John');
-insert into books (name, author, info) values ('Acts', 'Luke', 'Acts of the Apostles');
-insert into books (name, author, info) values ('Romans', 'Paul', 'Epistle to the Romans');
-insert into books (name, author, info) values ('I_Corinthians', 'Paul', 'First Epistle to the Corinthians');
-insert into books (name, author, info) values ('Ephesians', 'Paul', 'Epistle to the Ephesians');
-insert into books (name, author, info) values ('Hebrews', 'Unknown', 'Epistle to the Hebrews');
-insert into books (name, author, info) values ('I_Peter', 'Peter', 'First Epistle of Peter');
-insert into books (name, author, info) values ('Revelation_of_John', 'John', 'Revelation of John');
+insert into books (name, author, info, number) values ('Matthew', 'Matthew', 'Gospel of Matthew', 1);
+insert into books (name, author, info, number) values ('Mark', 'Mark', 'Gospel of Mark', 2);
+insert into books (name, author, info, number) values ('Luke', 'Luke', 'Gospel of Luke', 3);
+insert into books (name, author, info, number) values ('John', 'John', 'Gospel of John', 4);
+insert into books (name, author, info, number) values ('Acts', 'Luke', 'Acts of the Apostles', 5);
+insert into books (name, author, info, number) values ('Romans', 'Paul', 'Epistle to the Romans', 6);
+insert into books (name, author, info, number) values ('I_Corinthians', 'Paul', 'First Epistle to the Corinthians', 7);
+insert into books (name, author, info, number) values ('Ephesians', 'Paul', 'Epistle to the Ephesians', 10);
+insert into books (name, author, info, number) values ('Hebrews', 'Unknown', 'Epistle to the Hebrews', 19);
+insert into books (name, author, info, number) values ('I_Peter', 'Peter', 'First Epistle of Peter', 21);
+insert into books (name, author, info, number) values ('Revelation_of_John', 'John', 'Revelation of John', 27);
 
 insert into classifications (name, info) values ('quotation', 'direct reference given');
 insert into classifications (name, info) values ('repetition', 'repetition of a former quotation without reference');
@@ -710,3 +711,54 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (38, 1, 'εν τω νομω αυτων', 'γεγραμμενος'); -- εν τω νομω αυτων γεγραμμενος = in the law of them having been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (38, 1, 'quotation', 'literal, change', 'Z.K.');
+
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (39, 1, 110, 'Psalms 110:1', 'Luke', 'Luke 20:42-43', null, null, null, null, 'traditional');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (39, 1, 110, 'LXX Psalms 110:1+19 110:1', 'Luke', 'SBLGNT Luke 20:42+36 20:43', 132490, 73, 79150, 73, 'getrefs');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (39, 1, 110, 'LXX Psalms 110:1+13 110:1', 'Luke', 'SBLGNT Luke 20:42+31 20:43', 132484, 79, 79145, 78, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (39, 1, 'Δαυιδ ... εν βιβλω ψαλμων', 'λεγει'); -- λεγει = says
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (39, 1, 'quotation', 'literal', 'Z.K.');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (39, 2, 110, 'Psalms 110:1', 'Acts', 'Acts 2:34-35', null, null, null, null, 'traditional');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (39, 2, 110, 'LXX Psalms 110:1+11 110:1', 'Acts', 'SBLGNT Acts 2:34+40 2:35', 132482, 81, 5652, 81, 'getrefs');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (39, 2, 110, 'LXX Psalms 110:1+13 110:1', 'Acts', 'SBLGNT Acts 2:34+42 2:35', 132484, 79, 5654, 79, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (39, 2, 'Δαυιδ', 'λεγει, exact'); -- λεγει = says
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (39, 2, 'quotation', 'literal', 'Z.K.');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (39, 3, 110, 'Psalms 110:1', 'Hebrews', 'Hebrews 1:13', null, null, null, null, 'traditional');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (39, 3, 110, 'LXX Psalms 110:1+35 110:1', 'Hebrews', 'SBLGNT Hebrews 1:13+31 1:13', 132506, 57, 1145, 57, 'getrefs');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (39, 3, 110, 'LXX Psalms 110:1+35 110:1', 'Hebrews', 'SBLGNT Hebrews 1:13+31 1:13', 132506, 57, 1145, 57, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (39, 3, 'θεος', 'ειρηκεν'); -- ειρηκεν = did He say
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (39, 3, 'quotation', 'literal, exact', 'Z.K.');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (39, 4, 110, 'Psalms 110:1', 'Matthew', 'Matthew 22:44', null, null, null, null, 'traditional');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (39, 4, 110, 'LXX Psalms 110:1+19 110:1-17', 'Matthew', 'SBLGNT Matthew 22:44+5 22:44-15', 132490, 56, 66113, 56, 'getrefs');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (39, 4, 110, 'LXX Psalms 110:1+13 110:1', 'Matthew', 'SBLGNT Matthew 22:44', 132484, 79, 66108, 76, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (39, 4, 'Δαυιδ', 'λεγων'); -- λεγων = saying
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (39, 4, 'quotation', 'literal, synonym', 'Z.K.');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (39, 5, 110, 'Psalms 110:1', 'Mark', 'Mark 12:36', null, null, null, null, 'traditional');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (39, 5, 110, 'LXX Psalms 110:1+19 110:1-17', 'Mark', 'SBLGNT Mark 12:36+36 12:36-15', 132490, 56, 41472, 56, 'getrefs');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (39, 5, 110, 'LXX Psalms 110:1+13 110:1', 'Mark', 'SBLGNT Mark 12:36+33 12:36', 132484, 79, 41469, 76, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (39, 5, 'Δαυιδ', 'ειπεν'); -- ειπεν = said
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (39, 5, 'quotation', 'literal, synonym', 'Z.K.');

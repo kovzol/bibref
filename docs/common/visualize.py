@@ -32,6 +32,7 @@ def psalms_report_latex(conn):
     print ("\\newcommand\\Paul{{\color{YellowGreen}\\bullet}\mathllap{\color{YellowGreen}\circ}}")
     print ("\\newcommand\\Unknown{{\color{Orchid}\\bullet}\mathllap{\color{Orchid}\circ}}")
     print ("\\newcommand\\Matthew{{\color{Red}\\bullet}\mathllap{\color{Red}\circ}}")
+    print ("\\newcommand\\Mark{{\color{Cyan}\\bullet}\mathllap{\color{Cyan}\circ}}")
     print ("\\newcommand\\John{{\color{GreenYellow}\\bullet}\mathllap{\color{GreenYellow}\circ}}")
     print ("\\newcommand\\Peter{{\color{NavyBlue}\\bullet}\mathllap{\color{NavyBlue}\circ}}")
     print ("\\begin{document}")
@@ -53,7 +54,8 @@ def psalms_report_latex(conn):
             " AND q.found_method = 'getrefs'" +
             " AND a.name = b.author" +
             " AND b.name = q.nt_book" +
-            " GROUP BY q.ot_id, q.nt_id")
+            " GROUP BY q.ot_id, q.nt_id" +
+            " ORDER BY b.number")
         rows = cur.fetchall()
         if len(rows) > 0:
             print
