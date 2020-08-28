@@ -839,7 +839,14 @@ compare12
 # Comparing 'eipenokyriostvkyrivmoykauoyekdejivnmoyevsanuvtoysexuroyssoyypopodiontvnpodvnsoy' ~ 'eipenkyriostvkyrivmoykauoyekdejivnmoyevsanuvtoysexuroyssoyypokatvtvnpodvnsoy' = 13
 ## difference = 0.090323
 ## Here a synonym (hypokato/hypopodion) is used for the word "footstool" in both Matthew and Mark.
-## Hebrews 10:13 is a strong allusion.
+## Hebrews 10:13 is a repetition:
+lookup1 LXX Psalms 110:1+62 110:1-3
+# Stored internally as exuroyssoyypopodiontvnpodvn.
+lookup2 SBLGNT Hebrews 10:13+31 10:13-5
+# Stored internally as exuroiaytoyypopodiontvnpodvn.
+compare12
+# Comparing 'exuroyssoyypopodiontvnpodvn' ~ 'exuroiaytoyypopodiontvnpodvn' = 9
+# difference = 0.181818
 
 getrefs SBLGNT LXX Psalms 110:4
 # ... (lengths<=10)
@@ -853,8 +860,8 @@ getrefs SBLGNT LXX Psalms 110:4
 # LXX Psalms 110:4 110:4-41 = SBLGNT Hebrews 7:21+40 7:21-17 (length=34, pos1=132725)
 # LXX Psalms 110:4+36 110:4 = SBLGNT Hebrews 5:6+22 5:6 (length=39, pos1=132761)
 # LXX Psalms 110:4+36 110:4 = SBLGNT Hebrews 7:17+19 7:17 (length=39, pos1=132761)
-## Some of these matches are just allusions (Hebrews 8:3 and 7:3), but the other
-## ones are indeed quotations. Hebrews 7:21 is split into parts and Hebrews 7:11
+## Some of these matches are just allusions (Hebrews 8:3 and 7:3) or repetitions, but the other
+## ones (5:6, 5:10, 7:17, 7:21) are indeed quotations. Hebrews 7:21 is split into parts and Hebrews 7:11
 ## contains the same text twice.
 
 
