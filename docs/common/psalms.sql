@@ -66,6 +66,7 @@ insert into books (name, author, info, number) values ('John', 'John', 'Gospel o
 insert into books (name, author, info, number) values ('Acts', 'Luke', 'Acts of the Apostles', 5);
 insert into books (name, author, info, number) values ('Romans', 'Paul', 'Epistle to the Romans', 6);
 insert into books (name, author, info, number) values ('I_Corinthians', 'Paul', 'First Epistle to the Corinthians', 7);
+insert into books (name, author, info, number) values ('II_Corinthians', 'Paul', 'Second Epistle to the Corinthians', 8);
 insert into books (name, author, info, number) values ('Ephesians', 'Paul', 'Epistle to the Ephesians', 10);
 insert into books (name, author, info, number) values ('Hebrews', 'Unknown', 'Epistle to the Hebrews', 19);
 insert into books (name, author, info, number) values ('I_Peter', 'Peter', 'First Epistle of Peter', 21);
@@ -815,3 +816,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (40, 4, 'του', 'λεγοντος'); -- του = the [One], λεγοντος = saying
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (40, 4, 'quotation', 'literal', 'Z.K.');
+
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (41, 1, 112, 'Psalms 112:9', 'II_Corinthians', 'II_Corinthians 9:9', null, null, null, null, 'traditional');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (41, 1, 112, 'LXX Psalms 112:9 112:9-37', 'II_Corinthians', 'SBLGNT II_Corinthians 9:9+9 9:9', 134163, 59, 14356, 59, 'getrefs');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (41, 1, 112, 'LXX Psalms 112:9 112:9-37', 'II_Corinthians', 'SBLGNT II_Corinthians 9:9+9 9:9', 134163, 59, 14356, 59, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (41, 1, null, 'καθως γεγραπται'); -- καθως γεγραπται = as it has been written
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (41, 1, 'quotation', 'literal, exact', 'Z.K.');
