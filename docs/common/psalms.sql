@@ -827,3 +827,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (41, 1, null, 'καθως γεγραπται'); -- καθως γεγραπται = as it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (41, 1, 'quotation', 'literal, exact', 'Z.K.');
+
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (42, 1, 116, 'Psalms 116:10', 'II_Corinthians', 'II_Corinthians 4:13', null, null, null, null, 'traditional');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (42, 1, 116, 'LXX Psalms 116:10+9 116:10-22', 'II_Corinthians', 'SBLGNT II_Corinthians 4:13+48 4:13-32', 136803, 19, 6211, 19, 'getrefs');
+insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (42, 1, 116, 'LXX Psalms 116:10+9 116:10-22', 'II_Corinthians', 'SBLGNT II_Corinthians 4:13+48 4:13-32', 136803, 19, 6211, 19, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (42, 1, null, 'γεγραμμενον'); -- γεγραμμενον = having been written
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (42, 1, 'quotation', 'literal, exact', 'Z.K.');

@@ -887,6 +887,7 @@ getrefs SBLGNT LXX Psalms 116:10
 
 getrefs SBLGNT LXX Psalms 116:11
 # LXX Psalms 116:11+25 116:11 = SBLGNT Romans 3:4+34 3:4-70 (length=15, pos1=136869)
+## This is just an allusion.
 
 
 getrefs SBLGNT LXX Psalms 117:1
