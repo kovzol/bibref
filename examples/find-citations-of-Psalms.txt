@@ -863,6 +863,17 @@ getrefs SBLGNT LXX Psalms 110:4
 ## Some of these matches are just allusions (Hebrews 8:3 and 7:3) or repetitions, but the other
 ## ones (5:6, 5:10, 7:17, 7:21) are indeed quotations. Hebrews 7:21 is split into parts and Hebrews 7:11
 ## contains the same text twice.
+lookup1 LXX Psalms 110:4 110:4-22
+# Stored internally as vmosenkyrioskaioymetamelhuhsetaisyeiiereyseistonaivna.
+lookup2 SBLGNT Hebrews 7:21+40 7:21
+# Stored internally as vmosenkyrioskaioymetamelhuhsetaisyiereyseistonaivna.
+length1
+# Length of text 1 is 53.
+length2
+# Length of text 2 is 51.
+compare12
+# Comparing 'vmosenkyrioskaioymetamelhuhsetaisyeiiereyseistonaivna' ~ 'vmosenkyrioskaioymetamelhuhsetaisyiereyseistonaivna' = 4
+# difference = 0.048077
 
 
 getrefs SBLGNT LXX Psalms 112:9
