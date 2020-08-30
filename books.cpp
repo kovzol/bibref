@@ -765,19 +765,19 @@ void showAvailableBibles() {
     SWMgr manager(new MarkupFilterMgr(FMT_XHTML));
     ModMap::iterator it;
     int first = 1;
-    printf("Available Bible translations: ");
+    string translations = "Available Bible translations: ";
     for (it = manager.Modules.begin(); it != manager.Modules.end(); ++it) {
         if (strcmp((*it).second->getType(), "Biblical Texts")==0) {
             if (first != 1) {
-                printf(", ");
+                translations += ", ";
             }
             string moduleName = (*it).second->getName();
             add_vocabulary_item(moduleName);
-            printf("%s", moduleName.c_str());
+            translations += moduleName.c_str();
             first = 0;
         }
     }
-    printf(".\n");
-    fflush(stdout);
+    translations += ".";
+    info(translations);
 }
 

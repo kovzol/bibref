@@ -61,7 +61,7 @@ void error(string message) {
 }
 
 void info(string message) {
-    cerr << message << endl << flush;
+    cerr << output_prepend_set << message << endl << flush;
 }
 
 // readline related code was taken mostly from https://eli.thegreenplace.net/2016/basics-of-using-the-readline-library/
@@ -106,15 +106,17 @@ char** completer(const char* text, int start, int end) {
     return rl_completion_matches(text, completion_generator);
 }
 
-void cli() {
+void cli(const char *input_prepend, const char *output_prepend) {
+    output_prepend_set = new char[4]; // FIXME: this is hardcoded.
+    strcpy(output_prepend_set, output_prepend);
     rl_attempted_completion_function = completer;
-    info("This is bibref-cli 2020Jul03, nice to meet you.");
+    info("This is bibref-cli 2020Aug30, nice to meet you.");
     showAvailableBibles();
 
     maxresults = 100;
 
     char* buf;
-    while ((buf = readline(">> ")) != nullptr) {
+    while ((buf = readline(input_prepend)) != nullptr) {
         if (strlen(buf) > 0) {
             add_history(buf);
         }

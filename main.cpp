@@ -9,14 +9,61 @@ using namespace std;
 #include <iostream>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include <algorithm>
+#include <string>
+#include <sstream>
+#include <vector>
 
 #include "books.h"
 #include "fingerprint.h"
 #include "cli.h"
 
-int main(int argc, char **argv) {
+// @author Iain Hull (https://stackoverflow.com/a/868894/1044586)
+class InputParser {
+public:
+    InputParser(int &argc, char **argv) {
+        for (int i = 1; i < argc; ++i)
+            this->tokens.emplace_back(argv[i]);
+    }
 
-    cli();
+    const string &getCmdOption(const string &option) const {
+        vector<string>::const_iterator itr;
+        itr = find(this->tokens.cbegin(), this->tokens.cend(), option);
+        if (itr != this->tokens.end() && ++itr != this->tokens.end()) {
+            return *itr;
+        }
+        static const string empty_string;
+        return empty_string;
+    }
+
+    bool cmdOptionExists(const string &option) const {
+        return find(this->tokens.begin(), this->tokens.end(), option)
+               != this->tokens.end();
+    }
+
+private:
+    vector<string> tokens;
+};
+
+void showHelp(const string &executable) {
+    cout << "Usage: " << executable << " [options]\n";
+    cout << " where options can be:\n";
+    cout << " -h            this help\n";
+    cout << " -e            show input/output to fit examples\n";
+}
+
+int main(int argc, char **argv) {
+    InputParser input(argc, argv);
+    if (input.cmdOptionExists("-h")) {
+        showHelp(argv[0]);
+        exit(0);
+    }
+
+    if (input.cmdOptionExists("-e")) {
+        cli("", "# ");
+    } else {
+        cli(">> ", "");
+    }
 
     exit(0);
     compare("ου μοιχευσεις ου κλεψεις", "κλεπτεις ο λεγων μη μοιχευειν μοιχευεις");
