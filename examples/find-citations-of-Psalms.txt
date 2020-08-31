@@ -894,11 +894,21 @@ getrefs SBLGNT LXX Psalms 117:1
 # LXX Psalms 117:1+36 117:1-18 = SBLGNT Romans 15:11+37 15:11-21 (length=9, pos1=137243)
 # LXX Psalms 117:1+46 117:1 = SBLGNT Romans 15:11+50 15:11 (length=17, pos1=137253)
 ## The union of the two should be one citation.
+lookup1 LXX Psalms 117:1+9 117:1
+# Stored internally as aineitetonkyrionpantataeunhepainesateaytonpantesoilaoi.
+lookup2 SBLGNT Romans 15:11+8 15:11
+# Stored internally as aineitepantataeunhtonkyrionkaiepainesatvsanaytonpantesoilaoi.
+compare12
+# Comparing 'aineitetonkyrionpantataeunhepainesateaytonpantesoilaoi' ~ 'aineitepantataeunhtonkyrionkaiepainesatvsanaytonpantesoilaoi' = 16
+# difference = 0.149123
+length1
+# Length of text 1 is 54.
+length2
+# Length of text 2 is 60.
 
 
 getrefs SBLGNT LXX Psalms 118:6
 # LXX Psalms 118:5+55 118:6 = SBLGNT Hebrews 13:6+23 13:6 (length=50, pos1=137636)
-
 
 getrefs SBLGNT LXX Psalms 118:22
 # ... (lengths<=10)
@@ -907,7 +917,6 @@ getrefs SBLGNT LXX Psalms 118:22
 # LXX Psalms 118:22 118:23-50 = SBLGNT Luke 20:17+50 20:18-62 (length=64, pos1=138494)
 # LXX Psalms 118:22 118:23 = SBLGNT Mark 12:10+27 12:11 (length=114, pos1=138494)
 # LXX Psalms 118:22 118:23 = SBLGNT Matthew 21:42+47 21:42 (length=114, pos1=138494)
-
 
 getrefs SBLGNT LXX Psalms 118:26
 # ... (lengths<=11)
