@@ -55,7 +55,7 @@ def psalms_report_latex(conn):
             " AND a.name = b.author" +
             " AND b.name = q.nt_book" +
             " GROUP BY q.ot_id, q.nt_id" +
-            " ORDER BY b.number")
+            " ORDER BY q.ot_startpos, b.number")
         rows = cur.fetchall()
         if len(rows) > 0:
             print

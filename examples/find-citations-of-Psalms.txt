@@ -917,6 +917,14 @@ getrefs SBLGNT LXX Psalms 118:22
 # LXX Psalms 118:22 118:23-50 = SBLGNT Luke 20:17+50 20:18-62 (length=64, pos1=138494)
 # LXX Psalms 118:22 118:23 = SBLGNT Mark 12:10+27 12:11 (length=114, pos1=138494)
 # LXX Psalms 118:22 118:23 = SBLGNT Matthew 21:42+47 21:42 (length=114, pos1=138494)
+lookup1 LXX Psalms 118:22
+# Stored internally as liuononapedokimasanoioikodomoyntesoytosegenhuheiskefalhngvnias.
+lookup2 SBLGNT I_Peter 2:7+39 2:7
+# Stored internally as liuosonapedokimasanoioikodomoyntesoytosegenhuheiskefalhngvnias.
+compare12
+# Comparing 'liuononapedokimasanoioikodomoyntesoytosegenhuheiskefalhngvnias' ~ 'liuosonapedokimasanoioikodomoyntesoytosegenhuheiskefalhngvnias' = 4
+# difference = 0.040323
+## Acts 4:11 is just a strong allusion.
 
 getrefs SBLGNT LXX Psalms 118:26
 # ... (lengths<=11)
