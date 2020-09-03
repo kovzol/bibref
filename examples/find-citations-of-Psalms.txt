@@ -69,6 +69,7 @@ getrefs SBLGNT LXX Psalms 4:4 # MT 4:5
 # ... (lengths<=20)
 # LXX Psalms 4:4 4:4-63 = SBLGNT Ephesians 4:26 4:26-33 (length=24, pos1=2163)
 ## The same result is given for the full Psalm. So getrefs is safe here.
+## This is a strong allusion.
 
 
 ## The getrefs algorithm does not find the match between Psalm 5:9 and Romans 3:13.
@@ -94,7 +95,7 @@ getrefs SBLGNT LXX Psalms 6:1 6:10
 # ... (lengths<=11)
 # LXX Psalms 6:8 6:8-64 = SBLGNT Luke 13:27+32 13:27-14 (length=20, pos1=3985)
 ## Unexpected result. The context is not really supporting, but the
-## match can be theoretically possible.
+## match can be theoretically possible. Maybe an allusion.
 
 
 getrefs SBLGNT LXX Psalms 8:2 # MT 8:3
@@ -284,6 +285,7 @@ length1
 # Length of text 1 is 33.
 length2
 # Length of text 2 is 25.
+## Just a strong allusion.
 
 getrefs SBLGNT LXX Psalms 34:12 34:16 # MT 34:13-17
 # ... (lengths<=8)
@@ -581,6 +583,7 @@ getrefs SBLGNT LXX Psalms 84:1 84:12
 ## is used in several parts of the SBLGNT, mostly in Revelation (11 times), but also by
 ## Paul (4 times) and Peter (once). The non-Revelation occurrences are always followed by
 ## "ἀμήν" (amen), and also one of the Revelation occurrences (7:12) is extended by that word.
+## These are not quotations.
 
 
 getrefs SBLGNT LXX Psalms 86:1 86:17
@@ -601,6 +604,13 @@ getrefs SBLGNT LXX Psalms 86:1 86:17
 ## (they will come and will worship before) or a quotation, because John speaks about the synagogue
 ## of Satan, so the context is different from Psalm 86 (where all nations are mentioned and
 ## the context is fully positive).
+lookup1 LXX Psalms 86:9
+# Stored internally as pantataeunhosaepoihsashjoysinkaiproskynhsoysinenvpionsoykyriekaidojasoysintoonomasoy.
+lookup2 SBLGNT Revelation_of_John 15:4+13 15:4-30
+# Stored internally as kyriekaidojaseitoonomasoyotimonososiosotipantataeunhhjoysinkaiproskynhsoysinenvpionsoy.
+compare12
+# Comparing 'pantataeunhosaepoihsashjoysinkaiproskynhsoysinenvpionsoykyriekaidojasoysintoonomasoy' ~ 'kyriekaidojaseitoonomasoyotimonososiosotipantataeunhhjoysinkaiproskynhsoysinenvpionsoy' = 34
+# difference = 0.205882
 
 
 ## The connection between Psalm 90:4 and II_Peter 3:8 should be found!
@@ -628,6 +638,7 @@ compare12
 # difference = 0.400000
 ## Technically this might be considered an almost begin...end match:
 ## xiliaeth...vshmmera
+## In fact, this is just an allusion.
 
 
 getrefs SBLGNT LXX Psalms 91:11 91:12
@@ -793,7 +804,7 @@ getrefs SBLGNT LXX Psalms 106:20
 # LXX Psalms 106:20+25 106:20-20 = SBLGNT Romans 1:23+33 1:23-56 (length=11, pos1=125029)
 # LXX Psalms 106:20+25 106:20-20 = SBLGNT Romans 8:3+67 8:3-58 (length=11, pos1=125029)
 # LXX Psalms 106:20+23 106:20-20 = SBLGNT Philippians 2:7+33 2:7-45 (length=13, pos1=125027)
-## This may be a possible match with Romans 1:23, maybe just an allusion and not a quotation.
+## This may be a possible match with Romans 1:23, but not a quotation.
 lookup1 LXX Psalms 106:20 106:20-20
 # Stored internally as kaihllajantothndojanaytvnenomoivmati.
 lookup2 SBLGNT Romans 1:23 1:23-56
@@ -974,7 +985,7 @@ minunique1 LXX
 # Text atonoyranonkait is minimal unique.
 # Text nthnualassankaip is minimal unique.
 # Text noyranonkaithnghnthn is minimal unique.
-## It seems that Psalms 146:6 is quoted in Acts 4:24 and Acts 14:15, but none of its minimal unique texts
+## It seems that Psalms 146:6 is mentioned in Acts 4:24 and Acts 14:15, but none of its minimal unique texts
 ## are present in the SBLGNT. A fuzzy match would be useful here when checking the connection between LXX and SBLGNT.
 latintext1 noyranonkaithnghn
 # Stored.
@@ -998,7 +1009,7 @@ find1 SBLGNT
 ##
 ## Here Luke 16:17 is missing because its context is different.
 ##
-## Conclusion: Psalms 146:6 is indeed quoted in Acts (twice). But to find this match a literal check is
+## Conclusion: Psalms 146:6 seems indeed mentioned in Acts (twice). But to find this match a literal check is
 ## not helpful.
 ## In fact, Psalms 146:6 cannot be identified as a quotation, but just a strong allusion, because
 ## there is no direct reference.

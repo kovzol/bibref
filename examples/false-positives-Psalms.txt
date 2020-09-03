@@ -1,28 +1,22 @@
-## Warning: This file contains contradictory data with psalms.sql. Quotations should be
-## identified in a different way and the data should be fixed accordingly. FIXME.
-##
-## This is a list of results that are long matches but clearly not quotations.
+## This is a list of results that are long matches but not quotations.
 ## The longest one is in Psalm 104:12 and the used expression is 31 characters long.
 ## (See also Psalm 115:15, Psalm 134:3, Psalm 33:6 and Psalm 145:17 that have
 ## a match of 28, 28, 27 and 26 characters in a similar manner.)
 ##
 ## In the table below the lengths of the longest (quasi-)matches are shown.
-## The meaning of column "Verified?" is that tradition assumes or contextual evidence is given
+## The meaning of column "Quotation?" is that contextual evidence is given
 ## whether the passage is indeed a quotation.
-## If there are more verified quotations in a psalm, all of them are listed (separated by commas).
-## Some shorter longest matches (e.g. Psalm 37 or 61) are traditionally not verified
-## or there is no further evidence of being a quotation, so they can be in a kind of grey zone:
-## maybe they are cited in the New Testament, but this may require further research.
-## They are perhaps just allusions but not quotations---this could be the most probable assumption.
+## If there are more quotations in a psalm, all of them are listed (separated by commas).
+## See also Psalm 37:1 or 61:5, they may also be allusions.
 
-## Psalm | Longest (quasi-)matches                    | Verified?
-## ------+--------------------------------------------+----------
+## Psalm | Longest (quasi-)matches                    | Quotation?
+## ------+--------------------------------------------+-----------
 ##     1 | 19                                         | No
 ##     2 | 131, 32                                    | Yes
 ##     3 | 12                                         | No
-##     4 | 24                                         | Yes
+##     4 | 24                                         | No
 ##     5 | 19                                         | No
-##     6 | 20                                         | No/Maybe
+##     6 | 20                                         | No
 ##     7 | 14                                         | No
 ##     8 | 120+33, 43                                 | Yes
 ##     9 | 18                                         | No
@@ -32,7 +26,7 @@
 ##    13 | 10                                         | No
 ##    14 | 318                                        | Yes
 ##    15 | 25                                         | No
-##    16 | 202, 80, 31                                | Yes
+##    16 | 282, 31                                    | Yes
 ##    17 | 12                                         | No
 ##    18 | 33+19                                      | Yes
 ##    19 | 74                                         | Yes
@@ -50,18 +44,18 @@
 ##    31 | 18                                         | No
 ##    32 | 97                                         | Yes
 ##    33 | 27                                         | No
-##    34 | 82+23+16+14+13+11, 18                      | Yes
+##    34 | 82+23+16+14+13+11, 18                      | Yes, No
 ##    35 | 18                                         | No
 ##    36 | 13                                         | No
-##    37 | 23                                         | Maybe
+##    37 | 23                                         | No
 ##    38 | 22                                         | No
 ##    39 | 15                                         | No
-##    40 | 64+29+25+21+20+19+11+11+9+8                | Yes
+##    40 | 64+29+25+19, 20+11, 21+8                   | Yes
 ##    41 | 15                                         | No
 ##    42 | 20                                         | No
 ##    43 | 19                                         | No
 ##    44 | 53                                         | Yes
-##    45 | 124+35                                     | Yes
+##    45 | 124+35+10+10                               | Yes
 ##    46 | 13                                         | No
 ##    47 | 20                                         | No
 ##    48 | 16                                         | No
@@ -77,7 +71,7 @@
 ##    58 | 18                                         | No
 ##    59 | 20                                         | No
 ##    60 | 15                                         | No
-##    61 | 25                                         | Maybe
+##    61 | 25                                         | No
 ##    62 | 14                                         | No
 ##    63 | 21                                         | No
 ##    64 | 19                                         | No
@@ -100,41 +94,41 @@
 ##    81 | 11                                         | No
 ##    82 | 15                                         | Yes
 ##    83 | 14                                         | No
-##    84 | 23                                         | Should be
+##    84 | 23                                         | No
 ##    85 | 21                                         | No
 ##    86 | 34+14+13                                   | Yes
 ##    87 | 13                                         | No
 ##    88 | 13                                         | No
 ##    89 | 22                                         | No
-##    90 | 21                                         | Maybe
+##    90 | 21                                         | No
 ##    91 | 53+37/52+52                                | Yes
 ##    92 | 14                                         | No
 ##    93 | 12                                         | No
-##    94 | 35                                         | Yes
+##    94 | 35+17                                      | Yes
 ##    95 | 133+73+20+17+14                            | Yes
 ##    96 | 14                                         | No
 ##    97 | 18                                         | No
 ##    98 | 15                                         | No
-##    99 | 26                                         | No/Maybe
+##    99 | 26                                         | No
 ##   100 | 17                                         | No
 ##   101 | 13                                         | No
 ##   102 | 133+52                                     | Yes
 ##   103 | 20                                         | No
-##   104 | 57                                         | Yes
+##   104 | 57, 31                                     | Yes, No
 ##   105 | 21                                         | No
 ##   106 | 25                                         | No
-##   107 | 23                                         | No/Maybe
+##   107 | 23                                         | No
 ##   108 | 13                                         | No
-##   109 | 23                                         | Yes
-##   110 | 81/73/57/56/56/19, 39/39/34+22/23/22/22/12 | Yes
+##   109 | 12                                         | Yes
+##   110 | 81/73/57/56/56, 39/39/34+22/22             | Yes
 ##   111 | 20                                         | No
 ##   112 | 59                                         | Yes
 ##   113 | 11                                         | No
 ##   114 | 17                                         | No
-##   115 | 28                                         | No/Maybe
+##   115 | 28                                         | No
 ##   116 | 19                                         | Yes
 ##   117 | 17+9                                       | Yes
-##   118 | 114/114/64/57/16, 50, 42/36/36/36/36/21    | Yes
+##   118 | 114/114/64/57, 50                          | Yes
 ##   119 | 17                                         | No
 ##   120 | 11                                         | No
 ##   121 | 9                                          | No
@@ -148,9 +142,9 @@
 ##   129 | 11                                         | No
 ##   130 | 13                                         | No
 ##   131 | 9                                          | No
-##   132 | 17                                         | Yes
+##   132 | 17                                         | No
 ##   133 | 14                                         | No
-##   134 | 28                                         | No/Maybe
+##   134 | 28                                         | No
 ##   135 | 18                                         | No
 ##   136 | 13                                         | No
 ##   137 | 13                                         | No
@@ -162,7 +156,7 @@
 ##   143 | 23                                         | No
 ##   144 | 14                                         | No
 ##   145 | 26                                         | No
-##   146 | 20                                         | No (but the real quotation is not found)
+##   146 | 20                                         | No
 ##   147 | 14                                         | No
 ##   148 | 17                                         | No
 ##   149 | 13                                         | No
@@ -567,3 +561,25 @@ getrefs SBLGNT LXX Psalms 150:1 150:6-575
 getrefs SBLGNT LXX Psalms 150:6+25 150:6 # Psalm 151 (apocryphal)
 # ... (lengths<=13)
 # LXX Psalms 150:6+340 150:6-245 = SBLGNT John 10:26+26 10:26-6 (length=15, pos1=171614)
+
+
+## Long matches
+## ------------
+##
+## Here is a list of long matches. They are not quotations, but either the getrefs algorithm or some
+## manual comparison detects them. They are mostly allusions or random matches.
+##
+## Psalms 2:9 - Revelation_of_John 2:27, 12:5, 19:15 (28/34)
+## Psalms 4:4 - Ephesians 4:26 (24)
+## Psalms 22:18 - Matthew 27:35 (20)
+## Psalms 31:5 - Luke 23:46 (34)
+## Psalms 33:6 - II_Thessalonians 2:8 (27)
+## Psalms 34:8 - I_Peter 2:3 (33/25)
+## Psalms 37:1 - Matthew 13:41 (23)
+## Psalms 61:5 - Revelation_of_John 11:18 (25)
+## Psalms 104:12 - Luke 9:58, Matthew 8:20 (31)
+## Psalms 115:15 - Revelation_of_John 14:7 (28)
+## Psalms 118:26 - Luke 19:38, John 12:13, Luke 13:35, Matthew 21:9, Matthew 23:39, Mark 11:9 (42)
+## Psalms 134:3 - Acts 4:24 (27)
+## Psalms 145:17 - James 1:8 (26)
+## Psalms 146:6 - Acts 4:24, 14:15 (57/58)
