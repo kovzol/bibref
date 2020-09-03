@@ -934,11 +934,13 @@ getrefs SBLGNT LXX Psalms 118:26
 # LXX Psalms 118:26 118:26-28 = SBLGNT Matthew 21:9+75 21:9-20 (length=36, pos1=138697)
 # LXX Psalms 118:26 118:26-28 = SBLGNT Matthew 23:39+39 23:39 (length=36, pos1=138697)
 # LXX Psalms 118:26 118:26-22 = SBLGNT Mark 11:9+46 11:10-59 (length=42, pos1=138697)
+## These are strong allusions, because it is not mentioned that anything was quoted.
 
 
 getrefs SBLGNT LXX Psalms 132:5
 # ... (lengths<=6)
 # LXX Psalms 132:5+21 132:5 = SBLGNT Acts 7:46+42 7:46 (length=17, pos1=154254)
+## This is surely a reference, but not a direct one. So this is a strong allusion.
 
 
 getrefs SBLGNT LXX Psalms 146:1 146:10
@@ -991,10 +993,12 @@ find1 SBLGNT
 ## LXX Psalms 134:3                 |   X    |   X   |     |                        |
 ## LXX Psalms 146:6                 |   X    |   X   |  X  |            X           |
 ## SBLGNT Acts 4:24                 |   X    |   X   |  X  |            X           |
-## SBLGNT Acts 14:14                |   X    |   X   |  X  |            X           |
+## SBLGNT Acts 14:15                |   X    |   X   |  X  |            X           |
 ## SBLGNT Revelations_of_John 14:7  |   X    |   X   |  X  |                        |           X
 ##
 ## Here Luke 16:17 is missing because its context is different.
 ##
 ## Conclusion: Psalms 146:6 is indeed quoted in Acts (twice). But to find this match a literal check is
 ## not helpful.
+## In fact, Psalms 146:6 cannot be identified as a quotation, but just a strong allusion, because
+## there is no direct reference.
