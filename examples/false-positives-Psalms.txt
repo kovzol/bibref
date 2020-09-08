@@ -569,7 +569,7 @@ getrefs SBLGNT LXX Psalms 150:6+25 150:6 # Psalm 151 (apocryphal)
 ## Here is a list of long matches. They are not quotations, but either the getrefs algorithm or some
 ## manual comparison detects them. They are mostly allusions or random matches.
 ##
-## Psalms 2:9 - Revelation_of_John 2:27, 12:5, 19:15 (28/34)
+## Psalms 2:9 - Revelation_of_John 2:27 (50/52), 12:5 (28/34), 19:15 (28/27)
 ## Psalms 4:4 - Ephesians 4:26 (24)
 ## Psalms 22:18 - Matthew 27:35 (20)
 ## Psalms 31:5 - Luke 23:46 (34)
@@ -579,7 +579,7 @@ getrefs SBLGNT LXX Psalms 150:6+25 150:6 # Psalm 151 (apocryphal)
 ## Psalms 61:5 - Revelation_of_John 11:18 (25)
 ## Psalms 104:12 - Luke 9:58, Matthew 8:20 (31)
 ## Psalms 115:15 - Revelation_of_John 14:7 (28)
-## Psalms 118:26 - Luke 19:38, John 12:13, Luke 13:35, Matthew 21:9, Matthew 23:39, Mark 11:9 (42)
+## Psalms 118:26 - Luke 19:38, John 12:13, Luke 13:35, Matthew 21:9, Matthew 23:39, Mark 11:9 (36)
 ## Psalms 134:3 - Acts 4:24 (27)
 ## Psalms 145:17 - James 1:8 (26)
 ## Psalms 146:6 - Acts 4:24, 14:15 (57/58)
