@@ -1,6 +1,6 @@
 # Several pieces of this code was taken from https://www.sqlitetutorial.net/sqlite-python/sqlite-python-select/
 
-import sqlite3
+import sqlite3, sys
 from sqlite3 import Error
 
 def create_connection(db_file):
@@ -17,7 +17,7 @@ def create_connection(db_file):
 
     return conn
 
-def psalms_report_latex(conn):
+def psalms_report_latex(conn, method):
     """
     Query all entries in the Psalms database rows and show them as a LaTeX table
     :param conn: the Connection object
@@ -42,6 +42,7 @@ def psalms_report_latex(conn):
     for i in range(0,10):
         print ("&{\\bf", i+1, "}", end = '', sep = '')
     print ("\\\\")
+    matches = 0
     for psalm in range(1,151):
         if psalm % 10 == 1:
             print ("{\\bf ", round(psalm/10), "}&", end = '', sep = '')
@@ -51,18 +52,17 @@ def psalms_report_latex(conn):
             " AND qc.quotation_ot_id = q.ot_id" +
             " AND qc.quotation_nt_id = q.nt_id" +
             " AND q.psalm = " + str(psalm) +
-            " AND q.found_method = 'getrefs'" +
+            " AND q.found_method = '" + method + "'" +
             " AND a.name = b.author" +
             " AND b.name = q.nt_book" +
             " GROUP BY q.ot_id, q.nt_id" +
-            " ORDER BY q.ot_startpos, b.number")
+            " ORDER BY q.ot_startpos, q.ot_id, b.number")
         rows = cur.fetchall()
         if len(rows) > 0:
             print
             print ("\n", "% Psalm ", psalm, sep = '')
             old_ot_id = 0
             for row in rows:
-                print("%", row)
                 author = row[3]
                 ot_id = row[0]
                 if old_ot_id > 0 and ot_id != old_ot_id:
@@ -71,10 +71,13 @@ def psalms_report_latex(conn):
                 #     print ("$\\Luke$", end = '')
                 print ("$\\", author, "$", sep = '', end = '')
                 old_ot_id = ot_id
+                print("%", row)
+                matches += 1
         if psalm % 10 == 0:
             print ("\\\\")
         else:
             print ("&", end = '', sep = '')
+    print ("%", matches, "matches")
     print ("\\end{tabular}")
     print ("\\end{table}")
     print ("\\end{document}")
@@ -83,8 +86,12 @@ def psalms_report_latex(conn):
 def main():
     database = r"psalms.sqlite3"
     conn = create_connection(database)
+    if len(sys.argv) > 1:
+        result_type = sys.argv[1]
+    else:
+        result_type = "traditional"
     with conn:
-        psalms_report_latex(conn)
+        psalms_report_latex(conn, result_type)
 
 if __name__ == '__main__':
     main()

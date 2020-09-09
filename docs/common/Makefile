@@ -1,20 +1,25 @@
-all: visualized.pdf
+all: getrefs.pdf traditional.pdf
 
-visualized.pdf: visualized.tex
-	pdflatex visualized
+traditional.pdf: traditional.tex
+	pdflatex traditional
 
-visualized.tex: visualize.py psalms.sqlite3
-	python3 visualize.py > visualized.tex
+getrefs.pdf: getrefs.tex
+	pdflatex getrefs
+
+traditional.tex: visualize.py psalms.sqlite3
+	python3 visualize.py traditional > traditional.tex
+
+getrefs.tex: visualize.py psalms.sqlite3
+	python3 visualize.py getrefs > getrefs.tex
 
 psalms.sqlite3: psalms.sql
 	./dropdb
 	./createdb
 
 clean:
-	rm -f psalms.sqlite3 visualized.tex visualized.aux visualized.log
+	rm -f psalms.sqlite3 traditional.tex getrefs.tex traditional.aux getrefs.aux traditional.log getrefs.log
 
 fullclean: clean
-	rm -f visualized.pdf
+	rm -f traditional.pdf getrefs.pdf
 
 .PHONY: clean fullclean all
-
