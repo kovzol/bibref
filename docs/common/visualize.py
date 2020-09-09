@@ -38,11 +38,13 @@ def psalms_report_latex(conn, method):
     print ("\\begin{document}")
     print ("\\centering")
     print ("\\begin{table}")
-    print ("\\begin{tabular}{rcccccccccc}")
+    print ("\\begin{tabular}{r|cccccccccc}")
     for i in range(0,10):
         print ("&{\\bf", i+1, "}", end = '', sep = '')
     print ("\\\\")
-    matches = 0
+    print ("\\hline")
+    quotations = 0
+    psalms = 0
     for psalm in range(1,151):
         if psalm % 10 == 1:
             print ("{\\bf ", round(psalm/10), "}&", end = '', sep = '')
@@ -72,12 +74,13 @@ def psalms_report_latex(conn, method):
                 print ("$\\", author, "$", sep = '', end = '')
                 old_ot_id = ot_id
                 print("%", row)
-                matches += 1
+                quotations += 1
+            psalms += 1
         if psalm % 10 == 0:
             print ("\\\\")
         else:
             print ("&", end = '', sep = '')
-    print ("%", matches, "matches")
+    print ("%", quotations, "quotations in", psalms, "psalms")
     print ("\\end{tabular}")
     print ("\\end{table}")
     print ("\\end{document}")

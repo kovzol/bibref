@@ -7,9 +7,10 @@
 \usepackage{amsmath,amsfonts,amssymb,amsthm}
 \usepackage[hyphens]{url}
 \usepackage{hyphenat}
-\usepackage{xcolor}
 \usepackage{graphicx}
 \usepackage{listings}
+\usepackage{mathtools}
+\usepackage[dvipsnames]{xcolor}
 
 \floatname{algorithm}{Algoritmus}
 \algrenewcommand\algorithmicwhile{\textbf{amíg}}
@@ -36,6 +37,14 @@
 \newcommand\hu{\selectlanguage{magyar}\frenchspacing}
 \newcommand\en{\selectlanguage{english}\frenchspacing}
 \newcommand\de{\selectlanguage{german}\frenchspacing}
+
+\newcommand\Luke{{\color{Lavender}\bullet}\mathllap{\color{Lavender}\circ}}
+\newcommand\Paul{{\color{YellowGreen}\bullet}\mathllap{\color{YellowGreen}\circ}}
+\newcommand\Unknown{{\color{Orchid}\bullet}\mathllap{\color{Orchid}\circ}}
+\newcommand\Matthew{{\color{Red}\bullet}\mathllap{\color{Red}\circ}}
+\newcommand\Mark{{\color{Cyan}\bullet}\mathllap{\color{Cyan}\circ}}
+\newcommand\John{{\color{GreenYellow}\bullet}\mathllap{\color{GreenYellow}\circ}}
+\newcommand\Peter{{\color{NavyBlue}\bullet}\mathllap{\color{NavyBlue}\circ}}
 
 \newtheorem{theorem}{Tétel}
 
@@ -1094,6 +1103,189 @@ Első tesztként A zsoltárok könyvének 150 zsoltárára futtatjuk le a \ref{a
 és a lehetséges idézeteket zsoltáronként, majd hosszúság szerinti rendezzük.
 A kapott listát végül összehasonlítjuk a hagyományosan elfogadott összefüggésekkel,
 esetlegesen bővítve a lehetséges idézetek listáját.
+
+A Zsoltárok könyvében található idézeteket a \ref{hagyomanyos-idezetek}. táblázat mutatja. Az
+egyes zsoltároknak egy-egy mező felel meg a $15\times10$-es táblázatban, így pl. a 14. zsoltárhoz
+egy bejegyzés, a $\Paul$-tal jelölt, Pál apostolt mint újszövetségi szerzőt mutató szimbólum tartozik.
+Ugyanilyen bejegyzés tartozik pl. a 18., 19. és 24. zsoltárokhoz: ezeket csupán Pál idézi egy-egy
+alkalommal. A 2. zsoltárhoz viszont 4 bejegyzés tartozik, amelyek közül az elsőt a másik háromtól
+vessző választja el. Az első bejegyzés a Zsolt 2:1-2-höz tartozó ApCsel 4:25-26-ra utal, ahol
+a $\Luke$ szimbólum Lukácsot jelenti; a második-harmadik-negyedik bejegyzés pedig a Zsolt 2:7-hez
+tartozik, melyeket az ApCsel 13:33 (szintén Lukács, tehát $\Luke$), valamint a Zsidók 1:5 és 5:5 is
+idéz (a Zsidókhoz írt levél szerzőjét $\Unknown$ szimbólummal jelöltük; a többi szerző
+a \ref{szerzok}. táblázat szerint beazonosítható).
+
+\begin{table}
+\centering
+\begin{tabular}{r|cccccccccc}
+&{\bf1}&{\bf2}&{\bf3}&{\bf4}&{\bf5}&{\bf6}&{\bf7}&{\bf8}&{\bf9}&{\bf10}\\
+\hline
+{\bf 0}&&
+% Psalm 2
+$\Luke$% (1, 1, 'Acts', 'Luke')
+,$\Luke$% (2, 1, 'Acts', 'Luke')
+$\Unknown$% (2, 2, 'Hebrews', 'Unknown')
+$\Unknown$% (2, 3, 'Hebrews', 'Unknown')
+&&&&&&
+% Psalm 8
+$\Matthew$% (7, 1, 'Matthew', 'Matthew')
+,$\Unknown$% (8, 1, 'Hebrews', 'Unknown')
+&&\\
+{\bf 1}&&&&
+% Psalm 14
+$\Paul$% (10, 1, 'Romans', 'Paul')
+&&
+% Psalm 16
+$\Luke$% (11, 1, 'Acts', 'Luke')
+$\Luke$% (11, 2, 'Acts', 'Luke')
+&&
+% Psalm 18
+$\Paul$% (12, 1, 'Romans', 'Paul')
+&
+% Psalm 19
+$\Paul$% (13, 1, 'Romans', 'Paul')
+&\\
+{\bf 2}&&
+% Psalm 22
+$\John$% (14, 2, 'John', 'John')
+,$\Unknown$% (15, 1, 'Hebrews', 'Unknown')
+&&
+% Psalm 24
+$\Paul$% (16, 1, 'I_Corinthians', 'Paul')
+&&&&&&\\
+{\bf 3}&&
+% Psalm 32
+$\Paul$% (18, 1, 'Romans', 'Paul')
+&&
+% Psalm 34
+$\Peter$% (20, 1, 'I_Peter', 'Peter')
+&&&&&&
+% Psalm 40
+$\Unknown$% (21, 1, 'Hebrews', 'Unknown')
+$\Unknown$% (21, 2, 'Hebrews', 'Unknown')
+$\Unknown$% (21, 3, 'Hebrews', 'Unknown')
+\\
+{\bf 4}&
+% Psalm 41
+$\John$% (22, 1, 'John', 'John')
+&&&
+% Psalm 44
+$\Paul$% (23, 1, 'Romans', 'Paul')
+&
+% Psalm 45
+$\Unknown$% (24, 1, 'Hebrews', 'Unknown')
+&&&&&\\
+{\bf 5}&
+% Psalm 51
+$\Paul$% (25, 1, 'Romans', 'Paul')
+&&&&&&&&&\\
+{\bf 6}&&&&&&&&
+% Psalm 68
+$\Paul$% (26, 1, 'Ephesians', 'Paul')
+&
+% Psalm 69
+$\John$% (27, 1, 'John', 'John')
+,$\Paul$% (28, 1, 'Romans', 'Paul')
+,$\Paul$% (29, 1, 'Romans', 'Paul')
+,$\Luke$% (30, 1, 'Acts', 'Luke')
+&\\
+{\bf 7}&&&&&&&&
+% Psalm 78
+$\Matthew$% (31, 1, 'Matthew', 'Matthew')
+&&\\
+{\bf 8}&&
+% Psalm 82
+$\John$% (32, 1, 'John', 'John')
+&&&&
+% Psalm 86
+$\John$% (33, 1, 'Revelation_of_John', 'John')
+&&&&\\
+{\bf 9}&
+% Psalm 91
+$\Matthew$% (34, 1, 'Matthew', 'Matthew')
+$\Luke$% (34, 2, 'Luke', 'Luke')
+&&&
+% Psalm 94
+$\Paul$% (35, 1, 'I_Corinthians', 'Paul')
+&
+% Psalm 95
+$\Unknown$% (36, 1, 'Hebrews', 'Unknown')
+$\Unknown$% (36, 2, 'Hebrews', 'Unknown')
+$\Unknown$% (36, 4, 'Hebrews', 'Unknown')
+$\Unknown$% (36, 5, 'Hebrews', 'Unknown')
+$\Unknown$% (36, 6, 'Hebrews', 'Unknown')
+&&&&&\\
+{\bf 10}&&
+% Psalm 102
+$\Unknown$% (37, 1, 'Hebrews', 'Unknown')
+&&
+% Psalm 104
+$\Unknown$% (38, 1, 'Hebrews', 'Unknown')
+&&&&&
+% Psalm 109
+$\John$% (39, 1, 'John', 'John')
+&
+% Psalm 110
+$\Matthew$% (40, 4, 'Matthew', 'Matthew')
+$\Mark$% (40, 5, 'Mark', 'Mark')
+$\Luke$% (40, 1, 'Luke', 'Luke')
+$\Luke$% (40, 2, 'Acts', 'Luke')
+$\Unknown$% (40, 3, 'Hebrews', 'Unknown')
+,$\Unknown$% (41, 1, 'Hebrews', 'Unknown')
+$\Unknown$% (41, 2, 'Hebrews', 'Unknown')
+$\Unknown$% (41, 3, 'Hebrews', 'Unknown')
+$\Unknown$% (41, 4, 'Hebrews', 'Unknown')
+\\
+{\bf 11}&&
+% Psalm 112
+$\Paul$% (42, 1, 'II_Corinthians', 'Paul')
+&&&&
+% Psalm 116
+$\Paul$% (43, 1, 'II_Corinthians', 'Paul')
+&
+% Psalm 117
+$\Paul$% (44, 1, 'Romans', 'Paul')
+&
+% Psalm 118
+$\Unknown$% (45, 1, 'Hebrews', 'Unknown')
+,$\Matthew$% (46, 1, 'Matthew', 'Matthew')
+$\Mark$% (46, 2, 'Mark', 'Mark')
+$\Luke$% (46, 3, 'Luke', 'Luke')
+$\Peter$% (46, 4, 'I_Peter', 'Peter')
+&&\\
+{\bf 12}&&&&&&&&&&\\
+{\bf 13}&&&&&&&&&&\\
+{\bf 14}&&&&&&&&&&\\
+% 59 matches
+\end{tabular}
+\caption{Idézetek A zsoltárok könyvében}
+\label{hagyomanyos-idezetek}
+\end{table}
+
+\begin{table}
+\centering
+\begin{tabular}{cc}
+\textbf{Szerző}&\textbf{Szimbólum}\\
+\hline
+Máté&$\Matthew$\\
+Márk&$\Mark$\\
+Lukács&$\Luke$\\
+János&$\John$\\
+Pál&$\Paul$\\
+A zsidókhoz írt levél szerzője&$\Unknown$\\
+Péter&$\Peter$
+\end{tabular}
+\caption{Újszövetségi szerzők jelölése a \ref{hagyomanyos-idezetek}. táblázatban}
+\label{szerzok}
+\end{table}
+
+A \ref{hagyomanyos-idezetek}. táblázat 59 idézetet tüntet fel, összesen 31 zsoltárban. Figyelemreméltó,
+hogy a \ref{algo-osz-uszi-ref}. algoritmus ezek közül csak a 41. zsoltárt nem azonosítja be lehetséges
+idézetként, amelyet -- a 9. verset (\textit{aki velem együtt evett, az is ellenem támadt}) --
+Jézus a János 13:18-ban idéz (\textit{$\ldots$be kell teljesednie az Írásnak:
+aki az én kenyeremet eszi, az emelte fel ellenem a sarkát}). A többi idézetet a
+\ref{algo-osz-uszi-ref}. algoritmus néhol egyetlen szövegként, néhol darabonként
+mind megtalálja.
 
 \subsection{Nem pontos egyezés}
 
