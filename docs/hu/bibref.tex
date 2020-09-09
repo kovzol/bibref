@@ -1285,7 +1285,156 @@ idézetként, amelyet -- a 9. verset (\textit{aki velem együtt evett, az is ell
 Jézus a János 13:18-ban idéz (\textit{$\ldots$be kell teljesednie az Írásnak:
 aki az én kenyeremet eszi, az emelte fel ellenem a sarkát}). A többi idézetet a
 \ref{algo-osz-uszi-ref}. algoritmus néhol egyetlen szövegként, néhol darabonként
-mind megtalálja.
+mind megtalálja: az erről készített statisztika a \ref{darabszam}. táblázatban látható.
+
+\begin{table}
+\centering
+\begin{tabular}{r|cccccccccc}
+&{\bf1}&{\bf2}&{\bf3}&{\bf4}&{\bf5}&{\bf6}&{\bf7}&{\bf8}&{\bf9}&{\bf10}\\
+\hline
+{\bf 0}&&
+% Psalm 2
+1% (1, 1, 'Acts', 'Luke')
+,1% (2, 1, 'Acts', 'Luke')
+1% (2, 2, 'Hebrews', 'Unknown')
+1% (2, 3, 'Hebrews', 'Unknown')
+&&&&&&
+% Psalm 8
+1% (7, 1, 'Matthew', 'Matthew')
+,2% (8, 1, 'Hebrews', 'Unknown')
+&&\\
+{\bf 1}&&&&
+% Psalm 14
+1% (10, 1, 'Romans', 'Paul')
+&&
+% Psalm 16
+1% (11, 1, 'Acts', 'Luke')
+1% (11, 2, 'Acts', 'Luke')
+&&
+% Psalm 18
+2% (12, 1, 'Romans', 'Paul')
+&
+% Psalm 19
+1% (13, 1, 'Romans', 'Paul')
+&\\
+{\bf 2}&&
+% Psalm 22
+1% (14, 2, 'John', 'John')
+,1% (15, 1, 'Hebrews', 'Unknown')
+&&
+% Psalm 24
+1% (16, 1, 'I_Corinthians', 'Paul')
+&&&&&&\\
+{\bf 3}&&
+% Psalm 32
+1% (18, 1, 'Romans', 'Paul')
+&&
+% Psalm 34
+7% (20, 1, 'I_Peter', 'Peter')
+&&&&&&
+% Psalm 40
+2% (21, 2, 'Hebrews', 'Unknown')
+4% (21, 1, 'Hebrews', 'Unknown')
+2% (21, 3, 'Hebrews', 'Unknown')
+\\
+{\bf 4}&&&&
+% Psalm 44
+1% (23, 1, 'Romans', 'Paul')
+&
+% Psalm 45
+4% (24, 1, 'Hebrews', 'Unknown')
+&&&&&\\
+{\bf 5}&
+% Psalm 51
+2% (25, 1, 'Romans', 'Paul')
+&&&&&&&&&\\
+{\bf 6}&&&&&&&&
+% Psalm 68
+1% (26, 1, 'Ephesians', 'Paul')
+&
+% Psalm 69
+1% (27, 1, 'John', 'John')
+,1% (28, 1, 'Romans', 'Paul')
+,5% (29, 1, 'Romans', 'Paul')
+,2% (30, 1, 'Acts', 'Luke')
+&\\
+{\bf 7}&&&&&&&&
+% Psalm 78
+1% (31, 1, 'Matthew', 'Matthew')
+&&\\
+{\bf 8}&&
+% Psalm 82
+1% (32, 1, 'John', 'John')
+&&&&
+% Psalm 86
+2% (33, 1, 'Revelation_of_John', 'John')
+&&&&\\
+{\bf 9}&
+% Psalm 91
+2% (34, 1, 'Matthew', 'Matthew')
+2% (34, 2, 'Luke', 'Luke')
+&&&
+% Psalm 94
+2% (35, 1, 'I_Corinthians', 'Paul')
+&
+% Psalm 95
+1% (36, 2, 'Hebrews', 'Unknown')
+1% (36, 6, 'Hebrews', 'Unknown')
+5% (36, 1, 'Hebrews', 'Unknown')
+1% (36, 4, 'Hebrews', 'Unknown')
+1% (36, 5, 'Hebrews', 'Unknown')
+&&&&&\\
+{\bf 10}&&
+% Psalm 102
+2% (37, 1, 'Hebrews', 'Unknown')
+&&
+% Psalm 104
+1% (38, 1, 'Hebrews', 'Unknown')
+&&&&&
+% Psalm 109
+1% (39, 1, 'John', 'John')
+&
+% Psalm 110
+1% (40, 2, 'Acts', 'Luke')
+1% (40, 4, 'Matthew', 'Matthew')
+1% (40, 5, 'Mark', 'Mark')
+1% (40, 1, 'Luke', 'Luke')
+1% (40, 3, 'Hebrews', 'Unknown')
+,1% (41, 1, 'Hebrews', 'Unknown')
+1% (41, 3, 'Hebrews', 'Unknown')
+2% (41, 4, 'Hebrews', 'Unknown')
+1% (41, 2, 'Hebrews', 'Unknown')
+\\
+{\bf 11}&&
+% Psalm 112
+1% (42, 1, 'II_Corinthians', 'Paul')
+&&&&
+% Psalm 116
+1% (43, 1, 'II_Corinthians', 'Paul')
+&
+% Psalm 117
+2% (44, 1, 'Romans', 'Paul')
+&
+% Psalm 118
+1% (45, 1, 'Hebrews', 'Unknown')
+,1% (46, 1, 'Matthew', 'Matthew')
+1% (46, 2, 'Mark', 'Mark')
+1% (46, 3, 'Luke', 'Luke')
+1% (46, 4, 'I_Peter', 'Peter')
+&&\\
+{\bf 12}&&&&&&&&&&\\
+{\bf 13}&&&&&&&&&&\\
+{\bf 14}&&&&&&&&&&\\
+\end{tabular}
+\caption{A \ref{algo-osz-uszi-ref}. algoritmus által azonosított lehetséges idézetek száma
+a tényleges idézeteken belül}
+\label{darabszam}
+\end{table}
+
+A \ref{darabszam}. táblázat szerint tehát a \ref{algo-osz-uszi-ref}. algoritmus
+40 idézetet egy darabban azonosított, a fennmaradó 18 idézetet pedig több darabban.
+A legmagasabb darabszám 7: a Zsolt 34:12-16-ot és az 1Pét 3:10-12-t az algoritmus 7-7 szövegrészben
+párosítja össze.
 
 \subsection{Nem pontos egyezés}
 

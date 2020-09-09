@@ -17,7 +17,7 @@ def create_connection(db_file):
 
     return conn
 
-def psalms_report_latex(conn, method):
+def psalms_report_latex(conn, method, show_pieces=False):
     """
     Query all entries in the Psalms database rows and show them as a LaTeX table
     :param conn: the Connection object
@@ -63,15 +63,24 @@ def psalms_report_latex(conn, method):
         if len(rows) > 0:
             print
             print ("\n", "% Psalm ", psalm, sep = '')
+
             old_ot_id = 0
             for row in rows:
                 author = row[3]
                 ot_id = row[0]
+                nt_id = row[1]
+                cur.execute("SELECT COUNT(*) FROM quotations q" +
+                    " WHERE ot_id = " + str(ot_id) +
+                    " AND nt_id = " + str(nt_id) +
+                    " AND q.found_method = '" + method + "'");
+                pieces = cur.fetchall();
+
                 if old_ot_id > 0 and ot_id != old_ot_id:
                     print(",", sep = '', end = '')
-                # if author == "Luke":
-                #     print ("$\\Luke$", end = '')
-                print ("$\\", author, "$", sep = '', end = '')
+                if show_pieces:
+                    print (pieces[0][0], sep='', end='')
+                else:
+                    print ("$\\", author, "$", sep = '', end = '')
                 old_ot_id = ot_id
                 print("%", row)
                 quotations += 1
@@ -93,8 +102,11 @@ def main():
         result_type = sys.argv[1]
     else:
         result_type = "traditional"
+    show_pieces = False
     with conn:
-        psalms_report_latex(conn, result_type)
+        if result_type == "getrefs":
+            show_pieces = True
+        psalms_report_latex(conn, result_type, show_pieces)
 
 if __name__ == '__main__':
     main()
