@@ -38,6 +38,7 @@ def psalms_report_latex(conn, method, data):
         print ("\\newcommand\\Peter{{\color{NavyBlue}\\bullet}\mathllap{\color{NavyBlue}\circ}}")
     if method == "traditional" and data == "manual_nt_length":
         print ("\\usepackage{graphicx}")
+        f = open("manual_nt_length.csv", "w")
     print ("\\begin{document}")
     print ("\\centering")
     print ("\\begin{table}")
@@ -87,7 +88,9 @@ def psalms_report_latex(conn, method, data):
                         " AND nt_id = " + str(nt_id) +
                         " AND q.found_method = 'manual'");
                     info = cur.fetchall()
-                    info = "\scalebox{.6}[1.0]{" + str(info[0][0]) + "}"
+                    number_str = str(info[0][0])
+                    f.write(number_str + "\n")
+                    info = "\scalebox{.6}[1.0]{" + number_str + "}"
                 if old_ot_id > 0 and ot_id != old_ot_id:
                     print(",", sep = '', end = '')
                 else:
@@ -110,7 +113,8 @@ def psalms_report_latex(conn, method, data):
     print ("\\end{tabular}")
     print ("\\end{table}")
     print ("\\end{document}")
-
+    if method == "traditional" and data == "manual_nt_length":
+        f.close()
 
 def main():
     database = r"psalms.sqlite3"
