@@ -561,7 +561,7 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
  (31, 1, 'quotation', 'literal, exact', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (32, 1, 82, 'Psalms 78:2', 'John', 'John 10:34', null, null, null, null, 'traditional');
+ (32, 1, 82, 'Psalms 82:6', 'John', 'John 10:34', null, null, null, null, 'traditional');
 insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (32, 1, 82, 'LXX Psalms 82:6 82:6-20', 'John', 'SBLGNT John 10:34+55 10:34', 96136, 15, 36114, 15, 'getrefs');
 insert into quotations (ot_id, nt_id, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
