@@ -10,12 +10,19 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: prerequisites
-      run: sudo apt update && sudo apt install libsword-common libsword-dev git cmake build-essential libreadline-dev libboost-dev sqlite3 python3 texlive-latex-recommended texlive-latex-extra texlive-science texlive-lang-european texlive-lang-german r-base-core r-cran-sm
+      run: >-
+         sudo apt update &&
+         sudo apt install libsword-common libsword-dev git cmake build-essential libreadline-dev libboost-dev
+              sqlite3 python3
+              texlive-latex-recommended texlive-latex-extra texlive-science texlive-lang-european texlive-lang-german
+              r-base-core r-cran-sm
     - name: cmake
       run: cmake .
     - name: make
       run: make
-    - name: db
-      run: cd docs/common && make
+#    - name: db-full
+#      run: cd docs/common && make
+    - name: db-incomplete
+      run: cd docs/common && make authors.pdf manual_nt_length.pdf getrefs.pdf
     - name: doc-hu
       run: cd docs/hu && make
