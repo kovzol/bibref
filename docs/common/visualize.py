@@ -17,7 +17,7 @@ def create_connection(db_file):
 
     return conn
 
-def psalms_report_latex(conn, method, show_pieces=False):
+def psalms_report_latex(conn, method, data):
     """
     Query all entries in the Psalms database rows and show them as a LaTeX table
     :param conn: the Connection object
@@ -26,18 +26,23 @@ def psalms_report_latex(conn, method, show_pieces=False):
     cur = conn.cursor()
 
     print ("\\documentclass{article}")
-    print ("\\usepackage{mathtools}")
-    print ("\\usepackage[dvipsnames]{xcolor}")
-    print ("\\newcommand\\Luke{{\color{Lavender}\\bullet}\mathllap{\color{Lavender}\circ}}")
-    print ("\\newcommand\\Paul{{\color{YellowGreen}\\bullet}\mathllap{\color{YellowGreen}\circ}}")
-    print ("\\newcommand\\Unknown{{\color{Orchid}\\bullet}\mathllap{\color{Orchid}\circ}}")
-    print ("\\newcommand\\Matthew{{\color{Red}\\bullet}\mathllap{\color{Red}\circ}}")
-    print ("\\newcommand\\Mark{{\color{Cyan}\\bullet}\mathllap{\color{Cyan}\circ}}")
-    print ("\\newcommand\\John{{\color{GreenYellow}\\bullet}\mathllap{\color{GreenYellow}\circ}}")
-    print ("\\newcommand\\Peter{{\color{NavyBlue}\\bullet}\mathllap{\color{NavyBlue}\circ}}")
+    if method == "traditional" and data == "authors":
+        print ("\\usepackage{mathtools}")
+        print ("\\usepackage[dvipsnames]{xcolor}")
+        print ("\\newcommand\\Luke{{\color{Lavender}\\bullet}\mathllap{\color{Lavender}\circ}}")
+        print ("\\newcommand\\Paul{{\color{YellowGreen}\\bullet}\mathllap{\color{YellowGreen}\circ}}")
+        print ("\\newcommand\\Unknown{{\color{Orchid}\\bullet}\mathllap{\color{Orchid}\circ}}")
+        print ("\\newcommand\\Matthew{{\color{Red}\\bullet}\mathllap{\color{Red}\circ}}")
+        print ("\\newcommand\\Mark{{\color{Cyan}\\bullet}\mathllap{\color{Cyan}\circ}}")
+        print ("\\newcommand\\John{{\color{GreenYellow}\\bullet}\mathllap{\color{GreenYellow}\circ}}")
+        print ("\\newcommand\\Peter{{\color{NavyBlue}\\bullet}\mathllap{\color{NavyBlue}\circ}}")
+    if method == "traditional" and data == "manual_nt_length":
+        print ("\\usepackage{graphicx}")
     print ("\\begin{document}")
     print ("\\centering")
     print ("\\begin{table}")
+    if method == "traditional" and data == "manual_nt_length":
+        print ("\\scriptsize")
     print ("\\begin{tabular}{r|cccccccccc}")
     for i in range(0,10):
         print ("&{\\bf", i+1, "}", end = '', sep = '')
@@ -69,16 +74,28 @@ def psalms_report_latex(conn, method, show_pieces=False):
                 author = row[3]
                 ot_id = row[0]
                 nt_id = row[1]
-                cur.execute("SELECT COUNT(*) FROM quotations q" +
-                    " WHERE ot_id = " + str(ot_id) +
-                    " AND nt_id = " + str(nt_id) +
-                    " AND q.found_method = '" + method + "'");
-                pieces = cur.fetchall();
-
+                if method == "getrefs" and data == 'pieces':
+                    cur.execute("SELECT COUNT(*) FROM quotations q" +
+                        " WHERE ot_id = " + str(ot_id) +
+                        " AND nt_id = " + str(nt_id) +
+                        " AND q.found_method = '" + method + "'");
+                    info = cur.fetchall()
+                    info = info[0][0]
+                if method == "traditional" and data == "manual_nt_length":
+                    cur.execute("SELECT nt_length FROM quotations q" +
+                        " WHERE ot_id = " + str(ot_id) +
+                        " AND nt_id = " + str(nt_id) +
+                        " AND q.found_method = 'manual'");
+                    info = cur.fetchall()
+                    info = "\scalebox{.6}[1.0]{" + str(info[0][0]) + "}"
                 if old_ot_id > 0 and ot_id != old_ot_id:
                     print(",", sep = '', end = '')
-                if show_pieces:
-                    print (pieces[0][0], sep='', end='')
+                else:
+                    if method == "traditional" and data == "manual_nt_length":
+                        if old_ot_id != 0:
+                            info = "\," + info
+                if data != 'authors':
+                    print (info, sep='', end='')
                 else:
                     print ("$\\", author, "$", sep = '', end = '')
                 old_ot_id = ot_id
@@ -102,11 +119,13 @@ def main():
         result_type = sys.argv[1]
     else:
         result_type = "traditional"
-    show_pieces = False
+    data = 'authors'
+    if len(sys.argv) > 2:
+        data = sys.argv[2]
     with conn:
         if result_type == "getrefs":
-            show_pieces = True
-        psalms_report_latex(conn, result_type, show_pieces)
+            data = "pieces"
+        psalms_report_latex(conn, result_type, data)
 
 if __name__ == '__main__':
     main()
