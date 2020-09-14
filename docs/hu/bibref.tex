@@ -11,6 +11,7 @@
 \usepackage{listings}
 \usepackage{mathtools}
 \usepackage[dvipsnames]{xcolor}
+\setlength{\fboxsep}{0pt} % for \colorbox
 
 \floatname{algorithm}{Algoritmus}
 \algrenewcommand\algorithmicwhile{\textbf{amíg}}
@@ -1080,6 +1081,16 @@ mely teológus vagy teológiai iskola fedezett fel, és hogy az összefüggés
 mennyiben fedheti a valóságot. Ez a vizsgálat azonban kívül esik tanulmányunk célkitűzésein,
 kivéve azt a kérdést, hogy egy összefüggés tényleges idézetnek számít-e vagy sem.
 
+Egy vitatott egyezést azonban kiemelünk, nevezetesen a Zsoltárok 86:8-10 és a Jelenések
+15:3-4 kapcsolatát. János az általa vizionált dalt Mózes énekének és a Bárány énekének nevezi.
+Azonban Mózes két éneke közül (melyek a 2Mózes 15-ben ill. az 5Mózes 32-ben találhatóak)
+egyikkel sem találunk betű szerinti egyezést a Jelenések ezen szakaszában, azonban a 86. zsoltárral
+igen (ez a zsoltár Dávidé). A \cite{Moyise} cikk több elképzelést is felvázol, hogy
+ezt az ellentmondást hogyan lehet feloldani -- mi ebben a tanulmányban egyszerűen elfogadjuk\footnote{Döntésünk
+voltaképpen ellenkezik a korábbiakban már említett \cite{SungKukKim} állításával, hogy
+a Jelenésekben nincs formálisan idézett zsoltár.},
+hogy itt idézetről van szó, a további részletek elemzése nélkül.
+
 %A fenti módszer pontosságát a következő módon fogjuk mérni. Az első kérdés, hogy
 %minden hagyományosan elfogadott idézet beazonosítható-e vele. Látni fogjuk, hogy a válasz nemleges,
 %de a módszer sok esetben nagyon pozitív eredményt ad.
@@ -1438,6 +1449,7 @@ A \ref{darabszam}. táblázat szerint tehát a \ref{algo-osz-uszi-ref}. algoritm
 A legmagasabb darabszám 7: a Zsolt 34:12-16-ot és az 1Pét 3:10-12-t az algoritmus 7-7 szövegrészben
 párosítja össze. Illusztrációként megmutatjuk, hogyan viszonyul ez a 7 szövegpár egymáshoz:
 
+\definecolor{light-gray}{gray}{0.9}
 \begin{center}
 \begin{tabular}{p{5cm} p{5cm}}
 LXX Zsolt 34:12-16 & SBLGNT 1Pét 3:10-12\\
@@ -1446,29 +1458,29 @@ LXX Zsolt 34:12-16 & SBLGNT 1Pét 3:10-12\\
 {\gr ο γαρ}\\
 {\gr \textcolor{red}{θελων ζωην αγαπ}ων} & % g
 {\gr \textcolor{red}{θελων ζωην αγαπ}αν}\\ % g
-{\gr \underline{\textcolor{blue}{ημερας}} \underline{\textcolor{magenta}{ιδειν}}} &
-{\gr και \underline{\textcolor{magenta}{ιδειν}} \underline{\textcolor{blue}{ημερας}}}\\
+{\gr \colorbox{light-gray}{\textcolor{blue}{ημερας}} \colorbox{light-gray}{\textcolor{magenta}{ιδειν}}} &
+{\gr και \colorbox{light-gray}{\textcolor{magenta}{ιδειν}} \colorbox{light-gray}{\textcolor{blue}{ημερας}}}\\
 {\gr \textcolor{green}{αγαθας παυσ}ον}& % g
 {\gr \textcolor{green}{αγαθας παυσ}ατω}\\ % g
-{\gr \underline{\textcolor{orange}{την γλωσσαν}} σου}&
-{\gr \underline{\textcolor{orange}{την γλωσσαν}}}\\
+{\gr \colorbox{light-gray}{\textcolor{orange}{την γλωσσαν}} σου}&
+{\gr \colorbox{light-gray}{\textcolor{orange}{την γλωσσαν}}}\\
 {\gr \textcolor{red}{απο κακου και χειλη} σου}& % g
 {\gr \textcolor{red}{απο κακου και χειλη}}\\ % g
 {\gr \textcolor{blue}{του μη λαλησαι δολον εκκλιν}ον}& % g
 {\gr \textcolor{blue}{του μη λαλησαι δολον εκκλιν}ατω δε}\\ % g
-{\gr \underline{\textcolor{magenta}{απο κακου και ποιησ}}ον}&
-{\gr \underline{\textcolor{magenta}{απο κακου και ποιησ}}ατω}\\
+{\gr \colorbox{light-gray}{\textcolor{magenta}{απο κακου και ποιησ}}ον}&
+{\gr \colorbox{light-gray}{\textcolor{magenta}{απο κακου και ποιησ}}ατω}\\
 {\gr \textcolor{green}{αγαθον ζητησ}ον}& % g
 {\gr \textcolor{green}{αγαθον ζητησ}ατω}\\ % g
-{\gr \textcolor{orange}{ειρηνην και διωξ}ον \underline{\textcolor{red}{αυτην}}}& % g1
-{\gr \textcolor{orange}{ειρηνην και διωξ}ατω \underline{\textcolor{red}{αυτην}} οτι}\\ % g1
+{\gr \textcolor{orange}{ειρηνην και διωξ}ον \colorbox{light-gray}{\textcolor{red}{αυτην}}}& % g1
+{\gr \textcolor{orange}{ειρηνην και διωξ}ατω \colorbox{light-gray}{\textcolor{red}{αυτην}} οτι}\\ % g1
 {\gr \textcolor{blue}{οφθαλμοι κυριου επι δικαιους και ωτα αυτου εις δεησιν αυτων \hfill\break προσωπον δε κυριου επι ποιουντας κακα}}& % g
 {\gr \textcolor{blue}{οφθαλμοι κυριου επι δικαιους και ωτα αυτου εις δεησιν αυτων \hfill\break προσωπον δε κυριου επι ποιουντας κακα}}\\ % g
 {\gr του εξολεθρευσαι εκ γης το \hfill\break μνημοσυνον αυτων}&
 \end{tabular}
 \end{center}
 \hu
-Az aláhúzássel jelölt részleteket a \ref{algo-osz-uszi-ref}. algoritmus nem azonosítja be
+A szürke háttérrel kiemelt részleteket a \ref{algo-osz-uszi-ref}. algoritmus nem azonosítja be
 lehetséges idézetekként, mivel ezek a szövegek túl rövidek ahhoz, hogy egyediek legyenek az LXX-ben.
 Például az {\gr {απο κακου και ποιησ$\ldots$}}, 16 hosszúságú szakasz a 37. zsoltárban is megjelenik:
 \begin{lstlisting}
