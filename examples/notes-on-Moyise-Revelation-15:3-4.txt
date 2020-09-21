@@ -1,0 +1,17 @@
+addbooks
+lookup LXX Daniel 2:28
+# αλλ η εστιν θεος εν ουρανω αποκαλυπτων μυστηρια και εγνωρισεν τω βασιλει ναβουχοδονοσορ α δει γενεσθαι επ εσχατων των ημερων το ενυπνιον σου και αι ορασεις της κεφαλης σου επι της κοιτης σου τουτο εστιν
+lookup1 LXX Daniel 2:28+75 2:28-81
+# Stored internally as adeigenesuai.
+## α δει γενεσθαι = what must take place
+find1 SBLGNT 
+# Found in Revelation_of_John 1:1+61 1:1-64 (book position 79-90)
+# Found in Revelation_of_John 4:1+116 4:1-9 (book position 7406-7417)
+# Found in Revelation_of_John 22:6+125 22:6-7 (book position 44590-44601)
+# 3 occurrences.
+## Checking back:
+find1 LXX
+# Found in Daniel 2:28+75 2:28-81 (book position 5694-5705)
+# Found in Daniel 2:29+105 2:29 (book position 5892-5903)
+# Found in Daniel 2:45+134 2:45-53 (book position 7958-7969)
+# 3 occurrences.
