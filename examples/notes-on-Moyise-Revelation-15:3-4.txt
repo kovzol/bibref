@@ -1,3 +1,7 @@
+## This study is related to Steve Moyise: Singing the Song of Moses and the Lamb,
+## Andrews University Seminary Studies, Vol 42., No. 2, 347-360, p. 351,
+## https://www.andrews.edu/library/car/cardigital/Periodicals/AUSS/2004-2/2004-2-05.pdf
+
 addbooks
 lookup LXX Daniel 2:28
 # αλλ η εστιν θεος εν ουρανω αποκαλυπτων μυστηρια και εγνωρισεν τω βασιλει ναβουχοδονοσορ α δει γενεσθαι επ εσχατων των ημερων το ενυπνιον σου και αι ορασεις της κεφαλης σου επι της κοιτης σου τουτο εστιν
@@ -15,3 +19,34 @@ find1 LXX
 # Found in Daniel 2:29+105 2:29 (book position 5892-5903)
 # Found in Daniel 2:45+134 2:45-53 (book position 7958-7969)
 # 3 occurrences.
+
+lookup1 LXX Deuteronomy 32:4
+# Stored internally as ueosalhuinataergaaytoykaipasaiaiodoiaytoykriseisueospistoskaioykestinadikiadikaioskaiosioskyrios.
+lookup2 SBLGNT Revelation_of_John 15:3+67 15:4
+# Stored internally as megalakaiuaymastataergasoykyrieoueosopantokratvrdikaiaikaialhuinaiaiodoisoyobasileystvnaivnvntisoymhfobhuhkyriekaidojaseitoonomasoyotimonososiosotipantataeunhhjoysinkaiproskynhsoysinenvpionsoyotitadikaivmatasoyefanervuhsan.
+compare12
+# Comparing 'ueosalhuinataergaaytoykaipasaiaiodoiaytoykriseisueospistoskaioykestinadikiadikaioskaiosioskyrios' ~ 'megalakaiuaymastataergasoykyrieoueosopantokratvrdikaiaikaialhuinaiaiodoisoyobasileystvnaivnvntisoymhfobhuhkyriekaidojaseitoonomasoyotimonososiosotipantataeunhhjoysinkaiproskynhsoysinenvpionsoyotitadikaivmatasoyefanervuhsan' = 172
+# difference = 0.544025
+## For full text fuzzy comparison the distance is too big.
+## The shortest partial texts are still too far with the fuzzy comparison:
+lookup1 LXX Deuteronomy 32:4+4 32:4-14
+# Stored internally as alhuinataergaaytoykaipasaiaiodoiaytoykriseisueospistoskaioykestinadikiadikaios.
+lookup2 SBLGNT Revelation_of_John 15:3+115 15:4-78
+# Stored internally as dikaiaikaialhuinaiaiodoisoyobasileystvnaivnvntisoymhfobhuhkyriekaidojaseitoonomasoyotimonososios.
+compare12
+# Comparing 'alhuinataergaaytoykaipasaiaiodoiaytoykriseisueospistoskaioykestinadikiadikaios' ~ 'dikaiaikaialhuinaiaiodoisoyobasileystvnaivnvntisoymhfobhuhkyriekaidojaseitoonomasoyotimonososios' = 90
+# difference = 0.522988
+
+lookup LXX Psalms 145:17
+# δικαιος κυριος εν πασαις ταις οδοις αυτου και οσιος εν πασιν τοις εργοις αυτου
+lookup1 LXX Psalms 145:17
+# Stored internally as dikaioskyriosenpasaistaisodoisaytoykaiosiosenpasintoisergoisaytoy.
+compare12
+# Comparing 'dikaioskyriosenpasaistaisodoisaytoykaiosiosenpasintoisergoisaytoy' ~ 'dikaiaikaialhuinaiaiodoisoyobasileystvnaivnvntisoymhfobhuhkyriekaidojaseitoonomasoyotimonososios' = 93
+# difference = 0.583851
+lookup1 LXX Psalms 145:17 145:17-22
+# Stored internally as dikaioskyriosenpasaistaisodoisaytoykaiosios.
+compare12
+# Comparing 'dikaioskyriosenpasaistaisodoisaytoykaiosios' ~ 'dikaiaikaialhuinaiaiodoisoyobasileystvnaivnvntisoymhfobhuhkyriekaidojaseitoonomasoyotimonososios' = 81
+# difference = 0.589928
+## No close textual match can be shown here with the fuzzy comparison, either.
