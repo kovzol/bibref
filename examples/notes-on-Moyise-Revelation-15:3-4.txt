@@ -50,3 +50,97 @@ compare12
 # Comparing 'dikaioskyriosenpasaistaisodoisaytoykaiosios' ~ 'dikaiaikaialhuinaiaiodoisoyobasileystvnaivnvntisoymhfobhuhkyriekaidojaseitoonomasoyotimonososios' = 81
 # difference = 0.589928
 ## No close textual match can be shown here with the fuzzy comparison, either.
+
+## The following text is Tob 12:22, copied from
+## https://www.bibelwissenschaft.de/online-bibeln/septuaginta-lxx/lesen-im-bibeltext/bibel/text/lesen/stelle/42/120001
+text1 καὶ ἐξωμολογοῦντο τὰ ἔργα τὰ μεγάλα καὶ θαυμαστὰ τοῦ θεοῦ καὶ ὡς ὤφθη αὐτοῖς ὁ ἄγγελος κυρίου.
+# Stored internally as kantottmegkauaymasttoueokaaskyr.
+## Accented Greek letters are not supported.
+text1 και εξωμολογουντο τα εργα τα μεγαλα και θαυμαστα του θεου και οσ ωφθη αυτοισ ο αγγελοσ κυριου
+# Stored internally as kaiejvmologoyntotaergatamegalakaiuaymastatoyueoykaiosvfuhaytoisoaggeloskyrioy.
+lookup2 SBLGNT Revelation_of_John 15:3+67 15:3-60
+# Stored internally as megalakaiuaymastataergasoykyrieou.
+compare12
+# Comparing 'kaiejvmologoyntotaergatamegalakaiuaymastatoyueoykaiosvfuhaytoisoaggeloskyrioy' ~ 'megalakaiuaymastataergasoykyrieou' = 48
+# difference = 0.445455
+## They are too far.
+text1 τα εργα τα μεγαλα και θαυμαστα
+# Stored internally as taergatamegalakaiuaymasta.
+lookup2 SBLGNT Revelation_of_John 15:3+67 15:3-70
+# Stored internally as megalakaiuaymastataerga.
+compare12
+# Comparing 'taergatamegalakaiuaymasta' ~ 'megalakaiuaymastataerga' = 2
+# difference = 0.062500
+length1
+# Length of text 1 is 25.
+## The fuzzy match is remarkable.
+
+lookup1 LXX Psalms 111:2 111:2-40
+# Stored internally as megalataerga.
+lookup2 SBLGNT Revelation_of_John 15:3+67 15:3-70
+# Stored internally as megalakaiuaymastataerga.
+compare12
+# Comparing 'megalataerga' ~ 'megalakaiuaymastataerga' = 11
+# difference = 0.342857
+## The fuzzy match cannot detect the subset property well.
+
+lookup1 LXX Psalms 139:14+28 139:14-28
+# Stored internally as uaymastvuhnuaymasiataerga.
+lookup2 SBLGNT Revelation_of_John 15:3+76 15:3-70
+# Stored internally as uaymastataerga.
+compare12
+# Comparing 'uaymastvuhnuaymasiataerga' ~ 'uaymastataerga' = 13
+# difference = 0.358974
+## The fuzzy match cannot detect the superset property well.
+
+## We search for the NT occurrences of "κυριος ο θεος ο παντοκρατωρ" from Amos 3:13, if any:
+getrefs SBLGNT LXX Amos 3:13
+# LXX Amos 3:13+18 3:13-40 = SBLGNT I_Corinthians 11:6+67 11:6-16 (length=5, pos1=4844)
+# LXX Amos 3:13+11 3:13-43 = SBLGNT Hebrews 2:4+3 2:4-99 (length=9, pos1=4837)
+# LXX Amos 3:13+14 3:13-40 = SBLGNT Acts 10:42+36 10:42-56 (length=9, pos1=4840)
+# LXX Amos 3:13+14 3:13-40 = SBLGNT Acts 20:24+110 20:24-31 (length=9, pos1=4840)
+# LXX Amos 3:13+8 3:13-43 = SBLGNT I_Peter 5:12+66 5:12-40 (length=12, pos1=4834)
+## Revelation is not listed, because the searched text is not unique:
+lookup LXX Amos 3:13
+# ακουσατε και επιμαρτυρασθε τω οικω ιακωβ λεγει κυριος ο θεος ο παντοκρατωρ
+lookup LXX Amos 4:13
+# διοτι ιδου εγω στερεων βροντην και κτιζων πνευμα και απαγγελλων εις ανθρωπους τον χριστον αυτου ποιων ορθρον και ομιχλην και επιβαινων επι τα υψη της γης κυριος ο θεος ο παντοκρατωρ ονομα αυτω
+lookup LXX Amos 5:8
+# ποιων παντα και μετασκευαζων και εκτρεπων εις το πρωι σκιαν θανατου και ημεραν εις νυκτα συσκοταζων ο προσκαλουμενος το υδωρ της θαλασσης και εκχεων αυτο επι προσωπου της γης κυριος ο θεος ο παντοκρατωρ ονομα αυτω
+lookup SBLGNT Revelation_of_John 15:3
+# καὶ ᾄδουσιν τὴν ᾠδὴν Μωϋσέως τοῦ δούλου τοῦ θεοῦ καὶ τὴν ᾠδὴν τοῦ ἀρνίου λέγοντες· Μεγάλα καὶ θαυμαστὰ τὰ ἔργα σου, κύριε, ὁ θεός, ὁ παντοκράτωρ· δίκαιαι καὶ ἀληθιναὶ αἱ ὁδοί σου, ὁ βασιλεὺς τῶν ⸀αἰώνων·
+text1 κυριος ο θεος ο παντοκρατωρ
+# Stored internally as kyriosoueosopantokratvr.
+find1 LXX
+# Found in Hosea 12:5+3 12:5-20 (book position 16595-16617)
+# Found in Amos 3:13+40 3:13 (book position 4867-4889)
+# Found in Amos 4:13+128 4:13-9 (book position 6827-6849)
+# Found in Amos 5:8+146 5:8-9 (book position 7659-7681)
+# Found in Amos 5:14+61 5:14-14 (book position 8208-8230)
+# Found in Amos 5:15+78 5:15-23 (book position 8323-8345)
+# Found in Amos 5:16+17 5:16-112 (book position 8386-8408)
+# Found in Amos 5:27+36 5:27-9 (book position 9349-9371)
+# Found in Amos 9:5+9 9:5-139 (book position 14613-14635)
+# Found in Amos 9:6+136 9:6-9 (book position 14911-14933)
+# Found in Amos 9:15+90 9:15 (book position 16110-16132)
+# Found in Nahum 3:5+17 3:5-93 (book position 3347-3369)
+# Found in Zechariah 10:3+74 10:3-69 (book position 15700-15722)
+# 13 occurrences.
+## That is, the searched text appears at several places (but mostly in Amos).
+find1 SBLGNT 
+# Found in Revelation_of_John 4:8+137 4:8-22 (book position 8276-8298)
+# Found in Revelation_of_John 19:6+104 19:6 (book position 37403-37425)
+# Found in Revelation_of_John 21:22+25 21:22-25 (book position 43492-43514)
+# 3 occurrences.
+## It is also present in Revelation. In fact, in Rev 15:3 there is a minor change:
+text1 κυριε ο θεος ο παντοκρατωρ
+# Stored internally as kyrieoueosopantokratvr.
+find1 LXX
+# 0 occurrences.
+## This variant is not present in the OT.
+find1 SBLGNT 
+# Found in Revelation_of_John 11:17+24 11:17-56 (book position 21389-21410)
+# Found in Revelation_of_John 15:3+93 15:3-45 (book position 28871-28892)
+# Found in Revelation_of_John 16:7+35 16:7-30 (book position 30126-30147)
+# 3 occurrences.
+## But it is there three times in Revelation.
