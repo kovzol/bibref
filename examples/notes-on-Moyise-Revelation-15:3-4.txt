@@ -144,3 +144,25 @@ find1 SBLGNT
 # Found in Revelation_of_John 16:7+35 16:7-30 (book position 30126-30147)
 # 3 occurrences.
 ## But it is there three times in Revelation.
+
+lookup LXX Jeremiah 11:20
+# κυριε κρινων δικαια δοκιμαζων νεφρους και καρδιας ιδοιμι την παρα σου εκδικησιν εξ αυτων οτι προς σε απεκαλυψα το δικαιωμα μου
+lookup1 LXX Jeremiah 11:20
+# Stored internally as kyriekrinvndikaiadokimaqvnnefroyskaikardiasidoimithnparasoyekdikhsinejaytvnotiprosseapekalycatodikaivmamoy.
+lookup SBLGNT Revelation_of_John 15:4
+# τίς οὐ μὴ ⸀φοβηθῇ, κύριε, καὶ ⸀δοξάσει τὸ ὄνομά σου, ὅτι μόνος ⸀ὅσιος; ὅτι πάντα τὰ ἔθνη ἥξουσιν καὶ προσκυνήσουσιν ἐνώπιόν σου, ὅτι τὰ δικαιώματά σου ἐφανερώθησαν. 
+lookup2 SBLGNT Revelation_of_John 15:4+99 15:4
+# Stored internally as otitadikaivmatasoyefanervuhsan.
+compare12
+# Comparing 'kyriekrinvndikaiadokimaqvnnefroyskaikardiasidoimithnparasoyekdikhsinejaytvnotiprosseapekalycatodikaivmamoy' ~ 'otitadikaivmatasoyefanervuhsan' = 96
+# difference = 0.713235
+## The fuzzy comparison algorithm unable to detect here any matches.
+lookup LXX Psalms 98:2
+# εγνωρισεν κυριος το σωτηριον αυτου εναντιον των εθνων απεκαλυψεν την δικαιοσυνην αυτου
+lookup1 LXX Psalms 98:2
+# Stored internally as egnvrisenkyriostosvthrionaytoyenantiontvneunvnapekalycenthndikaiosynhnaytoy.
+compare12
+# Comparing 'egnvrisenkyriostosvthrionaytoyenantiontvneunvnapekalycenthndikaiosynhnaytoy' ~ 'otitadikaivmatasoyefanervuhsan' = 85
+# difference = 0.819048
+## The fuzzy comparison algorithm unable to detect here any matches.
+## Moyise agrees that "there is some doubt about this last example".
