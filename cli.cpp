@@ -11,8 +11,11 @@
 
 #include "books.h"
 #include "cli.h"
+#include "swmgr.h"
 
 using namespace std;
+using namespace sword;
+
 bool booksAdded = false;
 string text[2];
 vector<bool> textset = {false, false};
@@ -175,7 +178,13 @@ void cli(const char *input_prepend, const char *output_prepend) {
                 goto end;
             }
             string rest = input.substr(input.find(" ") + 1);
-            string processed = processVerse(rest);
+            // Remove accidental Greek accents first:
+            SWMgr manager;
+            manager.setGlobalOption("Greek Accents", "Off");
+            SWBuf to_convert = rest.data();
+            manager.filterText("Greek Accents", to_convert);
+            // Convert Greek to Latin:
+            string processed = processVerse(to_convert.c_str());
             if (processed.length() == 0) {
                 error("Text does not contain Greek letters, ignored.");
                 goto end;
