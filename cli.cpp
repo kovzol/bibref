@@ -38,6 +38,7 @@ string errorLookupIncomplete = "Either " + lookupCmd + "1 or " + lookupCmd + "2 
 string errorLookupParameters = lookupCmd + " requires 3 or 4 parameters.";
 string errorFindIncomplete = "Either " + textCmd + "1 or " + textCmd + "2 must be used.";
 string errorFindParameters = findCmd + " requires one parameter.";
+string errorFindEmpty = "No text to find is defined yet.";
 string errorLengthIncomplete = "Either " + lengthCmd + "1 or " + lengthCmd + "2 must be used.";
 string errorMinuniqueParameters = minuniqueCmd + " requires one parameter";
 string errorExtendParameters = extendCmd + " requires 4 or 5 parameters.";
@@ -310,11 +311,15 @@ void cli(const char *input_prepend, const char *output_prepend) {
                 error(errorFindIncomplete);
                 goto end;
             }
-            if (input.length() < lookupCmd.length() + 2) {
+            if (input.length() < lookupCmd.length() + 1) {
                 error(errorFindParameters);
                 goto end;
             }
             string rest = input.substr(input.find(" ") + 1);
+            if (text[index].length() == 0) {
+                error(errorFindEmpty);
+                goto end;
+            }
             find(text[index], rest, maxresults, 1);
             goto end;
         }
