@@ -240,6 +240,7 @@ VerseInfo splitVerseInfo(string verseInfo) {
 int lookupTranslation(string moduleName, string book, string verse) {
     SWMgr library(new MarkupFilterMgr(FMT_PLAIN));
     SWModule *module;
+    library.setGlobalOption("Greek Accents", "Off");
     module = library.getModule(moduleName.c_str());
     if (!module) {
         error("The SWORD module " + moduleName + " is not installed.");
