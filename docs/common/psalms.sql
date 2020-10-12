@@ -916,3 +916,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (46, 4, 'εν γραφη', 'περιεχει ... δε'); -- εν γραφη = in Scripture, περιεχει ... δε = it is contained ... however
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (46, 4, 'quotation', 'literal', 'Z.K.');
+
+.exit
+
+-- Non-psalms:
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (101, 1, 'Isaiah', null, 'LXX Isaiah 29:14+69 29:14-5', 'I_Corinthians', 'SBLGNT 1:19+12 1:19-7', 55661, 45, 1391, 45, 'getrefs');
+-- TODO: Generalize this file to contain all matches.
