@@ -1,0 +1,92 @@
+addbooks
+
+lookup SBLGNT I_Corinthians 2:9
+# αλλα καθως γεγραπται· Α οφθαλμος ουκ ειδεν και ους ουκ ηκουσεν και επι καρδιαν ανθρωπου ουκ ανεβη, ⸀οσα ητοιμασεν ο θεος τοις αγαπωσιν αυτον.
+text2 οφθαλμος
+# Stored internally as ofualmos.
+find2 LXX
+# Found in Deuteronomy 7:16+63 7:16-62 (book position 26238-26245)
+# Found in Deuteronomy 13:8+51 13:8-49 (book position 44958-44965)
+# Found in Deuteronomy 15:9+110 15:9-95 (book position 49790-49797)
+# Found in Deuteronomy 19:13+11 19:13-58 (book position 60271-60278)
+# Found in Deuteronomy 19:21+11 19:21-88 (book position 61101-61108)
+# Found in Deuteronomy 25:12+33 25:12-9 (book position 76193-76200)
+# Found in Job 7:7+50 7:7-14 (book position 11439-11446)
+# Found in Job 7:8+16 7:8-41 (book position 11477-11484)
+# Found in Job 10:18+41 10:18-12 (book position 16479-16486)
+# Found in Job 13:1+20 13:1-18 (book position 19238-19245)
+# Found in Job 16:20+51 16:20 (book position 25255-25262)
+# Found in Job 19:27+24 19:27-51 (book position 28878-28885)
+# Found in Job 20:9 20:9-59 (book position 29542-29549)
+# Found in Job 24:15+3 24:15-72 (book position 36270-36277)
+# Found in Job 24:15+50 24:15-25 (book position 36317-36324)
+# Found in Job 28:7+46 28:7-5 (book position 39976-39983)
+# Found in Job 28:10+42 28:10 (book position 40132-40139)
+# Found in Job 29:11+28 29:11-17 (book position 41639-41646)
+# Found in Job 29:15 29:15-21 (book position 41828-41835)
+# Found in Job 42:5+38 42:5-12 (book position 64041-64048)
+# Found in Psalms 6:7+17 6:7-34 (book position 3944-3951)
+# Found in Psalms 31:9+40 31:9-24 (book position 30154-30161)
+# Found in Psalms 54:7+52 54:7-3 (book position 59541-59548)
+# Found in Psalms 92:11+11 92:11-80 (book position 108378-108385)
+# Found in Proverbs 6:17 6:17-46 (book position 10282-10289)
+# Found in Proverbs 15:30+6 15:30-42 (book position 28384-28391)
+# Found in Proverbs 20:12+12 20:12-24 (book position 36550-36557)
+# Found in Ecclesiastes 1:8+63 1:8-39 (book position 614-621)
+# Found in Ecclesiastes 4:8+99 4:8-120 (book position 7333-7340)
+# Found in Lamentations 1:16+1 1:16-113 (book position 2349-2356)
+# Found in Lamentations 2:18+118 2:18-3 (book position 5889-5896)
+# Found in Lamentations 3:48+21 3:48-38 (book position 8492-8499)
+# Found in Lamentations 3:49+1 3:49-42 (book position 8539-8546)
+# Found in Lamentations 3:51+1 3:51-51 (book position 8623-8630)
+# Found in Ezekiel 5:11+102 5:11-13 (book position 10302-10309)
+# Found in Ezekiel 7:4+11 7:4-101 (book position 12813-12820)
+# Found in Ezekiel 7:9+11 7:9-110 (book position 13155-13162)
+# Found in Ezekiel 8:18+38 8:18-15 (book position 16832-16839)
+# Found in Ezekiel 9:10+17 9:10-46 (book position 18220-18227)
+# Found in Ezekiel 16:5+13 16:5-125 (book position 33013-33020)
+# Found in Ezekiel 20:17+12 20:17-70 (book position 49494-49501)
+# Found in Habakkuk 1:13+7 1:13-117 (book position 1246-1253)
+# Found in Zechariah 11:17+151 11:17-39 (book position 18902-18909)
+# 43 occurrences.
+
+## Sword search "οφθαλμ* ειδ* ηκουσ*" gives two possible matches:
+lookup LXX II_Chronicles 9:6
+# και ουκ επιστευσα τοις λογοις εως ου ηλθον και ειδον οι οφθαλμοι μου και ιδου ουκ απηγγελη μοι ημισυ του πληθους της σοφιας σου προσεθηκας επι την ακοην ην ηκουσα
+lookup LXX Isaiah 64:4
+# απο του αιωνος ουκ ηκουσαμεν ουδε οι οφθαλμοι ημων ειδον θεον πλην σου και τα εργα σου α ποιησεις τοις υπομενουσιν ελεον
+
+getrefs SBLGNT LXX II_Chronicles 9:6
+# LXX II_Chronicles 9:6+73 9:6-55 = SBLGNT Romans 7:10+21 7:10-28 (length=5, pos1=22350)
+# LXX II_Chronicles 9:6+114 9:6-11 = SBLGNT Romans 4:9+38 4:9-56 (length=8, pos1=22391)
+## Not helpful.
+
+getrefs SBLGNT LXX Isaiah 64:4
+# LXX Isaiah 64:4+26 64:4-68 = SBLGNT Acts 8:6+9 8:6-84 (length=5, pos1=126517)
+# LXX Isaiah 64:4+26 64:4-68 = SBLGNT Matthew 9:8+7 9:8-69 (length=5, pos1=126517)
+# LXX Isaiah 64:4+42 64:4-51 = SBLGNT Revelation_of_John 20:11+3 20:11-97 (length=6, pos1=126533)
+# LXX Isaiah 64:4+42 64:4-51 = SBLGNT Revelation_of_John 20:4+3 20:4-260 (length=6, pos1=126533)
+# LXX Isaiah 64:4+67 64:4-25 = SBLGNT Matthew 15:1+20 15:1-40 (length=7, pos1=126558)
+# LXX Isaiah 64:4+22 64:4-69 = SBLGNT Mark 13:32+39 13:32-34 (length=8, pos1=126513)
+# LXX Isaiah 64:4+22 64:4-69 = SBLGNT Matthew 24:36+38 24:36-41 (length=8, pos1=126513)
+# LXX Isaiah 64:4+38 64:4-53 = SBLGNT I_Thessalonians 1:3+129 1:4-41 (length=8, pos1=126529)
+# LXX Isaiah 64:4+19 64:4-71 = SBLGNT II_Corinthians 7:2+23 7:2-33 (length=9, pos1=126510)
+# LXX Isaiah 64:4+86 64:4-4 = SBLGNT I_Corinthians 15:6+55 15:6-24 (length=9, pos1=126577)
+# LXX Isaiah 64:4+3 64:4-79 = SBLGNT John 9:32+2 9:32-42 (length=17, pos1=126494)
+# LXX Isaiah 64:4+53 64:4-29 = SBLGNT Revelation_of_John 2:19+64 2:19-24 (length=17, pos1=126544)
+## Not helpful, either.
+
+lookup2 SBLGNT I_Corinthians 2:9+18 2:9
+# Stored internally as aofualmosoykeidenkaioysoykhkoysenkaiepikardiananurvpoyoykanebhosahtoimasenoueostoisagapvsinayton.
+lookup1 LXX II_Chronicles 9:6
+# Stored internally as kaioykepisteysatoislogoisevsoyhluonkaieidonoiofualmoimoykaiidoyoykaphggelhmoihmisytoyplhuoysthssofiassoyproseuhkasepithnakohnhnhkoysa.
+compare12
+# Comparing 'kaioykepisteysatoislogoisevsoyhluonkaieidonoiofualmoimoykaiidoyoykaphggelhmoihmisytoyplhuoysthssofiassoyproseuhkasepithnakohnhnhkoysa' ~ 'aofualmosoykeidenkaioysoykhkoysenkaiepikardiananurvpoyoykanebhosahtoimasenoueostoisagapvsinayton' = 115
+# difference = 0.506550
+lookup1 LXX Isaiah 64:4
+# Stored internally as apotoyaivnosoykhkoysamenoydeoiofualmoihmvneidonueonplhnsoykaitaergasoyapoihseistoisypomenoysineleon.
+compare12
+# Comparing 'apotoyaivnosoykhkoysamenoydeoiofualmoihmvneidonueonplhnsoykaitaergasoyapoihseistoisypomenoysineleon' ~ 'aofualmosoykeidenkaioysoykhkoysenkaiepikardiananurvpoyoykanebhosahtoimasenoueostoisagapvsinayton' = 91
+# difference = 0.471795
+
+## There should be a command to shorten both texts in the comparison until the difference is minimal.
