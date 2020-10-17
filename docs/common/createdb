@@ -1,2 +1,2 @@
 #!/bin/sh
-echo ".read psalms.sql" | sqlite3 psalms.sqlite3
+echo ".read quotations.sql" | sqlite3 quotations.sqlite3

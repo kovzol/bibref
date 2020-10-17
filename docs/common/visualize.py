@@ -117,7 +117,7 @@ def psalms_report_latex(conn, method, data):
         f.close()
 
 def main():
-    database = r"psalms.sqlite3"
+    database = r"quotations.sqlite3"
     conn = create_connection(database)
     if len(sys.argv) > 1:
         result_type = sys.argv[1]

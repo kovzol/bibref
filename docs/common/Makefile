@@ -9,16 +9,16 @@ manual_nt_length.pdf: manual_nt_length.tex
 getrefs.pdf: getrefs.tex
 	pdflatex getrefs
 
-authors.tex: visualize.py psalms.sqlite3
+authors.tex: visualize.py quotations.sqlite3
 	python3 visualize.py traditional > authors.tex
 
-manual_nt_length.tex manual_nt_length.csv: visualize.py psalms.sqlite3
+manual_nt_length.tex manual_nt_length.csv: visualize.py quotations.sqlite3
 	python3 visualize.py traditional manual_nt_length > manual_nt_length.tex
 
-getrefs.tex: visualize.py psalms.sqlite3
+getrefs.tex: visualize.py quotations.sqlite3
 	python3 visualize.py getrefs > getrefs.tex
 
-psalms.sqlite3: psalms.sql
+quotations.sqlite3: quotations.sql
 	./dropdb
 	./createdb
 
@@ -26,7 +26,7 @@ Rplots.pdf: manual_nt_length.csv manual_nt_length.r
 	R -q --save < manual_nt_length.r
 
 clean:
-	rm -f psalms.sqlite3 authors.tex manual_nt_length.tex getrefs.tex authors.aux manual_nt_length.aux getrefs.aux authors.log manual_nt_length.log getrefs.log
+	rm -f quotations.sqlite3 authors.tex manual_nt_length.tex getrefs.tex authors.aux manual_nt_length.aux getrefs.aux authors.log manual_nt_length.log getrefs.log
 
 fullclean: clean
 	rm -f authors.pdf getrefs.pdf manual_nt_length.pdf Rplots.pdf
