@@ -1,0 +1,15 @@
+lookup1 LXX Habakkuk 2:4+42 2:4
+# Stored internally as dikaiosekpistevsmoyqhsetai.
+lookup2 SBLGNT Galatians 3:11+45 3:11
+# Stored internally as dikaiosekpistevsqhsetai.
+compare12
+# Comparing 'dikaiosekpistevsmoyqhsetai' ~ 'dikaiosekpistevsqhsetai' = 5
+# difference = 0.122449
+lookup1 LXX Habakkuk 2:4+39 2:4
+# Stored internally as odedikaiosekpistevsmoyqhsetai.
+lookup2 SBLGNT Galatians 3:11+44 3:11
+# Stored internally as odikaiosekpistevsqhsetai.
+compare12
+# Comparing 'odedikaiosekpistevsmoyqhsetai' ~ 'odikaiosekpistevsqhsetai' = 7
+# difference = 0.150943
+## Maybe the second match should be better scored.

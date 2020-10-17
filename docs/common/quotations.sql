@@ -921,6 +921,31 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
  (46, 4, 'quotation', 'literal', 'Z.K.');
 
 -- Non-psalms:
+
+-- TODO: Add identification and traditional data.
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (101, 1, 'Isaiah', null, 'LXX Isaiah 29:14+69 29:14-5', 'I_Corinthians', 'SBLGNT 1:19+12 1:19-7', 55661, 45, 1391, 45, 'getrefs');
--- TODO: Generalize this file to contain all matches.
+ (101, 1, 'Isaiah', null, 'LXX Isaiah 29:14+69 29:14-5', 'I_Corinthians', 'SBLGNT I_Corinthians 1:19+12 1:19-7', 55661, 45, 1391, 45, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (102, 1, 'Isaiah', null, 'Isaiah 64:4', 'I_Corinthians', 'I_Corinthians 2:9', null, null, null, null, 'traditional');
+
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1001, 1, 'Habakkuk', null, 'LXX Habakkuk 2:4+39 2:4-10', 'SBLGNT Romans 1:17+68 1:17-7', 2126, 19, 1330, 19, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1001, 1, 'Habakkuk', null, 'LXX Habakkuk 2:4+39 2:4', 'SBLGNT Romans 1:17+68 1:17', 2126, 29, 1330, 26, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (1001, 1, null, 'καθως γεγραπται'); -- καθως γεγραπται = as it has been written
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (1001, 1, 'quotation', 'literal, superset', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1001, 2, 'Habakkuk', null, 'LXX Habakkuk 2:4+42 2:4-10', 'SBLGNT Galatians 3:11+45 3:11-7', 2129, 16, 4515, 19, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1001, 2, 'Habakkuk', null, 'LXX Habakkuk 2:4+39 2:4', 'SBLGNT Galatians 3:11+44 3:11', 2126, 29, 4514, 27, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (1001, 2, null, 'οτι'); -- οτι = because
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (1001, 2, 'quotation', 'literal, superset', 'Z.K.');
+
+-- TODO: Continue with the following matches:
+-- LXX Habakkuk 2:4+49 2:4-10 = SBLGNT Hebrews 10:38+13 10:38-49 (length=9, pos1=2136)
+-- LXX Habakkuk 2:3+84 2:3-9 = SBLGNT Hebrews 10:37+21 10:37-8 (length=18, pos1=2060)
+-- LXX Habakkuk 2:4 2:4-29 = SBLGNT Hebrews 10:38+32 10:38 (length=39, pos1=2087)
