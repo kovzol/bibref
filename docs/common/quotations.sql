@@ -70,6 +70,7 @@ insert into books (name, author, info, number) values ('Acts', 'Luke', 'Acts of 
 insert into books (name, author, info, number) values ('Romans', 'Paul', 'Epistle to the Romans', 106);
 insert into books (name, author, info, number) values ('I_Corinthians', 'Paul', 'First Epistle to the Corinthians', 107);
 insert into books (name, author, info, number) values ('II_Corinthians', 'Paul', 'Second Epistle to the Corinthians', 108);
+insert into books (name, author, info, number) values ('Galatians', 'Paul', 'Epistle to the Galatians', 109);
 insert into books (name, author, info, number) values ('Ephesians', 'Paul', 'Epistle to the Ephesians', 110);
 insert into books (name, author, info, number) values ('Hebrews', 'Unknown', 'Epistle to the Hebrews', 119);
 insert into books (name, author, info, number) values ('I_Peter', 'Peter', 'First Epistle of Peter', 121);
@@ -929,17 +930,17 @@ insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_pa
  (102, 1, 'Isaiah', null, 'Isaiah 64:4', 'I_Corinthians', 'I_Corinthians 2:9', null, null, null, null, 'traditional');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (1001, 1, 'Habakkuk', null, 'LXX Habakkuk 2:4+39 2:4-10', 'SBLGNT Romans 1:17+68 1:17-7', 2126, 19, 1330, 19, 'getrefs');
+ (1001, 1, 'Habakkuk', null, 'LXX Habakkuk 2:4+39 2:4-10', 'Romans', 'SBLGNT Romans 1:17+68 1:17-7', 2126, 19, 1330, 19, 'getrefs');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (1001, 1, 'Habakkuk', null, 'LXX Habakkuk 2:4+39 2:4', 'SBLGNT Romans 1:17+68 1:17', 2126, 29, 1330, 26, 'manual');
+ (1001, 1, 'Habakkuk', null, 'LXX Habakkuk 2:4+39 2:4', 'Romans','SBLGNT Romans 1:17+68 1:17', 2126, 29, 1330, 26, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (1001, 1, null, 'καθως γεγραπται'); -- καθως γεγραπται = as it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1001, 1, 'quotation', 'literal, superset', 'Z.K.');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (1001, 2, 'Habakkuk', null, 'LXX Habakkuk 2:4+42 2:4-10', 'SBLGNT Galatians 3:11+45 3:11-7', 2129, 16, 4515, 19, 'getrefs');
+ (1001, 2, 'Habakkuk', null, 'LXX Habakkuk 2:4+42 2:4-10', 'Galatians', 'SBLGNT Galatians 3:11+45 3:11-7', 2129, 16, 4515, 19, 'getrefs');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (1001, 2, 'Habakkuk', null, 'LXX Habakkuk 2:4+39 2:4', 'SBLGNT Galatians 3:11+44 3:11', 2126, 29, 4514, 27, 'manual');
+ (1001, 2, 'Habakkuk', null, 'LXX Habakkuk 2:4+39 2:4', 'Galatians', 'SBLGNT Galatians 3:11+44 3:11', 2126, 29, 4514, 27, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (1001, 2, null, 'οτι'); -- οτι = because
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
