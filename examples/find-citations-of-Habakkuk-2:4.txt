@@ -1,3 +1,4 @@
+addbooks
 lookup1 LXX Habakkuk 2:4+42 2:4
 # Stored internally as dikaiosekpistevsmoyqhsetai.
 lookup2 SBLGNT Galatians 3:11+45 3:11

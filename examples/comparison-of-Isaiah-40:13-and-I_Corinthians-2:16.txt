@@ -1,0 +1,8 @@
+addbooks
+lookup1 LXX Isaiah 40:13
+# Stored internally as tisegnvnoynkyrioykaitisaytoysymboylosegenetoossymbibaayton.
+lookup2 SBLGNT I_Corinthians 2:16 2:16-24
+# Stored internally as tisgaregnvnoynkyrioyossymbibaseiayton.
+compare12
+# Comparing 'tisegnvnoynkyrioykaitisaytoysymboylosegenetoossymbibaayton' ~ 'tisgaregnvnoynkyrioyossymbibaseiayton' = 37
+# difference = 0.400000

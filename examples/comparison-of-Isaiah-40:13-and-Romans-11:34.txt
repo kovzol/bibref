@@ -1,0 +1,8 @@
+addbooks
+lookup1 LXX Isaiah 40:13 40:13-14
+# Stored internally as tisegnvnoynkyrioykaitisaytoysymboylosegeneto.
+lookup2 SBLGNT Romans 11:34
+# Stored internally as tisgaregnvnoynkyrioyhtissymboylosaytoyegeneto.
+compare12
+# Comparing 'tisegnvnoynkyrioykaitisaytoysymboylosegeneto' ~ 'tisgaregnvnoynkyrioyhtissymboylosaytoyegeneto' = 15
+# difference = 0.179775

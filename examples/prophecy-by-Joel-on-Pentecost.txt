@@ -1,5 +1,7 @@
 ## A comparison of the texts in Joel and Acts about Joel's prophecy on Pentecost.
 
+addbooks
+
 getrefs SBLGNT LXX Joel 2:28 2:32
 # ... (lengths<=13)
 # LXX Joel 2:29+17 2:29-44 = SBLGNT Acts 2:18+22 2:18-64 (length=15, pos1=5357)
