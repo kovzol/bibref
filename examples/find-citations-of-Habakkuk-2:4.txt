@@ -14,3 +14,14 @@ compare12
 # Comparing 'odedikaiosekpistevsmoyqhsetai' ~ 'odikaiosekpistevsqhsetai' = 7
 # difference = 0.150943
 ## Maybe the second match should be better scored.
+lookup1 LXX Habakkuk 2:3+84 2:4-10
+# Stored internally as erxomenoshjeikaioymhxronisheanyposteilhtaioykeydokeihcyxhmoyenaytvodedikaiosekpistevs.
+lookup2 SBLGNT Hebrews 10:37+21 10:38
+# Stored internally as erxomenoshjeikaioyxroniseiodedikaiosmoyekpistevsqhsetaikaieanyposteilhtaioykeydokeihcyxhmoyenaytv.
+compare12
+# Comparing 'erxomenoshjeikaioymhxronisheanyposteilhtaioykeydokeihcyxhmoyenaytvodedikaiosekpistevs' ~ 'erxomenoshjeikaioyxroniseiodedikaiosmoyekpistevsqhsetaikaieanyposteilhtaioykeydokeihcyxhmoyenaytv' = 24
+# difference = 0.137363
+length1
+# Length of text 1 is 85.
+length2
+# Length of text 2 is 97.
