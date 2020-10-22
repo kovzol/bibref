@@ -2,65 +2,68 @@
 ## in Romans. A "verified quotation" is that has evidence by tradition of textual evidence.
 ## The following verified quotations can be found automatically with the getrefs algorithm:
 ##
-## Romans    | Match length   | Found? | Problem
-## ----------+----------------+--------+-----------------------------------------------------------------------------
-## 1:17      | 19             | Yes    |
-## 2:6       |                | No     | Maybe the minunique algorithm should be changed (there are two LXX matches).
-## 2:24      | 39             | Yes    |
-## 3:4       | 38+16          | Yes    |
-## 3:10      |                | No     | Paul's text cannot be identified, either manually.
-## 3:11      | 318            | Yes    |
-## 4:3       | 36             | Yes    |
-## 4:9       |                | No     | This is a repetition of a quotation with some variations.
-## 4:22      | 26             | No     | This is only a part of the quotation that is higlighted, so it is too short.
-## 4:23      | 12             | No     | This is only a part of the quotation that is higlighted, so it is too short.
-## 4:7       | 97             | Yes    |
-## 4:17      | 31             | Yes    |
-## 4:18      | 17, 25         | Yes    |
-## 8:36      | 53             | Yes    |
-## 9:7       | 26             | Yes    |
-## 9:9       | 20, 19         | Yes    |
-## 9:12      | 29             | Yes    |
-## 9:13      | 16             | Yes    |
-## 9:15      | 38             | Yes    |
-## 9:17      | 39+18          | Yes    |
-## 9:20      | 24+12          | Yes    |
-## 9:25-26   | 10             | Yes    | Wording in LXX is different, ABPGRK seems to be better for the match.
-## 9:26      | 73             | Yes    |
-## 9:27      | 40             | Yes    |
-## 9:29      | 81             | Yes    |
-## 9:33a     | 12             | Yes    | There is one letter of difference, a fuzzy search would be more useful.
-## 9:33b     | 20             | Yes    | Two letters are removed by Paul, a fuzzy search would be more useful.
-## 10:5      | 27             | Yes    |
-## 10:8      | 30             | Yes    |
-## 10:11     | 17             | Yes    |
-## 10:13     | 38             | Yes    |
-## 10:15     |                | No     | The quotation is far from being literal.
-## 10:16     | 28             | Yes    |
-## 10:18     | 74             | Yes    |
-## 10:19     | 33+12          | Yes    |
-## 10:20     | 24+21+19+7     | Yes    |
-## 10:21     | 32+21          | Yes    |
-## 11:3      | 28             | Yes    | Maybe the minunique algorithm should be changed. (Also for 11:2, not listed here.)
-## 11:4      | 7              | Yes    | Some wording in the quotation are synonyms instead of being literal matches.
-## 11:8a     |                | No     | Two letters are removed by Paul, a fuzzy search would be more useful.
-## 11:8b     | 13+13          | Yes    | A clever fuzzy search would be more successful.
-## 11:9-10   | 74+22+20+16+14 | Yes    |
-## 11:26-27a | 54+13          | Yes    |
-## 11:27b    | 12             | Yes    | The quotation is too short: the correct identification is difficult. A fuzzy search would be more useful.
-## 11:32     | 19             | Yes    |
-## 11:34     | 14             | Yes    |
-## 12:19     |                | No     | The short quotation is far from being literal. A fuzzy match helps finding the traditional match.
-## 12:20     | 77+18          | Yes    |
-## 13:9a     |                | No     | Maybe the minunique algorithm should be changed. Then, also a fuzzy match could be helpful.
-## 13:9b     | 31             | Yes    |
-## 14:11a    |                | No     | 16 characters long match with 17 passages in the LXX.
-## 14:11b    | 23+12          | Yes    |
-## 15:3      | 44             | Yes    |
-## 15:10     | 33             | Yes    |
-## 15:11     | 17+9           | Yes    |
-## 15:12     | 59             | Yes    |
-## 15:21     | 58             | Yes    |
+## Romans    | Match length   | Found? | Direct quotation? | Problem
+## ----------+----------------+--------+-------------------+-----------------------------------------------------------------------------
+## 1:17      | 19             | Yes    | Yes               |
+## 2:6       |                | No     | No                | Maybe the minunique algorithm should be changed (there are two LXX matches).
+## 2:24      | 39             | Yes    | Yes               |
+## 3:4       | 38+16          | Yes    |                   |
+## 3:10      |                | No     |                   | Paul's text cannot be identified, either manually.
+## 3:11      | 318            | Yes    |                   |
+## 4:3       | 36             | Yes    |                   |
+## 4:9       |                | No     |                   | This is a repetition of a quotation with some variations.
+## 4:22      | 26             | No     |                   | This is only a part of the quotation that is higlighted, so it is too short.
+## 4:23      | 12             | No     |                   | This is only a part of the quotation that is higlighted, so it is too short.
+## 4:7       | 97             | Yes    |                   |
+## 4:17      | 31             | Yes    |                   |
+## 4:18      | 17, 25         | Yes    |                   |
+## 8:36      | 53             | Yes    |                   |
+## 9:7       | 26             | Yes    |                   |
+## 9:9       | 20, 19         | Yes    |                   |
+## 9:12      | 29             | Yes    |                   |
+## 9:13      | 16             | Yes    |                   |
+## 9:15      | 38             | Yes    |                   |
+## 9:17      | 39+18          | Yes    |                   |
+## 9:20      | 24+12          | Yes    |                   |
+## 9:25-26   | 10             | Yes    |                   | Wording in LXX is different, ABPGRK seems to be better for the match.
+## 9:26      | 73             | Yes    |                   |
+## 9:27      | 40             | Yes    |                   |
+## 9:29      | 81             | Yes    |                   |
+## 9:33a     | 12             | Yes    |                   | There is one letter of difference, a fuzzy search would be more useful.
+## 9:33b     | 20             | Yes    |                   | Two letters are removed by Paul, a fuzzy search would be more useful.
+## 10:5      | 27             | Yes    |                   |
+## 10:8      | 30             | Yes    |                   |
+## 10:11     | 17             | Yes    |                   |
+## 10:13     | 38             | Yes    |                   |
+## 10:15     |                | No     |                   | The quotation is far from being literal.
+## 10:16     | 28             | Yes    |                   |
+## 10:18     | 74             | Yes    |                   |
+## 10:19     | 33+12          | Yes    |                   |
+## 10:20     | 24+21+19+7     | Yes    |                   |
+## 10:21     | 32+21          | Yes    |                   |
+## 11:3      | 28             | Yes    |                   | Maybe the minunique algorithm should be changed. (Also for 11:2, not listed here.)
+## 11:4      | 7              | Yes    |                   | Some wording in the quotation are synonyms instead of being literal matches.
+## 11:8a     |                | No     |                   | Two letters are removed by Paul, a fuzzy search would be more useful.
+## 11:8b     | 13+13          | Yes    |                   | A clever fuzzy search would be more successful.
+## 11:9-10   | 74+22+20+16+14 | Yes    |                   |
+## 11:26-27a | 54+13          | Yes    |                   |
+## 11:27b    | 12             | Yes    |                   | The quotation is too short: the correct identification is difficult. A fuzzy search would be more useful.
+## 11:32     | 19             | Yes    |                   |
+## 11:34     | 14             | Yes    |                   |
+## 12:19     |                | No     |                   | The short quotation is far from being literal. A fuzzy match helps finding the traditional match.
+## 12:20     | 77+18          | Yes    |                   |
+## 13:9a     |                | No     |                   | Maybe the minunique algorithm should be changed. Then, also a fuzzy match could be helpful.
+## 13:9b     | 31             | Yes    |                   |
+## 14:11a    |                | No     |                   | 16 characters long match with 17 passages in the LXX.
+## 14:11b    | 23+12          | Yes    |                   |
+## 15:3      | 44             | Yes    |                   |
+## 15:10     | 33             | Yes    |                   |
+## 15:11     | 17+9           | Yes    |                   |
+## 15:12     | 59             | Yes    |                   |
+## 15:21     | 58             | Yes    |                   |
+##
+## "Direct quotation" means that there is a direct sign in Paul's text that
+## the text was indeed quoted.
 
 addbooks
 
@@ -98,6 +101,13 @@ compare12
 getrefs SBLGNT LXX Isaiah 52:5
 # ... (lengths<=11)
 # LXX Isaiah 52:5+115 52:5 = SBLGNT Romans 2:24+23 2:24-14 (length=25, pos1=106381)
+lookup1 LXX Isaiah 52:5+90 52:5
+# Stored internally as diymasdiapantostoonomamoyblasfhmeitaientoiseunesin.
+lookup2 SBLGNT Romans 2:24 2:24-14
+# Stored internally as togaronomatoyueoydiymasblasfhmeitaientoiseunesin.
+compare12
+# Comparing 'diymasdiapantostoonomamoyblasfhmeitaientoiseunesin' ~ 'togaronomatoyueoydiymasblasfhmeitaientoiseunesin' = 24
+# difference = 0.255102
 
 getrefs SBLGNT LXX Psalms 51:4
 # ... (lengths<=10)
