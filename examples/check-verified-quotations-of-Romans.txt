@@ -7,10 +7,10 @@
 ## 1:17      | 19             | Yes    | Yes               |
 ## 2:6       |                | No     | No                | Maybe the minunique algorithm should be changed (there are two LXX matches).
 ## 2:24      | 39             | Yes    | Yes               |
-## 3:4       | 38+16          | Yes    |                   |
-## 3:10      |                | No     |                   | Paul's text cannot be identified, either manually.
-## 3:11      | 318            | Yes    |                   |
-## 4:3       | 36             | Yes    |                   |
+## 3:4       | 38+16          | Yes    | Yes               |
+## 3:10      |                | No     | ?                 | Paul's text cannot be identified, either manually.
+## 3:11      | 318            | Yes    | Yes               |
+## 4:3       | 36             | Yes    | Yes               |
 ## 4:9       |                | No     |                   | This is a repetition of a quotation with some variations.
 ## 4:22      | 26             | No     |                   | This is only a part of the quotation that is higlighted, so it is too short.
 ## 4:23      | 12             | No     |                   | This is only a part of the quotation that is higlighted, so it is too short.
@@ -143,6 +143,23 @@ getrefs SBLGNT LXX Genesis 15:6
 # LXX Genesis 15:6+18 15:6 = SBLGNT Galatians 3:6+21 3:6 (length=34, pos1=34473)
 # LXX Genesis 15:6+16 15:6 = SBLGNT James 2:23+41 2:23-18 (length=36, pos1=34471)
 # LXX Genesis 15:6+16 15:6 = SBLGNT Romans 4:3+32 4:3 (length=36, pos1=34471)
+lookup1 LXX Genesis 15:6+3 15:6
+# Stored internally as episteysenabramtvuevkaielogisuhaytveisdikaiosynhn.
+lookup2 SBLGNT Romans 4:3+16 4:3
+# Stored internally as episteysendeabraamtvuevkaielogisuhaytveisdikaiosynhn.
+compare12
+# Comparing 'episteysenabramtvuevkaielogisuhaytveisdikaiosynhn' ~ 'episteysendeabraamtvuevkaielogisuhaytveisdikaiosynhn' = 5
+# difference = 0.059406
+lookup2 SBLGNT Galatians 3:6+5 3:6
+# Stored internally as abraamepisteysentvuevkaielogisuhaytveisdikaiosynhn.
+compare12
+# Comparing 'episteysenabramtvuevkaielogisuhaytveisdikaiosynhn' ~ 'abraamepisteysentvuevkaielogisuhaytveisdikaiosynhn' = 5
+# difference = 0.060606
+lookup2 SBLGNT James 2:23+25 2:23-18
+# Stored internally as episteysendeabraamtvuevkaielogisuhaytveisdikaiosynhn.
+compare12
+# Comparing 'episteysenabramtvuevkaielogisuhaytveisdikaiosynhn' ~ 'episteysendeabraamtvuevkaielogisuhaytveisdikaiosynhn' = 5
+# difference = 0.059406
 
 ## The getrefs algorithm does not find the citations in Romans 4:9, 4:22 and 4:23.
 ## For Romans 4:9 there is a fuzzy comparison that is still somewhat far:
