@@ -84,7 +84,8 @@ insert into books (name, author, info, number) values ('James', 'James', 'Epistl
 insert into books (name, author, info, number) values ('I_Peter', 'Peter', 'First Epistle of Peter', 121);
 insert into books (name, author, info, number) values ('Revelation_of_John', 'John', 'Revelation of John', 127);
 
-insert into classifications (name, info) values ('quotation', 'direct reference given');
+insert into classifications (name, info) values ('quotation', 'first quotation with a direct reference given');
+insert into classifications (name, info) values ('repeated quotation', 'repetition of a former quotation with reference');
 insert into classifications (name, info) values ('repetition', 'repetition of a former quotation without reference');
 -- Quotations are claimed if and only if there is a direct mentioning of an OT quotation in the NT part.
 insert into classifications (name, info) values ('secondary quotation', 'direct reference given, but not longest match');
@@ -1020,3 +1021,21 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2001, 3, 'η γραφη', 'λεγουσα'); -- η γραφη = the Scripture, λεγουσα = saying
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2001, 3, 'quotation', 'literal', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2001, 4, 'Genesis', null, 'LXX Genesis 15:6+3 15:6', 'Romans', 'SBLGNT Romans 4:9+65 4:9', 34458, 49, 7654, 37, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2001, 4, null, 'λεγομεν γαρ'); -- λεγομεν γαρ = we are saying for
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2001, 4, 'repeated quotation', 'far-fuzzy, supertext', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2001, 5, 'Genesis', null, 'LXX Genesis 15:6+26 15:6', 'Romans', 'SBLGNT Romans 4:22+3 4:22', 34458, 26, 8856, 26, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2001, 5, null, null);
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2001, 5, 'repetition', 'literal, exact', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2001, 6, 'Genesis', null, 'LXX Genesis 15:6+26 15:6', 'Romans', 'SBLGNT Romans 4:23+26 4:23', 34482, 12, 8908, 12, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2001, 6, null, null);
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2001, 6, 'repetition', 'literal, exact', 'Z.K.');

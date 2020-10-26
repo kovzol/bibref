@@ -355,6 +355,9 @@ lookup KJV Matthew 8:20
 
 ## Note that the getrefs command returns a false positive for Psalm 106 for the longest match (25).
 ## In fact there are two shorter matches that seem to be allusions (or, at least, weak quotations).
+## Also, LXX Psalms 106:31+3 106:31-30 is the same text (length=26) as LXX Genesis 15:6+26 15:6
+## which is mentioned in Romans 4 several times. Even if there is a quite long match to Psalm 106:31,
+## from the context in Romans 4 it is clear that it refers to Genesis 15:6.
 
 getrefs SBLGNT LXX Psalms 107:1 107:43
 # ... (lengths<=20)
