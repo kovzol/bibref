@@ -11,12 +11,12 @@
 ## 3:10      |                | No     | ?                 | Paul's text cannot be identified, either manually.
 ## 3:11      | 318            | Yes    | Yes               |
 ## 4:3       | 36             | Yes    | Yes               |
-## 4:9       |                | No     |                   | This is a repetition of a quotation with some variations.
-## 4:22      | 26             | No     |                   | This is only a part of the quotation that is higlighted, so it is too short.
-## 4:23      | 12             | No     |                   | This is only a part of the quotation that is higlighted, so it is too short.
-## 4:7       | 97             | Yes    |                   |
-## 4:17      | 31             | Yes    |                   |
-## 4:18      | 17, 25         | Yes    |                   |
+## 4:9       |                | No     | Yes               | This is a repetition of a quotation with some variations.
+## 4:22      | 26             | No     | No                | This is only a part of the quotation that is higlighted, so it is too short.
+## 4:23      | 12             | No     | No                | This is only a part of the quotation that is higlighted, so it is too short.
+## 4:7       | 97             | Yes    | Yes               |
+## 4:17      | 31             | Yes    | Yes               |
+## 4:18      | 17, 25         | Yes    | No, Yes           | The first part is just a repetition.
 ## 8:36      | 53             | Yes    |                   |
 ## 9:7       | 26             | Yes    |                   |
 ## 9:9       | 20, 19         | Yes    |                   |
@@ -210,6 +210,7 @@ getrefs SBLGNT LXX Genesis 15:5
 # ... (lengths<=18)
 # LXX Genesis 15:5+21 15:5-92 = SBLGNT Luke 18:42+10 18:42-19 (length=18, pos1=34345)
 # LXX Genesis 15:5+109 15:6-49 = SBLGNT Romans 4:18+78 4:19-104 (length=25, pos1=34433)
+## Here the match with Luke is a false positive!
 
 getrefs SBLGNT LXX Psalms 44:22
 # ... (length=7)
