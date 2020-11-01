@@ -246,7 +246,7 @@ compare12
 
 getrefs SBLGNT LXX Exodus 33:19
 # ... (lengths<=9)
-# LXX Exodus 33:19+86 33:19 = SBLGNT Romans 9:15+9 9:15 (length=38, pos1=99824)
+# LXX Exodus 33:19+86 33:19 = SBLGNT Romans 9:15+15 9:15 (length=38, pos1=99824)
 
 getrefs SBLGNT LXX Exodus 9:16
 # ... (lengths<=9)
