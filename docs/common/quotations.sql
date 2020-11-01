@@ -67,6 +67,7 @@ insert into found_methods (name, info) values ('manual', 'confirmed manually (wi
 insert into found_methods (name, info) values ('manual-mechanical', 'confirmed manually (with no understanding of Greek)');
 
 insert into books (name, author, info, number) values ('Genesis', 'Moses', 'Book of Genesis', 1);
+insert into books (name, author, info, number) values ('Exodus', 'Moses', 'Book of Exodus', 2);
 insert into books (name, author, info, number) values ('Psalms', 'Various', 'Book of Psalms', 19);
 insert into books (name, author, info, number) values ('Isaiah', 'Isaiah', 'Book of Isaiah', 23);
 insert into books (name, author, info, number) values ('Habakkuk', 'Habakkuk', 'Book of Habakkuk', 35);
@@ -1109,3 +1110,12 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2006, 1, 'Ρεβεκκα ... αυτη', 'ερρεθη'); -- Ρεβεκκα ... αυτη = Rebecca ... to her, ερρεθη = it was said
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2006, 1, 'quotation', 'literal, exact', 'Z.K.');
+
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2101, 1, 'Exodus', null, 'LXX Exodus 33:19+86 33:19', 'Romans', 'SBLGNT Romans 9:15+15 9:15', 99824, 38, 19123, 38, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2101, 1, 'Exodus', null, 'LXX Exodus 33:19+87 33:19', 'Romans', 'SBLGNT Romans 9:15+16 9:15', 99825, 37, 19124, 37, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2101, 1, 'τω Μωυσει', 'γαρ λεγει'); -- τω Μωυσει = to Moses, γαρ λεγει = for He says
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2101, 1, 'quotation', 'literal, exact', 'Z.K.');
