@@ -679,7 +679,7 @@ string _extend(string moduleName1, string moduleName2, string book2, int pos2S, 
     return moduleName1 + " " + book1 + " "
             + verse1infoS + " " + verse1infoE + " = " + moduleName2 + " "
             + book2 + " " + verse2infoS + " " + verse2infoE + ","
-            + to_string(pos1S) + "," + to_string(pos1E - pos1S + 1);
+            + to_string(pos1S) + "," + to_string(pos1E - pos1S + 1) + "," + to_string(pos2S);
 }
 
 void extend(string moduleName1, string moduleName2, string book2, string verse2S,
@@ -717,7 +717,7 @@ end:
 }
 
 struct Reference {
-    int pos1;
+    int pos1, pos2;
     int length;
     string text;
 };
@@ -749,7 +749,7 @@ void getrefs(string moduleName2, string moduleName1, string book1, string verse1
             int pos = stoi(info1[1]);
             string ext = _extend(moduleName1, moduleName2, book2, pos, pos + m.length() - 1, 0);
             boost::split(info2, ext, boost::is_any_of(","));
-            Reference r = {stoi(info2[1]), stoi(info2[2]), info2[0]};
+            Reference r = {stoi(info2[1]), stoi(info2[3]), stoi(info2[2]), info2[0]};
             refs.push_back(r);
         }
     }
@@ -758,7 +758,8 @@ void getrefs(string moduleName2, string moduleName1, string book1, string verse1
     it = unique(refs.begin(), refs.end(), equalReference);
     refs.resize(distance(refs.begin(), it));
     for (Reference r : refs) {
-        info(r.text + " (length=" + to_string(r.length) + ", pos1=" + to_string(r.pos1) + ")");
+        info(r.text + " (length=" + to_string(r.length) + ", pos1=" + to_string(r.pos1 + 1) +
+             ", pos2=" + to_string(r.pos2 + 1) + ")");
     }
 }
 
