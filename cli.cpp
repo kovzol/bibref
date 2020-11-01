@@ -451,6 +451,10 @@ void cli(const char *input_prepend, const char *output_prepend) {
             vector<string> tokens;
             boost::split(tokens, rest, boost::is_any_of(" "));
             int restSize = tokens.size();
+            if (restSize < 3) {
+                error(errorGetrefsParameters);
+                goto end;
+            }
             string moduleName2 = tokens[0];
             string moduleName1 = tokens[1];
             string book1 = tokens[2];
