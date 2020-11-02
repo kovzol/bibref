@@ -1,0 +1,13 @@
+addbooks
+
+lookup1 LXX Haggai 2:6+31 2:6-25
+# Stored internally as etiapajegvseisvtonoyranonkaithnghn.
+lookup2 SBLGNT Hebrews 12:26+46 12:26
+# Stored internally as etiapajegvseisvoymononthnghnallakaitonoyranon.
+compare12
+# Comparing 'etiapajegvseisvtonoyranonkaithnghn' ~ 'etiapajegvseisvoymononthnghnallakaitonoyranon' = 15
+# difference = 0.202532
+length1
+# Length of text 1 is 34.
+length2
+# Length of text 2 is 45.

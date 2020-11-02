@@ -71,6 +71,7 @@ insert into books (name, author, info, number) values ('Exodus', 'Moses', 'Book 
 insert into books (name, author, info, number) values ('Psalms', 'Various', 'Book of Psalms', 19);
 insert into books (name, author, info, number) values ('Isaiah', 'Isaiah', 'Book of Isaiah', 23);
 insert into books (name, author, info, number) values ('Habakkuk', 'Habakkuk', 'Book of Habakkuk', 35);
+insert into books (name, author, info, number) values ('Haggai', 'Haggai', 'Book of Haggai', 37);
 insert into books (name, author, info, number) values ('Malachi', 'Malachi', 'Book of Malachi', 39);
 
 insert into books (name, author, info, number) values ('Matthew', 'Matthew', 'Gospel of Matthew', 101);
@@ -1009,6 +1010,15 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (1101, 1, null, 'καθως γεγραπται'); -- καθως γεγραπται = as it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1101, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1201, 1, 'Haggai', null, 'LXX Haggai 2:6+31 2:6-44', 'Hebrews', 'SBLGNT Hebrews 12:26+46 12:26-30', 2323, 15, 24091, 15, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1201, 1, 'Haggai', null, 'LXX Haggai 2:6+31 2:6-25', 'Hebrews', 'SBLGNT Hebrews 12:26+46 12:26', 2323, 34, 24091, 45, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (1201, 1, null, 'επηγγελται λεγων'); -- επηγγελται λεγων = He has promised saying
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (1201, 1, 'quotation', 'literal, fuzzy, subset', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2001, 1, 'Genesis', null, 'LXX Genesis 15:6+16 15:6', 'Romans', 'SBLGNT Romans 4:3+32 4:3', 34471, 36, 7233, 36, 'getrefs');
