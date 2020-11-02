@@ -760,6 +760,36 @@ void getrefs(string moduleName2, string moduleName1, string book1, string verse1
     for (Reference r : refs) {
         info(r.text + " (length=" + to_string(r.length) + ", pos1=" + to_string(r.pos1 + 1) +
              ", pos2=" + to_string(r.pos2 + 1) + ")");
+        if (sql) {
+            info("insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values");
+            string output = " (?, ?, '" + book1 + "', ";
+            if (book1.compare("Psalms") == 0) {
+                vector<string> verse1_split;
+                boost::split(verse1_split, verse1S, boost::is_any_of(":"));
+                output += verse1_split[0];
+            } else {
+                output += "null";
+            }
+            output += ", ";
+            vector<string> reference_split;
+            boost::split(reference_split, r.text, boost::is_any_of("="));
+            boost::algorithm::trim(reference_split[0]);
+            boost::algorithm::trim(reference_split[1]);
+            output += "'" + reference_split[0] + "', ";
+
+            vector<string> verse2_split;
+            boost::split(verse2_split, reference_split[1], boost::is_any_of(" "));
+            output += "'" + verse2_split[1] + "', ";
+            output += "'" + reference_split[1] + "', ";
+
+            output += to_string(r.pos1 + 1) + ", ";
+            output += to_string(r.length) + ", ";
+            output += to_string(r.pos2 + 1) + ", ";
+            output += to_string(r.length) + ", ";
+            output += "'getrefs');";
+
+            info(output);
+        }
     }
 }
 

@@ -31,6 +31,7 @@ string minuniqueCmd = "minunique";
 string extendCmd = "extend";
 string getrefsCmd = "getrefs";
 string maxresultsCmd = "maxresults";
+string sqlCmd = "sql";
 
 string errorNotRecognized = "Sorry, the command you entered was not recognized or its syntax is invalid.";
 string errorTextIncomplete = "Either " + textCmd + "1 or " + textCmd + "2 must be used.";
@@ -47,12 +48,13 @@ string errorMinuniqueParameters = minuniqueCmd + " requires one parameter";
 string errorExtendParameters = extendCmd + " requires 4 or 5 parameters.";
 string errorGetrefsParameters = getrefsCmd + " requires 3, 4 or 5 parameters.";
 string errorMaxresultsParameters = maxresultsCmd + " requires one parameter.";
+string errorSqlParameters = sqlCmd + " requires one parameter.";
 
 vector<string> vocabulary {addbooksCmd, compareCmd + "12",
                            textCmd + "1", textCmd + "2", lookupCmd + "1", lookupCmd + "2", "quit",
                                    "help", findCmd + "1", findCmd + "2", lengthCmd + "1", lengthCmd + "2",
                                    minuniqueCmd + "1", latintextCmd + "1", latintextCmd + "2",
-                                   extendCmd, getrefsCmd, lookupCmd, maxresultsCmd
+                                   extendCmd, getrefsCmd, lookupCmd, maxresultsCmd, sqlCmd
                           };
 
 void add_vocabulary_item(string item) {
@@ -110,14 +112,19 @@ char** completer(const char* text, int start, int end) {
     return rl_completion_matches(text, completion_generator);
 }
 
+int maxresults;
+bool sql;
+char* output_prepend_set;
+
 void cli(const char *input_prepend, const char *output_prepend) {
     output_prepend_set = new char[4]; // FIXME: this is hardcoded.
     strcpy(output_prepend_set, output_prepend);
     rl_attempted_completion_function = completer;
-    info("This is bibref-cli 2020Aug30, nice to meet you.");
+    info("This is bibref-cli 2020Nov02, nice to meet you.");
     showAvailableBibles();
 
     maxresults = 100;
+    sql = false;
 
     char* buf;
     while ((buf = readline(input_prepend)) != nullptr) {
@@ -364,6 +371,25 @@ void cli(const char *input_prepend, const char *output_prepend) {
             string rest = input.substr(input.find(" ") + 1);
             maxresults = stoi(rest);
             info("Set to " + to_string(maxresults) + ".");
+            goto end;
+        }
+
+        if (boost::starts_with(input, sqlCmd)) {
+            int index;
+            int commandLength = sqlCmd.length();
+            if (input.length() == commandLength) {
+                error(errorSqlParameters);
+                goto end;
+            }
+            string rest = input.substr(input.find(" ") + 1);
+            if (rest.compare("on")==0 || rest.compare("1")==0 || rest.compare("true")==0) {
+                sql = true;
+                info("SQL output enabled.");
+            } else
+            {
+                sql = false;
+                info("SQL output disabled.");
+            }
             goto end;
         }
 
