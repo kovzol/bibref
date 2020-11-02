@@ -78,7 +78,7 @@ Enter the command
 
 The following session finds the corresponding citation of the LXX text of Psalm 82:6 in the SBLGNT:
 ```commandline
-This is bibref-cli 2020Apr16, nice to meet you.
+This is bibref-cli 2020Nov02, nice to meet you.
 >> addbooks
 Loading LXX...
 Genesis contains 150801 characters,
@@ -92,7 +92,7 @@ Jude contains 2550 characters,
 and Revelation of John contains 45581 characters.
 Done loading books of SBLGNT.
 >> getrefs SBLGNT LXX Psalms 2:1
-LXX Psalms 2:1 2:2-8 = SBLGNT Acts 4:25+54 4:26 (length=131, pos1=11491)
+LXX Psalms 2:1 2:2-8 = SBLGNT Acts 4:25+58 4:26 (length=131, pos1=502, pos2=11596)
 >> quit
 Goodbye.
 ```
@@ -131,8 +131,11 @@ The available commands are:
 * `minunique1` *Bible*: Search for minimal unique passages in clipboard 1 in the given *Bible*.
 * `extend` *Bible1* *Bible2* *book2* *passage2*: Extend the given passage in *Bible2* according to the longest possible citation from *Bible1*, based on the text of *book2* in *passage2*. In most cases `LXX` is used for *Bible1* and `SBLGNT` for *Bible2*.
 * `getrefs` *Bible2* *Bible1* *book1* *passage1*: Search for references in *Bible2* on the passage in *Bible1* in book *book1* in *passage1*. Usually `SBLGNT` stands for *Bible2* and `LXX` for *Bible1*.
-* `quit`: Exit program.
+* `maxresults` *number*: Set the maximal amount of results to be shown to *number*.
+* `compare12`: Compare the two clipboards with a 2-long substring-fingerprint check.
+* `sql` *switch*: Set some outputs to be shown also as an SQL query if *switch* is `on`.
 * `help`: Show some hints on usage.
+* `quit`: Exit program.
 
 There may be other commands available that are not documented yet.
 
