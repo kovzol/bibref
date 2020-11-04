@@ -1,0 +1,41 @@
+lookup LXX Job 5:12
+# διαλλασσοντα βουλας πανουργων και ου μη ποιησουσιν αι χειρες αυτων αληθες
+lookup LXX Job 5:13
+# ο καταλαμβανων σοφους εν τη φρονησει βουλην δε πολυπλοκων εξεστησεν
+lookup SBLGNT I_Corinthians 3:19
+# η γαρ σοφια του κοσμου τουτου μωρια παρα τω θεω εστιν· γεγραπται γαρ· Ο δρασσομενος τους σοφους εν τη πανουργια αυτων·
+
+addbooks
+
+getrefs SBLGNT LXX Job 5:12 5:13
+# LXX Job 5:12+61 5:13-52 = SBLGNT Matthew 27:40+9 27:40-85 (length=8, pos1=8384, pos2=86167)
+# LXX Job 5:12+8 5:12-47 = SBLGNT I_Timothy 5:13+100 5:14-94 (length=8, pos1=8331, pos2=5969)
+# LXX Job 5:13+16 5:13-34 = SBLGNT Acts 5:22+36 5:22-30 (length=8, pos1=8402, pos2=14715)
+# LXX Job 5:12+21 5:12-33 = SBLGNT Hebrews 10:11+35 10:11-71 (length=9, pos1=8344, pos2=16030)
+# LXX Job 5:12+49 5:12-4 = SBLGNT Luke 6:26+84 6:27-73 (length=10, pos1=8372, pos2=22893)
+# LXX Job 5:13+13 5:13-35 = SBLGNT I_Corinthians 3:19+71 3:19-14 (length=10, pos1=8399, pos2=5062)
+lookup1 LXX Job 5:13+13 5:13-35
+# Stored internally as sofoysenth.
+
+lookup1 LXX Job 5:12+18 5:13-35
+# Stored internally as panoyrgvnkaioymhpoihsoysinaixeiresaytvnalhuesokatalambanvnsofoysenth.
+lookup2 SBLGNT I_Corinthians 3:19+71 3:19
+# Stored internally as sofoysenthpanoyrgiaaytvn.
+compare12
+# Comparing 'panoyrgvnkaioymhpoihsoysinaixeiresaytvnalhuesokatalambanvnsofoysenth' ~ 'sofoysenthpanoyrgiaaytvn' = 50
+# difference = 0.554348
+
+## The word δρασσομενος (catching) is not present in the LXX, except in the book of Sirach (an apocryph), 34:1-3:
+## 1 κεναι ελπιδες και ψευδεις ασυνετω ανδρι και ενυπνια αναπτερουσιν αφρονας
+## 2 ως δρασσομενος σκιας και διωκων ανεμον ουτως ο επεχων ενυπνιοις
+## 3 τουτο κατα τουτου ορασις ενυπνιων κατεναντι προσωπου ομοιωμα προσωπου
+## This seems to have nothing to do with I_Corinthians 3:19.
+
+## Conclusion. The matching text "σοφους εν τη" (wise with/in the) is very short and even if Job 5:13 contains
+## the only occurence in the LXX, the match is questionable. Also the two other words
+## "πανουργια" (craftiness) and "αυτων" (of them) are contextually somewhat different: in LXX
+## the word "πανουργων" (of clever ones) is used. I support that Paul either wants to quote a different
+## passage (that is lost), or refers to a different version of Job 5:12-13 (that is lost), or,
+## very exclusively, his "γεγραπται γαρ" introduces a free quotation of Job's text.
+## Actually, the meaning of Job 5:12-13 and I_Corinthians 3:19 are very close, so, instead of
+## literal matching, a contextual match is easier to find.
