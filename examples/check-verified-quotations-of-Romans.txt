@@ -23,7 +23,7 @@
 ## 9:12      | 29             | Yes    | Yes               |
 ## 9:13      | 16             | Yes    | Yes               |
 ## 9:15      | 38             | Yes    | Yes               |
-## 9:17      | 39+18          | Yes    |                   |
+## 9:17      | 39+18          | Yes    | Yes               |
 ## 9:20      | 24+12          | Yes    |                   |
 ## 9:25-26   | 10             | Yes    |                   | Wording in LXX is different, ABPGRK seems to be better for the match.
 ## 9:26      | 73             | Yes    |                   |

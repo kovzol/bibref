@@ -48,8 +48,10 @@ create table quotations_classifications (
  classified_by text);
 
 insert into authors (name, info) values ('Moses', 'Moses');
+insert into authors (name, info) values ('Job', 'Job');
 insert into authors (name, info) values ('Isaiah', 'Isaiah');
 insert into authors (name, info) values ('Habakkuk', 'Habakkuk');
+insert into authors (name, info) values ('Haggai', 'Haggai');
 insert into authors (name, info) values ('Various', 'Authors of Psalms');
 insert into authors (name, info) values ('Malachi', 'Malachi');
 
@@ -68,6 +70,7 @@ insert into found_methods (name, info) values ('manual-mechanical', 'confirmed m
 
 insert into books (name, author, info, number) values ('Genesis', 'Moses', 'Book of Genesis', 1);
 insert into books (name, author, info, number) values ('Exodus', 'Moses', 'Book of Exodus', 2);
+insert into books (name, author, info, number) values ('Job', 'Job', 'Book of Job', 18);
 insert into books (name, author, info, number) values ('Psalms', 'Various', 'Book of Psalms', 19);
 insert into books (name, author, info, number) values ('Isaiah', 'Isaiah', 'Book of Isaiah', 23);
 insert into books (name, author, info, number) values ('Habakkuk', 'Habakkuk', 'Book of Habakkuk', 35);
@@ -1129,3 +1132,18 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2101, 1, 'τω Μωυσει', 'γαρ λεγει'); -- τω Μωυσει = to Moses, γαρ λεγει = for He says
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2101, 1, 'quotation', 'literal, exact', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2102, 1, 'Exodus', null, 'LXX Exodus 9:16+28 9:16-43', 'Romans', 'SBLGNT Romans 9:17+50 9:17-45', 24278, 18, 19271, 18, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2102, 1, 'Exodus', null, 'LXX Exodus 9:16+50 9:16', 'Romans', 'SBLGNT Romans 9:17+74 9:17', 24300, 39, 19295, 39, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2102, 1, 'Exodus', null, 'LXX Exodus 9:16+28 9:16', 'Romans', 'SBLGNT Romans 9:17+50 9:17', 24278, 61, 19271, 63, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2102, 1, 'τω Φαραω', 'λεγει γαρ η γραφη'); -- τω Φαραω = to Pharaoh, λεγει γαρ η γραφη = says for the Scripture
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2102, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (3001, 1, 'Job', null, 'Job 5:12-13', 'I_Corinthians', 'I_Corinthians 3:19', null, null, null, null, 'traditional');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (3001, 1, 'Job', null, 'LXX Job 5:13+13 5:13-35', 'I_Corinthians', 'SBLGNT I_Corinthians 3:19+71 3:19-14', 8399, 10, 5062, 10, 'getrefs');
