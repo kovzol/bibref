@@ -24,10 +24,10 @@
 ## 9:13      | 16             | Yes    | Yes               |
 ## 9:15      | 38             | Yes    | Yes               |
 ## 9:17      | 39+18          | Yes    | Yes               |
-## 9:20      | 24+12          | Yes    |                   |
-## 9:25-26   | 10             | Yes    |                   | Wording in LXX is different, ABPGRK seems to be better for the match.
-## 9:26      | 73             | Yes    |                   |
-## 9:27      | 40             | Yes    |                   |
+## 9:20      | 24+12          | Yes    | No                |
+## 9:25-26   | 10             | Yes    | Yes               | Wording in LXX is different, ABPGRK seems to be better for the match.
+## 9:26      | 73             | Yes    | Yes               |
+## 9:27      | 40, 37+27      | Yes    | Yes, Yes          |
 ## 9:29      | 81             | Yes    |                   |
 ## 9:33a     | 12             | Yes    |                   | There is one letter of difference, a fuzzy search would be more useful.
 ## 9:33b     | 20             | Yes    |                   | Two letters are removed by Paul, a fuzzy search would be more useful.
@@ -289,8 +289,20 @@ getrefs SBLGNT LXX Hosea 2:23
 # LXX Hosea 2:23+46 2:23-53 = SBLGNT Romans 9:25+66 9:26-69 (length=10, pos1=3797)
 lookup1 LXX Hosea 2:23+46 2:23-53
 # Stored internally as hmenhnkaie.
-## Conclusion. This may require more study, the text of ABPGRK would be helpful to have a more detailed comparison.
+## This requires more study, the text of ABPGRK would be helpful to have a more detailed comparison.
 ## An algorithm based on exact match seems to be problematic when using LXX.
+lookup SBLGNT Romans 9:25
+# ως και εν τω Ωσηε λεγει· Καλεσω τον ου λαον μου λαον μου και την ουκ ηγαπημενην ηγαπημενην·
+## This is from ABPGRK, Hosea:
+text1 την ουκ ηγαπημένην και ερώ τω ου λαώ μου λαός μου
+# Stored internally as thnoykhgaphmenhnkaiervtvoylavmoylaosmoy.
+## This is from SBLGNT, Romans:
+text2 τον ου λαον μου λαον μου και την ουκ ηγαπημενην
+# Stored internally as tonoylaonmoylaonmoykaithnoykhgaphmenhn.
+compare12
+# Comparing 'thnoykhgaphmenhnkaiervtvoylavmoylaosmoy' ~ 'tonoylaonmoylaonmoykaithnoykhgaphmenhn' = 21
+# difference = 0.285714
+## The texts are still a bit far away from each other.
 
 getrefs SBLGNT LXX Isaiah 10:22
 # ... (lengths<=14)
