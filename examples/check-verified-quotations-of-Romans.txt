@@ -309,6 +309,27 @@ getrefs SBLGNT LXX Isaiah 10:22
 # LXX Isaiah 10:22+18 10:22-64 = SBLGNT Romans 9:27+46 9:27-18 (length=27, pos1=22156)
 # LXX Isaiah 10:22+60 10:22-12 = SBLGNT Romans 9:27+82 9:28-22 (length=37, pos1=22198)
 ## The union of the last two ones should be one citation.
+lookup1 LXX Isaiah 10:22+18 10:23-21
+# Stored internally as israhlvshammosthsualasshstokataleimmaaytvnsvuhsetailogongarsyntelvnkaisyntemnvnendikaiosynhotilogonsyntetmhmenonpoihsei.
+lookup2 SBLGNT Romans 9:27+46 9:28-15
+# Stored internally as israhlvshammosthsualasshstoypoleimmasvuhsetailogongarsyntelvnkaisyntemnvnpoihsei.
+compare12
+# Comparing 'israhlvshammosthsualasshstokataleimmaaytvnsvuhsetailogongarsyntelvnkaisyntemnvnendikaiosynhotilogonsyntetmhmenonpoihsei' ~ 'israhlvshammosthsualasshstoypoleimmasvuhsetailogongarsyntelvnkaisyntemnvnpoihsei' = 49
+# difference = 0.251256
+length1
+# Length of text 1 is 119.
+length2
+# Length of text 2 is 80.
+## We note that 25 characters in Romans 9:27 come from both Hosea 1:10 and Isaiah 10:22:
+text1 ισραηλ ως η αμμος της θαλασσης
+# Stored internally as israhlvshammosthsualasshs.
+find1 LXX
+# Found in Isaiah 10:22+18 10:22-66 (book position 22157-22181)
+# Found in Hosea 1:10+20 1:10-110 (book position 993-1017)
+# 2 occurrences.
+find1 SBLGNT 
+# Found in Romans 9:27+46 9:27-20 (book position 20031-20055)
+# 1 occurrences.
 
 getrefs SBLGNT LXX Isaiah 1:9
 # ... (lengths<=13)
