@@ -28,7 +28,7 @@
 ## 9:25-26   | 10             | Yes    | Yes               | Wording in LXX is different, ABPGRK seems to be better for the match.
 ## 9:26      | 73             | Yes    | Yes               |
 ## 9:27      | 40, 37+27      | Yes    | Yes, Yes          |
-## 9:29      | 81             | Yes    |                   |
+## 9:29      | 81             | Yes    | Yes               |
 ## 9:33a     | 12             | Yes    |                   | There is one letter of difference, a fuzzy search would be more useful.
 ## 9:33b     | 20             | Yes    |                   | Two letters are removed by Paul, a fuzzy search would be more useful.
 ## 10:5      | 27             | Yes    |                   |
