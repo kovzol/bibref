@@ -346,6 +346,23 @@ getrefs SBLGNT LXX Isaiah 8:14
 ## The text "λιθου προσκομματι" (stone of stumbling) is unique in LXX and therefore
 ## the fact of quotation in Romans 9:33 is clear. But there is one letter difference,
 ## so a fuzzy match is a requirement here to identify the whole match, not just the second word.
+text1 λιθου προσκομματι
+# Stored internally as liuoyproskommati.
+find1 LXX
+# Found in Isaiah 8:14+48 8:14-94 (book position 16771-16786)
+# 1 occurrences.
+text2 λιθον προσκομματος
+# Stored internally as liuonproskommatos.
+find2 SBLGNT 
+# Found in Romans 9:33+30 9:33-54 (book position 20459-20475)
+# 1 occurrences.
+length1
+# Length of text 1 is 16.
+length2
+# Length of text 2 is 17.
+compare12
+# Comparing 'liuoyproskommati' ~ 'liuonproskommatos' = 7
+# difference = 0.242424
 
 getrefs SBLGNT LXX Isaiah 28:16
 # ... (lengths<=9)
