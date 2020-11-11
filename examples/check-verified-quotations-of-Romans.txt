@@ -33,7 +33,7 @@
 ## 9:33b     | 20             | Yes    | Yes               | Two letters are removed by Paul, a fuzzy search would be more useful.
 ## 10:5      | 27             | Yes    |                   |
 ## 10:8      | 30             | Yes    |                   |
-## 10:11     | 17             | Yes    |                   |
+## 10:11     | 17             | Yes    | Yes               |
 ## 10:13     | 38             | Yes    |                   |
 ## 10:15     |                | No     |                   | The quotation is far from being literal.
 ## 10:16     | 28             | Yes    |                   |
@@ -412,6 +412,17 @@ length2
 compare12
 # Comparing 'idoyegvembalveistauemeliasivnliuonpolytelheklektonakrogvniaionentimoneistauemeliaaythskaiopisteyvnepaytvoymhkataisxynuh' ~ 'idoytiuhmiensivnliuonproskommatoskaipetranskandaloykaiopisteyvnepaytvoykataisxynuh' = 101
 # difference = 0.507463
+lookup1 LXX Isaiah 28:16+113 28:16
+# Stored internally as opisteyvnepaytvoymhkataisxynuh.
+lookup2 SBLGNT Romans 10:11+17 10:11-5
+# Stored internally as opisteyvnepaytvoykataisxynuh.
+length1
+# Length of text 1 is 30.
+length2
+# Length of text 2 is 28.
+compare12
+# Comparing 'opisteyvnepaytvoymhkataisxynuh' ~ 'opisteyvnepaytvoykataisxynuh' = 4
+# difference = 0.086207
 
 getrefs SBLGNT LXX Leviticus 18:5
 # ... (lengths<=9)
