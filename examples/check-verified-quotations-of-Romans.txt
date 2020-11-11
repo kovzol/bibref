@@ -29,8 +29,8 @@
 ## 9:26      | 73             | Yes    | Yes               |
 ## 9:27      | 40, 37+27      | Yes    | Yes, Yes          |
 ## 9:29      | 81             | Yes    | Yes               |
-## 9:33a     | 12             | Yes    |                   | There is one letter of difference, a fuzzy search would be more useful.
-## 9:33b     | 20             | Yes    |                   | Two letters are removed by Paul, a fuzzy search would be more useful.
+## 9:33a     | 12             | Yes    | Yes               | There is one letter of difference, a fuzzy search would be more useful.
+## 9:33b     | 20             | Yes    | Yes               | Two letters are removed by Paul, a fuzzy search would be more useful.
 ## 10:5      | 27             | Yes    |                   |
 ## 10:8      | 30             | Yes    |                   |
 ## 10:11     | 17             | Yes    |                   |
@@ -401,6 +401,17 @@ lookup SBLGNT Romans 9:33
 ## It seems Romans 9:33 is a short summary of more ideas with the inclusion of more than one short quotation
 ## and this leads to difficulties when using automated methods.
 ## Finally, Romans 10:11 is a correct match also.
+lookup1 LXX Isaiah 28:16+24 28:16
+# Stored internally as idoyegvembalveistauemeliasivnliuonpolytelheklektonakrogvniaionentimoneistauemeliaaythskaiopisteyvnepaytvoymhkataisxynuh.
+lookup2 SBLGNT Romans 9:33+14 9:33-5
+# Stored internally as idoytiuhmiensivnliuonproskommatoskaipetranskandaloykaiopisteyvnepaytvoykataisxynuh.
+length1
+# Length of text 1 is 119.
+length2
+# Length of text 2 is 82.
+compare12
+# Comparing 'idoyegvembalveistauemeliasivnliuonpolytelheklektonakrogvniaionentimoneistauemeliaaythskaiopisteyvnepaytvoymhkataisxynuh' ~ 'idoytiuhmiensivnliuonproskommatoskaipetranskandaloykaiopisteyvnepaytvoykataisxynuh' = 101
+# difference = 0.507463
 
 getrefs SBLGNT LXX Leviticus 18:5
 # ... (lengths<=9)
