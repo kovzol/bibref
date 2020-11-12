@@ -31,7 +31,7 @@
 ## 9:29      | 81             | Yes    | Yes               |
 ## 9:33a     | 12             | Yes    | Yes               | There is one letter of difference, a fuzzy search would be more useful.
 ## 9:33b     | 20             | Yes    | Yes               | Two letters are removed by Paul, a fuzzy search would be more useful.
-## 10:5      | 27             | Yes    |                   |
+## 10:5      | 27             | Yes    | Yes               |
 ## 10:8      | 30             | Yes    |                   |
 ## 10:11     | 17             | Yes    | Yes               |
 ## 10:13     | 38             | Yes    |                   |

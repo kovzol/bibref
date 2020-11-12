@@ -6,7 +6,7 @@ create table books (
  name text not null primary key,
  author text,
  info text,
- number int);
+ number int unique);
 
 create table found_methods (
  name text not null primary key,
@@ -70,6 +70,7 @@ insert into found_methods (name, info) values ('manual-mechanical', 'confirmed m
 
 insert into books (name, author, info, number) values ('Genesis', 'Moses', 'Book of Genesis', 1);
 insert into books (name, author, info, number) values ('Exodus', 'Moses', 'Book of Exodus', 2);
+insert into books (name, author, info, number) values ('Leviticus', 'Moses', 'Book of Leviticus', 3);
 insert into books (name, author, info, number) values ('Job', 'Job', 'Book of Job', 18);
 insert into books (name, author, info, number) values ('Psalms', 'Various', 'Book of Psalms', 19);
 insert into books (name, author, info, number) values ('Isaiah', 'Isaiah', 'Book of Isaiah', 23);
@@ -1207,6 +1208,15 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2102, 1, 'τω Φαραω', 'λεγει γαρ η γραφη'); -- τω Φαραω = to Pharaoh, λεγει γαρ η γραφη = says for the Scripture
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2102, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2201, 1, 'Leviticus', null, 'LXX Leviticus 18:5+69 18:5-21', 'Romans', 'SBLGNT Romans 10:5+46 10:5-1', 57053, 27, 20844, 27, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2201, 1, 'Leviticus', null, 'LXX Leviticus 18:5+69 18:5-21', 'Romans', 'SBLGNT Romans 10:5+46 10:5-1', 57053, 27, 20844, 27, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2201, 1, 'Μωυσης', 'γαρ γραφει'); -- γαρ γραφει = for writes
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2201, 1, 'quotation', 'literal, exact', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (3001, 1, 'Job', null, 'Job 5:12-13', 'I_Corinthians', 'I_Corinthians 3:19', null, null, null, null, 'traditional');
