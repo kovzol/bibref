@@ -32,7 +32,7 @@
 ## 9:33a     | 12             | Yes    | Yes               | There is one letter of difference, a fuzzy search would be more useful.
 ## 9:33b     | 20             | Yes    | Yes               | Two letters are removed by Paul, a fuzzy search would be more useful.
 ## 10:5      | 27             | Yes    | Yes               |
-## 10:8      | 30             | Yes    |                   |
+## 10:8      | 30             | Yes    | Yes               |
 ## 10:11     | 17             | Yes    | Yes               |
 ## 10:13     | 38             | Yes    |                   |
 ## 10:15     |                | No     |                   | The quotation is far from being literal.
@@ -431,6 +431,17 @@ getrefs SBLGNT LXX Leviticus 18:5
 getrefs SBLGNT LXX Deuteronomy 30:14
 # ... (lengths<=8)
 # LXX Deuteronomy 30:14+25 30:14-28 = SBLGNT Romans 10:8+30 10:8-36 (length=30, pos1=94464)
+lookup1 LXX Deuteronomy 30:12+26 30:14-28
+# Stored internally as tisanabhsetaihmineistonoyranonkailhmcetaiaythnhminkaiakoysantesaythnpoihsomenoydeperanthsualasshsestinlegvntisdiaperaseihmineistoperanthsualasshskailhmcetaihminaythnkaiakoysthnhminpoihseiaythnkaipoihsomenestinsoyeggystorhmasfodraentvstomatisoykaienthkardiasoy.
+lookup2 SBLGNT Romans 10:6+52 10:8-21
+# Stored internally as tisanabhsetaieistonoyranontoytestinxristonkatagageinhtiskatabhsetaieisthnabyssontoytestinxristoneknekrvnanagageinallatilegeieggyssoytorhmaestinentvstomatisoykaienthkardiasoytoytestintorhma.
+compare12
+# Comparing 'tisanabhsetaihmineistonoyranonkailhmcetaiaythnhminkaiakoysantesaythnpoihsomenoydeperanthsualasshsestinlegvntisdiaperaseihmineistoperanthsualasshskailhmcetaihminaythnkaiakoysthnhminpoihseiaythnkaipoihsomenestinsoyeggystorhmasfodraentvstomatisoykaienthkardiasoy' ~ 'tisanabhsetaieistonoyranontoytestinxristonkatagageinhtiskatabhsetaieisthnabyssontoytestinxristoneknekrvnanagageinallatilegeieggyssoytorhmaestinentvstomatisoykaienthkardiasoytoytestintorhma' = 189
+# difference = 0.425056
+length1
+# Length of text 1 is 259.
+length2
+# Length of text 2 is 188.
 
 getrefs SBLGNT LXX Joel 2:32
 # ... (lengths<=19)
