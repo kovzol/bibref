@@ -423,6 +423,17 @@ length2
 compare12
 # Comparing 'opisteyvnepaytvoymhkataisxynuh' ~ 'opisteyvnepaytvoykataisxynuh' = 4
 # difference = 0.086207
+lookup1 LXX Isaiah 28:16+24 28:16
+# Stored internally as idoyegvembalveistauemeliasivnliuonpolytelheklektonakrogvniaionentimoneistauemeliaaythskaiopisteyvnepaytvoymhkataisxynuh.
+lookup2 SBLGNT I_Peter 2:6+20 2:6
+# Stored internally as idoytiuhmiensivnliuonakrogvniaioneklektonentimonkaiopisteyvnepaytvoymhkataisxynuh.
+compare12
+# Comparing 'idoyegvembalveistauemeliasivnliuonpolytelheklektonakrogvniaionentimoneistauemeliaaythskaiopisteyvnepaytvoymhkataisxynuh' ~ 'idoytiuhmiensivnliuonakrogvniaioneklektonentimonkaiopisteyvnepaytvoymhkataisxynuh' = 56
+# difference = 0.285000
+length1
+# Length of text 1 is 119.
+length2
+# Length of text 2 is 81.
 
 getrefs SBLGNT LXX Leviticus 18:5
 # ... (lengths<=9)
