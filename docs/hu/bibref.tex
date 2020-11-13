@@ -1683,6 +1683,51 @@ a 116:10-et (19 hosszan), valamint a 110:4-nek a Zsidók 5:10-ben megjelenő id�
 Plagiátumok keresésekor két szöveg eltérésének mérésére speciális módszerek léteznek.
 
 
+% A compare12 algoritmus (l. a bibref programot) figyelembe veszi az összehasonlítandó két szöveg
+% hosszát: hosszabb szövegeknél, ha az eltérések D száma nő (1-1-gyel), a hossz L is nő (1-1-gyel),
+% így általában a D/(L+1) hányados (D+2)/(L+3)-ra változik, ez pedig rendre nagyobb eltérési
+% hányadost jelent. (Itt L=L1+L2, ahol L1 és L2 a két szöveg hossza.)
+% Habár ez számos esetben hasznos (mivel jelezni akarjuk, hogy az idézett
+% szavaknak inkább közel, mintsem távol kell lenniük egymáshoz: vagyis rövid szakaszt tartunk
+% inkább idézetnek, mint hosszút, ha nincs teljes egyezésről szó), hosszabb gondolatmeneteknél
+% (pl. Pálnál), ahol az egyes idézett szavak egymástól távol is eshetnek, túl nagy eltérést kapunk.
+%
+% Egy másik lehetőség, hogy nem az eltéréseket, hanem az egyezéseket számoljuk a két szövegben.
+% Itt a compare12 által is használt "összes karakterlánc előfordulás" statisztika szerint
+% dolgozhatunk. Míg azonban a compare12 2 hosszú karakterláncokról készít statisztikát, itt
+% ezt mi 3-ban vagy 4-ben határozzuk meg. (3 hosszúság esetén 25^3=15625, 4 esetén 25^4=390625
+% különböző lehetséges karakterlánc van. Ezek kellően egyediek ahhoz, hogy a fals pozitív
+% találatok nagy részét kizárjuk.) Az ilyen módon működő statisztikát match12-N algoritmusnak
+% nevezzük, ahol N=3 vagy 4. Két szöveg match12-N összehasonlítása tehát úgy történik,
+% hogy mindkettőhöz legyártjuk a 25^N db karakterlánchoz tartozó statisztikákat, majd ha
+% egy bizonyos ABC karakterlánc az egyik szövegben x-szer, a másikban y-szor jelenik meg, akkor
+% a találatok számát min(x,y)-nal növeljük. A találati érték vélhetően kevés lesz, és akkor
+% sem nő meg lényegesen, ha a szövegek hosszát valamelyest növeljük.
+%
+% Az lenne kényelmes, ha a szövegek hosszát egész nagy értékekig növelni lehetne, akár addig
+% is, hogy teljes könyveket összehasonlíthassunk. Nagyobb N-re ez jól működhet, úgy viszont
+% az N-nél rövidebb szavakat (ill. szókapcsolatokat) nem fogjuk tudni detektálni. Emiatt
+% már az N=4 is túl sok lehet.
+%
+% További probléma, hogy bizonyos karakterláncok gyakoriak a görög nyelvben, és témától
+% függetlenül tömegesen előfordulhatnak. Célszerű lehet a szignifikánsan magas gyakoriságú
+% karakterláncokat eltávolítani az összes statisztikából.
+%
+% A fent leírt módon minden egyes bibliai könyvhöz előállíthatunk egy arra jellemző,
+% legfeljebb 25^N bejegyzésből álló statisztikát. Ha egy ÓSz-i és egy ÚSz-i könyvet
+% ezután a match12-N algoritmussal összehasonlítunk, egy A számot kapunk, mely az
+% egyező karakterláncok számát adja (már a szignifikánsan magas gyakoriságúak nélkül).
+% Ez az A "szónyi" egyezés leszűkíthető mindkét könyvben egy-egy rövidebb szakaszra.
+% Előfordulhat, hogy két igen rövid (egy-két versből álló) szakaszról beszélünk,
+% de lehet, hogy jóval hosszabbról. Az első esetben vélhetően megtaláltunk egy
+% idézetet (vagy célzást). A második esetben a két szakasz két-két darabra szétvágásával
+% (melynek nem feltétlenül kell középen történnie) lehetőségünk nyílik a darabok
+% további összehasonlítására. Így pl. a darabok lehetnek Ó1 és Ó2 ill. Ú1 és Ú2,
+% s ha match12-N(Ói,Új)+match12-N(Ók,Ól)=A (ahol i,j ill. k,l mind 1 ill. 2 lehetnek),
+% akkor a szétvágás során nem vesztünk el egyezést. Ezek után a szűkítést a fentiek
+% megismétlésével addig folytatódhat, amíg a rövid egyezéseket mind meg nem találjuk.
+
+
 \textcolor{red}{A szöveg hátralévő része megírásra vár.}
 
 \bibliographystyle{unsrt}
