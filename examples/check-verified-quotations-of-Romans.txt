@@ -34,7 +34,7 @@
 ## 10:5      | 27             | Yes    | Yes               |
 ## 10:8      | 30             | Yes    | Yes               |
 ## 10:11     | 17             | Yes    | Yes               |
-## 10:13     | 38             | Yes    |                   |
+## 10:13     | 38             | Yes    | Yes               |
 ## 10:15     |                | No     |                   | The quotation is far from being literal.
 ## 10:16     | 28             | Yes    |                   |
 ## 10:18     | 74             | Yes    |                   |
@@ -458,6 +458,30 @@ getrefs SBLGNT LXX Joel 2:32
 # ... (lengths<=19)
 # LXX Joel 2:32+13 2:32-103 = SBLGNT Acts 2:21+14 2:21 (length=36, pos1=5578)
 # LXX Joel 2:32+11 2:32-103 = SBLGNT Romans 10:13+6 10:13 (length=38, pos1=5576)
+## The word "γαρ" (for) is inserted in Romans. Therefore the match is actually 3 letters longer.
+lookup1 LXX Joel 2:32+8 2:32-103
+# Stored internally as pasosanepikaleshtaitoonomakyrioysvuhsetai.
+lookup2 SBLGNT Romans 10:13 10:13
+# Stored internally as pasgarosanepikaleshtaitoonomakyrioysvuhsetai.
+compare12
+# Comparing 'pasosanepikaleshtaitoonomakyrioysvuhsetai' ~ 'pasgarosanepikaleshtaitoonomakyrioysvuhsetai' = 5
+# difference = 0.070588
+length1
+# Length of text 1 is 41.
+length2
+# Length of text 2 is 44.
+## The (fuzzy) match in Acts, in fact, is very long:
+lookup1 LXX Joel 2:28 2:32-103
+# Stored internally as kaiestaimetataytakaiekxevapotoypneymatosmoyepipasansarkakaiprofhteysoysinoiyioiymvnkaiaiuygateresymvnkaioipresbyteroiymvnenypniaenypniasuhsontaikaioineaniskoiymvnoraseisocontaikaiepitoysdoyloyskaiepitasdoylasentaishmeraisekeinaisekxevapotoypneymatosmoykaidvsvterataentvoyranvkaiepithsghsaimakaipyrkaiatmidakapnoyohliosmetastrafhsetaieisskotoskaihselhnheisaimaprinelueinhmerankyrioythnmegalhnkaiepifanhkaiestaipasosanepikaleshtaitoonomakyrioysvuhsetai.
+lookup2 SBLGNT Acts 2:17 2:21
+# Stored internally as kaiestaientaisesxataishmeraislegeioueosekxevapotoypneymatosmoyepipasansarkakaiprofhteysoysinoiyioiymvnkaiaiuygateresymvnkaioineaniskoiymvnoraseisocontaikaioipresbyteroiymvnenypnioisenypniasuhsontaikaigeepitoysdoyloysmoykaiepitasdoylasmoyentaishmeraisekeinaisekxevapotoypneymatosmoykaiprofhteysoysinkaidvsvterataentvoyranvanvkaishmeiaepithsghskatvaimakaipyrkaiatmidakapnoyohliosmetastrafhsetaieisskotoskaihselhnheisaimaprinhelueinhmerankyrioythnmegalhnkaiepifanhkaiestaipasoseanepikaleshtaitoonomakyrioysvuhsetai.
+compare12
+# Comparing 'kaiestaimetataytakaiekxevapotoypneymatosmoyepipasansarkakaiprofhteysoysinoiyioiymvnkaiaiuygateresymvnkaioipresbyteroiymvnenypniaenypniasuhsontaikaioineaniskoiymvnoraseisocontaikaiepitoysdoyloyskaiepitasdoylasentaishmeraisekeinaisekxevapotoypneymatosmoykaidvsvterataentvoyranvkaiepithsghsaimakaipyrkaiatmidakapnoyohliosmetastrafhsetaieisskotoskaihselhnheisaimaprinelueinhmerankyrioythnmegalhnkaiepifanhkaiestaipasosanepikaleshtaitoonomakyrioysvuhsetai' ~ 'kaiestaientaisesxataishmeraislegeioueosekxevapotoypneymatosmoyepipasansarkakaiprofhteysoysinoiyioiymvnkaiaiuygateresymvnkaioineaniskoiymvnoraseisocontaikaioipresbyteroiymvnenypnioisenypniasuhsontaikaigeepitoysdoyloysmoykaiepitasdoylasmoyentaishmeraisekeinaisekxevapotoypneymatosmoykaiprofhteysoysinkaidvsvterataentvoyranvanvkaishmeiaepithsghskatvaimakaipyrkaiatmidakapnoyohliosmetastrafhsetaieisskotoskaihselhnheisaimaprinhelueinhmerankyrioythnmegalhnkaiepifanhkaiestaipasoseanepikaleshtaitoonomakyrioysvuhsetai' = 83
+# difference = 0.087409
+length1
+# Length of text 1 is 450.
+length2
+# Length of text 2 is 511.
 
 ## Finding the match between Isaiah 52:7 and Romans 10:15 is difficult:
 lookup LXX Isaiah 52:7

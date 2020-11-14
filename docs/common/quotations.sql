@@ -50,6 +50,8 @@ create table quotations_classifications (
 insert into authors (name, info) values ('Moses', 'Moses');
 insert into authors (name, info) values ('Job', 'Job');
 insert into authors (name, info) values ('Isaiah', 'Isaiah');
+insert into authors (name, info) values ('Joel', 'Joel');
+insert into authors (name, info) values ('Hosea', 'Hosea');
 insert into authors (name, info) values ('Habakkuk', 'Habakkuk');
 insert into authors (name, info) values ('Haggai', 'Haggai');
 insert into authors (name, info) values ('Various', 'Authors of Psalms');
@@ -75,6 +77,8 @@ insert into books (name, author, info, number) values ('Deuteronomy', 'Moses', '
 insert into books (name, author, info, number) values ('Job', 'Job', 'Book of Job', 18);
 insert into books (name, author, info, number) values ('Psalms', 'Various', 'Book of Psalms', 19);
 insert into books (name, author, info, number) values ('Isaiah', 'Isaiah', 'Book of Isaiah', 23);
+insert into books (name, author, info, number) values ('Hosea', 'Hosea', 'Book of Hosea', 28);
+insert into books (name, author, info, number) values ('Joel', 'Joel', 'Book of Joel', 29);
 insert into books (name, author, info, number) values ('Habakkuk', 'Habakkuk', 'Book of Habakkuk', 35);
 insert into books (name, author, info, number) values ('Haggai', 'Haggai', 'Book of Haggai', 37);
 insert into books (name, author, info, number) values ('Malachi', 'Malachi', 'Book of Malachi', 39);
@@ -1099,6 +1103,45 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (1303, 1, 'Ωσηε', 'λεγει'); -- Ωσηε = Hosea, λεγει = says (in Romans 9:25)
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1303, 1, 'quotation', 'literal, exact', 'Z.K.');
+
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1401, 1, 'Joel', null, 'LXX Joel 2:32+11 2:32-103', 'Romans', 'SBLGNT Romans 10:13+6 10:13', 5577, 38, 21452, 38, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1401, 1, 'Joel', null, 'LXX Joel 2:32+8 2:32-103', 'Romans', 'SBLGNT Romans 10:13 10:13', 5577, 41, 21452, 44, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (1401, 1, null, 'γαρ'); -- γαρ = for
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (1401, 1, 'quotation', 'literal, exact, subset', 'Z.K.'); -- subset because of insertion of "γαρ"
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1401, 2, 'Joel', null, 'LXX Joel 2:29+52 2:29', 'Acts', 'SBLGNT Acts 2:17+38 2:17-135', 5393, 24, 4005, 24, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1401, 2, 'Joel', null, 'LXX Joel 2:28+20 2:28-70', 'Acts', 'SBLGNT Acts 2:17+39 2:17-72', 5185, 86, 4006, 86, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1401, 2, 'Joel', null, 'LXX Joel 2:28+144 2:29-73', 'Acts', 'SBLGNT Acts 2:17+120 2:17-42', 5309, 35, 4087, 35, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1401, 2, 'Joel', null, 'LXX Joel 2:28+101 2:28-49', 'Acts', 'SBLGNT Acts 2:17+152 2:17-19', 5266, 26, 4119, 26, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1401, 2, 'Joel', null, 'LXX Joel 2:28+128 2:28-29', 'Acts', 'SBLGNT Acts 2:17+181 2:18-98', 5293, 19, 4148, 19, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1401, 2, 'Joel', null, 'LXX Joel 2:29+17 2:29-44', 'Acts', 'SBLGNT Acts 2:18+22 2:18-64', 5358, 15, 4186, 15, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1401, 2, 'Joel', null, 'LXX Joel 2:29+32 2:30-57', 'Acts', 'SBLGNT Acts 2:18+40 2:18-14', 5373, 47, 4204, 47, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1401, 2, 'Joel', null, 'LXX Joel 2:28+56 2:28-103', 'Acts', 'SBLGNT Acts 2:18+84 2:18', 5221, 17, 4248, 17, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1401, 2, 'Joel', null, 'LXX Joel 2:30 2:30-37', 'Acts', 'SBLGNT Acts 2:19 2:19-50', 5417, 23, 4265, 23, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1401, 2, 'Joel', null, 'LXX Joel 2:30+35 2:31-38', 'Acts', 'SBLGNT Acts 2:19+48 2:20-39', 5452, 76, 4313, 76, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1401, 2, 'Joel', null, 'LXX Joel 2:31+51 2:32-139', 'Acts', 'SBLGNT Acts 2:20+52 2:21-37', 5528, 51, 4390, 51, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1401, 2, 'Joel', null, 'LXX Joel 2:32+13 2:32-103', 'Acts', 'SBLGNT Acts 2:21+14 2:21', 5579, 36, 4442, 36, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1401, 2, 'Joel', null, 'LXX Joel 2:28 2:32-103', 'Acts', 'SBLGNT Acts 2:17 2:21', 5165, 450, 3967, 511, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (1401, 2, 'προφητου Ιωηλ', 'ειρημενον'); -- προφητου Ιωηλ = prophet Joel, ειρημενον = having been spoken
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (1401, 2, 'quotation', 'literal, fuzzy', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2001, 1, 'Genesis', null, 'LXX Genesis 15:6+16 15:6', 'Romans', 'SBLGNT Romans 4:3+32 4:3', 34471, 36, 7233, 36, 'getrefs');
