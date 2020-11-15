@@ -1039,6 +1039,22 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (108, 1, null, 'καθως γεγραπται'); -- καθως γεγραπται = as it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (108, 1, 'quotation', 'far-fuzzy, superset', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (109, 1, 'Isaiah', null, 'LXX Isaiah 53:1 53:1-31', 'Romans', 'SBLGNT Romans 10:16+45 10:16', 107401, 28, 21714, 28, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (109, 1, 'Isaiah', null, 'LXX Isaiah 53:1 53:1-31', 'Romans', 'SBLGNT Romans 10:16+45 10:16', 107401, 28, 21714, 28, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (109, 1, 'Ησαιας', 'γαρ λεγει'); -- γαρ λεγει = for says
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (109, 1, 'quotation', 'literal, exact', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (109, 2, 'Isaiah', null, 'LXX Isaiah 52:15+123 53:1', 'John', 'SBLGNT John 12:38+39 12:38', 107400, 60, 44164, 60, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (109, 2, 'Isaiah', null, 'LXX Isaiah 53:1', 'John', 'SBLGNT John 12:38+38 12:38', 107401, 59, 44164, 59, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (109, 2, 'Ησαιας του προφητου', 'ον ειπεν'); -- Ησαιας του προφητου = Isaiah the prophet, ον ειπεν = that said
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (109, 2, 'quotation', 'literal, exact', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1001, 1, 'Habakkuk', null, 'LXX Habakkuk 2:4+39 2:4-10', 'Romans', 'SBLGNT Romans 1:17+68 1:17-7', 2126, 19, 1330, 19, 'getrefs');
