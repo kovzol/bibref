@@ -35,7 +35,7 @@
 ## 10:8      | 30             | Yes    | Yes               |
 ## 10:11     | 17             | Yes    | Yes               |
 ## 10:13     | 38             | Yes    | Yes               |
-## 10:15     |                | No     |                   | The quotation is far from being literal.
+## 10:15     |                | No     | Yes               | The quotation is far from being literal.
 ## 10:16     | 28             | Yes    |                   |
 ## 10:18     | 74             | Yes    |                   |
 ## 10:19     | 33+12          | Yes    |                   |
