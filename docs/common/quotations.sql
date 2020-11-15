@@ -113,6 +113,7 @@ insert into classification_subtypes (name, info) values ('exact', 'full literal 
 insert into classification_subtypes (name, info) values ('literal', 'full or almost full literal match');
 insert into classification_subtypes (name, info) values ('superset', 'OT text is a superset of the NT text');
 insert into classification_subtypes (name, info) values ('subset', 'OT text is a subset of the NT text');
+insert into classification_subtypes (name, info) values ('grammatical-change', 'some parts are changed to match the grammatical context');
 insert into classification_subtypes (name, info) values ('synonym', 'some parts are changed to synonyms');
 insert into classification_subtypes (name, info) values ('fuzzy', 'fuzzy match');
 insert into classification_subtypes (name, info) values ('far-fuzzy', 'fuzzy match that cannot be identified easily');
@@ -1299,9 +1300,19 @@ insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_pa
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2401, 1, 'Deuteronomy', null, 'LXX Deuteronomy 30:12+26 30:14-28', 'Romans', 'SBLGNT Romans 10:6+52 10:8-21', 94236, 259, 20924, 188, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
- (2201, 1, 'Μωυσης', 'λεγει'); -- λεγει = says (Moses was already mentioned in Romans 10:5)
+ (2401, 1, 'Μωυσης', 'λεγει'); -- λεγει = says (Moses was already mentioned in Romans 10:5)
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
- (2201, 1, 'quotation', 'literal, subset, superset, far-fuzzy, change', 'Z.K.');
+ (2401, 1, 'quotation', 'literal, subset, superset, far-fuzzy, change', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2402, 1, 'Deuteronomy', null, 'LXX Deuteronomy 32:21+58 32:21-44', 'Romans', 'SBLGNT Romans 10:19+41 10:19-40', 101516, 12, 21926, 12, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2402, 1, 'Deuteronomy', null, 'LXX Deuteronomy 32:21+75 32:21-6', 'Romans', 'SBLGNT Romans 10:19+56 10:19-4', 101533, 33, 21941, 33, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2402, 1, 'Deuteronomy', null, 'LXX Deuteronomy 32:21+56 32:21-44', 'Romans', 'SBLGNT Romans 10:19+41 10:19-40', 101514, 58, 21926, 53, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2402, 1, 'Μωυσης', 'λεγει'); -- λεγει = says
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2402, 1, 'quotation', 'literal, fuzzy, grammatical-change', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (3001, 1, 'Job', null, 'Job 5:12-13', 'I_Corinthians', 'I_Corinthians 3:19', null, null, null, null, 'traditional');

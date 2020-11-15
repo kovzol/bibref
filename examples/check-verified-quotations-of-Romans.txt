@@ -37,8 +37,8 @@
 ## 10:13     | 38             | Yes    | Yes               |
 ## 10:15     |                | No     | Yes               | The quotation is far from being literal.
 ## 10:16     | 28             | Yes    | Yes               |
-## 10:18     | 74             | Yes    |                   |
-## 10:19     | 33+12          | Yes    |                   |
+## 10:18     | 74             | Yes    | Yes               |
+## 10:19     | 33+12          | Yes    | Yes               |
 ## 10:20     | 24+21+19+7     | Yes    |                   |
 ## 10:21     | 32+21          | Yes    |                   |
 ## 11:3      | 28             | Yes    |                   | Maybe the minunique algorithm should be changed. (Also for 11:2, not listed here.)
@@ -517,6 +517,17 @@ getrefs SBLGNT LXX Deuteronomy 32:21
 # LXX Deuteronomy 32:21+58 32:21-44 = SBLGNT Romans 10:19+35 10:19-40 (length=12, pos1=101515)
 # LXX Deuteronomy 32:21+75 32:21-6 = SBLGNT Romans 10:19+50 10:19-4 (length=33, pos1=101532)
 ## The union of the last two ones should be one citation.
+lookup1 LXX Deuteronomy 32:21+56 32:21
+# Stored internally as kagvparaqhlvsvaytoysepoykeuneiepeuneiasynetvparorgivaytoys.
+lookup2 SBLGNT Romans 10:19+40 10:19
+# Stored internally as egvparaqhlvsvymasepoykeuneiepeuneiasynetvparorgivymas.
+compare12
+# Comparing 'kagvparaqhlvsvaytoysepoykeuneiepeuneiasynetvparorgivaytoys' ~ 'egvparaqhlvsvymasepoykeuneiepeuneiasynetvparorgivymas' = 23
+# difference = 0.216216
+length1
+# Length of text 1 is 58.
+length2
+# Length of text 2 is 53.
 
 getrefs SBLGNT LXX Isaiah 65:1 65:2
 # ... (lengths<=5)
