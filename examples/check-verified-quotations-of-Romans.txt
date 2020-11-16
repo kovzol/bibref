@@ -39,8 +39,8 @@
 ## 10:16     | 28             | Yes    | Yes               |
 ## 10:18     | 74             | Yes    | Yes               |
 ## 10:19     | 33+12          | Yes    | Yes               |
-## 10:20     | 24+21+19+7     | Yes    |                   |
-## 10:21     | 32+21          | Yes    |                   |
+## 10:20     | 24+21+19+7     | Yes    | Yes               |
+## 10:21     | 32+21          | Yes    | Yes               |
 ## 11:3      | 28             | Yes    |                   | Maybe the minunique algorithm should be changed. (Also for 11:2, not listed here.)
 ## 11:4      | 7              | Yes    |                   | Some wording in the quotation are synonyms instead of being literal matches.
 ## 11:8a     |                | No     |                   | Two letters are removed by Paul, a fuzzy search would be more useful.

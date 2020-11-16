@@ -1056,6 +1056,30 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (109, 2, 'Ησαιας του προφητου', 'ον ειπεν'); -- Ησαιας του προφητου = Isaiah the prophet, ον ειπεν = that said
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (109, 2, 'quotation', 'literal, exact', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (110, 1, 'Isaiah', null, 'LXX Isaiah 65:1+32 65:1-61', 'Romans', 'SBLGNT Romans 10:20+24 10:20-53', 127360, 7, 22002, 7, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (110, 1, 'Isaiah', null, 'LXX Isaiah 65:1+14 65:1-67', 'Romans', 'SBLGNT Romans 10:20+32 10:20-33', 127342, 19, 22010, 19, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (110, 1, 'Isaiah', null, 'LXX Isaiah 65:1+37 65:1-42', 'Romans', 'SBLGNT Romans 10:20+63 10:20', 127365, 21, 22041, 21, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (110, 1, 'Isaiah', null, 'LXX Isaiah 65:1 65:1-76', 'Romans', 'SBLGNT Romans 10:20+50 10:20-10', 127328, 24, 22028, 24, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (110, 1, 'Isaiah', null, 'LXX Isaiah 65:1 65:1-42', 'Romans', 'SBLGNT Romans 10:20+24 10:20', 127328, 58, 22002, 60, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (110, 1, 'Ησαιας', 'λεγει'); -- λεγει = says
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (110, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (111, 1, 'Isaiah', null, 'LXX Isaiah 65:2+34 65:2-50', 'Romans', 'SBLGNT Romans 10:21+54 10:21', 127462, 32, 22116, 32, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (111, 1, 'Isaiah', null, 'LXX Isaiah 65:2 65:2-95', 'Romans', 'SBLGNT Romans 10:21+33 10:21-32', 127428, 21, 22095, 21, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (111, 1, 'Isaiah', null, 'LXX Isaiah 65:2 65:2-50', 'Romans', 'SBLGNT Romans 10:21+20 10:21', 127428, 66, 22082, 60, 'getrefs');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (111, 1, 'Ησαιας ... προς ... Ισραηλ', 'λεγει'); -- προς ... Ισραηλ = as for ... Israel, λεγει = says (Isaiah is mentioned in 10:20)
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (111, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1001, 1, 'Habakkuk', null, 'LXX Habakkuk 2:4+39 2:4-10', 'Romans', 'SBLGNT Romans 1:17+68 1:17-7', 2126, 19, 1330, 19, 'getrefs');
