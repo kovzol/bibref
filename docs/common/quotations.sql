@@ -56,6 +56,7 @@ insert into authors (name, info) values ('Habakkuk', 'Habakkuk');
 insert into authors (name, info) values ('Haggai', 'Haggai');
 insert into authors (name, info) values ('Various', 'Authors of Psalms');
 insert into authors (name, info) values ('Malachi', 'Malachi');
+insert into authors (name, info) values ('Samuel', 'Samuel');
 
 insert into authors (name, info) values ('Matthew', 'Matthew the Apostle');
 insert into authors (name, info) values ('Mark', 'Mark the Evangelist');
@@ -74,6 +75,7 @@ insert into books (name, author, info, number) values ('Genesis', 'Moses', 'Book
 insert into books (name, author, info, number) values ('Exodus', 'Moses', 'Book of Exodus', 2);
 insert into books (name, author, info, number) values ('Leviticus', 'Moses', 'Book of Leviticus', 3);
 insert into books (name, author, info, number) values ('Deuteronomy', 'Moses', 'Book of Deuteronomy', 5);
+insert into books (name, author, info, number) values ('I_Kings', 'Samuel', 'The First Book of Kings', 11);
 insert into books (name, author, info, number) values ('Job', 'Job', 'Book of Job', 18);
 insert into books (name, author, info, number) values ('Psalms', 'Various', 'Book of Psalms', 19);
 insert into books (name, author, info, number) values ('Isaiah', 'Isaiah', 'Book of Isaiah', 23);
@@ -1342,3 +1344,12 @@ insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_pa
  (3001, 1, 'Job', null, 'Job 5:12-13', 'I_Corinthians', 'I_Corinthians 3:19', null, null, null, null, 'traditional');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (3001, 1, 'Job', null, 'LXX Job 5:13+13 5:13-35', 'I_Corinthians', 'SBLGNT I_Corinthians 3:19+71 3:19-14', 8399, 10, 5062, 10, 'getrefs');
+
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (3101, 1, 'I_Kings', null, 'LXX I_Kings 19:10+72 19:10-94', 'Romans', 'SBLGNT Romans 11:3+30 11:3-39', 75874, 28, 22368, 28, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (3101, 1, 'I_Kings', null, 'LXX I_Kings 19:10+72 19:10-11', 'Romans', 'SBLGNT Romans 11:3+5 11:3', 75874, 111, 22343, 92, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (3101, 1, 'εν Ηλια ... η γραφη', 'λεγει'); -- λεγει = says   εν Ηλια ... η γραφη = in Elijah ... the Scripture, λεγει = says
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (3101, 1, 'quotation', 'literal, fuzzy', 'Z.K.');

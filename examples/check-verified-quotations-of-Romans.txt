@@ -41,7 +41,7 @@
 ## 10:19     | 33+12          | Yes    | Yes               |
 ## 10:20     | 24+21+19+7     | Yes    | Yes               |
 ## 10:21     | 32+21          | Yes    | Yes               |
-## 11:3      | 28             | Yes    |                   | Maybe the minunique algorithm should be changed. (Also for 11:2, not listed here.)
+## 11:3      | 28             | Yes    | Yes               | Maybe the minunique algorithm should be changed. I_Kings 19:14 is a repetition of 19:10.
 ## 11:4      | 7              | Yes    |                   | Some wording in the quotation are synonyms instead of being literal matches.
 ## 11:8a     |                | No     |                   | Two letters are removed by Paul, a fuzzy search would be more useful.
 ## 11:8b     | 13+13          | Yes    |                   | A clever fuzzy search would be more successful.
@@ -665,6 +665,8 @@ compare12
 length2
 # Length of text 2 is 92.
 ## In fact, a fuzzy search here could find matching texts of a minimal length of 92.
+## From a database organizing point of view here the first LXX match should be considered as the origin
+## of the quotation.
 
 getrefs SBLGNT LXX I_Kings 19:18
 # LXX I_Kings 19:18+48 19:18-47 = SBLGNT II_Corinthians 12:4+44 12:4-18 (length=7, pos1=76988)
