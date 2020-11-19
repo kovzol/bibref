@@ -1353,3 +1353,11 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (3101, 1, 'εν Ηλια ... η γραφη', 'λεγει'); -- λεγει = says   εν Ηλια ... η γραφη = in Elijah ... the Scripture, λεγει = says
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (3101, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (3102, 1, 'I_Kings', null, 'LXX I_Kings 19:18+60 19:18-35', 'Romans', 'SBLGNT Romans 11:4+77 11:4-5', 77001, 7, 22512, 7, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (3102, 1, 'I_Kings', null, 'LXX I_Kings 19:18+3 19:18-30', 'Romans', 'SBLGNT Romans 11:4+27 11:4', 76944, 69, 22462, 62, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (3102, 1, 'αυτω ... ο χρηματισμος', 'λεγει'); -- λεγει = spoken, αυτω ... ο χρηματισμος = to him [Elijah] ... the divine answer
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (3102, 1, 'quotation', 'far-fuzzy, synonym', 'Z.K.');
