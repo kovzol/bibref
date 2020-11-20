@@ -43,8 +43,8 @@
 ## 10:21     | 32+21          | Yes    | Yes               |
 ## 11:3      | 28             | Yes    | Yes               | Maybe the minunique algorithm should be changed. I_Kings 19:14 is a repetition of 19:10.
 ## 11:4      | 7              | Yes    | Yes               | Some wording in the quotation are synonyms instead of being literal matches.
-## 11:8a     |                | No     |                   | Two letters are removed by Paul, a fuzzy search would be more useful.
-## 11:8b     | 13+13          | Yes    |                   | A clever fuzzy search would be more successful.
+## 11:8a     |                | No     | Yes               | Two letters are removed by Paul, a fuzzy search would be more useful.
+## 11:8b     | 13+13          | Yes    | Yes               | A clever fuzzy search would be more successful.
 ## 11:9-10   | 74+22+20+16+14 | Yes    |                   |
 ## 11:26-27a | 54+13          | Yes    |                   |
 ## 11:27b    | 12             | Yes    |                   | The quotation is too short: the correct identification is difficult. A fuzzy search would be more useful.
