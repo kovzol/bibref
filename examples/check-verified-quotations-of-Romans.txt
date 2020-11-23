@@ -47,7 +47,7 @@
 ## 11:8b     | 13+13          | Yes    | Yes               | A clever fuzzy search would be more successful.
 ## 11:9-10   | 74+22+20+16+14 | Yes    | Yes               |
 ## 11:26-27a | 54+13          | Yes    | Yes               |
-## 11:27b    | 12             | Yes    |                   | The quotation is too short: the correct identification is difficult. A fuzzy search would be more useful.
+## 11:27b    | 12             | Yes    | Yes               | The quotation is too short: the correct identification is difficult. A fuzzy search would be more useful.
 ## 11:32     | 19             | Yes    |                   |
 ## 11:34     | 14             | Yes    |                   |
 ## 12:19     |                | No     |                   | The short quotation is far from being literal. A fuzzy match helps finding the traditional match.
@@ -840,6 +840,8 @@ lookup LXX Isaiah 27:9
 lookup SBLGNT Romans 11:27
 # καὶ αὕτη αὐτοῖς ἡ παρʼ ἐμοῦ διαθήκη, ὅταν ἀφέλωμαι τὰς ἁμαρτίας αὐτῶν.
 ## Note: The Sword LXX search "αφελω* αμαρτι*" gives only one result: Isaiah 27:9.
+## Also, "οταν αφελωμαι" gives one result (the same).
+## It seems Isaiah is cited twice by Paul, without any notification.
 
 getrefs SBLGNT LXX Job 3:23
 # ... (lengths<=12)
