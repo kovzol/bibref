@@ -48,8 +48,8 @@
 ## 11:9-10   | 74+22+20+16+14 | Yes    | Yes               |
 ## 11:26-27a | 54+13          | Yes    | Yes               |
 ## 11:27b    | 12             | Yes    | Yes               | The quotation is too short: the correct identification is difficult. A fuzzy search would be more useful.
-## 11:32     | 19             | Yes    |                   |
-## 11:34     | 14             | Yes    |                   |
+## 11:32     | 19             | Yes    | No                |
+## 11:34     | 14             | Yes    | Yes               |
 ## 12:19     |                | No     |                   | The short quotation is far from being literal. A fuzzy match helps finding the traditional match.
 ## 12:20     | 77+18          | Yes    |                   |
 ## 13:9a     |                | No     |                   | Maybe the minunique algorithm should be changed. Then, also a fuzzy match could be helpful.
@@ -852,6 +852,18 @@ getrefs SBLGNT LXX Isaiah 40:13
 # LXX Isaiah 40:13+3 40:13-41 = SBLGNT I_Corinthians 2:16+6 2:16-41 (length=14, pos1=79030)
 # LXX Isaiah 40:13+3 40:13-41 = SBLGNT Romans 11:34+6 11:34-25 (length=14, pos1=79030)
 ## Both matches are correct.
+lookup1 LXX Isaiah 40:13 40:13-14
+# Stored internally as tisegnvnoynkyrioykaitisaytoysymboylosegeneto.
+lookup2 SBLGNT Romans 11:34
+# Stored internally as tisgaregnvnoynkyrioyhtissymboylosaytoyegeneto.
+compare12
+# Comparing 'tisegnvnoynkyrioykaitisaytoysymboylosegeneto' ~ 'tisgaregnvnoynkyrioyhtissymboylosaytoyegeneto' = 15
+# difference = 0.179775
+length1
+# Length of text 1 is 44.
+length2
+# Length of text 2 is 45.
+## In both matches the "gar" word is added by Paul to indicate the fact of a quotation.
 
 getrefs SBLGNT LXX Deuteronomy 32:35
 # LXX Deuteronomy 32:35+40 32:35-55 = SBLGNT Acts 16:28+17 16:28-53 (length=5, pos1=102610)
