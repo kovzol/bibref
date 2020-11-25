@@ -51,7 +51,7 @@
 ## 11:32     | 19             | Yes    | No                |
 ## 11:34     | 14             | Yes    | Yes               |
 ## 12:19     |                | No     | Yes               | The short quotation is far from being literal. A fuzzy match helps finding the traditional match.
-## 12:20     | 77+18          | Yes    |                   |
+## 12:20     | 77+18          | Yes    | Yes               |
 ## 13:9a     |                | No     |                   | Maybe the minunique algorithm should be changed. Then, also a fuzzy match could be helpful.
 ## 13:9b     | 31             | Yes    |                   |
 ## 14:11a    |                | No     |                   | 16 characters long match with 17 passages in the LXX.
@@ -926,6 +926,17 @@ getrefs SBLGNT LXX Proverbs 25:21 25:22
 # LXX Proverbs 25:21+22 25:22-28 = SBLGNT Romans 12:20+27 12:20 (length=77, pos1=47262)
 ## The last two parts can be considered as one fuzzy match. The first occurrence is just accidental:
 ## the matching parts in "ποτιζε αυτον" (LXX) and "ψώμιζε αὐτόν" (SBLGNT) are no real matches.
+lookup1 LXX Proverbs 25:21 25:22-28
+# Stored internally as eanpeinaoexurossoytrefeaytoneandicapotiqeaytontoytogarpoivnanurakaspyrossvreyseisepithnkefalhnaytoy.
+lookup2 SBLGNT Romans 12:20+4 12:20
+# Stored internally as eanpeinaoexurossoycvmiqeaytoneandicapotiqeaytontoytogarpoivnanurakaspyrossvreyseisepithnkefalhnaytoy.
+compare12
+# Comparing 'eanpeinaoexurossoytrefeaytoneandicapotiqeaytontoytogarpoivnanurakaspyrossvreyseisepithnkefalhnaytoy' ~ 'eanpeinaoexurossoycvmiqeaytoneandicapotiqeaytontoytogarpoivnanurakaspyrossvreyseisepithnkefalhnaytoy' = 11
+# difference = 0.060302
+length1
+# Length of text 1 is 99.
+length2
+# Length of text 2 is 100.
 
 getrefs SBLGNT LXX Exodus 20:13 20:17
 minunique1 LXX Exodus 20:13 20:17

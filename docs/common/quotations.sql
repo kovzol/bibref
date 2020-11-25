@@ -57,6 +57,7 @@ insert into authors (name, info) values ('Haggai', 'Haggai');
 insert into authors (name, info) values ('Various', 'Authors of Psalms');
 insert into authors (name, info) values ('Malachi', 'Malachi');
 insert into authors (name, info) values ('Samuel', 'Samuel');
+insert into authors (name, info) values ('Solomon', 'King Solomon');
 
 insert into authors (name, info) values ('Matthew', 'Matthew the Apostle');
 insert into authors (name, info) values ('Mark', 'Mark the Evangelist');
@@ -78,6 +79,7 @@ insert into books (name, author, info, number) values ('Deuteronomy', 'Moses', '
 insert into books (name, author, info, number) values ('I_Kings', 'Samuel', 'The First Book of Kings', 11);
 insert into books (name, author, info, number) values ('Job', 'Job', 'Book of Job', 18);
 insert into books (name, author, info, number) values ('Psalms', 'Various', 'Book of Psalms', 19);
+insert into books (name, author, info, number) values ('Proverbs', 'Solomon', 'Book of Proverbs', 20);
 insert into books (name, author, info, number) values ('Isaiah', 'Isaiah', 'Book of Isaiah', 23);
 insert into books (name, author, info, number) values ('Hosea', 'Hosea', 'Book of Hosea', 28);
 insert into books (name, author, info, number) values ('Joel', 'Joel', 'Book of Joel', 29);
@@ -1404,3 +1406,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (3102, 1, 'αυτω ... ο χρηματισμος', 'λεγει'); -- λεγει = spoken, αυτω ... ο χρηματισμος = to him [Elijah] ... the divine answer
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (3102, 1, 'quotation', 'far-fuzzy, synonym', 'Z.K.');
+
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (3201, 1, 'Proverbs', null, 'LXX Proverbs 25:21 25:21-28', 'Romans', 'SBLGNT Romans 12:20+4 12:20-82', 47241, 18, 26309, 18, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (3201, 1, 'Proverbs', null, 'LXX Proverbs 25:21+22 25:22-28', 'Romans', 'SBLGNT Romans 12:20+27 12:20', 47263, 77, 26332, 77, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (3201, 1, 'Proverbs', null, 'LXX Proverbs 25:21 25:22-28', 'Romans', 'SBLGNT Romans 12:20+4 12:20', 47241, 99, 26309, 100, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (3201, 1, null, 'αλλα'); -- αλλα = on the contrary
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (3201, 1, 'quotation', 'literal, fuzzy, synonym', 'Z.K.');
