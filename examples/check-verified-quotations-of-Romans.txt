@@ -50,7 +50,7 @@
 ## 11:27b    | 12             | Yes    | Yes               | The quotation is too short: the correct identification is difficult. A fuzzy search would be more useful.
 ## 11:32     | 19             | Yes    | No                |
 ## 11:34     | 14             | Yes    | Yes               |
-## 12:19     |                | No     |                   | The short quotation is far from being literal. A fuzzy match helps finding the traditional match.
+## 12:19     |                | No     | Yes               | The short quotation is far from being literal. A fuzzy match helps finding the traditional match.
 ## 12:20     | 77+18          | Yes    |                   |
 ## 13:9a     |                | No     |                   | Maybe the minunique algorithm should be changed. Then, also a fuzzy match could be helpful.
 ## 13:9b     | 31             | Yes    |                   |
