@@ -1366,7 +1366,7 @@ insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_pa
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2202, 2, 'Leviticus', null, 'LXX Leviticus 19:18+66 19:18-12', 'Luke', 'SBLGNT Luke 10:27+120 10:28-41', 60921, 22, 43138, 22, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
- (2202, 2, 'Εν τω νομω', 'γεγραπται'); -- Εν τω νομω τι = in the law, γεγραπται = has been written
+ (2202, 2, 'Εν τω νομω', 'γεγραπται'); -- Εν τω νομω = in the law, γεγραπται = has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2202, 2, 'quotation', 'literal, exact', 'Z.K.');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
@@ -1393,13 +1393,30 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2202, 5, 'εντολη', 'ανακεφαλαιουται εν τω'); -- εντολη = commandment, ανακεφαλαιουται εν τω = it is summed up in the
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2202, 5, 'quotation', 'literal, exact', 'Z.K.');
--- TODO: Finalize the next three entries:
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2202, 6, 'Leviticus', null, 'LXX Leviticus 19:18+57 19:18-12', 'Galatians', 'SBLGNT Galatians 5:14+35 5:15-58', 60912, 32, 8944, 32, 'getrefs');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2202, 6, 'Leviticus', null, 'LXX Leviticus 19:18+57 19:18-13', 'Galatians', 'SBLGNT Galatians 5:14+35 5:14', 60912, 31, 8944, 31, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2202, 6, 'νομος', 'πεπληρωται εν τω'); -- νομος = Law, πεπληρωται εν τω = is fulfilled in this
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2202, 6, 'quotation', 'literal, exact', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2202, 7, 'Leviticus', null, 'LXX Leviticus 19:18+57 19:18-12', 'Matthew', 'SBLGNT Matthew 22:39+18 22:40-56', 60912, 32, 65856, 32, 'getrefs');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2202, 7, 'Leviticus', null, 'LXX Leviticus 19:18+57 19:18-13', 'Matthew', 'SBLGNT Matthew 22:39+18 22:39', 60912, 31, 65856, 31, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2202, 7, 'εντολη ... εν τω νομω', 'αυτη εστιν ... δε ομοια αυτη'); -- εντολη ... εν τω νομω = commandment ... in the law, αυτη εστιν ... δε ομοια αυτη = this is ... also is like it
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2202, 7, 'quotation', 'literal, exact', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2202, 8, 'Leviticus', null, 'LXX Leviticus 19:18+54 19:18-13', 'Matthew', 'SBLGNT Matthew 19:19+25 19:19', 60909, 34, 55057, 34, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2202, 8, 'Leviticus', null, 'LXX Leviticus 19:18+57 19:18-13', 'Matthew', 'SBLGNT Matthew 19:19+28 19:19', 60912, 31, 55060, 31, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2202, 8, 'τας εντολας', 'Το'); -- τας εντολας = the commandments, Το = the
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2202, 8, 'quotation', 'literal, exact', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2401, 1, 'Deuteronomy', null, 'LXX Deuteronomy 30:14+25 30:14-28', 'Romans', 'SBLGNT Romans 10:8+30 10:8-36', 94465, 30, 21067, 30, 'getrefs');
