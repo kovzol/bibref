@@ -54,8 +54,8 @@
 ## 12:20     | 77+18          | Yes    | Yes               |
 ## 13:9a     |                | No     | Yes               | Maybe the minunique algorithm should be changed. Then, also a fuzzy match could be helpful.
 ## 13:9b     | 31             | Yes    | Yes               |
-## 14:11a    |                | No     |                   | 16 characters long match with 17 passages in the LXX.
-## 14:11b    | 23+12          | Yes    |                   |
+## 14:11a    |                | No     | ?                 | 16 characters long match with 17 passages in the LXX.
+## 14:11b    | 23+12          | Yes    | Yes               |
 ## 15:3      | 44             | Yes    |                   |
 ## 15:10     | 33             | Yes    |                   |
 ## 15:11     | 17+9           | Yes    |                   |
@@ -1017,7 +1017,18 @@ getrefs SBLGNT LXX Isaiah 45:23
 # LXX Isaiah 45:23+119 45:23-5 = SBLGNT Romans 14:11+49 14:11-19 (length=12, pos1=93656)
 # LXX Isaiah 45:23+84 45:23-29 = SBLGNT Romans 14:11+28 14:11-29 (length=23, pos1=93621)
 ## The last two matches can be considered as one.
-## The first two matches together is not a quotation but an important comparison of God and Jesus.
+lookup1 LXX Isaiah 45:23+84 45:23
+# Stored internally as otiemoikamceipangonykaiejomologhsetaipasaglvssatvuev.
+lookup2 SBLGNT Romans 14:11+28 14:11
+# Stored internally as otiemoikamceipangonykaipasaglvssaejomologhsetaitvuev.
+compare12
+# Comparing 'otiemoikamceipangonykaiejomologhsetaipasaglvssatvuev' ~ 'otiemoikamceipangonykaipasaglvssaejomologhsetaitvuev' = 4
+# difference = 0.048077
+length1
+# Length of text 1 is 52.
+length2
+# Length of text 2 is 52.
+## The first two matches from Philippians together is not a quotation but an important comparison of God and Jesus.
 
 getrefs SBLGNT LXX Psalms 69:9 # MT 69:10
 # ... (lengths<=6)

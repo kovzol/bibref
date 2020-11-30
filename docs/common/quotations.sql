@@ -1109,6 +1109,16 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (114, 1, null, 'καθως γεγραπται'); -- καθως γεγραπται = as it has been written (in Romans 11:26)
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (114, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (115, 1, 'Isaiah', null, 'LXX Isaiah 45:23+119 45:23-5', 'Romans', 'SBLGNT Romans 14:11+49 14:11-19', 93657, 12, 28552, 12, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (115, 1, 'Isaiah', null, 'LXX Isaiah 45:23+84 45:23-29', 'Romans', 'SBLGNT Romans 14:11+28 14:11-29', 93622, 23, 28531, 23, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (115, 1, 'Isaiah', null, 'LXX Isaiah 45:23+84 45:23', 'Romans', 'SBLGNT Romans 14:11+28 14:11', 93657, 52, 28531, 52, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (115, 1, null, 'καθως γεγραπται'); -- καθως γεγραπται = as it has been written
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (115, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1001, 1, 'Habakkuk', null, 'LXX Habakkuk 2:4+39 2:4-10', 'Romans', 'SBLGNT Romans 1:17+68 1:17-7', 2126, 19, 1330, 19, 'getrefs');
