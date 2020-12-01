@@ -61,7 +61,7 @@
 ## 15:10     | 33             | Yes    | Yes               |
 ## 15:11     | 17+9           | Yes    | Yes               |
 ## 15:12     | 59             | Yes    | Yes               |
-## 15:21     | 58             | Yes    |                   |
+## 15:21     | 58             | Yes    | Yes               |
 ##
 ## "Direct quotation" means that there is a direct sign in Paul's text that
 ## the text was indeed quoted.
