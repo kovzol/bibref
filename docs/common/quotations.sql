@@ -896,7 +896,7 @@ insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_pa
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (44, 1, null, 'και παλιν'); -- και παλιν = and again
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
- (44, 1, 'quotation', 'literal', 'Z.K.');
+ (44, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (45, 1, 'Psalms', 118, 'Psalms 118:6', 'Hebrews', 'Hebrews 13:6', null, null, null, null, 'traditional');

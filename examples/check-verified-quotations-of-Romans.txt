@@ -59,7 +59,7 @@
 ## 15:3      | 44             | Yes    | Yes               |
 ## 15:9      | 33+19          | Yes    | Yes               |
 ## 15:10     | 33             | Yes    | Yes               |
-## 15:11     | 17+9           | Yes    |                   |
+## 15:11     | 17+9           | Yes    | Yes               |
 ## 15:12     | 59             | Yes    |                   |
 ## 15:21     | 58             | Yes    |                   |
 ##
@@ -1071,6 +1071,13 @@ getrefs SBLGNT LXX Psalms 117:1
 # LXX Psalms 117:1+36 117:1-18 = SBLGNT Romans 15:11+37 15:11-21 (length=9, pos1=137243)
 # LXX Psalms 117:1+46 117:1 = SBLGNT Romans 15:11+50 15:11 (length=17, pos1=137253)
 ## The union of the two should be one citation.
+lookup1 LXX Psalms 117:1+9 117:1
+# Stored internally as aineitetonkyrionpantataeunhepainesateaytonpantesoilaoi.
+lookup2 SBLGNT Romans 15:11+8 15:11
+# Stored internally as aineitepantataeunhtonkyrionkaiepainesatvsanaytonpantesoilaoi.
+compare12
+# Comparing 'aineitetonkyrionpantataeunhepainesateaytonpantesoilaoi' ~ 'aineitepantataeunhtonkyrionkaiepainesatvsanaytonpantesoilaoi' = 16
+# difference = 0.149123
 
 getrefs SBLGNT LXX Isaiah 11:10
 # ... (lengths<=10)
