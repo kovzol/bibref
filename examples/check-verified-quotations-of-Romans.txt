@@ -60,7 +60,7 @@
 ## 15:9      | 33+19          | Yes    | Yes               |
 ## 15:10     | 33             | Yes    | Yes               |
 ## 15:11     | 17+9           | Yes    | Yes               |
-## 15:12     | 59             | Yes    |                   |
+## 15:12     | 59             | Yes    | Yes               |
 ## 15:21     | 58             | Yes    |                   |
 ##
 ## "Direct quotation" means that there is a direct sign in Paul's text that
@@ -1082,6 +1082,17 @@ compare12
 getrefs SBLGNT LXX Isaiah 11:10
 # ... (lengths<=10)
 # LXX Isaiah 11:10+23 11:10-27 = SBLGNT Romans 15:12+24 15:12 (length=59, pos1=24106)
+lookup1 LXX Isaiah 11:10+3 11:10-27
+# Stored internally as estaienthhmeraekeinhhriqatoyiessaikaioanistamenosarxeineunvnepaytveunhelpioysin.
+lookup2 SBLGNT Romans 15:12+19 15:12
+# Stored internally as estaihriqatoyiessaikaioanistamenosarxeineunvnepaytveunhelpioysin.
+compare12
+# Comparing 'estaienthhmeraekeinhhriqatoyiessaikaioanistamenosarxeineunvnepaytveunhelpioysin' ~ 'estaihriqatoyiessaikaioanistamenosarxeineunvnepaytveunhelpioysin' = 17
+# difference = 0.125874
+length1
+# Length of text 1 is 79.
+length2
+# Length of text 2 is 64.
 
 getrefs SBLGNT LXX Isaiah 52:15
 # ... (lengths<=13)
