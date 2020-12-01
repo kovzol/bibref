@@ -56,8 +56,9 @@
 ## 13:9b     | 31             | Yes    | Yes               |
 ## 14:11a    |                | No     | ?                 | 16 characters long match with 17 passages in the LXX.
 ## 14:11b    | 23+12          | Yes    | Yes               |
-## 15:3      | 44             | Yes    |                   |
-## 15:10     | 33             | Yes    |                   |
+## 15:3      | 44             | Yes    | Yes               |
+## 15:9      | 33+19          | Yes    | Yes               |
+## 15:10     | 33             | Yes    | Yes               |
 ## 15:11     | 17+9           | Yes    |                   |
 ## 15:12     | 59             | Yes    |                   |
 ## 15:21     | 58             | Yes    |                   |
@@ -1054,6 +1055,17 @@ getrefs SBLGNT LXX Deuteronomy 32:43
 ## text could be interpreted as "Καὶ προσκυνησάτωσαν αὐτῷ πάντες... ἄγγελοι θεοῦ" or
 ## "Καὶ προσκυνησάτωσαν αὐτῷ... πάντες ἄγγελοι θεοῦ".
 ## Anyway, the match with Romans 15:10 is correct.
+lookup1 LXX Deuteronomy 32:43+24 32:43-135
+# Stored internally as kaiproskynhsatvsanaytvpantesyioiueoyeyfranuhteeunhmetatoylaoyaytoykaienisxysatvsanaytvpantesaggeloiueoy.
+lookup2 SBLGNT Hebrews 1:6+53 1:6
+# Stored internally as kaiproskynhsatvsanaytvpantesaggeloiueoy.
+compare12
+# Comparing 'kaiproskynhsatvsanaytvpantesyioiueoyeyfranuhteeunhmetatoylaoyaytoykaienisxysatvsanaytvpantesaggeloiueoy' ~ 'kaiproskynhsatvsanaytvpantesaggeloiueoy' = 64
+# difference = 0.457746
+length1
+# Length of text 1 is 103.
+length2
+# Length of text 2 is 39.
 
 getrefs SBLGNT LXX Psalms 117:1
 # LXX Psalms 117:1+36 117:1-18 = SBLGNT Romans 15:11+37 15:11-21 (length=9, pos1=137243)
