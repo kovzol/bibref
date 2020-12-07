@@ -1,4 +1,4 @@
-all: getrefs.pdf authors.pdf manual_nt_length.pdf Rplots.pdf
+all: getrefs.pdf authors.pdf manual_nt_length.pdf Rplots.pdf Romans.ppm
 
 authors.pdf: authors.tex
 	pdflatex authors
@@ -8,6 +8,9 @@ manual_nt_length.pdf: manual_nt_length.tex
 
 getrefs.pdf: getrefs.tex
 	pdflatex getrefs
+
+Romans.ppm: visualize.py quotations.sqlite3
+	python3 visualize.py nt > Romans.ppm
 
 authors.tex: visualize.py quotations.sqlite3
 	python3 visualize.py traditional > authors.tex

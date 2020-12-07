@@ -19,8 +19,10 @@ def create_connection(db_file):
 
 def psalms_report_latex(conn, method, data):
     """
-    Query all entries in the Psalms database rows and show them as a LaTeX table
+    Query all entries in the Psalms database rows and show them as a LaTeX table on stdout
     :param conn: the Connection object
+    :param method: traditional, getrefs
+    :param data: authors or manual_nt_length (for traditional), pieces (for getrefs)
     :return:
     """
     cur = conn.cursor()
@@ -116,6 +118,61 @@ def psalms_report_latex(conn, method, data):
     if method == "traditional" and data == "manual_nt_length":
         f.close()
 
+def nt_report_ppm(conn, book, book_length, ppm_rows, ppm_columns):
+    """
+    Query all entries from a New Testament book and show them as PPM data on stdout
+    :param conn: the Connection object
+    :param book: NT book name
+    :param book_length: NT book length in characters
+    :param ppm_rows: number of pixel rows in PPM output
+    :param ppm_columns: number of pixel columns in PPM output
+    :return:
+    """
+    cur = conn.cursor()
+    book_letters = [0] * book_length
+    cur.execute("SELECT q.nt_startpos, q.nt_length, q.ot_book, q.ot_passage, q.nt_passage" +
+        " FROM quotations q, quotations_classifications qc " +
+        " WHERE qc.classification = 'quotation'" +
+        " AND qc.quotation_ot_id = q.ot_id" +
+        " AND qc.quotation_nt_id = q.nt_id" +
+        " AND q.found_method = 'manual'" +
+        " AND q.nt_book = '" + book + "'" +
+        " ORDER BY q.nt_startpos")
+    rows = cur.fetchall()
+    q = 0
+
+    print("P3")
+    print("# Report on", book)
+
+    for row in rows:
+        start = row[0]
+        length = row[1]
+        ot_book = row[2]
+        ot_passage = row[3]
+        nt_passage = row[4]
+        # print("# start =", start, "length =", length, f"({ot_passage} -> {nt_passage})")
+        for l in range(length):
+            book_letters[start+l] += 1
+        q += 1
+    r = 0
+
+    print(ppm_columns, ppm_rows)
+    print(15)
+
+    for l in range(book_length):
+        info = book_letters[l]
+        if info == 0:
+            print("7 7 7") # no quotation at that position
+        else:
+            r += 1
+        if info == 1:
+            print("7 0 0") # 1 quotation
+        if info == 2:
+            print("0 7 0") # 2 quotations
+    for l in range(ppm_rows*ppm_columns-book_length):
+        print("15 15 15") # empty cell
+    # print("#", r, "characters of", q, "manually verified quotations out of", book_length, f"({100*r/book_length:.3g}%)")
+
 def main():
     database = r"quotations.sqlite3"
     conn = create_connection(database)
@@ -123,13 +180,28 @@ def main():
         result_type = sys.argv[1]
     else:
         result_type = "traditional"
-    data = 'authors'
+    if result_type == "traditional":
+        data = 'authors'
+    if result_type == "getrefs":
+        data = "pieces"
+    if result_type == "nt":
+        data = "Romans"
+        data2 = 34176
+        data3 = 225
+        data4 = 160
     if len(sys.argv) > 2:
         data = sys.argv[2]
+    if len(sys.argv) > 3:
+        data2 = sys.argv[3]
+    if len(sys.argv) > 4:
+        data3 = sys.argv[4]
+    if len(sys.argv) > 5:
+        data4 = sys.argv[5]
     with conn:
-        if result_type == "getrefs":
-            data = "pieces"
-        psalms_report_latex(conn, result_type, data)
+        if result_type == "nt":
+            nt_report_ppm(conn, data, data2, data3, data4)
+        else:
+            psalms_report_latex(conn, result_type, data)
 
 if __name__ == '__main__':
     main()
