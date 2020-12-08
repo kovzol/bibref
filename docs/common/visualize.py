@@ -118,9 +118,9 @@ def psalms_report_latex(conn, method, data):
     if method == "traditional" and data == "manual_nt_length":
         f.close()
 
-def nt_report_ppm(conn, book, book_length, ppm_rows, ppm_columns):
+def nt_report_ppm(conn, book, book_length, ppm_rows, ppm_columns, mode):
     """
-    Query all entries from a New Testament book and show them as PPM data on stdout
+    Query all entries from a New Testament book and show them as PPM data in the file book-mode.ppm
     :param conn: the Connection object
     :param book: NT book name
     :param book_length: NT book length in characters
@@ -128,6 +128,7 @@ def nt_report_ppm(conn, book, book_length, ppm_rows, ppm_columns):
     :param ppm_columns: number of pixel columns in PPM output
     :return:
     """
+    f = open(book + "-" + mode + ".ppm", "w")
     cur = conn.cursor()
     book_letters = [0] * book_length
     cur.execute("SELECT q.nt_startpos, q.nt_length, q.ot_book, q.ot_passage, q.nt_passage" +
@@ -141,8 +142,8 @@ def nt_report_ppm(conn, book, book_length, ppm_rows, ppm_columns):
     rows = cur.fetchall()
     q = 0
 
-    print("P3")
-    print("# Report on", book)
+    f.write("P3\n")
+    f.write(f"# Report on {book}, mode {mode}\n")
 
     for row in rows:
         start = row[0]
@@ -150,28 +151,28 @@ def nt_report_ppm(conn, book, book_length, ppm_rows, ppm_columns):
         ot_book = row[2]
         ot_passage = row[3]
         nt_passage = row[4]
-        # print("# start =", start, "length =", length, f"({ot_passage} -> {nt_passage})")
+        print("# start =", start, "length =", length, f"({ot_passage} -> {nt_passage})")
         for l in range(length):
             book_letters[start+l] += 1
         q += 1
     r = 0
 
-    print(ppm_columns, ppm_rows)
-    print(15)
+    f.write(f"{ppm_columns} {ppm_rows}\n15\n")
 
     for l in range(book_length):
         info = book_letters[l]
         if info == 0:
-            print("7 7 7") # no quotation at that position
+            f.write("7 7 7\n") # no quotation at that position
         else:
             r += 1
         if info == 1:
-            print("7 0 0") # 1 quotation
+            f.write("7 0 0\n") # 1 quotation
         if info == 2:
-            print("0 7 0") # 2 quotations
+            f.write("0 7 0\n") # 2 quotations
     for l in range(ppm_rows*ppm_columns-book_length):
-        print("15 15 15") # empty cell
-    # print("#", r, "characters of", q, "manually verified quotations out of", book_length, f"({100*r/book_length:.3g}%)")
+        f.write("15 15 15\n") # empty cell
+    print("#", r, "characters of", q, "manually verified quotations out of", book_length, f"({100*r/book_length:.3g}%)")
+    f.close()
 
 def main():
     database = r"quotations.sqlite3"
@@ -189,6 +190,7 @@ def main():
         data2 = 34176
         data3 = 225
         data4 = 160
+        data5 = "manual"
     if len(sys.argv) > 2:
         data = sys.argv[2]
     if len(sys.argv) > 3:
@@ -197,9 +199,11 @@ def main():
         data3 = sys.argv[4]
     if len(sys.argv) > 5:
         data4 = sys.argv[5]
+    if len(sys.argv) > 6:
+        data5 = sys.argv[6]
     with conn:
         if result_type == "nt":
-            nt_report_ppm(conn, data, data2, data3, data4)
+            nt_report_ppm(conn, data, data2, data3, data4, data5)
         else:
             psalms_report_latex(conn, result_type, data)
 
