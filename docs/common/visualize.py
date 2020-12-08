@@ -145,18 +145,49 @@ def nt_report_ppm(conn, book, book_length, ppm_rows, ppm_columns, mode):
     f.write("P3\n")
     f.write(f"# Report on {book}, mode {mode}\n")
 
+    # Meaning of entries for the various modes:
+
+    # manual: 0: no quotation, 1: one quotation, 2: two quotations
+
+    # getrefs:
+    # 0: no quotation
+    # 1: first quotation without getrefs-match
+    # 2: second quotation without getrefs-match
+    # 3: getrefs incorrectly identified some characters
+    # 4: first quotation with getrefs-match
+    # 5: second quotation with getrefs-match
+    # 7: first quotation with two getrefs-matches
+
+    # FIXME: This system should be improved. Instead of numbers, flags should be used first.
+
     for row in rows:
         start = row[0]
         length = row[1]
         ot_book = row[2]
         ot_passage = row[3]
         nt_passage = row[4]
-        print("# start =", start, "length =", length, f"({ot_passage} -> {nt_passage})")
+        print("start =", start, "length =", length, f"({ot_passage} -> {nt_passage})")
         for l in range(length):
             book_letters[start+l] += 1
         q += 1
-    r = 0
 
+    if mode == "getrefs":
+        cur.execute("SELECT q.nt_startpos, q.nt_length, q.ot_book, q.ot_passage, q.nt_passage" +
+            " FROM quotations q, quotations_classifications qc " +
+            " WHERE qc.classification = 'quotation'" +
+            " AND qc.quotation_ot_id = q.ot_id" +
+            " AND qc.quotation_nt_id = q.nt_id" +
+            " AND q.found_method = 'getrefs'" +
+            " AND q.nt_book = '" + book + "'" +
+            " ORDER BY q.nt_startpos")
+        rows2 = cur.fetchall()
+        for row2 in rows2:
+            start = row2[0]
+            length = row2[1]
+            for l in range(length):
+                book_letters[start+l] += 3
+
+    r = 0
     f.write(f"{ppm_columns} {ppm_rows}\n15\n")
 
     for l in range(book_length):
@@ -166,12 +197,21 @@ def nt_report_ppm(conn, book, book_length, ppm_rows, ppm_columns, mode):
         else:
             r += 1
         if info == 1:
-            f.write("7 0 0\n") # 1 quotation
+            f.write("7 0 0\n") # 1. quotation
         if info == 2:
-            f.write("0 7 0\n") # 2 quotations
+            f.write("0 7 0\n") # 2. quotation
+        if info == 3:
+            f.write("0 0 0\n") # false identification
+            r -= 1
+        if info == 4:
+            f.write("15 0 0\n") # 1. quotation with getrefs-match
+        if info == 5:
+            f.write("0 15 0\n") # 2. quotation with getrefs-match
+        if info == 7:
+            f.write("15 0 15\n") # 1. quotation with two getrefs-matches
     for l in range(ppm_rows*ppm_columns-book_length):
         f.write("15 15 15\n") # empty cell
-    print("#", r, "characters of", q, "manually verified quotations out of", book_length, f"({100*r/book_length:.3g}%)")
+    print(r, "characters of", q, "manually verified quotations out of", book_length, f"({100*r/book_length:.3g}%)")
     f.close()
 
 def main():
@@ -190,7 +230,7 @@ def main():
         data2 = 34176
         data3 = 225
         data4 = 160
-        data5 = "manual"
+        data5 = "getrefs"
     if len(sys.argv) > 2:
         data = sys.argv[2]
     if len(sys.argv) > 3:
