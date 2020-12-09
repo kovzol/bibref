@@ -307,7 +307,7 @@ insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_pa
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (12, 1, 'Psalms', 18, 'LXX Psalms 18:49+39 18:49', 'Romans', 'SBLGNT Romans 15:9+79 15:9', 17448, 19, 30193, 19, 'getrefs');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (12, 1, 'Psalms', 18, 'LXX Psalms 18:49', 'Romans', 'SBLGNT Romans 15:9+46', 17409, 58, 30160, 52, 'manual');
+ (12, 1, 'Psalms', 18, 'LXX Psalms 18:49', 'Romans', 'SBLGNT Romans 15:9+46 15:9', 17409, 58, 30160, 52, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (12, 1, null, 'καθως γεγραπται'); -- καθως γεγραπται = as it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
@@ -1192,7 +1192,7 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1302, 1, 'Hosea', null, 'LXX Hosea 1:10+82 1:10', 'Romans', 'SBLGNT Romans 9:26 9:26', 1055, 73, 19912, 73, 'getrefs');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (1302, 1, 'Hosea', null, 'LXX Hosea 1:10+82 1:10', 'Romans', 'SBLGNT Romans 9:26 9:26', 1055, 73, 19912, 73, 'manual');
+ (1302, 1, 'Hosea', null, 'LXX Hosea 1:10+82 1:10', 'Romans', 'SBLGNT Romans 9:26', 1055, 73, 19912, 73, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (1302, 1, 'Ωσηε', 'λεγει'); -- Ωσηε = Hosea, λεγει = says (in Romans 9:25)
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
@@ -1209,7 +1209,7 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1401, 1, 'Joel', null, 'LXX Joel 2:32+11 2:32-103', 'Romans', 'SBLGNT Romans 10:13+6 10:13', 5577, 38, 21452, 38, 'getrefs');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (1401, 1, 'Joel', null, 'LXX Joel 2:32+8 2:32-103', 'Romans', 'SBLGNT Romans 10:13 10:13', 5577, 41, 21452, 44, 'manual');
+ (1401, 1, 'Joel', null, 'LXX Joel 2:32+8 2:32-103', 'Romans', 'SBLGNT Romans 10:13', 5577, 41, 21452, 44, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (1401, 1, null, 'γαρ'); -- γαρ = for
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values

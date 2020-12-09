@@ -23,7 +23,6 @@ def psalms_report_latex(conn, method, data):
     :param conn: the Connection object
     :param method: traditional, getrefs
     :param data: authors or manual_nt_length (for traditional), pieces (for getrefs)
-    :return:
     """
     cur = conn.cursor()
 
@@ -126,7 +125,6 @@ def nt_report_ppm(conn, book, book_length, ppm_rows, ppm_columns, mode):
     :param book_length: NT book length in characters
     :param ppm_rows: number of pixel rows in PPM output
     :param ppm_columns: number of pixel columns in PPM output
-    :return:
     """
     f = open(book + "-" + mode + ".ppm", "w")
     cur = conn.cursor()
@@ -214,6 +212,56 @@ def nt_report_ppm(conn, book, book_length, ppm_rows, ppm_columns, mode):
     print(r, "characters of", q, "manually verified quotations out of", book_length, f"({100*r/book_length:.3g}%)")
     f.close()
 
+def nt_report_latex(conn, book):
+    """
+    Query all entries from a New Testament book and show them as a LaTeX table on stdout
+    :param conn: the Connection object
+    :param book: NT book name
+    """
+
+    print ("\\documentclass{article}")
+    print ("\\begin{document}")
+    print ("\\centering")
+    print ("\\begin{table}")
+    print ("\\begin{tabular}{rrlc}")
+    print (f"&&&{{\\bf getrefs}}\\\\")
+    print (f"{{\\bf No.}}&{{\\bf {book} passage}}&{{\\bf OT passage}}&{{\\bf chunks}}\\\\")
+    print ("\\hline")
+
+    cur = conn.cursor()
+    cur.execute("SELECT q.nt_startpos, q.nt_length, q.ot_book, q.ot_passage, q.nt_passage, q.ot_id, q.nt_id" +
+        " FROM quotations q, quotations_classifications qc " +
+        " WHERE qc.classification = 'quotation'" +
+        " AND qc.quotation_ot_id = q.ot_id" +
+        " AND qc.quotation_nt_id = q.nt_id" +
+        " AND q.found_method = 'manual'" +
+        " AND q.nt_book = '" + book + "'" +
+        " ORDER BY q.nt_startpos")
+    rows = cur.fetchall()
+    q = 1
+
+    for row in rows:
+        start = row[0]
+        length = row[1]
+        ot_book = row[2]
+        ot_passage = row[3].replace("_", " ")
+        nt_passage = row[4]
+        # Remove book name from the beginning:
+        nt_passage = nt_passage[(nt_passage.find(book) + len(book)):]
+        ot_id = row[5]
+        nt_id = row[6]
+        cur.execute("SELECT COUNT(*) from quotations q" +
+            " WHERE q.ot_id = " + str(ot_id) +
+            " AND q.nt_id = " + str(nt_id) +
+            " AND q.found_method = 'getrefs'")
+        rows2 = cur.fetchall()
+        chunks = rows2[0][0]
+        print(f"{q}&{nt_passage}&{ot_passage}&{chunks}\\\\")
+        q = q + 1
+    print ("\\end{tabular}")
+    print ("\\end{table}")
+    print ("\\end{document}")
+
 def main():
     database = r"quotations.sqlite3"
     conn = create_connection(database)
@@ -225,12 +273,14 @@ def main():
         data = 'authors'
     if result_type == "getrefs":
         data = "pieces"
-    if result_type == "nt":
+    if result_type == "nt_ppm":
         data = "Romans"
         data2 = 34176
         data3 = 225
         data4 = 160
         data5 = "getrefs"
+    if result_type == "nt_latex":
+        data = "Romans"
     if len(sys.argv) > 2:
         data = sys.argv[2]
     if len(sys.argv) > 3:
@@ -242,10 +292,13 @@ def main():
     if len(sys.argv) > 6:
         data5 = sys.argv[6]
     with conn:
-        if result_type == "nt":
+        if result_type == "nt_ppm":
             nt_report_ppm(conn, data, data2, data3, data4, data5)
         else:
-            psalms_report_latex(conn, result_type, data)
+            if result_type == "nt_latex":
+                nt_report_latex(conn, data)
+            else:
+                psalms_report_latex(conn, result_type, data)
 
 if __name__ == '__main__':
     main()
