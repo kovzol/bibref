@@ -221,6 +221,7 @@ def nt_report_latex(conn, book):
 
     print ("\\documentclass{article}")
     print ("\\begin{document}")
+    print ("\\thispagestyle{empty}")
     print ("\\centering")
     print ("\\begin{table}")
     print ("\\begin{tabular}{rrlc}")
