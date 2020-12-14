@@ -240,10 +240,12 @@ def nt_report_latex(conn, book):
         " ORDER BY q.nt_startpos")
     rows = cur.fetchall()
     q = 1
+    f = open("manual_" + book + "_length.csv", "w")
 
     for row in rows:
         start = row[0]
         length = row[1]
+        f.write(str(length) + "\n")
         ot_book = row[2]
         ot_passage = row[3].replace("_", " ")
         nt_passage = row[4]
@@ -262,6 +264,7 @@ def nt_report_latex(conn, book):
     print ("\\end{tabular}")
     print ("\\end{table}")
     print ("\\end{document}")
+    f.close()
 
 def main():
     database = r"quotations.sqlite3"

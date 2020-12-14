@@ -11,6 +11,7 @@
 \usepackage{listings}
 \usepackage{mathtools}
 \usepackage[dvipsnames]{xcolor}
+\usepackage{longtable}
 \setlength{\fboxsep}{0pt} % for \colorbox
 
 \floatname{algorithm}{Algoritmus}
@@ -1684,6 +1685,135 @@ a 116:10-et (19 hosszan), valamint a 110:4-nek a Zsidók 5:10-ben megjelenő id�
 \end{center}
 \end{figure}
 
+Egy hasonló tesztet végzünk el a Római levél elemzésével. A \ref{tab:Rom-darabszam}. táblázatban
+a Római levél 50 olyan szakaszához jegyeztük fel az ószövetségi első egyezést, ahol Pál
+konkrétan idézetre utal. Nem számítottuk idézetnek (többek között) a Róma 4:22-t és 4:23-at,
+mivel a 4:3-ban már említi Pál apostol az 1Móz 15:6-ot. Nincs a listában a Róma 14:11a
+(``Élek én, így szól az Úr'') sem, mivel ez a szófordulat az ÓSZ-ben 17 helyen is megjelenik,
+és Pál talán többre vagy akár az \textit{összesre egyszerre} gondol. Hasonlóképpen az olyan utalásokat,
+ahol a szövegkörnyezet ezt nem támasztja alá, nem vettük bele a listába, hiába van ezek
+között akár egészen hosszú, betű szerint egyező szöveg is (ilyen pl. a Róma 9:20,
+ami egész biztosan az Ézs 29:16-ra utal, ez 24 ill. 12 betűnyi teljes egyezést jelentene).
+
+\begin{longtable}{rrrlc}
+\caption{A \ref{algo-osz-uszi-ref}. algoritmus által azonosított lehetséges idézetek darabszáma
+a tényleges idézeteken belül a Római levélben} \label{tab:Rom-darabszam}\\
+{\bf Ssz.}&{\bf Róma-szakasz}&{\bf Hossz}&{\bf ÓSZ-i szakasz}&{\bf Db.}\\
+\hline
+\endfirsthead
+1& 1:17+68 1:17&26&LXX Hab 2:4+39 2:4&1\\
+2& 2:24 2:24-14&48&LXX Ézs 52:5+90 52:5&1\\
+3& 3:4+63 3:4&56&LXX Zsolt 51:4+43 51:4&2\\
+4& 3:11+3 3:18&339&LXX Zsolt 14:2+59 14:3&1\\
+5& 4:3+16 4:3&52&LXX 1Móz 15:6+3&1\\
+6& 4:7 4:8&92&LXX Zsolt 32:1+15 32:2-30&1\\
+7& 4:17+14 4:17-77&29&LXX 1Móz 17:5+57 17:6-67&1\\
+8& 4:18+78 4:18&21&LXX 1Móz 15:5+109 15:5&1\\
+9& 8:36+14 8:36&62&LXX Zsolt 44:22&1\\
+10& 9:7+37 9:7&26&LXX 1Móz 21:12+127 21:12&1\\
+11& 9:9+24 9:9&47&LXX 1Móz 18:10+28 18:14&2\\
+12& 9:12+39 9:13-43&27&LXX 1Móz 25:23+103 25:24-64&1\\
+13& 9:13+29 9:13&31&LXX Mal 1:3 1:3-68&1\\
+14& 9:15+16 9:15&37&LXX 2Móz 33:19+87 33:19&1\\
+15& 9:17+50 9:17&63&LXX 2Móz 9:16+28 9:16&2\\
+16& 9:25+24 9:25-10&37&ABPGRK Hós 2:23+38 2:23-34&0\\
+17& 9:26&73&LXX Hós 1:10+82 1:10&1\\
+18& 9:27+31 9:27-20&40&LXX Hós 1:10+5 1:10-110&1\\
+19& 9:27+46 9:28-15&80&LXX Ézs 10:22+18 10:23-21&2\\
+20& 9:29+24 9:29&81&LXX Ézs 1:9+3 1:9&1\\
+21& 9:33+14 9:33-5&82&LXX Ézs 28:16+24 28:16&2\\
+22& 9:33+30 9:33-54&17&LXX Ézs 8:14+48 8:14-94&0\\
+23& 10:5+46 10:5-1&27&LXX 3Móz 18:5+69 18:5-21&1\\
+24& 10:6+52 10:8-21&188&LXX 5Móz 30:12+26 30:14-28&1\\
+25& 10:13&44&LXX Jóel 2:32+8 2:32-103&1\\
+26& 10:15+44 10:15&40&LXX Ézs 52:7 52:7-58&0\\
+27& 10:16+45 10:16&28&LXX Ézs 53:1 53:1-31&1\\
+28& 10:18+28 10:18&74&LXX Zsolt 19:4 19:4-27&1\\
+29& 10:19+41 10:19-40&53&LXX 5Móz 32:21+56 32:21-44&2\\
+30& 10:20+24 10:20&60&LXX Ézs 65:1 65:1-42&4\\
+31& 10:21+20 10:21&60&LXX Ézs 65:2 65:2-50&2\\
+32& 11:3+5 11:3&92&LXX 1Kir 19:10+72 19:10-11&1\\
+33& 11:4+27 11:4&62&LXX 1Kir 19:18+3 19:18-30&1\\
+34& 11:8+14 11:8&91&LXX 5Móz 29:4+6 29:4-6&2\\
+35& 11:8+31 11:8-46&28&LXX Ézs 29:10+22 29:10-61&0\\
+36& 11:9+13 11:10&152&LXX Zsolt 69:22 69:23&5\\
+37& 11:26+40 11:27-28&73&LXX Ézs 59:20+3 59:21-161&2\\
+38& 11:27+28 11:27&28&LXX Ézs 27:9+59 27:9-132&1\\
+39& 11:34&45&LXX Ézs 40:13 40:13-14&1\\
+40& 12:19+63 12:19-11&22&LXX 5Móz 32:35+7 32:35-73&0\\
+41& 12:20+4 12:20&100&LXX Péld 25:21 25:22-28&2\\
+42& 13:9+5 13:9-96&32&LXX 2Móz 20:13-15&0\\
+43& 13:9+102 13:9&31&LXX 3Móz 19:18+57 19:18-13&1\\
+44& 14:11+28 14:11&52&LXX Ézs 45:23+84 45:23&2\\
+45& 15:3+46 15:3&42&LXX Zsolt 69:9+34 69:9&1\\
+46& 15:9+46 15:9&52&LXX Zsolt 18:49&2\\
+47& 15:10+13 15:11-65&30&LXX 5Móz 32:43+60 32:43-172&1\\
+48& 15:11+8 15:11&60&LXX Zsolt 117:1+9 117:1&2\\
+49& 15:12+19 15:12&64&LXX Ézs 11:10+3 11:10-27&1\\
+50& 15:21+17 15:21&58&LXX Ézs 52:15+66 52:15&1\\
+\end{longtable}
+
+A táblázat -- mely az újszövetségi idézetek hosszát is megadja --
+jól mutatja, hogy a \ref{algo-osz-uszi-ref}. algoritmus az 50-ből mindössze 6
+esetben nem tudta beazonosítani a kapcsolatot. Az egyik esetben (a 9:25-nél) ez abból
+fakadt, hogy az SBLGNT nem az LXX szövegéhez, hanem az ABPGRK-éhoz hasonlít, de a kereső
+szoftver az LXX alapján dolgozott.
+
+A \ref{kezi-hosszak-suruseg-Rom}. ábra az 50 idézet hosszának sűrűségbecslését mutatja.
+Ez alapján is látható, hogy Pál apostol nem sajnálja a betűket a pontos szöveg megadására:
+a legrövidebb szövege 17 betűs (ez a 9:33-ban megjelenő Ézs 8:14), a következő 21 betűs
+(a 4:18-ban hivatkozott 1Móz 15:5), végül egy 22 betűs idézetet is találunk
+(a 12:19-ben hivatkozott 5Móz 32:35); a többi hivatkozása azonban legalább 26 betűs. A leghosszabb
+egyezés a korábban már említett 339 karakteres szakasz a 14. zsoltárból.
+
+Világos, hogy a \ref{kezi-hosszak-suruseg-Rom}. ábra nem teljesen független
+a \ref{kezi-hosszak-suruseg}. ábrától, hiszen a Római levél a Zsoltárokból is idéz.
+Szemmel láthatóan azonban a két sűrűségbecslés egymáshoz hasonló jelleget ölt.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=0.7\textwidth]{../common/manual_Romans_length_density.pdf}
+\caption{A Római levélben előforduló idézetek szöveghossz-sűrűségbecslése}
+\label{kezi-hosszak-suruseg-Rom}
+\end{center}
+\end{figure}
+
+A Római levél szövege tehát megerősíti, hogy -- bár
+a \ref{algo-osz-uszi-ref}. algoritmus majdnem 90\%-os eredményt produkál -- egy fejlettebb
+módszerre is szükség van.
+
+Mielőtt továbblépnénk, a Római levél szerkezetét egy további ábrával szemléltetjük.
+A \ref{Rom-getrefs}. ábrán szürke pixellel jelöltük a Római levél 34176 karakterének nagy
+részét: ezek azok a betűk, amelyek \textit{nem} idézetek. A többi 3014 karakter (ez mintegy
+8,82\%) különféle szerepet játszik az idézetek megadásában:
+
+\begin{itemize}
+\item Az élénkpiros pixelek a \ref{algo-osz-uszi-ref}. algoritmus által beazonosított
+szövegdarabokat jelzik.
+\item A sötétpiros pixelek az idézetek további részei, melyeket a \ref{algo-osz-uszi-ref}.
+algoritmus nem azonosított be.
+\item A fekete pixelek olyan, a \ref{algo-osz-uszi-ref}. algoritmus által detektált
+szövegek, melyeket az utólagos kézi ellenőrzés fals pozitív találatnak azonosított.
+\item A világoszöld pixelek olyan idézetek, amelyek egy első idézeten belüli
+második idézetek, s a \ref{algo-osz-uszi-ref}. algoritmus is megtalálja őket.
+\item A sötétzöld pixelek egy első idézeten belüli második idézetek, de csak
+a kézi ellenőrzés találta meg őket.
+\item A lila színű pixelek nyilvánvalóan idézetek, de esetlegesen több ószövetségi szakaszban
+is megtalálhatóak.
+\end{itemize}
+
+A pixeleket a bal felső sarokból balról jobbra, majd fentről lefelé kell olvasni. Így pl.
+a bal felső pixel a Róma 1:1 első betűjének, míg az utolsó sorokban álló szürke pixelek
+a levél utolsó fejezetének felelnek meg. Nagyon intenzív képet kapunk a 9-11. fejezet
+környékén: ez a 3 fejezet tartalmazza az idézetek 60\%-át.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=\textwidth]{../common/Romans-getrefs}
+\caption{Idézetek a Római levélben}
+\label{Rom-getrefs}
+\end{center}
+\end{figure}
 
 \begin{center} *
 \end{center}
