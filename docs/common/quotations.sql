@@ -1345,6 +1345,54 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2006, 1, 'Ρεβεκκα ... αυτη', 'ερρεθη'); -- Ρεβεκκα ... αυτη = Rebecca ... to her, ερρεθη = it was said
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2006, 1, 'quotation', 'literal, exact', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2007, 1, 'Genesis', null, 'LXX Genesis 2:24+109 2:24', 'I_Corinthians', 'SBLGNT I_Corinthians 6:16+57 6:16', 5595, 17, 9366, 17, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2007, 1, 'Genesis', null, 'LXX Genesis 2:24+102 2:24', 'I_Corinthians', 'SBLGNT I_Corinthians 6:16+42 6:16', 5588, 24, 9351, 32, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2007, 1, null, 'γαρ φησιν'); -- γαρ φησιν = for it says
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2007, 1, 'quotation', 'literal, exact', 'Z.K.');
+-- TODO: Check all of these matches:
+# LXX Genesis 2:24+39 2:24-70 = SBLGNT Luke 14:26+38 14:26-97 (length=17, pos1=5525, pos2=59730)
+# insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+#  (?, ?, 'Genesis', null, 'LXX Genesis 2:24+39 2:24-70', 'Luke', 'SBLGNT Luke 14:26+38 14:26-97', 5525, 17, 59730, 17, 'getrefs');
+# LXX Genesis 2:24+44 2:24-65 = SBLGNT Matthew 2:14+28 2:14-30 (length=17, pos1=5530, pos2=3548)
+# insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+#  (?, ?, 'Genesis', null, 'LXX Genesis 2:24+44 2:24-65', 'Matthew', 'SBLGNT Matthew 2:14+28 2:14-30', 5530, 17, 3548, 17, 'getrefs');
+# LXX Genesis 2:24+61 2:24-46 = SBLGNT Ephesians 5:31+49 5:31-41 (length=19, pos1=5547, pos2=9847)
+# insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+#  (?, ?, 'Genesis', null, 'LXX Genesis 2:24+61 2:24-46', 'Ephesians', 'SBLGNT Ephesians 5:31+49 5:31-41', 5547, 19, 9847, 19, 'getrefs');
+# LXX Genesis 2:24+44 2:24-62 = SBLGNT Matthew 2:13+89 2:13-84 (length=20, pos1=5530, pos2=3416)
+# insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+#  (?, ?, 'Genesis', null, 'LXX Genesis 2:24+44 2:24-62', 'Matthew', 'SBLGNT Matthew 2:13+89 2:13-84', 5530, 20, 3416, 20, 'getrefs');
+# LXX Genesis 2:24+44 2:24-62 = SBLGNT Matthew 2:21+28 2:21-20 (length=20, pos1=5530, pos2=4237)
+# insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+#  (?, ?, 'Genesis', null, 'LXX Genesis 2:24+44 2:24-62', 'Matthew', 'SBLGNT Matthew 2:21+28 2:21-20', 5530, 20, 4237, 20, 'getrefs');
+# LXX Genesis 2:24+44 2:24-62 = SBLGNT Romans 16:13+33 16:13-4 (length=20, pos1=5530, pos2=33214)
+# insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+#  (?, ?, 'Genesis', null, 'LXX Genesis 2:24+44 2:24-62', 'Romans', 'SBLGNT Romans 16:13+33 16:13-4', 5530, 20, 33214, 20, 'getrefs');
+# LXX Genesis 2:24+44 2:24-61 = SBLGNT Matthew 2:20+30 2:20-60 (length=21, pos1=5530, pos2=4128)
+# insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+#  (?, ?, 'Genesis', null, 'LXX Genesis 2:24+44 2:24-61', 'Matthew', 'SBLGNT Matthew 2:20+30 2:20-60', 5530, 21, 4128, 21, 'getrefs');
+# LXX Genesis 2:24+94 2:24 = SBLGNT Ephesians 5:31+77 5:31 (length=32, pos1=5580, pos2=9875)
+# insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+#  (?, ?, 'Genesis', null, 'LXX Genesis 2:24+94 2:24', 'Ephesians', 'SBLGNT Ephesians 5:31+77 5:31', 5580, 32, 9875, 32, 'getrefs');
+# LXX Genesis 2:24+94 2:24 = SBLGNT Matthew 19:5+82 19:5 (length=32, pos1=5580, pos2=53857)
+# insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+#  (?, ?, 'Genesis', null, 'LXX Genesis 2:24+94 2:24', 'Matthew', 'SBLGNT Matthew 19:5+82 19:5', 5580, 32, 53857, 32, 'getrefs');
+# LXX Genesis 2:24+6 2:24-87 = SBLGNT Ephesians 5:31+4 5:31-72 (length=33, pos1=5492, pos2=9802)
+# insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+#  (?, ?, 'Genesis', null, 'LXX Genesis 2:24+6 2:24-87', 'Ephesians', 'SBLGNT Ephesians 5:31+4 5:31-72', 5492, 33, 9802, 33, 'getrefs');
+# LXX Genesis 2:24+6 2:24-87 = SBLGNT Matthew 19:5+13 19:5-68 (length=33, pos1=5492, pos2=53788)
+# insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+#  (?, ?, 'Genesis', null, 'LXX Genesis 2:24+6 2:24-87', 'Matthew', 'SBLGNT Matthew 19:5+13 19:5-68', 5492, 33, 53788, 33, 'getrefs');
+# LXX Genesis 2:24 2:24-70 = SBLGNT Mark 10:7 10:7-38 (length=56, pos1=5486, pos2=31613)
+# insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+#  (?, ?, 'Genesis', null, 'LXX Genesis 2:24 2:24-70', 'Mark', 'SBLGNT Mark 10:7 10:7-38', 5486, 56, 31613, 56, 'getrefs');
+# LXX Genesis 2:24+61 2:24 = SBLGNT Mark 10:7+56 10:8-29 (length=65, pos1=5547, pos2=31669)
+# insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+#  (?, ?, 'Genesis', null, 'LXX Genesis 2:24+61 2:24', 'Mark', 'SBLGNT Mark 10:7+56 10:8-29', 5547, 65, 31669, 65, 'getrefs');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2101, 1, 'Exodus', null, 'LXX Exodus 33:19+86 33:19', 'Romans', 'SBLGNT Romans 9:15+15 9:15', 99825, 38, 19129, 38, 'getrefs');
