@@ -1365,13 +1365,17 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2007, 2, null, 'το μυστηριον τουτο μεγα εστιν, εγω δε λεγω εις Χριστον και εις την εκκλησιαν'); -- το μυστηριον τουτο μεγα εστιν, εγω δε λεγω εις Χριστον και εις την εκκλησιαν = This is a great mystery: but I speak concerning Christ and the church.
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2007, 2, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2007, 3, 'Genesis', null, 'LXX Genesis 2:24+94 2:24', 'Matthew', 'SBLGNT Matthew 19:5+82 19:5', 5580, 32, 53857, 32, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2007, 3, 'Genesis', null, 'LXX Genesis 2:24+6 2:24-87', 'Matthew', 'SBLGNT Matthew 19:5+13 19:5-68', 5492, 33, 53788, 33, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2007, 3, 'Genesis', null, 'LXX Genesis 2:24 2:24', 'Matthew', 'SBLGNT Matthew 19:5+8 19:5', 5486, 126, 53775, 106, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2007, 3, null, 'Ουκ ανεγνωτε οτι'); -- Ουκ ανεγνωτε οτι = Not have you read that
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2007, 3, 'quotation', 'literal, fuzzy', 'Z.K.');
 -- TODO: Add these matches (they are quotations---this becomes clear in context):
--- LXX Genesis 2:24+94 2:24 = SBLGNT Matthew 19:5+82 19:5 (length=32, pos1=5580, pos2=53857)
--- insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
---  (?, ?, 'Genesis', null, 'LXX Genesis 2:24+94 2:24', 'Matthew', 'SBLGNT Matthew 19:5+82 19:5', 5580, 32, 53857, 32, 'getrefs');
--- LXX Genesis 2:24+6 2:24-87 = SBLGNT Matthew 19:5+13 19:5-68 (length=33, pos1=5492, pos2=53788)
--- insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
---  (?, ?, 'Genesis', null, 'LXX Genesis 2:24+6 2:24-87', 'Matthew', 'SBLGNT Matthew 19:5+13 19:5-68', 5492, 33, 53788, 33, 'getrefs');
 -- LXX Genesis 2:24 2:24-70 = SBLGNT Mark 10:7 10:7-38 (length=56, pos1=5486, pos2=31613)
 -- insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
 --  (?, ?, 'Genesis', null, 'LXX Genesis 2:24 2:24-70', 'Mark', 'SBLGNT Mark 10:7 10:7-38', 5486, 56, 31613, 56, 'getrefs');
