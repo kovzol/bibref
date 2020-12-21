@@ -1,0 +1,17 @@
+addbooks
+
+lookup1 LXX Deuteronomy 24:1+100 24:1-60
+# Stored internally as graceiaythbiblionapostasioy.
+lookup2 SBLGNT Mark 10:4+24 10:4-11
+# Stored internally as biblionapostasioygracai.
+compare12
+# Comparing 'graceiaythbiblionapostasioy' ~ 'biblionapostasioygracai' = 10
+# difference = 0.220000
+find1 LXX
+# Found in Deuteronomy 24:1+100 24:1-60 (book position 72306-72332)
+# Found in Deuteronomy 24:3+30 24:3-106 (book position 72452-72478)
+# 2 occurrences.
+length1
+# Length of text 1 is 27.
+length2
+# Length of text 2 is 23.

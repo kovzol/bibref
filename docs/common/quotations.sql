@@ -1372,16 +1372,31 @@ insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_pa
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2007, 3, 'Genesis', null, 'LXX Genesis 2:24 2:24', 'Matthew', 'SBLGNT Matthew 19:5+8 19:5', 5486, 126, 53775, 106, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
- (2007, 3, null, 'Ουκ ανεγνωτε οτι'); -- Ουκ ανεγνωτε οτι = Not have you read that
+ (2007, 3, 'ο κτισας απ αρχης', 'Ουκ ανεγνωτε οτι'); -- ο κτισας απ αρχης = the One having created from the beginning, Ουκ ανεγνωτε οτι = Not have you read that (in Matthew 19:4)
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2007, 3, 'quotation', 'literal, fuzzy', 'Z.K.');
--- TODO: Add these matches (they are quotations---this becomes clear in context):
--- LXX Genesis 2:24 2:24-70 = SBLGNT Mark 10:7 10:7-38 (length=56, pos1=5486, pos2=31613)
--- insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
---  (?, ?, 'Genesis', null, 'LXX Genesis 2:24 2:24-70', 'Mark', 'SBLGNT Mark 10:7 10:7-38', 5486, 56, 31613, 56, 'getrefs');
--- LXX Genesis 2:24+61 2:24 = SBLGNT Mark 10:7+56 10:8-29 (length=65, pos1=5547, pos2=31669)
--- insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
---  (?, ?, 'Genesis', null, 'LXX Genesis 2:24+61 2:24', 'Mark', 'SBLGNT Mark 10:7+56 10:8-29', 5547, 65, 31669, 65, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2007, 4, 'Genesis', null, 'LXX Genesis 2:24 2:24-70', 'Mark', 'SBLGNT Mark 10:7 10:7-38', 5486, 56, 31613, 56, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2007, 4, 'Genesis', null, 'LXX Genesis 2:24+61 2:24', 'Mark', 'SBLGNT Mark 10:7+56 10:8-29', 5547, 65, 31669, 65, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2007, 4, 'Genesis', null, 'LXX Genesis 2:24 2:24', 'Mark', 'SBLGNT Mark 10:7 10:8-29', 5486, 126, 31613, 121, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2007, 4, 'απο ... αρχης κτισεως', 'δε'); -- απο δε αρχης κτισεως = from ... the beginning of creation, δε = however (in Mark 10:6)
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2007, 4, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2008, 1, 'Genesis', null, 'LXX Genesis 1:27+53 1:27', 'Mark', 'SBLGNT Mark 10:6+17 10:6', 2703, 26, 31587, 26, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2008, 1, 'απο ... αρχης κτισεως', 'δε'); -- απο δε αρχης κτισεως = from ... the beginning of creation, δε = however
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2008, 1, 'quotation', 'literal, exact', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2008, 2, 'Genesis', null, 'LXX Genesis 1:27+53 1:27', 'Matthew', 'SBLGNT Matthew 19:4+46 19:4', 2703, 26, 53749, 26, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2008, 2, 'ο κτισας απ αρχης', 'Ουκ ανεγνωτε οτι'); -- ο κτισας απ αρχης = the One having created from the beginning, Ουκ ανεγνωτε οτι = Not have you read that
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2008, 2, 'quotation', 'literal, exact', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2101, 1, 'Exodus', null, 'LXX Exodus 33:19+86 33:19', 'Romans', 'SBLGNT Romans 9:15+15 9:15', 99825, 38, 19129, 38, 'getrefs');
@@ -1535,6 +1550,18 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2405, 2, null, 'λεγει'); -- λεγει = it says
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2405, 2, 'quotation', 'literal, far-fuzzy, superset', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2406, 1, 'Deuteronomy', null, 'LXX Deuteronomy 24:1+100 24:1-60', 'Mark', 'SBLGNT Mark 10:4+24 10:4-11', 72306, 27, 31465, 23, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2406, 1, 'Μωυσης', 'εγραψεν'); -- εγραψεν = he wrote
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2406, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2406, 2, 'Deuteronomy', null, 'LXX Deuteronomy 24:1+110 24:1-60', 'Matthew', 'SBLGNT Matthew 19:7+39 19:7-16', 72316, 17, 53994, 17, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2406, 2, 'Μωυσης', 'ενετειλατο'); -- ενετειλατο = did command
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2406, 2, 'quotation', 'literal, exact', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (3001, 1, 'Job', null, 'Job 5:12-13', 'I_Corinthians', 'I_Corinthians 3:19', null, null, null, null, 'traditional');
