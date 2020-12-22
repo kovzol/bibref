@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 # Several pieces of this code was taken from https://www.sqlitetutorial.net/sqlite-python/sqlite-python-select/
 
 import sqlite3, sys
@@ -266,6 +267,34 @@ def nt_report_latex(conn, book):
     print ("\\end{document}")
     f.close()
 
+def nt_frequencies_csv(conn):
+    """
+    Query all New Testament books and show them as a CSV table
+    :param conn: the Connection object
+    """
+
+    f = open("nt_frequencies.csv", "w")
+    f.write("Book,No. of quotations\n")
+
+    cur = conn.cursor()
+    cur.execute("SELECT name, COUNT(*) FROM" +
+        " (SELECT b.number as number, b.name as name" +
+        " FROM quotations q, quotations_classifications qc, books b " +
+        " WHERE qc.classification = 'quotation'" +
+        " AND qc.quotation_ot_id = q.ot_id" +
+        " AND qc.quotation_nt_id = q.nt_id" +
+        " AND q.nt_book = b.name" +
+        " GROUP BY b.number, q.ot_id, q.nt_id" +
+        " ORDER BY b.number)" +
+        " GROUP BY name ORDER BY number")
+    rows = cur.fetchall()
+
+    for row in rows:
+        book = row[0]
+        frequency = row[1]
+        f.write(book + "," + str(frequency) + "\n")
+    f.close()
+
 def main():
     database = r"quotations.sqlite3"
     conn = create_connection(database)
@@ -296,13 +325,16 @@ def main():
     if len(sys.argv) > 6:
         data5 = sys.argv[6]
     with conn:
-        if result_type == "nt_ppm":
-            nt_report_ppm(conn, data, data2, data3, data4, data5)
+        if result_type == "nt_freq_csv":
+            nt_frequencies_csv(conn)
         else:
-            if result_type == "nt_latex":
-                nt_report_latex(conn, data)
+            if result_type == "nt_ppm":
+                nt_report_ppm(conn, data, data2, data3, data4, data5)
             else:
-                psalms_report_latex(conn, result_type, data)
+                if result_type == "nt_latex":
+                    nt_report_latex(conn, data)
+                else:
+                    psalms_report_latex(conn, result_type, data)
 
 if __name__ == '__main__':
     main()

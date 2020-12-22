@@ -1,4 +1,4 @@
-all: getrefs.pdf authors.pdf manual_nt_length.pdf Rplots.pdf Romans-getrefs.png Romans-table.pdf Romans-Rplots.pdf
+all: getrefs.pdf authors.pdf manual_nt_length.pdf Rplots.pdf Romans-getrefs.png Romans-table.pdf Romans-Rplots.pdf nt_frequencies.csv
 
 authors.pdf: authors.tex
 	pdflatex authors
@@ -39,6 +39,9 @@ Romans-Rplots.pdf: manual_Romans_length.csv manual_Romans_length.r
 
 Romans-table.pdf: Romans-table.tex
 	pdflatex Romans-table
+
+nt_frequencies.csv: visualize.py quotations.sqlite3
+	python3 visualize.py nt_freq_csv
 
 clean:
 	rm -f quotations.sqlite3 authors.tex manual_nt_length.tex getrefs.tex authors.aux manual_nt_length.aux getrefs.aux authors.log manual_nt_length.log getrefs.log
