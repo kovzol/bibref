@@ -327,14 +327,12 @@ def main():
     with conn:
         if result_type == "nt_freq_csv":
             nt_frequencies_csv(conn)
+        elif result_type == "nt_ppm":
+            nt_report_ppm(conn, data, data2, data3, data4, data5)
+        elif result_type == "nt_latex":
+            nt_report_latex(conn, data)
         else:
-            if result_type == "nt_ppm":
-                nt_report_ppm(conn, data, data2, data3, data4, data5)
-            else:
-                if result_type == "nt_latex":
-                    nt_report_latex(conn, data)
-                else:
-                    psalms_report_latex(conn, result_type, data)
+            psalms_report_latex(conn, result_type, data)
 
 if __name__ == '__main__':
     main()
