@@ -1135,6 +1135,16 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (117, 1, null, 'καθως γεγραπται'); -- καθως γεγραπται = as it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (117, 1, 'quotation', 'literal', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (118, 1, 'Isaiah', null, 'LXX Isaiah 7:14+85 7:14', 'Matthew', 'SBLGNT Matthew 1:23+52 1:23-34', 14284, 21, 1974, 21, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (118, 1, 'Isaiah', null, 'LXX Isaiah 7:14+35 7:14-24', 'Matthew', 'SBLGNT Matthew 1:23 1:23-60', 14234, 47, 1922, 47, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (118, 1, 'Isaiah', null, 'LXX Isaiah 7:14+35 7:14', 'Matthew', 'SBLGNT Matthew 1:23 1:23-34', 14234, 71, 1922, 73, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (118, 1, 'δια του προφητου', 'το ρηθεν υπο κυριου ... λεγοντος'); -- δια του προφητου = through the prophet, το ρηθεν υπο κυριου ... λεγοντος = having been spoken by the Lord ... saying
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (118, 1, 'quotation', 'literal', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1001, 1, 'Habakkuk', null, 'LXX Habakkuk 2:4+39 2:4-10', 'Romans', 'SBLGNT Romans 1:17+68 1:17-7', 2126, 19, 1330, 19, 'getrefs');
