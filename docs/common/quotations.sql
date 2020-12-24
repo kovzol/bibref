@@ -50,6 +50,7 @@ create table quotations_classifications (
 insert into authors (name, info) values ('Moses', 'Moses');
 insert into authors (name, info) values ('Job', 'Job');
 insert into authors (name, info) values ('Isaiah', 'Isaiah');
+insert into authors (name, info) values ('Jeremiah', 'Jeremiah');
 insert into authors (name, info) values ('Joel', 'Joel');
 insert into authors (name, info) values ('Hosea', 'Hosea');
 insert into authors (name, info) values ('Micah', 'Micah');
@@ -82,6 +83,7 @@ insert into books (name, author, info, number) values ('Job', 'Job', 'Book of Jo
 insert into books (name, author, info, number) values ('Psalms', 'Various', 'Book of Psalms', 19);
 insert into books (name, author, info, number) values ('Proverbs', 'Solomon', 'Book of Proverbs', 20);
 insert into books (name, author, info, number) values ('Isaiah', 'Isaiah', 'Book of Isaiah', 23);
+insert into books (name, author, info, number) values ('Jeremiah', 'Jeremiah', 'Book of Jeremiah', 24);
 insert into books (name, author, info, number) values ('Hosea', 'Hosea', 'Book of Hosea', 28);
 insert into books (name, author, info, number) values ('Joel', 'Joel', 'Book of Joel', 29);
 insert into books (name, author, info, number) values ('Micah', 'Micah', 'Book of Micah', 33);
@@ -1149,6 +1151,17 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
  (118, 1, 'quotation', 'literal', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (201, 1, 'Jeremiah', null, 'LXX Jeremiah 31:15+50 31:15-64', 'Matthew', 'SBLGNT Matthew 2:18+25 2:18-66', 80265, 9, 3951, 9, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (201, 1, 'Jeremiah', null, 'LXX Jeremiah 31:15+14 31:15-90', 'Matthew', 'SBLGNT Matthew 2:17+47 2:18-83', 80229, 19, 3924, 19, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (201, 1, 'Jeremiah', null, 'LXX Jeremiah 31:15+16 31:15', 'Matthew', 'SBLGNT Matthew 2:18', 80231, 107, 3926, 100, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (201, 1, 'δια Ιερεμιου του προφητου', 'το ρηθεν ... λεγοντος'); -- δια Ιερεμιου του προφητου = by Jeremiah the prophet, το ρηθεν ... λεγοντος = having been spoken ... saying
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (201, 1, 'quotation', 'far-fuzzy', 'Z.K.');
+
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1001, 1, 'Habakkuk', null, 'LXX Habakkuk 2:4+39 2:4-10', 'Romans', 'SBLGNT Romans 1:17+68 1:17-7', 2126, 19, 1330, 19, 'getrefs');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1001, 1, 'Habakkuk', null, 'LXX Habakkuk 2:4+39 2:4', 'Romans','SBLGNT Romans 1:17+68 1:17', 2126, 29, 1330, 26, 'manual');
@@ -1218,7 +1231,7 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1303, 1, 'quotation', 'literal, exact', 'Z.K.');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (1304, 1, 'Hosea', null, 'LXX Hosea 11:1+38 1:11-11', 'Romans', 'SBLGNT Matthew 2:15+77 2:15-9', 15030, 21, 3672, 18, 'manual');
+ (1304, 1, 'Hosea', null, 'LXX Hosea 11:1+38 1:11-11', 'Matthew', 'SBLGNT Matthew 2:15+77 2:15-9', 15030, 21, 3672, 18, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (1304, 1, 'δια του προφητου', 'το ρηθεν υπο κυριου ... λεγοντος'); -- δια του προφητου = through the prophet, το ρηθεν υπο κυριου ... λεγοντος = having been spoken by the Lord ... saying
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
