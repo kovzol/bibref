@@ -1,0 +1,22 @@
+addbooks
+
+getrefs SBLGNT LXX Hosea 11:1
+# ...
+
+lookup1 LXX Hosea 11:1+38 11:1-11
+# Stored internally as ejaigyptoymetekalesat.
+lookup2 SBLGNT Matthew 2:15+77 2:15-9
+# Stored internally as ejaigyptoyekalesat.
+compare12
+# Comparing 'ejaigyptoymetekalesat' ~ 'ejaigyptoyekalesat' = 5
+# difference = 0.153846
+length1
+# Length of text 1 is 21.
+length2
+# Length of text 2 is 18.
+find1 LXX
+# Found in Hosea 11:1+38 11:1-11 (book position 15030-15050)
+# 1 occurrences.
+find2 SBLGNT 
+# Found in Matthew 2:15+77 2:15-9 (book position 3672-3689)
+# 1 occurrences.
