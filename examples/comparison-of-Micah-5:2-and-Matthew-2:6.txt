@@ -1,0 +1,27 @@
+addbooks
+
+getrefs SBLGNT LXX Micah 5:2
+# ... (lengths<=9)
+# LXX Micah 5:2 5:2-132 = SBLGNT Matthew 2:6 2:6-103 (length=12, pos1=6563, pos2=2608)
+# LXX Micah 5:2+52 5:2-79 = SBLGNT Matthew 2:6+47 2:6-55 (length=13, pos1=6615, pos2=2655)
+
+lookup LXX Micah 5:2
+# και συ βηθλεεμ οικος του εφραθα ολιγοστος ει του ειναι εν χιλιασιν ιουδα εκ σου μοι εξελευσεται του ειναι εις αρχοντα εν τω ισραηλ και αι εξοδοι αυτου απ αρχης εξ ημερων αιωνος
+## 1=και 2=συ 3=βηθλεεμ 4=οικος 5=του 6=εφραθα 7=ολιγοστος 8=ει 5=του 9=ειναι 10=εν 11=χιλιασιν 12=ιουδα
+## 13=εκ 14=σου 15=μοι 16=εξελευσεται 5=του 9=ειναι 17=εις 18=αρχοντα 10=εν 19=τω 20=ισραηλ 1=και
+## 21=αι 22=εξοδοι 23=αυτου 24=απ 25=αρχης 26=εξ 27=ημερων 28=αιωνος
+lookup SBLGNT Matthew 2:6
+# Και συ, Βηθλεεμ γη Ιουδα, ουδαμως ελαχιστη ει εν τοις ηγεμοσιν Ιουδα· εκ σου γαρ εξελευσεται ηγουμενος, οστις ποιμανει τον λαον μου τον Ισραηλ.
+## 1=Και 2=συ 3=Βηθλεεμ A=γη 12=Ιουδα B=ουδαμως C=ελαχιστη 8=ει 10=εν D=τοις E=ηγεμοσιν 12=Ιουδα
+## 13=εκ 14=σου F=γαρ 16=εξελευσεται G=ηγουμενος H=οστις I=ποιμανει J=τον K=λαον L=μου J=τον 20=Ισραηλ
+
+>> lookup1 LXX Micah 5:2 5:2-79
+Stored internally as kaisybhuleemoikostoyefrauaoligostoseitoyeinaienxiliasinioydaeksoy.
+>> lookup2 SBLGNT Matthew 2:6 2:6-55
+Stored internally as kaisybhuleemghioydaoydamvselaxistheientoishgemosinioydaeksoy.
+>> compare12
+Comparing 'kaisybhuleemoikostoyefrauaoligostoseitoyeinaienxiliasinioydaeksoy' ~ 'kaisybhuleemghioydaoydamvselaxistheientoishgemosinioydaeksoy' = 51
+difference = 0.416000
+
+## Note that Matthew quotes the chief priests and scribes who quote Micah.
+## The result is a very fuzzy variant of the text of LXX.

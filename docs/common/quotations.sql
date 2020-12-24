@@ -52,6 +52,7 @@ insert into authors (name, info) values ('Job', 'Job');
 insert into authors (name, info) values ('Isaiah', 'Isaiah');
 insert into authors (name, info) values ('Joel', 'Joel');
 insert into authors (name, info) values ('Hosea', 'Hosea');
+insert into authors (name, info) values ('Micah', 'Micah');
 insert into authors (name, info) values ('Habakkuk', 'Habakkuk');
 insert into authors (name, info) values ('Haggai', 'Haggai');
 insert into authors (name, info) values ('Various', 'Authors of Psalms');
@@ -83,6 +84,7 @@ insert into books (name, author, info, number) values ('Proverbs', 'Solomon', 'B
 insert into books (name, author, info, number) values ('Isaiah', 'Isaiah', 'Book of Isaiah', 23);
 insert into books (name, author, info, number) values ('Hosea', 'Hosea', 'Book of Hosea', 28);
 insert into books (name, author, info, number) values ('Joel', 'Joel', 'Book of Joel', 29);
+insert into books (name, author, info, number) values ('Micah', 'Micah', 'Book of Micah', 33);
 insert into books (name, author, info, number) values ('Habakkuk', 'Habakkuk', 'Book of Habakkuk', 35);
 insert into books (name, author, info, number) values ('Haggai', 'Haggai', 'Book of Haggai', 37);
 insert into books (name, author, info, number) values ('Malachi', 'Malachi', 'Book of Malachi', 39);
@@ -1254,6 +1256,17 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (1401, 2, 'προφητου Ιωηλ', 'ειρημενον'); -- προφητου Ιωηλ = prophet Joel, ειρημενον = having been spoken
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1401, 2, 'quotation', 'literal, fuzzy', 'Z.K.');
+
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1501, 1, 'Micah', null, 'LXX Micah 5:2 5:2-132', 'Matthew', 'SBLGNT Matthew 2:6 2:6-103', 6563, 12, 2608, 12, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1501, 1, 'Micah', null, 'LXX Micah 5:2+52 5:2-79', 'Matthew', 'SBLGNT Matthew 2:6+47 2:6-55', 6615, 13, 2655, 13, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1501, 1, 'Micah', null, 'LXX Micah 5:2 5:2-79', 'Matthew', 'SBLGNT Matthew 2:6 2:6-55', 6563, 65, 2608, 60, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (1501, 1, 'δια του προφητου', 'γαρ γεγραπται'); -- γαρ γεγραπται, δια του προφητου = for has it been written, through the prophet
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (1501, 1, 'quotation', 'far-fuzzy', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2001, 1, 'Genesis', null, 'LXX Genesis 15:6+16 15:6', 'Romans', 'SBLGNT Romans 4:3+32 4:3', 34471, 36, 7233, 36, 'getrefs');
