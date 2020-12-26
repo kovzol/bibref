@@ -1,6 +1,6 @@
 lookup Aleppo Isaiah 11:1
-# ויצא חטר מגזע ישי נצר משרשיו יפרה
+# ויצא חטר מגזע ישי ונצר משרשיו יפרה
 ## Here נצר is the word "branch" (nê-ṣer or nëtzer).
-##  Matthew 2:23 certainly refers to this puzzle according to the word "Ναζωραιος" (a Nazarene):
+## Matthew 2:23 certainly refers to this puzzle according to the word "Ναζωραιος" (a Nazarene):
 lookup SBLGNT Matthew 2:23
 # και ελθων κατωκησεν εις πολιν λεγομενην Ναζαρετ, οπως πληρωθη το ρηθεν δια των προφητων οτι Ναζωραιος κληθησεται.

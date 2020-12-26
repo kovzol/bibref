@@ -1151,7 +1151,7 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (118, 1, 'quotation', 'literal', 'Z.K.');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (119, 1, 'Isaiah', null, 'Aleppo Isaiah 11:2', 'Matthew', 'SBLGNT Matthew 2:23', null, null, null, null, 'traditional');
+ (119, 1, 'Isaiah', null, 'Aleppo Isaiah 11:1+16 11:1-10', 'Matthew', 'SBLGNT Matthew 2:23+76 2:23-14', null, 3, 4488, 5, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (119, 1, 'δια του προφητων', 'το ρηθεν ... οτι'); -- δια του προφητων = through the prophets, το ρηθεν ... οτι = that having been spoken ... that
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
