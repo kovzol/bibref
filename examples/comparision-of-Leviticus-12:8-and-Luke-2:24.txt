@@ -1,0 +1,27 @@
+addbooks
+
+## Traditionally Luke 2:24 refers to Leviticus 12:8.
+
+lookup LXX Leviticus 12:8
+# εαν δε μη ευρισκη η χειρ αυτης το ικανον εις αμνον και λημψεται δυο τρυγονας η δυο νεοσσους περιστερων μιαν εις ολοκαυτωμα και μιαν περι αμαρτιας και εξιλασεται περι αυτης ο ιερευς και καθαρισθησεται
+lookup SBLGNT Luke 2:24
+# και του δουναι θυσιαν κατα το ειρημενον εν ⸀τω νομω κυριου, ζευγος τρυγονων η δυο νοσσους περιστερων.
+
+lookup1 LXX Leviticus 12:8+51 12:8-82
+# Stored internally as dyotrygonashdyoneossoysperistervn.
+lookup2 SBLGNT Luke 2:24+47 2:24
+# Stored internally as qeygostrygonvnhdyonossoysperistervn.
+compare12
+# Comparing 'dyotrygonashdyoneossoysperistervn' ~ 'qeygostrygonvnhdyonossoysperistervn' = 18
+# difference = 0.279412
+
+## In fact, a couple of other textual matches can be found in LXX:
+find1 LXX
+# Found in Leviticus 5:7+78 5:7-39 (book position 10386-10418)
+# Found in Leviticus 12:8+51 12:8-82 (book position 33446-33478)
+# Found in Leviticus 14:22+3 14:22-62 (book position 42675-42707)
+# Found in Leviticus 15:14+30 15:14-75 (book position 47716-47748)
+# Found in Leviticus 15:29+29 15:29-56 (book position 49427-49459)
+# Found in Numbers 6:10+22 6:10-44 (book position 22898-22930)
+# 6 occurrences.
+## But only Leviticus 12:8 matches contextually!
