@@ -295,6 +295,34 @@ def nt_frequencies_csv(conn):
         f.write(book + "," + str(frequency) + "\n")
     f.close()
 
+def ot_frequencies_csv(conn):
+    """
+    Query all Old Testament books and show them as a CSV table
+    :param conn: the Connection object
+    """
+
+    f = open("ot_frequencies.csv", "w")
+    f.write("Book,No. of quotations\n")
+
+    cur = conn.cursor()
+    cur.execute("SELECT name, COUNT(*) FROM" +
+        " (SELECT b.number as number, b.name as name" +
+        " FROM quotations q, quotations_classifications qc, books b " +
+        " WHERE qc.classification = 'quotation'" +
+        " AND qc.quotation_ot_id = q.ot_id" +
+        " AND qc.quotation_nt_id = q.nt_id" +
+        " AND q.ot_book = b.name" +
+        " GROUP BY b.number, q.ot_id, q.nt_id" +
+        " ORDER BY b.number)" +
+        " GROUP BY name ORDER BY number")
+    rows = cur.fetchall()
+
+    for row in rows:
+        book = row[0]
+        frequency = row[1]
+        f.write(book + "," + str(frequency) + "\n")
+    f.close()
+
 def main():
     database = r"quotations.sqlite3"
     conn = create_connection(database)
@@ -327,6 +355,8 @@ def main():
     with conn:
         if result_type == "nt_freq_csv":
             nt_frequencies_csv(conn)
+        elif result_type == "ot_freq_csv":
+            ot_frequencies_csv(conn)
         elif result_type == "nt_ppm":
             nt_report_ppm(conn, data, data2, data3, data4, data5)
         elif result_type == "nt_latex":

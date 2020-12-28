@@ -1,4 +1,5 @@
-all: getrefs.pdf authors.pdf manual_nt_length.pdf Rplots.pdf Romans-getrefs.png Romans-table.pdf Romans-Rplots.pdf nt_frequencies.csv
+all: getrefs.pdf authors.pdf manual_nt_length.pdf Rplots.pdf Romans-getrefs.png \
+ Romans-table.pdf Romans-Rplots.pdf nt_frequencies.csv ot_frequencies.csv
 
 authors.pdf: authors.tex
 	pdflatex authors
@@ -43,8 +44,12 @@ Romans-table.pdf: Romans-table.tex
 nt_frequencies.csv: visualize.py quotations.sqlite3
 	python3 visualize.py nt_freq_csv
 
+ot_frequencies.csv: visualize.py quotations.sqlite3
+	python3 visualize.py ot_freq_csv
+
 clean:
-	rm -f quotations.sqlite3 authors.tex manual_nt_length.tex getrefs.tex authors.aux manual_nt_length.aux getrefs.aux authors.log manual_nt_length.log getrefs.log
+	rm -f quotations.sqlite3 authors.tex manual_nt_length.tex getrefs.tex authors.aux manual_nt_length.aux getrefs.aux \
+ authors.log manual_nt_length.log getrefs.log
 
 fullclean: clean
 	rm -f authors.pdf getrefs.pdf manual_nt_length.pdf Rplots.pdf
