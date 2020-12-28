@@ -28,7 +28,7 @@
 \lstset{
   basicstyle=\footnotesize\ttfamily,
   mathescape,
-  morekeywords={*,text1,text2,lookup1,lookup2,find1,find2,getrefs,extend,minunique1,latintext1,latintext2},
+  morekeywords={*,text1,text2,lookup1,lookup2,find1,find2,getrefs,extend,minunique1,latintext1,latintext2,length1,length2},
   keywordstyle=\color{blue},
   breaklines=true,
   breakatwhitespace=true
@@ -709,7 +709,7 @@ karakterből áll a kérdéses könyv. A $T=\textrm{\gr ουκεκπειρασε
 pozíción kezdődik $B$-ben, vagyis $p(T,B)=23212$, hossza 30 karakter, tehát $|T|=30$. $T$ egyedi $B$-ben,
 de az egész LXX-ben is.
 
-Legyen ezen kívül $N$ a Lk-hoz tartozó matematikai objektum az SBLGNT-ből. $|N|=94627$. $p(T,N)=13792$.
+Legyen ezen kívül $N$ a Lk-hoz tartozó matematikai objektum az SBLGNT-ből. $|N|=94627$. $p(T,N)=13910$.
 $T$ tehát lehetséges idézet,
 valamint maximális lehetséges idézet, mert a Lk 4:12-nek ezt a néhány szavát tartalmazó, az igehelyet magát
 is befoglaló szakasz nincs a Lukácsban, ami az Ószövetségben is jelen lenne.
@@ -722,11 +722,11 @@ Stored internally as oykekpeiraseiskyriontonueonsoy.
 >> length1
 Length of text 1 is 30.
 >> find1 LXX
-Found in Deuteronomy 6:16 6:16 (book position 23212)
+Found in Deuteronomy 6:16 6:16 (book position 23212-23241)
 1 occurrences.
 >> find1 SBLGNT 
-Found in Matthew 4:7+28 4:7 (book position 6621)
-Found in Luke 4:12+39 4:12 (book position 13792)
+Found in Matthew 4:7+28 4:7 (book position 6621-6715)
+Found in Luke 4:12+39 4:12 (book position 13910-13939)
 2 occurrences.
 \end{lstlisting}
 (A fent használt jelölésekkel egy bibliaversen belüli betű szerinti pontosításokat adhatunk meg.
@@ -737,7 +737,7 @@ az első 39 betű elhagyásával.)
 \item Tekintsük az LXX-et. Ebben legyen $B$ a 91. zsoltár, valamint
 $$T=\textrm{\gr τοιςαγγελοιςαυτουεντελειταιπερισουτουδιαφυλαξαισε\hu}.$$ $|T|=49$. $T$ egyedi az egész LXX-ben.
 
-Legyen továbbá $N$ ismét a Lk-hoz tartozó objektum az SBLGNT-ből. $p(T,N)=13646$. $T$ tehát lehetséges idézet,
+Legyen továbbá $N$ ismét a Lk-hoz tartozó objektum az SBLGNT-ből. $p(T,N)=13764$. $T$ tehát lehetséges idézet,
 de nem maximális, ugyanis a Lk 4:10-nek ezt a szakaszát tartalmazó
 $$T'=\textrm{\gr οτιτοιςαγγελοιςαυτουεντελειταιπερισουτουδιαφυλαξαισε\hu}$$
 szövegre $T<T'$ teljesül, továbbá $T'$ lehetséges idézet $B$-ben. $T'$ azonban már maximális.
@@ -748,10 +748,10 @@ Ez a példa a \texttt{bibref} programmal így ellenőrizhető:
 >> lookup1 LXX Psalms 91:11+3 91:11-20
 Stored internally as toisaggeloisaytoyenteleitaiperisoytoydiafylajaise.
 >> find1 LXX
-Found in Psalms 91:11+3 91:11 (book position 107359)
+Found in Psalms 91:11+3 91:11 (book position 107359-107407)
 1 occurrences.
 >> find1 SBLGNT
-Found in Luke 4:10+15 4:10 (book position 13646)
+Found in Luke 4:10+15 4:10 (book position 13764-13812)
 1 occurrences.
 >> extend LXX SBLGNT Luke 4:10+15 4:10
 Extended match is LXX Psalms 91:11 91:11-20 = SBLGNT Luke 4:10+12 4:10 (otitoisaggeloisaytoyenteleitaiperisoytoydiafylajaise, length 52).
@@ -778,8 +778,8 @@ mert az Ézs 41:23 végén is jelen van:
 >> lookup1 LXX Psalms 82:6+7 82:6-20
 Stored internally as ueoieste.
 >> find1 LXX
-Found in Psalms 82:6+7 82:6 (book position 96144)
-Found in Isaiah 41:23+51 41:23 (book position 82752)
+Found in Psalms 82:6+7 82:6 (book position 96144-96151)
+Found in Isaiah 41:23+51 41:23 (book position 82752-82759)
 2 occurrences.
 \end{lstlisting}
 Azonban még egy betűt hozzávéve ehhez a két szóhoz már egyedi szöveget kapunk:
@@ -787,7 +787,7 @@ Azonban még egy betűt hozzávéve ehhez a két szóhoz már egyedi szöveget k
 >> lookup1 LXX Psalms 82:6+6 82:6-20
 Stored internally as aueoieste.
 >> find1 LXX
-Found in Psalms 82:6+6 82:6 (book position 96143)
+Found in Psalms 82:6+6 82:6 (book position 96143-96151)
 1 occurrences.
 \end{lstlisting}
 A fenti jelölésekhez igazodva itt $T=\textrm{\gr εγωειπαθεοιεστε\hu}$,
@@ -921,10 +921,10 @@ ebben is segítséget ad, pl. a latin írással megadott ``eipau'' szöveg az
 >> latintext2 eipau
 Stored.
 >> find2 SBLGNT 
-Found in Luke 24:26+11 24:26 (book position 92671)
-Found in John 10:34+58 10:34 (book position 35754)
-Found in Acts 17:3+40 17:3 (book position 55405)
-Found in Acts 26:23 26:23 (book position 86624)
+Found in Luke 24:26+11 24:26-41 (book position 93873-93877)
+Found in John 10:34+58 10:34-7 (book position 36117-36121)
+Found in Acts 17:3+40 17:3-73 (book position 55940-55944)
+Found in Acts 26:23 26:23-80 (book position 87534-87538)
 4 occurrences.
 \end{lstlisting}
 
@@ -1005,14 +1005,14 @@ Az algoritmust (ill. annak rendezett eredményét) az alábbi \texttt{bibref}-ki
 
 \begin{lstlisting}
 >> getrefs SBLGNT LXX Psalms 91:11
-LXX Psalms 91:11+24 91:11-41 = SBLGNT Revelation_of_John 11:8+54 11:8-55 (length=7, pos1=107379)
-LXX Psalms 91:11+24 91:11-40 = SBLGNT Acts 10:32+45 10:32-51 (length=8, pos1=107379)
-LXX Psalms 91:11+24 91:11-40 = SBLGNT Acts 10:5+57 10:5-4 (length=8, pos1=107379)
-LXX Psalms 91:11 91:11-63 = SBLGNT Romans 8:28+9 8:28-62 (length=9, pos1=107355)
-LXX Psalms 91:11+25 91:11-38 = SBLGNT Luke 17:2+32 17:2-73 (length=9, pos1=107380)
-LXX Psalms 91:11+2 91:11-51 = SBLGNT Matthew 25:41+95 25:42-56 (length=19, pos1=107357)
-LXX Psalms 91:11 91:11-35 = SBLGNT Matthew 4:6+54 4:6-55 (length=37, pos1=107355)
-LXX Psalms 91:11 91:11-20 = SBLGNT Luke 4:10+12 4:10 (length=52, pos1=107355)
+LXX Psalms 91:11+24 91:11-41 = SBLGNT Revelation_of_John 11:8+54 11:8-55 (length=7, pos1=107380, pos2=20295)
+LXX Psalms 91:11+24 91:11-40 = SBLGNT Acts 10:32+45 10:32-51 (length=8, pos1=107380, pos2=33961)
+LXX Psalms 91:11+24 91:11-40 = SBLGNT Acts 10:5+57 10:5-4 (length=8, pos1=107380, pos2=31677)
+LXX Psalms 91:11 91:11-63 = SBLGNT Romans 8:28+9 8:28-62 (length=9, pos1=107356, pos2=17203)
+LXX Psalms 91:11+25 91:11-38 = SBLGNT Luke 17:2+32 17:2-73 (length=9, pos1=107381, pos2=66314)
+LXX Psalms 91:11+2 91:11-51 = SBLGNT Matthew 25:41+95 25:42-56 (length=19, pos1=107358, pos2=76695)
+LXX Psalms 91:11 91:11-35 = SBLGNT Matthew 4:6+54 4:6-55 (length=37, pos1=107356, pos2=6566)
+LXX Psalms 91:11 91:11-20 = SBLGNT Luke 4:10+12 4:10 (length=52, pos1=107356, pos2=13761)
 \end{lstlisting}
 
 Örvendetes, hogy a Lk 4:10 mint maximális lehetséges idézet jelent meg, azonban vannak további találatok is,
@@ -1025,18 +1025,18 @@ egyezésről van szó. A Zsolt 82:6-ra való hivatkozásra keresés a 15 betűs 
 jól beazonosítja, ám ez a Mt 25:41-hez tévesen kapcsolt Zsolt 91:11 részszövegnél rövidebb:
 \begin{lstlisting}
 >> getrefs SBLGNT LXX Psalms 82:6
-LXX Psalms 82:6+3 82:6-27 = SBLGNT Acts 26:23 26:23-80 (length=5, pos1=96139)
-LXX Psalms 82:6+4 82:6-26 = SBLGNT Luke 24:46+30 24:46-44 (length=5, pos1=96140)
-LXX Psalms 82:6+3 82:6-26 = SBLGNT Acts 17:3+40 17:3-72 (length=6, pos1=96139)
-LXX Psalms 82:6+3 82:6-26 = SBLGNT Luke 24:26+11 24:26-40 (length=6, pos1=96139)
-LXX Psalms 82:6+6 82:6-23 = SBLGNT Ephesians 2:12+117 2:12-8 (length=6, pos1=96142)
-LXX Psalms 82:6+11 82:6-16 = SBLGNT Romans 1:6+5 1:6-22 (length=8, pos1=96147)
-LXX Psalms 82:6+25 82:6-2 = SBLGNT II_Thessalonians 1:3+112 1:3-17 (length=8, pos1=96161)
-LXX Psalms 82:6+24 82:6-2 = SBLGNT Colossians 1:3+43 1:3-24 (length=9, pos1=96160)
-LXX Psalms 82:6+24 82:6-2 = SBLGNT Colossians 4:12+35 4:12-97 (length=9, pos1=96160)
-LXX Psalms 82:6+11 82:6-13 = SBLGNT I_Thessalonians 5:5+23 5:5-31 (length=11, pos1=96147)
-LXX Psalms 82:6+18 82:6-6 = SBLGNT Luke 6:35+102 6:35-48 (length=11, pos1=96154)
-LXX Psalms 82:6 82:6-20 = SBLGNT John 10:34+55 10:34 (length=15, pos1=96136)
+LXX Psalms 82:6+3 82:6-27 = SBLGNT Acts 26:23 26:23-80 (length=5, pos1=96140, pos2=87534)
+LXX Psalms 82:6+4 82:6-26 = SBLGNT Luke 24:46+30 24:46-44 (length=5, pos1=96141, pos2=95326)
+LXX Psalms 82:6+3 82:6-26 = SBLGNT Acts 17:3+40 17:3-72 (length=6, pos1=96140, pos2=55940)
+LXX Psalms 82:6+3 82:6-26 = SBLGNT Luke 24:26+11 24:26-40 (length=6, pos1=96140, pos2=93873)
+LXX Psalms 82:6+6 82:6-23 = SBLGNT Ephesians 2:12+117 2:12-8 (length=6, pos1=96143, pos2=3029)
+LXX Psalms 82:6+11 82:6-16 = SBLGNT Romans 1:6+5 1:6-22 (length=8, pos1=96148, pos2=363)
+LXX Psalms 82:6+25 82:6-2 = SBLGNT II_Thessalonians 1:3+112 1:3-17 (length=8, pos1=96162, pos2=268)
+LXX Psalms 82:6+24 82:6-2 = SBLGNT Colossians 1:3+43 1:3-24 (length=9, pos1=96161, pos2=202)
+LXX Psalms 82:6+24 82:6-2 = SBLGNT Colossians 4:12+35 4:12-97 (length=9, pos1=96161, pos2=7359)
+LXX Psalms 82:6+11 82:6-13 = SBLGNT I_Thessalonians 5:5+23 5:5-31 (length=11, pos1=96148, pos2=6064)
+LXX Psalms 82:6+18 82:6-6 = SBLGNT Luke 6:35+102 6:35-48 (length=11, pos1=96155, pos2=23617)
+LXX Psalms 82:6 82:6-20 = SBLGNT John 10:34+55 10:34 (length=15, pos1=96137, pos2=36114)
 \end{lstlisting}
 Jézus azonban egyértelműen kifejezi, hogy Ő itt az Ószövetségből idézett (\textit{Nincs-e
 megírva a ti törvényetekben$\ldots$?}), így az idézet hosszára való tekintet
@@ -1050,8 +1050,8 @@ hibára, de akár az újszövetségi szerző szándékára is.
 Egy példa erre a Zsolt 117:1-re adott gépi találat:
 \begin{lstlisting}
 >> getrefs SBLGNT LXX Psalms 117:1
-LXX Psalms 117:1+36 117:1-18 = SBLGNT Romans 15:11+37 15:11-21 (length=9, pos1=30105)
-LXX Psalms 117:1+46 117:1 = SBLGNT Romans 15:11+50 15:11 (length=17, pos1=30119)
+LXX Psalms 117:1+36 117:1-18 = SBLGNT Romans 15:11+38 15:11-21 (length=9, pos1=137244, pos2=30293)
+LXX Psalms 117:1+46 117:1 = SBLGNT Romans 15:11+51 15:11 (length=17, pos1=137254, pos2=30306)
 \end{lstlisting}
 
 Itt az algoritmus jól azonosítja be az újszövetségi kapcsolatot, azonban a találatot
