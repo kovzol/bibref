@@ -132,7 +132,8 @@ The available commands are:
 * `extend` *Bible1* *Bible2* *book2* *passage2*: Extend the given passage in *Bible2* according to the longest possible citation from *Bible1*, based on the text of *book2* in *passage2*. In most cases `LXX` is used for *Bible1* and `SBLGNT` for *Bible2*.
 * `getrefs` *Bible2* *Bible1* *book1* *passage1*: Search for references in *Bible2* on the passage in *Bible1* in book *book1* in *passage1*. Usually `SBLGNT` stands for *Bible2* and `LXX` for *Bible1*.
 * `maxresults` *number*: Set the maximal amount of results to be shown to *number*.
-* `compare12`: Compare the two clipboards with a 2-long substring-fingerprint check.
+* `compare12`: Compare the two clipboards with a 2-long substring-fingerprint (2-shingles) check, best match is reached at 1/(length1+length2).
+* `jaccard12`: Compute the Jaccard similarity of the two clipboards with a 2-long substring-fingerprint (2-shingles) check, best match is reached at 1/2.
 * `sql` *switch*: Set some outputs to be shown also as an SQL query if *switch* is `on`.
 * `help`: Show some hints on usage.
 * `quit`: Exit program.

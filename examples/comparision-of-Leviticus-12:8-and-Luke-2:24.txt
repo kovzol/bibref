@@ -25,3 +25,6 @@ find1 LXX
 # Found in Numbers 6:10+22 6:10-44 (book position 22898-22930)
 # 6 occurrences.
 ## But only Leviticus 12:8 matches contextually!
+
+jaccard12
+# Jaccard similarity is 0.363636.

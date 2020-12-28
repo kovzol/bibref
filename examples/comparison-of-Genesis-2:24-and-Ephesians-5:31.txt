@@ -6,6 +6,8 @@ lookup2 SBLGNT Ephesians 5:31
 compare12
 # Comparing 'enekentoytoykataleiceianurvpostonpateraaytoykaithnmhteraaytoykaiproskollhuhsetaiprosthngynaikaaytoykaiesontaioidyoeissarkamian' ~ 'antitoytoykataleiceianurvpostonpaterakaithnmhterakaiproskollhuhsetaithgynaikiaytoykaiesontaioidyoeissarkamian' = 35
 # difference = 0.153191
+jaccard12
+# Jaccard similarity is 0.424893.
 length1
 # Length of text 1 is 126.
 length2
@@ -24,3 +26,5 @@ lookup2 SBLGNT Ephesians 5:31+4 5:31
 compare12
 # Comparing 'toytoykataleiceianurvpostonpateraaytoykaithnmhteraaytoykaiproskollhuhsetaiprosthngynaikaaytoykaiesontaioidyoeissarkamian' ~ 'toytoykataleiceianurvpostonpaterakaithnmhterakaiproskollhuhsetaithgynaikiaytoykaiesontaioidyoeissarkamian' = 27
 # difference = 0.124444
+jaccard12
+# Jaccard similarity is 0.439462.

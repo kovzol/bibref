@@ -22,6 +22,7 @@ vector<bool> textset = {false, false};
 
 string addbooksCmd = "addbooks";
 string compareCmd = "compare";
+string jaccardCmd = "jaccard";
 string textCmd = "text";
 string latintextCmd = "latintext";
 string lookupCmd = "lookup";
@@ -50,7 +51,7 @@ string errorGetrefsParameters = getrefsCmd + " requires 3, 4 or 5 parameters.";
 string errorMaxresultsParameters = maxresultsCmd + " requires one parameter.";
 string errorSqlParameters = sqlCmd + " requires one parameter.";
 
-vector<string> vocabulary {addbooksCmd, compareCmd + "12",
+vector<string> vocabulary {addbooksCmd, compareCmd + "12", jaccardCmd + "12",
                            textCmd + "1", textCmd + "2", lookupCmd + "1", lookupCmd + "2", "quit",
                                    "help", findCmd + "1", findCmd + "2", lengthCmd + "1", lengthCmd + "2",
                                    minuniqueCmd + "1", latintextCmd + "1", latintextCmd + "2",
@@ -120,7 +121,7 @@ void cli(const char *input_prepend, const char *output_prepend) {
     output_prepend_set = new char[4]; // FIXME: this is hardcoded.
     strcpy(output_prepend_set, output_prepend);
     rl_attempted_completion_function = completer;
-    info("This is bibref-cli 2020Nov02, nice to meet you.");
+    info("This is bibref-cli 2020Dec28, nice to meet you.");
     showAvailableBibles();
 
     maxresults = 100;
@@ -396,6 +397,16 @@ void cli(const char *input_prepend, const char *output_prepend) {
         if (boost::starts_with(input, compareCmd + "12")) {
             if (textset.at(0) && textset.at(1)) {
                 compareLatin(text[0], text[1]);
+            } else {
+                error("Text 1 or 2 is not set.");
+            }
+            goto end;
+        }
+
+        if (boost::starts_with(input, jaccardCmd + "12")) {
+            if (textset.at(0) && textset.at(1)) {
+                double jd = jaccard_sim(text[0], text[1]);
+                info("Jaccard similarity is " + to_string(jd) + ".");
             } else {
                 error("Text 1 or 2 is not set.");
             }

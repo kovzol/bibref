@@ -15,3 +15,6 @@ length1
 # Length of text 1 is 27.
 length2
 # Length of text 2 is 23.
+
+jaccard12
+# Jaccard similarity is 0.395833.

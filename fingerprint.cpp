@@ -54,3 +54,18 @@ void printDist(fingerprint f1, fingerprint f2) {
 int dist(string text1, string text2) {
     return dist(getFingerprint(text1), getFingerprint(text2));
 }
+
+double jaccard_sim(string text1, string text2) {
+    int d1 = 0;
+    int d2 = 0;
+    int d = 0;
+    fingerprint f1 = getFingerprint(text1);
+    fingerprint f2 = getFingerprint(text2);
+    for (int i=0; i<N; ++i)
+        for (int j=0; j<N; ++j) {
+            d1 += f1.data[i][j];
+            d2 += f2.data[i][j];
+            d += min(f1.data[i][j], f2.data[i][j]);
+        }
+    return ((double) d)/(d1+d2);
+}
