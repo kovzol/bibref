@@ -26,3 +26,5 @@ jobs:
       run: cd docs/common && make authors.pdf manual_nt_length.pdf getrefs.pdf Romans-getrefs.png
     - name: doc-hu
       run: cd docs/hu && make
+    - name: selftest
+      run: cd docs/common && ./selftest.py
