@@ -310,9 +310,8 @@ def ot_frequencies_csv(conn):
         " FROM quotations q, quotations_classifications qc, books b " +
         " WHERE qc.classification = 'quotation'" +
         " AND qc.quotation_ot_id = q.ot_id" +
-        " AND qc.quotation_nt_id = q.nt_id" +
         " AND q.ot_book = b.name" +
-        " GROUP BY b.number, q.ot_id, q.nt_id" +
+        " GROUP BY b.number, q.ot_id" +
         " ORDER BY b.number)" +
         " GROUP BY name ORDER BY number")
     rows = cur.fetchall()

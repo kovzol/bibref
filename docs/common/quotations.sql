@@ -101,6 +101,7 @@ insert into books (name, author, info, number) values ('I_Corinthians', 'Paul', 
 insert into books (name, author, info, number) values ('II_Corinthians', 'Paul', 'Second Epistle to the Corinthians', 108);
 insert into books (name, author, info, number) values ('Galatians', 'Paul', 'Epistle to the Galatians', 109);
 insert into books (name, author, info, number) values ('Ephesians', 'Paul', 'Epistle to the Ephesians', 110);
+insert into books (name, author, info, number) values ('I_Timothy', 'Paul', 'First Epistle to the Ephesians', 115);
 insert into books (name, author, info, number) values ('Hebrews', 'Unknown', 'Epistle to the Hebrews', 119);
 insert into books (name, author, info, number) values ('James', 'James', 'Epistle of James', 120);
 insert into books (name, author, info, number) values ('I_Peter', 'Peter', 'First Epistle of Peter', 121);
@@ -1631,6 +1632,16 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2407, 1, 'εν ... τω Μωυσεως νομω ', 'γαρ ... γεγραπται'); -- εν γαρ τω Μωυσεως νομω γεγραπται = in for the of Moses law it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2407, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2407, 2, 'Deuteronomy', null, 'LXX Deuteronomy 25:4 25:4-11', 'I_Timothy', 'SBLGNT I_Timothy 5:18+25 5:18-30', 75098, 10, 6301, 10, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2407, 2, 'Deuteronomy', null, 'LXX Deuteronomy 25:4+10 25:4', 'I_Timothy', 'SBLGNT I_Timothy 5:18+14 5:18-40', 75108, 11, 6290, 11, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2407, 2, 'Deuteronomy', null, 'LXX Deuteronomy 25:4', 'I_Timothy', 'SBLGNT I_Timothy 5:18+14 5:18-30', 75098, 21, 6290, 21, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2407, 2, 'η γραφη', 'λεγει γαρ'); -- η γραφη = the Scripture, λεγει γαρ = says for
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2407, 2, 'quotation', 'literal, fuzzy', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (3001, 1, 'Job', null, 'Job 5:12-13', 'I_Corinthians', 'I_Corinthians 3:19', null, null, null, null, 'traditional');
