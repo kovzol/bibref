@@ -133,7 +133,7 @@ The available commands are:
 * `getrefs` *Bible2* *Bible1* *book1* *passage1*: Search for references in *Bible2* on the passage in *Bible1* in book *book1* in *passage1*. Usually `SBLGNT` stands for *Bible2* and `LXX` for *Bible1*.
 * `maxresults` *number*: Set the maximal amount of results to be shown to *number*.
 * `compare12`: Compare the two clipboards with a 2-long substring-fingerprint (2-shingles) check, best match is reached at 1/(length1+length2).
-* `jaccard12`: Compute the Jaccard similarity of the two clipboards with a 2-long substring-fingerprint (2-shingles) check, best match is reached at 1/2.
+* `jaccard12`: Compare the two clipboards the same way how `compare12` does but use the "Jaccard similarity for bags" algorithm, best match is reached at 0.
 * `sql` *switch*: Set some outputs to be shown also as an SQL query if *switch* is `on`.
 * `help`: Show some hints on usage.
 * `quit`: Exit program.

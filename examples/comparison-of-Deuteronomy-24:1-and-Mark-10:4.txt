@@ -17,4 +17,4 @@ length2
 # Length of text 2 is 23.
 
 jaccard12
-# Jaccard similarity is 0.395833.
+# Jaccard distance is 0.269231.

@@ -27,4 +27,4 @@ find1 LXX
 ## But only Leviticus 12:8 matches contextually!
 
 jaccard12
-# Jaccard similarity is 0.363636.
+# Jaccard distance is 0.294118.

@@ -405,8 +405,8 @@ void cli(const char *input_prepend, const char *output_prepend) {
 
         if (boost::starts_with(input, jaccardCmd + "12")) {
             if (textset.at(0) && textset.at(1)) {
-                double jd = jaccard_sim(text[0], text[1]);
-                info("Jaccard similarity is " + to_string(jd) + ".");
+                double jd = jaccard_dist(text[0], text[1]);
+                info("Jaccard distance is " + to_string(jd) + ".");
             } else {
                 error("Text 1 or 2 is not set.");
             }

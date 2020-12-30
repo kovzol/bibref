@@ -55,7 +55,7 @@ int dist(string text1, string text2) {
     return dist(getFingerprint(text1), getFingerprint(text2));
 }
 
-double jaccard_sim(string text1, string text2) {
+double jaccard_dist(string text1, string text2) {
     int d1 = 0;
     int d2 = 0;
     int d = 0;
@@ -67,5 +67,11 @@ double jaccard_sim(string text1, string text2) {
             d2 += f2.data[i][j];
             d += min(f1.data[i][j], f2.data[i][j]);
         }
-    return ((double) d)/(d1+d2);
+    /* We compute the Jaccard similarity for bags
+     * (see Leskovec, Rajamaran, Ullman: Mining of massive datasets,
+     * Cambridge Univ. Press, 2014, p. 77, footnote 2)
+     * with the redefinition of the union of bags.
+     * Then we compute the Jaccard distance.
+     */
+    return 1-((double) d)/max(d1,d2);
 }
