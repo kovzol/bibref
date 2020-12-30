@@ -1157,6 +1157,12 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (119, 1, 'δια του προφητων', 'το ρηθεν ... οτι'); -- δια του προφητων = through the prophets, το ρηθεν ... οτι = that having been spoken ... that
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (119, 1, 'quotation', 'puzzle', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (120, 1, 'Isaiah', null, 'Isaiah 28:11+12 28:11', 'I_Corinthians', 'SBLGNT I_Corinthians 14:21+40 14:21-38', 52171, 46, 25551, 30, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (120, 1, 'εν τω νομω', 'γεγραπται οτι'); -- εν τω νομω  = in the law, γεγραπται οτι = it has been written
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (120, 1, 'quotation', 'far-fuzzy', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (201, 1, 'Jeremiah', null, 'LXX Jeremiah 31:15+50 31:15-64', 'Matthew', 'SBLGNT Matthew 2:18+25 2:18-66', 80265, 9, 3951, 9, 'getrefs');
