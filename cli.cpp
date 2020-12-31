@@ -117,12 +117,17 @@ int maxresults;
 bool sql;
 char* output_prepend_set;
 
-void cli(const char *input_prepend, const char *output_prepend) {
+void cli(const char *input_prepend, const char *output_prepend, bool addbooks) {
     output_prepend_set = new char[4]; // FIXME: this is hardcoded.
     strcpy(output_prepend_set, output_prepend);
     rl_attempted_completion_function = completer;
     info("This is bibref-cli 2020Dec28, nice to meet you.");
     showAvailableBibles();
+    if (addbooks) {
+        if (addBooks() == 0) {
+            booksAdded = true;
+            }
+        }
 
     maxresults = 100;
     sql = false;
