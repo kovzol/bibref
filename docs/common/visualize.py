@@ -348,6 +348,7 @@ def nt_jaccard_csv(conn, nt_book):
     p.expect("Done loading books of SBLGNT.")
 
     f = open("jaccard_" + nt_book + ".csv", "w")
+    g = open("jaccard_" + nt_book + ".txt", "w")
     r = 0
     for row in rows:
         ot_passage = row[0]
@@ -368,9 +369,11 @@ def nt_jaccard_csv(conn, nt_book):
         percent = int(r/len(rows)*100)
         print(f"{percent}% done\u001b[{0}K\r", end='')
         f.write(f"{jaccard}\n")
+        g.write(f"{jaccard:.6f}\t{ot_passage}\t{nt_passage}\n")
         r += 1
     print(f"Done\u001b[{0}K")
     f.close()
+    g.close()
 
 def main():
     database = r"quotations.sqlite3"
