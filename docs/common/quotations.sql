@@ -1256,6 +1256,16 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (1304, 1, 'δια του προφητου', 'το ρηθεν υπο κυριου ... λεγοντος'); -- δια του προφητου = through the prophet, το ρηθεν υπο κυριου ... λεγοντος = having been spoken by the Lord ... saying
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1304, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1305, 1, 'Hosea', null, 'LXX Hosea 13:14+61 13:14-51', 'I_Corinthians', 'SBLGNT I_Corinthians 15:55+22 15:55-9', 18605, 9, 30849, 9, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1305, 1, 'Hosea', null, 'LXX Hosea 13:14+73 13:14-39', 'I_Corinthians', 'SBLGNT I_Corinthians 15:55+31 15:55', 18617, 9, 30858, 9, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1305, 1, 'Hosea', null, 'LXX Hosea 13:14+61 13:14-39', 'I_Corinthians', 'SBLGNT I_Corinthians 15:55+19 15:55', 18605, 21, 30846, 21, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (1305, 1, null, 'γεγραμμενος'); -- γεγραμμενος = having been written
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (1305, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1401, 1, 'Joel', null, 'LXX Joel 2:32+11 2:32-103', 'Romans', 'SBLGNT Romans 10:13+6 10:13', 5577, 38, 21452, 38, 'getrefs');
