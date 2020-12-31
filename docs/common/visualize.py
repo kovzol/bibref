@@ -358,8 +358,10 @@ def nt_jaccard_csv(conn, nt_book):
         command2 = "lookup2 " + nt_passage
         p.sendline(command2)
         p.expect("Stored internally as \w.")
+        # command3 = "compare12"
         command3 = "jaccard12"
         p.sendline(command3)
+        # p.expect("difference = ([0-9]+\.[0-9]+).")
         p.expect("Jaccard distance is ([0-9]+\.[0-9]+).")
         jaccard12 = p.match.groups()
         jaccard = float(jaccard12[0])
