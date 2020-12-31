@@ -235,6 +235,7 @@ VerseInfo splitVerseInfo(string verseInfo) {
             return {bookName, reference};
         }
     }
+    throw InvalidPassage;
 }
 
 int lookupTranslation(string moduleName, string book, string verse) {
@@ -412,6 +413,7 @@ int compareLatin(string verse1, string verse2) {
     info("Comparing '" + verse1 + "' ~ '" + verse2 + "' = " + to_string(d));
     float ratio = ((float) d+1) / (verse1.length() + verse2.length());
     info("difference = " + to_string(ratio));
+    return d;
 }
 
 int compare(string verse1, string verse2) {
@@ -419,6 +421,7 @@ int compare(string verse1, string verse2) {
     info("Comparing '" + verse1 + "' ~ '" + verse2 + "' = " + to_string(d));
     float ratio = ((float) d+1) / (verse1.length() + verse2.length());
     info("difference = " + to_string(ratio));
+    return d;
 }
 
 typedef struct fingerprintInfo {
