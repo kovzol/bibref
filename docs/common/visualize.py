@@ -3,6 +3,7 @@
 
 import sqlite3, sys
 from sqlite3 import Error
+import pexpect
 
 def create_connection(db_file):
     """
@@ -322,6 +323,53 @@ def ot_frequencies_csv(conn):
         f.write(book + "," + str(frequency) + "\n")
     f.close()
 
+def nt_jaccard_csv(conn, nt_book):
+    """
+    Collect all quotations from an NT book that are obtained manually and
+    determine the Jaccard distances to the OT passages in a CSV file
+    :param conn: the Connection object
+    :nt_book: NT book name
+    """
+
+    cur = conn.cursor()
+    cur.execute("SELECT q.ot_passage, q.nt_passage" +
+        " FROM quotations q, quotations_classifications qc" +
+        " WHERE q.found_method = 'manual'" +
+        " AND qc.classification = 'quotation'" +
+        " AND qc.quotation_ot_id = q.ot_id" +
+        " AND qc.quotation_nt_id = q.nt_id" +
+        " AND q.nt_book = '" + nt_book + "'" +
+        " AND INSTR(q.ot_passage, 'LXX') > 0" +
+        " ORDER BY q.nt_startpos")
+    rows = cur.fetchall()
+
+    print("Waiting for bibref's full startup...")
+    p = pexpect.spawn("../../bibref -a") # FIXME: path is hardcoded now
+    p.expect("Done loading books of SBLGNT.")
+
+    f = open("jaccard_" + nt_book + ".csv", "w")
+    r = 0
+    for row in rows:
+        ot_passage = row[0]
+        nt_passage = row[1]
+        command1 = "lookup1 " + ot_passage
+        p.sendline(command1)
+        p.expect("Stored internally as \w.")
+        command2 = "lookup2 " + nt_passage
+        p.sendline(command2)
+        p.expect("Stored internally as \w.")
+        command3 = "jaccard12"
+        p.sendline(command3)
+        p.expect("Jaccard distance is ([0-9]+\.[0-9]+).")
+        jaccard12 = p.match.groups()
+        jaccard = float(jaccard12[0])
+        percent = int(r/len(rows)*100)
+        print(f"{percent}% done\u001b[{0}K\r", end='')
+        f.write(f"{jaccard}\n")
+        r += 1
+    print(f"Done\u001b[{0}K")
+    f.close()
+
 def main():
     database = r"quotations.sqlite3"
     conn = create_connection(database)
@@ -341,6 +389,9 @@ def main():
         data5 = "getrefs"
     if result_type == "nt_latex":
         data = "Romans"
+    if result_type == "nt_jaccard":
+        data = "Romans"
+
     if len(sys.argv) > 2:
         data = sys.argv[2]
     if len(sys.argv) > 3:
@@ -360,6 +411,8 @@ def main():
             nt_report_ppm(conn, data, data2, data3, data4, data5)
         elif result_type == "nt_latex":
             nt_report_latex(conn, data)
+        elif result_type == "nt_jaccard":
+            nt_jaccard_csv(conn, data)
         else:
             psalms_report_latex(conn, result_type, data)
 

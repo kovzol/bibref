@@ -1320,7 +1320,7 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2001, 1, 'Genesis', null, 'LXX Genesis 15:6+16 15:6', 'Romans', 'SBLGNT Romans 4:3+32 4:3', 34471, 36, 7233, 36, 'getrefs');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (2001, 1, 'Genesis', null, 'LXX Genesis 15:6+3', 'Romans', 'SBLGNT Romans 4:3+16 4:3', 34458, 49, 7217, 52, 'manual');
+ (2001, 1, 'Genesis', null, 'LXX Genesis 15:6+3 15:6', 'Romans', 'SBLGNT Romans 4:3+16 4:3', 34458, 49, 7217, 52, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2001, 1, 'η γραφη', 'λεγει'); -- η γραφη = the Scripture, λεγει = says
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
@@ -1497,7 +1497,7 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2102, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (2103, 1, 'Exodus', null, 'LXX Exodus 20:13-15', 'Romans', 'SBLGNT Romans 13:9+5 13:9-96', 57313, 32, 27194, 32, 'manual');
+ (2103, 1, 'Exodus', null, 'LXX Exodus 20:13 20:15', 'Romans', 'SBLGNT Romans 13:9+5 13:9-96', 57313, 32, 27194, 32, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2103, 1, 'νομον', 'το γαρ'); -- νομον = the Law (in Romans 13:8), το γαρ = for
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values

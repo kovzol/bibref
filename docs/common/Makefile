@@ -1,5 +1,6 @@
 all: getrefs.pdf authors.pdf manual_nt_length.pdf Rplots.pdf Romans-getrefs.png \
- Romans-table.pdf Romans-Rplots.pdf nt_frequencies.csv ot_frequencies.csv
+ Romans-table.pdf Romans-Rplots.pdf nt_frequencies.csv ot_frequencies.csv \
+ jaccard-Romans-Rplots.pdf
 
 authors.pdf: authors.tex
 	pdflatex authors
@@ -37,6 +38,12 @@ Rplots.pdf: manual_nt_length.csv manual_nt_length.r
 
 Romans-Rplots.pdf: manual_Romans_length.csv manual_Romans_length.r
 	R -q --save < manual_Romans_length.r
+
+jaccard-Romans-Rplots.pdf: jaccard_Romans.csv jaccard_Romans.r
+	R -q --save < jaccard_Romans.r
+
+jaccard_Romans.csv: visualize.py quotations.sqlite3
+	python3 visualize.py nt_jaccard
 
 Romans-table.pdf: Romans-table.tex
 	pdflatex Romans-table
