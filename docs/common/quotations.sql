@@ -1169,6 +1169,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (121, 1, null, null);
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (121, 1, 'strong allusion', 'literal', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (122, 1, 'Isaiah', null, 'LXX Isaiah 9:2+71 9:2-6', 'II_Corinthians', 'SBLGNT II_Corinthians 4:6+23 4:6-80', 17973, 9, 5634, 9, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (122, 1, 'Isaiah', null, 'LXX Isaiah 9:2+71 9:2-6', 'II_Corinthians', 'SBLGNT II_Corinthians 4:6+23 4:6-80', 17973, 9, 5634, 9, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (122, 1, 'θεος', 'ειπων'); -- ειπων = having said
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (122, 1, 'quotation', 'literal, exact', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (201, 1, 'Jeremiah', null, 'LXX Jeremiah 31:15+50 31:15-64', 'Matthew', 'SBLGNT Matthew 2:18+25 2:18-66', 80265, 9, 3951, 9, 'getrefs');
