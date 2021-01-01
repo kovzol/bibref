@@ -1,6 +1,7 @@
 all: getrefs.pdf authors.pdf manual_nt_length.pdf Rplots.pdf Romans-getrefs.png \
  Romans-table.pdf Romans-Rplots.pdf nt_frequencies.csv ot_frequencies.csv \
- jaccard-Romans-Rplots.pdf jaccard_Romans-sorted.txt
+ jaccard-Romans-Rplots.pdf jaccard_Romans-sorted.txt \
+ jaccard-Psalms-Rplots.pdf jaccard_Psalms-sorted.txt
 
 authors.pdf: authors.tex
 	pdflatex authors
@@ -50,6 +51,18 @@ jaccard_Romans.txt: visualize.py quotations.sqlite3
 
 jaccard_Romans-sorted.txt: jaccard_Romans.txt
 	sort jaccard_Romans.txt > jaccard_Romans-sorted.txt
+
+jaccard-Psalms-Rplots.pdf: jaccard_Psalms.csv jaccard_Psalms.r
+	R -q --save < jaccard_Psalms.r
+
+jaccard_Psalms.csv: visualize.py quotations.sqlite3
+	python3 visualize.py ot_jaccard
+
+jaccard_Psalms.txt: visualize.py quotations.sqlite3
+	python3 visualize.py ot_jaccard
+
+jaccard_Psalms-sorted.txt: jaccard_Psalms.txt
+	sort jaccard_Psalms.txt > jaccard_Psalms-sorted.txt
 
 Romans-table.pdf: Romans-table.tex
 	pdflatex Romans-table
