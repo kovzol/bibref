@@ -1187,6 +1187,40 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (123, 1, 'θεου', 'λεγει γαρ'); -- λεγει γαρ = He says for
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (123, 1, 'quotation', 'literal, exact', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (124, 1, 'Isaiah', null, 'LXX Isaiah 40:3+27 40:3-35', 'John', 'SBLGNT John 1:23+31 1:23-25', 78225, 16, 1462, 16, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (124, 1, 'Isaiah', null, 'LXX Isaiah 40:3 40:3-57', 'John', 'SBLGNT John 1:23+6 1:23-45', 78198, 21, 1437, 21, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (124, 1, 'Isaiah', null, 'LXX Isaiah 40:3 40:3-35', 'John', 'SBLGNT John 1:23+6 1:23-25', 78198, 43, 1437, 41, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (124, 1, 'Ησαΐας ο προφητης', 'καθως ειπεν'); -- Ησαΐας ο προφητης = Isaiah the prophet, καθως ειπεν = as said
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (124, 1, 'quotation', 'literal, fuzzy, change', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (124, 2, 'Isaiah', null, 'LXX Isaiah 40:3 40:3-11', 'Luke', 'SBLGNT Luke 3:4+40 3:4-5', 78198, 67, 10557, 67, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (124, 2, 'Isaiah', null, 'LXX Isaiah 40:3 40:3-11', 'Luke', 'SBLGNT Luke 3:4+40 3:4-5', 78198, 67, 10557, 67, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (124, 2, 'εν βιβλω λογων Ησαΐου του προφητου', 'ως γεγραπται'); -- εν βιβλω λογων Ησαΐου του προφητου = in the book of the words of Isaiah the prophet, ως γεγραπται = as it has been written
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (124, 2, 'quotation', 'literal, exact', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (124, 3, 'Isaiah', null, 'LXX Isaiah 40:3 40:3-11', 'Mark', 'SBLGNT Mark 1:3 1:3-5', 78198, 67, 136, 67, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (124, 3, 'Isaiah', null, 'LXX Isaiah 40:3 40:3-11', 'Mark', 'SBLGNT Mark 1:3 1:3-5', 78198, 67, 136, 67, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (124, 3, 'εν τω Ησαΐα τω προφητη', 'Καθως γεγραπται'); -- εν τω Ησαΐα τω προφητη = in Isaiah the prophet, Καθως γεγραπται = as it has been written
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (124, 3, 'quotation', 'literal, exact', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (124, 4, 'Isaiah', null, 'LXX Isaiah 40:2+145 40:3-11', 'Matthew', 'SBLGNT Matthew 3:3+47 3:3-5', 78197, 68, 4680, 68, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (124, 4, 'Isaiah', null, 'LXX Isaiah 40:3 40:3-11', 'Matthew', 'SBLGNT Matthew 3:3+48 3:3-5', 78198, 67, 4681, 67, 'gmanual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (124, 4, 'δια Ησαΐου του προφητου', 'ρηθεις ... λεγοντος'); -- ρηθεις ... λεγοντος = having been spoken of ... saying
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (124, 4, 'quotation', 'literal, exact', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (201, 1, 'Jeremiah', null, 'LXX Jeremiah 31:15+50 31:15-64', 'Matthew', 'SBLGNT Matthew 2:18+25 2:18-66', 80265, 9, 3951, 9, 'getrefs');

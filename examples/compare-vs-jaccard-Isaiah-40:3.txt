@@ -1,0 +1,36 @@
+addbooks
+
+## Background: Isaiah 40:3 is quoted in all the four gospels.
+## Mostly literally, but John's quotation can be better identified with a fuzzy comparison.
+
+lookup1 LXX Isaiah 40:3 40:3-35
+# Stored internally as fvnhbovntosentherhmvetoimasatethnodonkyrioy.
+lookup2 SBLGNT John 1:23+6 1:23-25
+# Stored internally as fvnhbovntosentherhmveyuynatethnodonkyrioy.
+compare12
+# Comparing 'fvnhbovntosentherhmvetoimasatethnodonkyrioy' ~ 'fvnhbovntosentherhmveyuynatethnodonkyrioy' = 12
+# difference = 0.154762
+jaccard12
+# Jaccard distance is 0.166667.
+length1
+# Length of text 1 is 43.
+length2
+# Length of text 2 is 41.
+
+## This is acceptable.
+## On the other hand, the word "ευθείας" (straight) follows the quoted text in LXX, and a similar
+## word is used by John in the middle of quotation: "Εὐθύνατε" (make straight). As an option,
+## we can consider a longer text from LXX (which includes the three additional letters "ευθ")
+## and this gives a better match with the compare algorithm, but a worse match with Jaccard:
+
+lookup1 LXX Isaiah 40:3 40:3-32
+# Stored internally as fvnhbovntosentherhmvetoimasatethnodonkyrioyeyu.
+compare12
+# Comparing 'fvnhbovntosentherhmvetoimasatethnodonkyrioyeyu' ~ 'fvnhbovntosentherhmveyuynatethnodonkyrioy' = 11
+# difference = 0.137931
+jaccard12
+# Jaccard distance is 0.177778.
+
+## This is still acceptable, however, this influences the detection of possible extension.
+## At the moment, the database for the "manual" entry of this match above considers
+## the Jaccard distance and points to the shorter match.
