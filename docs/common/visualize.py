@@ -5,6 +5,8 @@ import sqlite3, sys
 from sqlite3 import Error
 import pexpect
 
+bibref = None
+
 def create_connection(db_file):
     """
     Create a database connection to the SQLite database specified by the db_file
@@ -323,6 +325,14 @@ def ot_frequencies_csv(conn):
         f.write(book + "," + str(frequency) + "\n")
     f.close()
 
+def spawn_bibref():
+    global bibref
+    if bibref is not None:
+        return
+    print("Waiting for bibref's full startup...")
+    bibref = pexpect.spawn("../../bibref -a") # FIXME: path is hardcoded now
+    bibref.expect("Done loading books of SBLGNT.")
+
 def nt_jaccard_csv(conn, nt_book):
     """
     Collect all quotations from an NT book that are obtained manually and
@@ -331,6 +341,7 @@ def nt_jaccard_csv(conn, nt_book):
     :nt_book: NT book name
     """
 
+    global bibref
     cur = conn.cursor()
     cur.execute("SELECT q.ot_passage, q.nt_passage" +
         " FROM quotations q, quotations_classifications qc" +
@@ -343,9 +354,7 @@ def nt_jaccard_csv(conn, nt_book):
         " ORDER BY q.nt_startpos")
     rows = cur.fetchall()
 
-    print("Waiting for bibref's full startup...")
-    p = pexpect.spawn("../../bibref -a") # FIXME: path is hardcoded now
-    p.expect("Done loading books of SBLGNT.")
+    spawn_bibref()
 
     f = open("jaccard_" + nt_book + ".csv", "w")
     g = open("jaccard_" + nt_book + ".txt", "w")
@@ -354,17 +363,17 @@ def nt_jaccard_csv(conn, nt_book):
         ot_passage = row[0]
         nt_passage = row[1]
         command1 = "lookup1 " + ot_passage
-        p.sendline(command1)
-        p.expect("Stored internally as \w.")
+        bibref.sendline(command1)
+        bibref.expect("Stored internally as \w.")
         command2 = "lookup2 " + nt_passage
-        p.sendline(command2)
-        p.expect("Stored internally as \w.")
+        bibref.sendline(command2)
+        bibref.expect("Stored internally as \w.")
         # command3 = "compare12"
         command3 = "jaccard12"
-        p.sendline(command3)
-        # p.expect("difference = ([0-9]+\.[0-9]+).")
-        p.expect("Jaccard distance is ([0-9]+\.[0-9]+).")
-        jaccard12 = p.match.groups()
+        bibref.sendline(command3)
+        # bibref.expect("difference = ([0-9]+\.[0-9]+).")
+        bibref.expect("Jaccard distance is ([0-9]+\.[0-9]+).")
+        jaccard12 = bibref.match.groups()
         jaccard = float(jaccard12[0])
         percent = int(r/len(rows)*100)
         print(f"{percent}% done\u001b[{0}K\r", end='')
@@ -383,6 +392,7 @@ def ot_jaccard_csv(conn, ot_book):
     :ot_book: OT book name
     """
 
+    global bibref
     cur = conn.cursor()
     cur.execute("SELECT q.ot_passage, q.nt_passage" +
         " FROM quotations q, quotations_classifications qc" +
@@ -395,9 +405,7 @@ def ot_jaccard_csv(conn, ot_book):
         " ORDER BY q.ot_startpos")
     rows = cur.fetchall()
 
-    print("Waiting for bibref's full startup...")
-    p = pexpect.spawn("../../bibref -a") # FIXME: path is hardcoded now
-    p.expect("Done loading books of SBLGNT.")
+    spawn_bibref()
 
     f = open("jaccard_" + ot_book + ".csv", "w")
     g = open("jaccard_" + ot_book + ".txt", "w")
@@ -406,17 +414,17 @@ def ot_jaccard_csv(conn, ot_book):
         ot_passage = row[0]
         nt_passage = row[1]
         command1 = "lookup1 " + ot_passage
-        p.sendline(command1)
-        p.expect("Stored internally as \w.")
+        bibref.sendline(command1)
+        bibref.expect("Stored internally as \w.")
         command2 = "lookup2 " + nt_passage
-        p.sendline(command2)
-        p.expect("Stored internally as \w.")
+        bibref.sendline(command2)
+        bibref.expect("Stored internally as \w.")
         # command3 = "compare12"
         command3 = "jaccard12"
-        p.sendline(command3)
-        # p.expect("difference = ([0-9]+\.[0-9]+).")
-        p.expect("Jaccard distance is ([0-9]+\.[0-9]+).")
-        jaccard12 = p.match.groups()
+        bibref.sendline(command3)
+        # bibref.expect("difference = ([0-9]+\.[0-9]+).")
+        bibref.expect("Jaccard distance is ([0-9]+\.[0-9]+).")
+        jaccard12 = bibref.match.groups()
         jaccard = float(jaccard12[0])
         percent = int(r/len(rows)*100)
         print(f"{percent}% done\u001b[{0}K\r", end='')
