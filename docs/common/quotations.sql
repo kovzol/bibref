@@ -51,6 +51,7 @@ insert into authors (name, info) values ('Moses', 'Moses');
 insert into authors (name, info) values ('Job', 'Job');
 insert into authors (name, info) values ('Isaiah', 'Isaiah');
 insert into authors (name, info) values ('Jeremiah', 'Jeremiah');
+insert into authors (name, info) values ('Ezekiel', 'Ezekiel');
 insert into authors (name, info) values ('Joel', 'Joel');
 insert into authors (name, info) values ('Amos', 'Amos');
 insert into authors (name, info) values ('Hosea', 'Hosea');
@@ -85,6 +86,7 @@ insert into books (name, author, info, number) values ('Psalms', 'Various', 'Boo
 insert into books (name, author, info, number) values ('Proverbs', 'Solomon', 'Book of Proverbs', 20);
 insert into books (name, author, info, number) values ('Isaiah', 'Isaiah', 'Book of Isaiah', 23);
 insert into books (name, author, info, number) values ('Jeremiah', 'Jeremiah', 'Book of Jeremiah', 24);
+insert into books (name, author, info, number) values ('Ezekiel', 'Ezekiel', 'Book of Ezekiel', 25);
 insert into books (name, author, info, number) values ('Hosea', 'Hosea', 'Book of Hosea', 28);
 insert into books (name, author, info, number) values ('Joel', 'Joel', 'Book of Joel', 29);
 insert into books (name, author, info, number) values ('Amos', 'Amos', 'Book of Amos', 30);
@@ -1234,6 +1236,15 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
  (201, 1, 'quotation', 'far-fuzzy', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (301, 1, 'Ezekiel', null, 'LXX Ezekiel 37:27+47 37:27-14', 'II_Corinthians', 'SBLGNT II_Corinthians 6:16+125 6:16-14', 104701, 12, 9631, 12, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (301, 1, 'Ezekiel', null, 'LXX Ezekiel 37:27+32 37:27', 'II_Corinthians', 'SBLGNT II_Corinthians 6:16+111 6:16', 104686, 41, 9617, 40, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (301, 1, 'θεος', 'καθως ειπεν'); -- καθως ειπεν = as has said
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (301, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1001, 1, 'Habakkuk', null, 'LXX Habakkuk 2:4+39 2:4-10', 'Romans', 'SBLGNT Romans 1:17+68 1:17-7', 2126, 19, 1330, 19, 'getrefs');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1001, 1, 'Habakkuk', null, 'LXX Habakkuk 2:4+39 2:4', 'Romans','SBLGNT Romans 1:17+68 1:17', 2126, 29, 1330, 26, 'manual');
@@ -1664,6 +1675,9 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2203, 1, 'εν τω νομω κυριου', 'το ειρημενον'); -- εν τω νομω κυριου = in the law of the Lord, το ειρημενον = that having been said
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2203, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+-- TODO: Complete this entry:
+-- insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+--  (?, ?, 'Leviticus', null, 'LXX Leviticus 26:11+53 26:12-44', 'II_Corinthians', 'SBLGNT II_Corinthians 6:16+95 6:16-40', 84290, 16, 9601, 16, 'getrefs');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2401, 1, 'Deuteronomy', null, 'LXX Deuteronomy 30:14+25 30:14-28', 'Romans', 'SBLGNT Romans 10:8+30 10:8-36', 94465, 30, 21067, 30, 'getrefs');
