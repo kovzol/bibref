@@ -1,0 +1,48 @@
+addbooks
+
+## Traditionally Deuteronomy 6:13 is cited by Jesus in Matthew 4:10.
+
+getrefs SBLGNT LXX Deuteronomy 6:13
+## No result.
+lookup LXX Deuteronomy 6:13
+# κυριον τον θεον σου φοβηθηση και αυτω λατρευσεις και προς αυτον κολληθηση και τω ονοματι αυτου ομη
+lookup SBLGNT Matthew 4:10
+# τοτε λεγει αυτω ο Ιησους· ⸀Υπαγε, Σατανα· γεγραπται γαρ· Κυριον τον θεον σου προσκυνησεις και αυτω μονω λατρευσεις.
+
+## Clearly the word "φοβηθηση" ("you shall fear") is changed to "προσκυνησεις" ("you shall worship").
+## This new word is used 5 times in LXX: in Exodus 20:5, Exodus 23:24 and Deuteronomy 5:9 (all of them
+## are in a denial form); in Deuteronomy 4:19 there is a possible fuzzy match:
+
+lookup LXX Deuteronomy 4:19
+# και μη αναβλεψας εις τον ουρανον και ιδων τον ηλιον και την σεληνην και τους αστερας και παντα τον κοσμον του ουρανου πλανηθεις προσκυνησης αυτοις και λατρευσης αυτοις α απενειμεν κυριος ο θεος σου αυτα πασιν τοις εθνεσιν τοις υποκατω του ουρανου
+
+## and finally, in Psalm 81:9 (MT 81:10) there is some combination of all of the words
+## used by Jesus:
+
+lookup LXX Psalms 81:9
+# ουκ εσται εν σοι θεος προσφατος ουδε προσκυνησεις θεω αλλοτριω
+
+## In fact, Deuteronomy 10:20 is the same as 6:13:
+lookup LXX Deuteronomy 10:20
+# κυριον τον θεον σου φοβηθηση και αυτω λατρευσεις και προς αυτον κολληθηση και τω ονοματι αυτου ομη
+
+## It seems plausible that Jesus refers to the denial forms of "προσκυνησεις" because Satan mentions
+## this word in Matthew 4:9: "εαν πεσων προσκυνησης μοι" ("if falling down you will worship me").
+## And Jesus then points indeed to Deuteronomy 6:13 because this is quite similar to the quoted text:
+## it begins with the same words and has grammatically the same structure.
+##
+## On the other hand, a very strong allusion to the denial forms can be assumed. It seems reasonable
+## to identify the first occurrence of the word "προσκυνησεις" in Exodus 20:5 also as a quoted word
+## and the surrounding words too.
+
+lookup1 LXX Exodus 20:5+2 20:5-115
+# Stored internally as proskynhseisaytoisoydemhlatreys.
+lookup2 SBLGNT Matthew 4:10+59 4:10-3
+# Stored internally as proskynhseiskaiaytvmonvlatreys.
+compare12
+# Comparing 'proskynhseisaytoisoydemhlatreys' ~ 'proskynhseiskaiaytvmonvlatreys' = 21
+# difference = 0.360656
+jaccard12
+# Jaccard distance is 0.366667.
+
+## Finally, Jesus' words in Luke 4:8 are literally the same as in Matthew 4:10.
