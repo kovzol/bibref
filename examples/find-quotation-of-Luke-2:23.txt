@@ -1,0 +1,50 @@
+addbooks
+
+lookup SBLGNT Luke 2:23
+# καθως γεγραπται εν νομω κυριου οτι Παν αρσεν διανοιγον μητραν αγιον τω κυριω κληθησεται,
+
+lookup LXX Exodus 13:2
+# αγιασον μοι παν πρωτοτοκον πρωτογενες διανοιγον πασαν μητραν εν τοις υιοις ισραηλ απο ανθρωπου εως κτηνους εμοι εστιν
+lookup LXX Exodus 13:12
+# και αφελεις παν διανοιγον μητραν τα αρσενικα τω κυριω παν διανοιγον μητραν εκ των βουκολιων η εν τοις κτηνεσιν σου οσα εαν γενηται σοι τα αρσενικα αγιασεις τω κυριω
+
+lookup2 SBLGNT Luke 2:23+29 2:23-10
+# Stored internally as panarsendianoigonmhtranagiontvkyriv.
+lookup1 LXX Exodus 13:2 13:2-47
+# Stored internally as agiasonmoipanprvtotokonprvtogenesdianoigonpasanmhtran.
+compare12
+# Comparing 'agiasonmoipanprvtotokonprvtogenesdianoigonpasanmhtran' ~ 'panarsendianoigonmhtranagiontvkyriv' = 46
+# difference = 0.534091
+jaccard12 
+# Jaccard distance is 0.615385.
+
+## These two seem to be too far from each other.
+
+lookup1 LXX Exodus 13:12+10 13:12-91
+# Stored internally as pandianoigonmhtrantaarsenikatvkyriv.
+compare12
+# Comparing 'pandianoigonmhtrantaarsenikatvkyriv' ~ 'panarsendianoigonmhtranagiontvkyriv' = 12
+# difference = 0.185714
+jaccard12 
+# Jaccard distance is 0.176471.
+
+## In fact, Exodus 13:15 contains a quite similar part:
+
+lookup1 LXX Exodus 13:15+126 13:15-33
+# Stored internally as tvkyrivpandianoigonmhtrantaarsenikakai.
+compare12 
+# Comparing 'tvkyrivpandianoigonmhtrantaarsenikakai' ~ 'panarsendianoigonmhtranagiontvkyriv' = 15
+# difference = 0.219178
+jaccard12 
+# Jaccard distance is 0.243243.
+
+## Here two strategies rivalize. The concept of Luke 2:23 is already mentioned in Exodus 13:2,
+## but some literal details are introduced just in Exodus 13:12, namely "arsen" ("boy")---even if it is
+## impicitly mentioned in 13:2 in "πρωτότοκον" ("first born") ... "εν τοις υιοις" ("among the sons"),
+## actually more precisely as in 13:12. Luke, however, mentions the word "arsen".
+## The same happens with the expression "τω κυριω" ("to the Lord"). Implicitly it is there in 13:1:
+## "αγίασόν μοι" ("sanctify to me"), but it is mentioned by Luke with the same word as in 13:12.
+
+## The first strategy is to find the first passage that is mentioned. This would designate
+## Exodus 2:13 as the origin of quotation. The second strategy is to use the better literal match.
+## Here it seems logical to use the second strategy.
