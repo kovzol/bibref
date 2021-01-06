@@ -291,11 +291,14 @@ def nt_frequencies_csv(conn):
         " ORDER BY b.number)" +
         " GROUP BY name ORDER BY number")
     rows = cur.fetchall()
+    total = 0
 
     for row in rows:
         book = row[0]
         frequency = row[1]
         f.write(book + "," + str(frequency) + "\n")
+        total += frequency
+    f.write("Total," + str(total) + "\n")
     f.close()
 
 def ot_frequencies_csv(conn):
@@ -318,11 +321,14 @@ def ot_frequencies_csv(conn):
         " ORDER BY b.number)" +
         " GROUP BY name ORDER BY number")
     rows = cur.fetchall()
+    total = 0
 
     for row in rows:
         book = row[0]
         frequency = row[1]
         f.write(book + "," + str(frequency) + "\n")
+        total += frequency
+    f.write("Total," + str(total) + "\n")
     f.close()
 
 def spawn_bibref():
