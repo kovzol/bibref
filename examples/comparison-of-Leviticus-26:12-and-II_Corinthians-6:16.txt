@@ -1,0 +1,23 @@
+addbooks
+
+getrefs SBLGNT LXX Leviticus 26:12
+# ... (lengths<=10)
+# LXX Leviticus 26:11+53 26:12-44 = SBLGNT II_Corinthians 6:16+95 6:16-40 (length=16, pos1=84290, pos2=9601)
+
+lookup SBLGNT II_Corinthians 6:16
+# τις δε συγκαταθεσις ναω θεου μετα ειδωλων; ⸂ημεις γαρ ναος θεου εσμεν⸃ ζωντος· καθως ειπεν ο θεος οτι Ενοικησω εν αυτοις και εμπεριπατησω, και εσομαι αυτων θεος, και αυτοι εσονται ⸀μου λαος.
+lookup LXX Leviticus 26:12
+# και εμπεριπατησω εν υμιν και εσομαι υμων θεος και υμεις εσεσθε μου λαος
+
+lookup1 LXX Leviticus 26:12
+# Stored internally as kaiemperipathsvenyminkaiesomaiymvnueoskaiymeisesesuemoylaos.
+lookup2 SBLGNT II_Corinthians 6:16+96 6:16
+# Stored internally as kaiemperipathsvkaiesomaiaytvnueoskaiaytoiesontaimoylaos.
+compare12
+# Comparing 'kaiemperipathsvenyminkaiesomaiymvnueoskaiymeisesesuemoylaos' ~ 'kaiemperipathsvkaiesomaiaytvnueoskaiaytoiesontaimoylaos' = 38
+# difference = 0.342105
+jaccard12 
+# Jaccard distance is 0.362069.
+
+## The word "εμπεριπατησω" ("will walk among them") is unique in LXX (see above at the getrefs command).
+## This argument supports that Paul quotes this idea as well, not just Ezekiel 37:27.

@@ -1687,9 +1687,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2203, 1, 'εν τω νομω κυριου', 'το ειρημενον'); -- εν τω νομω κυριου = in the law of the Lord, το ειρημενον = that having been said
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2203, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
--- TODO: Complete this entry:
--- insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
---  (?, ?, 'Leviticus', null, 'LXX Leviticus 26:11+53 26:12-44', 'II_Corinthians', 'SBLGNT II_Corinthians 6:16+95 6:16-40', 84290, 16, 9601, 16, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2204, 1, 'Leviticus', null, 'LXX Leviticus 26:11+53 26:12-44', 'II_Corinthians', 'SBLGNT II_Corinthians 6:16+95 6:16-40', 84290, 16, 9601, 16, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2204, 1, 'Leviticus', null, 'LXX Leviticus 26:12 26:12-44', 'II_Corinthians', 'SBLGNT II_Corinthians 6:16+96 6:16-40', 84291, 59, 9602, 55, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2204, 1, 'θεος', 'καθως ειπεν'); -- καθως ειπεν = as has said
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2204, 1, 'quotation', 'literal, far-fuzzy', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2401, 1, 'Deuteronomy', null, 'LXX Deuteronomy 30:14+25 30:14-28', 'Romans', 'SBLGNT Romans 10:8+30 10:8-36', 94465, 30, 21067, 30, 'getrefs');
