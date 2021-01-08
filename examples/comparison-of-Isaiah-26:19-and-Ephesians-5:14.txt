@@ -1,0 +1,44 @@
+addbooks
+
+text1 αναστησονται οι νεκροι και εγερθησονται οι εν τοις μνημειοις και ευφρανθησονται οι εν τη γη η γαρ δροσος η παρα σου ιαμα αυτοις εστιν η δε γη των ασεβων πεσειται
+# Stored internally as anasthsontaioinekroikaiegeruhsontaioientoismnhmeioiskaieyfranuhsontaioienthghhgardrososhparasoyiamaaytoisestinhdeghtvnasebvnpeseitai.
+text2 εγειρε ο καθευδων και αναστα εκ των νεκρων και επιφαυσει σοι ο χριστος
+# Stored internally as egeireokaueydvnkaianastaektvnnekrvnkaiepifayseisoioxristos.
+compare12
+# Comparing 'anasthsontaioinekroikaiegeruhsontaioientoismnhmeioiskaieyfranuhsontaioienthghhgardrososhparasoyiamaaytoisestinhdeghtvnasebvnpeseitai' ~ 'egeireokaueydvnkaianastaektvnnekrvnkaiepifayseisoioxristos' = 124
+# difference = 0.657895
+jaccard12
+# Jaccard distance is 0.755725.
+
+text1 αναστησονται οι νεκροι και εγερθησονται
+# Stored internally as anasthsontaioinekroikaiegeruhsontai.
+text2 εγειρε ο καθευδων και αναστα εκ των νεκρων
+# Stored internally as egeireokaueydvnkaianastaektvnnekrvn.
+compare12
+# Comparing 'anasthsontaioinekroikaiegeruhsontai' ~ 'egeireokaueydvnkaianastaektvnnekrvn' = 44
+# difference = 0.642857
+jaccard12
+# Jaccard distance is 0.647059.
+
+text1 αναστησονται οι νεκροι και εγερθησονται
+# Stored internally as anasthsontaioinekroikaiegeruhsontai.
+text2 εγειρε ο καθευδων και αναστα εκ των νεκρ
+# Stored internally as egeireokaueydvnkaianastaektvnnekr.
+compare12
+# Comparing 'anasthsontaioinekroikaiegeruhsontai' ~ 'egeireokaueydvnkaianastaektvnnekr' = 42
+# difference = 0.632353
+jaccard12
+# Jaccard distance is 0.647059.
+
+text1 αναστησονται οι νεκροι και εγε
+# Stored internally as anasthsontaioinekroikaiege.
+text2 εγειρε ο καθευδων και αναστα εκ των νεκρ
+# Stored internally as egeireokaueydvnkaianastaektvnnekr.
+compare12
+# Comparing 'anasthsontaioinekroikaiege' ~ 'egeireokaueydvnkaianastaektvnnekr' = 33
+# difference = 0.576271
+jaccard12
+# Jaccard distance is 0.625000.
+
+## Other candidates are Isaiah 60:1-2 and Jonah 1:6.
+## The Greek text, however, does not support this.
