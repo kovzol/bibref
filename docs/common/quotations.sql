@@ -1223,6 +1223,18 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (124, 4, 'δια Ησαΐου του προφητου', 'ρηθεις ... λεγοντος'); -- ρηθεις ... λεγοντος = having been spoken of ... saying
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (124, 4, 'quotation', 'literal, exact', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (125, 1, 'Isaiah', null, 'LXX Isaiah 52:11+72 52:11-23', 'II_Corinthians', 'SBLGNT II_Corinthians 6:17+26 6:17-50', 106991, 10, 9683, 10, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (125, 1, 'Isaiah', null, 'LXX Isaiah 52:11+52 52:11-35', 'II_Corinthians', 'SBLGNT II_Corinthians 6:17+3 6:17-65', 106971, 18, 9660, 18, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (125, 1, 'Isaiah', null, 'LXX Isaiah 52:11+31 52:11-53', 'II_Corinthians', 'SBLGNT II_Corinthians 6:17+47 6:17-18', 106950, 21, 9704, 21, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (125, 1, 'Isaiah', null, 'LXX Isaiah 52:11+31 52:11-23', 'II_Corinthians', 'SBLGNT II_Corinthians 6:17+3 6:17-18', 106950, 51, 9660, 65, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (125, 1, 'κυριος', 'διο ... λεγει'); -- διο ... λεγει = therefore ... says
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (125, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (201, 1, 'Jeremiah', null, 'LXX Jeremiah 31:15+50 31:15-64', 'Matthew', 'SBLGNT Matthew 2:18+25 2:18-66', 80265, 9, 3951, 9, 'getrefs');
