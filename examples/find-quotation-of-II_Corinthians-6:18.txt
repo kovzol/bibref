@@ -1,0 +1,49 @@
+addbooks
+
+lookup SBLGNT II_Corinthians 6:18
+# και εσομαι υμιν εις πατερα, και υμεις εσεσθε μοι εις υιους και θυγατερας, λεγει κυριος παντοκρατωρ.
+
+## In Ellicott's Commentary for English Readers (see https://biblehub.com/commentaries/2_corinthians/6-18.htm)
+## a mosaic of citations are suggested. According to the Cambridge Bible for Schools and Colleges,
+## it is a combination of various passages. The Pulpic Commentary writes:
+## "These reminiscences are sufficiently near to 2 Samuel 7:8-14; Isaiah 43:6; Jeremiah 31:9".
+## We find that:
+
+lookup LXX II_Samuel 7:14
+# εγω εσομαι αυτω εις πατερα και αυτος εσται μοι εις υιον και εαν ελθη η αδικια αυτου και ελεγξω αυτον εν ραβδω ανδρων και εν αφαις υιων ανθρωπων
+
+## But the beginning of this is literally the same as the next passage:
+
+lookup LXX I_Chronicles 17:13
+# εγω εσομαι αυτω εις πατερα και αυτος εσται μοι εις υιον και το ελεος μου ουκ αποστησω απ αυτου ως απεστησα απο των οντων εμπροσθεν σου
+
+## Anyway, both texts are just partial matches and far-fuzzy:
+lookup1 LXX II_Samuel 7:14+3 7:14-72
+# Stored internally as esomaiaytveispaterakaiaytosestaimoieisyio.
+lookup2 SBLGNT II_Corinthians 6:18+3 6:18-36
+# Stored internally as esomaiymineispaterakaiymeisesesuemoieisyio.
+compare12 
+# Comparing 'esomaiaytveispaterakaiaytosestaimoieisyio' ~ 'esomaiymineispaterakaiymeisesesuemoieisyio' = 29
+# difference = 0.361446
+jaccard12 
+# Jaccard distance is 0.365854.
+length1
+# Length of text 1 is 41.
+length2
+# Length of text 2 is 42.
+
+## There seems to be several matches on the next part of II_Corinthians (on the topic "sons and daughters"),
+## but contextually Isaiah 43:6 seems to be a close enough one:
+
+lookup LXX Isaiah 43:6
+# ερω τω βορρα αγε και τω λιβι μη κωλυε αγε τους υιους μου απο γης πορρωθεν και τας θυγατερας μου απ ακρων της γης
+lookup KJV Isaiah 43:6
+# I will say to the north, Give up; and to the south, Keep not back: bring my sons from far, and my daughters from the ends of the earth;
+
+## Also, the end of Paul' text ("λεγει κυριος παντοκρατωρ") is present several (!) times in LXX
+## not just in II_Samuel 7:8 as it is mentioned in Elliott's.
+
+## Conclusion. II_Corinthians 6:18 seems to be indeed a combination of more passages,
+## however, the quoted passages seem to be not unique and not literally matching.
+## Maybe the best identification of Paul's method is a sort of "combination of free quotations",
+## but the analysis of Paul's passage seems to be extremely difficult and unsure.
