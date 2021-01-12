@@ -1620,6 +1620,16 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2106, 2, null, 'γεγραπται'); -- γεγραπται = it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2106, 2, 'quotation', 'literal, changed, fuzzy', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2107, 1, 'Exodus', null, 'LXX Exodus 16:18+21 16:18-75', 'II_Corinthians', 'SBLGNT II_Corinthians 8:15+21 8:15-26', 47144, 13, 12704, 13, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2107, 1, 'Exodus', null, 'LXX Exodus 16:18+52 16:18-41', 'II_Corinthians', 'SBLGNT II_Corinthians 8:15+44 8:15', 47175, 16, 12727, 16, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2107, 1, 'Exodus', null, 'LXX Exodus 16:18+21 16:18-41', 'II_Corinthians', 'SBLGNT II_Corinthians 8:15+14 8:15', 47144, 47, 12704, 46, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2107, 1, null, 'καθως γεγραπται'); -- καθως γεγραπται = as it has been written
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2107, 1, 'quotation', 'literal, synonym, fuzzy', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2201, 1, 'Leviticus', null, 'LXX Leviticus 18:5+69 18:5-21', 'Romans', 'SBLGNT Romans 10:5+46 10:5-1', 57053, 27, 20844, 27, 'getrefs');
