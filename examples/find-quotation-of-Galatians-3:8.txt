@@ -1,0 +1,32 @@
+addbooks
+
+lookup SBLGNT Galatians 3:8
+# προιδουσα δε η γραφη οτι εκ πιστεως δικαιοι τα εθνη ο θεος προευηγγελισατο τω Αβρααμ οτι Ενευλογηθησονται εν σοι παντα τα εθνη.
+
+## The word "ενευλογηθησονται" will be blessed is present 5 times in LXX and twice in SBLGNT:
+
+text1 ενευλογηθησονται
+# Stored internally as eneyloghuhsontai.
+find1 LXX
+# Found in Genesis 12:3+63 12:3-23 (book position 27855-27870)
+# Found in Genesis 18:18+44 18:18-23 (book position 41664-41679)
+# Found in Genesis 22:18+3 22:18-58 (book position 54409-54424)
+# Found in Genesis 26:4+84 26:4-32 (book position 67162-67177)
+# Found in Genesis 28:14+98 28:14-41 (book position 76468-76483)
+# 5 occurrences.
+find1 SBLGNT 
+# Found in Acts 3:25+106 3:25-20 (book position 9183-9198)
+# Found in Galatians 3:8+73 3:8-16 (book position 4262-4277)
+# 2 occurrences.
+
+## The first two occurrences in LXX play an important role.
+
+lookup LXX Genesis 12:3
+# και ευλογησω τους ευλογουντας σε και τους καταρωμενους σε καταρασομαι και ενευλογηθησονται εν σοι πασαι αι φυλαι της γης
+lookup LXX Genesis 18:18
+# αβρααμ δε γινομενος εσται εις εθνος μεγα και πολυ και ενευλογηθησονται εν αυτω παντα τα εθνη της γης
+
+## Since there is no 100% literal match from LXX for Galatians 3:8, but these two candidates cover
+## it fully ("Ενευλογηθησονται εν σοι" could be taken from the first candidate,
+## "παντα τα εθνη" from the second one), here we can come up with an idea that Paul combines
+## two passages.
