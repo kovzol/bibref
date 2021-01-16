@@ -1848,6 +1848,16 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2410, 2, null, 'γεγραπται'); -- γεγραπται = it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2410, 2, 'quotation', 'literal, changed, fuzzy', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2411, 1, 'Deuteronomy', null, 'LXX Deuteronomy 27:26+22 27:26-72', 'Galatians', 'SBLGNT Galatians 3:10+68 3:10-53', 81686, 13, 4404, 13, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2411, 1, 'Deuteronomy', null, 'LXX Deuteronomy 27:26 27:26-92', 'Galatians', 'SBLGNT Galatians 3:10+54 3:10-65', 81664, 15, 4390, 15, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2411, 1, 'Deuteronomy', null, 'LXX Deuteronomy 27:26 27:26-28', 'Galatians', 'SBLGNT Galatians 3:10+54 3:10-1', 81664, 79, 4390, 79, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2411, 1, null, 'γεγραπται γαρ οτι'); -- γεγραπται γαρ οτι = it has been written for
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2411, 1, 'quotation', 'literal, grammatical-change, fuzzy', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (3001, 1, 'Job', null, 'Job 5:12-13', 'I_Corinthians', 'I_Corinthians 3:19', null, null, null, null, 'traditional');
