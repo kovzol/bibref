@@ -1,0 +1,41 @@
+addbooks
+
+lookup SBLGNT Galatians 3:12
+# ο δε νομος ουκ εστιν εκ πιστεως, αλλʼ· Ο ποιησας ⸀αυτα ζησεται εν αυτοις.
+
+## Traditionally Leviticus 18:5 is cited here:
+lookup LXX Leviticus 18:5
+# και φυλαξεσθε παντα τα προσταγματα μου και παντα τα κριματα μου και ποιησετε αυτα α ποιησας ανθρωπος ζησεται εν αυτοις εγω κυριος ο θεος υμων
+
+getrefs SBLGNT LXX Leviticus 18:5
+# LXX Leviticus 18:5+63 18:5-46 = SBLGNT I_John 5:21+14 5:21-10 (length=8, pos1=57047, pos2=9436)
+# LXX Leviticus 18:5+69 18:5-39 = SBLGNT Mark 5:32+28 5:32 (length=9, pos1=57053, pos2=14719)
+# LXX Leviticus 18:5+69 18:5-21 = SBLGNT Romans 10:5+46 10:5-1 (length=27, pos1=57053, pos2=20844)
+
+## For the first look, however, there is a fuzzy match between Leviticus 18:5 and Galatians 3:12.
+## In fact, all words (in some slightly different forms) are present in some other verses than Leviticus 18:5:
+## In Nehemiah 9:29, Ezekiel 20:11, 20:13, 20:21. In all of these 5 verses we have the last three words
+## of Galatians 3:12 literally:
+
+text1 ζησεται εν αυτοις
+# Stored internally as qhsetaienaytois.
+find1 LXX
+# Found in Leviticus 18:5+84 18:5-18 (book position 57068-57082)
+# Found in Nehemiah 9:29+131 9:29-63 (book position 25289-25303)
+# Found in Ezekiel 20:11+87 20:11 (book position 48736-48750)
+# Found in Ezekiel 20:13+133 20:13-94 (book position 48999-49013)
+# Found in Ezekiel 20:21+130 20:21-100 (book position 50046-50060)
+# 5 occurrences.
+
+## From the contexts it is clear that all of the last 4 candidates refer to a former commandment of the Lord.
+## So contextually it is clear that Leviticus 18:5 was quoted by Paul.
+
+lookup1 LXX Leviticus 18:5+64 18:5-18
+# Stored internally as aytaapoihsasanurvposqhsetaienaytois.
+lookup2 SBLGNT Galatians 3:12+29 3:12
+# Stored internally as poihsasaytaqhsetaienaytois.
+compare12
+# Comparing 'aytaapoihsasanurvposqhsetaienaytois' ~ 'poihsasaytaqhsetaienaytois' = 11
+# difference = 0.196721
+jaccard12
+# Jaccard distance is 0.294118.
