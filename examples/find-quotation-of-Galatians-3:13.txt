@@ -1,0 +1,29 @@
+addbooks
+
+getrefs SBLGNT LXX Deuteronomy 21:23
+# ... (length<=10)
+# LXX Deuteronomy 21:23+100 21:23-52 = SBLGNT Galatians 3:13+92 3:13 (length=18, pos1=66388, pos2=4685)
+lookup LXX Deuteronomy 21:23
+# ουκ επικοιμηθησεται το σωμα αυτου επι του ξυλου αλλα ταφη θαψετε αυτον εν τη ημερα εκεινη οτι κεκατηραμενος υπο θεου πας κρεμαμενος επι ξυλου και ου μιανειτε την γην ην κυριος ο θεος σου διδωσιν σοι εν κληρω
+lookup SBLGNT Galatians 3:13
+# Χριστος ημας εξηγορασεν εκ της καταρας του νομου γενομενος υπερ ημων καταρα, ⸂οτι γεγραπται⸃· Επικαταρατος πας ο κρεμαμενος επι ξυλου,
+lookup2 SBLGNT Galatians 3:13+76 3:13-19
+# Stored internally as epikataratospas.
+find2 LXX
+# Found in Deuteronomy 27:26 27:26-92 (book position 81664-81678)
+# 1 occurrences.
+lookup LXX Deuteronomy 27:26
+# επικαταρατος πας ανθρωπος ος ουκ εμμενει εν πασιν τοις λογοις του νομου τουτου του ποιησαι αυτους και ερουσιν πας ο λαος γενοιτο
+
+## This seems to be a kind of combination of two LXX passages. Paul begins his text with
+## the starting words of Deuteronomy 27:26, and then he continues with the 18-long match from
+## Deuteronomy 21:23. But, since Deuteronomy 27:26 has already been cited in Galatians 3:10,
+## when building a database, we should ignore this duplication (or, at least, not count it as a new quotation):
+
+getrefs SBLGNT LXX Deuteronomy 27:26
+# LXX Deuteronomy 27:26+22 27:26-72 = SBLGNT Galatians 3:10+68 3:10-53 (length=13, pos1=81686, pos2=4404)
+# LXX Deuteronomy 27:26+41 27:26-52 = SBLGNT I_Thessalonians 4:18+24 4:18-4 (length=14, pos1=81705, pos2=5736)
+# LXX Deuteronomy 27:26 27:26-92 = SBLGNT Galatians 3:10+54 3:10-65 (length=15, pos1=81664, pos2=4390)
+# LXX Deuteronomy 27:26 27:26-92 = SBLGNT Galatians 3:13+76 3:13-19 (length=15, pos1=81664, pos2=4669)
+
+## (I_Thessalonians 4:18 is a false positive.)
