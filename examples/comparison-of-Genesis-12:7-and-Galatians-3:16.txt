@@ -1,0 +1,40 @@
+addbooks
+
+lookup SBLGNT Galatians 3:16
+# τω δε Αβρααμ ερρεθησαν αι επαγγελιαι και τω σπερματι αυτου· ου λεγει· Και τοις σπερμασιν, ως επι πολλων, αλλʼ ως εφʼ ενος· Και τω σπερματι σου, ος εστιν Χριστος.
+text2 τω σπερματι σου
+# Stored internally as tvspermatisoy.
+find2 LXX
+# Found in Genesis 12:7+32 12:7-68 (book position 28321-28333)
+# Found in Genesis 13:15+37 13:15-12 (book position 31049-31061)
+# Found in Genesis 15:18+48 15:18-75 (book position 35514-35526)
+# Found in Genesis 17:8+13 17:8-79 (book position 37980-37992)
+# Found in Genesis 22:18+21 22:18-43 (book position 54427-54439)
+# Found in Genesis 24:7+140 24:7-76 (book position 57539-57551)
+# Found in Genesis 26:3+60 26:3-63 (book position 67002-67014)
+# Found in Genesis 26:4+51 26:4-68 (book position 67129-67141)
+# Found in Genesis 26:4+102 26:4-17 (book position 67180-67192)
+# Found in Genesis 28:4+44 28:4-62 (book position 75304-75316)
+# Found in Genesis 28:13+127 28:13 (book position 76357-76369)
+# Found in Genesis 28:14+142 28:14 (book position 76512-76524)
+# Found in Genesis 35:12+56 35:12-22 (book position 100329-100341)
+# Found in Genesis 48:4+91 48:4-26 (book position 143112-143124)
+# Found in Numbers 18:19+155 18:19-6 (book position 65809-65821)
+# Found in Deuteronomy 28:46+33 28:46-12 (book position 86534-86546)
+# Found in II_Kings 5:27+37 5:27-56 (book position 18091-18103)
+# 17 occurrences.
+text2 τοις σπερμασιν
+# Stored internally as toisspermasin.
+find2 LXX
+# 0 occurrences.
+
+## This confirms Paul's statement that no "seeds" (plural) but "seed" (singular) is mentioned.
+## On the other hand, some Bible translations still use a plural form in Genesis 12:7,
+## including the New American Standard Bible, simply because MT also uses a plural form:
+
+lookup Aleppo Genesis 12:7
+# וירא יהוה אל אברם ויאמר לזרעך אתן את הארץ הזאת ויבן שם מזבח ליהוה הנראה אליו
+
+## Here לזרעך means "to your descendants", however, Google Translator gives simply "seed" here.
+
+## It is notable that the literal quotation of a text can be mandatory sometimes!
