@@ -1,0 +1,13 @@
+lookup SBLGNT Galatians 4:22
+# γεγραπται γαρ οτι Αβρααμ δυο υιους εσχεν, ενα εκ της παιδισκης και ενα εκ της ελευθερας·
+
+## By using Sword's search "παιδισ* ελευθε*" (slave/free) we get two results from Jeremiah 34,
+## but they are contextually non-matching.
+
+## Traditionally Galatians 4:22 refers to Genesis 16:15 and 21:2, but no literal evidence
+## can be found. In Galatians a longer story is summarized. On the other hand, the
+## introductory words "γεγραπται γαρ οτι" are misleading because these words usually
+## introduce a literal quotation.
+
+## Conclusion. Presence of usual introductory words of a quotation does not always mean
+## that a literal quotation is given (even if the author is Paul!).
