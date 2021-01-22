@@ -1235,6 +1235,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (125, 1, 'κυριος', 'διο ... λεγει'); -- διο ... λεγει = therefore ... says
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (125, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (126, 1, 'Isaiah', null, 'LXX Isaiah 54:1 54:1-14', 'Galatians', 'SBLGNT Galatians 4:27+12 4:27', 108811, 102, 7727, 102, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (126, 1, 'Isaiah', null, 'LXX Isaiah 54:1 54:1-14', 'Galatians', 'SBLGNT Galatians 4:27+12 4:27', 108811, 102, 7727, 102, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (126, 1, null, 'γεγραπται γαρ'); -- γεγραπται γαρ = it has been written for
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (126, 1, 'quotation', 'literal, exact', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (201, 1, 'Jeremiah', null, 'LXX Jeremiah 31:15+50 31:15-64', 'Matthew', 'SBLGNT Matthew 2:18+25 2:18-66', 80265, 9, 3951, 9, 'getrefs');
