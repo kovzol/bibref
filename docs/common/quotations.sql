@@ -1581,6 +1581,22 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2010, 1, null, 'ου λεγει ... αλλ'); -- ου λεγει ... αλλ = not it does say ... but
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2010, 1, 'quotation', 'literal, exact', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2011, 1, 'Genesis', null, 'LXX Genesis 21:10+93 21:10-8', 'Galatians', 'SBLGNT Galatians 4:30+84 4:30-12', 50185, 13, 8016, 13, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2011, 1, 'Genesis', null, 'LXX Genesis 21:10+16 21:10-80', 'Galatians', 'SBLGNT Galatians 4:30+17 4:30-74', 50108, 18, 7949, 18, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2011, 1, 'Genesis', null, 'LXX Genesis 21:10+38 21:10-54', 'Galatians', 'SBLGNT Galatians 4:30+33 4:30-54', 50130, 22, 7965, 22, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2011, 1, 'Genesis', null, 'LXX Genesis 21:10+60 21:10-25', 'Galatians', 'SBLGNT Galatians 4:30+57 4:30-23', 50152, 29, 7989, 29, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2011, 1, 'Genesis', null, 'LXX Genesis 21:10+60 21:10-25', 'Galatians', 'SBLGNT Galatians 4:30+57 4:30-23', 50152, 29, 7989, 29, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2011, 1, 'Genesis', null, 'LXX Genesis 21:10+16 21:10-8', 'Galatians', 'SBLGNT Galatians 4:30+17 4:30-12', 50108, 90, 7949, 80, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2011, 1, null, 'αλλα τι λεγει η γραφη'); -- αλλα τι λεγει η γραφη = but what says the Scripture
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2011, 1, 'quotation', 'literal, superset', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2101, 1, 'Exodus', null, 'LXX Exodus 33:19+86 33:19', 'Romans', 'SBLGNT Romans 9:15+15 9:15', 99825, 38, 19129, 38, 'getrefs');
