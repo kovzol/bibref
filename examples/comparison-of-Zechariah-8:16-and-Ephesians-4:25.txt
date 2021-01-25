@@ -1,0 +1,22 @@
+addbooks
+
+getrefs SBLGNT LXX Zechariah 8:16
+# ... (length<=11)
+# LXX Zechariah 8:16+23 8:16-59 = SBLGNT Ephesians 4:25+21 4:25-38 (length=22, pos1=12531, pos2=7263)
+
+lookup1 LXX Zechariah 8:16+23 8:16-40
+# Stored internally as laleitealhueianekastosprostonplhsionaytoy.
+lookup2 SBLGNT Ephesians 4:25+21 4:25-19
+# Stored internally as laleitealhueianekastosmetatoyplhsionaytoy.
+compare12 
+# Comparing 'laleitealhueianekastosprostonplhsionaytoy' ~ 'laleitealhueianekastosmetatoyplhsionaytoy' = 14
+# difference = 0.182927
+jaccard12 
+# Jaccard distance is 0.175000.
+length1
+# Length of text 1 is 41.
+length2
+# Length of text 2 is 41.
+
+## These are quite close. But no introduction is given by Paul. The first word "Διο" (therefore)
+## could be identified like that, but this seems to be too weak for introducing a quotation.
