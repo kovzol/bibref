@@ -79,6 +79,7 @@ insert into found_methods (name, info) values ('manual-mechanical', 'confirmed m
 insert into books (name, author, info, number) values ('Genesis', 'Moses', 'Book of Genesis', 1);
 insert into books (name, author, info, number) values ('Exodus', 'Moses', 'Book of Exodus', 2);
 insert into books (name, author, info, number) values ('Leviticus', 'Moses', 'Book of Leviticus', 3);
+insert into books (name, author, info, number) values ('Numbers', 'Moses', 'Book of Numbers', 4);
 insert into books (name, author, info, number) values ('Deuteronomy', 'Moses', 'Book of Deuteronomy', 5);
 insert into books (name, author, info, number) values ('I_Kings', 'Samuel', 'The First Book of Kings', 11);
 insert into books (name, author, info, number) values ('Job', 'Job', 'Book of Job', 18);
@@ -1776,6 +1777,15 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2204, 1, 'θεος', 'καθως ειπεν'); -- καθως ειπεν = as has said
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2204, 1, 'quotation', 'literal, far-fuzzy', 'Z.K.');
+
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2301, 1, 'Numbers', null, 'LXX Numbers 16:5+73 16:5-75', 'II_Timothy', 'SBLGNT II_Timothy 2:19+65 2:19-43', 57258, 19, 2818, 19, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2301, 1, 'Numbers', null, 'LXX Numbers 16:5+66 16:5-78', 'II_Timothy', 'SBLGNT II_Timothy 2:19+57 2:19-46', 57251, 23, 2810, 24, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2301, 1, null, 'εχων την σφραγιδα ταυτην'); -- εχων την σφραγιδα ταυτην = having the seal this
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2301, 1, 'quotation', 'literal, synonym', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2401, 1, 'Deuteronomy', null, 'LXX Deuteronomy 30:14+25 30:14-28', 'Romans', 'SBLGNT Romans 10:8+30 10:8-36', 94465, 30, 21067, 30, 'getrefs');
