@@ -47,3 +47,21 @@ lookup KJV Isaiah 43:6
 ## however, the quoted passages seem to be not unique and not literally matching.
 ## Maybe the best identification of Paul's method is a sort of "combination of free quotations",
 ## but the analysis of Paul's passage seems to be extremely difficult and unsure.
+
+## Note. The second quotation in Hebrews 1:5 matches to both II_Samuel 7:14 and I_Chronicles 7:13:
+
+lookup SBLGNT Hebrews 1:5
+# Τινι γαρ ειπεν ποτε των αγγελων· Υιος μου ει συ, εγω σημερον γεγεννηκα σε, και παλιν· Εγω εσομαι αυτω εις πατερα, και αυτος εσται μοι εις υιον;
+lookup LXX II_Samuel 7:14
+# εγω εσομαι αυτω εις πατερα και αυτος εσται μοι εις υιον και εαν ελθη η αδικια αυτου και ελεγξω αυτον εν ραβδω ανδρων και εν αφαις υιων ανθρωπων
+text1 εγω εσομαι αυτω εις πατερα και αυτος εσται μοι εις υιον
+# Stored internally as egvesomaiaytveispaterakaiaytosestaimoieisyion.
+find1 LXX
+# Found in II_Samuel 7:14 7:14-71 (book position 20344-20388)
+# Found in I_Chronicles 17:13 17:13-64 (book position 46456-46500)
+# 2 occurrences.
+find1 SBLGNT 
+# Found in Hebrews 1:5+66 1:5 (book position 472-516)
+# 1 occurrences.
+length1
+# Length of text 1 is 45.
