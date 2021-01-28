@@ -1635,6 +1635,32 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2103, 1, 'quotation', 'literal', 'Z.K.');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2103, 2, 'Exodus', null, 'LXX Exodus 20:12+27 20:12-63', 'Ephesians', 'SBLGNT Ephesians 6:2+58 6:3-24', 57231, 19, 10174, 19, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2103, 2, 'Exodus', null, 'LXX Exodus 20:12 20:12-35', 'Ephesians', 'SBLGNT Ephesians 6:2 6:3', 57204, 74, 10116, 101, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2103, 2, 'εντολη', null); -- εντολη = commandment
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2103, 2, 'quotation', 'literal, exact, subset', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2103, 3, 'Exodus', null, 'LXX Exodus 20:12 20:12-81', 'Mark', 'SBLGNT Mark 7:10+14 7:10-44', 57204, 28, 21570, 28, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2103, 3, 'Μωυσης', 'γαρ ειπεν'); -- γαρ ειπεν = for said
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2103, 3, 'quotation', 'literal, exact', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2103, 4, 'Exodus', null, 'LXX Exodus 20:12 20:16-31', 'Mark', 'SBLGNT Mark 10:19+15 10:9', 57204, 159, 32466, 87, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2103, 4, 'τας εντολας', 'οιδας'); -- τας εντολας οιδας = the commandments you know
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2103, 4, 'quotation', 'literal, far-fuzzy, superset', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2103, 5, 'Exodus', null, 'LXX Exodus 20:12 20:16-31', 'Luke', 'SBLGNT Luke 18:20+15 18:20', 57204, 159, 70598, 74, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2103, 5, 'τας εντολας', 'οιδας'); -- τας εντολας οιδας = the commandments you know
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2103, 5, 'quotation', 'literal, far-fuzzy, superset', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2104, 1, 'Exodus', null, 'LXX Exodus 13:12+10 13:12-91', 'Luke', 'SBLGNT Luke 2:23+29 2:23-10', 37422, 35, 7753, 35, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2104, 1, 'εν νομω κυριου', 'καθως γεγραπται'); -- εν νομω κυριου = in the law of the Lord, καθως γεγραπται = as it has been written
@@ -1672,18 +1698,6 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2107, 1, null, 'καθως γεγραπται'); -- καθως γεγραπται = as it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2107, 1, 'quotation', 'literal, synonym, fuzzy', 'Z.K.');
-insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (2108, 1, 'Exodus', null, 'LXX Exodus 20:12+27 20:12-63', 'Ephesians', 'SBLGNT Ephesians 6:2+58 6:3-24', 57231, 19, 10174, 19, 'getrefs');
-insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (2108, 1, 'Exodus', null, 'LXX Exodus 20:12 20:12-35', 'Ephesians', 'SBLGNT Ephesians 6:2 6:3', 57204, 74, 10116, 101, 'manual');
-insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
- (2108, 1, 'εντολη', null); -- εντολη = commandment
-insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
- (2108, 1, 'quotation', 'literal, exact, subset', 'Z.K.');
--- TODO: Add also these occurrences:
--- Found in Mark 7:10+14 7:10-44 (book position 21570-21597)
--- Found in Mark 10:19+74 10:19 (book position 32525-32552)
--- Found in Luke 18:20+61 18:20 (book position 70644-70671)
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2201, 1, 'Leviticus', null, 'LXX Leviticus 18:5+69 18:5-21', 'Romans', 'SBLGNT Romans 10:5+46 10:5-1', 57053, 27, 20844, 27, 'getrefs');
