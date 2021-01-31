@@ -1641,6 +1641,20 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2013, 1, null, 'λεγων'); -- λεγων = saying
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2013, 1, 'quotation', 'literal, exact', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2014, 1, 'Genesis', null, 'LXX Genesis 14:17+62 14:17-82', 'Hebrews', 'SBLGNT Hebrews 7:1+84 7:1-27', 33237, 12, 8855, 12, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2014, 1, 'Genesis', null, 'LXX Genesis 14:18+3 14:18-50', 'Hebrews', 'SBLGNT Hebrews 7:1+9 7:1-91', 33334, 23, 8780, 23, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2014, 1, 'Genesis', null, 'LXX Genesis 14:18+53 14:18', 'Hebrews', 'SBLGNT Hebrews 7:1+32 7:1-68', 33384, 23, 8803, 23, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2014, 1, 'Genesis', null, 'LXX Genesis 14:20+77 14:21-66', 'Hebrews', 'SBLGNT Hebrews 7:2+4 7:2-99', 33569, 17, 8898, 17, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2014, 1, 'Genesis', null, 'LXX Genesis 14:17+62 14:20', 'Hebrews', 'SBLGNT Hebrews 7:1+9 7:2-100', 33237, 348, 8780, 134, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2014, 1, null, 'Ουτος γαρ'); -- Ουτος γαρ = this for
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2014, 1, 'quotation', 'superset, far-fuzzy', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2101, 1, 'Exodus', null, 'LXX Exodus 33:19+86 33:19', 'Romans', 'SBLGNT Romans 9:15+15 9:15', 99825, 38, 19129, 38, 'getrefs');
