@@ -1280,6 +1280,28 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (201, 1, 'δια Ιερεμιου του προφητου', 'το ρηθεν ... λεγοντος'); -- δια Ιερεμιου του προφητου = by Jeremiah the prophet, το ρηθεν ... λεγοντος = having been spoken ... saying
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (201, 1, 'quotation', 'far-fuzzy', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (202, 1, 'Jeremiah', null, 'LXX Jeremiah 31:31+63 31:32-152', 'Hebrews', 'SBLGNT Hebrews 8:8+96 8:9-149', 81873, 38, 11896, 38, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (202, 1, 'Jeremiah', null, 'LXX Jeremiah 31:32+27 31:32-27', 'Hebrews', 'SBLGNT Hebrews 8:9+26 8:9-25', 81919, 117, 11941, 117, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (202, 1, 'Jeremiah', null, 'LXX Jeremiah 31:32+146 31:32-11', 'Hebrews', 'SBLGNT Hebrews 8:9+143 8:9-11', 82038, 14, 12058, 14, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (202, 1, 'Jeremiah', null, 'LXX Jeremiah 31:32+165 31:33-125', 'Hebrews', 'SBLGNT Hebrews 8:9+162 8:10-124', 82057, 65, 12077, 65, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (202, 1, 'Jeremiah', null, 'LXX Jeremiah 31:33+64 31:33-108', 'Hebrews', 'SBLGNT Hebrews 8:10+64 8:10-107', 82127, 12, 12147, 12, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (202, 1, 'Jeremiah', null, 'LXX Jeremiah 31:33+80 31:33-58', 'Hebrews', 'SBLGNT Hebrews 8:10+76 8:10-61', 82143, 46, 12159, 46, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (202, 1, 'Jeremiah', null, 'LXX Jeremiah 31:33+126 31:34-86', 'Hebrews', 'SBLGNT Hebrews 8:10+125 8:11-15', 82189, 170, 12208, 170, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (202, 1, 'Jeremiah', null, 'LXX Jeremiah 31:34+120 31:35-134', 'Hebrews', 'SBLGNT Hebrews 8:11+112 8:13-76', 82367, 79, 12378, 79, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (202, 1, 'Jeremiah', null, 'LXX Jeremiah 31:31+63 31:35-134', 'Hebrews', 'SBLGNT Hebrews 8:8+96 8:13-76', 81810, 636, 11824, 633, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (202, 1, null, 'λεγει'); -- λεγει = He says
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (202, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (301, 1, 'Ezekiel', null, 'LXX Ezekiel 37:27+47 37:27-14', 'II_Corinthians', 'SBLGNT II_Corinthians 6:16+125 6:16-14', 104701, 12, 9631, 12, 'getrefs');

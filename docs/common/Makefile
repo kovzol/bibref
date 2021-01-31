@@ -1,7 +1,8 @@
 all: getrefs.pdf authors.pdf manual_nt_length.pdf Rplots.pdf Romans-getrefs.png \
  Romans-table.pdf Romans-Rplots.pdf nt_frequencies.csv ot_frequencies.csv \
  jaccard-Romans-Rplots.pdf jaccard_Romans-sorted.txt \
- jaccard-Psalms-Rplots.pdf jaccard_Psalms-sorted.txt
+ jaccard-Psalms-Rplots.pdf jaccard_Psalms-sorted.txt \
+ selftest
 
 authors.pdf: authors.tex
 	pdflatex authors
@@ -73,6 +74,9 @@ nt_frequencies.csv: visualize.py quotations.sqlite3
 ot_frequencies.csv: visualize.py quotations.sqlite3
 	python3 visualize.py ot_freq_csv
 
+selftest:
+	./selftest.py
+
 clean:
 	rm -f quotations.sqlite3 authors.tex manual_nt_length.tex getrefs.tex authors.aux manual_nt_length.aux getrefs.aux \
  authors.log manual_nt_length.log getrefs.log
@@ -80,4 +84,4 @@ clean:
 fullclean: clean
 	rm -f authors.pdf getrefs.pdf manual_nt_length.pdf Rplots.pdf
 
-.PHONY: clean fullclean all
+.PHONY: clean fullclean all selftest
