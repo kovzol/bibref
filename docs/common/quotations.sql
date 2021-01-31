@@ -1633,6 +1633,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2012, 1, 'που περι της εβδομης', 'ειρηκεν γαρ'); -- που περι της εβδομης = somewhere concering the seventh day, ειρηκεν γαρ = He has spoken for
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2012, 1, 'quotation', 'literal, superset, fuzzy', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2013, 1, 'Genesis', null, 'LXX Genesis 22:17+1 22:17-121', 'Hebrews', 'SBLGNT Hebrews 6:14+7 6:14-2', 54247, 38, 8206, 38, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2013, 1, 'Genesis', null, 'LXX Genesis 22:17+1 22:17-121', 'Hebrews', 'SBLGNT Hebrews 6:14+7 6:14-2', 54247, 38, 8206, 38, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2013, 1, null, 'λεγων'); -- λεγων = saying
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2013, 1, 'quotation', 'literal, exact', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2101, 1, 'Exodus', null, 'LXX Exodus 33:19+86 33:19', 'Romans', 'SBLGNT Romans 9:15+15 9:15', 99825, 38, 19129, 38, 'getrefs');
