@@ -1258,17 +1258,11 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (128, 1, 'Isaiah', null, 'LXX Isaiah 8:18 8:18-78', 'Hebrews', 'SBLGNT Hebrews 2:13+39 2:13', 17131, 33, 2440, 33, 'getrefs');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (128, 1, 'Isaiah', null, 'LXX Isaiah 8:18 8:18-78', 'Hebrews', 'SBLGNT Hebrews 2:13+39 2:13', 17131, 33, 2440, 33, 'manual');
+ (128, 1, 'Isaiah', null, 'LXX Isaiah 8:17+67 8:18-78', 'Hebrews', 'SBLGNT Hebrews 2:13+11 2:13', 17111, 53, 2412, 61, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
- (128, 1, null, 'και παλιν'); -- και παλιν = and again
+ (128, 1, null, 'και παλιν ... και παλιν'); -- και παλιν = and again
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (128, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
-insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (129, 1, 'Isaiah', null, 'LXX Isaiah 8:17+67 8:17', 'Hebrews', 'SBLGNT Hebrews 2:13+11 2:13-41', 17111, 20, 2412, 20, 'manual');
-insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
- (129, 1, null, 'και παλιν'); -- και παλιν = and again
-insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
- (129, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (201, 1, 'Jeremiah', null, 'LXX Jeremiah 31:15+50 31:15-64', 'Matthew', 'SBLGNT Matthew 2:18+25 2:18-66', 80265, 9, 3951, 9, 'getrefs');
@@ -1922,13 +1916,13 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2404, 1, 'quotation', 'fuzzy', 'Z.K.');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (2404, 2, 'Deuteronomy', null, 'LXX Deuteronomy 32:35', 'Hebrews', 'SBLGNT Hebrews 10:30', null, null, null, null, 'traditional');
+ (2404, 2, 'Deuteronomy', null, 'LXX Deuteronomy 32:35-36', 'Hebrews', 'SBLGNT Hebrews 10:30', null, null, null, null, 'traditional');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (2404, 2, 'Deuteronomy', null, 'LXX Deuteronomy 32:35+7 32:35-73', 'Hebrews', 'SBLGNT Hebrews 10:30+24 10:30-32', 102578, 20, 17508, 22, 'manual');
+ (2404, 2, 'Deuteronomy', null, 'LXX Deuteronomy 32:35+7 32:36-102', 'Hebrews', 'SBLGNT Hebrews 10:30+24 10:30', 102578, 120, 17508, 54, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
- (2404, 2, 'τον', 'ειποντα'); -- τον = the One, ειποντα = having said
+ (2404, 2, 'τον', 'ειποντα ... και παλιν'); -- τον = the One, ειποντα = having said, και παλιν = and again
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
- (2404, 2, 'quotation', 'fuzzy', 'Z.K.');
+ (2404, 2, 'quotation', 'fuzzy, superset', 'Z.K.');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2405, 1, 'Deuteronomy', null, 'LXX Deuteronomy 32:43+60 32:43-169', 'Romans', 'SBLGNT Romans 15:10+13 15:11-65', 103458, 33, 30225, 33, 'getrefs');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
