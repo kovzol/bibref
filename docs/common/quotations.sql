@@ -2051,6 +2051,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2413, 1, 'Μωυσης', 'ειπεν'); -- ειπεν = said
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2413, 1, 'quotation', 'literal, exact', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2414, 1, 'Deuteronomy', null, 'LXX Deuteronomy 31:6+104 31:6-19', 'Hebrews', 'SBLGNT Hebrews 13:5+54 13:5-20', 96097, 9, 24617, 9, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2414, 1, 'Deuteronomy', null, 'LXX Deuteronomy 31:6+105 31:6', 'Hebrews', 'SBLGNT Hebrews 13:5+55 13:5', 96098, 27, 24618, 28, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2414, 1, null, 'αυτος γαρ ειρηκεν'); -- αυτος γαρ ειρηκεν = He Himself for has said
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2414, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (3001, 1, 'Job', null, 'Job 5:12-13', 'I_Corinthians', 'I_Corinthians 3:19', null, null, null, null, 'traditional');
