@@ -1,0 +1,22 @@
+addbooks
+
+## Traditionally, Hebrews 12:20 refers to Exodus 19:12-13, and the contextual evidence is clear.
+## But the quoted text is too far from being an identified match.
+
+lookup LXX Exodus 19:12
+# και αφοριεις τον λαον κυκλω λεγων προσεχετε εαυτοις του αναβηναι εις το ορος και θιγειν τι αυτου πας ο αψαμενος του ορους θανατω τελευτησει
+lookup LXX Exodus 19:13
+# ουχ αψεται αυτου χειρ εν γαρ λιθοις λιθοβοληθησεται η βολιδι κατατοξευθησεται εαν τε κτηνος εαν τε ανθρωπος ου ζησεται οταν αι φωναι και αι σαλπιγγες και η νεφελη απελθη απο του ορους εκεινοι αναβησονται επι το ορος
+lookup SBLGNT Hebrews 12:20
+# ουκ εφερον γαρ το διαστελλομενον· Καν θηριον θιγη του ορους, λιθοβοληθησεται·
+text1 λιθοβοληθησεται
+# Stored internally as liuobolhuhsetai.
+find1 LXX
+# Found in Exodus 19:13+29 19:13-135 (book position 54909-54923)
+# Found in Exodus 21:28+48 21:28-61 (book position 60837-60851)
+# Found in Exodus 21:29+122 21:29-30 (book position 61035-61049)
+# Found in Exodus 21:32+87 21:32 (book position 61291-61305)
+# 4 occurrences.
+
+## It seems that the text in Hebrews just recalls Exodus 19:12-13 but does not quote it.
+## Two words match: ορους ("mountain") and λιθοβοληθησεται ("it shall be stoned").
