@@ -2043,6 +2043,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2412, 1, null, 'οτι γεγραπται'); -- οτι γεγραπται = it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2412, 1, 'quotation', 'literal, exact', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2413, 1, 'Deuteronomy', null, 'LXX Deuteronomy 9:19+3 9:19-102', 'Hebrews', 'SBLGNT Hebrews 12:21+41 12:21-11', 32201, 11, 23637, 11, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2413, 1, 'Deuteronomy', null, 'LXX Deuteronomy 9:19+3 9:19-102', 'Hebrews', 'SBLGNT Hebrews 12:21+41 12:21-11', 32201, 11, 23637, 11, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2413, 1, 'Μωυσης', 'ειπεν'); -- ειπεν = said
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2413, 1, 'quotation', 'literal, exact', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (3001, 1, 'Job', null, 'Job 5:12-13', 'I_Corinthians', 'I_Corinthians 3:19', null, null, null, null, 'traditional');
