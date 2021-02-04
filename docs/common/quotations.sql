@@ -1271,6 +1271,16 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (129, 1, null, 'ετι γαρ'); -- ετι γαρ = yet for
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (129, 1, 'quotation', 'literal, exact', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (130, 1, 'Isaiah', null, 'LXX Isaiah 40:6+40 40:6-20', 'I_Peter', 'SBLGNT I_Peter 1:24+15 1:24-50', 78495, 18, 2065, 18, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (130, 1, 'Isaiah', null, 'LXX Isaiah 40:6+65 40:8-27', 'I_Peter', 'SBLGNT I_Peter 1:24+37 1:25-61', 78520, 54, 2087, 54, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (130, 1, 'Isaiah', null, 'LXX Isaiah 40:6+32 40:8', 'I_Peter', 'SBLGNT I_Peter 1:24+5 1:25-39', 78487, 114, 2055, 108, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (130, 1, null, 'διοτι'); -- διοτι = because
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (130, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (201, 1, 'Jeremiah', null, 'LXX Jeremiah 31:15+50 31:15-64', 'Matthew', 'SBLGNT Matthew 2:18+25 2:18-66', 80265, 9, 3951, 9, 'getrefs');
