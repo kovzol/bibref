@@ -1,0 +1,10 @@
+lookup SBLGNT James 4:5
+# η δοκειτε οτι κενως η γραφη λεγει· Προς φθονον επιποθει το πνευμα ο ⸀κατωκισεν εν ημιν;
+
+## The quoted passage or parts of it cannot be found in LXX.
+## See a discussion at https://christianity.stackexchange.com/questions/3033/what-scripture-is-james-45-referring-to,
+## but here not solution is found. A comment https://christianity.stackexchange.com/a/50511 suggests
+## that Wisdom 6:23 (not present in the Sword library, since it is deuterocanonical) could eventually fit:
+## "οὔτε μὴν φθόνῳ τετηκότι συνοδεύσω ὅτι οὗτος οὐ κοινωνήσει σοφίᾳ" (taken from
+## https://en.katabiblon.com/us/index.php?text=LXX&book=Wsd&ch=6), but only the word
+## "φθόνῳ" matches.
