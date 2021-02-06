@@ -1943,6 +1943,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2204, 1, 'θεος', 'καθως ειπεν'); -- καθως ειπεν = as has said
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2204, 1, 'quotation', 'literal, far-fuzzy', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2205, 1, 'Leviticus', null, 'LXX Leviticus 19:2+48 19:2-14', 'I_Peter', 'SBLGNT I_Peter 1:16+17 1:17-107', 59515, 23, 1440, 23, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2205, 1, 'Leviticus', null, 'LXX Leviticus 19:2+48 19:2-14', 'I_Peter', 'SBLGNT I_Peter 1:16+17 1:17-107', 59515, 22, 1440, 22, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2205, 1, null, 'διοτι γεγραπται οτι'); -- διοτι γεγραπται οτι = because it has been written
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2205, 1, 'quotation', 'literal, exact', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2301, 1, 'Numbers', null, 'LXX Numbers 16:5+73 16:5-75', 'II_Timothy', 'SBLGNT II_Timothy 2:19+65 2:19-43', 57258, 19, 2818, 19, 'getrefs');
