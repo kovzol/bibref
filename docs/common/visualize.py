@@ -481,7 +481,7 @@ def main():
         elif result_type == "ot_freq_csv":
             ot_frequencies_csv(conn)
         elif result_type == "nt_ppm":
-            nt_report_ppm(conn, data, data2, data3, data4, data5)
+            nt_report_ppm(conn, data, int(data2), int(data3), int(data4), data5)
         elif result_type == "nt_latex":
             nt_report_latex(conn, data)
         elif result_type == "nt_jaccard":

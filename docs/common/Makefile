@@ -1,7 +1,8 @@
-all: getrefs.pdf authors.pdf manual_nt_length.pdf Rplots.pdf Romans-getrefs.png \
- Romans-table.pdf Romans-Rplots.pdf nt_frequencies.csv ot_frequencies.csv \
- jaccard-Romans-Rplots.pdf jaccard_Romans-sorted.txt \
+all: getrefs.pdf authors.pdf manual_nt_length.pdf Rplots.pdf \
  jaccard-Psalms-Rplots.pdf jaccard_Psalms-sorted.txt \
+ Romans-getrefs.png Romans-table.pdf Romans-Rplots.pdf jaccard-Romans-Rplots.pdf jaccard_Romans-sorted.txt \
+ Hebrews-getrefs.png Hebrews-table.pdf Hebrews-Rplots.pdf jaccard-Hebrews-Rplots.pdf jaccard_Hebrews-sorted.txt \
+ nt_frequencies.csv ot_frequencies.csv \
  selftest
 
 authors.pdf: authors.tex
@@ -13,6 +14,7 @@ manual_nt_length.pdf: manual_nt_length.tex
 getrefs.pdf: getrefs.tex
 	pdflatex getrefs
 
+
 Romans-getrefs.png: Romans-getrefs.ppm
 	convert Romans-getrefs.ppm png:Romans-getrefs.png
 
@@ -21,6 +23,53 @@ Romans-getrefs.ppm: visualize.py quotations.sqlite3
 
 Romans-table.tex: visualize.py quotations.sqlite3
 	python3 visualize.py nt_latex > Romans-table.tex
+
+Romans-Rplots.pdf: manual_Romans_length.csv manual_Romans_length.r
+	R -q --save < manual_Romans_length.r
+
+jaccard-Romans-Rplots.pdf: jaccard_Romans.csv jaccard_Romans.r
+	R -q --save < jaccard_Romans.r
+
+jaccard_Romans.csv: visualize.py quotations.sqlite3
+	python3 visualize.py nt_jaccard
+
+jaccard_Romans.txt: visualize.py quotations.sqlite3
+	python3 visualize.py nt_jaccard
+
+jaccard_Romans-sorted.txt: jaccard_Romans.txt
+	sort jaccard_Romans.txt > jaccard_Romans-sorted.txt
+
+Romans-table.pdf: Romans-table.tex
+	pdflatex Romans-table
+
+
+Hebrews-getrefs.png: Hebrews-getrefs.ppm
+	convert Hebrews-getrefs.ppm png:Hebrews-getrefs.png
+
+Hebrews-getrefs.ppm: visualize.py quotations.sqlite3
+	python3 visualize.py nt_ppm Hebrews 26307 165
+
+Hebrews-table.tex: visualize.py quotations.sqlite3
+	python3 visualize.py nt_latex Hebrews > Hebrews-table.tex
+
+Hebrews-Rplots.pdf: manual_Hebrews_length.csv manual_Hebrews_length.r
+	R -q --save < manual_Hebrews_length.r
+
+jaccard-Hebrews-Rplots.pdf: jaccard_Hebrews.csv jaccard_Hebrews.r
+	R -q --save < jaccard_Hebrews.r
+
+jaccard_Hebrews.csv: visualize.py quotations.sqlite3
+	python3 visualize.py nt_jaccard Hebrews
+
+jaccard_Hebrews.txt: visualize.py quotations.sqlite3
+	python3 visualize.py nt_jaccard Hebrews
+
+jaccard_Hebrews-sorted.txt: jaccard_Hebrews.txt
+	sort jaccard_Hebrews.txt > jaccard_Hebrews-sorted.txt
+
+Hebrews-table.pdf: Hebrews-table.tex
+	pdflatex Hebrews-table
+
 
 authors.tex: visualize.py quotations.sqlite3
 	python3 visualize.py traditional > authors.tex
@@ -38,21 +87,6 @@ quotations.sqlite3: quotations.sql
 Rplots.pdf: manual_nt_length.csv manual_nt_length.r
 	R -q --save < manual_nt_length.r
 
-Romans-Rplots.pdf: manual_Romans_length.csv manual_Romans_length.r
-	R -q --save < manual_Romans_length.r
-
-jaccard-Romans-Rplots.pdf: jaccard_Romans.csv jaccard_Romans.r
-	R -q --save < jaccard_Romans.r
-
-jaccard_Romans.csv: visualize.py quotations.sqlite3
-	python3 visualize.py nt_jaccard
-
-jaccard_Romans.txt: visualize.py quotations.sqlite3
-	python3 visualize.py nt_jaccard
-
-jaccard_Romans-sorted.txt: jaccard_Romans.txt
-	sort jaccard_Romans.txt > jaccard_Romans-sorted.txt
-
 jaccard-Psalms-Rplots.pdf: jaccard_Psalms.csv jaccard_Psalms.r
 	R -q --save < jaccard_Psalms.r
 
@@ -65,9 +99,6 @@ jaccard_Psalms.txt: visualize.py quotations.sqlite3
 jaccard_Psalms-sorted.txt: jaccard_Psalms.txt
 	sort jaccard_Psalms.txt > jaccard_Psalms-sorted.txt
 
-Romans-table.pdf: Romans-table.tex
-	pdflatex Romans-table
-
 nt_frequencies.csv: visualize.py quotations.sqlite3
 	python3 visualize.py nt_freq_csv
 
@@ -78,7 +109,8 @@ selftest:
 	./selftest.py
 
 clean:
-	rm -f quotations.sqlite3 authors.tex manual_nt_length.tex getrefs.tex authors.aux manual_nt_length.aux getrefs.aux \
+	rm -f quotations.sqlite3 authors.tex manual_nt_length.tex getrefs.tex \
+ authors.aux manual_nt_length.aux getrefs.aux \
  authors.log manual_nt_length.log getrefs.log
 
 fullclean: clean
