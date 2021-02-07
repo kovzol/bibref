@@ -1308,6 +1308,7 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
  (131, 3, 'quotation', 'literal, exact', 'Z.K.');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (132, 1, 'Isaiah', null, 'LXX Isaiah 53:9+78 53:9', 'I_Peter', 'SBLGNT I_Peter 2:22+7 2:22', 108358, 45, 4028, 45, 'getrefs');
+-- The non-literal quotation is longer: I_Peter 2:22-25 cites and summarizes Isaiah 53:5-9. Extend...
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (132, 1, 'Isaiah', null, 'LXX Isaiah 53:9+78 53:9', 'I_Peter', 'SBLGNT I_Peter 2:22+7 2:22', 108358, 45, 4028, 45, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
