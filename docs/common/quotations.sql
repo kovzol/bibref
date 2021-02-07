@@ -112,6 +112,7 @@ insert into books (name, author, info, number) values ('II_Timothy', 'Paul', 'Se
 insert into books (name, author, info, number) values ('Hebrews', 'Unknown', 'Epistle to the Hebrews', 119);
 insert into books (name, author, info, number) values ('James', 'James', 'Epistle of James', 120);
 insert into books (name, author, info, number) values ('I_Peter', 'Peter', 'First Epistle of Peter', 121);
+insert into books (name, author, info, number) values ('II_Peter', 'Peter', 'Second Epistle of Peter', 122);
 insert into books (name, author, info, number) values ('Revelation_of_John', 'John', 'Revelation of John', 127);
 
 insert into classifications (name, info) values ('quotation', 'first quotation with a direct reference given');
@@ -2183,6 +2184,8 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (3103, 2, null, 'οτι'); -- οτι = because
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (3103, 2, 'quotation', 'literal, exact', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (3104, 1, 'Proverbs', null, 'LXX Proverbs 26:11', 'II_Peter', 'SBLGNT II_Peter 2:22', null, null, null, null, 'traditional');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (4101, 1, 'II_Samuel', null, 'LXX II_Samuel 7:14 7:14-71', 'Hebrews', 'SBLGNT Hebrews 1:5+66 1:5', 20344, 45, 472, 45, 'manual');
