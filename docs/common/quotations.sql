@@ -107,7 +107,8 @@ insert into books (name, author, info, number) values ('I_Corinthians', 'Paul', 
 insert into books (name, author, info, number) values ('II_Corinthians', 'Paul', 'Second Epistle to the Corinthians', 108);
 insert into books (name, author, info, number) values ('Galatians', 'Paul', 'Epistle to the Galatians', 109);
 insert into books (name, author, info, number) values ('Ephesians', 'Paul', 'Epistle to the Ephesians', 110);
-insert into books (name, author, info, number) values ('I_Timothy', 'Paul', 'First Epistle to the Ephesians', 115);
+insert into books (name, author, info, number) values ('I_Timothy', 'Paul', 'First Epistle to Timothy', 115);
+insert into books (name, author, info, number) values ('II_Timothy', 'Paul', 'Second Epistle to Timothy', 116);
 insert into books (name, author, info, number) values ('Hebrews', 'Unknown', 'Epistle to the Hebrews', 119);
 insert into books (name, author, info, number) values ('James', 'James', 'Epistle of James', 120);
 insert into books (name, author, info, number) values ('I_Peter', 'Peter', 'First Epistle of Peter', 121);
@@ -1305,6 +1306,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (131, 3, null, 'γεγραπται'); -- γεγραπται = it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (131, 3, 'quotation', 'literal, exact', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (132, 1, 'Isaiah', null, 'LXX Isaiah 53:9+78 53:9', 'I_Peter', 'SBLGNT I_Peter 2:22+7 2:22', 108358, 45, 4028, 45, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (132, 1, 'Isaiah', null, 'LXX Isaiah 53:9+78 53:9', 'I_Peter', 'SBLGNT I_Peter 2:22+7 2:22', 108358, 45, 4028, 45, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (132, 1, null, 'υπολιμπανων υπογραμμον ινα επακολουθησητε'); -- υπολιμπανων υπογραμμον ινα επακολουθησητε = leaving an example that you should follow after
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (132, 1, 'quotation', 'literal, exact', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (201, 1, 'Jeremiah', null, 'LXX Jeremiah 31:15+50 31:15-64', 'Matthew', 'SBLGNT Matthew 2:18+25 2:18-66', 80265, 9, 3951, 9, 'getrefs');
