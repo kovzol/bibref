@@ -1186,6 +1186,20 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (122, 1, 'quotation', 'literal, exact', 'Z.K.');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (122, 2, 'Isaiah', null, 'LXX Isaiah 9:1+80 9:1-88', 'Matthew', 'SBLGNT Matthew 4:15+13 4:15-32', 17792, 22, 7230, 22, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (122, 2, 'Isaiah', null, 'LXX Isaiah 9:1+141 9:1-17', 'Matthew', 'SBLGNT Matthew 4:15+35 4:15', 17853, 32, 7252, 32, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (122, 2, 'Isaiah', null, 'LXX Isaiah 9:2+12 9:2-63', 'Matthew', 'SBLGNT Matthew 4:16+10 4:16-69', 17914, 11, 7294, 11, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (122, 2, 'Isaiah', null, 'LXX Isaiah 9:2+50 9:2-12', 'Matthew', 'SBLGNT Matthew 4:16+51 4:16-15', 17952, 24, 7335, 24, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (122, 2, 'Isaiah', null, 'LXX Isaiah 9:1+71 9:2-12', 'Matthew', 'SBLGNT Matthew 4:15+2 4:16-15', 17783, 193, 7219, 140, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (122, 2, 'Ησαΐου του προφητου', 'λεγοντος'); -- λεγοντος = saying
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (122, 2, 'quotation', 'literal, fuzzy, superset', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (123, 1, 'Isaiah', null, 'LXX Isaiah 49:8+16 49:8-77', 'II_Corinthians', 'SBLGNT II_Corinthians 6:2+8 6:2-45', 99749, 50, 8510, 50, 'getrefs');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (123, 1, 'Isaiah', null, 'LXX Isaiah 49:8+16 49:8-77', 'II_Corinthians', 'SBLGNT II_Corinthians 6:2+8 6:2-45', 99749, 50, 8510, 50, 'manual');
