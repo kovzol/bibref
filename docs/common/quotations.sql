@@ -1828,6 +1828,18 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2103, 6, null, 'ο γαρ ειπων ... ειπεν και'); -- ο γαρ ειπων = the One for having said, ειπεν και = said also
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2103, 6, 'quotation', 'literal, far-fuzzy', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2103, 7, 'Exodus', null, 'LXX Exodus 20:13 20:13', 'Matthew', 'SBLGNT Matthew 5:21+29 5:21-31', 57313, 11, 9907, 11, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2103, 7, null, 'ερρεθη'); -- ερρεθη = it was said
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2103, 7, 'quotation', 'literal, exact', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2103, 8, 'Exodus', null, 'LXX Exodus 20:12 20:16-31', 'Matthew', 'SBLGNT Matthew 19:18+30 19:19-34', 57204, 159, 54982, 75, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2103, 8, 'τας εντολας', null); -- τας εντολας = the commandments
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2103, 8, 'quotation', 'literal, exact, far-fuzzy, superset', 'Z.K.');
 -- End of the Ten Commandments.
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2104, 1, 'Exodus', null, 'LXX Exodus 13:12+10 13:12-91', 'Luke', 'SBLGNT Luke 2:23+29 2:23-10', 37422, 35, 7753, 35, 'manual');
