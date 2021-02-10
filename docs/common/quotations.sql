@@ -1840,6 +1840,12 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2103, 8, 'τας εντολας', null); -- τας εντολας = the commandments
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2103, 8, 'quotation', 'literal, exact, far-fuzzy, superset', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2103, 9, 'Exodus', null, 'LXX Exodus 20:14 20:14', 'Matthew', 'SBLGNT Matthew 5:27+17 5:27', 57324, 12, 10489, 12, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2103, 9, null, 'ερρεθη'); -- ερρεθη = it was said
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2103, 9, 'quotation', 'literal, exact', 'Z.K.');
 -- End of the Ten Commandments.
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2104, 1, 'Exodus', null, 'LXX Exodus 13:12+10 13:12-91', 'Luke', 'SBLGNT Luke 2:23+29 2:23-10', 37422, 35, 7753, 35, 'manual');
