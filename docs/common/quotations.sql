@@ -2087,6 +2087,12 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2406, 2, 'quotation', 'literal, exact', 'Z.K.');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2406, 3, 'Deuteronomy', null, 'LXX Deuteronomy 24:1+117 24:1-52', 'Matthew', 'SBLGNT Matthew 5:31+34 5:31', 72323, 18, 10880, 18, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2406, 3, null, 'Ερρεθη'); -- Ερρεθη = it was said
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2406, 3, 'quotation', 'far-fuzzy', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2407, 1, 'Deuteronomy', null, 'LXX Deuteronomy 25:4+4 25:4', 'I_Corinthians', 'SBLGNT I_Corinthians 9:9+31 9:9-19', 75102, 17, 14457, 17, 'getrefs');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2407, 1, 'Deuteronomy', null, 'LXX Deuteronomy 25:4', 'I_Corinthians', 'SBLGNT I_Corinthians 9:9+31 9:9-19', 75098, 21, 14453, 21, 'getrefs');
