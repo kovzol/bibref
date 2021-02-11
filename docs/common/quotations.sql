@@ -964,6 +964,9 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (46, 4, 'quotation', 'literal', 'Z.K.');
 
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (47, 1, 'Psalms', 50, 'LXX Psalms 50:14', 'Matthew', 'SBLGNT Matthew 5:33b', 0, 0, 0, 0, 'traditional');
+
 -- Non-psalms:
 
 -- TODO: Add traditional data (eventually).
@@ -1901,6 +1904,12 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2109, 1, null, 'λεγων'); -- λεγων = saying
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2109, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2110, 1, 'Exodus', null, 'LXX Exodus 21:24 21:24-28', 'Matthew', 'SBLGNT Matthew 5:38+17 5:38', 60430, 37, 11387, 40, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2110, 1, null, 'ερρεθη'); -- ερρεθη = it was said
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2110, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2201, 1, 'Leviticus', null, 'LXX Leviticus 18:5+69 18:5-21', 'Romans', 'SBLGNT Romans 10:5+46 10:5-1', 57053, 27, 20844, 27, 'getrefs');
@@ -2002,6 +2011,8 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2205, 1, null, 'διοτι γεγραπται οτι'); -- διοτι γεγραπται οτι = because it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2205, 1, 'quotation', 'literal, exact', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2206, 1, 'Leviticus', null, 'LXX Leviticus 19:12', 'Matthew', 'SBLGNT Matthew 5:33a', 0, 0, 0, 0, 'traditional');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2301, 1, 'Numbers', null, 'LXX Numbers 16:5+73 16:5-75', 'II_Timothy', 'SBLGNT II_Timothy 2:19+65 2:19-43', 57258, 19, 2818, 19, 'getrefs');
