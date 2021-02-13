@@ -1343,6 +1343,28 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
  (133, 1, 'strong allusion', 'literal, fuzzy', 'Z.K.');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (134, 1, 'Isaiah', null, 'LXX Isaiah 53:4', 'Matthew', 'Matthew 8:17', null, null, null, null, 'traditional');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (135, 1, 'Isaiah', null, 'LXX Isaiah 42:1+77 42:1-23', 'Matthew', 'SBLGNT Matthew 12:18+59 12:18-28', 83409, 19, 31171, 19, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (135, 1, 'Isaiah', null, 'LXX Isaiah 42:1+95 42:1-7', 'Matthew', 'SBLGNT Matthew 12:18+80 12:18-9', 83427, 17, 31192, 17, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (135, 1, 'Isaiah', null, 'LXX Isaiah 42:2+19 42:2-20', 'Matthew', 'SBLGNT Matthew 12:19+19 12:19-33', 83470, 12, 31237, 12, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (135, 1, 'Isaiah', null, 'LXX Isaiah 42:2+46 42:3-78', 'Matthew', 'SBLGNT Matthew 12:19+59 12:20-77', 83497, 12, 31277, 12, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (135, 1, 'Isaiah', null, 'LXX Isaiah 42:3+27 42:3-48', 'Matthew', 'SBLGNT Matthew 12:20+29 12:20-45', 83529, 10, 31311, 10, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (135, 1, 'Isaiah', null, 'LXX Isaiah 42:3+43 42:3-28', 'Matthew', 'SBLGNT Matthew 12:20+42 12:20-28', 83545, 14, 31324, 14, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (135, 1, 'Isaiah', null, 'LXX Isaiah 42:4+53 42:4', 'Matthew', 'SBLGNT Matthew 12:21+2 12:21', 83640, 28, 31368, 28, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (135, 1, 'Isaiah', null, 'LXX Isaiah 42:4+53 42:4', 'Matthew', 'SBLGNT Matthew 12:21+2 12:21', 83640, 28, 31368, 28, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (135, 1, 'Isaiah', null, 'LXX Isaiah 42:1+5 42:4', 'Matthew', 'SBLGNT Matthew 12:18+4 12:21', 83337, 331, 31116, 280, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (135, 1, 'Ησαΐου του προφητου', 'ρηθεν ... λεγοντος'); -- το ρηθεν ... λεγοντος = having been spoken ... saying
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (135, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (201, 1, 'Jeremiah', null, 'LXX Jeremiah 31:15+50 31:15-64', 'Matthew', 'SBLGNT Matthew 2:18+25 2:18-66', 80265, 9, 3951, 9, 'getrefs');
