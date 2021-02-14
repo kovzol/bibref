@@ -1393,6 +1393,34 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (136, 3, 'η προφητεια Ησαΐου', 'η λεγουσα'); -- η λεγουσα = saying
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (136, 3, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (137, 1, 'Isaiah', null, 'LXX Isaiah 29:13+24 29:13-104', 'Matthew', 'SBLGNT Matthew 15:8 15:8-37', 55467, 22, 42765, 22, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (137, 1, 'Isaiah', null, 'LXX Isaiah 29:13+60 29:13-31', 'Matthew', 'SBLGNT Matthew 15:8+28 15:9-28', 55503, 59, 42793, 59, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (137, 1, 'Isaiah', null, 'LXX Isaiah 29:13+118 29:13-11', 'Matthew', 'SBLGNT Matthew 15:9+38 15:10-51', 55561, 21, 42862, 21, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (137, 1, 'Isaiah', null, 'LXX Isaiah 29:13+139 29:13', 'Matthew', 'SBLGNT Matthew 15:9+28 15:9-17', 55582, 11, 42852, 11, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (137, 1, 'Isaiah', null, 'LXX Isaiah 29:13+24 29:13', 'Matthew', 'SBLGNT Matthew 15:8 15:9', 55467, 126, 42765, 115, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (137, 1, 'Ησαΐας', 'λεγων'); -- λεγων = saying
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (137, 1, 'quotation', 'literal, superset, fuzzy', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (137, 2, 'Isaiah', null, 'LXX Isaiah 29:13+32 29:13-104', 'Mark', 'SBLGNT Mark 7:6+79 7:6-37', 55475, 14, 21322, 14, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (137, 2, 'Isaiah', null, 'LXX Isaiah 29:13+60 29:13-31', 'Mark', 'SBLGNT Mark 7:6+99 7:7-28', 55503, 59, 21342, 59, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (137, 2, 'Isaiah', null, 'LXX Isaiah 29:13+118 29:13-14', 'Mark', 'SBLGNT Mark 7:7+38 7:7', 55561, 18, 21411, 18, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (137, 2, 'Isaiah', null, 'LXX Isaiah 29:13+139 29:13', 'Mark', 'SBLGNT Mark 7:7+28 7:7-17', 55582, 11, 21401, 11, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (137, 2, 'Isaiah', null, 'LXX Isaiah 29:13+32 29:13', 'Mark', 'SBLGNT Mark 7:6+79 7:7', 55467, 126, 21314, 115, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (137, 2, 'Ησαΐας', 'γεγραπται οτι'); -- γεγραπται οτι = it has been written
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (137, 2, 'quotation', 'literal, superset, fuzzy', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (201, 1, 'Jeremiah', null, 'LXX Jeremiah 31:15+50 31:15-64', 'Matthew', 'SBLGNT Matthew 2:18+25 2:18-66', 80265, 9, 3951, 9, 'getrefs');
