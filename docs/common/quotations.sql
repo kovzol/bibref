@@ -1917,6 +1917,12 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2103, 9, null, 'ερρεθη'); -- ερρεθη = it was said
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2103, 9, 'quotation', 'literal, exact', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2103, 10, 'Exodus', null, 'LXX Exodus 20:12 20:14', 'Matthew', 'SBLGNT Matthew 15:4+13 15:4-41', 57204, 28, 42524, 25, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2103, 10, 'θεος', 'ειπεν'); -- ειπεν = commanded
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2103, 10, 'quotation', 'literal, fuzzy, superset', 'Z.K.');
 -- End of the Ten Commandments.
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2104, 1, 'Exodus', null, 'LXX Exodus 13:12+10 13:12-91', 'Luke', 'SBLGNT Luke 2:23+29 2:23-10', 37422, 35, 7753, 35, 'manual');
@@ -1986,6 +1992,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2111, 1, null, 'γεγραπται'); -- γεγραπται = it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2111, 1, 'quotation', 'literal', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2112, 1, 'Exodus', null, 'LXX Exodus 21:17 21:17-33', 'Matthew', 'SBLGNT Matthew 15:4+41 15:4-22', 59825, 16, 42552, 16, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2112, 1, 'Exodus', null, 'LXX Exodus 21:17', 'Matthew', 'SBLGNT Matthew 15:4+41 15:4', 59825, 49, 42552, 38, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2112, 1, 'θεος', 'ειπεν'); -- ειπεν = commanded
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2112, 1, 'quotation', 'literal, superset, fuzzy', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2201, 1, 'Leviticus', null, 'LXX Leviticus 18:5+69 18:5-21', 'Romans', 'SBLGNT Romans 10:5+46 10:5-1', 57053, 27, 20844, 27, 'getrefs');
