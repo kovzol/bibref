@@ -2327,6 +2327,24 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2414, 1, null, 'αυτος γαρ ειρηκεν'); -- αυτος γαρ ειρηκεν = He Himself for has said
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2414, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2415, 1, 'Deuteronomy', null, 'LXX Deuteronomy 19:15+105 19:15-41', 'II_Corinthians', 'SBLGNT II_Corinthians 13:1+26 13:1-22', 60565, 25, 21157, 25, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2415, 1, 'Deuteronomy', null, 'LXX Deuteronomy 19:15+152 19:15', 'II_Corinthians', 'SBLGNT II_Corinthians 13:1+54 13:1', 60612, 19, 21185, 19, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2415, 1, 'Deuteronomy', null, 'LXX Deuteronomy 19:15+105 19:15', 'II_Corinthians', 'SBLGNT II_Corinthians 13:1+26 13:1', 60565, 66, 21157, 47, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2415, 1, null, null);
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2415, 1, 'strong allusion', 'literal, fuzzy, supertext', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2415, 2, 'Deuteronomy', null, 'LXX Deuteronomy 19:15+105 19:15-44', 'Matthew', 'SBLGNT Matthew 18:16+41 18:16-18', 60565, 22, 51782, 22, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2415, 2, 'Deuteronomy', null, 'LXX Deuteronomy 19:15+105 19:15', 'Matthew', 'SBLGNT Matthew 18:16+41 18:16', 60565, 66, 51782, 40, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2415, 2, null, null);
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2415, 2, 'strong allusion', 'literal, fuzzy, supertext', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (3001, 1, 'Job', null, 'Job 5:12-13', 'I_Corinthians', 'I_Corinthians 3:19', null, null, null, null, 'traditional');
