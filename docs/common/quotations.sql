@@ -60,6 +60,7 @@ insert into authors (name, info) values ('Habakkuk', 'Habakkuk');
 insert into authors (name, info) values ('Haggai', 'Haggai');
 insert into authors (name, info) values ('Various', 'Authors of Psalms');
 insert into authors (name, info) values ('Malachi', 'Malachi');
+insert into authors (name, info) values ('Zechariah', 'Zechariah');
 insert into authors (name, info) values ('Samuel', 'Samuel');
 insert into authors (name, info) values ('Solomon', 'King Solomon');
 
@@ -95,6 +96,7 @@ insert into books (name, author, info, number) values ('Amos', 'Amos', 'Book of 
 insert into books (name, author, info, number) values ('Micah', 'Micah', 'Book of Micah', 33);
 insert into books (name, author, info, number) values ('Habakkuk', 'Habakkuk', 'Book of Habakkuk', 35);
 insert into books (name, author, info, number) values ('Haggai', 'Haggai', 'Book of Haggai', 37);
+insert into books (name, author, info, number) values ('Zechariah', 'Zechariah', 'Book of Zechariah', 38);
 insert into books (name, author, info, number) values ('Malachi', 'Malachi', 'Book of Malachi', 39);
 
 insert into books (name, author, info, number) values ('Matthew', 'Matthew', 'Gospel of Matthew', 101);
@@ -1421,6 +1423,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (137, 2, 'Ησαΐας', 'γεγραπται οτι'); -- γεγραπται οτι = it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (137, 2, 'quotation', 'literal, superset, fuzzy', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (138, 1, 'Isaiah', null, 'LXX Isaiah 62:11+44 62:11-65', 'Matthew', 'SBLGNT Matthew 21:4+52 21:5-71', 124178, 24, 59120, 24, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (138, 1, 'Isaiah', null, 'LXX Isaiah 62:11+45 62:11-65', 'Matthew', 'SBLGNT Matthew 21:5 21:5-71', 124179, 23, 59121, 23, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (138, 1, 'του προφητου', 'ρηθεν ... λεγοντος'); -- having been spoken ... saying
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (138, 1, 'quotation', 'literal', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (201, 1, 'Jeremiah', null, 'LXX Jeremiah 31:15+50 31:15-64', 'Matthew', 'SBLGNT Matthew 2:18+25 2:18-66', 80265, 9, 3951, 9, 'getrefs');
@@ -1654,6 +1664,15 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (1601, 1, 'εν βιβλω των προφητων', 'καθως γεγραπται'); -- εν βιβλω των προφητων = in the book of the prophets, καθως γεγραπται = as it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1601, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1701, 1, 'Zechariah', null, 'LXX Zechariah 9:9+46 9:9-62', 'Matthew', 'SBLGNT Matthew 21:5+19 21:5-49', 14394, 26, 59140, 26, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1701, 1, 'Zechariah', null, 'LXX Zechariah 9:9+46 9:9', 'Matthew', 'SBLGNT Matthew 21:5+19 21:5', 14394, 88, 59140, 75, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (1701, 1, 'του προφητου', 'ρηθεν ... λεγοντος'); -- having been spoken ... saying
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (1701, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2001, 1, 'Genesis', null, 'LXX Genesis 15:6+16 15:6', 'Romans', 'SBLGNT Romans 4:3+32 4:3', 34471, 36, 7233, 36, 'getrefs');
