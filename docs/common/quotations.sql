@@ -382,7 +382,7 @@ insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_pa
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (16, 1, null, 'γαρ'); -- γαρ = for
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
- (16, 1, 'quotation', 'literal, subtext', 'Z.K.');
+ (16, 1, 'quotation', 'literal, subset', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (17, 1, 'Psalms', 31, 'Psalms 31:5', 'Luke', 'Luke 23:46', null, null, null, null, 'traditional');
@@ -708,7 +708,7 @@ insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_pa
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (36, 3, null, null);
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
- (36, 3, 'repetition', 'literal, supertext', 'Z.K.');
+ (36, 3, 'repetition', 'literal, superset', 'Z.K.');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (36, 4, 'Psalms', 95, 'Psalms 95:11', 'Hebrews', 'Hebrews 4:3', null, null, null, null, 'traditional');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
@@ -1713,7 +1713,7 @@ insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_pa
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2001, 4, null, 'λεγομεν γαρ'); -- λεγομεν γαρ = we are saying for
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
- (2001, 4, 'repeated quotation', 'far-fuzzy, supertext', 'Z.K.');
+ (2001, 4, 'repeated quotation', 'far-fuzzy, superset', 'Z.K.');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2001, 5, 'Genesis', null, 'LXX Genesis 15:6+26 15:6', 'Romans', 'SBLGNT Romans 4:22+3 4:22', 34458, 26, 8856, 26, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
@@ -1843,7 +1843,7 @@ insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_pa
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2009, 1, null, 'γεγραπται'); -- γεγραπται = it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
- (2009, 1, 'quotation', 'literal, subtext, fuzzy', 'Z.K.');
+ (2009, 1, 'quotation', 'literal, subset, fuzzy', 'Z.K.');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2010, 1, 'Genesis', null, 'LXX Genesis 12:7+32 12:7-68', 'Galatians', 'SBLGNT Galatians 3:16+59 3:16-52', 28321, 13, 4940, 13, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
@@ -2371,7 +2371,7 @@ insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_pa
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2415, 1, null, null);
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
- (2415, 1, 'strong allusion', 'literal, fuzzy, supertext', 'Z.K.');
+ (2415, 1, 'strong allusion', 'literal, fuzzy, superset', 'Z.K.');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2415, 2, 'Deuteronomy', null, 'LXX Deuteronomy 19:15+105 19:15-44', 'Matthew', 'SBLGNT Matthew 18:16+41 18:16-18', 60565, 22, 51782, 22, 'getrefs');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
@@ -2379,9 +2379,34 @@ insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_pa
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2415, 2, null, null);
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
- (2415, 2, 'strong allusion', 'literal, fuzzy, supertext', 'Z.K.');
+ (2415, 2, 'strong allusion', 'literal, fuzzy, superset', 'Z.K.');
+-- TODO: Add fully entry. This seems to be a quotation (far-fuzzy):
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2416, 1, 'Deuteronomy', null, 'LXX Deuteronomy 25:5', 'Matthew', 'SBLGNT Matthew 22:24', null, null, null, null, 'traditional');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2417, 1, 'Deuteronomy', null, 'LXX Deuteronomy 6:5+3 6:5-61', 'Matthew', 'SBLGNT Matthew 22:37+10 22:37-52', 22214, 26, 65730, 26, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2417, 1, 'Deuteronomy', null, 'LXX Deuteronomy 6:5+3 6:5', 'Matthew', 'SBLGNT Matthew 22:37+10 22:37', 22214, 87, 65730, 78, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2417, 1, 'ποια εντολη μεγαλη εν τω νομω', null); -- ποια εντολη μεγαλη εν τω νομω = which is the greatest commandment in the law
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2417, 1, 'quotation', 'literal, fuzzy, superset', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2417, 2, 'Deuteronomy', null, 'LXX Deuteronomy 6:5+3 6:5-39', 'Luke', 'SBLGNT Luke 10:27+18 10:27-76', 22214, 48, 43036, 48, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2417, 2, 'Deuteronomy', null, 'LXX Deuteronomy 6:5+3 6:5', 'Luke', 'SBLGNT Luke 10:27+18 10:27-25', 22214, 87, 43036, 99, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2417, 2, 'Εν τω νομω', 'τι γεγραπται; πως αναγινωσκεις'); -- Εν τω νομω = in the law, τι γεγραπται; πως αναγινωσκεις = what has been written; how read you
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2417, 2, 'quotation', 'literal, fuzzy, subset', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2417, 3, 'Deuteronomy', null, 'LXX Deuteronomy 6:4+103 6:5-10', 'Mark', 'SBLGNT Mark 12:29+28 12:30-31', 22171, 120, 40771, 120, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2417, 3, 'Deuteronomy', null, 'LXX Deuteronomy 6:4+103 6:5', 'Mark', 'SBLGNT Mark 12:29+28 12:30-21', 22171, 130, 40771, 130, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2417, 3, 'Ποια εστιν εντολη πρωτη παντων', null); -- Ποια εστιν εντολη πρωτη παντων = which is commandment the first of all
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2417, 3, 'quotation', 'literal, fuzzy', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (3001, 1, 'Job', null, 'Job 5:12-13', 'I_Corinthians', 'I_Corinthians 3:19', null, null, null, null, 'traditional');
