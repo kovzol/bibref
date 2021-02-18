@@ -63,6 +63,7 @@ insert into authors (name, info) values ('Malachi', 'Malachi');
 insert into authors (name, info) values ('Zechariah', 'Zechariah');
 insert into authors (name, info) values ('Samuel', 'Samuel');
 insert into authors (name, info) values ('Solomon', 'King Solomon');
+insert into authors (name, info) values ('Daniel', 'Daniel');
 
 insert into authors (name, info) values ('Matthew', 'Matthew the Apostle');
 insert into authors (name, info) values ('Mark', 'Mark the Evangelist');
@@ -89,7 +90,8 @@ insert into books (name, author, info, number) values ('Psalms', 'Various', 'Boo
 insert into books (name, author, info, number) values ('Proverbs', 'Solomon', 'Book of Proverbs', 20);
 insert into books (name, author, info, number) values ('Isaiah', 'Isaiah', 'Book of Isaiah', 23);
 insert into books (name, author, info, number) values ('Jeremiah', 'Jeremiah', 'Book of Jeremiah', 24);
-insert into books (name, author, info, number) values ('Ezekiel', 'Ezekiel', 'Book of Ezekiel', 25);
+insert into books (name, author, info, number) values ('Ezekiel', 'Ezekiel', 'Book of Ezekiel', 26);
+insert into books (name, author, info, number) values ('Daniel', 'Daniel', 'Book of Daniel', 27);
 insert into books (name, author, info, number) values ('Hosea', 'Hosea', 'Book of Hosea', 28);
 insert into books (name, author, info, number) values ('Joel', 'Joel', 'Book of Joel', 29);
 insert into books (name, author, info, number) values ('Amos', 'Amos', 'Book of Amos', 30);
@@ -1683,6 +1685,19 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (1701, 2, null, 'καθως εστιν γεγραμμενον'); -- καθως εστιν γεγραμμενον = as it is written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1701, 2, 'quotation', 'literal, far-fuzzy, superset', 'Z.K.');
+
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1801, 1, 'Daniel', null, 'LXX Daniel 9:27+101 9:27-54', 'Matthew', 'SBLGNT Matthew 24:15+14 24:15-60', 36179, 20, 70680, 20, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (1801, 1, 'Δανιηλ του προφητου', 'ρηθεν'); -- ρηθεν = having been spoken
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (1801, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1801, 2, 'Daniel', null, 'LXX Daniel 9:27+101 9:27-54', 'Mark', 'SBLGNT Mark 13:14+13 13:14-70', 36179, 20, 43426, 20, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (1801, 2, 'Δανιηλ του προφητου', 'ρηθεν'); -- ρηθεν = having been spoken (these are mentioned only in ABPGRK, in LXX and 01 it is only mentioned: "ο αναγινώσκων νοείτω", the one reading let him understand)
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (1801, 2, 'quotation', 'literal, fuzzy', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2001, 1, 'Genesis', null, 'LXX Genesis 15:6+16 15:6', 'Romans', 'SBLGNT Romans 4:3+32 4:3', 34471, 36, 7233, 36, 'getrefs');
