@@ -1685,6 +1685,18 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (1701, 2, null, 'καθως εστιν γεγραμμενον'); -- καθως εστιν γεγραμμενον = as it is written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1701, 2, 'quotation', 'literal, far-fuzzy, superset', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1702, 1, 'Zechariah', null, 'LXX Zechariah 13:7+77 13:7', 'Matthew', 'SBLGNT Matthew 26:31+81 26:31', 21571, 75, 79398, 56, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (1702, 1, null, 'γεγραπται γαρ'); -- γεγραπται γαρ = it has been written for
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (1702, 1, 'quotation', 'far-fuzzy, superset', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1702, 2, 'Zechariah', null, 'LXX Zechariah 13:7+77 13:7-34', 'Mark', 'SBLGNT Mark 14:27+58 14:27-18', 21571, 41, 47403, 28, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (1702, 2, null, 'γεγραπται'); -- γεγραπται = it has been written
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (1702, 2, 'quotation', 'far-fuzzy, superset', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1801, 1, 'Daniel', null, 'LXX Daniel 9:27+101 9:27-54', 'Matthew', 'SBLGNT Matthew 24:15+14 24:15-60', 36179, 20, 70680, 20, 'manual');
