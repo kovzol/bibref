@@ -1697,6 +1697,12 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (1702, 2, null, 'γεγραπται'); -- γεγραπται = it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1702, 2, 'quotation', 'far-fuzzy, superset', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1703, 1, 'Zechariah', null, 'LXX Zechariah 11:13+98 11:13-50', 'Matthew', 'SBLGNT Matthew 27:9+49 27:9-47', 18294, 30, 83819, 27, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (1703, 1, 'Ιερεμιου του προφητου', 'ρηθεν ... λεγοντος'); -- ρηθεν ... λεγοντος = having been spoken ... saying (see https://www.gotquestions.org/Matthew-27-9-Jeremiah-Zechariah.html for a possible explanation why Jeremiah is mentioned and not Zechariah)
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (1703, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1801, 1, 'Daniel', null, 'LXX Daniel 9:27+101 9:27-54', 'Matthew', 'SBLGNT Matthew 24:15+14 24:15-60', 36179, 20, 70680, 20, 'manual');
