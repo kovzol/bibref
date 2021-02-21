@@ -1398,6 +1398,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (136, 3, 'quotation', 'literal, fuzzy', 'Z.K.');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (136, 4, 'Isaiah', null, 'LXX Isaiah 6:9+63 6:9-16', 'Mark', 'SBLGNT Mark 4:12+3 4:12-79', 12471, 12, 9847, 12, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (136, 4, 'Isaiah', null, 'LXX Isaiah 6:9+39 6:10', 'Mark', 'SBLGNT Mark 4:12+3 4:12', 12447, 236, 9847, 91, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (136, 4, null, 'ινα'); -- ινα = so that
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (136, 4, 'quotation', 'far-fuzzy', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (137, 1, 'Isaiah', null, 'LXX Isaiah 29:13+24 29:13-104', 'Matthew', 'SBLGNT Matthew 15:8 15:8-37', 55467, 22, 42765, 22, 'getrefs');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (137, 1, 'Isaiah', null, 'LXX Isaiah 29:13+60 29:13-31', 'Matthew', 'SBLGNT Matthew 15:8+28 15:9-28', 55503, 59, 42793, 59, 'getrefs');
