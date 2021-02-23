@@ -1441,6 +1441,18 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (138, 1, 'του προφητου', 'ρηθεν ... λεγοντος'); -- having been spoken ... saying
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (138, 1, 'quotation', 'literal', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (139, 1, 'Isaiah', null, 'LXX Isaiah 53:12+98 53:12-61', 'Mark', 'ABPGRK Mark 15:28+32 15:28', 108735, 15, null, 14, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (139, 1, 'γραφή', 'λέγουσα'); -- γραφή = Scripture, λέγουσα = saying
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (139, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (139, 2, 'Isaiah', null, 'LXX Isaiah 53:12+98 53:12-61', 'Luke', 'SBLGNT Luke 22:37+60 22:37-25', 108735, 15, null, 14, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (139, 2, null, 'το γεγραμμενον'); -- το γεγραμμενον = which has been written
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (139, 2, 'quotation', 'literal, fuzzy', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (201, 1, 'Jeremiah', null, 'LXX Jeremiah 31:15+50 31:15-64', 'Matthew', 'SBLGNT Matthew 2:18+25 2:18-66', 80265, 9, 3951, 9, 'getrefs');
