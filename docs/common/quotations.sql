@@ -1453,6 +1453,18 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (139, 2, null, 'το γεγραμμενον'); -- το γεγραμμενον = which has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (139, 2, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (140, 1, 'Isaiah', null, 'LXX Isaiah 61:1 61:1-78', 'Luke', 'SBLGNT Luke 4:18 4:18-74', 121799, 68, 14356, 68, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (140, 1, 'Isaiah', null, 'LXX Isaiah 61:1+103 61:1', 'Luke', 'SBLGNT Luke 4:18+68 4:18-31', 121902, 43, 14424, 43, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (140, 1, 'Isaiah', null, 'LXX Isaiah 61:2+5 61:2-49', 'Luke', 'SBLGNT Luke 4:19+5 4:20-89', 121950, 25, 14503, 25, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (140, 1, 'Isaiah', null, 'LXX Isaiah 61:1 61:2-52', 'Luke', 'SBLGNT Luke 4:18 4:19', 121799, 173, 14356, 169, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (140, 1, 'του προφητου Ησαΐου', 'ην γεγραμμενον'); -- ην γεγραμμενον = it was written
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (140, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (201, 1, 'Jeremiah', null, 'LXX Jeremiah 31:15+50 31:15-64', 'Matthew', 'SBLGNT Matthew 2:18+25 2:18-66', 80265, 9, 3951, 9, 'getrefs');
