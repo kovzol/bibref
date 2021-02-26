@@ -1,0 +1,74 @@
+addbooks
+
+getrefs SBLGNT LXX Micah 7:6
+# ... (length<=7)
+# LXX Micah 7:6+23 7:6-93 = SBLGNT Luke 12:53+61 12:53-56 (length=9, pos1=10226, pos2=53700)
+# LXX Micah 7:6+60 7:6-46 = SBLGNT Luke 12:53+107 12:53 (length=19, pos1=10263, pos2=53746)
+
+lookup LXX Micah 7:6
+# διοτι υιος ατιμαζει πατερα θυγατηρ επαναστησεται επι την μητερα αυτης νυμφη επι την πενθεραν αυτης εχθροι ανδρος παντες οι ανδρες οι εν τω οικω αυτου
+lookup SBLGNT Luke 12:53
+# ⸀διαμερισθησονται πατηρ επι υιω και υιος επι πατρι, μητηρ ⸀επι ⸀θυγατερα και θυγατηρ επι ⸂την μητερα⸃, πενθερα επι την νυμφην αυτης και νυμφη επι την ⸀πενθεραν. 
+lookup1 LXX Micah 7:6+5 7:6
+# Stored internally as yiosatimaqeipaterauygathrepanasthsetaiepithnmhteraaythsnymfhepithnpenueranaythsexuroiandrospantesoiandresoientvoikvaytoy.
+lookup2 SBLGNT Luke 12:53+16 12:53
+# Stored internally as pathrepiyivkaiyiosepipatrimhthrepiuygaterakaiuygathrepithnmhterapenueraepithnnymfhnaythskainymfhepithnpenueran.
+compare12 
+# Comparing 'yiosatimaqeipaterauygathrepanasthsetaiepithnmhteraaythsnymfhepithnpenueranaythsexuroiandrospantesoiandresoientvoikvaytoy' ~ 'pathrepiyivkaiyiosepipatrimhthrepiuygaterakaiuygathrepithnmhterapenueraepithnnymfhnaythskainymfhepithnpenueran' = 108
+# difference = 0.473913
+jaccard12 
+# Jaccard distance is 0.495798.
+length1
+# Length of text 1 is 120.
+length2
+# Length of text 2 is 110.
+
+## It seems Jesus intentionally refers to Micah 7:6, however, the reference is just indirect.
+
+lookup SBLGNT Matthew 10:35
+# ηλθον γαρ διχασαι ανθρωπον κατα του πατρος αυτου και θυγατερα κατα της μητρος αυτης και νυμφην κατα της πενθερας αυτης,
+lookup SBLGNT Matthew 10:36
+# και εχθροι του ανθρωπου οι οικιακοι αυτου.
+
+## Also, Matthew 10:35 speaks on a similar topic.
+
+text1 της πενθερας αυτη
+# Stored internally as thspenuerasayth.
+find1 LXX
+# Found in Ruth 2:23+107 2:23-1 (book position 5352-5366)
+# 1 occurrences.
+text1 πενθερας αυτη
+# Stored internally as penuerasayth.
+find1 LXX
+# Found in Ruth 2:23+110 2:23-1 (book position 5355-5366)
+# 1 occurrences.
+text1 πενθερα
+# Stored internally as penuera.
+
+## πενθερα = mother-in-law, it is mostly present in Ruth:
+
+find1 LXX
+# Found in Deuteronomy 27:23+27 27:23-103 (book position 81418-81424)
+# Found in Ruth 1:14+57 1:14-55 (book position 1497-1503)
+# Found in Ruth 2:11+66 2:11-136 (book position 3677-3683)
+# Found in Ruth 2:18+38 2:18-65 (book position 4596-4602)
+# Found in Ruth 2:19+13 2:19-152 (book position 4681-4687)
+# Found in Ruth 2:19+102 2:19-63 (book position 4770-4776)
+# Found in Ruth 2:21+19 2:21-96 (book position 5029-5035)
+# Found in Ruth 2:23+110 2:23-6 (book position 5355-5361)
+# Found in Ruth 3:1+18 3:1-49 (book position 5386-5392)
+# Found in Ruth 3:6+56 3:6-5 (book position 5898-5904)
+# Found in Ruth 3:16+22 3:16-63 (book position 6872-6878)
+# Found in Ruth 3:17+74 3:17-4 (book position 7016-7022)
+# Found in Micah 7:6+71 7:6-47 (book position 10274-10280)
+# 13 occurrences.
+find1 SBLGNT 
+# Found in Matthew 8:14+41 8:14-30 (book position 18837-18843)
+# Found in Matthew 10:35+86 10:35-6 (book position 26830-26836)
+# Found in Mark 1:30+3 1:30-55 (book position 2368-2374)
+# Found in Luke 4:38+51 4:38-61 (book position 16142-16148)
+# Found in Luke 12:53+80 12:53-39 (book position 53719-53725)
+# Found in Luke 12:53+118 12:53-1 (book position 53757-53763)
+# 6 occurrences.
+
+## Conclusion. It seems that Jesus indeed refers to Micah 7:6 but without directly quoting it.
