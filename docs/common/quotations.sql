@@ -2489,12 +2489,15 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2415, 2, null, null);
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2415, 2, 'strong allusion', 'literal, fuzzy, superset', 'Z.K.');
--- TODO: Add fully entry. This seems to be a quotation (far-fuzzy):
+-- TODO: Add full entry. This seems to be a quotation (far-fuzzy):
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2416, 1, 'Deuteronomy', null, 'LXX Deuteronomy 25:5', 'Matthew', 'SBLGNT Matthew 22:24', null, null, null, null, 'traditional');
--- TODO: Add fully entry. This seems to be a quotation (far-fuzzy):
+-- TODO: Add full entry. This seems to be a quotation (far-fuzzy):
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2416, 2, 'Deuteronomy', null, 'LXX Deuteronomy 25:5', 'Mark', 'SBLGNT Mark 12:19', null, null, null, null, 'traditional');
+-- TODO: Add full entry. This seems to be a quotation (far-fuzzy):
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2416, 3, 'Deuteronomy', null, 'LXX Deuteronomy 25:5', 'Luke', 'SBLGNT Luke 20:28', null, null, null, null, 'traditional');
 -- In fact, these are closer to a kind of storytelling/summarizing than quoting. TODO: Decide how to classify such types.
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2417, 1, 'Deuteronomy', null, 'LXX Deuteronomy 6:5+3 6:5-61', 'Matthew', 'SBLGNT Matthew 22:37+10 22:37-52', 22214, 26, 65730, 26, 'getrefs');
