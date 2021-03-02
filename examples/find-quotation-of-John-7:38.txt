@@ -1,0 +1,36 @@
+addbooks
+
+## This is difficult. In a paper by Maarten J.J. Menken (The origin of the Old Testament quotation
+## in John 7:38, Novum Testamentum XXXVIII, 2, p. 160-175, 1996) the author suggests three possible
+## sources of this quotation.
+
+lookup SBLGNT John 7:37
+# Εν δε τη εσχατη ημερα τη μεγαλη της εορτης ειστηκει ο Ιησους, και εκραξεν λεγων· Εαν τις διψα ερχεσθω προς με και πινετω.
+lookup SBLGNT John 7:38
+# ο πιστευων εις εμε, καθως ειπεν η γραφη, ποταμοι εκ της κοιλιας αυτου ρευσουσιν υδατος ζωντος.
+
+## Menken mentions the word καθως that "usually precede quotations" and gives a couple of
+## examples (e.g. John 1:23, 6:31, 12:15). He also highlights three candidates
+## for the possible OT part of the quotation:
+
+lookup LXX Psalms 78:16
+# και εξηγαγεν υδωρ εκ πετρας και κατηγαγεν ως ποταμους υδατα
+lookup LXX Psalms 78:20
+# επει επαταξεν πετραν και ερρυησαν υδατα και χειμαρροι κατεκλυσθησαν μη και αρτον δυναται δουναι η ετοιμασαι τραπεζαν τω λαω αυτου
+
+lookup LXX Psalms 105:41
+# διερρηξεν πετραν και ερρυησαν υδατα επορευθησαν εν ανυδροις ποταμοι
+
+lookup LXX Isaiah 48:21
+# και εαν διψησωσιν δι ερημου αξει αυτους υδωρ εκ πετρας εξαξει αυτοις σχισθησεται πετρα και ρυησεται υδωρ και πιεται ο λαος μου
+
+## All of these candidates, however, seem to be literally very far from the NT text.
+
+## Also, a Sword search ποταμ* υδατ* gives another candidate (among many more false matches):
+
+lookup LXX Psalms 107:33
+# εθετο ποταμους εις ερημον και διεξοδους υδατων εις διψαν
+
+## This is still too far, and the context does not match, either.
+
+## Seemingly this "riddle" cannot be solved just by using the Greek texts.
