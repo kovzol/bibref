@@ -2202,6 +2202,12 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2113, 3, 'Μωυσης', 'λεγει'); -- λεγει = calls
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2113, 3, 'quotation', 'literal, grammatical-change, fuzzy', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2114, 1, 'Exodus', null, 'LXX Exodus 12:10+30 12:10-48', 'John', 'SBLGNT John 19:36+31 19:36', 31881, 25, 64522, 26, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2114, 1, 'η γραφη', 'πληρωθη'); -- η γραφη = the Scripture, πληρωθη = might be fulfilled
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2114, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2201, 1, 'Leviticus', null, 'LXX Leviticus 18:5+69 18:5-21', 'Romans', 'SBLGNT Romans 10:5+46 10:5-1', 57053, 27, 20844, 27, 'getrefs');
