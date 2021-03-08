@@ -19,3 +19,8 @@
 ## find any literal matches. Contextually Zechariah 12:10 is close, but literally not.
 
 ## In all four passages the Scripture is mentioned, but only two refer to literal matches.
+
+## 5. John 20:9
+## την γραφην οτι = the Scripture that
+## This refers to some concept of the OT (see e.g. https://en.wikipedia.org/wiki/John_20:9
+## that mentions Psalm 16:10, Hosea 6:2 and Jonah 1:17), but not literally.
