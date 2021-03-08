@@ -1,4 +1,5 @@
-## In this study we check the various quotations present in John 19.
+## In this study we check the various quotations present in John 19 (and later in chapter 20
+## and in another passage in Luke).
 
 ## 1. John 19:24
 ## ινα η γραφη πληρωθη η λεγουσα = that the Scripture might be fulfilled that said
@@ -24,3 +25,10 @@
 ## την γραφην οτι = the Scripture that
 ## This refers to some concept of the OT (see e.g. https://en.wikipedia.org/wiki/John_20:9
 ## that mentions Psalm 16:10, Hosea 6:2 and Jonah 1:17), but not literally.
+
+## To extend these pieces of information, we note that
+
+## 6. Luke 24:46
+## γεγραπται = it has been written
+## Here Jesus summarizes the OT in a longer sentence, but it has very little to do
+## literally with any passages of the OT.
