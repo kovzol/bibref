@@ -981,6 +981,15 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (48, 1, 'quotation', 'literal, far-fuzzy, subset', 'Z.K.');
 
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (49, 1, 'Psalms', 109, 'LXX Psalms 109:8+30 109:8-8', 'Acts', 'SBLGNT Acts 1:20+76 1:20-9', 130835, 23, 2101, 23, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (49, 1, 'Psalms', 109, 'LXX Psalms 109:8+30 109:8', 'Acts', 'SBLGNT Acts 1:20+76 1:20', 130835, 31, 2101, 32, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (49, 1, 'εν βιβλω ψαλμων', 'γεγραπται γαρ'); -- γεγραπται γαρ = it has been written for
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (49, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+
 -- Non-psalms:
 
 -- TODO: Add traditional data (eventually).
