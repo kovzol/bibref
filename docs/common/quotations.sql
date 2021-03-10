@@ -990,6 +990,13 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (49, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
 
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (50, 1, 'Psalms', 132, 'LXX Psalms 132:11 132:11-3', 'Acts', 'SBLGNT Acts 2:30 2:30-5', 154585, 87, 5255, 89, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (50, 1, 'Δαυιδ', 'ειδως'); -- ειδως = knowing
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (50, 1, 'quotation', 'far-fuzzy', 'Z.K.');
+
 -- Non-psalms:
 
 -- TODO: Add traditional data (eventually).
