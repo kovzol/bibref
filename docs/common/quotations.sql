@@ -2577,6 +2577,12 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2418, 1, 'επʼ αληθειας', 'ειπες οτι'); -- επʼ αληθειας = according to truth, ειπες οτι = you have spoken that
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2418, 1, 'quotation', 'literal, fuzzy, synonym', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2419, 1, 'Deuteronomy', null, 'LXX Deuteronomy 18:18 18:18-28', 'Acts', 'SBLGNT Acts 3:22+17 3:22-8', 58142, 88, 8825, 87, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2419, 1, 'Μωυσης', 'ειπεν οτι'); -- ειπεν οτι = said that
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2419, 1, 'quotation', 'far-fuzzy', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (3001, 1, 'Job', null, 'Job 5:12-13', 'I_Corinthians', 'I_Corinthians 3:19', null, null, null, null, 'traditional');
