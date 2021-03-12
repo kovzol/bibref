@@ -2019,6 +2019,12 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2014, 1, null, 'Ουτος γαρ'); -- Ουτος γαρ = this for
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2014, 1, 'quotation', 'superset, far-fuzzy', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2015, 1, 'Genesis', null, 'LXX Genesis 18:18+44 18:18-6', 'Galatians', 'SBLGNT Galatians 3:8+73 3:8', 41664, 33, 4262, 32, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2015, 1, 'η γραφη ... τω Αβρααμ', 'θεος προευηγγελισατο ... οτι'); -- θεος προευηγγελισατο = God foretold the gospel
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2015, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2101, 1, 'Exodus', null, 'LXX Exodus 33:19+86 33:19', 'Romans', 'SBLGNT Romans 9:15+15 9:15', 99825, 38, 19129, 38, 'getrefs');
