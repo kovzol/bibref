@@ -2041,6 +2041,22 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2017, 1, 'Ο θεος της δοξης ... προς αυτον', 'ειπεν'); -- Ο θεος της δοξης ... προς αυτον = the God of glory ... to him (Abraham), ειπεν = said
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2017, 1, 'quotation', 'literal, fuzzy, superset', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2018, 1, 'Genesis', null, 'LXX Genesis 15:13+34 15:13-100', 'Acts', 'SBLGNT Acts 7:6+41 7:6-55', 35016, 9, 18741, 9, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2018, 1, 'Genesis', null, 'LXX Genesis 15:13+67 15:13-56', 'Acts', 'SBLGNT Acts 7:6+59 7:6-26', 35049, 20, 18759, 20, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2018, 1, 'Genesis', null, 'LXX Genesis 15:14+4 15:14-57', 'Acts', 'SBLGNT Acts 7:7+5 7:7-78', 35129, 16, 18810, 16, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2018, 1, 'Genesis', null, 'LXX Genesis 15:14+21 15:14-45', 'Acts', 'SBLGNT Acts 7:7+23 7:7-65', 35146, 11, 18828, 11, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2018, 1, 'Genesis', null, 'LXX Genesis 15:14+38 15:14-22', 'Acts', 'SBLGNT Acts 7:7+51 7:7-31', 35163, 17, 18856, 17, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2018, 1, 'Genesis', null, 'LXX Genesis 15:13+34 15:14-22', 'Acts', 'SBLGNT Acts 7:6+41 7:7-31', 35016, 164, 18741, 132, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2018, 1, 'θεος', 'ελαλησεν δε'); -- ελαλησεν δε = spoke however
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2018, 1, 'quotation', 'literal, fuzzy, superset', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2101, 1, 'Exodus', null, 'LXX Exodus 33:19+86 33:19', 'Romans', 'SBLGNT Romans 9:15+15 9:15', 99825, 38, 19129, 38, 'getrefs');
