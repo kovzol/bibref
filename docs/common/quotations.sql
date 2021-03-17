@@ -2261,7 +2261,13 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2113, 4, 'Exodus', null, 'LXX Exodus 3:5+61 3:5', 'Acts', 'SBLGNT Acts 7:33+55 7:33', 4960, 18, 21092, 18, 'getrefs');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (2113, 4, 'Exodus', null, 'LXX Exodus 3:5+61 3:6-70', 'Acts', 'SBLGNT Acts 7:32 7:33', 4960, 88, 20945, 165, 'manual');
+ (2113, 4, 'Exodus', null, 'LXX Exodus 3:7+22 3:7-58', 'Acts', 'SBLGNT Acts 7:33+72 7:34-80', 5140, 46, 21109, 46, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2113, 4, 'Exodus', null, 'LXX Exodus 3:8 3:8-207', 'Acts', 'SBLGNT Acts 7:34+67 7:34-33', 5244, 25, 21177, 25, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2113, 4, 'Exodus', null, 'LXX Exodus 3:9+81 3:10-72', 'Acts', 'SBLGNT Acts 7:34+86 7:34-11', 5557, 28, 21196, 28, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2113, 4, 'Exodus', null, 'LXX Exodus 3:5+61 3:10-48', 'Acts', 'SBLGNT Acts 7:32 7:34', 4960, 649, 20945, 290, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2113, 4, 'Μωυσης', 'εγενετο φωνη κυριου'); -- εγενετο φωνη κυριου = there was voice of the Lord
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
