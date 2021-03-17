@@ -2643,6 +2643,12 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2419, 1, 'Μωυσης', 'ειπεν οτι'); -- ειπεν οτι = said that
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2419, 1, 'quotation', 'far-fuzzy', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2420, 1, 'Deuteronomy', null, 'LXX Deuteronomy 18:15 18:15-31', 'Acts', 'SBLGNT Acts 7:37+38 7:37', 57869, 37, 21517, 47, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2420, 1, 'Μωυσης', 'ειπας'); -- ειπας = having said
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2420, 1, 'quotation', 'literal, fuzzy, subset', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (3001, 1, 'Job', null, 'Job 5:12-13', 'I_Corinthians', 'I_Corinthians 3:19', null, null, null, null, 'traditional');
