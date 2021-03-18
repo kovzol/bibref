@@ -1723,13 +1723,13 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
  (1501, 1, 'quotation', 'far-fuzzy', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (1601, 1, 'Amos', null, 'LXX Amos 5:26+51 5:26-24', 'Acts', 'SBLGNT Acts 7:43+47 7:43-60', 9273, 16, 22213, 16, 'getrefs');
-insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (1601, 1, 'Amos', null, 'LXX Amos 5:26+85 5:27-45', 'Acts', 'SBLGNT Acts 7:43+85 7:43-9', 9307, 29, 22251, 29, 'getrefs');
-insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1601, 1, 'Amos', null, 'LXX Amos 5:25 5:25-34', 'Acts', 'SBLGNT Acts 7:42+93 7:42-34', 9155, 33, 22099, 33, 'getrefs');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1601, 1, 'Amos', null, 'LXX Amos 5:25+56 5:26-44', 'Acts', 'SBLGNT Acts 7:42+149 7:43-76', 9211, 58, 22155, 58, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1601, 1, 'Amos', null, 'LXX Amos 5:26+51 5:26-24', 'Acts', 'SBLGNT Acts 7:43+47 7:43-60', 9273, 16, 22213, 16, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1601, 1, 'Amos', null, 'LXX Amos 5:26+85 5:27-45', 'Acts', 'SBLGNT Acts 7:43+85 7:43-9', 9307, 29, 22251, 29, 'getrefs');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1601, 1, 'Amos', null, 'LXX Amos 5:25 5:27-45', 'Acts', 'SBLGNT Acts 7:42+93 7:43-9', 9155, 181, 22099, 181, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
