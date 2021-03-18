@@ -1508,7 +1508,7 @@ insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_pa
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (142, 1, 'Isaiah', null, 'LXX Isaiah 66:1+88 66:1', 'Acts', 'SBLGNT Acts 7:49+81 7:49', 130406, 23, 22744, 23, 'getrefs');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (142, 1, 'Isaiah', null, 'LXX Isaiah 66:1+5 66:1', 'Acts', 'SBLGNT Acts 7:49', 130323, 106, 22663, 104, 'manual');
+ (142, 1, 'Isaiah', null, 'LXX Isaiah 66:1+5 66:2-105', 'Acts', 'SBLGNT Acts 7:49 7:50', 130323, 132, 22663, 134, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (142, 1, 'ο προφητης', 'καθως ... λεγει'); -- καθως ... λεγει = as ... says
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
