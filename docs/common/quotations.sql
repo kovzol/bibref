@@ -997,6 +997,13 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (50, 1, 'quotation', 'far-fuzzy', 'Z.K.');
 
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (51, 1, 'Psalms', 89, 'LXX Psalms 89:20 89:20-34', 'Acts', 'SBLGNT Acts 13:22+68 13:22-58', 103496, 13, 42856, 13, 'getrefs');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (51, 1, 'Δαυιδ', 'ω ... ειπεν'); -- ω ... ειπεν = to whom ... He said
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (51, 1, 'quotation', 'literal, exact', 'Z.K.');
+
 -- Non-psalms:
 
 -- TODO: Add traditional data (eventually).

@@ -1,0 +1,25 @@
+addbooks
+
+lookup SBLGNT Acts 13:22
+# και μεταστησας αυτον ηγειρεν ⸂τον Δαυιδ αυτοις⸃ εις βασιλεα, ω και ειπεν μαρτυρησας· Ευρον Δαυιδ τον του Ιεσσαι, ανδρα κατα την καρδιαν μου, ος ποιησει παντα τα θεληματα μου.
+
+getrefs SBLGNT LXX Psalms 89:20
+# LXX Psalms 89:20 89:20-41 = SBLGNT Luke 24:2 24:2-38 (length=6, pos1=103496, pos2=91927)
+# LXX Psalms 89:20+3 89:20-34 = SBLGNT Matthew 1:6+18 1:6-48 (length=10, pos1=103499, pos2=421)
+# LXX Psalms 89:20 89:20-34 = SBLGNT Acts 13:22+68 13:22-58 (length=13, pos1=103496, pos2=42856)
+
+## Here the last match is confirmed by scholars, e.g. by Ellicott (https://biblehub.com/commentaries/acts/13-22.htm),
+## and I_Samuel 13:14 is also given as the second part of the composite quotation.
+
+lookup LXX I_Samuel 13:14
+# και νυν η βασιλεια σου ου στησεται και ζητησει κυριος εαυτω ανθρωπον κατα την καρδιαν αυτου και εντελειται κυριος αυτω εις αρχοντα επι τον λαον αυτου οτι ουκ εφυλαξας οσα ενετειλατο σοι κυριος
+
+## Here the words "ανθρωπον κατα την καρδιαν" are literally quite close to the quoted text in Acts 13:22, but
+## not completely the same. In fact, the Sword search gives 10 additional matches, however, contextually I_Samuel 13:14
+## seems to be the best fit.
+
+## Further parts of the quoted text in Acts may refer to Isaiah 44:28 that speaks about Cyrus ("παντα τα θεληματα μου ποιησε").
+
+## The quotation in Acts 13:22 seems indeed a combination of quotation, but it is difficult to tell
+## exactly which passages are quoted. It seems plausible that Paul starts with Psalm 89:20 and then just
+## mentions other parts of life of David's, without exact matches.
