@@ -1530,6 +1530,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (143, 1, 'Ησαΐαν τον προφητην ... περιοχη της γραφης', 'ανεγινωσκεν'); -- περιοχη της γραφης = the passage of the Scripture, = he was reading
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (143, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (144, 1, 'Isaiah', null, 'LXX Isaiah 55:3+124 55:3', 'Acts', 'SBLGNT Acts 13:34+86 13:34', 110809, 19, 43962, 19, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (144, 1, 'Isaiah', null, 'LXX Isaiah 55:3+115 55:3', 'Acts', 'SBLGNT Acts 13:34+82 13:34', 110800, 38, 43958, 23, 'getrefs');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (144, 1, null, 'ειρηκεν οτι'); -- ειρηκεν οτι = He spoke
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (144, 1, 'quotation', 'literal, fuzzy, change', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (201, 1, 'Jeremiah', null, 'LXX Jeremiah 31:15+50 31:15-64', 'Matthew', 'SBLGNT Matthew 2:18+25 2:18-66', 80265, 9, 3951, 9, 'getrefs');
