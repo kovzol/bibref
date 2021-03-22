@@ -1633,6 +1633,24 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (1001, 3, null, 'κομισησθε την επαγγελιαν / ετι γαρ'); -- κομισησθε την επαγγελιαν / ετι γαρ = you may receive the promise / yet for
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1001, 3, 'quotation', 'fuzzy, subset', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1002, 1, 'Habakkuk', null, 'LXX Habakkuk 1:5 1:5-113', 'Acts', 'SBLGNT Acts 13:41 13:41-99', 343, 22, 44365, 22, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1002, 1, 'Habakkuk', null, 'LXX Habakkuk 1:5+32 1:5-91', 'Acts', 'SBLGNT Acts 13:41+19 13:41-90', 375, 12, 44384, 12, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1002, 1, 'Habakkuk', null, 'LXX Habakkuk 1:5+52 1:5-70', 'Acts', 'SBLGNT Acts 13:41+31 13:41-77', 395, 13, 44396, 13, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1002, 1, 'Habakkuk', null, 'LXX Habakkuk 1:5+67 1:5-59', 'Acts', 'SBLGNT Acts 13:41+44 13:41-68', 410, 9, 44409, 9, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1002, 1, 'Habakkuk', null, 'LXX Habakkuk 1:5+78 1:5-47', 'Acts', 'SBLGNT Acts 13:41+52 13:41-59', 421, 10, 44417, 10, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1002, 1, 'Habakkuk', null, 'LXX Habakkuk 1:5+103 1:5', 'Acts', 'SBLGNT Acts 13:41+85 13:41-4', 446, 32, 44450, 32, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1002, 1, 'Habakkuk', null, 'LXX Habakkuk 1:5', 'Acts', 'SBLGNT Acts 13:41 13:41-4', 343, 135, 44365, 117, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (1002, 1, 'εν τοις προφηταις', 'ειρημενον'); -- ειρημενον εν τοις προφηταις = having been said
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (1002, 1, 'quotation', 'literal, fuzzy, superset', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1101, 1, 'Malachi', null, 'LXX Malachi 1:3 1:3-68', 'Romans', 'SBLGNT Romans 9:13+29 9:13', 173, 16, 19060, 16, 'getrefs');
