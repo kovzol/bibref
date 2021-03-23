@@ -2373,6 +2373,12 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2116, 1, 'τω Ααρων', 'ειποντες'); -- ειποντες = having said
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2116, 1, 'quotation', 'literal, fuzzy, supertext', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (2117, 1, 'Exodus', null, 'LXX Exodus 22:28+22 22:28', 'Acts', 'SBLGNT Acts 23:5 23:5+59', 64257, 30, 76944, 30, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2117, 1, null, 'γεγραπται γαρ οτι'); -- γεγραπται γαρ οτι = it has been written for
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2117, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2201, 1, 'Leviticus', null, 'LXX Leviticus 18:5+69 18:5-21', 'Romans', 'SBLGNT Romans 10:5+46 10:5-1', 57053, 27, 20844, 27, 'getrefs');
