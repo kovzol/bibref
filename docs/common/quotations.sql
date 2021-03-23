@@ -1416,6 +1416,8 @@ insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_pa
  (136, 2, 'Isaiah', null, 'LXX Isaiah 6:9+35 6:10-142', 'Acts', 'SBLGNT Acts 28:26+39 28:27-137', 12443, 98, 95163, 98, 'getrefs');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (136, 2, 'Isaiah', null, 'LXX Isaiah 6:10+46 6:10', 'Acts', 'SBLGNT Acts 28:27+41 28:27', 12545, 138, 95260, 138, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (136, 2, 'Isaiah', null, 'LXX Isaiah 6:9+8 6:10', 'Acts', 'SBLGNT Acts 28:26+5 28:27', 12416, 267, 95129, 269, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (136, 2, 'Ησαΐου του προφητου', 'λεγων'); -- λεγων = saying
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
