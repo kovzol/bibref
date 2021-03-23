@@ -1799,6 +1799,24 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (1601, 1, 'εν βιβλω των προφητων', 'καθως γεγραπται'); -- εν βιβλω των προφητων = in the book of the prophets, καθως γεγραπται = as it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1601, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1602, 1, 'Amos', null, 'LXX Amos 9:11+110 9:11-27', 'Acts', 'SBLGNT Acts 15:16+17 15:16-77', 15526, 16, 49603, 16, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1602, 1, 'Amos', null, 'LXX Amos 9:11+20 9:11-100', 'Acts', 'SBLGNT Acts 15:16+30 15:16-47', 15436, 33, 49616, 33, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1602, 1, 'Amos', null, 'LXX Amos 9:11+81 9:11-48', 'Acts', 'SBLGNT Acts 15:16+60 15:16-26', 15497, 24, 49646, 24, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1602, 1, 'Amos', null, 'LXX Amos 9:11+108 9:11-36', 'Acts', 'SBLGNT Acts 15:16+91 15:16-10', 15524, 9, 49677, 9, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1602, 1, 'Amos', null, 'LXX Amos 9:12+4 9:12-75', 'Acts', 'SBLGNT Acts 15:17+6 15:17-78', 15573, 34, 49702, 34, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1602, 1, 'Amos', null, 'LXX Amos 9:12+37 9:12-16', 'Acts', 'SBLGNT Acts 15:17+48 15:17-10', 15606, 60, 49744, 60, 'getrefs');
+insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1602, 1, 'Amos', null, 'LXX Amos 9:11+15 9:12', 'Acts', 'SBLGNT Acts 15:16+9 15:17', 15431, 251, 49595, 219, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (1602, 1, 'οι λογοι των προφητων', 'καθως γεγραπται'); -- οι λογοι των προφητων = the words of the prophets, καθως γεγραπται = as it is written
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (1602, 1, 'quotation', 'literal, fuzzy, change, superset', 'Z.K.');
 
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1701, 1, 'Zechariah', null, 'LXX Zechariah 9:9+46 9:9-62', 'Matthew', 'SBLGNT Matthew 21:5+19 21:5-49', 14394, 26, 59140, 26, 'getrefs');
