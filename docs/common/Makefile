@@ -2,6 +2,7 @@ all: getrefs.pdf authors.pdf manual_nt_length.pdf Rplots.pdf \
  jaccard-Psalms-Rplots.pdf jaccard_Psalms-sorted.txt \
  Romans-getrefs.png Romans-table.pdf Romans-Rplots.pdf jaccard-Romans-Rplots.pdf jaccard_Romans-sorted.txt \
  Hebrews-getrefs.png Hebrews-table.pdf Hebrews-Rplots.pdf jaccard-Hebrews-Rplots.pdf jaccard_Hebrews-sorted.txt \
+ Matthew-getrefs.png Matthew-table.pdf Matthew-Rplots.pdf jaccard-Matthew-Rplots.pdf jaccard_Matthew-sorted.txt \
  nt_frequencies.csv ot_frequencies.csv \
  selftest
 
@@ -14,7 +15,7 @@ manual_nt_length.pdf: manual_nt_length.tex
 getrefs.pdf: getrefs.tex
 	pdflatex getrefs
 
-
+# Romans
 Romans-getrefs.png: Romans-getrefs.ppm
 	convert Romans-getrefs.ppm png:Romans-getrefs.png
 
@@ -42,7 +43,7 @@ jaccard_Romans-sorted.txt: jaccard_Romans.txt
 Romans-table.pdf: Romans-table.tex
 	pdflatex Romans-table
 
-
+# Hebrews
 Hebrews-getrefs.png: Hebrews-getrefs.ppm
 	convert Hebrews-getrefs.ppm png:Hebrews-getrefs.png
 
@@ -70,7 +71,35 @@ jaccard_Hebrews-sorted.txt: jaccard_Hebrews.txt
 Hebrews-table.pdf: Hebrews-table.tex
 	pdflatex Hebrews-table
 
+# Matthew
+Matthew-getrefs.png: Matthew-getrefs.ppm
+	convert Matthew-getrefs.ppm png:Matthew-getrefs.png
 
+Matthew-getrefs.ppm: visualize.py quotations.sqlite3
+	python3 visualize.py nt_ppm Matthew 90007 356
+
+Matthew-table.tex: visualize.py quotations.sqlite3
+	python3 visualize.py nt_latex Matthew > Matthew-table.tex
+
+Matthew-Rplots.pdf: manual_Matthew_length.csv manual_Matthew_length.r
+	R -q --save < manual_Matthew_length.r
+
+jaccard-Matthew-Rplots.pdf: jaccard_Matthew.csv jaccard_Matthew.r
+	R -q --save < jaccard_Matthew.r
+
+jaccard_Matthew.csv: visualize.py quotations.sqlite3
+	python3 visualize.py nt_jaccard Matthew
+
+jaccard_Matthew.txt: visualize.py quotations.sqlite3
+	python3 visualize.py nt_jaccard Matthew
+
+jaccard_Matthew-sorted.txt: jaccard_Matthew.txt
+	sort jaccard_Matthew.txt > jaccard_Matthew-sorted.txt
+
+Matthew-table.pdf: Matthew-table.tex
+	pdflatex Matthew-table
+
+# Other tasks
 authors.tex: visualize.py quotations.sqlite3
 	python3 visualize.py traditional > authors.tex
 
