@@ -159,6 +159,7 @@ def nt_report_ppm(conn, book, book_length, ppm_rows, ppm_columns, mode):
     # 4: first quotation with getrefs-match
     # 5: second quotation with getrefs-match
     # 7: first quotation with two getrefs-matches
+    # TODO: add repetition
 
     # FIXME: This system should be improved. Instead of numbers, flags should be used first.
 
@@ -211,6 +212,10 @@ def nt_report_ppm(conn, book, book_length, ppm_rows, ppm_columns, mode):
             f.write("0 15 0\n") # 2. quotation with getrefs-match
         if info == 7:
             f.write("15 0 15\n") # 1. quotation with two getrefs-matches
+        if info == 8:
+            print("Warning, ambiguous situation: position",l,"modesum",info)
+            f.write("15 15 0\n") # TODO: investigate this situation
+            # exit(1)
     for l in range(ppm_rows*ppm_columns-book_length):
         f.write("15 15 15\n") # empty cell
     print(r, "characters of", q, "manually verified quotations out of", book_length, f"({100*r/book_length:.3g}%)")

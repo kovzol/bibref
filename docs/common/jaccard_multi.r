@@ -1,0 +1,12 @@
+pdf(file='jaccard-multi-Rplots.pdf');
+library(sm); data = NULL; group = NULL;
+jaccard_Matthew <- read.csv('jaccard_Matthew.csv', header = F);
+sm.density(jaccard_Matthew,xlim=c(0,1),ylim=c(0,3),col='red',lty=1,xlab='',ylab='');
+par(new=TRUE);
+jaccard_Romans <- read.csv('jaccard_Romans.csv', header = F);
+sm.density(jaccard_Romans,xlim=c(0,1),ylim=c(0,3),col='blue',lty=1,xlab='',ylab='');
+par(new=TRUE);
+jaccard_Hebrews <- read.csv('jaccard_Hebrews.csv', header = F);
+sm.density(jaccard_Hebrews,xlim=c(0,1),ylim=c(0,3),col='green',lty=1,xlab='',ylab='');
+par(new=TRUE);
+legend('top','groups',c('Matthew','Romans','Hebrews'),lty=c(1,1,1),col=c('red','blue','green'),ncol=3,bty="n");

@@ -3,6 +3,7 @@ all: getrefs.pdf authors.pdf manual_nt_length.pdf Rplots.pdf \
  Romans-getrefs.png Romans-table.pdf Romans-Rplots.pdf jaccard-Romans-Rplots.pdf jaccard_Romans-sorted.txt \
  Hebrews-getrefs.png Hebrews-table.pdf Hebrews-Rplots.pdf jaccard-Hebrews-Rplots.pdf jaccard_Hebrews-sorted.txt \
  Matthew-getrefs.png Matthew-table.pdf Matthew-Rplots.pdf jaccard-Matthew-Rplots.pdf jaccard_Matthew-sorted.txt \
+ jaccard-multi-Rplots.pdf multi-Rplots.pdf \
  nt_frequencies.csv ot_frequencies.csv \
  selftest
 
@@ -48,7 +49,7 @@ Hebrews-getrefs.png: Hebrews-getrefs.ppm
 	convert Hebrews-getrefs.ppm png:Hebrews-getrefs.png
 
 Hebrews-getrefs.ppm: visualize.py quotations.sqlite3
-	python3 visualize.py nt_ppm Hebrews 26307 165
+	python3 visualize.py nt_ppm Hebrews 26307 165 160
 
 Hebrews-table.tex: visualize.py quotations.sqlite3
 	python3 visualize.py nt_latex Hebrews > Hebrews-table.tex
@@ -76,7 +77,7 @@ Matthew-getrefs.png: Matthew-getrefs.ppm
 	convert Matthew-getrefs.ppm png:Matthew-getrefs.png
 
 Matthew-getrefs.ppm: visualize.py quotations.sqlite3
-	python3 visualize.py nt_ppm Matthew 90007 356
+	python3 visualize.py nt_ppm Matthew 90007 356 253
 
 Matthew-table.tex: visualize.py quotations.sqlite3
 	python3 visualize.py nt_latex Matthew > Matthew-table.tex
@@ -98,6 +99,13 @@ jaccard_Matthew-sorted.txt: jaccard_Matthew.txt
 
 Matthew-table.pdf: Matthew-table.tex
 	pdflatex Matthew-table
+
+# Multiple plots
+jaccard-multi-Rplots.pdf: jaccard_Matthew.csv jaccard_Romans.csv jaccard_Hebrews.csv jaccard_multi.r
+	R -q --save < jaccard_multi.r
+
+multi-Rplots.pdf: manual_Matthew_length.csv manual_Romans_length.csv manual_Hebrews_length.csv manual_multi_length.r
+	R -q --save < manual_multi_length.r
 
 # Other tasks
 authors.tex: visualize.py quotations.sqlite3
