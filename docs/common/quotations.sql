@@ -1276,7 +1276,7 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (124, 4, 'Isaiah', null, 'LXX Isaiah 40:2+145 40:3-11', 'Matthew', 'SBLGNT Matthew 3:3+47 3:3-5', 78197, 68, 4680, 68, 'getrefs');
 insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (124, 4, 'Isaiah', null, 'LXX Isaiah 40:3 40:3-11', 'Matthew', 'SBLGNT Matthew 3:3+48 3:3-5', 78198, 67, 4681, 67, 'gmanual');
+ (124, 4, 'Isaiah', null, 'LXX Isaiah 40:3 40:3-11', 'Matthew', 'SBLGNT Matthew 3:3+48 3:3-5', 78198, 67, 4681, 67, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (124, 4, 'δια Ησαΐου του προφητου', 'ρηθεις ... λεγοντος'); -- ρηθεις ... λεγοντος = having been spoken of ... saying
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
