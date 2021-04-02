@@ -120,6 +120,7 @@ getrefs.tex: visualize.py quotations.sqlite3
 quotations.sqlite3: quotations.sql
 	./dropdb
 	./createdb
+	echo ".read views.sql" | sqlite3 quotations.sqlite3
 
 Rplots.pdf: manual_nt_length.csv manual_nt_length.r
 	R -q --save < manual_nt_length.r
