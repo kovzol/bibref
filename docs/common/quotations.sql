@@ -14,8 +14,9 @@ create table found_methods (
 
 create table nt_quotation_introductions (
  nt_quotation_id int not null,
+ nt_book,
  nt_startpos int,
- nt_length int);
+ nt_endpos int);
 
 create table quotations (
  nt_quotation_id int,
@@ -160,6 +161,8 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (1, 1, 'Δαυιδ', 'ειπων'); -- ειπων = having spoken
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1, 1, 'quotation', 'exact, literal', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_startpos, nt_endpos) values
+ (11, 'Acts', 11538, 11595);
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (21, 2, 1, 'Psalms', 2, 'Psalms 2:7', 'Acts', 'Acts 13:33', null, null, null, null, 'traditional');
