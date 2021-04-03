@@ -21,8 +21,8 @@ nt_inputs = Matthew Romans Hebrews
 
 # Jaccard
 jaccard-Rplots = $(nt_inputs:%=jaccard-%-Rplots.pdf)
-jaccard-sorted-txts: $(nt_inputs:%=jaccard_%-sorted.txt)
-jaccard-csvs: $(nt_inputs:%=jaccard_%.csv)
+jaccard-sorted-txts = $(nt_inputs:%=jaccard_%-sorted.txt)
+jaccard-csvs = $(nt_inputs:%=jaccard_%.csv)
 
 jaccard-%-Rplots.pdf: jaccard_%.csv jaccard_%.r
 	R -q --save < jaccard_$*.r
