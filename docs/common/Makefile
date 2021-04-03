@@ -1,13 +1,5 @@
 all: jaccard nojaccard
 
-nojaccard: getrefs.pdf authors.pdf manual_nt_length.pdf Rplots.pdf \
- Romans-getrefs.png Romans-table.pdf Romans-Rplots.pdf \
- Hebrews-getrefs.png Hebrews-table.pdf Hebrews-Rplots.pdf \
- Matthew-getrefs.png Matthew-table.pdf Matthew-Rplots.pdf \
- multi-Rplots.pdf \
- nt_frequencies.csv ot_frequencies.csv \
- selftest
-
 authors.pdf: authors.tex
 	pdflatex authors
 
@@ -20,7 +12,7 @@ getrefs.pdf: getrefs.tex
 nt_inputs = Matthew Romans Hebrews
 
 # Jaccard
-jaccard-Rplots = $(nt_inputs:%=jaccard-%-Rplots.pdf)
+jaccard-Rplots-pdfs = $(nt_inputs:%=jaccard-%-Rplots.pdf)
 jaccard-sorted-txts = $(nt_inputs:%=jaccard_%-sorted.txt)
 jaccard-csvs = $(nt_inputs:%=jaccard_%.csv)
 
@@ -34,53 +26,40 @@ jaccard-multi-Rplots.pdf: $(jaccard-csvs) jaccard_multi.r
 	R -q --save < jaccard_multi.r
 
 jaccard: jaccard-Psalms-Rplots.pdf jaccard_Psalms-sorted.txt \
- $(jaccard-Rplots) $(jaccard-sorted-txts) \
+ $(jaccard-Rplots-pdfs) $(jaccard-sorted-txts) \
  jaccard-multi-Rplots.pdf
 
-# Romans
-Romans-getrefs.png: Romans-getrefs.ppm
-	convert Romans-getrefs.ppm png:Romans-getrefs.png
+# No-Jaccard
+nojaccard: getrefs.pdf authors.pdf manual_nt_length.pdf Rplots.pdf \
+ $(getrefs-pngs) $(table-pdfs) $(Rplots-pdfs) \
+ multi-Rplots.pdf \
+ nt_frequencies.csv ot_frequencies.csv \
+ selftest
 
-Romans-getrefs.ppm: visualize.py quotations.sqlite3
-	python3 visualize.py nt_ppm
+getrefs-pngs = $(nt_inputs:%=%-getrefs.png)
+getrefs-ppms = $(nt_inputs:%=%-getrefs.ppm)
+table-texs = $(nt_inputs:%=%-table.tex)
+Rplots-pdfs = $(nt_inputs:%=%-Rplots.pdf)
+table-pdfs = $(nt_inputs:%=%-table.pdf)
 
-Romans-table.tex: visualize.py quotations.sqlite3
-	python3 visualize.py nt_latex > Romans-table.tex
+jaccard-%-Rplots.pdf: jaccard_%.csv jaccard_%.r
+	R -q --save < jaccard_$*.r
 
-Romans-table.pdf: Romans-table.tex
-	pdflatex Romans-table
-
-# Hebrews
-Hebrews-getrefs.png: Hebrews-getrefs.ppm
-	convert Hebrews-getrefs.ppm png:Hebrews-getrefs.png
+%-getrefs.png: %-getrefs.ppm
+	convert $*-getrefs.ppm png:$*-getrefs.png
+%-table.tex: visualize.py quotations.sqlite3
+	python3 visualize.py nt_latex $* > $*-table.tex
+%-Rplots.pdf: manual_%_length.csv manual_%_length.r
+	R -q --save < manual_$*_length.r
+%-table.pdf: %-table.tex
+	pdflatex $*-table
 
 Hebrews-getrefs.ppm: visualize.py quotations.sqlite3
 	python3 visualize.py nt_ppm Hebrews 26307 165 160
-
-Hebrews-table.tex: visualize.py quotations.sqlite3
-	python3 visualize.py nt_latex Hebrews > Hebrews-table.tex
-
-Hebrews-Rplots.pdf: manual_Hebrews_length.csv manual_Hebrews_length.r
-	R -q --save < manual_Hebrews_length.r
-
-Hebrews-table.pdf: Hebrews-table.tex
-	pdflatex Hebrews-table
-
-# Matthew
-Matthew-getrefs.png: Matthew-getrefs.ppm
-	convert Matthew-getrefs.ppm png:Matthew-getrefs.png
-
+Romans-getrefs.ppm: visualize.py quotations.sqlite3
+	python3 visualize.py nt_ppm
 Matthew-getrefs.ppm: visualize.py quotations.sqlite3
 	python3 visualize.py nt_ppm Matthew 90007 356 253
-
-Matthew-table.tex: visualize.py quotations.sqlite3
-	python3 visualize.py nt_latex Matthew > Matthew-table.tex
-
-Matthew-Rplots.pdf: manual_Matthew_length.csv manual_Matthew_length.r
-	R -q --save < manual_Matthew_length.r
-
-Matthew-table.pdf: Matthew-table.tex
-	pdflatex Matthew-table
 
 # Multiple plots
 
@@ -122,7 +101,6 @@ nt_frequencies.csv: visualize.py quotations.sqlite3
 
 ot_frequencies.csv: visualize.py quotations.sqlite3
 	python3 visualize.py ot_freq_csv
-
 
 selftest:
 	./selftest.py
