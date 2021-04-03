@@ -23,6 +23,17 @@ manual_nt_length.pdf: manual_nt_length.tex
 getrefs.pdf: getrefs.tex
 	pdflatex getrefs
 
+# Jaccard
+nt_jaccard_inputs = Matthew Romans Hebrews
+jaccard-Rplots = $(nt_jaccard_inputs:%=jaccard-%-Rplots.pdf)
+
+jaccard-%-Rplots.pdf: jaccard_%.csv jaccard_%.r
+	R -q --save < jaccard_$*.r
+jaccard_%.csv jaccard_%.txt:  visualize.py quotations.sqlite3
+	python3 visualize.py nt_jaccard $*
+jaccard_%-sorted.txt: jaccard_%.txt
+	sort jaccard_$*.txt > jaccard_$*-sorted.txt
+
 # Romans
 Romans-getrefs.png: Romans-getrefs.ppm
 	convert Romans-getrefs.ppm png:Romans-getrefs.png
@@ -32,18 +43,6 @@ Romans-getrefs.ppm: visualize.py quotations.sqlite3
 
 Romans-table.tex: visualize.py quotations.sqlite3
 	python3 visualize.py nt_latex > Romans-table.tex
-
-Romans-Rplots.pdf: manual_Romans_length.csv manual_Romans_length.r
-	R -q --save < manual_Romans_length.r
-
-jaccard-Romans-Rplots.pdf: jaccard_Romans.csv jaccard_Romans.r
-	R -q --save < jaccard_Romans.r
-
-jaccard_Romans.csv jaccard_Romans.txt: visualize.py quotations.sqlite3
-	python3 visualize.py nt_jaccard
-
-jaccard_Romans-sorted.txt: jaccard_Romans.txt
-	sort jaccard_Romans.txt > jaccard_Romans-sorted.txt
 
 Romans-table.pdf: Romans-table.tex
 	pdflatex Romans-table
@@ -61,15 +60,6 @@ Hebrews-table.tex: visualize.py quotations.sqlite3
 Hebrews-Rplots.pdf: manual_Hebrews_length.csv manual_Hebrews_length.r
 	R -q --save < manual_Hebrews_length.r
 
-jaccard-Hebrews-Rplots.pdf: jaccard_Hebrews.csv jaccard_Hebrews.r
-	R -q --save < jaccard_Hebrews.r
-
-jaccard_Hebrews.csv jaccard_Hebrews.txt: visualize.py quotations.sqlite3
-	python3 visualize.py nt_jaccard Hebrews
-
-jaccard_Hebrews-sorted.txt: jaccard_Hebrews.txt
-	sort jaccard_Hebrews.txt > jaccard_Hebrews-sorted.txt
-
 Hebrews-table.pdf: Hebrews-table.tex
 	pdflatex Hebrews-table
 
@@ -85,15 +75,6 @@ Matthew-table.tex: visualize.py quotations.sqlite3
 
 Matthew-Rplots.pdf: manual_Matthew_length.csv manual_Matthew_length.r
 	R -q --save < manual_Matthew_length.r
-
-jaccard-Matthew-Rplots.pdf: jaccard_Matthew.csv jaccard_Matthew.r
-	R -q --save < jaccard_Matthew.r
-
-jaccard_Matthew.csv jaccard_Matthew.txt: visualize.py quotations.sqlite3
-	python3 visualize.py nt_jaccard Matthew
-
-jaccard_Matthew-sorted.txt: jaccard_Matthew.txt
-	sort jaccard_Matthew.txt > jaccard_Matthew-sorted.txt
 
 Matthew-table.pdf: Matthew-table.tex
 	pdflatex Matthew-table
@@ -132,7 +113,7 @@ jaccard_Psalms.csv: visualize.py quotations.sqlite3
 jaccard_Psalms.txt: visualize.py quotations.sqlite3
 	python3 visualize.py ot_jaccard
 
-jaccard_Psalms-sorted.txt: jaccard_Psalms.txt
+jaccard_%-sorted.txt: jaccard_Psalms.txt
 	sort jaccard_Psalms.txt > jaccard_Psalms-sorted.txt
 
 nt_frequencies.csv: visualize.py quotations.sqlite3
@@ -140,6 +121,7 @@ nt_frequencies.csv: visualize.py quotations.sqlite3
 
 ot_frequencies.csv: visualize.py quotations.sqlite3
 	python3 visualize.py ot_freq_csv
+
 
 selftest:
 	./selftest.py
