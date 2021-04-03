@@ -15,6 +15,8 @@ nt_inputs = Matthew Romans Acts Hebrews
 jaccard-Rplots-pdfs = $(nt_inputs:%=jaccard-%-Rplots.pdf)
 jaccard-sorted-txts = $(nt_inputs:%=jaccard_%-sorted.txt)
 jaccard-csvs = $(nt_inputs:%=jaccard_%.csv)
+# For removal:
+jaccard-txts = $(nt_inputs:%=jaccard_%.txt)
 
 jaccard-%-Rplots.pdf: jaccard_%.csv jaccard_%.r
 	R -q --save < jaccard_$*.r
@@ -35,12 +37,6 @@ getrefs-ppms = $(nt_inputs:%=%-getrefs.ppm)
 table-texs = $(nt_inputs:%=%-table.tex)
 Rplots-pdfs = $(nt_inputs:%=%-Rplots.pdf)
 table-pdfs = $(nt_inputs:%=%-table.pdf)
-
-nojaccard: getrefs.pdf authors.pdf manual_nt_length.pdf Rplots.pdf \
- $(getrefs-pngs) $(table-pdfs) $(Rplots-pdfs) \
- multi-Rplots.pdf \
- nt_frequencies.csv ot_frequencies.csv \
- selftest
 
 jaccard-%-Rplots.pdf: jaccard_%.csv jaccard_%.r
 	R -q --save < jaccard_$*.r
@@ -107,6 +103,12 @@ ot_frequencies.csv: visualize.py quotations.sqlite3
 selftest:
 	./selftest.py
 
+nojaccard: getrefs.pdf authors.pdf manual_nt_length.pdf Rplots.pdf \
+ $(getrefs-pngs) $(table-pdfs) $(Rplots-pdfs) \
+ multi-Rplots.pdf \
+ nt_frequencies.csv ot_frequencies.csv \
+ selftest
+
 clean:
 	rm -f quotations.sqlite3 authors.tex manual_nt_length.tex getrefs.tex \
  authors.aux manual_nt_length.aux getrefs.aux \
@@ -114,7 +116,7 @@ clean:
 
 fullclean: clean
 	rm -f authors.pdf getrefs.pdf manual_nt_length.pdf Rplots.pdf
-	rm -f $(jaccard-Rplots-pdfs) $(jaccard-sorted-txts) $(jaccard-csvs)
+	rm -f $(jaccard-Rplots-pdfs) $(jaccard-txts) $(jaccard-sorted-txts) $(jaccard-csvs)
 	rm -f $(getrefs-pngs) $(getrefs-ppms) $(table-texs) $(Rplots-pdfs) $(table-pdfs)
 
 .PHONY: clean fullclean all selftest
