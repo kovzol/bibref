@@ -114,14 +114,13 @@ nojaccard: getrefs.pdf authors.pdf manual_nt_length.pdf Rplots.pdf \
  selftest
 
 clean:
-	rm -f quotations.sqlite3 authors.tex manual_nt_length.tex getrefs.tex \
- authors.aux manual_nt_length.aux getrefs.aux \
- authors.log manual_nt_length.log getrefs.log \
- .RData 
+	rm -f quotations.sqlite3  authors.aux manual_nt_length.aux getrefs.aux \
+         authors.log manual_nt_length.log getrefs.log .RData 
 	rm -f $(table-auxs) $(table-logs)
 	rm -f jaccard_Psalms.txt
 
 fullclean: clean
+	rm -f authors.tex manual_nt_length.tex getrefs.tex
 	rm -f authors.pdf getrefs.pdf manual_nt_length.pdf Rplots.pdf
 	rm -f $(jaccard-Rplots-pdfs) $(jaccard-txts) $(jaccard-sorted-txts) $(jaccard-csvs)
 	rm -f $(getrefs-pngs) $(getrefs-ppms) $(table-texs) $(Rplots-pdfs) $(table-pdfs)
@@ -129,3 +128,4 @@ fullclean: clean
 	rm -f $(manual_length-csvs) manual_nt_length.csv multi-Rplots.pdf nt_frequencies.csv ot_frequencies.csv
 
 .PHONY: clean fullclean all selftest
+.PRECIOUS: $(table-texs)
