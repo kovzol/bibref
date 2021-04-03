@@ -1,9 +1,16 @@
-all: getrefs.pdf authors.pdf manual_nt_length.pdf Rplots.pdf \
- jaccard-Psalms-Rplots.pdf jaccard_Psalms-sorted.txt \
- Romans-getrefs.png Romans-table.pdf Romans-Rplots.pdf jaccard-Romans-Rplots.pdf jaccard_Romans-sorted.txt \
- Hebrews-getrefs.png Hebrews-table.pdf Hebrews-Rplots.pdf jaccard-Hebrews-Rplots.pdf jaccard_Hebrews-sorted.txt \
- Matthew-getrefs.png Matthew-table.pdf Matthew-Rplots.pdf jaccard-Matthew-Rplots.pdf jaccard_Matthew-sorted.txt \
- jaccard-multi-Rplots.pdf multi-Rplots.pdf \
+all: jaccard nojaccard
+
+jaccard: jaccard-Psalms-Rplots.pdf jaccard_Psalms-sorted.txt \
+ jaccard-Romans-Rplots.pdf jaccard_Romans-sorted.txt \
+ jaccard-Hebrews-Rplots.pdf jaccard_Hebrews-sorted.txt \
+ jaccard-Matthew-Rplots.pdf jaccard_Matthew-sorted.txt \
+ jaccard-multi-Rplots.pdf
+
+nojaccard: getrefs.pdf authors.pdf manual_nt_length.pdf Rplots.pdf \
+ Romans-getrefs.png Romans-table.pdf Romans-Rplots.pdf \
+ Hebrews-getrefs.png Hebrews-table.pdf Hebrews-Rplots.pdf \
+ Matthew-getrefs.png Matthew-table.pdf Matthew-Rplots.pdf \
+ multi-Rplots.pdf \
  nt_frequencies.csv ot_frequencies.csv \
  selftest
 
