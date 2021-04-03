@@ -39,10 +39,7 @@ Romans-Rplots.pdf: manual_Romans_length.csv manual_Romans_length.r
 jaccard-Romans-Rplots.pdf: jaccard_Romans.csv jaccard_Romans.r
 	R -q --save < jaccard_Romans.r
 
-jaccard_Romans.csv: visualize.py quotations.sqlite3
-	python3 visualize.py nt_jaccard
-
-jaccard_Romans.txt: visualize.py quotations.sqlite3
+jaccard_Romans.csv jaccard_Romans.txt: visualize.py quotations.sqlite3
 	python3 visualize.py nt_jaccard
 
 jaccard_Romans-sorted.txt: jaccard_Romans.txt
@@ -67,10 +64,7 @@ Hebrews-Rplots.pdf: manual_Hebrews_length.csv manual_Hebrews_length.r
 jaccard-Hebrews-Rplots.pdf: jaccard_Hebrews.csv jaccard_Hebrews.r
 	R -q --save < jaccard_Hebrews.r
 
-jaccard_Hebrews.csv: visualize.py quotations.sqlite3
-	python3 visualize.py nt_jaccard Hebrews
-
-jaccard_Hebrews.txt: visualize.py quotations.sqlite3
+jaccard_Hebrews.csv jaccard_Hebrews.txt: visualize.py quotations.sqlite3
 	python3 visualize.py nt_jaccard Hebrews
 
 jaccard_Hebrews-sorted.txt: jaccard_Hebrews.txt
@@ -95,10 +89,7 @@ Matthew-Rplots.pdf: manual_Matthew_length.csv manual_Matthew_length.r
 jaccard-Matthew-Rplots.pdf: jaccard_Matthew.csv jaccard_Matthew.r
 	R -q --save < jaccard_Matthew.r
 
-jaccard_Matthew.csv: visualize.py quotations.sqlite3
-	python3 visualize.py nt_jaccard Matthew
-
-jaccard_Matthew.txt: visualize.py quotations.sqlite3
+jaccard_Matthew.csv jaccard_Matthew.txt: visualize.py quotations.sqlite3
 	python3 visualize.py nt_jaccard Matthew
 
 jaccard_Matthew-sorted.txt: jaccard_Matthew.txt
