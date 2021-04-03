@@ -1,11 +1,5 @@
 all: jaccard nojaccard
 
-jaccard: jaccard-Psalms-Rplots.pdf jaccard_Psalms-sorted.txt \
- jaccard-Romans-Rplots.pdf jaccard_Romans-sorted.txt \
- jaccard-Hebrews-Rplots.pdf jaccard_Hebrews-sorted.txt \
- jaccard-Matthew-Rplots.pdf jaccard_Matthew-sorted.txt \
- jaccard-multi-Rplots.pdf
-
 nojaccard: getrefs.pdf authors.pdf manual_nt_length.pdf Rplots.pdf \
  Romans-getrefs.png Romans-table.pdf Romans-Rplots.pdf \
  Hebrews-getrefs.png Hebrews-table.pdf Hebrews-Rplots.pdf \
@@ -23,9 +17,12 @@ manual_nt_length.pdf: manual_nt_length.tex
 getrefs.pdf: getrefs.tex
 	pdflatex getrefs
 
+nt_inputs = Matthew Romans Hebrews
+
 # Jaccard
-nt_jaccard_inputs = Matthew Romans Hebrews
-jaccard-Rplots = $(nt_jaccard_inputs:%=jaccard-%-Rplots.pdf)
+jaccard-Rplots = $(nt_inputs:%=jaccard-%-Rplots.pdf)
+jaccard-sorted-txts: $(nt_inputs:%=jaccard_%-sorted.txt)
+jaccard-csvs: $(nt_inputs:%=jaccard_%.csv)
 
 jaccard-%-Rplots.pdf: jaccard_%.csv jaccard_%.r
 	R -q --save < jaccard_$*.r
@@ -33,6 +30,12 @@ jaccard_%.csv jaccard_%.txt:  visualize.py quotations.sqlite3
 	python3 visualize.py nt_jaccard $*
 jaccard_%-sorted.txt: jaccard_%.txt
 	sort jaccard_$*.txt > jaccard_$*-sorted.txt
+jaccard-multi-Rplots.pdf: $(jaccard-csvs) jaccard_multi.r
+	R -q --save < jaccard_multi.r
+
+jaccard: jaccard-Psalms-Rplots.pdf jaccard_Psalms-sorted.txt \
+ $(jaccard-Rplots) $(jaccard-sorted-txts) \
+ jaccard-multi-Rplots.pdf
 
 # Romans
 Romans-getrefs.png: Romans-getrefs.ppm
@@ -80,8 +83,6 @@ Matthew-table.pdf: Matthew-table.tex
 	pdflatex Matthew-table
 
 # Multiple plots
-jaccard-multi-Rplots.pdf: jaccard_Matthew.csv jaccard_Romans.csv jaccard_Hebrews.csv jaccard_multi.r
-	R -q --save < jaccard_multi.r
 
 multi-Rplots.pdf: manual_Matthew_length.csv manual_Romans_length.csv manual_Hebrews_length.csv manual_multi_length.r
 	R -q --save < manual_multi_length.r
