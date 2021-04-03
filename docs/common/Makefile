@@ -30,17 +30,17 @@ jaccard: jaccard-Psalms-Rplots.pdf jaccard_Psalms-sorted.txt \
  jaccard-multi-Rplots.pdf
 
 # No-Jaccard
-nojaccard: getrefs.pdf authors.pdf manual_nt_length.pdf Rplots.pdf \
- $(getrefs-pngs) $(table-pdfs) $(Rplots-pdfs) \
- multi-Rplots.pdf \
- nt_frequencies.csv ot_frequencies.csv \
- selftest
-
 getrefs-pngs = $(nt_inputs:%=%-getrefs.png)
 getrefs-ppms = $(nt_inputs:%=%-getrefs.ppm)
 table-texs = $(nt_inputs:%=%-table.tex)
 Rplots-pdfs = $(nt_inputs:%=%-Rplots.pdf)
 table-pdfs = $(nt_inputs:%=%-table.pdf)
+
+nojaccard: getrefs.pdf authors.pdf manual_nt_length.pdf Rplots.pdf \
+ $(getrefs-pngs) $(table-pdfs) $(Rplots-pdfs) \
+ multi-Rplots.pdf \
+ nt_frequencies.csv ot_frequencies.csv \
+ selftest
 
 jaccard-%-Rplots.pdf: jaccard_%.csv jaccard_%.r
 	R -q --save < jaccard_$*.r
@@ -112,5 +112,7 @@ clean:
 
 fullclean: clean
 	rm -f authors.pdf getrefs.pdf manual_nt_length.pdf Rplots.pdf
+	rm -f $(jaccard-Rplots-pdfs) $(jaccard-sorted-txts) $(jaccard-csvs)
+	rm -f $(getrefs-pngs) $(getrefs-ppms) $(table-texs) $(Rplots-pdfs) $(table-pdfs)
 
 .PHONY: clean fullclean all selftest
