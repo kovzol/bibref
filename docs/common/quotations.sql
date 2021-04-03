@@ -55,6 +55,18 @@ create table quotations_classifications (
  classification_subtype text,
  classified_by text);
 
+create table clasps (
+ nt_quotation_id int,
+ ot_book text not null,
+ ot_passage text not null,
+ nt_book text not null,
+ nt_passage text not null,
+ ot_startpos int,
+ ot_length int,
+ nt_startpos int,
+ nt_length int
+ );
+
 
 insert into authors (name, info) values ('Moses', 'Moses');
 insert into authors (name, info) values ('Job', 'Job');
@@ -164,6 +176,8 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
  (1, 1, 'quotation', 'exact, literal', 'Z.K.');
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
  (11, 'Acts', 'SBLGNT Acts 4:25 4:25-38', 11538, 11595);
+insert into clasps (nt_quotation_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (11, 'Psalms', 'LXX Psalms 2:1 2:2-8', 'Acts', 'SBLGNT Acts 4:25+54 4:26', 501, 131, 11592, 131); -- perfect!
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (21, 2, 1, 'Psalms', 2, 'Psalms 2:7', 'Acts', 'Acts 13:33', null, null, null, null, 'traditional');
