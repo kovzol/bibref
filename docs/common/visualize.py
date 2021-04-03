@@ -59,19 +59,6 @@ def psalms_report_latex(conn, method, data):
     for psalm in range(1,151):
         if psalm % 10 == 1:
             print ("{\\bf ", round(psalm/10), "}&", end = '', sep = '')
-        """
-        cur.execute("SELECT q.ot_id, q.nt_id, q.nt_book, a.name" +
-            " FROM quotations_classifications qc, quotations q, authors a, books b " +
-            " WHERE qc.classification = 'quotation'" +
-            " AND qc.quotation_ot_id = q.ot_id" +
-            " AND qc.quotation_nt_id = q.nt_id" +
-            " AND q.psalm = " + str(psalm) +
-            " AND q.found_method = '" + method + "'" +
-            " AND a.name = b.author" +
-            " AND b.name = q.nt_book" +
-            " GROUP BY q.ot_id, q.nt_id" +
-            " ORDER BY q.ot_startpos, q.ot_id, b.number")
-        """
         cur.execute("SELECT q.ot_id, q.nt_id, q.nt_book, a.name" +
             " FROM quotations_with_introduction q, authors a, books b " +
             " WHERE q.psalm = " + str(psalm) +
@@ -185,17 +172,6 @@ def nt_report_ppm(conn, book, book_length, ppm_rows, ppm_columns, mode):
         q += 1
 
     if mode == "getrefs":
-        """
-        cur.execute("SELECT q.nt_startpos, q.nt_length, q.ot_book, q.ot_passage, q.nt_passage" +
-            "SELECT q.nt_startpos, q.nt_length, q.ot_book, q.ot_passage, q.nt_passage" +
-            " FROM quotations q, quotations_classifications qc " +
-            " WHERE qc.classification = 'quotation'" +
-            " AND qc.quotation_ot_id = q.ot_id" +
-            " AND qc.quotation_nt_id = q.nt_id" +
-            " AND q.found_method = 'getrefs'" +
-            " AND q.nt_book = '" + book + "'" +
-            " ORDER BY q.nt_startpos"
-        """
         cur.execute("SELECT q.nt_startpos, q.nt_length, q.ot_book, q.ot_passage, q.nt_passage" +
             " FROM quotations_with_introduction q " +
             " WHERE q.found_method = 'getrefs'" +
@@ -257,16 +233,6 @@ def nt_report_latex(conn, book):
     print ("\\hline")
 
     cur = conn.cursor()
-    """
-    cur.execute("SELECT q.nt_startpos, q.nt_length, q.ot_book, q.ot_passage, q.nt_passage, q.ot_id, q.nt_id" +
-        " FROM quotations q, quotations_classifications qc " +
-        " WHERE qc.classification = 'quotation'" +
-        " AND qc.quotation_ot_id = q.ot_id" +
-        " AND qc.quotation_nt_id = q.nt_id" +
-        " AND q.found_method = 'manual'" +
-        " AND q.nt_book = '" + book + "'" +
-        " ORDER BY q.nt_startpos")
-    """
     cur.execute("SELECT q.nt_startpos, q.nt_length, q.ot_book, q.ot_passage, q.nt_passage, q.ot_id, q.nt_id" +
         " FROM quotations_with_introduction q" +
         " WHERE q.found_method = 'manual'" +
@@ -310,18 +276,6 @@ def nt_frequencies_csv(conn):
     f.write("Book,No. of quotations\n")
 
     cur = conn.cursor()
-    """
-    cur.execute("SELECT name, COUNT(*) FROM" +
-        " (SELECT b.number as number, b.name as name" +
-        " FROM quotations q, quotations_classifications qc, books b " +
-        " WHERE qc.classification = 'quotation'" +
-        " AND qc.quotation_ot_id = q.ot_id" +
-        " AND qc.quotation_nt_id = q.nt_id" +
-        " AND q.nt_book = b.name" +
-        " GROUP BY b.number, q.ot_id, q.nt_id" +
-        " ORDER BY b.number)" +
-        " GROUP BY name ORDER BY number")
-    """
     cur.execute("SELECT name, COUNT(*) FROM" +
         " (SELECT b.number as number, b.name as name" +
         " FROM quotations_with_introduction q, books b " +
@@ -350,17 +304,6 @@ def ot_frequencies_csv(conn):
     f.write("Book,No. of quotations\n")
 
     cur = conn.cursor()
-    """
-    cur.execute("SELECT name, COUNT(*) FROM" +
-        " (SELECT b.number as number, b.name as name" +
-        " FROM quotations q, quotations_classifications qc, books b " +
-        " WHERE qc.classification = 'quotation'" +
-        " AND qc.quotation_ot_id = q.ot_id" +
-        " AND q.ot_book = b.name" +
-        " GROUP BY b.number, q.ot_id" +
-        " ORDER BY b.number)" +
-        " GROUP BY name ORDER BY number")
-    """
     cur.execute("SELECT name, COUNT(*) FROM" +
         " (SELECT b.number as number, b.name as name" +
         " FROM quotations_with_introduction q, books b " +
@@ -397,17 +340,6 @@ def nt_jaccard_csv(conn, nt_book):
 
     global bibref
     cur = conn.cursor()
-    """
-    cur.execute("SELECT q.ot_passage, q.nt_passage" +
-        " FROM quotations q, quotations_classifications qc" +
-        " WHERE q.found_method = 'manual'" +
-        " AND qc.classification = 'quotation'" +
-        " AND qc.quotation_ot_id = q.ot_id" +
-        " AND qc.quotation_nt_id = q.nt_id" +
-        " AND q.nt_book = '" + nt_book + "'" +
-        " AND INSTR(q.ot_passage, 'LXX') > 0" +
-        " ORDER BY q.nt_startpos")
-    """
     cur.execute("SELECT q.ot_passage, q.nt_passage" +
         " FROM quotations_with_introduction q" +
         " WHERE q.found_method = 'manual'" +
@@ -456,17 +388,6 @@ def ot_jaccard_csv(conn, ot_book):
 
     global bibref
     cur = conn.cursor()
-    """
-    cur.execute("SELECT q.ot_passage, q.nt_passage" +
-        " FROM quotations q, quotations_classifications qc" +
-        " WHERE q.found_method = 'manual'" +
-        " AND qc.classification = 'quotation'" +
-        " AND qc.quotation_ot_id = q.ot_id" +
-        " AND qc.quotation_nt_id = q.nt_id" +
-        " AND q.ot_book = '" + ot_book + "'" +
-        " AND INSTR(q.nt_passage, 'SBLGNT') > 0" +
-        " ORDER BY q.ot_startpos")
-    """
     cur.execute("SELECT q.ot_passage, q.nt_passage" +
         " FROM quotations_with_introduction q" +
         " WHERE q.found_method = 'manual'" +

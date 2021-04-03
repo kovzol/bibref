@@ -47,7 +47,7 @@ jaccard-%-Rplots.pdf: jaccard_%.csv jaccard_%.r
 
 %-getrefs.png: %-getrefs.ppm
 	convert $< png:$@
-%-table.tex: visualize.py quotations.sqlite3
+%-table.tex manual_%_length.csv: visualize.py quotations.sqlite3
 	python3 visualize.py nt_latex $* > $@
 %-Rplots.pdf: manual_%_length.csv manual_%_length.r
 	R -q --save < manual_$*_length.r

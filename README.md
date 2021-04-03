@@ -141,3 +141,4 @@ The available commands are:
 There may be other commands available that are not documented yet.
 
 Some [examples](/examples) are also available. See also [an incomplete draft (in Hungarian)](docs/hu/bibref.pdf) on the purpose of the commands.
+Also, a work-in-progress database can be found in [docs/common](/docs/common) which aims collecting all quotations.

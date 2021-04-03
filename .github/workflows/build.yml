@@ -23,10 +23,6 @@ jobs:
     - name: make
       run: make
     - name: db-full
-      run: cd docs/common && (make || make)
-#    - name: db-incomplete
-#      run: cd docs/common && make authors.pdf manual_nt_length.pdf getrefs.pdf Romans-getrefs.png
+      run: cd docs/common && make
     - name: doc-hu
       run: cd docs/hu && make
-#    - name: selftest
-#      run: cd docs/common && ./selftest.py
