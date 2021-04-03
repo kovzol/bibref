@@ -14,7 +14,7 @@ jobs:
 #        repo-name: cran40
 #        keys: E298A3A825C0D65DFD57CBB651716619E084DAB9
 #        key-server: keyserver.ubuntu.com
-        repo: deb https://debian.ethz.ch/debian stable main contrib non-free
+        repo: deb http://debian.ethz.ch/debian stable main contrib non-free
         repo-name: debian
     - name: prerequisites
       run: >-
