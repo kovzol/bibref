@@ -14,7 +14,7 @@ jobs:
 #        repo-name: cran40
 #        keys: E298A3A825C0D65DFD57CBB651716619E084DAB9
 #        key-server: keyserver.ubuntu.com
-        repo: deb http://ftp.ch.debian.org/debian/ bullseye
+        repo: deb http://ftp.ch.debian.org/debian/dists/ bullseye
         repo-name: debian-bullseye
     - name: prerequisites
       run: >-
