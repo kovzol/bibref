@@ -14,7 +14,7 @@ jobs:
               sqlite3 python3 python3-pexpect \
               texlive-latex-recommended texlive-latex-extra texlive-science texlive-lang-european texlive-lang-german \
               r-base-core &&
-         sudo apt install --no-install-recommends r-cran-sm
+         sudo apt install --no-install-recommends --nodeps r-cran-sm
     - name: cmake
       run: cmake .
     - name: make
