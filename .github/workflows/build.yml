@@ -14,11 +14,11 @@ jobs:
 #        repo-name: cran40
 #        keys: E298A3A825C0D65DFD57CBB651716619E084DAB9
 #        key-server: keyserver.ubuntu.com
-        repo: deb http://debian.ethz.ch/debian stable main contrib non-free
+        repo: deb [trusted=yes] http://debian.ethz.ch/debian stable main contrib non-free
         repo-name: debian
     - name: prerequisites
       run: >-
-         sudo apt update --allow-unauthenticated &&
+         sudo apt update --allow-unauthenticated --allow-insecure-repositories &&
          sudo apt install libsword-common libsword-dev git cmake build-essential libreadline-dev libboost-dev \
               sqlite3 python3 python3-pexpect \
               texlive-latex-recommended texlive-latex-extra texlive-science texlive-lang-european texlive-lang-german \
