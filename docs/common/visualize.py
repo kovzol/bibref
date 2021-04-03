@@ -230,7 +230,7 @@ def nt_report_ppm(conn, book, book_length, ppm_rows, ppm_columns, mode):
             f.write("0 15 0\n") # 2. quotation with getrefs-match
         if info == 7:
             f.write("15 0 15\n") # 1. quotation with two getrefs-matches
-        if info == 8:
+        if info == 6 or info >= 8:
             print("Warning, ambiguous situation: position",l,"modesum",info)
             f.write("15 15 0\n") # TODO: investigate this situation
             # exit(1)
