@@ -9,7 +9,7 @@ manual_nt_length.pdf: manual_nt_length.tex
 getrefs.pdf: getrefs.tex
 	pdflatex getrefs
 
-nt_inputs = Matthew Romans Hebrews
+nt_inputs = Matthew Romans Acts Hebrews
 
 # Jaccard
 jaccard-Rplots-pdfs = $(nt_inputs:%=jaccard-%-Rplots.pdf)
@@ -54,12 +54,14 @@ jaccard-%-Rplots.pdf: jaccard_%.csv jaccard_%.r
 %-table.pdf: %-table.tex
 	pdflatex $<
 
-Hebrews-getrefs.ppm: visualize.py quotations.sqlite3
-	python3 visualize.py nt_ppm Hebrews 26307 165 160
-Romans-getrefs.ppm: visualize.py quotations.sqlite3
-	python3 visualize.py nt_ppm
 Matthew-getrefs.ppm: visualize.py quotations.sqlite3
 	python3 visualize.py nt_ppm Matthew 90007 356 253
+Acts-getrefs.ppm: visualize.py quotations.sqlite3
+	python3 visualize.py nt_ppm Acts 95651 368 260
+Romans-getrefs.ppm: visualize.py quotations.sqlite3
+	python3 visualize.py nt_ppm
+Hebrews-getrefs.ppm: visualize.py quotations.sqlite3
+	python3 visualize.py nt_ppm Hebrews 26307 165 160
 
 # Multiple plots
 
