@@ -16,7 +16,7 @@ jobs:
               sqlite3 python3 python3-pexpect \
               texlive-latex-recommended texlive-latex-extra texlive-science texlive-lang-european texlive-lang-german \
               r-base-core &&
-         sudo echo "deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/" >> /etc/apt/source.list &&
+         sudo echo "deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/" >> /etc/apt/sources.list &&
          sudo apt update &&
          sudo apt install r-cran-sm
     - name: cmake
