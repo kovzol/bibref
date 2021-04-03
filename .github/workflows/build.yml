@@ -17,7 +17,7 @@ jobs:
     - name: prerequisites2
       run: >-
          wget http://http.us.debian.org/debian/pool/main/s/sm/r-cran-sm_2.2-5.6-1+b2_amd64.deb &&
-         sudo dpkg -i r-cran-r-cran-sm_2.2-5.6-1+b2_amd64.deb
+         sudo dpkg -i r-cran-sm_2.2-5.6-1+b2_amd64.deb
     - name: cmake
       run: cmake .
     - name: make
