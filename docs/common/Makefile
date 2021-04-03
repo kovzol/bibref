@@ -21,7 +21,7 @@ jaccard-%-Rplots.pdf: jaccard_%.csv jaccard_%.r
 jaccard_%.csv jaccard_%.txt:  visualize.py quotations.sqlite3
 	python3 visualize.py nt_jaccard $*
 jaccard_%-sorted.txt: jaccard_%.txt
-	sort jaccard_$*.txt > jaccard_$*-sorted.txt
+	sort $< > $@
 jaccard-multi-Rplots.pdf: $(jaccard-csvs) jaccard_multi.r
 	R -q --save < jaccard_multi.r
 
@@ -46,13 +46,13 @@ jaccard-%-Rplots.pdf: jaccard_%.csv jaccard_%.r
 	R -q --save < jaccard_$*.r
 
 %-getrefs.png: %-getrefs.ppm
-	convert $*-getrefs.ppm png:$*-getrefs.png
+	convert $< png:$@
 %-table.tex: visualize.py quotations.sqlite3
-	python3 visualize.py nt_latex $* > $*-table.tex
+	python3 visualize.py nt_latex $* > $@
 %-Rplots.pdf: manual_%_length.csv manual_%_length.r
 	R -q --save < manual_$*_length.r
 %-table.pdf: %-table.tex
-	pdflatex $*-table
+	pdflatex $<
 
 Hebrews-getrefs.ppm: visualize.py quotations.sqlite3
 	python3 visualize.py nt_ppm Hebrews 26307 165 160
