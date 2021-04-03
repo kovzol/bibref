@@ -37,6 +37,10 @@ getrefs-ppms = $(nt_inputs:%=%-getrefs.ppm)
 table-texs = $(nt_inputs:%=%-table.tex)
 Rplots-pdfs = $(nt_inputs:%=%-Rplots.pdf)
 table-pdfs = $(nt_inputs:%=%-table.pdf)
+# For removal
+table-auxs = $(nt_inputs:%=%-table.aux)
+table-logs = $(nt_inputs:%=%-table.log)
+manual_length-csvs = $(nt_inputs:%=manual_%_length.csv)
 
 jaccard-%-Rplots.pdf: jaccard_%.csv jaccard_%.r
 	R -q --save < jaccard_$*.r
@@ -112,11 +116,16 @@ nojaccard: getrefs.pdf authors.pdf manual_nt_length.pdf Rplots.pdf \
 clean:
 	rm -f quotations.sqlite3 authors.tex manual_nt_length.tex getrefs.tex \
  authors.aux manual_nt_length.aux getrefs.aux \
- authors.log manual_nt_length.log getrefs.log
+ authors.log manual_nt_length.log getrefs.log \
+ .RData 
+	rm -f $(table-auxs) $(table-logs)
+	rm -f jaccard_Psalms.txt
 
 fullclean: clean
 	rm -f authors.pdf getrefs.pdf manual_nt_length.pdf Rplots.pdf
 	rm -f $(jaccard-Rplots-pdfs) $(jaccard-txts) $(jaccard-sorted-txts) $(jaccard-csvs)
 	rm -f $(getrefs-pngs) $(getrefs-ppms) $(table-texs) $(Rplots-pdfs) $(table-pdfs)
+	rm -f jaccard-Psalms-Rplots.pdf jaccard-multi-Rplots.pdf jaccard_Psalms-sorted.txt jaccard_Psalms.csv
+	rm -f $(manual_length-csvs) manual_nt_length.csv multi-Rplots.pdf nt_frequencies.csv ot_frequencies.csv
 
 .PHONY: clean fullclean all selftest
