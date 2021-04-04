@@ -329,6 +329,7 @@ def spawn_bibref():
     print("Waiting for bibref's full startup...")
     bibref = pexpect.spawn("../../bibref -a") # FIXME: path is hardcoded now
     bibref.expect("Done loading books of SBLGNT.")
+    bibref.timeout = 5
 
 def nt_jaccard_csv(conn, nt_book):
     """

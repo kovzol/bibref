@@ -1267,7 +1267,7 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (119, 1, 'quotation', 'puzzle', 'Z.K.');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (1201, 120, 1, 'Isaiah', null, 'Isaiah 28:11+12 28:11', 'I_Corinthians', 'SBLGNT I_Corinthians 14:21+40 14:21-38', 52171, 46, 25551, 30, 'manual');
+ (1201, 120, 1, 'Isaiah', null, 'LXX Isaiah 28:11+12 28:11', 'I_Corinthians', 'SBLGNT I_Corinthians 14:21+40 14:21-38', 52171, 46, 25551, 30, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (120, 1, 'εν τω νομω', 'γεγραπται οτι'); -- εν τω νομω  = in the law, γεγραπται οτι = it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
@@ -2284,7 +2284,7 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2103, 9, 'quotation', 'literal, exact', 'Z.K.');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (21040, 2103, 10, 'Exodus', null, 'LXX Exodus 20:12 20:14', 'Matthew', 'SBLGNT Matthew 15:4+13 15:4-41', 57204, 28, 42524, 25, 'manual');
+ (21040, 2103, 10, 'Exodus', null, 'LXX Exodus 20:12 20:12-81', 'Matthew', 'SBLGNT Matthew 15:4+13 15:4-41', 57204, 28, 42524, 25, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2103, 10, 'θεος', 'ειπεν'); -- ειπεν = commanded
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
@@ -2576,7 +2576,7 @@ insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passag
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (24021, 2402, 1, 'Deuteronomy', null, 'LXX Deuteronomy 32:21+75 32:21-6', 'Romans', 'SBLGNT Romans 10:19+56 10:19-4', 101533, 33, 21941, 33, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (24021, 2402, 1, 'Deuteronomy', null, 'LXX Deuteronomy 32:21+56 32:21-44', 'Romans', 'SBLGNT Romans 10:19+41 10:19-40', 101514, 58, 21926, 53, 'manual');
+ (24021, 2402, 1, 'Deuteronomy', null, 'LXX Deuteronomy 32:21+56 32:21-6', 'Romans', 'SBLGNT Romans 10:19+41 10:19-4', 101514, 52, 21926, 48, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2402, 1, 'Μωυσης', 'λεγει'); -- λεγει = says
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
