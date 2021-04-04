@@ -2016,7 +2016,7 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (20031, 2003, 1, 'Genesis', null, 'LXX Genesis 15:5+109 15:6-49', 'Romans', 'SBLGNT Romans 4:18+78 4:19-104', 34433, 25, 8591, 25, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (20031, 2003, 1, 'Genesis', null, 'LXX Genesis 15:5+109 15:5', 'Romans', 'SBLGNT Romans 4:18+78 4:18', 34434, 21, 8592, 21, 'manual');
+ (20031, 2003, 1, 'Genesis', null, 'LXX Genesis 15:5+110 15:5', 'Romans', 'SBLGNT Romans 4:18+79 4:18', 34434, 21, 8592, 21, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2003, 1, null, 'κατα το ειρημενον'); -- κατα το ειρημενον = according to that having spoken
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
@@ -2050,7 +2050,7 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (20061, 2006, 1, 'Genesis', null, 'LXX Genesis 25:23+103 25:24-64', 'Romans', 'SBLGNT Romans 9:12+39 9:13-43', 65834, 29, 19004, 29, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (20061, 2006, 1, 'Genesis', null, 'LXX Genesis 25:23+103 25:24-64', 'Romans', 'SBLGNT Romans 9:12+39 9:13-43', 65834, 27, 19004, 27, 'manual');
+ (20061, 2006, 1, 'Genesis', null, 'LXX Genesis 25:23+104 25:23', 'Romans', 'SBLGNT Romans 9:12+40 9:12', 65835, 26, 19005, 26, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2006, 1, 'Ρεβεκκα ... αυτη', 'ερρεθη'); -- Ρεβεκκα ... αυτη = Rebecca ... to her, ερρεθη = it was said
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
