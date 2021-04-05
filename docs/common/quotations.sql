@@ -362,6 +362,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (11, 1, 'Δαυιδ', 'λεγει'); -- λεγει = says
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (11, 1, 'quotation', 'literal', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (111, 'Acts', 'Acts 2:25 2:25-68', 4812, 4832);
+insert into clasps (nt_quotation_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (111, 'Psalms', 'LXX Psalms 16:8 16:11-31', 'Romans', 'SBLGNT Acts 2:25+21 2:28', 12492, 286, 4833, 286);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (112, 11, 2, 'Psalms', 16, 'Psalms 16:10', 'Acts', 'Acts 13:35', null, null, null, null, 'traditional');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
