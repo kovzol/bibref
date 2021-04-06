@@ -5,6 +5,7 @@ from sqlite3 import Error
 import pexpect
 
 bibref = None
+errors = 0
 
 def create_connection(db_file):
     """
@@ -59,7 +60,7 @@ def quotation_entries_lengths(conn):
     :param conn: the Connection object
     """
 
-    global bibref
+    global bibref, errors
     cur = conn.cursor()
     cur.execute("SELECT ot_passage, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length" +
         " FROM quotations_with_introduction" +
@@ -96,10 +97,101 @@ def quotation_entries_lengths(conn):
         length2 = int(length2s[0])
         if ot_length != length1:
             print(f"Length for OT passage {ot_passage} does not match, in database {ot_length}, in OT {length1}")
-            sys.exit(1)
-        if ot_length != length1:
+            errors += 1
+        if nt_length != length2:
             print(f"Length for NT passage {nt_passage} does not match, in database {nt_length}, in NT {length2}")
-            sys.exit(1)
+            errors += 1
+        percent = int(r/len(rows)*100)
+        print(f"{percent}% done\u001b[{0}K\r", end='')
+        r += 1
+    print(f"Done\u001b[{0}K")
+
+def nt_quotation_introduction_entries_lengths(conn):
+    """
+    Check if all NT quotation introduction entries are consistent:
+    The length of the texts must match the entries.
+    :param conn: the Connection object
+    """
+
+    global bibref, errors
+    cur = conn.cursor()
+    cur.execute("SELECT nt_passage, nt_startpos, nt_endpos" +
+        " FROM nt_quotation_introductions" +
+        " ORDER BY nt_passage")
+    rows = cur.fetchall()
+
+    spawn_bibref()
+    print("Checking lengths of NT quotation introduction entries...")
+
+    r = 0
+    for row in rows:
+        nt_passage = row[0]
+        nt_startpos = row[1]
+        nt_endpos = row[2]
+        nt_length = nt_endpos - nt_startpos + 1
+        command2 = "lookup2 " + nt_passage
+        bibref.sendline(command2)
+        bibref.expect("Stored internally as \w.")
+        command4 = "length2"
+        bibref.sendline(command4)
+        bibref.expect("Length of text 2 is ([0-9]+).")
+        length2s = bibref.match.groups()
+        length2 = int(length2s[0])
+        if nt_length != length2:
+            print(f"Length for NT passage {nt_passage} does not match, in database {nt_length}, in NT {length2}")
+            errors += 1
+        percent = int(r/len(rows)*100)
+        print(f"{percent}% done\u001b[{0}K\r", end='')
+        r += 1
+    print(f"Done\u001b[{0}K")
+
+def clasp_entries_lengths(conn):
+    """
+    Check if all clasps are consistent:
+    The length of the texts must match the entries.
+    :param conn: the Connection object
+    """
+
+    global bibref, errors
+    cur = conn.cursor()
+    cur.execute("SELECT ot_passage, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length" +
+        " FROM clasps" +
+        " ORDER BY ot_passage, nt_passage")
+    rows = cur.fetchall()
+
+    spawn_bibref()
+    print("Checking lengths of clasp entries...")
+
+    r = 0
+    for row in rows:
+        ot_passage = row[0]
+        nt_passage = row[1]
+        ot_startpos = row[2]
+        ot_length = row[3]
+        nt_startpos = row[4]
+        nt_length = row[5]
+        command1 = "lookup1 " + ot_passage
+        bibref.sendline(command1)
+        bibref.expect("Stored internally as \w.")
+        command2 = "lookup2 " + nt_passage
+        bibref.sendline(command2)
+        bibref.expect("Stored internally as \w.")
+        command3 = "length1"
+        bibref.sendline(command3)
+        bibref.expect("Length of text 1 is ([0-9]+).")
+        length1s = bibref.match.groups()
+        length1 = int(length1s[0])
+        command4 = "length2"
+        bibref.sendline(command4)
+        bibref.expect("Length of text 2 is ([0-9]+).")
+        length2s = bibref.match.groups()
+        length2 = int(length2s[0])
+        if ot_length != length1:
+            print(f"Length for OT passage {ot_passage} does not match, in database {ot_length}, in OT {length1}")
+            errors += 1
+        if nt_length != length2:
+            print(f"Length for NT passage {nt_passage} does not match, in database {nt_length}, in NT {length2}")
+            errors += 1
         percent = int(r/len(rows)*100)
         print(f"{percent}% done\u001b[{0}K\r", end='')
         r += 1
@@ -110,7 +202,14 @@ def main():
     conn = create_connection(database)
     book_entries(conn)
     quotation_entries_lengths(conn)
-    print("All tests passed")
+    nt_quotation_introduction_entries_lengths(conn)
+    clasp_entries_lengths(conn)
+    if errors == 0:
+        print("All tests passed")
+    else:
+        print(errors, "error(s)")
+        sys.exit(1)
+
 
 if __name__ == '__main__':
     main()
