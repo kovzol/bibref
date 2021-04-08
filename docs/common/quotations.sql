@@ -1968,25 +1968,25 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
  (1802, 2, 'quotation', 'literal', 'Z.K.');
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (20011, 2001, 1, 'Genesis', null, 'LXX Genesis 15:6+16 15:6', 'Romans', 'SBLGNT Romans 4:3+32 4:3', 34471, 36, 7233, 36, 'getrefs');
+ (20011, 2001, 1, 'Genesis', null, 'LXX Genesis 15:6+16 15:6', 'Romans', 'SBLGNT Romans 4:3+32 4:3', 34472, 36, 7233, 36, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (20011, 2001, 1, 'Genesis', null, 'LXX Genesis 15:6+3 15:6', 'Romans', 'SBLGNT Romans 4:3+16 4:3', 34458, 49, 7217, 52, 'manual');
+ (20011, 2001, 1, 'Genesis', null, 'LXX Genesis 15:6+3 15:6', 'Romans', 'SBLGNT Romans 4:3+16 4:3', 34459, 49, 7217, 52, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2001, 1, 'η γραφη', 'λεγει'); -- η γραφη = the Scripture, λεγει = says
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2001, 1, 'quotation', 'literal', 'Z.K.');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (20012, 2001, 2, 'Genesis', null, 'LXX Genesis 15:6+18 15:6', 'Galatians', 'SBLGNT Galatians 3:6+21 3:6', 34473, 34, 4109, 34, 'getrefs');
+ (20012, 2001, 2, 'Genesis', null, 'LXX Genesis 15:6+18 15:6', 'Galatians', 'SBLGNT Galatians 3:6+21 3:6', 34474, 34, 4109, 34, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (20012, 2001, 2, 'Genesis', null, 'LXX Genesis 15:6+3 15:6', 'Galatians', 'SBLGNT Galatians 3:6+5 3:6', 34458, 49, 4093, 50, 'manual');
+ (20012, 2001, 2, 'Genesis', null, 'LXX Genesis 15:6+3 15:6', 'Galatians', 'SBLGNT Galatians 3:6+5 3:6', 34459, 49, 4093, 50, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2001, 2, null, 'καθως'); -- καθως = so also
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2001, 2, 'quotation', 'literal', 'Z.K.');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (20013, 2001, 3, 'Genesis', null, 'LXX Genesis 15:6+16 15:6', 'James', 'SBLGNT James 2:23+41 2:23-18', 34471, 36, 3924, 36, 'getrefs');
+ (20013, 2001, 3, 'Genesis', null, 'LXX Genesis 15:6+16 15:6', 'James', 'SBLGNT James 2:23+41 2:23-18', 34472, 36, 3924, 36, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (20013, 2001, 3, 'Genesis', null, 'LXX Genesis 15:6+3 15:6', 'James', 'SBLGNT James 2:23+25 2:23-18', 34458, 49, 3908, 52, 'manual');
+ (20013, 2001, 3, 'Genesis', null, 'LXX Genesis 15:6+3 15:6', 'James', 'SBLGNT James 2:23+25 2:23-18', 34459, 49, 3908, 52, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2001, 3, 'η γραφη', 'λεγουσα'); -- η γραφη = the Scripture, λεγουσα = saying
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
@@ -2010,59 +2010,59 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2001, 6, 'repetition', 'literal, exact', 'Z.K.');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (20021, 2002, 1, 'Genesis', null, 'LXX Genesis 17:5+57 17:6-65', 'Romans', 'SBLGNT Romans 4:17+14 4:17-75', 37722, 31, 8407, 31, 'getrefs');
+ (20021, 2002, 1, 'Genesis', null, 'LXX Genesis 17:5+57 17:6-65', 'Romans', 'SBLGNT Romans 4:17+14 4:17-75', 37723, 31, 8407, 31, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (20021, 2002, 1, 'Genesis', null, 'LXX Genesis 17:5+57 17:6-67', 'Romans', 'SBLGNT Romans 4:17+14 4:17-77', 37722, 29, 8407, 29, 'manual');
+ (20021, 2002, 1, 'Genesis', null, 'LXX Genesis 17:5+57 17:6-67', 'Romans', 'SBLGNT Romans 4:17+14 4:17-77', 37723, 29, 8407, 29, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2002, 1, null, 'καθως γεγραπται'); -- καθως γεγραπται = as it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2002, 1, 'quotation', 'literal, exact', 'Z.K.');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (20021, 2002, 2, 'Genesis', null, 'LXX Genesis 17:5+60 17:5-9', 'Romans', 'SBLGNT Romans 4:18+47 4:18-36', 37725, 17, 8560, 17, 'getrefs');
+ (20021, 2002, 2, 'Genesis', null, 'LXX Genesis 17:5+60 17:5-9', 'Romans', 'SBLGNT Romans 4:18+47 4:18-36', 37726, 17, 8560, 17, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (20021, 2002, 2, 'Genesis', null, 'LXX Genesis 17:5+60 17:5-9', 'Romans', 'SBLGNT Romans 4:18+47 4:18-36', 37725, 17, 8560, 17, 'manual');
+ (20021, 2002, 2, 'Genesis', null, 'LXX Genesis 17:5+60 17:5-9', 'Romans', 'SBLGNT Romans 4:18+47 4:18-36', 37726, 17, 8560, 17, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2002, 2, null, null);
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2002, 2, 'repetition', 'literal, exact', 'Z.K.');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (20031, 2003, 1, 'Genesis', null, 'LXX Genesis 15:5+109 15:6-49', 'Romans', 'SBLGNT Romans 4:18+78 4:19-104', 34433, 25, 8591, 25, 'getrefs');
+ (20031, 2003, 1, 'Genesis', null, 'LXX Genesis 15:5+109 15:6-49', 'Romans', 'SBLGNT Romans 4:18+78 4:19-104', 34434, 25, 8591, 25, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (20031, 2003, 1, 'Genesis', null, 'LXX Genesis 15:5+110 15:5', 'Romans', 'SBLGNT Romans 4:18+79 4:18', 34434, 21, 8592, 21, 'manual');
+ (20031, 2003, 1, 'Genesis', null, 'LXX Genesis 15:5+110 15:5', 'Romans', 'SBLGNT Romans 4:18+79 4:18', 34435, 21, 8592, 21, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2003, 1, null, 'κατα το ειρημενον'); -- κατα το ειρημενον = according to that having spoken
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2003, 1, 'quotation', 'literal, exact', 'Z.K.');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (20041, 2004, 1, 'Genesis', null, 'LXX Genesis 21:12+127 21:12', 'Romans', 'SBLGNT Romans 9:7+37 9:7', 50388, 26, 18644, 26, 'getrefs');
+ (20041, 2004, 1, 'Genesis', null, 'LXX Genesis 21:12+127 21:12', 'Romans', 'SBLGNT Romans 9:7+37 9:7', 50389, 26, 18644, 26, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (20041, 2004, 1, 'Genesis', null, 'LXX Genesis 21:12+127 21:12', 'Romans', 'SBLGNT Romans 9:7+37 9:7', 50388, 26, 18644, 26, 'manual');
+ (20041, 2004, 1, 'Genesis', null, 'LXX Genesis 21:12+127 21:12', 'Romans', 'SBLGNT Romans 9:7+37 9:7', 50389, 26, 18644, 26, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2004, 1, 'ο λογος του θεου', 'ου γαρ ... ουδ οτι ... αλλ'); -- ο λογος του θεου = the word of God, ου γαρ ... ουδ οτι ... αλλ = not for ... nor because ... rather
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2004, 1, 'quotation', 'literal, exact', 'Z.K.');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (20042, 2004, 2, 'Genesis', null, 'LXX Genesis 21:12+124 21:12', 'Hebrews', 'SBLGNT Hebrews 11:18+13 11:18', 50385, 29, 19944, 29, 'getrefs');
+ (20042, 2004, 2, 'Genesis', null, 'LXX Genesis 21:12+124 21:12', 'Hebrews', 'SBLGNT Hebrews 11:18+13 11:18', 50386, 29, 19941, 29, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (20042, 2004, 2, 'Genesis', null, 'LXX Genesis 21:12+124 21:12', 'Hebrews', 'SBLGNT Hebrews 11:18+13 11:18', 50385, 29, 19944, 29, 'manual');
+ (20042, 2004, 2, 'Genesis', null, 'LXX Genesis 21:12+124 21:12', 'Hebrews', 'SBLGNT Hebrews 11:18+13 11:18', 50386, 29, 19941, 29, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2004, 2, null, 'ελαληθη οτι'); -- ελαληθη οτι = it was said
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2004, 2, 'quotation', 'literal, exact', 'Z.K.');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (20051, 2005, 1, 'Genesis', null, 'LXX Genesis 18:10+28 18:10-79', 'Romans', 'SBLGNT Romans 9:9+24 9:9-27', 40961, 20, 18780, 20, 'getrefs');
+ (20051, 2005, 1, 'Genesis', null, 'LXX Genesis 18:10+28 18:10-79', 'Romans', 'SBLGNT Romans 9:9+24 9:9-27', 40962, 20, 18780, 20, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (20051, 2005, 1, 'Genesis', null, 'LXX Genesis 18:14+63 18:14', 'Romans', 'SBLGNT Romans 9:9+52 9:9', 41367, 19, 18808, 19, 'getrefs');
+ (20051, 2005, 1, 'Genesis', null, 'LXX Genesis 18:14+63 18:14', 'Romans', 'SBLGNT Romans 9:9+52 9:9', 41368, 19, 18808, 19, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (20051, 2005, 1, 'Genesis', null, 'LXX Genesis 18:10+28 18:14', 'Romans', 'SBLGNT Romans 9:9+24 9:9', 40961, 425, 18780, 47, 'manual');
+ (20051, 2005, 1, 'Genesis', null, 'LXX Genesis 18:10+28 18:14', 'Romans', 'SBLGNT Romans 9:9+24 9:9', 40962, 425, 18780, 47, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2005, 1, null, 'επαγγελιας γαρ ο λογος ουτος'); -- επαγγελιας γαρ ο λογος ουτος = of the promise for the word is this
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2005, 1, 'quotation', 'literal, superset, synonym', 'Z.K.');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (20061, 2006, 1, 'Genesis', null, 'LXX Genesis 25:23+103 25:24-64', 'Romans', 'SBLGNT Romans 9:12+39 9:13-43', 65834, 29, 19004, 29, 'getrefs');
+ (20061, 2006, 1, 'Genesis', null, 'LXX Genesis 25:23+103 25:24-64', 'Romans', 'SBLGNT Romans 9:12+39 9:13-43', 65835, 29, 19004, 29, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (20061, 2006, 1, 'Genesis', null, 'LXX Genesis 25:23+104 25:23', 'Romans', 'SBLGNT Romans 9:12+40 9:12', 65835, 26, 19005, 26, 'manual');
+ (20061, 2006, 1, 'Genesis', null, 'LXX Genesis 25:23+104 25:23', 'Romans', 'SBLGNT Romans 9:12+40 9:12', 65836, 26, 19005, 26, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2006, 1, 'Ρεβεκκα ... αυτη', 'ερρεθη'); -- Ρεβεκκα ... αυτη = Rebecca ... to her, ερρεθη = it was said
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values

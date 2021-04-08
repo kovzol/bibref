@@ -197,9 +197,50 @@ def clasp_entries_lengths(conn):
         r += 1
     print(f"Done\u001b[{0}K")
 
+def getrefs_entries(conn):
+    """
+    Check if the getrefs data are correct.
+    :param conn: the Connection object
+    """
+
+    global bibref, errors
+    cur = conn.cursor()
+    cur.execute("SELECT ot_passage, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length" +
+        " FROM quotations" +
+        " WHERE found_method='getrefs'" +
+        " ORDER BY ot_passage, nt_passage")
+    rows = cur.fetchall()
+
+    spawn_bibref()
+    print("Checking getrefs data...")
+    bibref.timeout = 60
+
+    r = 0
+    for row in rows:
+        ot_passage = row[0]
+        nt_passage = row[1]
+        ot_startpos = row[2]
+        ot_length = row[3]
+        nt_startpos = row[4]
+        nt_length = row[5]
+        command = "getrefs SBLGNT " + ot_passage
+        bibref.sendline(command)
+        bibref.expect("Finished")
+        expected = ot_passage + " = " + nt_passage + " (length=" + str(ot_length) + ", pos1=" + str(ot_startpos) + ", pos2=" + str(nt_startpos) + ")"
+        if bibref.before.decode('utf-8').find(expected) == -1:
+            print(f"Database entry {expected} is incorrect")
+            errors += 1
+        percent = int(r/len(rows)*100)
+        print(f"{percent}% done\u001b[{0}K\r", end='')
+        r += 1
+    print(f"Done\u001b[{0}K")
+    bibref.timeout = 5
+
+
 def main():
     database = r"quotations.sqlite3"
     conn = create_connection(database)
+    getrefs_entries(conn)
     book_entries(conn)
     quotation_entries_lengths(conn)
     nt_quotation_introduction_entries_lengths(conn)

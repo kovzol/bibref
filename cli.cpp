@@ -530,6 +530,7 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks) {
             } catch (exception &e) {
                 error(e.what());
             }
+            info("Finished");
             goto end;
         }
 
