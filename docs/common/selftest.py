@@ -106,6 +106,79 @@ def quotation_entries_lengths(conn):
         r += 1
     print(f"Done\u001b[{0}K")
 
+def quotation_entries(conn):
+    """
+    Check if manual quotation entries are correct.
+    :param conn: the Connection object
+    """
+
+    global bibref, errors
+    cur = conn.cursor()
+    cur.execute("SELECT ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method" +
+        " FROM quotations_with_introduction" +
+        " WHERE ot_startpos IS NOT NULL AND ot_length IS NOT NULL AND nt_startpos IS NOT NULL AND nt_length IS NOT NULL" +
+        " ORDER BY ot_passage, nt_passage")
+    rows = cur.fetchall()
+
+    spawn_bibref()
+    print("Checking quotation entries...")
+
+    r = 0
+    for row in rows:
+        ot_book = row[0]
+        ot_passage = row[1]
+        nt_book = row[2]
+        nt_passage = row[3]
+        ot_startpos = row[4]
+        ot_length = row[5]
+        nt_startpos = row[6]
+        nt_length = row[7]
+        found_method = row[8]
+        command1 = "lookup1 " + ot_passage
+        bibref.sendline(command1)
+        bibref.expect("Stored internally as \w.")
+        command2 = "lookup2 " + nt_passage
+        bibref.sendline(command2)
+        bibref.expect("Stored internally as \w.")
+        command3 = "find1 LXX"
+        bibref.sendline(command3)
+        bibref.expect("[0-9]+ occurrences.")
+        ot_passage = ot_passage[4:] # trim leading LXX
+        expected_end = " (book position " + str(ot_startpos) + "-" + str(ot_startpos + ot_length - 1) + ")"
+        expected = "Found in " + ot_passage + expected_end
+        if bibref.before.decode('utf-8').find(expected) == -1:
+            ot_passage_s = ot_passage.split()
+            if len(ot_passage_s) == 2:
+                ot_passage = ot_passage_s[0] + " " + ot_passage_s[1] + " " + ot_passage_s[1] # end verse := start verse
+                expected = "Found in " + ot_passage + expected_end
+                if bibref.before.decode('utf-8').find(expected) == -1:
+                    print(f"Entry {ot_passage} ({found_method}) is incorrect")
+                    errors += 1
+            else:
+                print(f"Entry {ot_passage} ({found_method}) is incorrect")
+                errors += 1
+        command4 = "find2 SBLGNT"
+        bibref.sendline(command4)
+        bibref.expect("[0-9]+ occurrences.")
+        nt_passage = nt_passage[7:] # trim leading SBLGNT
+        expected_end = " (book position " + str(nt_startpos) + "-" + str(nt_startpos + nt_length - 1) + ")"
+        expected = "Found in " + nt_passage + expected_end
+        if bibref.before.decode('utf-8').find(expected) == -1:
+            nt_passage_s = nt_passage.split()
+            if len(nt_passage_s) == 2:
+                nt_passage = nt_passage_s[0] + " " + nt_passage_s[1] + " " + nt_passage_s[1] # end verse := start verse
+                expected = "Found in " + nt_passage + expected_end
+                if bibref.before.decode('utf-8').find(expected) == -1:
+                    print(f"Entry {nt_passage} ({found_method}) is incorrect")
+                    errors += 1
+            else:
+                print(f"Entry {nt_passage} ({found_method}) is incorrect")
+                errors += 1
+        percent = int(r/len(rows)*100)
+        print(f"{percent}% done\u001b[{0}K\r", end='')
+        r += 1
+    print(f"Done\u001b[{0}K")
+
 def nt_quotation_introduction_entries_lengths(conn):
     """
     Check if all NT quotation introduction entries are consistent:
@@ -240,6 +313,7 @@ def getrefs_entries(conn):
 def main():
     database = r"quotations.sqlite3"
     conn = create_connection(database)
+    quotation_entries(conn)
     getrefs_entries(conn)
     book_entries(conn)
     quotation_entries_lengths(conn)
