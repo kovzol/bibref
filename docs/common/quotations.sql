@@ -2012,7 +2012,7 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (20021, 2002, 1, 'Genesis', null, 'LXX Genesis 17:5+57 17:6-65', 'Romans', 'SBLGNT Romans 4:17+14 4:17-75', 37723, 31, 8407, 31, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (20021, 2002, 1, 'Genesis', null, 'LXX Genesis 17:5+57 17:6-67', 'Romans', 'SBLGNT Romans 4:17+14 4:17-77', 37723, 29, 8407, 29, 'manual');
+ (20021, 2002, 1, 'Genesis', null, 'LXX Genesis 17:5+57 17:5', 'Romans', 'SBLGNT Romans 4:17+14 4:17-77', 37723, 29, 8407, 29, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2002, 1, null, 'καθως γεγραπται'); -- καθως γεγραπται = as it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
@@ -2154,7 +2154,7 @@ insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passag
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (20121, 2012, 1, 'Genesis', null, 'LXX Genesis 2:2+64 2:2-10', 'Hebrews', 'SBLGNT Hebrews 4:4+49 4:4', 3432, 40, 4749, 40, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (20121, 2012, 1, 'Genesis', null, 'LXX Genesis 2:2+14 2:2-10', 'Hebrews', 'SBLGNT Hebrews 4:4+32 4:4', 3482, 90, 4732, 57, 'manual');
+ (20121, 2012, 1, 'Genesis', null, 'LXX Genesis 2:2+14 2:2-10', 'Hebrews', 'SBLGNT Hebrews 4:4+32 4:4', 3382, 90, 4732, 57, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2012, 1, 'που περι της εβδομης', 'ειρηκεν γαρ'); -- που περι της εβδομης = somewhere concering the seventh day, ειρηκεν γαρ = He has spoken for
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
@@ -2303,7 +2303,7 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
  (2103, 10, 'quotation', 'literal, fuzzy, superset', 'Z.K.');
 -- End of the Ten Commandments.
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (21041, 2104, 1, 'Exodus', null, 'LXX Exodus 13:12+10 13:12-91', 'Luke', 'SBLGNT Luke 2:23+29 2:23-10', 37422, 35, 7753, 35, 'manual');
+ (21041, 2104, 1, 'Exodus', null, 'LXX Exodus 13:12+10 13:12-91', 'Luke', 'SBLGNT Luke 2:23+29 2:23-10', 37462, 35, 7753, 35, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2104, 1, 'εν νομω κυριου', 'καθως γεγραπται'); -- εν νομω κυριου = in the law of the Lord, καθως γεγραπται = as it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
@@ -2404,7 +2404,7 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2112, 2, 'quotation', 'literal, superset, fuzzy', 'Z.K.');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (21131, 2113, 1, 'Exodus', null, 'LXX Exodus 3:6+12 3:6-70', 'Matthew', 'SBLGNT Matthew 22:32 22:32-29', 4990, 58, 65497, 44, 'manual');
+ (21131, 2113, 1, 'Exodus', null, 'LXX Exodus 3:6+12 3:6-70', 'Matthew', 'SBLGNT Matthew 22:32 22:32-29', 4990, 58, 65454, 44, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2113, 1, 'θεου', 'λεγοντος'); -- λεγοντος = saying
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
@@ -2444,7 +2444,7 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (21151, 2115, 1, 'Exodus', null, 'LXX Exodus 2:14+7 2:14-53', 'Acts', 'SBLGNT Acts 7:27+35 7:29-72', 3240, 93, 20621, 93, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (21151, 2115, 1, 'Exodus', null, 'LXX Exodus 2:14+8 2:14-55', 'Acts', 'SBLGNT Acts 7:27+36 7:29-74', 3241, 90, 20622, 90, 'manual');
+ (21151, 2115, 1, 'Exodus', null, 'LXX Exodus 2:14+8 2:14-55', 'Acts', 'SBLGNT Acts 7:27+36 7:28', 3241, 90, 20622, 90, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2115, 1, 'Μωυσης', 'ειπων'); -- ειπων = having said
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
