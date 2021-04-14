@@ -437,7 +437,7 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
  (142, 'John', 'SBLGNT Romans 19:24+65 19:24-94', 63407, 63430);
 insert into clasps (nt_quotation_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
- (142, 14, 2, 'Psalms', 22, 'LXX Psalms 22:18', 'John', 'SBLGNT John 19:24+89 19:24-31', 21364, 63, 63431, 63);
+ (142, 'Psalms', 'LXX Psalms 22:18', 'John', 'SBLGNT John 19:24+89 19:24-31', 21364, 63, 63431, 63);
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (151, 15, 1, 'Psalms', 22, 'Psalms 22:22', 'Hebrews', 'Hebrews 2:12', null, null, null, null, 'traditional');
