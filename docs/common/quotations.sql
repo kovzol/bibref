@@ -408,6 +408,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (13, 1, null, 'μενουνγε'); -- μενουνγε = indeed
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (13, 1, 'quotation', 'literal', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (131, 'Romans', 'SBLGNT Romans 10:18+20 10:18-74', 21803, 21810);
+insert into clasps (nt_quotation_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (131, 'Psalms', 'LXX Psalms 19:4 19:4-27', 'Romans', 'SBLGNT Romans 10:18+28 10:18', 17757, 74, 21811, 74);
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (null, 14, 1, 'Psalms', 22, 'Psalms 22:18', 'Matthew', 'Matthew 27:35', null, null, null, null, 'traditional');
@@ -427,9 +431,13 @@ insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passag
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (142, 14, 2, 'Psalms', 22, 'LXX Psalms 22:18', 'John', 'SBLGNT John 19:24+89 19:24-31', 21364, 63, 63431, 63, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
- (14, 2, null, 'τινος εσται ινα η γραφη πληρωθη η λεγουσα'); -- τινος εσται ινα η γραφη πληρωθη η λεγουσα = whose it shall be: that the scripture might be fulfilled, which saith (KJV)
+ (14, 2, null, 'ινα η γραφη πληρωθη η λεγουσα'); -- ινα η γραφη πληρωθη η λεγουσα = that the scripture might be fulfilled, which saith (KJV)
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (14, 2, 'quotation', 'exact, literal', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (142, 'John', 'SBLGNT Romans 19:24+65 19:24-94', 63407, 63430);
+insert into clasps (nt_quotation_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (142, 14, 2, 'Psalms', 22, 'LXX Psalms 22:18', 'John', 'SBLGNT John 19:24+89 19:24-31', 21364, 63, 63431, 63);
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (151, 15, 1, 'Psalms', 22, 'Psalms 22:22', 'Hebrews', 'Hebrews 2:12', null, null, null, null, 'traditional');
