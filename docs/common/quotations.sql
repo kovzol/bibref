@@ -464,6 +464,12 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (16, 1, null, 'γαρ'); -- γαρ = for
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (16, 1, 'quotation', 'literal, subset', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (161, 'I_Corinthians', 'SBLGNT I_Corinthians 10:26+9 10:26-20', 17820, 17822);
+insert into clasps (nt_quotation_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (161, 'Psalms', 'LXX Psalms 24:1+37 24:1-39', 'I_Corinthians', 'SBLGNT I_Corinthians 10:26+12 10:26', 23001, 20, 17823, 20);
+insert into clasps (nt_quotation_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (161, 'Psalms', 'LXX Psalms 24:1+28 24:1-59', 'I_Corinthians', 'SBLGNT I_Corinthians 10:26 10:26-23', 22992, 9, 17811, 9);
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (null, 17, 1, 'Psalms', 31, 'Psalms 31:5', 'Luke', 'Luke 23:46', null, null, null, null, 'traditional');
