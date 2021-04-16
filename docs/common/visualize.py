@@ -266,6 +266,57 @@ def nt_report_latex(conn, book):
     print ("\\end{document}")
     f.close()
 
+def ot_report_latex(conn, book):
+    """
+    Query all entries from an Old Testament book and show them as a LaTeX table on stdout
+    :param conn: the Connection object
+    :param book: OT book name
+    """
+
+    print ("\\documentclass{article}")
+    print ("\\begin{document}")
+    print ("\\thispagestyle{empty}")
+    print ("\\centering")
+    print ("\\begin{table}")
+    print ("\\begin{tabular}{rrlc}")
+    print (f"&&&{{\\bf getrefs}}\\\\")
+    print (f"{{\\bf No.}}&{{\\bf {book} passage}}&{{\\bf NT passage}}&{{\\bf chunks}}\\\\")
+    print ("\\hline")
+
+    cur = conn.cursor()
+    cur.execute("SELECT q.ot_startpos, q.ot_length, q.nt_book, q.nt_passage, q.ot_passage, q.ot_id, q.nt_id" +
+        " FROM quotations_with_introduction q" +
+        " WHERE q.found_method = 'manual'" +
+        " AND q.ot_book = '" + book + "'" +
+        " ORDER BY q.ot_startpos")
+    rows = cur.fetchall()
+    q = 1
+    f = open("manual_" + book + "_length.csv", "w")
+
+    for row in rows:
+        start = row[0]
+        length = row[1]
+        f.write(str(length) + "\n")
+        nt_book = row[2]
+        nt_passage = row[3].replace("_", " ")
+        ot_passage = row[4]
+        # Remove book name from the beginning:
+        ot_passage = ot_passage[(ot_passage.find(book) + len(book)):]
+        ot_id = row[5]
+        nt_id = row[6]
+        cur.execute("SELECT COUNT(*) from quotations q" +
+            " WHERE q.ot_id = " + str(ot_id) +
+            " AND q.nt_id = " + str(nt_id) +
+            " AND q.found_method = 'getrefs'")
+        rows2 = cur.fetchall()
+        chunks = rows2[0][0]
+        print(f"{q}&{ot_passage}&{nt_passage}&{chunks}\\\\")
+        q = q + 1
+    print ("\\end{tabular}")
+    print ("\\end{table}")
+    print ("\\end{document}")
+    f.close()
+
 def nt_frequencies_csv(conn):
     """
     Query all New Testament books and show them as a CSV table
@@ -446,6 +497,8 @@ def main():
         data5 = "getrefs"
     if result_type == "nt_latex":
         data = "Romans"
+    if result_type == "nt_latex":
+        data = "Isaiah"
     if result_type == "nt_jaccard":
         data = "Romans"
     if result_type == "ot_jaccard":
@@ -470,6 +523,8 @@ def main():
             nt_report_ppm(conn, data, int(data2), int(data3), int(data4), data5)
         elif result_type == "nt_latex":
             nt_report_latex(conn, data)
+        elif result_type == "ot_latex":
+            ot_report_latex(conn, data)
         elif result_type == "nt_jaccard":
             nt_jaccard_csv(conn, data)
         elif result_type == "ot_jaccard":
