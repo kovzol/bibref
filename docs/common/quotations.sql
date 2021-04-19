@@ -603,6 +603,12 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (22, 1, null, 'αλλ ινα η γραφη πληρωθη'); -- αλλ ινα η γραφη πληρωθη = but the Scripture may be fulfilled
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (22, 1, 'quotation', 'far-fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (221, 'John', 'SBLGNT John 13:18+42 13:18-44', 46560, 46578);
+insert into clasps (nt_quotation_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (221, 'Psalms', 'LXX Psalms 41:9+45 41:9-25', 'John', 'SBLGNT John 13:18+68 13:18-26', 45860, 9, 46586, 11);
+insert into clasps (nt_quotation_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (221, 'Psalms', 'LXX Psalms 41:9+64 41:9-5', 'John', 'SBLGNT John 13:18+85 13:18-7', 45879, 10, 46603, 13);
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (231, 23, 1, 'Psalms', 44, 'Psalms 44:22', 'Romans', 'Romans 8:36', null, null, null, null, 'traditional');
