@@ -250,7 +250,13 @@ int lookupTranslation(string moduleName, string book, string verse) {
     boost::replace_all(book, "_", " ");
     string lookupString = book + " " + verse;
     module->setKey(lookupString.c_str());
-    string text = module->renderText().c_str();
+    string text;
+    if (moduleName == "LXX")
+        text += ot_color;
+    if (moduleName == "SBLGNT")
+        text += nt_color;
+    text += module->renderText().c_str();
+    text += reset_color;
     info(text);
     return 0;
 }
@@ -673,15 +679,15 @@ string _extend(string moduleName1, string moduleName2, string book2, int pos2S, 
     string verse2infoS = b2.getVerseInfoStart(pos2S);
     string verse2infoE = b2.getVerseInfoEnd(pos2E);
     if (verb == 1) {
-        info("Extended match is " + moduleName1 + " " + book1 + " "
-            + verse1infoS + " " + verse1infoE + " = " + moduleName2 + " "
-            + book2 + " " + verse2infoS + " " + verse2infoE + " ("
-            + text1.substr(pos1S, pos1E - pos1S + 1) + ", length "
+        info("Extended match is " + ot_color + moduleName1 + " " + book1 + " "
+            + verse1infoS + " " + verse1infoE + reset_color + " = " + nt_color + moduleName2 + " "
+            + book2 + " " + verse2infoS + " " + verse2infoE + reset_color + " ("
+            + ot_color + text1.substr(pos1S, pos1E - pos1S + 1) + reset_color + ", length "
             + to_string(pos1E - pos1S + 1) + ").");
     }
-    return moduleName1 + " " + book1 + " "
-            + verse1infoS + " " + verse1infoE + " = " + moduleName2 + " "
-            + book2 + " " + verse2infoS + " " + verse2infoE + ","
+    return ot_color + moduleName1 + " " + book1 + " "
+            + verse1infoS + " " + verse1infoE + reset_color + " = " + nt_color + moduleName2 + " "
+            + book2 + " " + verse2infoS + " " + verse2infoE + reset_color + ","
             + to_string(pos1S) + "," + to_string(pos1E - pos1S + 1) + "," + to_string(pos2S);
 }
 
@@ -761,11 +767,12 @@ void getrefs(string moduleName2, string moduleName1, string book1, string verse1
     it = unique(refs.begin(), refs.end(), equalReference);
     refs.resize(distance(refs.begin(), it));
     for (Reference r : refs) {
-        info(r.text + " (length=" + to_string(r.length) + ", pos1=" + to_string(r.pos1 + 1) +
-             ", pos2=" + to_string(r.pos2 + 1) + ")");
+        info(r.text + " (length=" + to_string(r.length) + ", pos1=" + ot_color + to_string(r.pos1 + 1) + reset_color +
+             ", pos2=" + nt_color + to_string(r.pos2 + 1) + reset_color + ")");
         if (sql) {
             info("insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values");
-            string output = " (?, ?, '" + book1 + "', ";
+            string output = " (?, ?, '" + ot_color + book1 + reset_color + "', ";
+            output += ot_color;
             if (book1.compare("Psalms") == 0) {
                 vector<string> verse1_split;
                 boost::split(verse1_split, verse1S, boost::is_any_of(":"));
@@ -773,22 +780,23 @@ void getrefs(string moduleName2, string moduleName1, string book1, string verse1
             } else {
                 output += "null";
             }
+            output += reset_color;
             output += ", ";
             vector<string> reference_split;
             boost::split(reference_split, r.text, boost::is_any_of("="));
             boost::algorithm::trim(reference_split[0]);
             boost::algorithm::trim(reference_split[1]);
-            output += "'" + reference_split[0] + "', ";
+            output += "'" + ot_color + reference_split[0] + reset_color + "', ";
 
             vector<string> verse2_split;
             boost::split(verse2_split, reference_split[1], boost::is_any_of(" "));
-            output += "'" + verse2_split[1] + "', ";
-            output += "'" + reference_split[1] + "', ";
+            output += "'" + nt_color + verse2_split[1] + reset_color + "', ";
+            output += "'" + nt_color + reference_split[1] + reset_color + "', ";
 
-            output += to_string(r.pos1 + 1) + ", ";
-            output += to_string(r.length) + ", ";
-            output += to_string(r.pos2 + 1) + ", ";
-            output += to_string(r.length) + ", ";
+            output += ot_color + to_string(r.pos1 + 1) + reset_color + ", ";
+            output += ot_color + to_string(r.length) + reset_color + ", ";
+            output += nt_color + to_string(r.pos2 + 1) + reset_color + ", ";
+            output += nt_color + to_string(r.length) + reset_color + ", ";
             output += "'getrefs');";
 
             info(output);

@@ -51,6 +51,7 @@ void showHelp(const string &executable) {
     cout << " -h            this help\n";
     cout << " -e            show input/output to fit examples\n";
     cout << " -a            run the addbooks command on startup\n";
+    cout << " -c            use colored output\n";
 }
 
 int main(int argc, char **argv) {
@@ -65,10 +66,15 @@ int main(int argc, char **argv) {
         ab = true;
     }
 
+    bool c = false;
+    if (input.cmdOptionExists("-c")) {
+        c = true;
+    }
+
     if (input.cmdOptionExists("-e")) {
-        cli("", "# ", ab);
+        cli("", "# ", ab, c);
     } else {
-        cli(">> ", "", ab);
+        cli(">> ", "", ab, c);
     }
 
     exit(0);

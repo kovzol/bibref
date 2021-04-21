@@ -116,8 +116,9 @@ char** completer(const char* text, int start, int end) {
 int maxresults;
 bool sql;
 char* output_prepend_set;
+string ot_color, nt_color, reset_color;
 
-void cli(const char *input_prepend, const char *output_prepend, bool addbooks) {
+void cli(const char *input_prepend, const char *output_prepend, bool addbooks, bool colored) {
     output_prepend_set = new char[4]; // FIXME: this is hardcoded.
     strcpy(output_prepend_set, output_prepend);
     rl_attempted_completion_function = completer;
@@ -131,6 +132,17 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks) {
 
     maxresults = 100;
     sql = false;
+
+    ot_color = "";
+    nt_color = "";
+    reset_color = "";
+
+
+    if (colored) {
+        ot_color = "\033[1;33m";
+        nt_color = "\033[1;36m";
+        reset_color = "\033[0m";
+        }
 
     char* buf;
     while ((buf = readline(input_prepend)) != nullptr) {
