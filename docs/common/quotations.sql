@@ -743,6 +743,12 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (30, 1, 'εν βιβλω ψαλμων', 'γεγραπται γαρ'); -- γεγραπται γαρ = it has been written for
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (30, 1, 'quotation', 'literal, superset', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (301, 'Acts', 'SBLGNT Acts 1:20 1:20-83', 2025, 2049);
+insert into clasps (nt_quotation_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (301, 'Psalms', 'LXX Psalms 69:25 69:25-36', 'Acts', 'SBLGNT Acts 1:20+25 1:20-53', 76594, 33, 2050, 30);
+insert into clasps (nt_quotation_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (301, 'Psalms', 'LXX Psalms 69:25+54 69:25', 'Acts', 'SBLGNT Acts 1:20+55 1:20-38', 76648, 15, 2080, 15);
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (311, 31, 1, 'Psalms', 78, 'Psalms 78:2', 'Matthew', 'Matthew 13:35', null, null, null, null, 'traditional');
@@ -1128,7 +1134,8 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (48, 1, 'quotation', 'literal, far-fuzzy, subset', 'Z.K.');
 
--- Discuss if this indeed belongs to 301, or, because of "kai", this can be considered as a second quotation:
+-- Discuss if this indeed belongs to 301, or, because of "kai", this can be considered as a second quotation.
+-- "kai" is actually there in LXX, so it can be considered as a part of the quoted text. Now we assume that this belongs to 301.
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (301, 49, 1, 'Psalms', 109, 'LXX Psalms 109:8+30 109:8-8', 'Acts', 'SBLGNT Acts 1:20+76 1:20-9', 130835, 23, 2101, 23, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
@@ -1137,6 +1144,8 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (49, 1, 'εν βιβλω ψαλμων', 'γεγραπται γαρ'); -- γεγραπται γαρ = it has been written for
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (49, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into clasps (nt_quotation_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (301, 'Psalms', 'LXX Psalms 109:8+30 109:8', 'Acts', 'SBLGNT Acts 1:20+76 1:20', 130835, 31, 2101, 32);
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (501, 50, 1, 'Psalms', 132, 'LXX Psalms 132:11 132:11-3', 'Acts', 'SBLGNT Acts 2:30 2:30-5', 154585, 87, 5255, 89, 'manual');
