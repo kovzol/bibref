@@ -1153,6 +1153,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (50, 1, 'Δαυιδ', 'ειδως'); -- ειδως = knowing
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (50, 1, 'quotation', 'far-fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (501, 'Acts', 'SBLGNT Acts 2:30 2:30-61', 5255, 5287);
+insert into clasps (nt_quotation_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (501, 'Psalms', 'LXX Psalms 132:11+47 132:11-32', 'Acts', 'SBLGNT Acts 2:30+48 2:30-35', 154632, 11, 5303, 11);
+insert into clasps (nt_quotation_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (501, 'Psalms', 'LXX Psalms 132:11+75 132:11-3', 'Acts', 'SBLGNT Acts 2:30+77 2:30-5', 154660, 12, 5332, 12);
+insert into clasps (nt_quotation_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (501, 'Psalms', 'LXX Psalms 132:11 132:11-84', 'Acts', 'SBLGNT Acts 2:30+33 2:30-55', 154585, 6, 5288, 6);
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (511, 51, 1, 'Psalms', 89, 'LXX Psalms 89:20 89:20-34', 'Acts', 'SBLGNT Acts 13:22+68 13:22-58', 103496, 13, 42856, 13, 'getrefs');
