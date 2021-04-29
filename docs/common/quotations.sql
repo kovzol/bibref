@@ -775,6 +775,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (32, 1, 'εν τω νομω υμων', 'γεγραμμενον'); -- εν τω νομω υμων = in the law of you, γεγραμμενον = written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (32, 1, 'quotation', 'literal, exact', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (321, 'John', 'SBLGNT John 10:34+21 10:34-15', 36080, 36113);
+insert into clasps (nt_quotation_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (321, 'Psalms', 'LXX Psalms 82:6 82:6-20', 'John', 'SBLGNT John 10:34+55 10:34', 96137, 15, 36114, 15);
 
 -- TODO: Is this a combination of quotations or NOT a quotation?
 -- In the latter case remove this entry, now it is assumed that it is a quotation, but this seems to be incorrect.
