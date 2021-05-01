@@ -823,6 +823,12 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (34, 2, null, 'γεγραπται γαρ'); -- γεγραπται γαρ = it has been written for
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (34, 2, 'quotation', 'literal, superset', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (342, 'Luke', 'SBLGNT Luke 4:10 4:10-52', 13749, 13760);
+insert into clasps (nt_quotation_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (342, 'Psalms', 'LXX Psalms 91:11 91:11-20', 'Luke', 'SBLGNT Luke 4:10+12 4:10', 107356, 52, 13761, 52);
+insert into clasps (nt_quotation_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (342, 'Psalms', 'LXX Psalms 91:12 91:12', 'Luke', 'SBLGNT Luke 4:11+6 4:11', 107428, 52, 13819, 52);
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (351, 35, 1, 'Psalms', 94, 'Psalms 94:11', 'I_Corinthians', 'I_Corinthians 3:20', null, null, null, null, 'traditional');
