@@ -842,6 +842,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (35, 1, null, 'και παλιν'); -- και παλιν = and again
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (35, 1, 'quotation', 'literal, change', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (351, 'I_Corinthians', 'SBLGNT I_Corinthians 3:20 3:20-53', 5086, 5093);
+insert into clasps (nt_quotation_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (351, 'Psalms', 'LXX Psalms 94:11 94:11', 'I_Corinthians', 'SBLGNT I_Corinthians 3:20+8 3:20', 109645, 56, 5094, 53);
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (361, 36, 1, 'Psalms', 95, 'Psalms 95:7-11', 'Hebrews', 'Hebrews 3:7-11', null, null, null, null, 'traditional');
