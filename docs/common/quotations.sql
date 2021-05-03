@@ -879,6 +879,8 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (36, 2, null, 'εν τω λεγεσθαι'); -- εν τω λεγεσθαι = as it is said
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (36, 2, 'repetition', 'literal, exact', 'Z.K.');
+insert into clasps (nt_quotation_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (361, 'Psalms', 'LXX Psalms 95:7+65 95:8-34', 'Hebrews', 'SBLGNT Hebrews 3:15+12 3:15', 110945, 75, 4005, 75);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (361, 36, 3, 'Psalms', 95, 'Psalms 95:11', 'Hebrews', 'Hebrews 3:18', null, null, null, null, 'traditional');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
@@ -889,6 +891,11 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (36, 3, null, null);
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (36, 3, 'repetition', 'literal, superset', 'Z.K.');
+insert into clasps (nt_quotation_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (361, 'Psalms', 95, 'LXX Psalms 95:11+20 95:11-3', 'Hebrews', 'SBLGNT Hebrews 3:18+15 3:18-24', 111220, 29, 4243, 29);
+-- This clasp would be too short and far from being unique, even if there is connection between the texts:
+-- insert into clasps (nt_quotation_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+--  (361, 'Psalms', 95, 'LXX Psalms 95:11+2 95:11-46', 'Hebrews', 'SBLGNT Hebrews 3:18+7 3:18-57', 111202, 4, 4235, 4);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (361, 36, 4, 'Psalms', 95, 'Psalms 95:11', 'Hebrews', 'Hebrews 4:3', null, null, null, null, 'traditional');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
@@ -899,6 +906,8 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (36, 4, null, 'καθως ειρηκεν'); -- καθως ειρηκεν = as He has said
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (36, 4, 'repetition', 'literal, exact', 'Z.K.');
+insert into clasps (nt_quotation_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (361, 'Psalms', 'LXX Psalms 95:11', 'Hebrews', 'SBLGNT Hebrews 4:3+53 4:3-42', 111201, 52, 4606, 52);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (361, 36, 5, 'Psalms', 95, 'Psalms 95:11', 'Hebrews', 'Hebrews 4:5', null, null, null, null, 'traditional');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
@@ -909,6 +918,8 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (36, 5, null, 'και εν τουτω παλιν'); -- και εν τουτω παλιν = and in this again
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (36, 5, 'repetition', 'literal, exact', 'Z.K.');
+insert into clasps (nt_quotation_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (361, 'Psalms', 'LXX Psalms 95:11+18 95:11', 'Hebrews', 'SBLGNT Hebrews 4:5+15 4:5', 111219, 34, 4804, 34);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (361, 36, 6, 'Psalms', 95, 'Psalms 95:7-8', 'Hebrews', 'Hebrews 4:7', null, null, null, null, 'traditional');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
@@ -919,6 +930,8 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (36, 6, 'Δαυιδ', 'καθως προειρηται'); -- καθως προειρηται = just as it has been said
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (36, 6, 'repetition', 'literal, exact', 'Z.K.');
+insert into clasps (nt_quotation_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (361, 'Psalms', 'LXX Psalms 95:7+65 95:8-52', 'Hebrews', 'SBLGNT Hebrews 4:7+73 4:7', 110945, 57, 5001, 57);
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (371, 37, 1, 'Psalms', 102, 'Psalms 102:25-27', 'Hebrews', 'Hebrews 1:10-12', null, null, null, null, 'traditional');
