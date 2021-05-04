@@ -944,7 +944,11 @@ insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passag
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (37, 1, 'θεος', 'προς δε τον υιον ... και'); -- προς δε τον υιον ... και = unto however the Son ... and
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
- (37, 1, 'quotation', 'literal, subset', 'Z.K.');
+ (37, 1, 'quotation', 'literal, subset', 'Z.K.'); -- the words "ως ιματιον" is doubled in Hebrews
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (371, 'Hebrews', 'SBLGNT Hebrews 1:10 1:10-65', 894, 896);
+insert into clasps (nt_quotation_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (371, 'Psalms', 'LXX Psalms 102:25 102:27', 'Hebrews', 'SBLGNT Hebrews 1:10+3 1:12', 117051, 209, 897, 217);
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (381, 38, 1, 'Psalms', 104, 'Psalms 104:4', 'Hebrews', 'Hebrews 1:7', null, null, null, null, 'traditional');
