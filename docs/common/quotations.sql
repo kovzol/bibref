@@ -978,7 +978,7 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
  (391, 'John', 'SBLGNT John 15:25 15:25-16', 52535, 52581);
 insert into clasps (nt_quotation_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
- (391, 'Psalms', 'LXX Psalms 109:3+9 109:3-35', 'John', 'SBLGNT John 15:25+48 15:25-12', 130535, 3, 52583, 3,);
+ (391, 'Psalms', 'LXX Psalms 109:3+9 109:3-35', 'John', 'SBLGNT John 15:25+48 15:25-12', 130535, 3, 52583, 3);
 insert into clasps (nt_quotation_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (391, 'Psalms', 'LXX Psalms 109:3+29 109:3', 'John', 'SBLGNT John 15:25+47 15:25', 130555, 18, 52582, 16);
 -- "Mis" is copied from the beginning from Psalm 109:3. So this is similar to a "..."-like quotation. Note the overlapping.
