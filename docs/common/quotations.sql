@@ -994,7 +994,7 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (40, 1, 'quotation', 'literal', 'Z.K.');
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
- (40, 1, 'Luke' 'SBLGNT Luke 20:42 20:42-37', 79114, 79144);
+ (40, 1, 'Luke', 'SBLGNT Luke 20:42 20:42-37', 79114, 79144);
 insert into clasps (nt_quotation_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (401, 'Psalms', 'LXX Psalms 110:1+13 110:1', 'Luke', 'SBLGNT Luke 20:42+31 20:43', 132485, 79, 79145, 78);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
