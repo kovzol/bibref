@@ -175,6 +175,9 @@ string processWord(string word) {
         if (c1 == 0x80) {
             i--;
         }
+        if (c1 == '(' || c1 == ')') {
+            i--;
+        }
         if (c1 == 0xe2) {
             i++; // handle ⸂ (0xe2 0xb8 0x82), fix issue #4
         }
