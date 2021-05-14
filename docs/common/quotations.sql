@@ -1639,9 +1639,9 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
  (132, 1, 'quotation', 'literal, exact', 'Z.K.');
 -- TODO: Double check if this rather a quotation than a strong allusion:
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (null, 133, 1, 'Isaiah', null, 'LXX Isaiah 66:24+68 66:24-58', 'Mark', 'SBLGNT Mark 9:48+5 9:48-20', 133191, 19, 31052, 19, 'getrefs');
+ (null, 133, 1, 'Isaiah', null, 'LXX Isaiah 66:24+68 66:24-58', 'Mark', 'SBLGNT Mark 9:48+5 9:48-20', 133191, 19, 31055, 19, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (null, 133, 1, 'Isaiah', null, 'LXX Isaiah 66:24+68 66:24-28', 'Mark', 'SBLGNT Mark 9:48+5 9:48', 133191, 49, 31052, 39, 'manual');
+ (null, 133, 1, 'Isaiah', null, 'LXX Isaiah 66:24+68 66:24-28', 'Mark', 'SBLGNT Mark 9:48+5 9:48', 133191, 49, 31055, 39, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (133, 1, null, 'υπολιμπανων υπογραμμον ινα επακολουθησητε'); -- υπολιμπανων υπογραμμον ινα επακολουθησητε = leaving an example that you should follow after
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
