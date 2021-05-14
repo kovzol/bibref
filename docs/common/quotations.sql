@@ -2391,7 +2391,7 @@ insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passag
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (20171, 2017, 1, 'Genesis', null, 'LXX Genesis 12:1+84 12:1', 'Acts', 'SBLGNT Acts 7:3+63 7:3', 27699, 21, 18425, 21, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (20171, 2017, 1, 'Genesis', null, 'LXX Genesis 12:1+21 12:1', 'Acts', 'SBLGNT Acts 7:3+17 7:3', 27636, 84, 18378, 67, 'manual');
+ (20171, 2017, 1, 'Genesis', null, 'LXX Genesis 12:1+21 12:1', 'Acts', 'SBLGNT Acts 7:3+17 7:3', 27636, 84, 18379, 67, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2017, 1, 'Ο θεος της δοξης ... προς αυτον', 'ειπεν'); -- Ο θεος της δοξης ... προς αυτον = the God of glory ... to him (Abraham), ειπεν = said
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
