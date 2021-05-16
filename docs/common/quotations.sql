@@ -2567,7 +2567,7 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (21112, 2111, 2, 'Exodus', null, 'LXX Exodus 23:20+10 23:20-54', 'Luke', 'SBLGNT Luke 7:27+29 7:27-36', 66269, 36, 27601, 36, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (21112, 2111, 2, 'Exodus', null, 'LXX Exodus 23:20+3 23:20-54', 'Luke', 'SBLGNT Luke 7:27+25 7:27-36', 66262, 43, 27600, 40, 'manual');
+ (21112, 2111, 2, 'Exodus', null, 'LXX Exodus 23:20+3 23:20-54', 'Luke', 'SBLGNT Luke 7:27+25 7:27-36', 66262, 43, 27596, 40, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2111, 2, null, 'γεγραπται'); -- γεγραπται = it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
