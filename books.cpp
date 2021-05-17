@@ -773,8 +773,8 @@ void getrefs(string moduleName2, string moduleName1, string book1, string verse1
         info(r.text + " (length=" + to_string(r.length) + ", pos1=" + ot_color + to_string(r.pos1 + 1) + reset_color +
              ", pos2=" + nt_color + to_string(r.pos2 + 1) + reset_color + ")");
         if (sql) {
-            info("insert into quotations (ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values");
-            string output = " (?, ?, '" + ot_color + book1 + reset_color + "', ";
+            info("insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values");
+            string output = " (?, ?, ?, '" + ot_color + book1 + reset_color + "', ";
             output += ot_color;
             if (book1.compare("Psalms") == 0) {
                 vector<string> verse1_split;
