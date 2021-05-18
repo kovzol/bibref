@@ -1479,7 +1479,7 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
  (120, 1, 'quotation', 'far-fuzzy', 'Z.K.');
 -- TODO: Consider this as a quotation in case.
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (null, 121, 1, 'Isaiah', null, 'LXX Isaiah 22:13+107 22:13', 'I_Corinthians', 'SBLGNT I_Corinthians 15:32+67 15:32', 41992, 37, 29178, 37, 'getrefs');
+ (null, 121, 1, 'Isaiah', null, 'LXX Isaiah 22:13+107 22:13', 'I_Corinthians', 'SBLGNT I_Corinthians 15:32+67 15:32', 41992, 37, 29181, 37, 'getrefs');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (121, 1, null, null);
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
@@ -1983,11 +1983,11 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1304, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (13051, 1305, 1, 'Hosea', null, 'LXX Hosea 13:14+61 13:14-51', 'I_Corinthians', 'SBLGNT I_Corinthians 15:55+22 15:55-9', 18605, 9, 30849, 9, 'getrefs');
+ (13051, 1305, 1, 'Hosea', null, 'LXX Hosea 13:14+61 13:14-51', 'I_Corinthians', 'SBLGNT I_Corinthians 15:55+22 15:55-9', 18605, 9, 30852, 9, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (13051, 1305, 1, 'Hosea', null, 'LXX Hosea 13:14+73 13:14-39', 'I_Corinthians', 'SBLGNT I_Corinthians 15:55+31 15:55', 18617, 9, 30858, 9, 'getrefs');
+ (13051, 1305, 1, 'Hosea', null, 'LXX Hosea 13:14+73 13:14-39', 'I_Corinthians', 'SBLGNT I_Corinthians 15:55+31 15:55', 18617, 9, 30861, 9, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (13051, 1305, 1, 'Hosea', null, 'LXX Hosea 13:14+61 13:14-39', 'I_Corinthians', 'SBLGNT I_Corinthians 15:55+19 15:55', 18605, 21, 30846, 21, 'manual');
+ (13051, 1305, 1, 'Hosea', null, 'LXX Hosea 13:14+61 13:14-39', 'I_Corinthians', 'SBLGNT I_Corinthians 15:55+19 15:55', 18605, 21, 30849, 21, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (1305, 1, null, 'γεγραμμενος'); -- γεγραμμενος = having been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
@@ -2316,9 +2316,9 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2008, 2, 'quotation', 'literal, exact', 'Z.K.');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (20091, 2009, 1, 'Genesis', null, 'LXX Genesis 2:7+98 2:7', 'I_Corinthians', 'SBLGNT I_Corinthians 15:45+43 15:45-30', 3957, 13, 30073, 13, 'getrefs');
+ (20091, 2009, 1, 'Genesis', null, 'LXX Genesis 2:7+98 2:7', 'I_Corinthians', 'SBLGNT I_Corinthians 15:45+43 15:45-30', 3957, 13, 30076, 13, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (20091, 2009, 1, 'Genesis', null, 'LXX Genesis 2:7+82 2:7', 'I_Corinthians', 'SBLGNT I_Corinthians 15:45+17 15:45-30', 3941, 29, 30047, 39, 'manual');
+ (20091, 2009, 1, 'Genesis', null, 'LXX Genesis 2:7+82 2:7', 'I_Corinthians', 'SBLGNT I_Corinthians 15:45+17 15:45-30', 3941, 29, 30050, 39, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2009, 1, null, 'γεγραπται'); -- γεγραπται = it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
