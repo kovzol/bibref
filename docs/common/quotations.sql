@@ -1237,6 +1237,8 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (46, 4, 'εν γραφη', 'περιεχει ... δε'); -- εν γραφη = in Scripture, περιεχει ... δε = it is contained ... however
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (46, 4, 'quotation', 'literal', 'Z.K.');
+insert into clasps (nt_quotation_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (464, 'Psalms', 'LXX Psalms 118:22', 'I_Peter', 'SBLGNT I_Peter 2:7+39 2:7', 138495, 62, 2731, 62);
 
 -- TODO: Renumber psalm IDs eventually:
 -- TODO: This may be a combination of more quotations, consider adding this as a part to 22061.
@@ -1383,6 +1385,8 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (107, 3, 'εν γραφη', 'περιεχει'); -- εν γραφη = in Scripture,  περιεχει = it is contained
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (107, 3, 'quotation', 'literal, fuzzy, change, superset', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (464, 'I_Peter', 'SBLGNT I_Peter 2:6 2:6-81', 2591, 2610);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1081, 108, 1, 'Isaiah', null, 'LXX Isaiah 52:7 52:7-58', 'Romans', 'SBLGNT Romans 10:15+44 10:15', 106484, 72, 21631, 40, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
