@@ -1223,6 +1223,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (46, 3, null, 'γεγραμμενον'); -- γεγραμμενον = has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (46, 3, 'quotation', 'literal, exact', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (463, 'Luke', 'SBLGNT Luke 20:17+22 20:17-62', 77279, 77306);
+insert into clasps (nt_quotation_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (463, 'Psalms', 'LXX Psalms 118:22', 'Luke', 'SBLGNT Luke 20:17+50 20:17', 138495, 62, 77307, 62);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (464, 46, 4, 'Psalms', 118, 'Psalms 118:22', 'I_Peter', 'I_Peter 2:7', null, null, null, null, 'traditional');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
