@@ -1248,7 +1248,7 @@ insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passag
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (481, 48, 1, 'Psalms', 78, 'LXX Psalms 78:24+35 78:24', 'John', 'SBLGNT John 6:31+66 6:31-6', 88940, 19, 19255, 19, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (481, 48, 1, 'Psalms', 78, 'LXX Psalms 78:24+30 78:24', 'John', 'SBLGNT John 6:31+56 6:31', 88935, 33, 19245, 35, 'manual');
+ (481, 48, 1, 'Psalms', 78, 'LXX Psalms 78:24+21 78:24', 'John', 'SBLGNT John 6:31+56 6:31', 88926, 33, 19245, 35, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (48, 1, null, 'καθως εστιν γεγραμμενον'); -- καθως εστιν γεγραμμενον = as it is written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
@@ -1256,7 +1256,7 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
  (481, 'John', 'SBLGNT John 6:31+35 6:31-35', 19224, 19244);
 insert into clasps (nt_quotation_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
- (481, 'Psalms', 'LXX Psalms 78:24+30 78:24', 'John', 'SBLGNT John 6:31+56 6:31', 88935, 33, 19245, 35);
+ (481, 'Psalms', 'LXX Psalms 78:24+21 78:24', 'John', 'SBLGNT John 6:31+56 6:31', 88926, 33, 19245, 35);
 
 -- Discuss if this indeed belongs to 301, or, because of "kai", this can be considered as a second quotation.
 -- "kai" is actually there in LXX, so it can be considered as a part of the quoted text. Now we assume that this belongs to 301.
