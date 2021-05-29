@@ -1315,7 +1315,7 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
  (1011, 'I_Corinthians', 'SBLGNT I_Corinthians 1:19 1:19-52', 1379, 1390);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
- (1011, 101, 1, 'Isaiah', null, 'LXX Isaiah 29:14+69 29:14-5', 'I_Corinthians', 'SBLGNT I_Corinthians 1:19+12 1:19-7', 55662, 45, 1391, 45);
+ (1011, 101, 1, 'Isaiah', 'LXX Isaiah 29:14+69 29:14-5', 'I_Corinthians', 'SBLGNT I_Corinthians 1:19+12 1:19-7', 55662, 45, 1391, 45);
 -- TODO: Complete this entry:
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1021, 102, 1, 'Isaiah', null, 'Isaiah 64:4', 'I_Corinthians', 'I_Corinthians 2:9', null, null, null, null, 'traditional');
@@ -1327,6 +1327,12 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (103, 1, null, 'γαρ'); -- γαρ = for
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (103, 1, 'quotation', 'fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (1031, 'Romans', 'SBLGNT Romans 11:34+3 11:34-39', 24738, 24740);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1031, 103, 1, 'Isaiah', 'LXX Isaiah 40:13 40:13-55', 'Romans', 'SBLGNT Romans 11:34 11:34-42', 79028, 3, 24735, 3);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1031, 103, 1, 'Isaiah', 'LXX Isaiah 40:13+3 40:13-14', 'Romans', 'SBLGNT Romans 11:34+6 11:34', 79031, 41, 24741, 39);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1032, 103, 2, 'Isaiah', null, 'LXX Isaiah 40:13+3 40:13-41', 'I_Corinthians', 'SBLGNT I_Corinthians 2:16+6 2:16-41', 79031, 14, 3646, 14, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
