@@ -1358,13 +1358,13 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
  (1033, 'Romans', 'SBLGNT Romans 2:24+2 2:24-57', 4584, 4586); -- gar
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
- (1033, 'Romans', 'SBLGNT Romans 2:24+48 2:24', 4630, 4643) -- καθως γεγραπται
+ (1033, 'Romans', 'SBLGNT Romans 2:24+48 2:24', 4630, 4643); -- καθως γεγραπται
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1033, 103, 3, 'Isaiah', 'LXX Isaiah 52:5+105 52:5-33', 'Romans', 'SBLGNT Romans 2:24 2:24-60', 106372, 2, 4582, 2); -- to
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1033, 103, 3, 'Isaiah', 'LXX Isaiah 52:5+107 52:5-28', 'Romans', 'SBLGNT Romans 2:24+5 2:24-52', 106374, 5, 4587, 5); -- onoma
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
- (1033, 103, 3, 'Isaiah', 'LXX Isaiah 52:5+90 52:5-49', 'Romans', 'SBLGNT Romans 2:24+17 2:24-39', 106357, 6, 4599, 6); -- di ymas
+ (1033, 103, 3, 'Isaiah', 'LXX Isaiah 52:5+90 52:5-44', 'Romans', 'SBLGNT Romans 2:24+17 2:24-39', 106357, 6, 4599, 6); -- di ymas
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1033, 103, 3, 'Isaiah', 'LXX Isaiah 52:5+115 52:5', 'Romans', 'SBLGNT Romans 2:24+23 2:24-14', 106382, 25, 4605, 25);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
