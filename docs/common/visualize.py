@@ -402,8 +402,8 @@ def nt_jaccard_csv(conn, nt_book):
 
     spawn_bibref()
 
-    f = open("jaccard_" + nt_book + ".csv", "w")
-    g = open("jaccard_" + nt_book + ".txt", "w")
+    f = open("nt-jaccard_" + nt_book + ".csv", "w")
+    g = open("nt-jaccard_" + nt_book + ".txt", "w")
     r = 0
     for row in rows:
         ot_passage = row[0]
@@ -450,11 +450,13 @@ def ot_jaccard_csv(conn, ot_book):
 
     spawn_bibref()
 
-    f = open("jaccard_" + ot_book + ".csv", "w")
-    g = open("jaccard_" + ot_book + ".txt", "w")
+    f = open("ot-jaccard_" + ot_book + ".csv", "w")
+    g = open("ot-jaccard_" + ot_book + ".txt", "w")
     r = 0
     for row in rows:
         ot_passage = row[0]
+        if "Aleppo" in ot_passage:
+            continue
         nt_passage = row[1]
         command1 = "lookup1 " + ot_passage
         bibref.sendline(command1)

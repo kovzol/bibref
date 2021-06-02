@@ -11,25 +11,44 @@ getrefs.pdf: getrefs.tex
 
 nt_inputs = Matthew Romans Acts Hebrews
 
-# Jaccard
-jaccard-Rplots-pdfs = $(nt_inputs:%=jaccard-%-Rplots.pdf)
-jaccard-sorted-txts = $(nt_inputs:%=jaccard_%-sorted.txt)
-jaccard-csvs = $(nt_inputs:%=jaccard_%.csv)
+# Jaccard (NT)
+nt-jaccard-Rplots-pdfs = $(nt_inputs:%=nt-jaccard-%-Rplots.pdf)
+nt-jaccard-sorted-txts = $(nt_inputs:%=nt-jaccard_%-sorted.txt)
+nt-jaccard-csvs = $(nt_inputs:%=nt-jaccard_%.csv)
 # For removal:
-jaccard-txts = $(nt_inputs:%=jaccard_%.txt)
+nt-jaccard-txts = $(nt_inputs:%=nt-jaccard_%.txt)
 
-jaccard-%-Rplots.pdf: jaccard_%.csv jaccard_%.r
-	R -q --save < jaccard_$*.r
-jaccard_%.csv jaccard_%.txt:  visualize.py quotations.sqlite3
+nt-jaccard-%-Rplots.pdf: nt-jaccard_%.csv nt-jaccard_%.r
+	R -q --save < nt-jaccard_$*.r
+nt-jaccard_%.csv nt-jaccard_%.txt: visualize.py quotations.sqlite3
 	python3 visualize.py nt_jaccard $*
-jaccard_%-sorted.txt: jaccard_%.txt
+nt-jaccard_%-sorted.txt: nt-jaccard_%.txt
 	sort $< > $@
-jaccard-multi-Rplots.pdf: $(jaccard-csvs) jaccard_multi.r
-	R -q --save < jaccard_multi.r
+nt-jaccard-multi-Rplots.pdf: $(jaccard-csvs) nt-jaccard_multi.r
+	R -q --save < nt-jaccard_multi.r
 
-jaccard: jaccard-Psalms-Rplots.pdf jaccard_Psalms-sorted.txt \
- $(jaccard-Rplots-pdfs) $(jaccard-sorted-txts) \
- jaccard-multi-Rplots.pdf
+ot_inputs = Psalms Isaiah
+
+# Jaccard (OT)
+ot-jaccard-Rplots-pdfs = $(ot_inputs:%=ot-jaccard-%-Rplots.pdf)
+ot-jaccard-sorted-txts = $(ot_inputs:%=ot-jaccard_%-sorted.txt)
+ot-jaccard-csvs = $(ot_inputs:%=ot-jaccard_%.csv)
+# For removal:
+ot-jaccard-txts = $(ot_inputs:%=ot-jaccard_%.txt)
+
+ot-jaccard-%-Rplots.pdf: ot-jaccard_%.csv ot-jaccard_%.r
+	R -q --save < ot-jaccard_$*.r
+ot-jaccard_%.csv ot-jaccard_%.txt: visualize.py quotations.sqlite3
+	python3 visualize.py ot_jaccard $*
+ot-jaccard_%-sorted.txt: ot-jaccard_%.txt
+	sort $< > $@
+
+jaccard: \
+ $(ot-jaccard-Rplots-pdfs) $(ot-jaccard-sorted-txts) \
+ $(nt-jaccard-Rplots-pdfs) $(nt-jaccard-sorted-txts) \
+ nt-jaccard-multi-Rplots.pdf
+# ot-jaccard-multi-Rplots.pdf
+
 
 # No-Jaccard
 getrefs-pngs = $(nt_inputs:%=%-getrefs.png)
@@ -42,8 +61,6 @@ table-auxs = $(nt_inputs:%=%-table.aux)
 table-logs = $(nt_inputs:%=%-table.log)
 manual_length-csvs = $(nt_inputs:%=manual_%_length.csv)
 
-jaccard-%-Rplots.pdf: jaccard_%.csv jaccard_%.r
-	R -q --save < jaccard_$*.r
 
 %-getrefs.png: %-getrefs.ppm
 	convert $< png:$@
@@ -86,18 +103,6 @@ quotations.sqlite3: quotations.sql
 Rplots.pdf: manual_nt_length.csv manual_nt_length.r
 	R -q --save < manual_nt_length.r
 
-jaccard-Psalms-Rplots.pdf: jaccard_Psalms.csv jaccard_Psalms.r
-	R -q --save < jaccard_Psalms.r
-
-jaccard_Psalms.csv: visualize.py quotations.sqlite3
-	python3 visualize.py ot_jaccard
-
-jaccard_Psalms.txt: visualize.py quotations.sqlite3
-	python3 visualize.py ot_jaccard
-
-jaccard_%-sorted.txt: jaccard_Psalms.txt
-	sort jaccard_Psalms.txt > jaccard_Psalms-sorted.txt
-
 nt_frequencies.csv: visualize.py quotations.sqlite3
 	python3 visualize.py nt_freq_csv
 
@@ -117,14 +122,13 @@ clean:
 	rm -f quotations.sqlite3  authors.aux manual_nt_length.aux getrefs.aux \
          authors.log manual_nt_length.log getrefs.log .RData 
 	rm -f $(table-auxs) $(table-logs)
-	rm -f jaccard_Psalms.txt
 
 fullclean: clean
 	rm -f authors.tex manual_nt_length.tex getrefs.tex
 	rm -f authors.pdf getrefs.pdf manual_nt_length.pdf Rplots.pdf
-	rm -f $(jaccard-Rplots-pdfs) $(jaccard-txts) $(jaccard-sorted-txts) $(jaccard-csvs)
+	rm -f $(ot-jaccard-Rplots-pdfs) $(ot-jaccard-txts) $(ot-jaccard-sorted-txts) $(ot-jaccard-csvs)
+	rm -f $(nt-jaccard-Rplots-pdfs) $(nt-jaccard-txts) $(nt-jaccard-sorted-txts) $(nt-jaccard-csvs)
 	rm -f $(getrefs-pngs) $(getrefs-ppms) $(table-texs) $(Rplots-pdfs) $(table-pdfs)
-	rm -f jaccard-Psalms-Rplots.pdf jaccard-multi-Rplots.pdf jaccard_Psalms-sorted.txt jaccard_Psalms.csv
 	rm -f $(manual_length-csvs) manual_nt_length.csv multi-Rplots.pdf nt_frequencies.csv ot_frequencies.csv
 
 .PHONY: clean fullclean all selftest
