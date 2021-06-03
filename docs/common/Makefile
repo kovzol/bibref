@@ -59,8 +59,8 @@ table-pdfs = $(nt_inputs:%=%-table.pdf)
 # For removal
 table-auxs = $(nt_inputs:%=%-table.aux)
 table-logs = $(nt_inputs:%=%-table.log)
-manual_length-csvs = $(nt_inputs:%=manual_%_length.csv)
-
+nt-manual_length-csvs = $(nt_inputs:%=manual_%_length.csv)
+ot-manual_length-csvs = $(ot_inputs:%=manual_%_length.csv)
 
 %-getrefs.png: %-getrefs.ppm
 	convert $< png:$@
@@ -129,7 +129,7 @@ fullclean: clean
 	rm -f $(ot-jaccard-Rplots-pdfs) $(ot-jaccard-txts) $(ot-jaccard-sorted-txts) $(ot-jaccard-csvs)
 	rm -f $(nt-jaccard-Rplots-pdfs) $(nt-jaccard-txts) $(nt-jaccard-sorted-txts) $(nt-jaccard-csvs)
 	rm -f $(getrefs-pngs) $(getrefs-ppms) $(table-texs) $(Rplots-pdfs) $(table-pdfs)
-	rm -f $(manual_length-csvs) manual_nt_length.csv multi-Rplots.pdf nt_frequencies.csv ot_frequencies.csv
+	rm -f $(nt-manual_length-csvs) $(ot-manual-length-csvs) manual_nt_length.csv multi-Rplots.pdf nt_frequencies.csv ot_frequencies.csv
 
 .PHONY: clean fullclean all selftest
 .PRECIOUS: $(table-texs)
