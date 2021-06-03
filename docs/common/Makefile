@@ -1,4 +1,4 @@
-all: jaccard nojaccard
+all: jaccard nojaccard selftest
 
 authors.pdf: authors.tex
 	pdflatex authors
@@ -50,26 +50,43 @@ jaccard: \
 # ot-jaccard-multi-Rplots.pdf
 
 
-# No-Jaccard
+# No-Jaccard (NT)
 getrefs-pngs = $(nt_inputs:%=%-getrefs.png)
 getrefs-ppms = $(nt_inputs:%=%-getrefs.ppm)
-table-texs = $(nt_inputs:%=%-table.tex)
-Rplots-pdfs = $(nt_inputs:%=%-Rplots.pdf)
-table-pdfs = $(nt_inputs:%=%-table.pdf)
+nt-table-texs = $(nt_inputs:%=nt-%-table.tex)
+nt-Rplots-pdfs = $(nt_inputs:%=nt-%-Rplots.pdf)
+nt-table-pdfs = $(nt_inputs:%=nt-%-table.pdf)
 # For removal
-table-auxs = $(nt_inputs:%=%-table.aux)
-table-logs = $(nt_inputs:%=%-table.log)
-nt-manual_length-csvs = $(nt_inputs:%=manual_%_length.csv)
-ot-manual_length-csvs = $(ot_inputs:%=manual_%_length.csv)
+nt-table-auxs = $(nt_inputs:%=nt-%-table.aux)
+nt-table-logs = $(nt_inputs:%=nt-%-table.log)
+nt-manual_length-csvs = $(nt_inputs:%=nt-manual_%_length.csv)
 
 %-getrefs.png: %-getrefs.ppm
 	convert $< png:$@
-%-table.tex manual_%_length.csv: visualize.py quotations.sqlite3
+nt-%-table.tex nt-manual_%_length.csv: visualize.py quotations.sqlite3
 	python3 visualize.py nt_latex $* > $@
-%-Rplots.pdf: manual_%_length.csv manual_%_length.r
-	R -q --save < manual_$*_length.r
-%-table.pdf: %-table.tex
+nt-%-Rplots.pdf: nt-manual_%_length.csv nt-manual_%_length.r
+	R -q --save < nt-manual_$*_length.r
+nt-%-table.pdf: nt-%-table.tex
 	pdflatex $<
+
+
+# No-Jaccard (OT)
+ot-table-texs = $(ot_inputs:%=ot-%-table.tex)
+ot-Rplots-pdfs = $(ot_inputs:%=ot-%-Rplots.pdf)
+ot-table-pdfs = $(ot_inputs:%=ot-%-table.pdf)
+# For removal
+ot-table-auxs = $(ot_inputs:%=ot-%-table.aux)
+ot-table-logs = $(ot_inputs:%=ot-%-table.log)
+ot-manual_length-csvs = $(ot_inputs:%=ot-manual_%_length.csv)
+
+ot-%-table.tex ot-manual_%_length.csv: visualize.py quotations.sqlite3
+	python3 visualize.py ot_latex $* > $@
+ot-%-Rplots.pdf: ot-manual_%_length.csv ot-manual_%_length.r
+	R -q --save < ot-manual_$*_length.r
+ot-%-table.pdf: ot-%-table.tex
+	pdflatex $<
+
 
 Matthew-getrefs.ppm: visualize.py quotations.sqlite3
 	python3 visualize.py nt_ppm Matthew 90007 356 253
@@ -82,7 +99,7 @@ Hebrews-getrefs.ppm: visualize.py quotations.sqlite3
 
 # Multiple plots
 
-multi-Rplots.pdf: manual_Matthew_length.csv manual_Romans_length.csv manual_Hebrews_length.csv manual_multi_length.r
+multi-Rplots.pdf: nt-manual_Matthew_length.csv nt-manual_Romans_length.csv nt-manual_Hebrews_length.csv manual_multi_length.r
 	R -q --save < manual_multi_length.r
 
 # Other tasks
@@ -113,23 +130,25 @@ selftest:
 	./selftest.py
 
 nojaccard: getrefs.pdf authors.pdf manual_nt_length.pdf Rplots.pdf \
- $(getrefs-pngs) $(table-pdfs) $(Rplots-pdfs) \
+ $(getrefs-pngs) $(nt-table-pdfs) $(nt-Rplots-pdfs) \
+ $(ot-table-pdfs) $(ot-Rplots-pdfs) \
  multi-Rplots.pdf \
- nt_frequencies.csv ot_frequencies.csv \
- selftest
+ nt_frequencies.csv ot_frequencies.csv
 
 clean:
 	rm -f quotations.sqlite3  authors.aux manual_nt_length.aux getrefs.aux \
          authors.log manual_nt_length.log getrefs.log .RData 
-	rm -f $(table-auxs) $(table-logs)
+	rm -f $(nt-table-auxs) $(nt-table-logs)
+	rm -f $(ot-table-auxs) $(ot-table-logs)
 
 fullclean: clean
 	rm -f authors.tex manual_nt_length.tex getrefs.tex
 	rm -f authors.pdf getrefs.pdf manual_nt_length.pdf Rplots.pdf
 	rm -f $(ot-jaccard-Rplots-pdfs) $(ot-jaccard-txts) $(ot-jaccard-sorted-txts) $(ot-jaccard-csvs)
 	rm -f $(nt-jaccard-Rplots-pdfs) $(nt-jaccard-txts) $(nt-jaccard-sorted-txts) $(nt-jaccard-csvs)
-	rm -f $(getrefs-pngs) $(getrefs-ppms) $(table-texs) $(Rplots-pdfs) $(table-pdfs)
+	rm -f $(getrefs-pngs) $(getrefs-ppms) $(nt-table-texs) $(nt-Rplots-pdfs) $(nt-table-pdfs)
+	rm -f $(ot-table-texs) $(ot-Rplots-pdfs) $(ot-table-pdfs)
 	rm -f $(nt-manual_length-csvs) $(ot-manual-length-csvs) manual_nt_length.csv multi-Rplots.pdf nt_frequencies.csv ot_frequencies.csv
 
 .PHONY: clean fullclean all selftest
-.PRECIOUS: $(table-texs)
+.PRECIOUS: $(ot-table-texs) $(nt-table-texs)

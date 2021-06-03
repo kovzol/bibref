@@ -236,11 +236,12 @@ def nt_report_latex(conn, book):
     cur.execute("SELECT q.nt_startpos, q.nt_length, q.ot_book, q.ot_passage, q.nt_passage, q.ot_id, q.nt_id" +
         " FROM quotations_with_introduction q" +
         " WHERE q.found_method = 'manual'" +
+        " AND q.ot_startpos IS NOT NULL" +
         " AND q.nt_book = '" + book + "'" +
         " ORDER BY q.nt_startpos")
     rows = cur.fetchall()
     q = 1
-    f = open("manual_" + book + "_length.csv", "w")
+    f = open("nt-manual_" + book + "_length.csv", "w")
 
     for row in rows:
         start = row[0]
@@ -287,11 +288,12 @@ def ot_report_latex(conn, book):
     cur.execute("SELECT q.ot_startpos, q.ot_length, q.nt_book, q.nt_passage, q.ot_passage, q.ot_id, q.nt_id" +
         " FROM quotations_with_introduction q" +
         " WHERE q.found_method = 'manual'" +
+        " AND q.ot_startpos IS NOT NULL" +
         " AND q.ot_book = '" + book + "'" +
         " ORDER BY q.ot_startpos")
     rows = cur.fetchall()
     q = 1
-    f = open("manual_" + book + "_length.csv", "w")
+    f = open("ot-manual_" + book + "_length.csv", "w")
 
     for row in rows:
         start = row[0]
@@ -443,6 +445,7 @@ def ot_jaccard_csv(conn, ot_book):
     cur.execute("SELECT q.ot_passage, q.nt_passage" +
         " FROM quotations_with_introduction q" +
         " WHERE q.found_method = 'manual'" +
+        " AND q.ot_startpos IS NOT NULL" +
         " AND q.ot_book = '" + ot_book + "'" +
         " AND INSTR(q.nt_passage, 'SBLGNT') > 0" +
         " ORDER BY q.ot_startpos")
@@ -455,8 +458,6 @@ def ot_jaccard_csv(conn, ot_book):
     r = 0
     for row in rows:
         ot_passage = row[0]
-        if "Aleppo" in ot_passage:
-            continue
         nt_passage = row[1]
         command1 = "lookup1 " + ot_passage
         bibref.sendline(command1)
