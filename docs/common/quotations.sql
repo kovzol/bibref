@@ -1239,6 +1239,8 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (46, 4, 'εν γραφη', 'περιεχει ... δε'); -- εν γραφη = in Scripture, περιεχει ... δε = it is contained ... however
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (46, 4, 'quotation', 'literal', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (464, 'I_Peter', 'SBLGNT I_Peter 2:7+27 2:7-62', 2719, 2730);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (464, 46, 4, 'Psalms', 'LXX Psalms 118:22', 'I_Peter', 'SBLGNT I_Peter 2:7+39 2:7', 138495, 62, 2731, 62);
 
@@ -1426,7 +1428,7 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1061, 107, 1, 'Isaiah', 'LXX Isaiah 28:16+24 28:16-115', 'Romans', 'SBLGNT Romans 9:33+14 9:33-83', 52716, 4, 20445, 4); -- idoy
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
- (1061, 107, 1, 'Isaiah', 'LXX Isaiah 28:16+49 28:16-84', 'Romans', 'SBLGNT Romans 9:33+26 9:33-65', 52741, 10, 20457, 10); -- Σιων λιθον
+ (1061, 107, 1, 'Isaiah', 'LXX Isaiah 28:16+49 28:16-85', 'Romans', 'SBLGNT Romans 9:33+26 9:33-66', 52741, 9, 20457, 9); -- Σιων λιθον
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1061, 107, 2, 'Isaiah', null, 'LXX Isaiah 28:16+113 28:16-13', 'Romans', 'SBLGNT Romans 10:11+17 10:11-16', 52805, 17, 21317, 17, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
@@ -1440,17 +1442,25 @@ insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1061, 107, 2, 'Isaiah', 'LXX Isaiah 28:16+113 28:16', 'Romans', 'SBLGNT Romans 10:11+17 10:11-5', 52805, 30, 21317, 28);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (464, 107, 3, 'Isaiah', null, 'LXX Isaiah 28:16+72 28:16-56', 'I_Peter', 'SBLGNT I_Peter 2:6+39 2:6-47', 52764, 15, 2630, 15, 'getrefs');
+ (1073, 107, 3, 'Isaiah', null, 'LXX Isaiah 28:16+72 28:16-56', 'I_Peter', 'SBLGNT I_Peter 2:6+39 2:6-47', 52764, 15, 2630, 15, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (464, 107, 3, 'Isaiah', null, 'LXX Isaiah 28:16+110 28:16', 'I_Peter', 'SBLGNT I_Peter 2:6+68 2:6', 52802, 33, 2659, 33, 'getrefs');
+ (1073, 107, 3, 'Isaiah', null, 'LXX Isaiah 28:16+110 28:16', 'I_Peter', 'SBLGNT I_Peter 2:6+68 2:6', 52802, 33, 2659, 33, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (464, 107, 3, 'Isaiah', null, 'LXX Isaiah 28:16+24 28:16', 'I_Peter', 'SBLGNT I_Peter 2:6+20 2:6', 52716, 119, 2611, 81, 'manual');
+ (1073, 107, 3, 'Isaiah', null, 'LXX Isaiah 28:16+24 28:16', 'I_Peter', 'SBLGNT I_Peter 2:6+20 2:6', 52716, 119, 2611, 81, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (107, 3, 'εν γραφη', 'περιεχει'); -- εν γραφη = in Scripture,  περιεχει = it is contained
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (107, 3, 'quotation', 'literal, fuzzy, change, superset', 'Z.K.');
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
- (464, 'I_Peter', 'SBLGNT I_Peter 2:6 2:6-81', 2591, 2610);
+ (1073, 'I_Peter', 'SBLGNT I_Peter 2:6 2:6-81', 2591, 2610);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1073, 107, 3, 'Isaiah', 'LXX Isaiah 28:16+24 28:16-115', 'I_Peter', 'SBLGNT I_Peter 2:6+20 2:6-77', 52716, 4, 2611, 4); -- idoy
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1073, 107, 3, 'Isaiah', 'LXX Isaiah 28:16+49 28:16-85', 'I_Peter', 'SBLGNT I_Peter 2:6+32 2:6-60', 52741, 9, 2623, 9); -- Σιων λιθον
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1073, 107, 3, 'Isaiah', 'LXX Isaiah 28:16+66 28:16-50', 'I_Peter', 'SBLGNT I_Peter 2:6+41 2:6-33', 52758, 27, 2632, 27); -- ακρογωνιαιον εκλεκτον εντιμον
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1073, 107, 3, 'Isaiah', 'LXX Isaiah 28:16+110 28:16', 'I_Peter', 'SBLGNT I_Peter 2:6+68 2:6', 52802, 33, 2659, 33);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1081, 108, 1, 'Isaiah', null, 'LXX Isaiah 52:7 52:7-58', 'Romans', 'SBLGNT Romans 10:15+44 10:15', 106484, 72, 21631, 40, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
