@@ -9,6 +9,10 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/algorithm/string/split.hpp>
 
+#include <unistd.h>
+#include <sys/types.h>
+#include <pwd.h>
+
 #include "books.h"
 #include "cli.h"
 #include "swmgr.h"
@@ -145,9 +149,16 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
         }
 
     char* buf;
+
+    struct passwd *pw = getpwuid(getuid());
+    char *histfile = pw->pw_dir;
+    strcat(histfile, "/.bibref_history");
+    read_history(histfile);
+
     while ((buf = readline(input_prepend)) != nullptr) {
         if (strlen(buf) > 0) {
             add_history(buf);
+            write_history(histfile);
         }
 
         string rawinput(buf);
