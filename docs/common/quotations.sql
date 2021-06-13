@@ -1591,6 +1591,12 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (116, 1, 'Ησαιας', 'λεγει'); -- λεγει = says
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (116, 1, 'quotation', 'literal, superset, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (1161, 'Romans', 'SBLGNT Romans 15:12 15:12-64', 30325, 30343);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1161, 116, 1, 'Isaiah', 'LXX Isaiah 11:10+3 11:10-101', 'Romans', 'SBLGNT Romans 15:12+19 15:12-59', 24087, 5, 30344, 5);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1161, 116, 1, 'Isaiah', 'LXX Isaiah 11:10+23 11:10-27', 'Romans', 'SBLGNT Romans 15:12+24 15:12', 24107, 59, 30349, 59);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1171, 117, 1, 'Isaiah', null, 'LXX Isaiah 52:15+66 52:15', 'Romans', 'SBLGNT Romans 15:21+17 15:21', 107343, 58, 31217, 58, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
