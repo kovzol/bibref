@@ -1607,7 +1607,7 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
  (117, 1, 'quotation', 'literal, exact', 'Z.K.');
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
  (1171, 'Romans', 'SBLGNT Romans 15:21 15:21-57', 31200, 31217);
-insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1171, 117, 1, 'Isaiah', 'LXX Isaiah 52:15+67 52:15', 'Romans', 'SBLGNT Romans 15:21+18 15:21', 107344, 57, 31218, 57);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1181, 118, 1, 'Isaiah', null, 'LXX Isaiah 7:14+85 7:14', 'Matthew', 'SBLGNT Matthew 1:23+52 1:23-34', 14284, 21, 1974, 21, 'getrefs');
