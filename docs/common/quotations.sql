@@ -1619,6 +1619,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (118, 1, 'δια του προφητου', 'το ρηθεν υπο κυριου ... λεγοντος'); -- δια του προφητου = through the prophet, το ρηθεν υπο κυριου ... λεγοντος = having been spoken by the Lord ... saying
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (118, 1, 'quotation', 'literal', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (1181, 'Matthew', 'SBLGNT Matthew 1:22 1:22', 1856, 1921);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1181, 118, 1, 'Isaiah', 'LXX Isaiah 7:14+35 7:14', 'Matthew', 'SBLGNT Matthew 1:23 1:23-34', 14234, 71, 1922, 73);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1191, 119, 1, 'Isaiah', null, 'Aleppo Isaiah 11:1+16 11:1-10', 'Matthew', 'SBLGNT Matthew 2:23+76 2:23-14', null, 3, 4488, 5, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
