@@ -1639,6 +1639,15 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (120, 1, 'εν τω νομω', 'γεγραπται οτι'); -- εν τω νομω  = in the law, γεγραπται οτι = it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (120, 1, 'quotation', 'far-fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (1201, 'I_Corinthians', 'SBLGNT I_Corinthians 14:21 14:21-88', 25511, 25530);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1201, 120, 1, 'Isaiah', 'LXX Isaiah 28:11+12 28:11-39', 'I_Corinthians', 'SBLGNT I_Corinthians 14:21+40 14:21-60', 52171, 7, 25551, 8); -- χειλεων -> χειλεσιν
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1201, 120, 1, 'Isaiah', 'LXX Isaiah 28:11+22 28:11-23', 'I_Corinthians', 'SBLGNT I_Corinthians 14:21+22 14:21-73', 52181, 13, 25533, 13) ; -- γλωσσης ετερας -> ετερογλωσσοις
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1201, 120, 1, 'Isaiah', 'LXX Isaiah 28:11+38 28:11', 'I_Corinthians', 'SBLGNT I_Corinthians 14:21+54 14:21-38', 52197, 20, 25565, 16); -- λαλησουσιν τω λαω τουτω -> λαλησω τω λαω τουτω
+-- TODO: The end of Isaiah 28:12 is a bit similar to the end of I_Corinthians 14:22, consider adding it as another clasp.
 -- TODO: Consider this as a quotation in case.
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (null, 121, 1, 'Isaiah', null, 'LXX Isaiah 22:13+107 22:13', 'I_Corinthians', 'SBLGNT I_Corinthians 15:32+67 15:32', 41992, 37, 29181, 37, 'getrefs');
