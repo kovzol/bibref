@@ -1697,6 +1697,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (123, 1, 'θεου', 'λεγει γαρ'); -- λεγει γαρ = He says for
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (123, 1, 'quotation', 'literal, exact', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (1231, 'II_Corinthians', 'SBLGNT II_Corinthians 6:2 6:2-95', 8502, 8509);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1231, 123, 1, 'Isaiah', 'LXX Isaiah 49:8+16 49:8-77', 'II_Corinthians', 'SBLGNT II_Corinthians 6:2+8 6:2-45', 99749, 50, 8510, 50);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1241, 124, 1, 'Isaiah', null, 'LXX Isaiah 40:3+27 40:3-35', 'John', 'SBLGNT John 1:23+31 1:23-25', 78225, 16, 1469, 16, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
