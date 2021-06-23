@@ -1711,6 +1711,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (124, 1, 'Ησαΐας ο προφητης', 'καθως ειπεν'); -- Ησαΐας ο προφητης = Isaiah the prophet, καθως ειπεν = as said
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (124, 1, 'quotation', 'literal, fuzzy, change', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (1241, 'John', 'SBLGNT John 1:23+47 1:23', 1485, 1509);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1241, 124, 1, 'Isaiah', 'LXX Isaiah 40:3 40:3-35', 'John', 'SBLGNT John 1:23+6 1:23-25', 78198, 43, 1444, 41);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1242, 124, 2, 'Isaiah', null, 'LXX Isaiah 40:3 40:3-11', 'Luke', 'SBLGNT Luke 3:4+40 3:4-5', 78198, 67, 10561, 67, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
