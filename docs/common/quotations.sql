@@ -1747,6 +1747,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (124, 4, 'δια Ησαΐου του προφητου', 'ρηθεις ... λεγοντος'); -- ρηθεις ... λεγοντος = having been spoken of ... saying
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (124, 4, 'quotation', 'literal, exact', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (1244, 'Matthew', 'SBLGNT Matthew 3:3 3:3-72', 4633, 4680);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1244, 124, 4, 'Isaiah', 'LXX Isaiah 40:3 40:3-8', 'Matthew', 'SBLGNT Matthew 3:3+48 3:3', 78198, 70, 4681, 72);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1251, 125, 1, 'Isaiah', null, 'LXX Isaiah 52:11+72 52:11-23', 'II_Corinthians', 'SBLGNT II_Corinthians 6:17+26 6:17-50', 106991, 10, 9683, 10, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
