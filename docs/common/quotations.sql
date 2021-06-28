@@ -1763,6 +1763,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (125, 1, 'κυριος', 'διο ... λεγει'); -- διο ... λεγει = therefore ... says
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (125, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (1251, 'II_Corinthians', 'SBLGNT II_Corinthians 6:17 6:17-83', 9657, 9659);
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (1251, 'II_Corinthians', 'SBLGNT II_Corinthians 6:17+36 6:17-39', 9693, 9703);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1251, 125, 1, 'Isaiah', 'LXX Isaiah 52:11+52 52:11-23', 'II_Corinthians', 'SBLGNT II_Corinthians 6:17+3 6:17-50', 106971, 30, 9660, 33);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1251, 125, 1, 'Isaiah', 'LXX Isaiah 52:11+31 52:11-53', 'II_Corinthians', 'SBLGNT II_Corinthians 6:17+47 6:17-18', 106950, 21, 9704, 21);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1261, 126, 1, 'Isaiah', null, 'LXX Isaiah 54:1 54:1-14', 'Galatians', 'SBLGNT Galatians 4:27+12 4:27', 108811, 102, 7727, 102, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
