@@ -2553,8 +2553,6 @@ insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passag
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (20111, 2011, 1, 'Genesis', null, 'LXX Genesis 21:10+60 21:10-25', 'Galatians', 'SBLGNT Galatians 4:30+57 4:30-23', 50152, 29, 7989, 29, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (20111, 2011, 1, 'Genesis', null, 'LXX Genesis 21:10+60 21:10-25', 'Galatians', 'SBLGNT Galatians 4:30+57 4:30-23', 50152, 29, 7989, 29, 'getrefs');
-insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (20111, 2011, 1, 'Genesis', null, 'LXX Genesis 21:10+16 21:10-8', 'Galatians', 'SBLGNT Galatians 4:30+17 4:30-12', 50108, 90, 7949, 80, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2011, 1, null, 'αλλα τι λεγει η γραφη'); -- αλλα τι λεγει η γραφη = but what says the Scripture
