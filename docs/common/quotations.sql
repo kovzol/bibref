@@ -1793,6 +1793,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (127, 1, null, 'ευηγγελισατο'); -- ευηγγελισατο = He proclaimed the gospel
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (127, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (1271, 'Ephesians', 'SBLGNT Ephesians 2:17+8 2:17-40', 3397, 3408);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1271, 127, 1, 'Isaiah', 'LXX Isaiah 57:19 57:19-32', 'Ephesians', 'SBLGNT Ephesians 2:17+20 2:17', 115012, 38, 3409, 40);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1281, 128, 1, 'Isaiah', null, 'LXX Isaiah 8:18 8:18-78', 'Hebrews', 'SBLGNT Hebrews 2:13+39 2:13', 17131, 33, 2440, 33, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
