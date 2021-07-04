@@ -1821,6 +1821,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (129, 1, null, 'ετι γαρ'); -- ετι γαρ = yet for (see also Hebrews 10:36)
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (129, 1, 'quotation', 'literal, exact', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (1291, 'Hebrews', 'SBLGNT Hebrews 10:37 10:37-41', 18046, 18051);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1291, 129, 1, 'Isaiah', 'LXX Isaiah 26:20+66 26:20-23', 'Hebrews', 'SBLGNT Hebrews 10:37+6 10:37-27', 49503, 14, 18052, 14);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1301, 130, 1, 'Isaiah', null, 'LXX Isaiah 40:6+40 40:6-20', 'I_Peter', 'SBLGNT I_Peter 1:24+15 1:24-50', 78495, 18, 2065, 18, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
