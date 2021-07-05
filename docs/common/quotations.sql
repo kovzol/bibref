@@ -1832,9 +1832,13 @@ insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passag
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1301, 130, 1, 'Isaiah', null, 'LXX Isaiah 40:6+32 40:8', 'I_Peter', 'SBLGNT I_Peter 1:24+5 1:25-39', 78487, 114, 2055, 108, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
- (130, 1, null, 'διοτι'); -- διοτι = because
+ (130, 1, null, 'διοτι'); -- διοτι = because (see also the end: "τουτο δε εστιν το ρημα το ευαγγελισθεν εις υμας" in I_Peter 1:25)
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (130, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (1301, 'I_Peter', 'SBLGNT I_Peter 1:24 1:24-78', 2050, 2054);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1301, 130, 1, 'Isaiah', 'LXX Isaiah 40:6+32 40:8', 'I_Peter', 'SBLGNT I_Peter 1:24+5 1:25-39', 78487, 114, 2055, 108);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1311, 131, 1, 'Isaiah', null, 'LXX Isaiah 56:7+143 56:7', 'Mark', 'SBLGNT Mark 11:17+42 11:17-36', 112775, 48, 36991, 48, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
