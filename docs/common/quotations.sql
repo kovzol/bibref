@@ -1847,6 +1847,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (131, 1, null, 'Ου γεγραπται οτι'); -- Ου γεγραπται οτι = not has it been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (131, 1, 'quotation', 'literal, exact', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (1311, 'Mark', 'SBLGNT Mark 11:17+27 11:17-85', 36976, 36989);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1311, 131, 1, 'Isaiah', 'LXX Isaiah 56:7+139 56:7', 'Mark', 'SBLGNT Mark 11:17+41 11:17-36', 112775, 52, 36991, 49);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1312, 131, 2, 'Isaiah', null, 'LXX Isaiah 56:7+143 56:7-16', 'Matthew', 'SBLGNT Matthew 21:13+24 21:13-33', 112775, 32, 59893, 32, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
