@@ -1871,6 +1871,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (131, 3, null, 'γεγραπται'); -- γεγραπται = it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (131, 3, 'quotation', 'literal, exact', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (1313, 'Luke', 'SBLGNT Luke 19:46+11 19:46-66', 75700, 75708);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1313, 131, 3, 'Isaiah', 'LXX Isaiah 56:7+139 56:7-26', 'Luke', 'SBLGNT Luke 19:46+28 19:46-35', 112771, 26, 75717, 23);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1313, 131, 3, 'Isaiah', 'LXX Isaiah 56:7+89 56:7-99', 'Luke', 'SBLGNT Luke 19:46+20 19:46-63', 112721, 3, 75709, 3); -- kai
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1313, 131, 3, 'Isaiah', 'LXX Isaiah 56:7+105 56:7-79', 'Luke', 'SBLGNT Luke 19:46+23 19:46-58', 112737, 7, 75712, 5); -- esontai -> estai
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1321, 132, 1, 'Isaiah', null, 'LXX Isaiah 53:9+78 53:9', 'I_Peter', 'SBLGNT I_Peter 2:22+7 2:22', 108358, 45, 4031, 45, 'getrefs');
 -- TODO: The non-literal quotation is longer: I_Peter 2:22-25 cites and summarizes Isaiah 53:5-9. Extend...
