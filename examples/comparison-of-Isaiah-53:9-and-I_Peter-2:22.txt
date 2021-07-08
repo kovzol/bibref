@@ -1,0 +1,75 @@
+## It seems there is more correlation between Isaiah 53:5-9 and I_Peter 2:22-25.
+## This text file is dedicated to collect them.
+
+text1 ταις αμαρτιαις
+# Stored internally as taisamartiais.
+find1 SBLGNT 
+# Found in John 8:24+28 8:24-62 (book position 27348-27360)
+# Found in John 8:24+86 8:24-4 (book position 27406-27418)
+# Found in I_Corinthians 15:17+49 15:17-4 (book position 28161-28173)
+# Found in Ephesians 2:1+38 2:1-4 (book position 2022-2034)
+# Found in I_Peter 2:24+59 2:24-47 (book position 4209-4221)
+# Found in Revelation_of_John 18:4+81 18:4-35 (book position 34322-34334)
+# 6 occurrences.
+find1 LXX
+# Found in Leviticus 26:18+67 26:18-4 (book position 85026-85038)
+# Found in I_Kings 8:34+37 8:34-70 (book position 32567-32579)
+# Found in I_Kings 8:36+35 8:36-131 (book position 32862-32874)
+# Found in I_Kings 14:22+95 14:22-15 (book position 57291-57303)
+# Found in I_Kings 15:3+13 15:3-110 (book position 58471-58483)
+# Found in I_Kings 15:26+68 15:26-26 (book position 61137-61149)
+# Found in I_Kings 15:34+71 15:34-25 (book position 61922-61934)
+# Found in I_Kings 16:19+99 16:19-25 (book position 63947-63959)
+# Found in I_Kings 16:26+42 16:26-77 (book position 64756-64768)
+# Found in I_Kings 16:31+33 16:31-124 (book position 66124-66136)
+# Found in I_Kings 22:52+103 22:52-42 (book position 92330-92342)
+# Found in II_Kings 1:18+342 1:18-93 (book position 3028-3040)
+# Found in II_Kings 14:6+172 14:6-16 (book position 47688-47700)
+# Found in II_Chronicles 6:25+37 6:25-76 (book position 13901-13913)
+# Found in II_Chronicles 6:27+37 6:27-140 (book position 14197-14209)
+# Found in II_Chronicles 7:14+179 7:14-26 (book position 18431-18443)
+# Found in II_Chronicles 28:13+108 28:13-70 (book position 71623-71635)
+# Found in Psalms 78:38+32 78:38-89 (book position 89850-89862)
+# Found in Psalms 79:9+79 79:9-23 (book position 92977-92989)
+# Found in Isaiah 14:21+27 14:21-73 (book position 29653-29665)
+# Found in Isaiah 43:24+66 43:24-34 (book position 87782-87794)
+# Found in Isaiah 50:1+100 50:1-55 (book position 101899-101911)
+# Found in Isaiah 53:6+75 53:6-4 (book position 108010-108022)
+# Found in Jeremiah 36:3+132 36:3-5 (book position 95193-95205)
+# Found in Ezekiel 3:20+137 3:20-98 (book position 6004-6016)
+# Found in Ezekiel 16:52+48 16:52-115 (book position 38344-38356)
+# Found in Ezekiel 18:24+177 18:24-34 (book position 45270-45282)
+# Found in Micah 6:13+36 6:13-3 (book position 9247-9259)
+# 28 occurrences.
+## Literal match, but not unique.
+
+text1 αυτον ταις αμαρτιαις ημων
+# Stored internally as aytontaisamartiaishmvn.
+find1 LXX
+# Found in Isaiah 53:6+70 53:6 (book position 108005-108026)
+# 1 occurrences.
+text2 τας αμαρτιας ημων αυτος
+# Stored internally as tasamartiashmvnaytos.
+find2 SBLGNT 
+# Found in I_Peter 2:24+2 2:24-97 (book position 4152-4171)
+# 1 occurrences.
+jaccard12 
+# Jaccard distance is 0.285714.
+## Non-literal match.
+
+###############################################################
+
+text1 ως προβατα επλανηθημεν
+# Stored internally as vsprobataeplanhuhmen.
+find1 LXX
+# Found in Isaiah 53:6+6 53:6-66 (book position 107941-107960)
+# 1 occurrences.
+text2 ως προβατα ⸀πλανωμενοι
+# Stored internally as vsprobataplanvmenoi.
+find2 SBLGNT 
+# Found in I_Peter 2:25+6 2:25-55 (book position 4275-4293)
+# 1 occurrences.
+jaccard12 
+# Jaccard distance is 0.315789.
+
+## To be continued...
