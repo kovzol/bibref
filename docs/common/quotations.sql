@@ -1892,13 +1892,12 @@ insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt
  (1321, 'I_Peter', 'SBLGNT I_Peter 2:21+50 2:21', 3970, 4023);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1321, 132, 1, 'Isaiah', 'LXX Isaiah 53:9+71 53:9', 'I_Peter', 'SBLGNT I_Peter 2:22 2:22', 108351, 52, 4024, 52);
--- TODO: Double check if this rather a quotation than a strong allusion:
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (null, 133, 1, 'Isaiah', null, 'LXX Isaiah 66:24+68 66:24-58', 'Mark', 'SBLGNT Mark 9:48+5 9:48-20', 133191, 19, 31055, 19, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (null, 133, 1, 'Isaiah', null, 'LXX Isaiah 66:24+68 66:24-28', 'Mark', 'SBLGNT Mark 9:48+5 9:48', 133191, 49, 31055, 39, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
- (133, 1, null, 'υπολιμπανων υπογραμμον ινα επακολουθησητε'); -- υπολιμπανων υπογραμμον ινα επακολουθησητε = leaving an example that you should follow after
+ (133, 1, null, null);
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (133, 1, 'strong allusion', 'literal, fuzzy', 'Z.K.');
 -- TODO: Find passage in Isaiah.
