@@ -1925,6 +1925,20 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (135, 1, 'Ησαΐου του προφητου', 'ρηθεν ... λεγοντος'); -- το ρηθεν ... λεγοντος = having been spoken ... saying
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (135, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (1351, 'Matthew', 'SBLGNT Matthew 12:17 12:17', 31067, 31111);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1351, 135, 1, 'Isaiah', 'LXX Isaiah 42:1+5 42:1-106', 'Matthew', 'SBLGNT Matthew 12:18+4 12:18-94', 83337, 8, 31116, 8); -- ο παις μου
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1351, 135, 1, 'Isaiah', 'LXX Isaiah 42:1+64 42:1-7', 'Matthew', 'SBLGNT Matthew 12:18+47 12:18-9', 83396, 48, 31159, 50); -- η ψυχη μου εδωκα το πνευμα μου επ αυτον κρισιν τοις εθνεσιν -> η ψυχη μου θησω το πνευμα μου επ αυτον, και κρισιν τοις εθνεσιν
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1351, 135, 1, 'Isaiah', 'LXX Isaiah 42:2+22 42:2-13', 'Matthew', 'SBLGNT Matthew 12:19+22 12:19-31', 83473, 16, 31240, 11); -- ουδε ακουσθησεται -> ουδε ακουσει
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1351, 135, 1, 'Isaiah', 'LXX Isaiah 42:2+42 42:3-78', 'Matthew', 'SBLGNT Matthew 12:19+54 12:20-77', 83493, 16, 31272, 17); -- φωνη αυτου καλαμον -> φωνην αυτου καλαμον
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1351, 135, 1, 'Isaiah', 'LXX Isaiah 42:3+29 42:3-28', 'Matthew', 'SBLGNT Matthew 12:20+31 12:20-28', 83531, 28, 31313, 25); -- και λινον καπνιζομενον ου σβεσει -> και λινον τυφομενον ου σβεσει
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1351, 135, 1, 'Isaiah', 'LXX Isaiah 42:4+42 42:4', 'Matthew', 'SBLGNT Matthew 12:20+78 12:21', 83629, 39, 31360, 36); -- κρισιν και επι τω ονοματι αυτου εθνη ελπιουσιν -> κρισιν και τω ονοματι αυτου εθνη ελπιουσιν
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1361, 136, 1, 'Isaiah', null, 'LXX Isaiah 6:10+96 6:10-66', 'John', 'SBLGNT John 12:40+59 12:40-44', 12595, 22, 44341, 22, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
