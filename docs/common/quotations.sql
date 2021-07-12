@@ -1947,6 +1947,8 @@ insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passag
  (1361, 136, 1, 'Isaiah', null, 'LXX Isaiah 6:10+63 6:10', 'John', 'SBLGNT John 12:40+10 12:40', 12562, 121, 44292, 115, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (136, 1, 'Ησαΐας', 'ειπεν'); -- ειπεν = said
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (136, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
  (1361, 'John', 'SBLGNT John 12:39 12:39', 44235, 44281);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
@@ -1957,8 +1959,6 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
  (1361, 136, 1, 'Isaiah', 'LXX Isaiah 6:10+138 6:10-38', 'John', 'SBLGNT John 12:40+89 12:40-28', 12637, 8, 44371, 8); -- τη καρδια
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1361, 136, 1, 'Isaiah', 'LXX Isaiah 6:10+153 6:10', 'John', 'SBLGNT John 12:40+97 12:40', 12652, 31, 44379, 28); -- και επιστρεψωσιν και ιασομαι αυτους -> και στραφωσιν, και ιασομαι αυτους
-insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
- (136, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1362, 136, 2, 'Isaiah', null, 'LXX Isaiah 6:9+35 6:10-142', 'Acts', 'SBLGNT Acts 28:26+39 28:27-137', 12443, 98, 95175, 98, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
@@ -1969,6 +1969,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (136, 2, 'Ησαΐου του προφητου', 'λεγων'); -- λεγων = saying
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (136, 2, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (1362, 'Acts', 'SBLGNT Acts 28:25+63 28:26-90', 95069, 95140);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1362, 136, 2, 'Isaiah', 'LXX Isaiah 6:9+8 6:10', 'Acts', 'SBLGNT Acts 28:26+5 28:27', 12416, 267, 95141, 269);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1363, 136, 3, 'Isaiah', null, 'LXX Isaiah 6:9+35 6:10-142', 'Matthew', 'SBLGNT Matthew 13:14+45 13:15-137', 12443, 98, 35214, 98, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
