@@ -1995,6 +1995,16 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (136, 4, null, 'ινα'); -- ινα = so that
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (136, 4, 'quotation', 'far-fuzzy, superset', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (1364, 'Mark', 'SBLGNT Mark 4:12 4:12-91', 12468, 12470);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1364, 136, 4, 'Isaiah', 'LXX Isaiah 6:9+63 6:9', 'Mark', 'SBLGNT Mark 4:12+3 4:12-64', 12471, 28, 9850, 27); -- βλεποντες βλεψετε και ου μη ιδητε -> βλεποντες βλεπωσι και μη ιδωσιν
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1364, 136, 4, 'Isaiah', 'LXX Isaiah 6:10+126 6:10-31', 'Mark', 'SBLGNT Mark 4:12+42 4:12-32', 12625, 27, 9889, 20); -- ακουσωσιν και τη καρδια συνωσιν -> ακουωσι και μη συνιωσιν
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1364, 136, 4, 'Isaiah', 'LXX Isaiah 6:10+90 6:10-88', 'Mark', 'SBLGNT Mark 4:12+62 4:12-26', 12589, 6, 9909, 6); -- μηποτε
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1364, 136, 4, 'Isaiah', 'LXX Isaiah 6:10+156 6:10-13', 'Mark', 'SBLGNT Mark 4:12+68 4:12-11', 12655, 15, 9915, 15); -- επιστρεψωσιν και
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1365, 136, 5, 'Isaiah', null, 'LXX Isaiah 6:9+39 6:9-12', 'Luke', 'SBLGNT Luke 8:10+82 8:10', 12447, 40, 30550, 41, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
