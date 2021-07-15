@@ -2029,6 +2029,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (137, 1, 'Ησαΐας', 'λεγων'); -- λεγων = saying
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (137, 1, 'quotation', 'literal, superset, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (1371, 'Matthew', 'SLBGNT Matthew 15:7 15:7', 42720, 42764);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1371, 137, 1, 'Isaiah', 'LXX Isaiah 29:13+24 29:13', 'Matthew', 'SBLGNT Matthew 15:8 15:9', 55467, 126, 42765, 115);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1372, 137, 2, 'Isaiah', null, 'LXX Isaiah 29:13+32 29:13-104', 'Mark', 'SBLGNT Mark 7:6+79 7:6-37', 55475, 14, 21325, 14, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
