@@ -2063,6 +2063,7 @@ insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt
  (1381, 'Matthew', 'SBLGNT Matthew 21:4 21:4', 59068, 59120);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1381, 138, 1, 'Isaiah', 'LXX Isaiah 62:11+45 62:11-65', 'Matthew', 'SBLGNT Matthew 21:5 21:5-71', 124179, 23, 59121, 23);
+-- TODO: Complete this entry (if possible)
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1391, 139, 1, 'Isaiah', null, 'LXX Isaiah 53:12+98 53:12-61', 'Mark', 'ABPGRK Mark 15:28+32 15:28', 108735, 15, null, 14, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
@@ -2075,6 +2076,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (139, 2, null, 'το γεγραμμενον'); -- το γεγραμμενον = which has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (139, 2, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (1392, 'Luke', 'SBLGNT Luke 22:37 22:37-48', 85085, 85135);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1392, 139, 2, 'Isaiah', 'LXX Isaiah 53:12+98 53:12-61', 'Luke', 'SBLGNT Luke 22:37+60 22:37-25', 108735, 15, 85145, 14);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1401, 140, 1, 'Isaiah', null, 'LXX Isaiah 61:1 61:1-78', 'Luke', 'SBLGNT Luke 4:18 4:18-74', 121799, 68, 14360, 68, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
