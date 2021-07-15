@@ -2092,6 +2092,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (140, 1, 'του προφητου Ησαΐου', 'ην γεγραμμενον'); -- ην γεγραμμενον = it was written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (140, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (1401, 'Luke', 'SBLGNT Luke 4:17 4:17', 14273, 14359);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1401, 140, 1, 'Isaiah', 'LXX Isaiah 61:1 61:1-78', 'Luke', 'SBLGNT Luke 4:18 4:18-74', 121799, 68, 14360, 68);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1401, 140, 1, 'Isaiah', 'LXX Isaiah 61:1+103 61:1', 'Luke', 'SBLGNT Luke 4:18+68 4:18-31', 121902, 43, 14428, 43);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1401, 140, 1, 'Isaiah', 'LXX Isaiah 61:2+7 61:2-52', 'Luke', 'SBLGNT Luke 4:19+7 4:19', 121952, 20, 14509, 20);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1411, 141, 1, 'Isaiah', null, 'LXX Isaiah 54:13+21 54:13-32', 'John', 'SBLGNT John 6:45+47 6:45-51', 110015, 7, 20387, 7, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
