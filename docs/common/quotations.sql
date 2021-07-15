@@ -2059,6 +2059,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (138, 1, 'του προφητου', 'ρηθεν ... λεγοντος'); -- having been spoken ... saying
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (138, 1, 'quotation', 'literal', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (1381, 'Matthew', 'SBLGNT Matthew 21:4 21:4', 59068, 59120);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1381, 138, 1, 'Isaiah', 'LXX Isaiah 62:11+45 62:11-65', 'Matthew', 'SBLGNT Matthew 21:5 21:5-71', 124179, 23, 59121, 23);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1391, 139, 1, 'Isaiah', null, 'LXX Isaiah 53:12+98 53:12-61', 'Mark', 'ABPGRK Mark 15:28+32 15:28', 108735, 15, null, 14, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
