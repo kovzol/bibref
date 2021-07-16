@@ -2108,6 +2108,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (141, 1, 'εν τοις προφηταις', 'εστιν γεγραμμενον'); -- εστιν γεγραμμενον = it is written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (141, 1, 'quotation', 'far-fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (1411, 'John', 'SBLGNT John 6:45 6:45-74', 20340, 20370);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1411, 141, 1, 'Isaiah', 'LXX Isaiah 54:13 54:13-57', 'John', 'SBLGNT John 6:45+31 6:45-71', 109994, 3, 20371, 3); -- και
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1411, 141, 1, 'Isaiah', 'LXX Isaiah 54:13+3 54:13-51', 'John', 'SBLGNT John 6:45+41 6:45-58', 109997, 6, 20381, 6); -- παντας -> παντες
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1411, 141, 1, 'Isaiah', 'LXX Isaiah 54:13+21 54:13-26', 'John', 'SBLGNT John 6:45+47 6:45-46', 111015, 13, 20387, 12); -- διδακτους θεου -> διδακτοι θεου
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1421, 142, 1, 'Isaiah', null, 'LXX Isaiah 66:1+16 66:1-28', 'Acts', 'SBLGNT Acts 7:49 7:49-37', 130334, 67, 22671, 67, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
