@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# Several pieces of this code was taken from https://www.sqlitetutorial.net/sqlite-python/sqlite-python-select/
+# Several pieces of this code were taken from https://www.sqlitetutorial.net/sqlite-python/sqlite-python-select/
 
 import sqlite3, sys
 from sqlite3 import Error
@@ -481,6 +481,53 @@ def ot_jaccard_csv(conn, ot_book):
     f.close()
     g.close()
 
+def nt_passage_info(conn, nt_quotation_id):
+    """
+    Show all relevant information on a given NT quotation
+    :param conn: the Connection object
+    :nt_quotation_id: NT quotation identifier
+    """
+
+    global bibref
+    spawn_bibref()
+
+    cur = conn.cursor()
+
+    cur.execute("SELECT qi.nt_book, qi.nt_passage, qi.nt_startpos, qi.nt_endpos" +
+        " FROM nt_quotation_introductions qi" +
+        " WHERE qi.nt_quotation_id = " + str(nt_quotation_id) +
+        " ORDER BY qi.nt_startpos")
+    rows = cur.fetchall()
+    print ("Introduction(s):")
+    for row in rows:
+        nt_book, nt_passage, nt_startpos, nt_endpos = row
+        print(f"{nt_passage} (book position: {nt_startpos}-{nt_endpos})")
+
+    cur.execute("SELECT c.ot_book, c.ot_passage, c.nt_passage, c.ot_startpos, c.ot_length, c.nt_startpos, c.nt_length" +
+        " FROM clasps c" +
+        " WHERE c.nt_quotation_id = " + str(nt_quotation_id) +
+        " ORDER BY c.nt_startpos")
+    rows2 = cur.fetchall()
+    print ("Clasp(s):")
+
+    for row2 in rows2:
+        ot_book, ot_passage, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length = row2
+        ot_endpos = ot_startpos + ot_length - 1
+        nt_endpos = nt_startpos + nt_length - 1
+
+        command1 = "lookup1 " + ot_passage
+        bibref.sendline(command1)
+        bibref.expect("Stored internally as \w.")
+        command2 = "lookup2 " + nt_passage
+        bibref.sendline(command2)
+        bibref.expect("Stored internally as \w.")
+        command3 = "jaccard12"
+        bibref.sendline(command3)
+        bibref.expect("Jaccard distance is ([0-9]+\.[0-9]+).")
+        jaccard12 = bibref.match.groups()
+        jaccard = float(jaccard12[0])
+        print(f"{ot_passage} -> {nt_passage} (book positions: {ot_startpos}-{ot_endpos} -> {nt_startpos}-{nt_endpos}, jaccard={jaccard:.6f})")
+
 def main():
     database = r"quotations.sqlite3"
     conn = create_connection(database)
@@ -506,6 +553,8 @@ def main():
         data = "Romans"
     if result_type == "ot_jaccard":
         data = "Psalms"
+    if result_type == "nt_passage_info":
+        data = 1311
 
     if len(sys.argv) > 2:
         data = sys.argv[2]
@@ -532,6 +581,8 @@ def main():
             nt_jaccard_csv(conn, data)
         elif result_type == "ot_jaccard":
             ot_jaccard_csv(conn, data)
+        elif result_type == "nt_passage_info":
+            nt_passage_info(conn, int(data))
         else:
             psalms_report_latex(conn, result_type, data)
 
