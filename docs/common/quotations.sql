@@ -2202,11 +2202,15 @@ insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passag
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2021, 202, 1, 'Jeremiah', null, 'LXX Jeremiah 31:34+120 31:35-134', 'Hebrews', 'SBLGNT Hebrews 8:11+112 8:13-76', 82367, 79, 12392, 79, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (2021, 202, 1, 'Jeremiah', null, 'LXX Jeremiah 31:31 31:35-134', 'Hebrews', 'SBLGNT Hebrews 8:8+24 8:13-76', 81810, 636, 11838, 633, 'manual');
+ (2021, 202, 1, 'Jeremiah', null, 'LXX Jeremiah 31:31 31:34', 'Hebrews', 'SBLGNT Hebrews 8:8+24 8:12', 81810, 635, 11838, 632, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (202, 1, null, 'λεγει'); -- λεγει = He says
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (202, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (2021, 'Hebrews', 'SBLGNT Hebrews 8:8 8:8-91', 11814, 11837);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (2021, 202, 1, 'Jeremiah', 'LXX Jeremiah 31:31 31:34', 'Hebrews', 'SBLGNT Hebrews 8:8+24 8:12', 81810, 635, 11838, 632);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1313, 203, 1, 'Jeremiah', null, 'LXX Jeremiah 7:11+2 7:11-80', 'Luke', 'SBLGNT Luke 19:46+72 19:46', 19391, 14, 75761, 14, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
