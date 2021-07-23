@@ -528,6 +528,24 @@ def nt_passage_info(conn, nt_quotation_id):
         jaccard = float(jaccard12[0])
         print(f"{ot_passage} -> {nt_passage} (book positions: {ot_startpos}-{ot_endpos} -> {nt_startpos}-{nt_endpos}, jaccard={jaccard:.6f})")
 
+def nt_passage_info_all(conn):
+    """
+    Show all relevant information on all NT quotations
+    :param conn: the Connection object
+    """
+
+    cur = conn.cursor()
+
+    cur.execute("SELECT qi.nt_quotation_id" +
+        " FROM nt_quotation_introductions qi, books b" +
+        " WHERE b.name = qi.nt_book"
+        " ORDER BY b.number, qi.nt_startpos")
+    rows = cur.fetchall()
+    for row in rows:
+        nt_quotation_id = row[0]
+        print(f"nt_quotation_id={nt_quotation_id}")
+        nt_passage_info(conn, nt_quotation_id)
+
 def main():
     database = r"quotations.sqlite3"
     conn = create_connection(database)
@@ -554,7 +572,7 @@ def main():
     if result_type == "ot_jaccard":
         data = "Psalms"
     if result_type == "nt_passage_info":
-        data = 1311
+        data = "all"
 
     if len(sys.argv) > 2:
         data = sys.argv[2]
@@ -582,7 +600,10 @@ def main():
         elif result_type == "ot_jaccard":
             ot_jaccard_csv(conn, data)
         elif result_type == "nt_passage_info":
-            nt_passage_info(conn, int(data))
+            if data == "all":
+                nt_passage_info_all(conn)
+            else:
+                nt_passage_info(conn, int(data))
         else:
             psalms_report_latex(conn, result_type, data)
 
