@@ -2185,6 +2185,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (201, 1, 'δια Ιερεμιου του προφητου', 'το ρηθεν ... λεγοντος'); -- δια Ιερεμιου του προφητου = by Jeremiah the prophet, το ρηθεν ... λεγοντος = having been spoken ... saying
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (201, 1, 'quotation', 'far-fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (2011, 'Matthew', 'SBLGNT Matthew 2:17 2:17',  3877, 3925);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (2011, 201, 1, 'Jeremiah', 'LXX Jeremiah 31:15+16 31:15-46', 'Matthew', 'SBLGNT Matthew 2:18 2:18-47', 80231, 61, 3926, 53);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (2011, 201, 1, 'Jeremiah', 'LXX Jeremiah 31:15+77 31:15-37', 'Matthew', 'SBLGNT Matthew 2:18+68 2:18-23', 80292, 9, 3994, 9); -- ουκ ηθελεν
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (2011, 201, 1, 'Jeremiah', 'LXX Jeremiah 31:15+112 31:15', 'Matthew', 'SBLGNT Matthew 2:18+89 2:18', 80327, 11, 4015, 11); -- οτι ουκ εισιν
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2021, 202, 1, 'Jeremiah', null, 'LXX Jeremiah 31:31+63 31:32-152', 'Hebrews', 'SBLGNT Hebrews 8:8+96 8:9-149', 81873, 38, 11910, 38, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
