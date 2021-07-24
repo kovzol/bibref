@@ -534,6 +534,9 @@ def nt_passage_info_all(conn):
     :param conn: the Connection object
     """
 
+    global bibref
+    spawn_bibref()
+
     cur = conn.cursor()
 
     cur.execute("SELECT qi.nt_quotation_id" +
@@ -543,6 +546,7 @@ def nt_passage_info_all(conn):
     rows = cur.fetchall()
     for row in rows:
         nt_quotation_id = row[0]
+        print()
         print(f"nt_quotation_id={nt_quotation_id}")
         nt_passage_info(conn, nt_quotation_id)
 

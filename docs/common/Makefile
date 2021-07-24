@@ -46,10 +46,15 @@ ot-jaccard_%.csv ot-jaccard_%.txt: visualize.py quotations.sqlite3
 ot-jaccard_%-sorted.txt: ot-jaccard_%.txt
 	sort $< > $@
 
+nt-passage-info.txt: visualize.py quotations.sqlite3
+	python3 visualize.py nt_passage_info all > nt-passage-info.txt
+
+
 jaccard: \
  $(ot-jaccard-Rplots-pdfs) $(ot-jaccard-sorted-txts) \
  $(nt-jaccard-Rplots-pdfs) $(nt-jaccard-sorted-txts) \
- nt-jaccard-multi-Rplots.pdf
+ nt-jaccard-multi-Rplots.pdf \
+ nt-passage-info.txt
 # ot-jaccard-multi-Rplots.pdf
 
 
