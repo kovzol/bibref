@@ -2261,7 +2261,7 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
  (3011, 'II_Corinthians', 'SBLGNT II_Corinthians 6:16 6:16-71', 9506, 9585);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
- (3011, 301, 1, 'Ezekiel', null, 'LXX Ezekiel 37:27+32 37:27', 'II_Corinthians', 'SBLGNT II_Corinthians 6:16+111 6:16', 104686, 41, 9617, 40, 'manual');
+ (3011, 301, 1, 'Ezekiel', 'LXX Ezekiel 37:27+32 37:27', 'II_Corinthians', 'SBLGNT II_Corinthians 6:16+111 6:16', 104686, 41, 9617, 40);
 -- TODO: Consider adding Ezekiel 20:34 or 22:20 as a second part of a combined quotation in II_Corinthians 6:17
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
