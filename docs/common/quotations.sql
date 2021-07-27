@@ -2272,6 +2272,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (1001, 1, null, 'καθως γεγραπται'); -- καθως γεγραπται = as it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1001, 1, 'quotation', 'literal, superset', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (10011, 'Romans', 'SBLGNT Romans 1:17 1:17-26', 1262, 1329);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (10011, 1001, 1, 'Habakkuk', 'LXX Habakkuk 2:4+39 2:4', 'Romans','SBLGNT Romans 1:17+68 1:17', 2127, 29, 1330, 26);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (10012, 1001, 2, 'Habakkuk', null, 'LXX Habakkuk 2:4+42 2:4-10', 'Galatians', 'SBLGNT Galatians 3:11+45 3:11-7', 2130, 16, 4515, 16, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
