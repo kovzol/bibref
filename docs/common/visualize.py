@@ -499,9 +499,18 @@ def nt_passage_info(conn, nt_quotation_id):
         " ORDER BY qi.nt_startpos")
     rows = cur.fetchall()
     print ("Introduction(s):")
+
+    nt_positions = []
+    nt_positions_info = []
+    i = 1
     for row in rows:
         nt_book, nt_passage, nt_startpos, nt_endpos = row
+        nt_positions.append(nt_startpos)
+        nt_positions_info.append("intro-start " + str(i))
+        nt_positions.append(nt_endpos)
+        nt_positions_info.append("intro-end " + str(i))
         print(f"{nt_passage} (book position: {nt_startpos}-{nt_endpos})")
+        i += 1
 
     cur.execute("SELECT c.ot_book, c.ot_passage, c.nt_passage, c.ot_startpos, c.ot_length, c.nt_startpos, c.nt_length" +
         " FROM clasps c" +
@@ -510,10 +519,26 @@ def nt_passage_info(conn, nt_quotation_id):
     rows2 = cur.fetchall()
     print ("Clasp(s):")
 
+    ot_positions = dict()
+    ot_positions_info = dict()
+    j = 1
+    clasp_ot_book = []
+    clasp_jaccard = []
     for row2 in rows2:
         ot_book, ot_passage, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length = row2
         ot_endpos = ot_startpos + ot_length - 1
         nt_endpos = nt_startpos + nt_length - 1
+        if not ot_book in ot_positions:
+           ot_positions[ot_book] = []
+           ot_positions_info[ot_book] = []
+        ot_positions[ot_book].append(ot_startpos)
+        ot_positions_info[ot_book].append("clasp-start " + str(j))
+        ot_positions[ot_book].append(ot_endpos)
+        ot_positions_info[ot_book].append("clasp-end " + str(j))
+        nt_positions.append(nt_startpos)
+        nt_positions_info.append("clasp-start " + str(j))
+        nt_positions.append(nt_endpos)
+        nt_positions_info.append("clasp-end " + str(j))
 
         command1 = "lookup1 " + ot_passage
         bibref.sendline(command1)
@@ -527,6 +552,12 @@ def nt_passage_info(conn, nt_quotation_id):
         jaccard12 = bibref.match.groups()
         jaccard = float(jaccard12[0])
         print(f"{ot_passage} -> {nt_passage} (book positions: {ot_startpos}-{ot_endpos} -> {nt_startpos}-{nt_endpos}, jaccard={jaccard:.6f})")
+        clasp_ot_book.append(ot_book)
+        clasp_jaccard.append(jaccard)
+        j += 1
+    print('#', nt_positions, nt_positions_info)
+    print('#', ot_positions, ot_positions_info)
+    print('#', clasp_ot_book, clasp_jaccard)
 
 def nt_passage_info_all(conn):
     """
