@@ -555,6 +555,23 @@ def nt_passage_info(conn, nt_quotation_id):
         clasp_ot_book.append(ot_book)
         clasp_jaccard.append(jaccard)
         j += 1
+
+    # Order the NT positions
+    s = 0
+    for k in range(len(nt_positions)):
+        for l in range(k):
+            # print(k,l,nt_positions[l],nt_positions[k])
+            if nt_positions[l] > nt_positions[k]:
+                # swap them
+                d = nt_positions[l]
+                di = nt_positions_info[l]
+                nt_positions[l] = nt_positions[k]
+                nt_positions_info[l] = nt_positions_info[k]
+                nt_positions[k] = d
+                nt_positions_info[k] = di
+                s += 1
+
+    print('#', s, 'swaps')
     print('#', nt_positions, nt_positions_info)
     print('#', ot_positions, ot_positions_info)
     print('#', clasp_ot_book, clasp_jaccard)
