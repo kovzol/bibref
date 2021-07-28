@@ -1996,7 +1996,7 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (136, 4, 'quotation', 'far-fuzzy, superset', 'Z.K.');
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
- (1364, 'Mark', 'SBLGNT Mark 4:12 4:12-91', 12468, 12470);
+ (1364, 'Mark', 'SBLGNT Mark 4:12 4:12-91', 9847, 9849);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1364, 136, 4, 'Isaiah', 'LXX Isaiah 6:9+63 6:9', 'Mark', 'SBLGNT Mark 4:12+3 4:12-64', 12471, 28, 9850, 27); -- βλεποντες βλεψετε και ου μη ιδητε -> βλεποντες βλεπωσι και μη ιδωσιν
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
