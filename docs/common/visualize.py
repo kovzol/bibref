@@ -571,6 +571,21 @@ def nt_passage_info(conn, nt_quotation_id):
                 nt_positions_info[k] = di
                 s += 1
 
+    # Order the OT positions
+    for m in ot_positions.keys():
+        for k in range(len(ot_positions[m])):
+            for l in range(k):
+            # print(k,l,nt_positions[l],nt_positions[k])
+                if ot_positions[m][l] > ot_positions[m][k]:
+                    # swap them
+                    d = ot_positions[m][l]
+                    di = ot_positions_info[m][l]
+                    ot_positions[m][l] = ot_positions[m][k]
+                    ot_positions_info[m][l] = ot_positions_info[m][k]
+                    ot_positions[m][k] = d
+                    ot_positions_info[m][k] = di
+                    s += 1
+
     print('#', s, 'swaps')
     print('#', nt_positions, nt_positions_info)
     print('#', ot_positions, ot_positions_info)
@@ -587,7 +602,7 @@ def nt_passage_info_all(conn):
 
     cur = conn.cursor()
 
-    cur.execute("SELECT qi.nt_quotation_id" +
+    cur.execute("SELECT DISTINCT qi.nt_quotation_id" +
         " FROM nt_quotation_introductions qi, books b" +
         " WHERE b.name = qi.nt_book"
         " ORDER BY b.number, qi.nt_startpos")
