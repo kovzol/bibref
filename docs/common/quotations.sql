@@ -2295,11 +2295,13 @@ insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passag
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1291, 1001, 3, 'Habakkuk', null, 'LXX Habakkuk 2:4+49 2:4-10', 'Hebrews', 'SBLGNT Hebrews 10:38+13 10:38-49', 2137, 9, 18106, 9, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (1291, 1001, 3, 'Habakkuk', null, 'LXX Habakkuk 2:3+84 2:4-10', 'Hebrews', 'SBLGNT Hebrews 10:37+21 10:38', 2061, 85, 18067, 97, 'manual');
+ (1291, 1001, 3, 'Habakkuk', null, 'LXX Habakkuk 2:3+84 2:4', 'Hebrews', 'SBLGNT Hebrews 10:37+21 10:38', 2061, 95, 18067, 97, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (1001, 3, null, 'κομισησθε την επαγγελιαν / ετι γαρ'); -- κομισησθε την επαγγελιαν / ετι γαρ = you may receive the promise / yet for
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1001, 3, 'quotation', 'fuzzy, subset', 'Z.K.');
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1291, 1001, 3, 'Habakkuk', 'LXX Habakkuk 2:3+84 2:4', 'Hebrews', 'SBLGNT Hebrews 10:37+21 10:38', 2061, 95, 18067, 97);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (10021, 1002, 1, 'Habakkuk', null, 'LXX Habakkuk 1:5 1:5-113', 'Acts', 'SBLGNT Acts 13:41 13:41-99', 343, 22, 44377, 22, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
