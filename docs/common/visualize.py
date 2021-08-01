@@ -604,14 +604,24 @@ def nt_passage_info(conn, nt_quotation_id):
             nt_text[nt_startpos - nt_pos_start + k] += "i" + str(i) + ","
         i += 1
     j = 1
+    ot_text = dict()
+    ot_pos_start = dict()
+    for m in ot_positions.keys():
+        ot_pos_start[m] = ot_positions[m][0]
+        ot_pos_end = ot_positions[m][-1]
+        ot_length = ot_pos_end - ot_pos_start[m] + 1
+        ot_text[m] = [""] * ot_length
     for row2 in rows2:
         ot_book, ot_passage, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length = row2
         ot_endpos = ot_startpos + ot_length - 1
         nt_endpos = nt_startpos + nt_length - 1
         for k in range(nt_endpos - nt_startpos + 1):
             nt_text[nt_startpos - nt_pos_start + k] += "c" + str(j) + ","
+        for k in range(ot_endpos - ot_startpos + 1):
+            ot_text[ot_book][ot_startpos - ot_pos_start[ot_book] + k] += "c" + str(j) + ","
         j += 1
     print('#', nt_text)
+    print('#', ot_text)
 
 def nt_passage_info_all(conn):
     """
