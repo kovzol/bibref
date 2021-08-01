@@ -556,7 +556,7 @@ def nt_passage_info(conn, nt_quotation_id):
         clasp_jaccard.append(jaccard)
         j += 1
 
-    # Order the NT positions
+    # Order the NT positions (bubble sort)
     s = 0
     for k in range(len(nt_positions)):
         for l in range(k):
@@ -571,7 +571,7 @@ def nt_passage_info(conn, nt_quotation_id):
                 nt_positions_info[k] = di
                 s += 1
 
-    # Order the OT positions
+    # Order the OT positions (bubble sort)
     for m in ot_positions.keys():
         for k in range(len(ot_positions[m])):
             for l in range(k):
@@ -590,6 +590,28 @@ def nt_passage_info(conn, nt_quotation_id):
     print('#', nt_positions, nt_positions_info)
     print('#', ot_positions, ot_positions_info)
     print('#', clasp_ot_book, clasp_jaccard)
+
+    # Create array to describe each letter of the texts
+    nt_pos_start = nt_positions[0]
+    nt_pos_end = nt_positions[-1]
+    print('# NT: ', nt_pos_start, '-', nt_pos_end)
+    nt_length = nt_pos_end - nt_pos_start + 1
+    nt_text = [""] * nt_length
+    i = 1
+    for row in rows:
+        nt_book, nt_passage, nt_startpos, nt_endpos = row
+        for k in range(nt_endpos - nt_startpos + 1):
+            nt_text[nt_startpos - nt_pos_start + k] += "i" + str(i) + ","
+        i += 1
+    j = 1
+    for row2 in rows2:
+        ot_book, ot_passage, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length = row2
+        ot_endpos = ot_startpos + ot_length - 1
+        nt_endpos = nt_startpos + nt_length - 1
+        for k in range(nt_endpos - nt_startpos + 1):
+            nt_text[nt_startpos - nt_pos_start + k] += "c" + str(j) + ","
+        j += 1
+    print('#', nt_text)
 
 def nt_passage_info_all(conn):
     """
