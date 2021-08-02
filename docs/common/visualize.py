@@ -481,6 +481,41 @@ def ot_jaccard_csv(conn, ot_book):
     f.close()
     g.close()
 
+def sort_positions():
+    global nt_positions, nt_positions_info, ot_positions, ot_positions_info
+    # Order the NT positions (bubble sort)
+    s = 0
+    for k in range(len(nt_positions)):
+        for l in range(k):
+            # print(k,l,nt_positions[l],nt_positions[k])
+            if nt_positions[l] > nt_positions[k]:
+                # swap them
+                d = nt_positions[l]
+                di = nt_positions_info[l]
+                nt_positions[l] = nt_positions[k]
+                nt_positions_info[l] = nt_positions_info[k]
+                nt_positions[k] = d
+                nt_positions_info[k] = di
+                s += 1
+
+    # Order the OT positions (bubble sort)
+    for m in ot_positions.keys():
+        for k in range(len(ot_positions[m])):
+            for l in range(k):
+            # print(k,l,nt_positions[l],nt_positions[k])
+                if ot_positions[m][l] > ot_positions[m][k]:
+                    # swap them
+                    d = ot_positions[m][l]
+                    di = ot_positions_info[m][l]
+                    ot_positions[m][l] = ot_positions[m][k]
+                    ot_positions_info[m][l] = ot_positions_info[m][k]
+                    ot_positions[m][k] = d
+                    ot_positions_info[m][k] = di
+                    s += 1
+
+    # print('#', s, 'swaps')
+
+
 def nt_passage_info(conn, nt_quotation_id):
     """
     Show all relevant information on a given NT quotation
@@ -500,6 +535,7 @@ def nt_passage_info(conn, nt_quotation_id):
     rows = cur.fetchall()
     print ("Introduction(s):")
 
+    global nt_positions, nt_positions_info
     nt_positions = []
     nt_positions_info = []
     i = 1
@@ -519,6 +555,7 @@ def nt_passage_info(conn, nt_quotation_id):
     rows2 = cur.fetchall()
     print ("Clasp(s):")
 
+    global ot_positions, ot_positions_info
     ot_positions = dict()
     ot_positions_info = dict()
     j = 1
@@ -556,37 +593,7 @@ def nt_passage_info(conn, nt_quotation_id):
         clasp_jaccard.append(jaccard)
         j += 1
 
-    # Order the NT positions (bubble sort)
-    s = 0
-    for k in range(len(nt_positions)):
-        for l in range(k):
-            # print(k,l,nt_positions[l],nt_positions[k])
-            if nt_positions[l] > nt_positions[k]:
-                # swap them
-                d = nt_positions[l]
-                di = nt_positions_info[l]
-                nt_positions[l] = nt_positions[k]
-                nt_positions_info[l] = nt_positions_info[k]
-                nt_positions[k] = d
-                nt_positions_info[k] = di
-                s += 1
-
-    # Order the OT positions (bubble sort)
-    for m in ot_positions.keys():
-        for k in range(len(ot_positions[m])):
-            for l in range(k):
-            # print(k,l,nt_positions[l],nt_positions[k])
-                if ot_positions[m][l] > ot_positions[m][k]:
-                    # swap them
-                    d = ot_positions[m][l]
-                    di = ot_positions_info[m][l]
-                    ot_positions[m][l] = ot_positions[m][k]
-                    ot_positions_info[m][l] = ot_positions_info[m][k]
-                    ot_positions[m][k] = d
-                    ot_positions_info[m][k] = di
-                    s += 1
-
-    # print('#', s, 'swaps')
+    sort_positions()
 
     # Create array to describe each letter of the texts
     nt_pos_start = nt_positions[0]
@@ -645,6 +652,8 @@ def nt_passage_info(conn, nt_quotation_id):
                 ot_positions_info[m].append("unidentified-end " + str(u))
                 u += 1
             p += 1
+
+    sort_positions()
 
     print('#', nt_text)
     print('#', ot_text)
