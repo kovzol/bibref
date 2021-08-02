@@ -603,11 +603,12 @@ def nt_passage_info(conn, nt_quotation_id):
     j = 1
     ot_text = dict()
     ot_pos_start = dict()
+    ot_len = dict()
     for m in ot_positions.keys():
         ot_pos_start[m] = ot_positions[m][0]
         ot_pos_end = ot_positions[m][-1]
-        ot_length = ot_pos_end - ot_pos_start[m] + 1
-        ot_text[m] = [""] * ot_length
+        ot_len[m] = ot_pos_end - ot_pos_start[m] + 1
+        ot_text[m] = [""] * ot_len[m]
     for row2 in rows2:
         ot_book, ot_passage, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length = row2
         ot_endpos = ot_startpos + ot_length - 1
@@ -631,6 +632,19 @@ def nt_passage_info(conn, nt_quotation_id):
             nt_positions_info.append("unidentified-end " + str(u))
             u += 1
         p += 1
+    for m in ot_positions.keys():
+        p = 0
+        while p < ot_len[m]:
+            if ot_text[m][p] == "":
+                ot_positions[m].append(ot_pos_start[m] + p)
+                ot_positions_info[m].append("unidentified-start " + str(u))
+                while ot_text[m][p] == "":
+                    ot_text[m][p] = "u" + str(u)
+                    p += 1
+                ot_positions[m].append(ot_pos_start[m] + p - 1)
+                ot_positions_info[m].append("unidentified-end " + str(u))
+                u += 1
+            p += 1
 
     print('#', nt_text)
     print('#', ot_text)
