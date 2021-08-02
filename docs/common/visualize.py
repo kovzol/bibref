@@ -586,17 +586,14 @@ def nt_passage_info(conn, nt_quotation_id):
                     ot_positions_info[m][k] = di
                     s += 1
 
-    print('#', s, 'swaps')
-    print('#', nt_positions, nt_positions_info)
-    print('#', ot_positions, ot_positions_info)
-    print('#', clasp_ot_book, clasp_jaccard)
+    # print('#', s, 'swaps')
 
     # Create array to describe each letter of the texts
     nt_pos_start = nt_positions[0]
     nt_pos_end = nt_positions[-1]
     print('# NT: ', nt_pos_start, '-', nt_pos_end)
-    nt_length = nt_pos_end - nt_pos_start + 1
-    nt_text = [""] * nt_length
+    nt_len = nt_pos_end - nt_pos_start + 1
+    nt_text = [""] * nt_len
     i = 1
     for row in rows:
         nt_book, nt_passage, nt_startpos, nt_endpos = row
@@ -620,8 +617,28 @@ def nt_passage_info(conn, nt_quotation_id):
         for k in range(ot_endpos - ot_startpos + 1):
             ot_text[ot_book][ot_startpos - ot_pos_start[ot_book] + k] += "c" + str(j) + ","
         j += 1
+    # start_with_intro = nt_text[0][0] == "i"
+    p = 0
+    u = 1
+    while p < nt_len:
+        if nt_text[p] == "":
+            nt_positions.append(nt_pos_start + p)
+            nt_positions_info.append("unidentified-start " + str(u))
+            while nt_text[p] == "":
+                nt_text[p] = "u" + str(u)
+                p += 1
+            nt_positions.append(nt_pos_start + p - 1)
+            nt_positions_info.append("unidentified-end " + str(u))
+            u += 1
+        p += 1
+
     print('#', nt_text)
     print('#', ot_text)
+    print('#', nt_positions, nt_positions_info)
+    print('#', ot_positions, ot_positions_info)
+    print('#', clasp_ot_book, clasp_jaccard)
+
+    # Print graphs
 
 def nt_passage_info_all(conn):
     """
