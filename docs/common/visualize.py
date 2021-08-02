@@ -679,11 +679,13 @@ def nt_passage_info_all(conn):
         " WHERE b.name = qi.nt_book"
         " ORDER BY b.number, qi.nt_startpos")
     rows = cur.fetchall()
+    i = 1
     for row in rows:
         nt_quotation_id = row[0]
         print()
-        print(f"nt_quotation_id={nt_quotation_id}")
+        print(f"{i}. nt_quotation_id={nt_quotation_id}")
         nt_passage_info(conn, nt_quotation_id)
+        i += 1
 
 def main():
     database = r"quotations.sqlite3"
