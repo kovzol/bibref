@@ -2348,6 +2348,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (1201, 1, null, 'επηγγελται λεγων'); -- επηγγελται λεγων = He has promised saying
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1201, 1, 'quotation', 'literal, fuzzy, subset', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (12011, 'Hebrews', 'SBLGNT Hebrews 12:26 12:26-45',  24059, 24104);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (12011, 1201, 1, 'Haggai', 'LXX Haggai 2:6+31 2:6-44', 'Hebrews', 'SBLGNT Hebrews 12:26+46 12:26-30', 2323, 15, 24105, 15); -- ετι απαξ εγω σεισω
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (12011, 1201, 1, 'Haggai', 'LXX Haggai 2:6+46 2:6-34', 'Hebrews', 'SBLGNT Hebrews 12:26+81 12:26', 2338, 10, 24140, 10); -- τον ουρανον
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (12011, 1201, 1, 'Haggai', 'LXX Haggai 2:6+59 2:6-25', 'Hebrews', 'SBLGNT Hebrews 12:26+68 12:26-17', 2351, 6, 24127, 6); -- την γην
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (13011, 1301, 1, 'Hosea', null, 'ABPGRK Hosea 2:23+38 2:23-34', 'Romans', 'SBLGNT Romans 9:25+24 9:25-10', null, 39, 19866, 38, 'manual');
