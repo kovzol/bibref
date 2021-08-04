@@ -625,7 +625,6 @@ def nt_passage_info(conn, nt_quotation_id):
         for k in range(ot_endpos - ot_startpos + 1):
             ot_text[ot_book][ot_startpos - ot_pos_start[ot_book] + k] += "c" + str(j) + ","
         j += 1
-    # start_with_intro = nt_text[0][0] == "i"
     p = 0
     u = 1
     while p < nt_len:
@@ -662,6 +661,37 @@ def nt_passage_info(conn, nt_quotation_id):
     print('#', clasp_ot_book, clasp_jaccard)
 
     # Print graphs
+    start_with_intro = nt_text[0][0] == "i"
+    p = 0
+    out = ""
+    while p < len(nt_positions):
+        words = nt_positions_info[p].split(" ")
+        cl = words[0].split("-")
+        chunk = int(words[1])
+        if words[0] == "intro-start":
+            out += "[intro"
+            if not start_with_intro or chunk > 1:
+                q = p
+                found = False
+                while not found:
+                    q += 1
+                    found = nt_positions_info[q] == "intro-end " + str(chunk)
+                intro_length = nt_positions[q] - nt_positions[p] + 1
+                out += f" ({intro_length})"
+            out += "]"
+        else:
+            if cl[1] == "start":
+                out += "[" + cl[0]
+                q = p
+                found = False
+                while not found:
+                    q += 1
+                    found = nt_positions_info[q] == cl[0] + "-end " + str(chunk)
+                class_length = nt_positions[q] - nt_positions[p] + 1
+                out += f" ({class_length})"
+                out += "]"
+        p += 1
+    print("NT:", out)
 
 def nt_passage_info_all(conn):
     """
