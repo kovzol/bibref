@@ -663,13 +663,13 @@ def nt_passage_info(conn, nt_quotation_id):
     # Print graphs
     start_with_intro = nt_text[0][0] == "i"
     p = 0
-    out = ""
+    nt_out = ""
     while p < len(nt_positions):
         words = nt_positions_info[p].split(" ")
         cl = words[0].split("-")
         chunk = int(words[1])
         if words[0] == "intro-start":
-            out += "[intro"
+            nt_out += "[intro"
             if not start_with_intro or chunk > 1:
                 q = p
                 found = False
@@ -677,21 +677,46 @@ def nt_passage_info(conn, nt_quotation_id):
                     q += 1
                     found = nt_positions_info[q] == "intro-end " + str(chunk)
                 intro_length = nt_positions[q] - nt_positions[p] + 1
-                out += f" ({intro_length})"
-            out += "]"
+                nt_out += f" ({intro_length})"
+            nt_out += "]"
         else:
             if cl[1] == "start":
-                out += "[" + cl[0]
+                nt_out += "[" + cl[0]
                 q = p
                 found = False
                 while not found:
                     q += 1
                     found = nt_positions_info[q] == cl[0] + "-end " + str(chunk)
                 class_length = nt_positions[q] - nt_positions[p] + 1
-                out += f" ({class_length})"
-                out += "]"
+                if cl[0] == "clasp":
+                    nt_out += f" {chunk}"
+                nt_out += f" ({class_length})"
+                nt_out += "]"
         p += 1
-    print("NT:", out)
+    print("NT:", nt_out)
+
+    ot_out = dict()
+    for m in ot_positions.keys():
+        p = 0
+        ot_out[m] = ""
+        while p < len(ot_positions[m]):
+            words = ot_positions_info[m][p].split(" ")
+            cl = words[0].split("-")
+            chunk = int(words[1])
+            if cl[1] == "start":
+                ot_out[m] += "[" + cl[0]
+                q = p
+                found = False
+                while not found:
+                    q += 1
+                    found = ot_positions_info[m][q] == cl[0] + "-end " + str(chunk)
+                class_length = ot_positions[m][q] - ot_positions[m][p] + 1
+                if cl[0] == "clasp":
+                    ot_out[m] += f" {chunk}"
+                ot_out[m] += f" ({class_length})"
+                ot_out[m] += "]"
+            p += 1
+        print(f"OT/{m}:", ot_out[m])
 
 def nt_passage_info_all(conn):
     """
