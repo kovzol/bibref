@@ -982,8 +982,8 @@ insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (391, 39, 1, 'Psalms', 'LXX Psalms 109:3+9 109:3-35', 'John', 'SBLGNT John 15:25+48 15:25-12', 130535, 3, 52594, 3);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
- (391, 39, 1, 'Psalms', 'LXX Psalms 109:3+29 109:3', 'John', 'SBLGNT John 15:25+47 15:25', 130555, 18, 52593, 16);
--- "Mis" is copied from the beginning from Psalm 109:3. So this is similar to a "..."-like quotation. Note the overlapping.
+ (391, 39, 1, 'Psalms', 'LXX Psalms 109:3+35 109:3', 'John', 'SBLGNT John 15:25+51 15:25', 130561, 12, 52597, 12);
+-- "Mis" is copied from the beginning from Psalm 109:3. So this is similar to a "..."-like quotation.
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (401, 40, 1, 'Psalms', 110, 'Psalms 110:1', 'Luke', 'Luke 20:42-43', null, null, null, null, 'traditional');

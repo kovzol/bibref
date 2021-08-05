@@ -616,15 +616,25 @@ def nt_passage_info(conn, nt_quotation_id):
         ot_pos_end = ot_positions[m][-1]
         ot_len[m] = ot_pos_end - ot_pos_start[m] + 1
         ot_text[m] = [""] * ot_len[m]
+    overlapping_nt = False
+    overlapping_ot = False
     for row2 in rows2:
         ot_book, ot_passage, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length = row2
         ot_endpos = ot_startpos + ot_length - 1
         nt_endpos = nt_startpos + nt_length - 1
         for k in range(nt_endpos - nt_startpos + 1):
+            if len(nt_text[nt_startpos - nt_pos_start + k]) > 0:
+                overlapping_nt = True
             nt_text[nt_startpos - nt_pos_start + k] += "c" + str(j) + ","
         for k in range(ot_endpos - ot_startpos + 1):
+            if len(ot_text[ot_book][ot_startpos - ot_pos_start[ot_book] + k]) > 0:
+                overlapping_ot = True
             ot_text[ot_book][ot_startpos - ot_pos_start[ot_book] + k] += "c" + str(j) + ","
         j += 1
+    if overlapping_nt:
+        print("Warning: NT overlapping")
+    if overlapping_ot:
+        print("Warning: OT overlapping")
     p = 0
     u = 1
     while p < nt_len:
@@ -643,12 +653,12 @@ def nt_passage_info(conn, nt_quotation_id):
         while p < ot_len[m]:
             if ot_text[m][p] == "":
                 ot_positions[m].append(ot_pos_start[m] + p)
-                ot_positions_info[m].append("unidentified-start " + str(u))
+                ot_positions_info[m].append("unquoted-start " + str(u))
                 while ot_text[m][p] == "":
                     ot_text[m][p] = "u" + str(u)
                     p += 1
                 ot_positions[m].append(ot_pos_start[m] + p - 1)
-                ot_positions_info[m].append("unidentified-end " + str(u))
+                ot_positions_info[m].append("unquoted-end " + str(u))
                 u += 1
             p += 1
 
