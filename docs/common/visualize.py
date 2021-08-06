@@ -379,7 +379,7 @@ def spawn_bibref():
     global bibref
     if bibref is not None:
         return
-    print("Waiting for bibref's full startup...")
+    sys.stderr.write("Waiting for bibref's full startup...\n")
     bibref = pexpect.spawn("../../bibref -a") # FIXME: path is hardcoded now
     bibref.expect("Done loading books of SBLGNT.")
     bibref.timeout = 5
@@ -389,7 +389,7 @@ def nt_jaccard_csv(conn, nt_book):
     Collect all quotations from an NT book that are obtained manually and
     determine the Jaccard distances to the OT passages in a CSV file
     :param conn: the Connection object
-    :nt_book: NT book name
+    :param nt_book: NT book name
     """
 
     global bibref
@@ -437,7 +437,7 @@ def ot_jaccard_csv(conn, ot_book):
     Collect all quotations from an OT book that are obtained manually and
     determine the Jaccard distances to the NT passages in a CSV file
     :param conn: the Connection object
-    :ot_book: OT book name
+    :param ot_book: OT book name
     """
 
     global bibref
@@ -515,12 +515,24 @@ def sort_positions():
 
     # print('#', s, 'swaps')
 
+def comment(text, format):
+    """
+    Print a comment to stdout according to the given format
+    :param text: the text of comment
+    :param format: expected format (latex, text, html)
+    """
+    if format == "latex":
+        print("%", text)
+    if format == "html":
+        print("<!--", text, "-->")
+    if format == "text":
+        print("#", text)
 
-def nt_passage_info(conn, nt_quotation_id):
+def nt_passage_info(conn, nt_quotation_id, format):
     """
     Show all relevant information on a given NT quotation
     :param conn: the Connection object
-    :nt_quotation_id: NT quotation identifier
+    :param nt_quotation_id: NT quotation identifier
     """
 
     global bibref
@@ -533,7 +545,7 @@ def nt_passage_info(conn, nt_quotation_id):
         " WHERE qi.nt_quotation_id = " + str(nt_quotation_id) +
         " ORDER BY qi.nt_startpos")
     rows = cur.fetchall()
-    print ("Introduction(s):")
+    comment("Introduction(s):", format)
 
     global nt_positions, nt_positions_info
     nt_positions = []
@@ -545,7 +557,7 @@ def nt_passage_info(conn, nt_quotation_id):
         nt_positions_info.append("intro-start " + str(i))
         nt_positions.append(nt_endpos)
         nt_positions_info.append("intro-end " + str(i))
-        print(f"{nt_passage} (book position: {nt_startpos}-{nt_endpos})")
+        comment(f"{nt_passage} (book position: {nt_startpos}-{nt_endpos})", format)
         i += 1
 
     cur.execute("SELECT c.ot_book, c.ot_passage, c.nt_passage, c.ot_startpos, c.ot_length, c.nt_startpos, c.nt_length" +
@@ -553,7 +565,7 @@ def nt_passage_info(conn, nt_quotation_id):
         " WHERE c.nt_quotation_id = " + str(nt_quotation_id) +
         " ORDER BY c.nt_startpos")
     rows2 = cur.fetchall()
-    print ("Clasp(s):")
+    comment("Clasp(s):", format)
 
     global ot_positions, ot_positions_info
     ot_positions = dict()
@@ -588,7 +600,7 @@ def nt_passage_info(conn, nt_quotation_id):
         bibref.expect("Jaccard distance is ([0-9]+\.[0-9]+).")
         jaccard12 = bibref.match.groups()
         jaccard = float(jaccard12[0])
-        print(f"{ot_passage} -> {nt_passage} (book positions: {ot_startpos}-{ot_endpos} -> {nt_startpos}-{nt_endpos}, jaccard={jaccard:.6f})")
+        comment(f"{ot_passage} -> {nt_passage} (book positions: {ot_startpos}-{ot_endpos} -> {nt_startpos}-{nt_endpos}, jaccard={jaccard:.6f})", format)
         clasp_ot_book.append(ot_book)
         clasp_jaccard.append(jaccard)
         j += 1
@@ -598,7 +610,7 @@ def nt_passage_info(conn, nt_quotation_id):
     # Create array to describe each letter of the texts
     nt_pos_start = nt_positions[0]
     nt_pos_end = nt_positions[-1]
-    print('# NT: ', nt_pos_start, '-', nt_pos_end)
+    comment(f"NT: {nt_pos_start}-{nt_pos_end}", format)
     nt_len = nt_pos_end - nt_pos_start + 1
     nt_text = [""] * nt_len
     i = 1
@@ -660,16 +672,16 @@ def nt_passage_info(conn, nt_quotation_id):
 
     sort_positions()
 
-    print('#', nt_text)
-    print('#', ot_text)
-    print('#', nt_positions, nt_positions_info)
-    print('#', ot_positions, ot_positions_info)
-    print('#', clasp_ot_book, clasp_jaccard)
+    comment(nt_text, format)
+    comment(ot_text, format)
+    comment(f"{nt_positions} {nt_positions_info}", format)
+    comment(f"{ot_positions} {ot_positions_info}", format)
+    comment(f"{clasp_ot_book} {clasp_jaccard}", format)
 
     if overlapping_nt:
-        print("Warning: NT overlapping")
+        comment("Warning: NT overlapping", format)
     if overlapping_ot:
-        print("Warning: OT overlapping")
+        comment("Warning: OT overlapping", format)
     if overlapping_nt or overlapping_ot:
         return
 
@@ -706,7 +718,7 @@ def nt_passage_info(conn, nt_quotation_id):
                 nt_out += f" ({class_length})"
                 nt_out += "]"
         p += 1
-    print("NT:", nt_out)
+    comment(f"NT: {nt_out}", format)
 
     ot_out = dict()
     for m in ot_positions.keys():
@@ -729,9 +741,9 @@ def nt_passage_info(conn, nt_quotation_id):
                 ot_out[m] += f" ({class_length})"
                 ot_out[m] += "]"
             p += 1
-        print(f"OT/{m}:", ot_out[m])
+        comment(f"OT/{m}: {ot_out[m]}", format)
 
-def nt_passage_info_all(conn):
+def nt_passage_info_all(conn, format):
     """
     Show all relevant information on all NT quotations
     :param conn: the Connection object
@@ -750,9 +762,9 @@ def nt_passage_info_all(conn):
     i = 1
     for row in rows:
         nt_quotation_id = row[0]
-        print()
-        print(f"{i}. nt_quotation_id={nt_quotation_id}")
-        nt_passage_info(conn, nt_quotation_id)
+        comment("", format)
+        comment(f"{i}. nt_quotation_id={nt_quotation_id}", format)
+        nt_passage_info(conn, nt_quotation_id, format)
         i += 1
 
 def main():
@@ -810,9 +822,9 @@ def main():
             ot_jaccard_csv(conn, data)
         elif result_type == "nt_passage_info":
             if data == "all":
-                nt_passage_info_all(conn)
+                nt_passage_info_all(conn, "text")
             else:
-                nt_passage_info(conn, int(data))
+                nt_passage_info(conn, int(data), "text")
         else:
             psalms_report_latex(conn, result_type, data)
 
