@@ -631,10 +631,6 @@ def nt_passage_info(conn, nt_quotation_id):
                 overlapping_ot = True
             ot_text[ot_book][ot_startpos - ot_pos_start[ot_book] + k] += "c" + str(j) + ","
         j += 1
-    if overlapping_nt:
-        print("Warning: NT overlapping")
-    if overlapping_ot:
-        print("Warning: OT overlapping")
     p = 0
     u = 1
     while p < nt_len:
@@ -669,6 +665,13 @@ def nt_passage_info(conn, nt_quotation_id):
     print('#', nt_positions, nt_positions_info)
     print('#', ot_positions, ot_positions_info)
     print('#', clasp_ot_book, clasp_jaccard)
+
+    if overlapping_nt:
+        print("Warning: NT overlapping")
+    if overlapping_ot:
+        print("Warning: OT overlapping")
+    if overlapping_nt or overlapping_ot:
+        return
 
     # Print graphs
     start_with_intro = nt_text[0][0] == "i"
