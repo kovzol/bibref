@@ -701,6 +701,7 @@ def nt_passage_info(conn, nt_quotation_id, format):
     nt_out = ""
     latex_lastnode = ""
     nt_latex = ""
+    connect_nodes = "\\draw "
     while p < len(nt_positions):
         words = nt_positions_info[p].split(" ")
         cl = words[0].split("-")
@@ -711,6 +712,7 @@ def nt_passage_info(conn, nt_quotation_id, format):
             node_content = ""
             if latex_lastnode != "":
                 nt_latex += ",right of=" + latex_lastnode
+                connect_nodes += " --"
             if not start_with_intro or chunk > 1:
                 q = p
                 found = False
@@ -723,6 +725,7 @@ def nt_passage_info(conn, nt_quotation_id, format):
             nt_out += "]"
             nt_latex += "] {" + node_content+ "};\n"
             latex_lastnode = "intro " + str(chunk)
+            connect_nodes += " (" + latex_lastnode + ")"
         else:
             if cl[1] == "start":
                 nt_out += "[" + cl[0]
@@ -740,9 +743,12 @@ def nt_passage_info(conn, nt_quotation_id, format):
                 nt_latex += "\\node[" + cl[0]+ "] (" + cl[0] + " " + str(chunk) + ")"
                 if latex_lastnode != "":
                     nt_latex += "[right of=" + latex_lastnode + "]"
+                    connect_nodes += " --"
                 nt_latex += " {" + str(class_length) + "};\n"
                 latex_lastnode = cl[0] + " " + str(chunk)
+                connect_nodes += " (" + latex_lastnode + ")"
         p += 1
+    connect_nodes += ";"
     comment(f"NT: {nt_out}", format)
 
     ot_out = dict()
@@ -770,6 +776,7 @@ def nt_passage_info(conn, nt_quotation_id, format):
 
     if format == "latex":
         print (nt_latex)
+        print (connect_nodes)
         print ("\\end{tikzpicture} \\par")
 
 def nt_passage_info_all(conn, format):
