@@ -521,12 +521,16 @@ def comment(text, format):
     :param text: the text of comment
     :param format: expected format (latex, text, html)
     """
+    threshold = 2000 # this is needed for LaTeX since it cannot handle too long lines
+    output = str(text)
+    if len(output) > threshold and format == "latex":
+        output = str(output[0:threshold]) + "..."
     if format == "latex":
-        print("%", text)
+        print("%", output)
     if format == "html":
-        print("<!--", text, "-->")
+        print("<!--", output, "-->")
     if format == "text":
-        print("#", text)
+        print("#", output)
 
 def nt_passage_info(conn, nt_quotation_id, format):
     """
@@ -558,6 +562,9 @@ def nt_passage_info(conn, nt_quotation_id, format):
         nt_positions.append(nt_endpos)
         nt_positions_info.append("intro-end " + str(i))
         comment(f"{nt_passage} (book position: {nt_startpos}-{nt_endpos})", format)
+        if format == "latex":
+            nt_passage_formatted = nt_passage.replace("_", " ")
+            print(f"{nt_passage_formatted} (book position: {nt_startpos}-{nt_endpos}) \\par")
         i += 1
 
     cur.execute("SELECT c.ot_book, c.ot_passage, c.nt_passage, c.ot_startpos, c.ot_length, c.nt_startpos, c.nt_length" +
@@ -686,15 +693,24 @@ def nt_passage_info(conn, nt_quotation_id, format):
         return
 
     # Print graphs
+    if format == "latex":
+        print ("\\begin{tikzpicture}[node distance=8mm]")
+
     start_with_intro = nt_text[0][0] == "i"
     p = 0
     nt_out = ""
+    latex_lastnode = ""
+    nt_latex = ""
     while p < len(nt_positions):
         words = nt_positions_info[p].split(" ")
         cl = words[0].split("-")
         chunk = int(words[1])
         if words[0] == "intro-start":
             nt_out += "[intro"
+            nt_latex += "\\node[intro] (intro " + str(chunk) + ") ["
+            node_content = ""
+            if latex_lastnode != "":
+                nt_latex += ",right of=" + latex_lastnode
             if not start_with_intro or chunk > 1:
                 q = p
                 found = False
@@ -703,7 +719,10 @@ def nt_passage_info(conn, nt_quotation_id, format):
                     found = nt_positions_info[q] == "intro-end " + str(chunk)
                 intro_length = nt_positions[q] - nt_positions[p] + 1
                 nt_out += f" ({intro_length})"
+                node_content = str(intro_length)
             nt_out += "]"
+            nt_latex += "] {" + node_content+ "};\n"
+            latex_lastnode = "intro " + str(chunk)
         else:
             if cl[1] == "start":
                 nt_out += "[" + cl[0]
@@ -717,6 +736,12 @@ def nt_passage_info(conn, nt_quotation_id, format):
                     nt_out += f" {chunk}"
                 nt_out += f" ({class_length})"
                 nt_out += "]"
+
+                nt_latex += "\\node[" + cl[0]+ "] (" + cl[0] + " " + str(chunk) + ")"
+                if latex_lastnode != "":
+                    nt_latex += "[right of=" + latex_lastnode + "]"
+                nt_latex += " {" + str(class_length) + "};\n"
+                latex_lastnode = cl[0] + " " + str(chunk)
         p += 1
     comment(f"NT: {nt_out}", format)
 
@@ -743,6 +768,10 @@ def nt_passage_info(conn, nt_quotation_id, format):
             p += 1
         comment(f"OT/{m}: {ot_out[m]}", format)
 
+    if format == "latex":
+        print (nt_latex)
+        print ("\\end{tikzpicture} \\par")
+
 def nt_passage_info_all(conn, format):
     """
     Show all relevant information on all NT quotations
@@ -753,6 +782,14 @@ def nt_passage_info_all(conn, format):
     spawn_bibref()
 
     cur = conn.cursor()
+
+    if format == "latex":
+        print ("\\documentclass{article}")
+        print ("\\usepackage{tikz}")
+        print ("\\tikzstyle{intro}=[rectangle,draw=blue!50,fill=blue!20,thick,inner sep=0 pt,minimum size=6mm]")
+        print ("\\tikzstyle{clasp}=[rectangle,draw=blue!50,fill=black!20,thick,inner sep=0 pt,minimum size=6mm]")
+        print ("\\tikzstyle{unidentified}=[rectangle,draw=blue!20,fill=black!5,thick,inner sep=0 pt,minimum size=6mm]")
+        print ("\\begin{document}")
 
     cur.execute("SELECT DISTINCT qi.nt_quotation_id" +
         " FROM nt_quotation_introductions qi, books b" +
@@ -766,6 +803,8 @@ def nt_passage_info_all(conn, format):
         comment(f"{i}. nt_quotation_id={nt_quotation_id}", format)
         nt_passage_info(conn, nt_quotation_id, format)
         i += 1
+    if format == "latex":
+        print ("\\end{document}")
 
 def main():
     database = r"quotations.sqlite3"
@@ -822,7 +861,7 @@ def main():
             ot_jaccard_csv(conn, data)
         elif result_type == "nt_passage_info":
             if data == "all":
-                nt_passage_info_all(conn, "text")
+                nt_passage_info_all(conn, "latex")
             else:
                 nt_passage_info(conn, int(data), "text")
         else:
