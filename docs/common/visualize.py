@@ -482,7 +482,7 @@ def ot_jaccard_csv(conn, ot_book):
     g.close()
 
 def sort_positions():
-    global nt_positions, nt_positions_info, ot_positions, ot_positions_info
+    global nt_positions, nt_positions_info, nt_passages, ot_positions, ot_positions_info, ot_passages
     # Order the NT positions (bubble sort)
     s = 0
     for k in range(len(nt_positions)):
@@ -492,10 +492,13 @@ def sort_positions():
                 # swap them
                 d = nt_positions[l]
                 di = nt_positions_info[l]
+                dp = nt_passages[l]
                 nt_positions[l] = nt_positions[k]
                 nt_positions_info[l] = nt_positions_info[k]
+                nt_passages[l] = nt_passages[k]
                 nt_positions[k] = d
                 nt_positions_info[k] = di
+                nt_passages[k] = dp
                 s += 1
 
     # Order the OT positions (bubble sort)
@@ -507,10 +510,13 @@ def sort_positions():
                     # swap them
                     d = ot_positions[m][l]
                     di = ot_positions_info[m][l]
+                    dp = ot_passages[m][l]
                     ot_positions[m][l] = ot_positions[m][k]
                     ot_positions_info[m][l] = ot_positions_info[m][k]
+                    ot_passages[m][l] = ot_passages[m][k]
                     ot_positions[m][k] = d
                     ot_positions_info[m][k] = di
+                    ot_passages[m][k] = dp
                     s += 1
 
     # print('#', s, 'swaps')
@@ -551,22 +557,19 @@ def nt_passage_info(conn, nt_quotation_id, format):
     rows = cur.fetchall()
     comment("Introduction(s):", format)
 
-    global nt_positions, nt_positions_info
+    global nt_positions, nt_positions_info, nt_passages
     nt_positions = []
     nt_positions_info = []
-    nt_begin = 0
-    nt_begin_pos = 0
+    nt_passages = []
     i = 1
     for row in rows:
         nt_book, nt_passage, nt_startpos, nt_endpos = row
         nt_positions.append(nt_startpos)
         nt_positions_info.append("intro-start " + str(i))
-        if i == 1:
-            nt_begin_pos = nt_startpos
-            nt_begin = nt_passage.split(" ")[0:3]
-            nt_begin = f"{nt_begin[1]} {nt_begin[2]}"
         nt_positions.append(nt_endpos)
         nt_positions_info.append("intro-end " + str(i))
+        nt_passages.append(nt_passage)
+        nt_passages.append(0) # technical
         comment(f"{nt_passage} (book position: {nt_startpos}-{nt_endpos})", format)
         i += 1
 
@@ -577,9 +580,10 @@ def nt_passage_info(conn, nt_quotation_id, format):
     rows2 = cur.fetchall()
     comment("Clasp(s):", format)
 
-    global ot_positions, ot_positions_info
+    global ot_positions, ot_positions_info, ot_passages
     ot_positions = dict()
     ot_positions_info = dict()
+    ot_passages = dict()
     ot_begin = dict()
     ot_begin_pos = dict()
     j = 1
@@ -592,18 +596,19 @@ def nt_passage_info(conn, nt_quotation_id, format):
         if not ot_book in ot_positions:
            ot_positions[ot_book] = []
            ot_positions_info[ot_book] = []
+           ot_passages[ot_book] = []
         ot_positions[ot_book].append(ot_startpos)
         ot_positions_info[ot_book].append("clasp-start " + str(j))
         ot_positions[ot_book].append(ot_endpos)
-        if j == 1:
-            ot_begin_pos[ot_book] = ot_startpos
-            ot_begin[ot_book] = ot_passage.split(" ")[0:3]
-            ot_begin[ot_book] = f"{ot_begin[ot_book][1]} {ot_begin[ot_book][2]}"
         ot_positions_info[ot_book].append("clasp-end " + str(j))
         nt_positions.append(nt_startpos)
         nt_positions_info.append("clasp-start " + str(j))
         nt_positions.append(nt_endpos)
         nt_positions_info.append("clasp-end " + str(j))
+        nt_passages.append(nt_passage)
+        nt_passages.append(0) # technical
+        ot_passages[ot_book].append(ot_passage)
+        ot_passages[ot_book].append(0) # technical
 
         command1 = "lookup1 " + ot_passage
         bibref.sendline(command1)
@@ -670,6 +675,8 @@ def nt_passage_info(conn, nt_quotation_id, format):
                 p += 1
             nt_positions.append(nt_pos_start + p - 1)
             nt_positions_info.append("unidentified-end " + str(u))
+            nt_passages.append(0)
+            nt_passages.append(0) # technical
             u += 1
         p += 1
     for m in ot_positions.keys():
@@ -683,6 +690,8 @@ def nt_passage_info(conn, nt_quotation_id, format):
                     p += 1
                 ot_positions[m].append(ot_pos_start[m] + p - 1)
                 ot_positions_info[m].append("unquoted-end " + str(u))
+                ot_passages[m].append(0) # technical
+                ot_passages[m].append(0) # technical
                 u += 1
             p += 1
 
@@ -701,16 +710,43 @@ def nt_passage_info(conn, nt_quotation_id, format):
     if overlapping_nt or overlapping_ot:
         return
 
+    found = False
+    p = 0
+    while p < len(nt_positions) and not found:
+        if nt_positions_info[p].startswith("clasp"):
+            found = True
+            nt_begin_pos = nt_positions[p]
+            nt_begin = nt_passages[p].split(" ")[0:3]
+            nt_begin = f"{nt_begin[1]} {nt_begin[2]}"
+        p += 1
+    if not found:
+        comment("Warning: missing first clasp (NT)", format)
+        return
+
+    for m in ot_positions.keys():
+        found = False
+        p = 0
+        while p < len(ot_positions[m]) and not found:
+            if ot_positions_info[m][p].startswith("clasp"):
+                found = True
+                ot_begin_pos[m] = ot_positions[m][p]
+                ot_begin[m] = ot_passages[m][p].split(" ")[0:3]
+                ot_begin[m] = f"{ot_begin[m][1]} {ot_begin[m][2]}"
+            p += 1
+        if not found:
+            comment(f"Warning: missing first clasp (OT/{m})", format)
+            return
+
     # Print graphs
     if format == "latex":
         nt_passage_formatted = nt_begin.replace("_", " ")
-        print ("\\begin{tikzpicture}[node distance=8mm]")
-        print(f"\\node[nt_passage] (nt_passage) {{{nt_passage_formatted}}};")
+        print ("\\noindent\\begin{tikzpicture}[node distance=8mm]")
+        print(f"\\node[nt_passage] (nt_passage) at (0,0) {{{nt_passage_formatted}}};")
 
     start_with_intro = nt_text[0][0] == "i"
     p = 0
     nt_out = ""
-    latex_lastnode = "nt_passage"
+    latex_lastnode_nt = "nt_passage"
     nt_latex = ""
     connect_nodes = "\\draw "
     while p < len(nt_positions):
@@ -721,10 +757,10 @@ def nt_passage_info(conn, nt_quotation_id, format):
             nt_out += "[intro"
             nt_latex += "\\node[intro] (intro " + str(chunk) + ") ["
             node_content = ""
-            if latex_lastnode != "":
-                nt_latex += ",right of=" + latex_lastnode
+            if latex_lastnode_nt != "":
+                nt_latex += ",right of=" + latex_lastnode_nt
                 connect_nodes += " --"
-                if latex_lastnode == "nt_passage":
+                if latex_lastnode_nt == "nt_passage":
                     nt_latex += ",node distance=3cm"
             if not start_with_intro or chunk > 1:
                 q = p
@@ -737,8 +773,8 @@ def nt_passage_info(conn, nt_quotation_id, format):
                 node_content = str(intro_length)
             nt_out += "]"
             nt_latex += "] {" + node_content+ "};\n"
-            latex_lastnode = "intro " + str(chunk)
-            connect_nodes += " (" + latex_lastnode + ")"
+            latex_lastnode_nt = "intro " + str(chunk)
+            connect_nodes += " (" + latex_lastnode_nt + ")"
         else:
             if cl[1] == "start":
                 nt_out += "[" + cl[0]
@@ -754,23 +790,37 @@ def nt_passage_info(conn, nt_quotation_id, format):
                 nt_out += "]"
 
                 nt_latex += "\\node[" + cl[0]+ "] (" + cl[0] + " " + str(chunk) + ")"
-                if latex_lastnode != "":
-                    nt_latex += "[right of=" + latex_lastnode
+                if latex_lastnode_nt != "":
+                    nt_latex += "[right of=" + latex_lastnode_nt
                     connect_nodes += " --"
-                    if latex_lastnode == "nt_passage":
+                    if latex_lastnode_nt == "nt_passage":
                         nt_latex += ",node distance=3cm"
                     nt_latex += "]"
                 nt_latex += " {" + str(class_length) + "};\n"
-                latex_lastnode = cl[0] + " " + str(chunk)
-                connect_nodes += " (" + latex_lastnode + ")"
+                latex_lastnode_nt = cl[0] + " " + str(chunk)
+                connect_nodes += " (" + latex_lastnode_nt + ")"
         p += 1
     connect_nodes += ";"
     comment(f"NT: {nt_out}", format)
 
+    if format == "latex":
+        print (nt_latex)
+        print (connect_nodes)
+
     ot_out = dict()
+
+    y = 0
     for m in ot_positions.keys():
+        y += 1
+        ot_latex = ""
+        connect_nodes = "\\draw "
         p = 0
         ot_out[m] = ""
+        latex_lastnode_ot = "ot_passage " + m
+        if format == "latex":
+            ot_passage_formatted = ot_begin[m].replace("_", " ")
+            print(f"\\node[ot_passage] (ot_passage {m}) at (0,{-y}) {{{ot_passage_formatted}}};")
+
         while p < len(ot_positions[m]):
             words = ot_positions_info[m][p].split(" ")
             cl = words[0].split("-")
@@ -787,13 +837,27 @@ def nt_passage_info(conn, nt_quotation_id, format):
                     ot_out[m] += f" {chunk}"
                 ot_out[m] += f" ({class_length})"
                 ot_out[m] += "]"
+
+                ot_latex += "\\node[" + cl[0]+ "] (" + m + " " + cl[0] + " " + str(chunk) + ")"
+                if latex_lastnode_ot != "":
+                    ot_latex += "[right of=" + latex_lastnode_ot
+                    connect_nodes += " --"
+                    if latex_lastnode_ot.startswith("ot_passage"):
+                        ot_latex += ",node distance=3cm"
+                    ot_latex += "]"
+                ot_latex += " {" + str(class_length) + "};\n"
+                latex_lastnode_ot = m + " " + cl[0] + " " + str(chunk)
+                connect_nodes += " (" + latex_lastnode_ot + ")"
+
             p += 1
+        connect_nodes += ";"
         comment(f"OT/{m}: {ot_out[m]}", format)
+        if format == "latex":
+            print (ot_latex)
+            print (connect_nodes)
 
     if format == "latex":
-        print (nt_latex)
-        print (connect_nodes)
-        print ("\\end{tikzpicture} \\par")
+        print ("\\end{tikzpicture} \\par\\noindent\\rule{\\textwidth}{0.4pt}\\vspace{10pt}")
 
 def nt_passage_info_all(conn, format):
     """
@@ -809,10 +873,12 @@ def nt_passage_info_all(conn, format):
     if format == "latex":
         print ("\\documentclass{article}")
         print ("\\usepackage{tikz}")
-        print ("\\tikzstyle{nt_passage}=[rectangle,draw=yellow!50,fill=yellow!20,thick,minimum size=6mm]")
+        print ("\\tikzstyle{nt_passage}=[rectangle,draw=cyan!50,fill=cyan!20,thick,minimum size=6mm]")
+        print ("\\tikzstyle{ot_passage}=[rectangle,draw=yellow!50,fill=yellow!20,thick,minimum size=6mm]")
         print ("\\tikzstyle{intro}=[rectangle,draw=blue!50,fill=blue!20,thick,inner sep=0 pt,minimum size=6mm]")
         print ("\\tikzstyle{clasp}=[rectangle,draw=blue!50,fill=black!20,thick,inner sep=0 pt,minimum size=6mm]")
         print ("\\tikzstyle{unidentified}=[rectangle,draw=blue!20,fill=black!5,thick,inner sep=0 pt,minimum size=6mm]")
+        print ("\\tikzstyle{unquoted}=[rectangle,draw=blue!20,fill=black!5,thick,inner sep=0 pt,minimum size=6mm]")
         print ("\\begin{document}")
 
     cur.execute("SELECT DISTINCT qi.nt_quotation_id" +
