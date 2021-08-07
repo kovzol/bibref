@@ -843,13 +843,13 @@ def nt_passage_info(conn, nt_quotation_id, format):
                 ot_out[m] += f" ({class_length})"
                 ot_out[m] += "]"
 
-                ot_latex += "\\node[" + cl[0]+ "] (" + m + " " + cl[0] + " " + str(chunk) + ")"
-                if latex_lastnode_ot != "":
-                    ot_latex += "[right of=" + latex_lastnode_ot
+                ot_latex += "\\node[" + cl[0]+ "] (" + m + " " + cl[0] + " " + str(chunk) + ") ["
+                if latex_lastnode_ot.startswith("ot_passage"):
+                    ot_latex += "below of=clasp " + str(chunk) + ",node distance=" + str(y) + "cm"
+                else:
+                    ot_latex += "right of=" + latex_lastnode_ot
                     connect_nodes += " --"
-                    if latex_lastnode_ot.startswith("ot_passage"):
-                        ot_latex += ",node distance=3cm"
-                    ot_latex += "]"
+                ot_latex += "]"
                 ot_latex += " {" + str(class_length) + "};\n"
                 latex_lastnode_ot = m + " " + cl[0] + " " + str(chunk)
                 connect_nodes += " (" + latex_lastnode_ot + ")"
