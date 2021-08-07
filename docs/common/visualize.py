@@ -628,7 +628,7 @@ def nt_passage_info(conn, nt_quotation_id, format):
         jaccard = str(round(jaccard, 2))
         if jaccard == "0.0":
             jaccard = ""
-        jaccards += f"\\draw [<-] (clasp {j}) -- ({ot_book} clasp {j}) node [right,midway,font=\\footnotesize] {{{jaccard}}};\n"
+        jaccards += f"\\draw [<-] (clasp {j}.south) -- ({ot_book} clasp {j}.north) node [right,midway,font=\\footnotesize] {{{jaccard}}};\n"
         j += 1
 
     sort_positions()
