@@ -704,13 +704,13 @@ def nt_passage_info(conn, nt_quotation_id, format):
     # Print graphs
     if format == "latex":
         nt_passage_formatted = nt_begin.replace("_", " ")
-        print(f"{nt_passage_formatted} \\par")
         print ("\\begin{tikzpicture}[node distance=8mm]")
+        print(f"\\node[nt_passage] (nt_passage) {{{nt_passage_formatted}}};")
 
     start_with_intro = nt_text[0][0] == "i"
     p = 0
     nt_out = ""
-    latex_lastnode = ""
+    latex_lastnode = "nt_passage"
     nt_latex = ""
     connect_nodes = "\\draw "
     while p < len(nt_positions):
@@ -724,6 +724,8 @@ def nt_passage_info(conn, nt_quotation_id, format):
             if latex_lastnode != "":
                 nt_latex += ",right of=" + latex_lastnode
                 connect_nodes += " --"
+                if latex_lastnode == "nt_passage":
+                    nt_latex += ",node distance=3cm"
             if not start_with_intro or chunk > 1:
                 q = p
                 found = False
@@ -753,8 +755,11 @@ def nt_passage_info(conn, nt_quotation_id, format):
 
                 nt_latex += "\\node[" + cl[0]+ "] (" + cl[0] + " " + str(chunk) + ")"
                 if latex_lastnode != "":
-                    nt_latex += "[right of=" + latex_lastnode + "]"
+                    nt_latex += "[right of=" + latex_lastnode
                     connect_nodes += " --"
+                    if latex_lastnode == "nt_passage":
+                        nt_latex += ",node distance=3cm"
+                    nt_latex += "]"
                 nt_latex += " {" + str(class_length) + "};\n"
                 latex_lastnode = cl[0] + " " + str(chunk)
                 connect_nodes += " (" + latex_lastnode + ")"
@@ -804,6 +809,7 @@ def nt_passage_info_all(conn, format):
     if format == "latex":
         print ("\\documentclass{article}")
         print ("\\usepackage{tikz}")
+        print ("\\tikzstyle{nt_passage}=[rectangle,draw=yellow!50,fill=yellow!20,thick,minimum size=6mm]")
         print ("\\tikzstyle{intro}=[rectangle,draw=blue!50,fill=blue!20,thick,inner sep=0 pt,minimum size=6mm]")
         print ("\\tikzstyle{clasp}=[rectangle,draw=blue!50,fill=black!20,thick,inner sep=0 pt,minimum size=6mm]")
         print ("\\tikzstyle{unidentified}=[rectangle,draw=blue!20,fill=black!5,thick,inner sep=0 pt,minimum size=6mm]")
