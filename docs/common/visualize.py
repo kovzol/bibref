@@ -589,6 +589,7 @@ def nt_passage_info(conn, nt_quotation_id, format):
     j = 1
     clasp_ot_book = []
     clasp_jaccard = []
+    jaccards = ""
     for row2 in rows2:
         ot_book, ot_passage, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length = row2
         ot_endpos = ot_startpos + ot_length - 1
@@ -624,6 +625,10 @@ def nt_passage_info(conn, nt_quotation_id, format):
         comment(f"{ot_passage} -> {nt_passage} (book positions: {ot_startpos}-{ot_endpos} -> {nt_startpos}-{nt_endpos}, jaccard={jaccard:.6f})", format)
         clasp_ot_book.append(ot_book)
         clasp_jaccard.append(jaccard)
+        jaccard = str(round(jaccard, 2))
+        if jaccard == "0.0":
+            jaccard = ""
+        jaccards += f"\\draw [<-] (clasp {j}) -- ({ot_book} clasp {j}) node [right,midway,font=\\footnotesize] {{{jaccard}}};\n"
         j += 1
 
     sort_positions()
@@ -857,6 +862,7 @@ def nt_passage_info(conn, nt_quotation_id, format):
             print (connect_nodes)
 
     if format == "latex":
+        print (jaccards)
         print ("\\end{tikzpicture} \\par\\noindent\\rule{\\textwidth}{0.4pt}\\vspace{10pt}")
 
 def nt_passage_info_all(conn, format):
