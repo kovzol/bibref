@@ -554,17 +554,20 @@ def nt_passage_info(conn, nt_quotation_id, format):
     global nt_positions, nt_positions_info
     nt_positions = []
     nt_positions_info = []
+    nt_begin = 0
+    nt_begin_pos = 0
     i = 1
     for row in rows:
         nt_book, nt_passage, nt_startpos, nt_endpos = row
         nt_positions.append(nt_startpos)
         nt_positions_info.append("intro-start " + str(i))
+        if i == 1:
+            nt_begin_pos = nt_startpos
+            nt_begin = nt_passage.split(" ")[0:3]
+            nt_begin = f"{nt_begin[1]} {nt_begin[2]}"
         nt_positions.append(nt_endpos)
         nt_positions_info.append("intro-end " + str(i))
         comment(f"{nt_passage} (book position: {nt_startpos}-{nt_endpos})", format)
-        if format == "latex":
-            nt_passage_formatted = nt_passage.replace("_", " ")
-            print(f"{nt_passage_formatted} (book position: {nt_startpos}-{nt_endpos}) \\par")
         i += 1
 
     cur.execute("SELECT c.ot_book, c.ot_passage, c.nt_passage, c.ot_startpos, c.ot_length, c.nt_startpos, c.nt_length" +
@@ -577,6 +580,8 @@ def nt_passage_info(conn, nt_quotation_id, format):
     global ot_positions, ot_positions_info
     ot_positions = dict()
     ot_positions_info = dict()
+    ot_begin = dict()
+    ot_begin_pos = dict()
     j = 1
     clasp_ot_book = []
     clasp_jaccard = []
@@ -590,6 +595,10 @@ def nt_passage_info(conn, nt_quotation_id, format):
         ot_positions[ot_book].append(ot_startpos)
         ot_positions_info[ot_book].append("clasp-start " + str(j))
         ot_positions[ot_book].append(ot_endpos)
+        if j == 1:
+            ot_begin_pos[ot_book] = ot_startpos
+            ot_begin[ot_book] = ot_passage.split(" ")[0:3]
+            ot_begin[ot_book] = f"{ot_begin[ot_book][1]} {ot_begin[ot_book][2]}"
         ot_positions_info[ot_book].append("clasp-end " + str(j))
         nt_positions.append(nt_startpos)
         nt_positions_info.append("clasp-start " + str(j))
@@ -694,6 +703,8 @@ def nt_passage_info(conn, nt_quotation_id, format):
 
     # Print graphs
     if format == "latex":
+        nt_passage_formatted = nt_begin.replace("_", " ")
+        print(f"{nt_passage_formatted} \\par")
         print ("\\begin{tikzpicture}[node distance=8mm]")
 
     start_with_intro = nt_text[0][0] == "i"
