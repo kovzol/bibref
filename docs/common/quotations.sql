@@ -2384,6 +2384,8 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (1303, 1, 'Ωσηε', 'λεγει'); -- Ωσηε = Hosea, λεγει = says (in Romans 9:25)
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1303, 1, 'quotation', 'literal, exact', 'Z.K.');
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1041, 1303, 1, 'Hosea', 'LXX Hosea 1:10+3 1:10-135', 'Romans', 'SBLGNT Romans 9:27+30 9:27-45', 978, 17, 20017, 16);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (13041, 1304, 1, 'Hosea', null, 'LXX Hosea 11:1+38 11:1-11', 'Matthew', 'SBLGNT Matthew 2:15+77 2:15-9', 15030, 21, 3672, 18, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
