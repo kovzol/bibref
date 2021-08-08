@@ -633,7 +633,8 @@ def nt_passage_info(conn, nt_quotation_id, format):
         y = 1
         for m in ot_passages.keys():
             if m == ot_book:
-                ot_bookindex = y # TODO: exit from for loop
+                ot_bookindex = y
+                break
             y += 1
         lwidth = str(ot_bookindex * 0.5) + "pt"
         jaccards += f"\\draw [<-,ForestGreen!{jnum},line width={lwidth}] (clasp {j}.south) -- ({ot_book} clasp {j}.north) node [right,midway,font=\\footnotesize] {{\\textcolor{{ForestGreen!{jnum}}}{{{jaccard}}}}};\n"
