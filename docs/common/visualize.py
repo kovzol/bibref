@@ -625,10 +625,11 @@ def nt_passage_info(conn, nt_quotation_id, format):
         comment(f"{ot_passage} -> {nt_passage} (book positions: {ot_startpos}-{ot_endpos} -> {nt_startpos}-{nt_endpos}, jaccard={jaccard:.6f})", format)
         clasp_ot_book.append(ot_book)
         clasp_jaccard.append(jaccard)
+        jnum = (1 - jaccard) * 100
         jaccard = str(round(jaccard, 2))
         if jaccard == "0.0":
             jaccard = ""
-        jaccards += f"\\draw [<-] (clasp {j}.south) -- ({ot_book} clasp {j}.north) node [right,midway,font=\\footnotesize] {{{jaccard}}};\n"
+        jaccards += f"\\draw [<-,ForestGreen!{jnum}] (clasp {j}.south) -- ({ot_book} clasp {j}.north) node [right,midway,font=\\footnotesize] {{\\textcolor{{ForestGreen!{jnum}}}{{{jaccard}}}}};\n"
         j += 1
 
     sort_positions()
@@ -762,11 +763,11 @@ def nt_passage_info(conn, nt_quotation_id, format):
             nt_out += "[intro"
             nt_latex += "\\node[intro] (intro " + str(chunk) + ") ["
             node_content = ""
-            if latex_lastnode_nt != "":
-                nt_latex += ",right of=" + latex_lastnode_nt
+            nt_latex += ",right of=" + latex_lastnode_nt
+            if latex_lastnode_nt == "nt_passage":
+                nt_latex += ",node distance=3cm"
+            else:
                 connect_nodes += " --"
-                if latex_lastnode_nt == "nt_passage":
-                    nt_latex += ",node distance=3cm"
             if not start_with_intro or chunk > 1:
                 q = p
                 found = False
@@ -795,13 +796,18 @@ def nt_passage_info(conn, nt_quotation_id, format):
                 nt_out += "]"
 
                 nt_latex += "\\node[" + cl[0]+ "] (" + cl[0] + " " + str(chunk) + ")"
-                if latex_lastnode_nt != "":
-                    nt_latex += "[right of=" + latex_lastnode_nt
+                nt_latex += "[right of=" + latex_lastnode_nt
+                if latex_lastnode_nt == "nt_passage":
+                    nt_latex += ",node distance=3cm"
+                else:
                     connect_nodes += " --"
-                    if latex_lastnode_nt == "nt_passage":
-                        nt_latex += ",node distance=3cm"
-                    nt_latex += "]"
-                nt_latex += " {" + str(class_length) + "};\n"
+                textcolor = "black"
+                if cl[0] == "clasp":
+                    jnum = (1 - clasp_jaccard[chunk - 1]) * 100
+                    nt_latex += ",fill=ForestGreen!" + str(jnum)
+                    textcolor = "white"
+                nt_latex += "]"
+                nt_latex += " {\\textcolor{" + textcolor + "}{" + str(class_length) + "}};\n"
                 latex_lastnode_nt = cl[0] + " " + str(chunk)
                 connect_nodes += " (" + latex_lastnode_nt + ")"
         p += 1
@@ -849,8 +855,13 @@ def nt_passage_info(conn, nt_quotation_id, format):
                 else:
                     ot_latex += "right of=" + latex_lastnode_ot
                     connect_nodes += " --"
+                textcolor = "black"
+                if cl[0] == "clasp":
+                    jnum = (1 - clasp_jaccard[chunk - 1]) * 100
+                    textcolor = "white"
+                    ot_latex += ",fill=ForestGreen!" + str(jnum)
                 ot_latex += "]"
-                ot_latex += " {" + str(class_length) + "};\n"
+                ot_latex += " {\\textcolor{" + textcolor + "}{" + str(class_length) + "}};\n"
                 latex_lastnode_ot = m + " " + cl[0] + " " + str(chunk)
                 connect_nodes += " (" + latex_lastnode_ot + ")"
 
@@ -878,11 +889,12 @@ def nt_passage_info_all(conn, format):
 
     if format == "latex":
         print ("\\documentclass{article}")
+        print ("\\usepackage[dvipsnames]{xcolor}")
         print ("\\usepackage{tikz}")
         print ("\\tikzstyle{nt_passage}=[rectangle,draw=cyan!50,fill=cyan!20,thick,minimum size=6mm]")
         print ("\\tikzstyle{ot_passage}=[rectangle,draw=yellow!50,fill=yellow!20,thick,minimum size=6mm]")
         print ("\\tikzstyle{intro}=[rectangle,draw=blue!50,fill=blue!20,thick,inner sep=0 pt,minimum size=6mm]")
-        print ("\\tikzstyle{clasp}=[rectangle,draw=blue!50,fill=black!20,thick,inner sep=0 pt,minimum size=6mm]")
+        print ("\\tikzstyle{clasp}=[rectangle,draw=blue!50,fill=ForestGreen!20,thick,inner sep=0 pt,minimum size=6mm]")
         print ("\\tikzstyle{unidentified}=[rectangle,draw=blue!20,fill=black!5,thick,inner sep=0 pt,minimum size=6mm]")
         print ("\\tikzstyle{unquoted}=[rectangle,draw=blue!20,fill=black!5,thick,inner sep=0 pt,minimum size=6mm]")
         print ("\\begin{document}")
