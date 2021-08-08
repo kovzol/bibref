@@ -629,7 +629,14 @@ def nt_passage_info(conn, nt_quotation_id, format):
         jaccard = str(round(jaccard, 2))
         if jaccard == "0.0":
             jaccard = ""
-        jaccards += f"\\draw [<-,ForestGreen!{jnum}] (clasp {j}.south) -- ({ot_book} clasp {j}.north) node [right,midway,font=\\footnotesize] {{\\textcolor{{ForestGreen!{jnum}}}{{{jaccard}}}}};\n"
+        found = False
+        y = 1
+        for m in ot_passages.keys():
+            if m == ot_book:
+                ot_bookindex = y # TODO: exit from for loop
+            y += 1
+        lwidth = str(ot_bookindex * 0.5) + "pt"
+        jaccards += f"\\draw [<-,ForestGreen!{jnum},line width={lwidth}] (clasp {j}.south) -- ({ot_book} clasp {j}.north) node [right,midway,font=\\footnotesize] {{\\textcolor{{ForestGreen!{jnum}}}{{{jaccard}}}}};\n"
         j += 1
 
     sort_positions()
