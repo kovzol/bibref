@@ -2392,6 +2392,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (1304, 1, 'δια του προφητου', 'το ρηθεν υπο κυριου ... λεγοντος'); -- δια του προφητου = through the prophet, το ρηθεν υπο κυριου ... λεγοντος = having been spoken by the Lord ... saying
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1304, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (13041, 'Matthew', 'SBLGNT Matthew 2:15 2:15-27', 3595, 3671);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (13041, 1304, 1, 'Hosea', 'LXX Hosea 11:1+38 11:1-11', 'Matthew', 'SBLGNT Matthew 2:15+77 2:15-9', 15030, 21, 3672, 18);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (13051, 1305, 1, 'Hosea', null, 'LXX Hosea 13:14+61 13:14-51', 'I_Corinthians', 'SBLGNT I_Corinthians 15:55+22 15:55-9', 18605, 9, 30852, 9, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
