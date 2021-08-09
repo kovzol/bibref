@@ -637,7 +637,10 @@ def nt_passage_info(conn, nt_quotation_id, format):
                 break
             y += 1
         lwidth = str(ot_bookindex * 0.5) + "pt"
-        jaccards += f"\\draw [<-,ForestGreen!{jnum},line width={lwidth}] (clasp {j}.south) -- ({ot_book} clasp {j}.north) node [right,midway,font=\\footnotesize] {{\\textcolor{{ForestGreen!{jnum}}}{{{jaccard}}}}};\n"
+        lpos = 0.5
+        if ot_bookindex == 2:
+           lpos = 0.85
+        jaccards += f"\\draw [<-,ForestGreen!{jnum},line width={lwidth}] (clasp {j}.south) -- ({ot_book} clasp {j}.north) node [right,pos={lpos},font=\\footnotesize] {{\\textcolor{{ForestGreen!{jnum}}}{{{jaccard}}}}};\n"
         j += 1
 
     sort_positions()
