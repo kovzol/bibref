@@ -2430,6 +2430,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (1306, 2, null, 'ει δε εγνωκειτε τι εστιν'); -- ει δε εγνωκειτε τι εστιν = if however you had known what is
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1306, 2, 'quotation', 'literal, exact', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (13062, 'Matthew', 'SBLGNT Matthew 12:7 12:7-50', 30359, 30378);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (13062, 1306, 2, 'Hosea', 'LXX Hosea 6:6+5 6:6-29', 'Matthew', 'SBLGNT Matthew 12:7+20 12:7-30', 8273, 20, 30379, 20);
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (14011, 1401, 1, 'Joel', null, 'LXX Joel 2:32+11 2:32-103', 'Romans', 'SBLGNT Romans 10:13+6 10:13', 5577, 38, 21454, 38, 'getrefs');
