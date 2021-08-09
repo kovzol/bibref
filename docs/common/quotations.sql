@@ -2406,6 +2406,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (1305, 1, null, 'γεγραμμενος'); -- γεγραμμενος = having been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1305, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (13051, 'I_Corinthians', 'SBLGNT I_Corinthians 15:54 15:54-24', 30703, 30805);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (13051, 1305, 1, 'Hosea', 'LXX Hosea 13:14+61 13:14-39', 'I_Corinthians', 'SBLGNT I_Corinthians 15:55+19 15:55', 18605, 21, 30849, 21);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (13061, 1306, 1, 'Hosea', null, 'LXX Hosea 6:6+5 6:6-29', 'Matthew', 'SBLGNT Matthew 9:13+26 9:13-39', 8273, 20, 21658, 20, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
