@@ -2441,6 +2441,12 @@ insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passag
  (14011, 1401, 1, 'Joel', null, 'LXX Joel 2:32+8 2:32-103', 'Romans', 'SBLGNT Romans 10:13', 5574, 41, 21448, 44, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (1401, 1, null, 'γαρ'); -- γαρ = for
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (14011, 'Romans', 'SBLGNT Romans 10:13+3 10:13-38', 21451, 21453); -- γαρ
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (14011, 1401, 1, 'Joel', 'LXX Joel 2:32+8 2:32-141', 'Romans', 'SBLGNT Romans 10:13 10:13-41', 5574, 3, 21448, 3);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (14011, 1401, 1, 'Joel', 'LXX Joel 2:32+11 2:32-103', 'Romans', 'SBLGNT Romans 10:13+6 10:13', 5577, 38, 21454, 38);
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1401, 1, 'quotation', 'literal, exact, subset', 'Z.K.'); -- subset because of insertion of "γαρ"
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
