@@ -2496,6 +2496,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (1501, 1, 'δια του προφητου', 'γαρ γεγραπται'); -- γαρ γεγραπται, δια του προφητου = for has it been written, through the prophet
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1501, 1, 'quotation', 'far-fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (15011, 'Matthew', 'SBLGNT Matthew 2:5 2:5', 2544, 2607);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (15011, 1501, 1, 'Micah', 'LXX Micah 5:2 5:2-132', 'Matthew', 'SBLGNT Matthew 2:6 2:6-103', 6563, 12, 2608, 12);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (15011, 1501, 1, 'Micah', 'LXX Micah 5:2+45 5:2-65', 'Matthew', 'SBLGNT Matthew 2:6+36 2:6-41', 6608, 34, 2644, 38);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (15011, 1501, 1, 'Micah', 'LXX Micah 5:2+99 5:2-37', 'Matthew', 'SBLGNT Matthew 2:6+106 2:6', 6662, 8, 2714, 9);
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (16011, 1601, 1, 'Amos', null, 'LXX Amos 5:25 5:25-34', 'Acts', 'SBLGNT Acts 7:42+93 7:42-34', 9155, 33, 22107, 33, 'getrefs');
