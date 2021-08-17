@@ -2541,6 +2541,13 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (1602, 1, 'οι λογοι των προφητων', 'καθως γεγραπται'); -- οι λογοι των προφητων = the words of the prophets, καθως γεγραπται = as it is written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1602, 1, 'quotation', 'literal, fuzzy, change, superset', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (16021, 'Acts', 'SBLGNT Acts 15:15 15:15', 49547, 49597);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (16021, 1602, 1, 'Amos', 'LXX Amos 9:11+15 9:11-27', 'Acts', 'SBLGNT Acts 15:16+9 15:16-16', 15431, 111, 49607, 85);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (16021, 1602, 1, 'Amos', 'LXX Amos 9:12 9:12', 'Acts', 'SBLGNT Acts 15:17 15:17', 15569, 113, 49708, 118);
+-- TODO: consider adding the clasp "αιωνος" (this is, however, quite oftenly used in LXX, but not in SBLGNT)
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1381, 1701, 1, 'Zechariah', null, 'LXX Zechariah 9:9+46 9:9-62', 'Matthew', 'SBLGNT Matthew 21:5+19 21:5-49', 14394, 26, 59140, 26, 'getrefs');
