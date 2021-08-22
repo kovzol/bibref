@@ -2589,6 +2589,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (1702, 1, null, 'γεγραπται γαρ'); -- γεγραπται γαρ = it has been written for
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1702, 1, 'quotation', 'far-fuzzy, superset', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (17021, 'Matthew', 'SBLGNT Matthew 26:31 26:31-56', 79317, 79397);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (17021, 1702, 1, 'Zechariah', 'LXX Zechariah 13:7+77 13:7-52', 'Matthew', 'SBLGNT Matthew 26:31+81 26:31-37', 21571, 23, 79398, 19); -- παταξατε τους ποιμενας και -> Παταξω τον ποιμενα, και
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (17021, 1702, 1, 'Zechariah', 'LXX Zechariah 13:7+109 13:7-34', 'Matthew', 'SBLGNT Matthew 26:31+118 26:31-10', 21603, 9, 79435, 9); -- τα προβατα
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (17021, 1702, 1, 'Zechariah', 'LXX Zechariah 13:7+140 13:7', 'Matthew', 'SBLGNT Matthew 26:31+127 26:31', 21634, 12, 79444, 10); -- τους ποιμενας -> της ποιμνης
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (17022, 1702, 2, 'Zechariah', null, 'LXX Zechariah 13:7+77 13:7-34', 'Mark', 'SBLGNT Mark 14:27+58 14:27-18', 21571, 41, 47406, 28, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
