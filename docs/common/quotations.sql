@@ -2573,6 +2573,16 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (1701, 2, null, 'καθως εστιν γεγραμμενον'); -- καθως εστιν γεγραμμενον = as it is written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1701, 2, 'quotation', 'literal, far-fuzzy, superset', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (17012, 'John', 'SBLGNT John 12:14 12:14', 42166, 42221);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (17012, 1701, 2, 'Zechariah', 'LXX Zechariah 9:9+11 9:9-112', 'John', 'SBLGNT John 12:15+7 12:15-44', 14359, 11, 42229, 11); -- θυγατερ σιων -> θυγατηρ Σιων
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (17012, 1701, 2, 'Zechariah', 'LXX Zechariah 9:9+46 9:9-65', 'John', 'SBLGNT John 12:15+18 12:15-21', 14394, 23, 42240, 23); -- ιδου ο βασιλευς σου ερχεται
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (17012, 1701, 2, 'Zechariah', 'LXX Zechariah 9:9+110 9:9-21', 'John', 'SBLGNT John 12:15+50 12:15-9', 14458, 3, 42272, 3); -- επι
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (17012, 1701, 2, 'Zechariah', 'LXX Zechariah 9:9+125 9:9-4', 'John', 'SBLGNT John 12:15+53 12:15-4', 14473, 5, 42275, 5); -- πωλον
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (17021, 1702, 1, 'Zechariah', null, 'LXX Zechariah 13:7+77 13:7', 'Matthew', 'SBLGNT Matthew 26:31+81 26:31', 21571, 75, 79398, 56, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
