@@ -2615,6 +2615,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (1703, 1, 'Ιερεμιου του προφητου', 'ρηθεν ... λεγοντος'); -- ρηθεν ... λεγοντος = having been spoken ... saying (see https://www.gotquestions.org/Matthew-27-9-Jeremiah-Zechariah.html for a possible explanation why Jeremiah is mentioned and not Zechariah)
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1703, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (17031, 'Matthew', 'SBLGNT Matthew 27:9 27:9-74', 83770, 83818);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (17031, 1703, 1, 'Zechariah', 'LXX Zechariah 11:13+98 11:13-50', 'Matthew', 'SBLGNT Matthew 27:9+49 27:9-47', 18294, 30, 83819, 27);
 -- TODO: Finalize this entry:
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (17041, 1704, 1, 'Zechariah', null, 'Zechariah 12:10', 'John', 'John 19:37', null, null, null, null, 'traditional');
