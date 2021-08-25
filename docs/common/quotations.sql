@@ -2631,6 +2631,8 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
  (1801, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
  (18011, 'Matthew', 'SBLGNT Matthew 24:15+34 24:15-33', 70700, 70726);
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (18011, 'Matthew', 'SBLGNT Matthew 24:15+76 24:15', 70742, 70759);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (18011, 1801, 1, 'Daniel', 'LXX Daniel 9:27+101 9:27-54', 'Matthew', 'SBLGNT Matthew 24:15+14 24:15-60', 36179, 20, 70680, 20);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
@@ -2639,6 +2641,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (1801, 2, 'Δανιηλ του προφητου', 'ρηθεν'); -- ρηθεν = having been spoken (these are mentioned only in ABPGRK, in LXX and 01 it is only mentioned: "ο αναγινώσκων νοείτω", the one reading let him understand)
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1801, 2, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (18012, 'Mark', 'SBLGNT Mark 13:14+50 13:14-35', 43466, 43483);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (18012, 1801, 2, 'Daniel', 'LXX Daniel 9:27+101 9:27-54', 'Mark', 'SBLGNT Mark 13:14+13 13:14-70', 36179, 20, 43429, 20);
 -- TODO: Consider merging this with 18011:
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (18021, 1802, 1, 'Daniel', null, 'LXX Daniel 12:1+104 12:1-112', 'Matthew', 'SBLGNT Matthew 24:21+24 24:21-35', 44472, 13, 71031, 13, 'getrefs');
