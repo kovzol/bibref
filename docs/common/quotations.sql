@@ -2654,6 +2654,12 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (1802, 1, 'Δανιηλ του προφητου', 'γαρ'); -- γαρ = for (Daniel is mentioned formerly in Matthew 24:15)
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1802, 1, 'quotation', 'literal, fuzzy, subset', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (18021, 'Matthew', 'SBLGNT Matthew 24:21 24:21-60', 71007, 71018);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (18021, 1802, 1, 'Daniel', 'LXX Daniel 12:1+98 12:1-111', 'Matthew', 'SBLGNT Matthew 24:21+12 24:21-34', 44466, 20, 71019, 26);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (18021, 1802, 1, 'Daniel', 'LXX Daniel 12:1+118 12:1-100', 'Matthew', 'SBLGNT Matthew 24:21+61 24:21', 44486, 11, 71068, 11);
 -- TODO: Consider merging this with 18021:
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (18022, 1802, 2, 'Daniel', null, 'LXX Daniel 12:1+98 12:1-113', 'Mark', 'SBLGNT Mark 13:19+25 13:19-58', 44466, 18, 43757, 18, 'getrefs');
