@@ -2671,6 +2671,13 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (1802, 2, 'Δανιηλ του προφητου', 'γαρ'); -- γαρ = for (Daniel is mentioned formerly in Mark 13:14, ABPGRK)
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1802, 2, 'quotation', 'literal', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (18022, 'Mark', 'SBLGNT Mark 13:19+7 13:19-91', 43739, 43741);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (18022, 1802, 2, 'Daniel', 'LXX Daniel 12:1+80 12:1-144', 'Mark', 'SBLGNT Mark 13:19 13:19-94', 44448, 5, 43732, 7); -- εσονται -> εσονται
+-- Note: The SBLGNT word εκειναι (those) appears in slightly different forms three times in Daniel 12:1 (and more than 500 times at other places in LXX).
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (18022, 1802, 2, 'Daniel', 'LXX Daniel 12:1+118 12:1-100', 'Mark', 'SBLGNT Mark 13:19+90 13:19', 44486, 11, 43822, 11); -- ου γεγενηται -> ου μη γενηται
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (20011, 2001, 1, 'Genesis', null, 'LXX Genesis 15:6+16 15:6', 'Romans', 'SBLGNT Romans 4:3+32 4:3', 34472, 36, 7233, 36, 'getrefs');
