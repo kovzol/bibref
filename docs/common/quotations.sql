@@ -2687,6 +2687,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2001, 1, 'η γραφη', 'λεγει'); -- η γραφη = the Scripture, λεγει = says
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2001, 1, 'quotation', 'literal', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (20011, 'Romans', 'SBLGNT Romans 4:3 4:3-52', 7201, 7216);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (20011, 2001, 1, 'Genesis', 'LXX Genesis 15:6+3 15:6', 'Romans', 'SBLGNT Romans 4:3+16 4:3', 34459, 49, 7217, 52);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (20012, 2001, 2, 'Genesis', null, 'LXX Genesis 15:6+18 15:6', 'Galatians', 'SBLGNT Galatians 3:6+21 3:6', 34474, 34, 4109, 34, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
