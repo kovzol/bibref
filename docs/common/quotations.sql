@@ -2711,6 +2711,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2001, 3, 'η γραφη', 'λεγουσα'); -- η γραφη = the Scripture, λεγουσα = saying
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2001, 3, 'quotation', 'literal', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (20013, 'James', 'SBLGNT James 2:23 2:23-70', 3883, 3907);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (20013, 2001, 3, 'Genesis', 'LXX Genesis 15:6+3 15:6', 'James', 'SBLGNT James 2:23+25 2:23-18', 34459, 49, 3908, 52);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (20011, 2001, 4, 'Genesis', null, 'LXX Genesis 15:6+3 15:6', 'Romans', 'SBLGNT Romans 4:9+65 4:9', 34458, 49, 7654, 37, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
