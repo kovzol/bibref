@@ -2799,6 +2799,12 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2005, 1, null, 'επαγγελιας γαρ ο λογος ουτος'); -- επαγγελιας γαρ ο λογος ουτος = of the promise for the word is this
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2005, 1, 'quotation', 'literal, superset, synonym', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (20051, 'Romans', 'SBLGNT Romans 9:9 9:9-47', 18758, 18781);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (20051, 2005, 1, 'Genesis', 'LXX Genesis 18:10+28 18:10-79', 'Romans', 'SBLGNT Romans 9:9+24 9:9-27', 40962, 20, 18782, 20);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (20051, 2005, 1, 'Genesis', 'LXX Genesis 18:14+63 18:14', 'Romans', 'SBLGNT Romans 9:9+52 9:9', 41368, 19, 18810, 19);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (20061, 2006, 1, 'Genesis', null, 'LXX Genesis 25:23+103 25:24-64', 'Romans', 'SBLGNT Romans 9:12+39 9:13-43', 65835, 29, 19006, 29, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
