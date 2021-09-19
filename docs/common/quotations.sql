@@ -2825,6 +2825,12 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2007, 1, null, 'γαρ φησιν'); -- γαρ φησιν = for it says
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2007, 1, 'quotation', 'literal, exact', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (20071, 'I_Corinthians', 'SBLGNT I_Corinthians 6:16+49 6:16-17', 9358, 9365);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (20071, 2007, 1, 'Genesis', 'LXX Genesis 2:24+109 2:24', 'I_Corinthians', 'SBLGNT I_Corinthians 6:16+57 6:16', 5595, 17, 9366, 17);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (20071, 2007, 1, 'Genesis', 'LXX Genesis 2:24+102 2:24-17', 'I_Corinthians', 'SBLGNT I_Corinthians 6:16+42 6:16-25', 5588, 7, 9351, 7); -- esontai
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (20072, 2007, 2, 'Genesis', null, 'LXX Genesis 2:24+6 2:24-87', 'Ephesians', 'SBLGNT Ephesians 5:31+4 5:31-72', 5492, 33, 9802, 33, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
