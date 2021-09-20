@@ -2843,6 +2843,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2007, 2, null, 'το μυστηριον τουτο μεγα εστιν, εγω δε λεγω εις Χριστον και εις την εκκλησιαν'); -- το μυστηριον τουτο μεγα εστιν, εγω δε λεγω εις Χριστον και εις την εκκλησιαν = This is a great mystery: but I speak concerning Christ and the church.
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2007, 2, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (20072, 'Ephesians', 'SBLGNT Ephesians 5:32 5:32', 9907, 9968);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (20072, 2007, 2, 'Genesis', 'LXX Genesis 2:24+6 2:24', 'Ephesians', 'SBLGNT Ephesians 5:31+4 5:31', 5492, 120, 9802, 105);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (20073, 2007, 3, 'Genesis', null, 'LXX Genesis 2:24+94 2:24', 'Matthew', 'SBLGNT Matthew 19:5+82 19:5', 5580, 32, 53857, 32, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
