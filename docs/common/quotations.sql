@@ -2916,11 +2916,17 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
  (920091, 2009, 1, 'Genesis', 'LXX Genesis 2:7+90 2:7-13', 'I_Corinthians', 'SBLGNT I_Corinthians 15:45+31 15:45-47', 3949, 8, 30064, 8); -- ανθρωπος
 -- End of alternation.
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (20101, 2010, 1, 'Genesis', null, 'LXX Genesis 12:7+32 12:7-68', 'Galatians', 'SBLGNT Galatians 3:16+59 3:16-52', 28321, 13, 4940, 13, 'manual');
+ (20101, 2010, 1, 'Genesis', null, 'LXX Genesis 12:7+32 12:7-68', 'Galatians', 'SBLGNT Galatians 3:16+97 3:16-14', 28321, 13, 4978, 13, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2010, 1, null, 'ου λεγει ... αλλ'); -- ου λεγει ... αλλ = not it does say ... but
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2010, 1, 'quotation', 'literal, exact', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (20101, 'Galatians', 'SBLGNT Galatians 3:16 3:16-30', 4881, 4974);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (20101, 2010, 1, 'Genesis', 'LXX Genesis 12:7+20 12:7-90', 'Galatians', 'SBLGNT Galatians 3:16+94 3:16-27', 28309, 3, 4975, 3); -- kai
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (20101, 2010, 1, 'Genesis', 'LXX Genesis 12:7+32 12:7-68', 'Galatians', 'SBLGNT Galatians 3:16+97 3:16-14', 28321, 13, 4978, 13);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (20111, 2011, 1, 'Genesis', null, 'LXX Genesis 21:10+93 21:10-8', 'Galatians', 'SBLGNT Galatians 4:30+84 4:30-12', 50185, 13, 8016, 13, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
