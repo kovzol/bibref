@@ -2950,11 +2950,15 @@ insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passag
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (20121, 2012, 1, 'Genesis', null, 'LXX Genesis 2:2+64 2:2-10', 'Hebrews', 'SBLGNT Hebrews 4:4+49 4:4', 3432, 40, 4749, 40, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (20121, 2012, 1, 'Genesis', null, 'LXX Genesis 2:2+14 2:2-10', 'Hebrews', 'SBLGNT Hebrews 4:4+32 4:4', 3382, 90, 4732, 57, 'manual');
+ (20121, 2012, 1, 'Genesis', null, 'LXX Genesis 2:2+54 2:2-10', 'Hebrews', 'SBLGNT Hebrews 4:4+32 4:4', 3422, 50, 4732, 57, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
- (2012, 1, 'που περι της εβδομης', 'ειρηκεν γαρ'); -- που περι της εβδομης = somewhere concering the seventh day, ειρηκεν γαρ = He has spoken for
+ (2012, 1, 'που περι της εβδομης', 'ειρηκεν γαρ'); -- που περι της εβδομης = somewhere concerning the seventh day, ειρηκεν γαρ = He has spoken for
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
- (2012, 1, 'quotation', 'literal, superset, fuzzy', 'Z.K.');
+ (2012, 1, 'quotation', 'literal, superset', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (20121, 'Hebrews', 'SBLGNT Hebrews 4:4 4:4-57', 4700, 4731);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (20121, 2012, 1, 'Genesis', 'LXX Genesis 2:2+54 2:2-10', 'Hebrews', 'SBLGNT Hebrews 4:4+32 4:4', 3422, 50, 4732, 57);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (20131, 2013, 1, 'Genesis', null, 'LXX Genesis 22:17+1 22:17-121', 'Hebrews', 'SBLGNT Hebrews 6:14+7 6:14-2', 54247, 38, 8206, 38, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
