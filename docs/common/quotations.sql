@@ -2967,6 +2967,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2013, 1, null, 'λεγων'); -- λεγων = saying
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2013, 1, 'quotation', 'literal, exact', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (20131, 'Hebrews', 'SBLGNT Hebrews 6:13 6:14-42', 8121, 8203);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (20131, 2013, 1, 'Genesis', 'LXX Genesis 22:17+1 22:17-121', 'Hebrews', 'SBLGNT Hebrews 6:14+7 6:14-2', 54247, 38, 8206, 38);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (20141, 2014, 1, 'Genesis', null, 'LXX Genesis 14:17+62 14:17-82', 'Hebrews', 'SBLGNT Hebrews 7:1+84 7:1-27', 33237, 12, 8855, 12, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
