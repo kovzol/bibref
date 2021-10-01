@@ -2992,7 +2992,7 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (20141, 2014, 1, 'Genesis', 'LXX Genesis 14:18+53 14:18', 'Hebrews', 'SBLGNT Hebrews 7:1+32 7:1-68', 33384, 23, 8803, 23); -- ιερευς του θεου του υψιστου
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
- (20141, 2014, 1, 'Genesis', 'LXX Genesis 14:20+77 14:20', 'Hebrews', 'SBLGNT Hebrews 7:2+4 7:2-99', 33569, 16, 8898, 16); -- δεκατην απο παντων
+ (20141, 2014, 1, 'Genesis', 'LXX Genesis 14:20+77 14:20', 'Hebrews', 'SBLGNT Hebrews 7:2+4 7:2-100', 33569, 16, 8898, 16); -- δεκατην απο παντων
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (20141, 2014, 1, 'Genesis', 'LXX Genesis 14:17+62 14:17-82', 'Hebrews', 'SBLGNT Hebrews 7:1+84 7:1-27', 33237, 12, 8855, 12); -- απο της κοπης
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
