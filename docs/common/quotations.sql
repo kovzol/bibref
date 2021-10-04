@@ -3025,6 +3025,12 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2017, 1, 'Ο θεος της δοξης ... προς αυτον', 'ειπεν'); -- Ο θεος της δοξης ... προς αυτον = the God of glory ... to him (Abraham), ειπεν = said
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2017, 1, 'quotation', 'literal, fuzzy, superset', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (20171, 'Acts', 'SBLGNT Acts 7:2 7:3-67', 18244, 18378);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (20171, 2017, 1, 'Genesis', 'LXX Genesis 12:1+21 12:1-43', 'Acts', 'SBLGNT Acts 7:3+17 7:3-26', 27636, 41, 18379, 41);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (20171, 2017, 1, 'Genesis', 'LXX Genesis 12:1+84 12:1', 'Acts', 'SBLGNT Acts 7:3+63 7:3', 27699, 21, 18425, 21);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (20181, 2018, 1, 'Genesis', null, 'LXX Genesis 15:13+34 15:13-100', 'Acts', 'SBLGNT Acts 7:6+41 7:6-55', 35016, 9, 18749, 9, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
