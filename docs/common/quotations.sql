@@ -3047,6 +3047,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2018, 1, 'θεος', 'ελαλησεν δε'); -- ελαλησεν δε = spoke however
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2018, 1, 'quotation', 'literal, fuzzy, superset', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (20181, 'Acts', 'SBLGNT Acts 7:6 7:6-85', 18708, 18727);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (20181, 2018, 1, 'Genesis', 'LXX Genesis 15:13+31 15:14-45', 'Acts', 'SBLGNT Acts 7:6+20 7:7-65', 35013, 144, 18728, 119);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (20181, 2018, 1, 'Genesis', 'LXX Genesis 15:14+32 15:14-22', 'Acts', 'SBLGNT Acts 7:7+47 7:7-31', 35157, 23, 18860, 21);
+-- Alternative way:
+-- TODO.
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (21011, 2101, 1, 'Exodus', null, 'LXX Exodus 33:19+86 33:19', 'Romans', 'SBLGNT Romans 9:15+15 9:15', 99825, 38, 19131, 38, 'getrefs');
