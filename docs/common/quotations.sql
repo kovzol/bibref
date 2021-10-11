@@ -3049,12 +3049,26 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
  (2018, 1, 'quotation', 'literal, fuzzy, superset', 'Z.K.');
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
  (20181, 'Acts', 'SBLGNT Acts 7:6 7:6-85', 18708, 18727);
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (20181, 'Acts', 'SBLGNT Acts 7:7+34 7:7-55', 18847, 18856);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (20181, 2018, 1, 'Genesis', 'LXX Genesis 15:13+31 15:14-45', 'Acts', 'SBLGNT Acts 7:6+20 7:7-65', 35013, 144, 18728, 119);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (20181, 2018, 1, 'Genesis', 'LXX Genesis 15:14+32 15:14-22', 'Acts', 'SBLGNT Acts 7:7+47 7:7-31', 35157, 23, 18860, 21);
 -- Alternative way:
--- TODO.
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (920181, 'Acts', 'SBLGNT Acts 7:6 7:6-85', 18708, 18727);
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (920181, 'Acts', 'SBLGNT Acts 7:7+34 7:7-55', 18847, 18856);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (920181, 2018, 1, 'Genesis', 'LXX Genesis 15:13+31 15:13-81', 'Acts', 'SBLGNT Acts 7:6+20 7:6-52', 35013, 31, 18728, 33); -- οτι παροικον εσται το σπερμα σου εν γη -> οτι εσται το σπερμα αυτου παροικον εν γη
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (920181, 2018, 1, 'Genesis', 'LXX Genesis 15:13+69 15:13-41', 'Acts', 'SBLGNT Acts 7:6+61 7:6-13', 35051, 33, 18769, 31); -- και δουλωσουσιν αυτους και κακωσουσιν -> και δουλωσουσιν αυτο και κακωσουσιν
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (920181, 2018, 1, 'Genesis', 'LXX Genesis 15:13+130 15:14-45', 'Acts', 'SBLGNT Acts 7:6+92 7:7-65', 35112, 45, 18800, 47); -- τετρακοσια ετη το δε εθνος ω εαν δουλευσωσιν κρινω εγω -> ετη τετρακοσια και το εθνος ω εαν δουλευσουσιν κρινω εγω
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (920181, 2018, 1, 'Genesis', 'LXX Genesis 15:14+32 15:14-22', 'Acts', 'SBLGNT Acts 7:7+47 7:7-31', 35157, 23, 18860, 21); -- μετα δε ταυτα εξελευσονται
+-- End of alternative way.
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (21011, 2101, 1, 'Exodus', null, 'LXX Exodus 33:19+86 33:19', 'Romans', 'SBLGNT Romans 9:15+15 9:15', 99825, 38, 19131, 38, 'getrefs');
