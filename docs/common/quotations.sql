@@ -3078,6 +3078,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2101, 1, 'τω Μωυσει', 'γαρ λεγει'); -- τω Μωυσει = to Moses, γαρ λεγει = for He says
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2101, 1, 'quotation', 'literal, exact', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (21011, 'Romans', 'SBLGNT Romans 9:15 9:15-37', 19116, 19131);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (21011, 2101, 1, 'Exodus', 'LXX Exodus 33:19+87 33:19', 'Romans', 'SBLGNT Romans 9:15+16 9:15', 99826, 37, 19132, 37);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (21021, 2102, 1, 'Exodus', null, 'LXX Exodus 9:16+28 9:16-43', 'Romans', 'SBLGNT Romans 9:17+50 9:17-45', 24278, 18, 19273, 18, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
