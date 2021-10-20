@@ -3151,6 +3151,13 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2103, 5, 'τας εντολας', 'οιδας'); -- τας εντολας οιδας = the commandments you know
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2103, 5, 'quotation', 'literal, far-fuzzy, superset', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (21035, 'Luke', 'SBLGNT Luke 18:20 18:20-74', 70590, 70604);
+-- Strangely these are very far:
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (21035, 2103, 5, 'Exodus', 'LXX Exodus 20:13 20:16-31', 'Luke', 'SBLGNT Luke 18:20+15 18:20-28', 57313, 50, 70605, 46);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (21035, 2103, 5, 'Exodus', 'LXX Exodus 20:12 20:12-81', 'Luke', 'SBLGNT Luke 18:20+61 18:20', 57204, 28, 70651, 28);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (21036, 2103, 6, 'Exodus', null, 'LXX Exodus 20:13 20:14', 'James', 'SBLGNT James 2:11+9 2:11-46', 57313, 23, 3015, 29, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
