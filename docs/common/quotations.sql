@@ -3164,6 +3164,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2103, 6, null, 'ο γαρ ειπων ... ειπεν και'); -- ο γαρ ειπων = the One for having said, ειπεν και = said also
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2103, 6, 'quotation', 'literal, far-fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (21036, 'James', 'SBLGNT James 2:11 2:11-75', 3006, 3014);
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (21036, 'James', 'SBLGNT James 2:11+20 2:11-56', 3026, 3033);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (21036, 2103, 6, 'Exodus', 'LXX Exodus 20:13 20:13', 'James', 'SBLGNT James 2:11+28 2:11-46', 57313, 11, 3034, 10);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (21036, 2103, 6, 'Exodus', 'LXX Exodus 20:14 20:14', 'James', 'SBLGNT James 2:11+9 2:11-64', 57324, 12, 3015, 11);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (21037, 2103, 7, 'Exodus', null, 'LXX Exodus 20:13 20:13', 'Matthew', 'SBLGNT Matthew 5:21+29 5:21-31', 57313, 11, 9907, 11, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
