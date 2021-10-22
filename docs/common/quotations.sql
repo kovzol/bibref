@@ -3178,6 +3178,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2103, 7, null, 'ερρεθη'); -- ερρεθη = it was said
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2103, 7, 'quotation', 'literal, exact', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (21037, 'Matthew', 'SBLGNT Matthew 5:21 5:21-42', 9878, 9906);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (21037, 2103, 7, 'Exodus', 'LXX Exodus 20:13 20:13', 'Matthew', 'SBLGNT Matthew 5:21+29 5:21-31', 57313, 11, 9907, 11);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (21038, 2103, 8, 'Exodus', null, 'LXX Exodus 20:12 20:16-31', 'Matthew', 'SBLGNT Matthew 19:18+30 19:19-34', 57204, 159, 54982, 75, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
