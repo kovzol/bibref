@@ -3188,6 +3188,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2103, 8, 'τας εντολας', null); -- τας εντολας = the commandments
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2103, 8, 'quotation', 'literal, exact, far-fuzzy, superset', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (21038, 'Matthew', 'SBLGNT Matthew 19:17+50 19:18-50', 54906, 54981);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (21038, 2103, 8, 'Exodus', 'LXX Exodus 20:13 20:15', 'Matthew', 'SBLGNT Matthew 19:18+30 19:18-18', 57313, 32, 54982, 32); -- Ου φονευσεις, Ου μοιχευσεις, Ου κλεψεις
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (21038, 2103, 8, 'Exodus', 'LXX Exodus 20:16 20:16-31', 'Matthew', 'SBLGNT Matthew 19:18+62 19:18', 57345, 18, 55014, 18); -- Ου ψευδομαρτυρησεις
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (21038, 2103, 8, 'Exodus', 'LXX Exodus 20:12 20:12-81', 'Matthew', 'SBLGNT Matthew 19:19 19:19-34', 57204, 28, 55032, 25); -- Τιμα τον πατερα και την μητερα
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (21039, 2103, 9, 'Exodus', null, 'LXX Exodus 20:14 20:14', 'Matthew', 'SBLGNT Matthew 5:27+17 5:27', 57324, 12, 10489, 12, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
