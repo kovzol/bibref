@@ -3212,6 +3212,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2103, 10, 'θεος', 'ειπεν'); -- ειπεν = commanded
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2103, 10, 'quotation', 'literal, fuzzy, superset', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (21040, 'Matthew', 'SBLGNT Matthew 15:4 15:4-66', 42511, 42523);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (21040, 2103, 10, 'Exodus', 'LXX Exodus 20:12 20:12-81', 'Matthew', 'SBLGNT Matthew 15:4+13 15:4-41', 57204, 28, 42524, 25);
 -- End of the Ten Commandments.
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (21041, 2104, 1, 'Exodus', null, 'LXX Exodus 13:12+10 13:12-91', 'Luke', 'SBLGNT Luke 2:23+29 2:23-10', 37462, 35, 7753, 35, 'manual');
