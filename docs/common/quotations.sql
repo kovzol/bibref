@@ -3223,6 +3223,12 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2104, 1, 'εν νομω κυριου', 'καθως γεγραπται'); -- εν νομω κυριου = in the law of the Lord, καθως γεγραπται = as it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2104, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (21041, 'Luke', 'SBLGNT Luke 2:23 2:23-45', 7724, 7752);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (21041, 2104, 1, 'Exodus', 'LXX Exodus 13:12+10 13:12-98', 'Luke', 'SBLGNT Luke 2:23+29 2:23-22', 37462, 28, 7753, 23); -- παν διανοιγον μητραν τα αρσενικα -> Παν αρσεν διανοιγον μητραν
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (21041, 2104, 1, 'Exodus', 'LXX Exodus 13:12+121 13:12', 'Luke', 'SBLGNT Luke 2:23+52 2:23-10', 37573, 15, 7776, 12); -- αγιασεις τω κυριω -> αγιον τω κυριω
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (21051, 2105, 1, 'Exodus', null, 'LXX Exodus 32:6+98 32:6', 'I_Corinthians', 'SBLGNT I_Corinthians 10:7+75 10:7', 94513, 22, 16541, 22, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
