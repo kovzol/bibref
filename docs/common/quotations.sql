@@ -3230,15 +3230,19 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (21041, 2104, 1, 'Exodus', 'LXX Exodus 13:12+121 13:12', 'Luke', 'SBLGNT Luke 2:23+52 2:23-10', 37573, 15, 7776, 12); -- αγιασεις τω κυριω -> αγιον τω κυριω
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (21051, 2105, 1, 'Exodus', null, 'LXX Exodus 32:6+98 32:6', 'I_Corinthians', 'SBLGNT I_Corinthians 10:7+75 10:7', 94513, 22, 16541, 22, 'getrefs');
-insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (21051, 2105, 1, 'Exodus', null, 'LXX Exodus 32:6+72 32:6-23', 'I_Corinthians', 'SBLGNT I_Corinthians 10:7+50 10:7-22', 94487, 25, 16516, 25, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (21051, 2105, 1, 'Exodus', null, 'LXX Exodus 32:6+72 32:6', 'I_Corinthians', 'SBLGNT I_Corinthians 10:7+50 10:7', 94487, 48, 16516, 47, 'manual');
+ (21051, 2105, 1, 'Exodus', null, 'LXX Exodus 32:6+98 32:6', 'I_Corinthians', 'SBLGNT I_Corinthians 10:7+75 10:7', 94513, 22, 16541, 22, 'getrefs');
+insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (21051, 2105, 1, 'Exodus', null, 'LXX Exodus 32:6+74 32:6', 'I_Corinthians', 'SBLGNT I_Corinthians 10:7+52 10:7', 94489, 46, 16518, 45, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2105, 1, null, 'ωσπερ γεγραπται'); -- ωσπερ γεγραπται = as it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2105, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (21051, 'I_Corinthians', 'SBLGNT I_Corinthians 10:7 10:7-45', 16466, 16517);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (21051, 2105, 1, 'Exodus', 'LXX Exodus 32:6+74 32:6', 'I_Corinthians', 'SBLGNT I_Corinthians 10:7+52 10:7', 94489, 46, 16518, 45);
 -- TODO: These have longer variants in Deuteronomy (see 24101 and 24102), so these should be removed from database:
 -- insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
 --  (21061, 2106, 1, 'Exodus', null, 'LXX Exodus 20:5+2 20:5-115', 'Matthew', 'SBLGNT Matthew 4:10+59 4:10-3', 56471, 31, 6932, 30, 'manual');
