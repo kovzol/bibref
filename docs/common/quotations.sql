@@ -3278,6 +3278,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2108, 1, 'Μωυσης', 'καθως κεχρηματισται ... φησιν'); -- καθως κεχρηματισται ... φησιν = as was divinely instructed ... He says
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2108, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (21081, 'Hebrews', 'SBLGNT Hebrews 8:5 8:5-59', 11492, 11588);
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (21081, 'Hebrews', 'SBLGNT Hebrews 8:5+100 8:5-48', 11592, 11599);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (21081, 2108, 1, 'Exodus', 'LXX Exodus 25:40 25:40-45', 'Hebrews', 'SBLGNT Hebrews 8:5+97 8:5-56', 73198, 3, 11589, 3); -- Ορα
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (21081, 2108, 1, 'Exodus', 'LXX Exodus 25:40+3 25:40', 'Hebrews', 'SBLGNT Hebrews 8:5+108 8:5', 73201, 45, 11600, 48);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (21091, 2109, 1, 'Exodus', null, 'LXX Exodus 24:8+50 24:8-45', 'Hebrews', 'SBLGNT Hebrews 9:20+10 9:20-23', 68770, 19, 14396, 19, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
