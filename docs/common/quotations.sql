@@ -3294,6 +3294,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2109, 1, null, 'λεγων'); -- λεγων = saying
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2109, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (21091, 'Hebrews', 'SBLGNT Hebrews 9:19 9:20-47', 14234, 14390);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (21091, 2109, 1, 'Exodus', 'LXX Exodus 24:8+50 24:8-45', 'Hebrews', 'SBLGNT Hebrews 9:20+10 9:20-23', 68770, 19, 14396, 19);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (21091, 2109, 1, 'Exodus', 'LXX Exodus 24:8+82 24:8-24', 'Hebrews', 'SBLGNT Hebrews 9:20+39 9:20-5', 68802, 8, 14425, 8); -- προς υμας
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (21091, 2109, 1, 'Exodus', 'LXX Exodus 24:8+108 24:8', 'Hebrews', 'SBLGNT Hebrews 9:20+5 9:20-42', 68828, 6, 14391, 5); -- τουτων -> Τουτο
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (21101, 2110, 1, 'Exodus', null, 'LXX Exodus 21:24 21:24-28', 'Matthew', 'SBLGNT Matthew 5:38+17 5:38', 60430, 37, 11387, 40, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
