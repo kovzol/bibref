@@ -3380,6 +3380,7 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2113, 4, 'Μωυσης', 'εγενετο φωνη κυριου'); -- εγενετο φωνη κυριου = there was voice of the Lord
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2113, 4, 'quotation', 'literal, far-fuzzy, grammatical-change, superset', 'Z.K.');
+-- FIXME: This is Exodus 12:46:
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (21141, 2114, 1, 'Exodus', null, 'LXX Exodus 12:10+30 12:10-48', 'John', 'SBLGNT John 19:36+31 19:36', 31881, 25, 64533, 26, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values

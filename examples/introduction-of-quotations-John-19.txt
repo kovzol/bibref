@@ -11,7 +11,9 @@
 
 ## 3. John 19:36
 ## ινα η γραφη πληρωθη = so that the Scripture might be fulfilled
-## This is a clear quotation from Exodus 12:10.
+## This is a clear quotation from Exodus 12:10. (But, in fact, literally it is
+## from Exodus 12:46. Some words seem to be removed from the Hebrew text in Exodus 12:10,
+## but present in Septuagint.) Psalm 34:20 is somewhat similar, but not so close.
 
 ## 4. John 19:37
 ## και παλιν ετερα γραφη λεγει = and again another Scripture says
