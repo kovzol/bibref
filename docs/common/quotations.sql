@@ -3308,6 +3308,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2110, 1, null, 'ερρεθη'); -- ερρεθη = it was said
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2110, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (21101, 'Matthew', 'SBLGNT Matthew 5:38 5:38-40', 11370, 11386);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (21101, 2110, 1, 'Exodus', 'LXX Exodus 21:24 21:24-28', 'Matthew', 'SBLGNT Matthew 5:38+17 5:38', 60430, 37, 11387, 40);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (21111, 2111, 1, 'Exodus', null, 'LXX Exodus 23:20+1 23:20-54', 'Matthew', 'SBLGNT Matthew 11:10+23 11:10-36', 66260, 45, 28147, 45, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
