@@ -3344,6 +3344,8 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2111, 3, null, 'Καθως γεγραπται'); -- Καθως γεγραπται = as it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2111, 3, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1243, 2111, 3, 'Exodus', 'LXX Exodus 23:20+3 23:20-54', 'Mark', 'SBLGNT Mark 1:2+32 1:2-24', 66262, 43, 72, 40);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (21121, 2112, 1, 'Exodus', null, 'LXX Exodus 21:17 21:17-33', 'Matthew', 'SBLGNT Matthew 15:4+41 15:4-22', 59825, 16, 42552, 16, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
