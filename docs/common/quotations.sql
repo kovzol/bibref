@@ -3366,6 +3366,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2112, 2, 'Μωυσης', 'γαρ ειπεν'); -- γαρ ειπεν = for said
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2112, 2, 'quotation', 'literal, superset, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (21122, 'Mark', 'SBLGNT Mark 7:10+45 7:10-38', 21604, 21606);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (21122, 2112, 2, 'Exodus', 'LXX Exodus 21:17 21:17', 'Mark', 'SBLGNT Mark 7:10+48 7:10', 59825, 49, 21607, 38);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (21131, 2113, 1, 'Exodus', null, 'LXX Exodus 3:6+12 3:6-70', 'Matthew', 'SBLGNT Matthew 22:32 22:32-29', 4990, 58, 65454, 44, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
