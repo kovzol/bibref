@@ -3354,6 +3354,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2112, 1, 'θεος', 'ειπεν'); -- ειπεν = commanded
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2112, 1, 'quotation', 'literal, superset, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (21121, 'Matthew', 'SBLGNT Matthew 15:4+38 15:4-38', 42549, 42551);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (21121, 2112, 1, 'Exodus', 'LXX Exodus 21:17 21:17', 'Matthew', 'SBLGNT Matthew 15:4+41 15:4', 59825, 49, 42552, 38);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (21122, 2112, 2, 'Exodus', null, 'LXX Exodus 21:17 21:17-33', 'Mark', 'SBLGNT Mark 7:10+48 7:10-22', 59825, 16, 21607, 16, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
