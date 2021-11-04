@@ -3402,6 +3402,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2113, 3, 'Μωυσης', 'λεγει'); -- λεγει = calls
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2113, 3, 'quotation', 'literal, grammatical-change, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (21133, 'Luke', 'SBLGNT Luke 20:37 20:37-37', 78830, 78893);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (21133, 2113, 3, 'Exodus', 'LXX Exodus 3:6+33 3:6-70', 'Luke', 'SBLGNT Luke 20:37+64 20:37', 5011, 37, 78894, 37);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (21134, 2113, 4, 'Exodus', null, 'LXX Exodus 3:5+61 3:5', 'Acts', 'SBLGNT Acts 7:33+55 7:33', 4960, 18, 21100, 18, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
