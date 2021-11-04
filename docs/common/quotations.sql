@@ -3415,11 +3415,27 @@ insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passag
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (21134, 2113, 4, 'Exodus', null, 'LXX Exodus 3:9+81 3:10-72', 'Acts', 'SBLGNT Acts 7:34+86 7:34-11', 5557, 28, 21204, 28, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (21134, 2113, 4, 'Exodus', null, 'LXX Exodus 3:5+61 3:10-48', 'Acts', 'SBLGNT Acts 7:32 7:34', 4960, 649, 20953, 290, 'manual');
+ (21134, 2113, 4, 'Exodus', null, 'LXX Exodus 3:5+20 3:10-48', 'Acts', 'SBLGNT Acts 7:32 7:34', 4919, 690, 20953, 290, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2113, 4, 'Μωυσης', 'εγενετο φωνη κυριου'); -- εγενετο φωνη κυριου = there was voice of the Lord
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2113, 4, 'quotation', 'literal, far-fuzzy, grammatical-change, superset', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (21134, 'Acts', 'SBLGNT Acts 7:31 7:31', 20877, 20952);
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (21134, 'Acts', 'SBLGNT Acts 7:32+48 7:33-55', 21001, 21062);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (21134, 2113, 4, 'Exodus', 'LXX Exodus 3:5+20 3:5', 'Acts', 'SBLGNT Acts 7:33+18 7:33', 4919, 59, 21063, 55); -- λυσαι το υποδημα εκ των ποδων σου ο γαρ τοπος εν ω συ εστηκας γη αγια εστιν -> Λυσον το υποδημα των ποδων σου, ο γαρ τοπος εφ ω εστηκας γη αγια εστιν
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (21134, 2113, 4, 'Exodus', 'LXX Exodus 3:6+12 3:6-70', 'Acts', 'SBLGNT Acts 7:32 7:32-44', 4990, 58, 20953, 48); -- εγω ειμι ο θεος του πατρος σου θεος αβρααμ και θεος ισαακ και θεος ιακωβ -> Εγω ο θεος των πατερων σου, ο θεος Αβρααμ και Ισαακ και Ιακωβ
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (21134, 2113, 4, 'Exodus', 'LXX Exodus 3:7+23 3:7-59', 'Acts', 'SBLGNT Acts 7:34 7:34-81', 5141, 44, 21118, 44); -- ιδων ειδον την κακωσιν του λαου μου του εν αιγυπτω
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (21134, 2113, 4, 'Exodus', 'LXX Exodus 3:8 3:8-207', 'Acts', 'SBLGNT Acts 7:34+67 7:34-33', 5244, 25, 21185, 25); -- και κατεβην εξελεσθαι αυτους
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (21134, 2113, 4, 'Exodus', 'LXX Exodus 3:10 3:10-72', 'Acts', 'SBLGNT Acts 7:34+92 7:34-11', 5563, 22, 21210, 22); -- και νυν δευρο αποστειλω σε
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (21134, 2113, 4, 'Exodus', 'LXX Exodus 3:10+38 3:10-48', 'Acts', 'SBLGNT Acts 7:34+117 7:34', 5601, 8, 21235, 8); -- αιγυπτου -> Αιγυπτον
 -- FIXME: This is Exodus 12:46:
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (21141, 2114, 1, 'Exodus', null, 'LXX Exodus 12:10+30 12:10-48', 'John', 'SBLGNT John 19:36+31 19:36', 31881, 25, 64533, 26, 'manual');
