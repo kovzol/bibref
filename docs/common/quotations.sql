@@ -3436,13 +3436,17 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
  (21134, 2113, 4, 'Exodus', 'LXX Exodus 3:10 3:10-72', 'Acts', 'SBLGNT Acts 7:34+92 7:34-11', 5563, 22, 21210, 22); -- και νυν δευρο αποστειλω σε
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (21134, 2113, 4, 'Exodus', 'LXX Exodus 3:10+38 3:10-48', 'Acts', 'SBLGNT Acts 7:34+117 7:34', 5601, 8, 21235, 8); -- αιγυπτου -> Αιγυπτον
--- FIXME: This is Exodus 12:46:
+-- This is repeated in Exodus 12:46 (but 12:10 is not present in many translations):
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (21141, 2114, 1, 'Exodus', null, 'LXX Exodus 12:10+30 12:10-48', 'John', 'SBLGNT John 19:36+31 19:36', 31881, 25, 64533, 26, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2114, 1, 'η γραφη', 'πληρωθη'); -- η γραφη = the Scripture, πληρωθη = might be fulfilled
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2114, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (21141, 'John', 'John 19:36 19:36-26', 64502, 64532);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (21141, 2114, 1, 'Exodus', 'LXX Exodus 12:10+30 12:10-48', 'John', 'SBLGNT John 19:36+31 19:36', 31881, 25, 64533, 26);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (21151, 2115, 1, 'Exodus', null, 'LXX Exodus 2:14+7 2:14-53', 'Acts', 'SBLGNT Acts 7:27+35 7:29-72', 3240, 93, 20629, 93, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
