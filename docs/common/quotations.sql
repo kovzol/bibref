@@ -3447,26 +3447,35 @@ insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt
  (21141, 'John', 'SBLGNT John 19:36 19:36-26', 64502, 64532);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (21141, 2114, 1, 'Exodus', 'LXX Exodus 12:10+30 12:10-48', 'John', 'SBLGNT John 19:36+31 19:36', 31881, 25, 64533, 26);
-insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (21151, 2115, 1, 'Exodus', null, 'LXX Exodus 2:14+7 2:14-53', 'Acts', 'SBLGNT Acts 7:27+35 7:29-72', 3240, 93, 20629, 93, 'getrefs');
-insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (21151, 2115, 1, 'Exodus', null, 'LXX Exodus 2:14+8 2:14-55', 'Acts', 'SBLGNT Acts 7:27+36 7:28', 3241, 90, 20630, 90, 'manual');
-insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
- (2115, 1, 'Μωυσης', 'ειπων'); -- ειπων = having said
-insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
- (2115, 1, 'quotation', 'literal, exact', 'Z.K.');
-insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (21161, 2116, 1, 'Exodus', null, 'LXX Exodus 32:1+96 32:1', 'Acts', 'SBLGNT Acts 7:40+15 7:40', 93906, 107, 21811, 101, 'manual');
-insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
- (2116, 1, 'τω Ααρων', 'ειποντες'); -- ειποντες = having said
-insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
- (2116, 1, 'quotation', 'literal, fuzzy, supertext', 'Z.K.');
+-- This does not seem to be a formal quotation. Stephan recalls many parts of a long story. Even if there are
+-- longer parts that are literally the same, this is a kind of mixture of story telling and non-strict quoting.
+-- TODO: Maybe handle the whole story as one text and find the clasps---there are many shorter and longer ones too.
+-- insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+--  (21151, 2115, 1, 'Exodus', null, 'LXX Exodus 2:14+7 2:14-53', 'Acts', 'SBLGNT Acts 7:27+35 7:29-72', 3240, 93, 20629, 93, 'getrefs');
+-- insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+--  (21151, 2115, 1, 'Exodus', null, 'LXX Exodus 2:14+8 2:14-55', 'Acts', 'SBLGNT Acts 7:27+36 7:28', 3241, 90, 20630, 90, 'manual');
+-- insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+--  (2115, 1, 'Μωυσης', 'ειπων'); -- ειπων = having said
+-- insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+--  (2115, 1, 'quotation', 'literal, exact', 'Z.K.');
+-- Again, this is more a story-telling than a formal quotation.
+-- TODO: Do something similar like with Acts 7:27-28.
+-- insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+--  (21161, 2116, 1, 'Exodus', null, 'LXX Exodus 32:1+96 32:1', 'Acts', 'SBLGNT Acts 7:40+15 7:40', 93906, 107, 21811, 101, 'manual');
+-- insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+--  (2116, 1, 'τω Ααρων', 'ειποντες'); -- ειποντες = having said
+-- insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+--  (2116, 1, 'quotation', 'literal, fuzzy, supertext', 'Z.K.');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (21171, 2117, 1, 'Exodus', null, 'LXX Exodus 22:28+22 22:28', 'Acts', 'SBLGNT Acts 23:5+59 23:5', 64257, 30, 76956, 30, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2117, 1, null, 'γεγραπται γαρ οτι'); -- γεγραπται γαρ οτι = it has been written for
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2117, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (21171, 'Acts', 'SBLGNT Acts 23:5+44 23:5-30', 76941, 76955);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (21171, 2117, 1, 'Exodus', 'LXX Exodus 22:28+22 22:28', 'Acts', 'SBLGNT Acts 23:5+59 23:5', 64257, 30, 76956, 30);
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (22011, 2201, 1, 'Leviticus', null, 'LXX Leviticus 18:5+69 18:5-21', 'Romans', 'SBLGNT Romans 10:5+46 10:5-1', 57053, 27, 20846, 27, 'getrefs');
