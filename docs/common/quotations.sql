@@ -3485,6 +3485,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2201, 1, 'Μωυσης', 'γαρ γραφει'); -- γαρ γραφει = for writes
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2201, 1, 'quotation', 'literal, exact', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (22011, 'Romans', 'SBLGNT Romans 10:5 10:5-56', 20800, 20817);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (22011, 2201, 1, 'Leviticus', 'LXX Leviticus 18:5+69 18:5-18', 'Romans', 'SBLGNT Romans 10:5+46 10:5', 57053, 30, 20846, 28);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (22012, 2201, 2, 'Leviticus', null, 'LXX Leviticus 18:5+64 18:5-18', 'Galatians', 'SBLGNT Galatians 3:12+29 3:12', 57048, 35, 4567, 26, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
