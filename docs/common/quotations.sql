@@ -3495,6 +3495,12 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2201, 2, null, 'αλλ'); -- αλλ = rather
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2201, 2, 'quotation', 'literal, fuzzy, superset', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (22012, 'Galatians', 'SBLGNT Galatians 3:12 3:12-27', 4538, 4565);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (22012, 2201, 2, 'Leviticus', 'LXX Leviticus 18:5+64 18:5-41', 'Galatians', 'SBLGNT Galatians 3:12+28 3:12-15', 57048, 12, 4566, 12); -- αυτα α ποιησας -> Ο ποιησας αυτα
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (22012, 2201, 2, 'Leviticus', 'LXX Leviticus 18:5+84 18:5-18', 'Galatians', 'SBLGNT Galatians 3:12+40 3:12', 57068, 15, 4578, 15); -- ζησεται εν αυτοις
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (22021, 2202, 1, 'Leviticus', null, 'LXX Leviticus 19:18+57 19:18-22', 'Matthew', 'SBLGNT Matthew 5:43+17 5:43-23', 60912, 22, 11699, 22, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
