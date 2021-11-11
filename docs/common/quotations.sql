@@ -3533,6 +3533,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2202, 3, 'νομον', 'κατα την γραφην'); -- νομον = law, κατα την γραφην = according to the Scripture
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2202, 3, 'quotation', 'literal, exact', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (22023, 'James', 'SBLGNT James 2:8 2:8-43', 2793, 2834);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (22023, 2202, 3, 'Leviticus', 'LXX Leviticus 19:18+57 19:18-13', 'James', 'SBLGNT James 2:8+42 2:8-12', 60912, 31, 2835, 31);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (22024, 2202, 4, 'Leviticus', null, 'LXX Leviticus 19:18+57 19:18-13', 'Mark', 'SBLGNT Mark 12:31+11 12:31-30', 60912, 31, 40936, 31, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
