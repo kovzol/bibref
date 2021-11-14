@@ -3557,6 +3557,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2202, 5, 'εντολη', 'ανακεφαλαιουται εν τω'); -- εντολη = commandment, ανακεφαλαιουται εν τω = it is summed up in the
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2202, 5, 'quotation', 'literal, exact', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (22025, 'Romans', 'SBLGNT Romans 13:9+70 13:9-31', 27261, 27292);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (22025, 2202, 5, 'Leviticus', 'LXX Leviticus 19:18+57 19:18-13', 'Romans', 'SBLGNT Romans 13:9+102 13:9', 60912, 31, 27293, 31);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (22026, 2202, 6, 'Leviticus', null, 'LXX Leviticus 19:18+57 19:18-12', 'Galatians', 'SBLGNT Galatians 5:14+35 5:15-58', 60912, 32, 8944, 32, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
