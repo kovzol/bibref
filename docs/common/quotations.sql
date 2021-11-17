@@ -3603,6 +3603,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2203, 1, 'εν τω νομω κυριου', 'το ειρημενον'); -- εν τω νομω κυριου = in the law of the Lord, το ειρημενον = that having been said
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2203, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (22031, 'Luke', 'SBLGNT Luke 2:24 2:24-35', 7798, 7844);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (22031, 2203, 1, 'Leviticus', 'LXX Leviticus 12:8+51 12:8-82', 'Luke', 'SBLGNT Luke 2:24+47 2:24', 33446, 33, 7845, 35);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (3011, 2204, 1, 'Leviticus', null, 'LXX Leviticus 26:11+53 26:12-44', 'II_Corinthians', 'SBLGNT II_Corinthians 6:16+95 6:16-40', 84290, 16, 9601, 16, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
