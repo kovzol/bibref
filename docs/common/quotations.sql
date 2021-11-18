@@ -3615,6 +3615,8 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2204, 1, 'θεος', 'καθως ειπεν'); -- καθως ειπεν = as has said
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2204, 1, 'quotation', 'literal, far-fuzzy', 'Z.K.');
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (3011, 2204, 1, 'Leviticus', 'LXX Leviticus 26:12 26:12-44', 'II_Corinthians', 'SBLGNT II_Corinthians 6:16+96 6:16-40', 84291, 15, 9602, 15);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (22051, 2205, 1, 'Leviticus', null, 'LXX Leviticus 19:2+48 19:2-14', 'I_Peter', 'SBLGNT I_Peter 1:16+17 1:17-107', 59515, 23, 1440, 23, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
