@@ -1248,6 +1248,7 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
 -- TODO: This may be a combination of more quotations, consider adding this as a part to 22061.
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (null, 47, 1, 'Psalms', 50, 'LXX Psalms 50:14', 'Matthew', 'SBLGNT Matthew 5:33b', 0, 0, 0, 0, 'traditional');
+-- TODO: Find this quotation, it seems Matthew 5:33 is not a literal quotation.
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (481, 48, 1, 'Psalms', 78, 'LXX Psalms 78:24+35 78:24', 'John', 'SBLGNT John 6:31+66 6:31-6', 88940, 19, 19255, 19, 'getrefs');
@@ -3632,6 +3633,7 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
 -- TODO: This may be a quotation, consider adding it fully (Matthew 5:33 can be eventually two quotations):
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (22061, 2206, 1, 'Leviticus', null, 'LXX Leviticus 19:12', 'Matthew', 'Matthew 5:33a', 0, 0, 0, 0, 'traditional');
+-- TODO: Find this quotation, it seems Matthew 5:33 is not a literal quotation.
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (23011, 2301, 1, 'Numbers', null, 'LXX Numbers 16:5+73 16:5-75', 'II_Timothy', 'SBLGNT II_Timothy 2:19+65 2:19-43', 57258, 19, 2818, 19, 'getrefs');
@@ -3641,6 +3643,11 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2301, 1, null, 'εχων την σφραγιδα ταυτην'); -- εχων την σφραγιδα ταυτην = having the seal this
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2301, 1, 'quotation', 'literal, synonym', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (23011, 'II_Timothy', 'SBLGNT II_Timothy 2:19 2:19-70', 2753, 2809);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (23011, 2301, 1, 'Numbers', 'LXX Numbers 16:5+66 16:5-78', 'II_Timothy', 'SBLGNT II_Timothy 2:19+57 2:19-46', 57251, 23, 2810, 24);
+-- TODO: The last part of II_Timothy 2:19 seems a bit similar to Psalms 119:29. Check...
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (24011, 2401, 1, 'Deuteronomy', null, 'LXX Deuteronomy 30:14+25 30:14-28', 'Romans', 'SBLGNT Romans 10:8+30 10:8-36', 94465, 30, 21069, 30, 'getrefs');
