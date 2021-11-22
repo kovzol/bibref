@@ -3657,6 +3657,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2401, 1, 'Μωυσης', 'λεγει'); -- λεγει = says (Moses was already mentioned in Romans 10:5)
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2401, 1, 'quotation', 'literal, subset, superset, far-fuzzy, change', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (24011, 'Romans', 'SBLGNT Romans 10:6 10:6-72', 20874, 20905);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24011, 2401, 1, 'Deuteronomy', 'LXX Deuteronomy 30:12+26 30:12-47', 'Romans', 'SBLGNT Romans 10:6+52 10:6-26', 94236, 30, 20926, 26); -- τις αναβησεται ημιν εις τον ουρανον -> Τις αναβησεται εις τον ουρανον
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24011, 2401, 1, 'Deuteronomy', 'LXX Deuteronomy 30:13+30 30:13-94', 'Romans', 'SBLGNT Romans 10:7+1 10:7-57', 94343, 3, 20979, 3); -- τις
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24011, 2401, 1, 'Deuteronomy', 'LXX Deuteronomy 30:14 30:14-28', 'Romans', 'SBLGNT Romans 10:8+11 10:8-36', 94440, 55, 21050, 49); -- εστιν σου εγγυς το ρημα σφοδρα εν τω στοματι σου και εν τη καρδια σου -> Εγγυς σου το ρημα εστιν, εν τω στοματι σου και εν τη καρδια σου
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (24021, 2402, 1, 'Deuteronomy', null, 'LXX Deuteronomy 32:21+58 32:21-44', 'Romans', 'SBLGNT Romans 10:19+41 10:19-40', 101516, 12, 21928, 12, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
