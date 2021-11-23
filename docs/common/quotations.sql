@@ -3675,6 +3675,12 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2402, 1, 'Μωυσης', 'λεγει'); -- λεγει = says
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2402, 1, 'quotation', 'literal, fuzzy, grammatical-change', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (24021, 'Romans', 'SBLGNT Romans 10:19+23 10:19-53', 21910, 21926);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24021, 2402, 1, 'Deuteronomy', 'LXX Deuteronomy 32:21+58 32:21-44', 'Romans', 'SBLGNT Romans 10:19+41 10:19-40', 101516, 12, 21928, 12);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24021, 2402, 1, 'Deuteronomy', 'LXX Deuteronomy 32:21+75 32:21-6', 'Romans', 'SBLGNT Romans 10:19+56 10:19-4', 101533, 33, 21943, 33);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1121, 2403, 1, 'Deuteronomy', null, 'LXX Deuteronomy 29:4+53 29:4-25', 'Romans', 'SBLGNT Romans 11:8+61 11:8-31', 89881, 13, 22764, 13, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
