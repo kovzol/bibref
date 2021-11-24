@@ -1544,8 +1544,9 @@ insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt
  (1121, 'Romans', 'SBLGNT Romans 11:8 11:8-91', 22703, 22716);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1121, 112, 1, 'Isaiah', 'LXX Isaiah 29:10+22 29:10-84', 'Romans', 'SBLGNT Romans 11:8+31 11:8-58', 55055, 18, 22734, 16);
-insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
- (1121, 112, 1, 'Isaiah', 'LXX Isaiah 29:10+51 29:10-60', 'Romans', 'SBLGNT Romans 11:8+47 11:8-46', 55084, 13, 22750, 12);
+-- It is more probable that this is cited from Deuteronomy 29:4
+-- insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+--  (1121, 112, 1, 'Isaiah', 'LXX Isaiah 29:10+51 29:10-60', 'Romans', 'SBLGNT Romans 11:8+47 11:8-46', 55084, 13, 22750, 12);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1131, 113, 1, 'Isaiah', null, 'LXX Isaiah 59:20+13 59:20-29', 'Romans', 'SBLGNT Romans 11:26+46 11:26-26', 119274, 13, 24255, 13, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
@@ -3677,6 +3678,7 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
  (2402, 1, 'quotation', 'literal, fuzzy, grammatical-change', 'Z.K.');
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
  (24021, 'Romans', 'SBLGNT Romans 10:19+23 10:19-53', 21910, 21926);
+-- TODO: Consider adding the starting word εδωκεν. This is however quite frequent in LXX.
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (24021, 2402, 1, 'Deuteronomy', 'LXX Deuteronomy 32:21+58 32:21-44', 'Romans', 'SBLGNT Romans 10:19+41 10:19-40', 101516, 12, 21928, 12);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
@@ -3691,6 +3693,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2403, 1, null, 'καθως γεγραπται'); -- καθως γεγραπται = as it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2403, 1, 'quotation', 'literal, fuzzy, subset, superset', 'Z.K.');
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1121, 2403, 1, 'Deuteronomy', 'LXX Deuteronomy 29:4+53 29:4-25', 'Romans', 'SBLGNT Romans 11:8+61 11:8-31', 89881, 13, 22764, 13); -- βλεπειν και ωτα
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1121, 2403, 1, 'Deuteronomy', 'LXX Deuteronomy 29:4+66 29:4-12', 'Romans', 'SBLGNT Romans 11:8+79 11:8-13', 89894, 13, 22782, 13); -- ακουειν εως της
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1121, 2403, 1, 'Deuteronomy', 'LXX Deuteronomy 29:4+79 29:4-6', 'Romans', 'SBLGNT Romans 11:8+99 11:8', 89907, 6, 22802, 6); -- ημερας
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1121, 2403, 1, 'Deuteronomy', 'LXX Deuteronomy 29:4+44 29:4-38', 'Romans', 'SBLGNT Romans 11:8+47 11:8-49', 89872, 9, 22750, 9); -- οφθαλμους
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (24041, 2404, 1, 'Deuteronomy', null, 'LXX Deuteronomy 32:35', 'Romans', 'Romans 12:19', null, null, null, null, 'traditional');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
