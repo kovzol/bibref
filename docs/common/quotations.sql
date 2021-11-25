@@ -3709,6 +3709,12 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2404, 1, null, 'γεγραπται γαρ'); -- γεγραπται γαρ = it has been written for
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2404, 1, 'quotation', 'fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (24041, 'Romans', 'SBLGNT Romans 12:19 12:19-37', 26211, 26269);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24041, 2404, 1, 'Deuteronomy', 'LXX Deuteronomy 32:35+7 32:35-83', 'Romans', 'SBLGNT Romans 12:19+63 12:19-24', 102578, 10, 26274, 9); -- εκδικησεως -> εκδικησις
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24041, 2404, 1, 'Deuteronomy', 'LXX Deuteronomy 32:35+17 32:35-73', 'Romans', 'SBLGNT Romans 12:19+75 12:19-11', 102588, 10, 26286, 10); -- ανταποδωσω
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (24042, 2404, 2, 'Deuteronomy', null, 'LXX Deuteronomy 32:35-36', 'Hebrews', 'Hebrews 10:30', null, null, null, null, 'traditional');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
