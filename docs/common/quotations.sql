@@ -3723,6 +3723,17 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2404, 2, 'τον', 'ειποντα ... και παλιν'); -- τον = the One, ειποντα = having said, και παλιν = and again
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2404, 2, 'quotation', 'fuzzy, superset', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (24042, 'Hebrews', 'SBLGNT Hebrews 10:30 10:30-58', 17498, 17517);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24042, 2404, 2, 'Deuteronomy', 'LXX Deuteronomy 32:35+7 32:35-83', 'Hebrews', 'SBLGNT Hebrews 10:30+24 10:30-45', 102578, 10, 17522, 9); -- εκδικησεως -> εκδικησις
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24042, 2404, 2, 'Deuteronomy', 'LXX Deuteronomy 32:35+17 32:35-73', 'Hebrews', 'SBLGNT Hebrews 10:30+36 10:30-32', 102588, 10, 17534, 10); -- ανταποδωσω
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (24042, 'Hebrews', 'SBLGNT Hebrews 10:30+46 10:30-24', 17544, 17551); -- και παλιν
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24042, 2404, 2, 'Deuteronomy', 'LXX Deuteronomy 32:36+3 32:36-102', 'Hebrews', 'SBLGNT Hebrews 10:30+54 10:30', 102674, 24, 17552, 24);
+-- There is a literal match for the last clasp in Psalms 135:14 too.
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (24051, 2405, 1, 'Deuteronomy', null, 'LXX Deuteronomy 32:43+60 32:43-169', 'Romans', 'SBLGNT Romans 15:10+13 15:11-65', 103458, 33, 30227, 33, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
