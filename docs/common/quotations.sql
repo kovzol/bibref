@@ -3746,6 +3746,7 @@ insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt
  (24051, 'Romans', 'SBLGNT Romans 15:10 15:10-30', 30214, 30226);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (24051, 2405, 1, 'Deuteronomy', 'LXX Deuteronomy 32:43+60 32:43-172', 'Romans', 'SBLGNT Romans 15:10+13 15:10', 103458, 30, 30227, 30);
+-- TODO: Eventually handle overlappings:
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (24052, 2405, 2, 'Deuteronomy', null, 'LXX Deuteronomy 32:43+24 32:43-210', 'Hebrews', 'SBLGNT Hebrews 1:6+53 1:6-11', 103422, 28, 570, 28, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
@@ -3756,6 +3757,12 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2405, 2, null, 'λεγει'); -- λεγει = it says
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2405, 2, 'quotation', 'literal, far-fuzzy, superset', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (24052, 'Hebrews', 'SBLGNT Hebrews 1:6 1:6-39', 517, 569);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24052, 2405, 2, 'Deuteronomy', 'LXX Deuteronomy 32:43+24 32:43-210', 'Hebrews', 'SBLGNT Hebrews 1:6+53 1:6-11', 103422, 28, 570, 28); -- και προσκυνησατωσαν αυτω παντες
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24052, 2405, 2, 'Deuteronomy', 'LXX Deuteronomy 32:43+116 32:43-135', 'Hebrews', 'SBLGNT Hebrews 1:6+81 1:6', 103514, 11, 598, 11); -- αγγελοι θεου
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (24061, 2406, 1, 'Deuteronomy', null, 'LXX Deuteronomy 24:1+100 24:1-60', 'Mark', 'SBLGNT Mark 10:4+24 10:4-11', 72306, 27, 31468, 23, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
