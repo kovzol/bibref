@@ -3763,18 +3763,21 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
  (24052, 2405, 2, 'Deuteronomy', 'LXX Deuteronomy 32:43+24 32:43-210', 'Hebrews', 'SBLGNT Hebrews 1:6+53 1:6-11', 103422, 28, 570, 28); -- και προσκυνησατωσαν αυτω παντες
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (24052, 2405, 2, 'Deuteronomy', 'LXX Deuteronomy 32:43+116 32:43-135', 'Hebrews', 'SBLGNT Hebrews 1:6+81 1:6', 103514, 11, 598, 11); -- αγγελοι θεου
+-- The importance and the way of citing seems here not so mandatory. TODO: Check, at the moment this is NOT considered a valid quotation.
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (24061, 2406, 1, 'Deuteronomy', null, 'LXX Deuteronomy 24:1+100 24:1-60', 'Mark', 'SBLGNT Mark 10:4+24 10:4-11', 72306, 27, 31468, 23, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2406, 1, 'Μωυσης', 'εγραψεν'); -- εγραψεν = he wrote
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2406, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+-- This one is similar. The exact match is present also in Mark 10:4 (βιβλιον αποστασιου). TODO: Check, at the moment this is NOT considered a valid quotation.
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (24062, 2406, 2, 'Deuteronomy', null, 'LXX Deuteronomy 24:1+110 24:1-60', 'Matthew', 'SBLGNT Matthew 19:7+39 19:7-16', 72316, 17, 53994, 17, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2406, 2, 'Μωυσης', 'ενετειλατο'); -- ενετειλατο = did command
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2406, 2, 'quotation', 'literal, exact', 'Z.K.');
+-- This one is not literally cited, but logically it should be a quotation. TODO: Check.
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (24063, 2406, 3, 'Deuteronomy', null, 'LXX Deuteronomy 24:1+117 24:1-52', 'Matthew', 'SBLGNT Matthew 5:31+34 5:31', 72323, 18, 10880, 18, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
