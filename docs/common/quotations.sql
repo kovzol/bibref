@@ -3806,6 +3806,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2407, 2, 'η γραφη', 'λεγει γαρ'); -- η γραφη = the Scripture, λεγει γαρ = says for
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2407, 2, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (24072, 'I_Timothy', 'SBLGNT I_Timothy 5:18 5:18-51', 6278, 6291);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24072, 2407, 2, 'Deuteronomy', 'LXX Deuteronomy 25:4', 'I_Timothy', 'SBLGNT I_Timothy 5:18+14 5:18-30', 75098, 21, 6292, 21);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (24081, 2408, 1, 'Deuteronomy', null, 'LXX Deuteronomy 6:16 6:16-33', 'Luke', 'SBLGNT Luke 4:12+39 4:12', 23212, 30, 13914, 30, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
