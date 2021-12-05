@@ -3792,6 +3792,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2407, 1, 'εν ... τω Μωυσεως νομω ', 'γαρ ... γεγραπται'); -- εν γαρ τω Μωυσεως νομω γεγραπται = in for the of Moses law it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2407, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (24071, 'I_Corinthians', 'SBLGNT I_Corinthians 9:9 9:9-40', 14426, 14452);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24071, 2407, 1, 'Deuteronomy', 'LXX Deuteronomy 25:4', 'I_Corinthians', 'SBLGNT I_Corinthians 9:9+27 9:9-19', 75098, 21, 14453, 21);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (24072, 2407, 2, 'Deuteronomy', null, 'LXX Deuteronomy 25:4 25:4-11', 'I_Timothy', 'SBLGNT I_Timothy 5:18+25 5:18-30', 75098, 10, 6303, 10, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
