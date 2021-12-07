@@ -3851,11 +3851,15 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (24092, 2409, 2, 'Deuteronomy', null, 'LXX Deuteronomy 8:3+88 8:3-62', 'Luke', 'SBLGNT Luke 4:4+35 4:4', 27879, 33, 13306, 33, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (24092, 2409, 2, 'Deuteronomy', null, 'LXX Deuteronomy 8:3+88 8:3-62', 'Luke', 'SBLGNT Luke 4:4+35 4:4', 27879, 33, 13306, 33, 'manual');
+ (24092, 2409, 2, 'Deuteronomy', null, 'LXX Deuteronomy 8:3+92 8:3-62', 'Luke', 'SBLGNT Luke 4:4+39 4:4', 27883, 29, 13310, 29, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
- (2409, 2, null, 'γεγραπται οτι'); -- γεγραπται οτι = it has been written
+ (2409, 2, null, 'γεγραπται οτι'); -- γεγραπται οτι = it has been written (the word "οτι" also appears in LXX)
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2409, 2, 'quotation', 'literal, exact', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (24092, 'Luke', 'SBLGNT Luke 4:4 4:4-29', 13271, 13309);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24092, 2409, 2, 'Deuteronomy', 'LXX Deuteronomy 8:3+92 8:3-62', 'Luke', 'SBLGNT Luke 4:4+39 4:4', 27883, 29, 13310, 29);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (24101, 2410, 1, 'Deuteronomy', null, 'LXX Deuteronomy 6:13 6:13-41', 'Matthew', 'SBLGNT Matthew 4:10+43 4:10', 22967, 41, 6916, 49, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
