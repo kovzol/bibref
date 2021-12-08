@@ -3866,6 +3866,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2410, 1, null, 'γεγραπται γαρ'); -- γεγραπται γαρ = it has been written for
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2410, 1, 'quotation', 'literal, changed, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (24101, 'Matthew', 'SBLGNT Matthew 4:10 4:10-49', 6873, 6915);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24101, 2410, 1, 'Deuteronomy', 'LXX Deuteronomy 6:13 6:13-66', 'Matthew', 'SBLGNT Matthew 4:10+43 4:10-33', 22967, 16, 6916, 16); -- Κυριον τον θεον σου
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24101, 2410, 1, 'Deuteronomy', 'LXX Deuteronomy 6:13+24 6:13-51', 'Matthew', 'SBLGNT Matthew 4:10+71 4:10-14', 22991, 7, 6944, 7); -- και αυτω
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24101, 2410, 1, 'Deuteronomy', 'LXX Deuteronomy 6:13+31 6:13-41', 'Matthew', 'SBLGNT Matthew 4:10+82 4:10', 22998, 10, 6955, 10); -- λατρευσεις
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (24102, 2410, 2, 'Deuteronomy', null, 'LXX Deuteronomy 6:13 6:13-41', 'Luke', 'SBLGNT Luke 4:8+38 4:8', 22967, 41, 13596, 49, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
