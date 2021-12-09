@@ -3898,6 +3898,15 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2411, 1, null, 'γεγραπται γαρ οτι'); -- γεγραπται γαρ οτι = it has been written for
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2411, 1, 'quotation', 'literal, grammatical-change, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (24111, 'Galatians', 'SBLGNT Galatians 3:10 3:10-80', 4336, 4389);
+-- FIXME: This could be done better in more clasps:
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24111, 2411, 1, 'Deuteronomy', 'LXX Deuteronomy 27:26 27:26-92', 'Galatians', 'SBLGNT Galatians 3:10+54 3:10-65', 81664, 15, 4390, 15); -- Επικαταρατος πας
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24111, 2411, 1, 'Deuteronomy', 'LXX Deuteronomy 27:26+23 27:26-61', 'Galatians', 'SBLGNT Galatians 3:10+69 3:10-44', 81687, 23, 4405, 21); -- ος ουκ εμμενει εν πασιν τοις -> ος ουκ εμμενει εν πασιν τοις
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24111, 2411, 1, 'Deuteronomy', 'LXX Deuteronomy 27:26+52 27:26-25', 'Galatians', 'SBLGNT Galatians 3:10+112 3:10', 81716, 30, 4448, 22); -- του νομου τουτου του ποιησαι αυτους -> του νομου του ποιησαι αυτα
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (24121, 2412, 1, 'Deuteronomy', null, 'LXX Deuteronomy 21:23+100 21:23-52', 'Galatians', 'SBLGNT Galatians 3:13+92 3:13', 66388, 18, 4685, 18, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values

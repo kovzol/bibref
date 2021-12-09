@@ -50,7 +50,7 @@ This project is a work in progress.
 ## Using the software tool
 
 At the moment the project was tested on
-Ubuntu Linux 18.04 and 19.10 but it should work
+Ubuntu Linux 18.04, 19.10, 20.04 and 22.04 but it should work
 on many other systems.
 
 ### Installation
@@ -60,7 +60,7 @@ on many other systems.
 The following commands
 should be entered on command line:
 ```commandline
-sudo apt install libsword-common libsword-dev libreadline-dev libboost-dev git cmake build-essential
+sudo apt install libsword-common libsword-dev libreadline-dev libboost-dev git cmake build-essential pkg-config
 git clone https://github.com/kovzol/bibref.git
 cd bibref
 cmake .
