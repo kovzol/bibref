@@ -3910,11 +3910,15 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (24121, 2412, 1, 'Deuteronomy', null, 'LXX Deuteronomy 21:23+100 21:23-52', 'Galatians', 'SBLGNT Galatians 3:13+92 3:13', 66388, 18, 4685, 18, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (24121, 2412, 1, 'Deuteronomy', null, 'LXX Deuteronomy 21:23+100 21:23-52', 'Galatians', 'SBLGNT Galatians 3:13+92 3:13', 66388, 18, 4685, 18, 'manual');
+ (24121, 2412, 1, 'Deuteronomy', null, 'LXX Deuteronomy 21:23+97 21:23-52', 'Galatians', 'SBLGNT Galatians 3:13+88 3:13', 66385, 21, 4681, 22, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2412, 1, null, 'οτι γεγραπται'); -- οτι γεγραπται = it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2412, 1, 'quotation', 'literal, exact', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (24121, 'Galatians', 'SBLGNT Galatians 3:13 3:13-34', 4593, 4668);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24121, 2412, 1, 'Deuteronomy', 'LXX Deuteronomy 21:23+97 21:23-52', 'Galatians', 'SBLGNT Galatians 3:13+88 3:13', 66385, 21, 4681, 22);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (24131, 2413, 1, 'Deuteronomy', null, 'LXX Deuteronomy 9:19+3 9:19-102', 'Hebrews', 'SBLGNT Hebrews 12:21+41 12:21-11', 32201, 11, 23651, 11, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
