@@ -4003,6 +4003,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2417, 3, 'Ποια εστιν εντολη πρωτη παντων', null); -- Ποια εστιν εντολη πρωτη παντων = which is commandment the first of all
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2417, 3, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (24173, 'Mark', 'SBLGNT Mark 12:28 12:29-40', 40628, 40773);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24173, 2417, 3, 'Deuteronomy', 'LXX Deuteronomy 6:4+103 6:5', 'Mark', 'SBLGNT Mark 12:29+28 12:30-21', 22171, 130, 40774, 130);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (24181, 2418, 1, 'Deuteronomy', null, 'LXX Deuteronomy 4:35+38 4:35-12', 'Mark', 'SBLGNT Mark 12:32+57 12:32-14', 16688, 17, 41054, 17, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
