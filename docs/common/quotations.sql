@@ -4018,7 +4018,7 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
  (24181, 'Mark', 'SBLGNT Mark 12:32 12:32-33', 40997, 41051);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
- (24181, 2418, 1, 'Deuteronomy', 'LXX Deuteronomy 4:35+38 4:35-12', 'Mark', 'SBLGNT Mark 12:32+57 12:32-14', 16689, 16, 41055, 16); -- εστιν και ουκ εστιν
+ (24181, 2418, 1, 'Deuteronomy', 'LXX Deuteronomy 4:35+39 4:35-12', 'Mark', 'SBLGNT Mark 12:32+58 12:32-14', 16689, 16, 41055, 16); -- εστιν και ουκ εστιν
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (24181, 2418, 1, 'Deuteronomy', 'LXX Deuteronomy 4:35+58 4:35', 'Mark', 'SBLGNT Mark 12:32+79 12:32', 16708, 9, 41076, 9); -- πλην αυτου
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
