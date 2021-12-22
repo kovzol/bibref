@@ -4027,6 +4027,15 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2419, 1, 'Μωυσης', 'ειπεν οτι'); -- ειπεν οτι = said that
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2419, 1, 'quotation', 'far-fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (24191, 'Acts', 'SBLGNT Acts 3:22 3:22-95', 8810, 8826);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24191, 2419, 1, 'Deuteronomy', 'LXX Deuteronomy 18:18 18:18-108', 'Acts', 'SBLGNT Acts 3:22+17 3:22-87', 58142, 8, 8827, 8); -- Προφητην
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24191, 2419, 1, 'Deuteronomy', 'LXX Deuteronomy 18:18+8 18:18-100', 'Acts', 'SBLGNT Acts 3:22+29 3:22-74', 58150, 8, 8839, 9); -- αναστησω -> αναστησει
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24191, 2419, 1, 'Deuteronomy', 'LXX Deuteronomy 18:18+22 18:18-82', 'Acts', 'SBLGNT Acts 3:22+49 3:22-51', 58164, 12, 8859, 12); -- εκ των αδελφων
+-- TODO: The word λαλησ... occurs also, but it is very frequent. Consider adding it.
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (24201, 2420, 1, 'Deuteronomy', null, 'LXX Deuteronomy 18:15 18:15-31', 'Acts', 'SBLGNT Acts 7:37+38 7:37', 57869, 37, 21525, 47, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
