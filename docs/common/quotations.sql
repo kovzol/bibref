@@ -4042,6 +4042,16 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2420, 1, 'Μωυσης', 'ειπας'); -- ειπας = having said
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2420, 1, 'quotation', 'literal, fuzzy, subset', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (24201, 'Acts', 'SBLGNT Acts 7:37 7:37-47', 21487, 21524);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24201, 2420, 1, 'Deuteronomy', 'LXX Deuteronomy 18:15 18:15-60', 'Acts', 'SBLGNT Acts 7:37+38 7:37-39', 57869, 8, 21525, 8); -- προφητην
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24201, 2420, 1, 'Deuteronomy', 'LXX Deuteronomy 18:15+28 18:15-31', 'Acts', 'SBLGNT Acts 7:37+50 7:37-26', 57897, 9, 21537, 9); -- αναστησει
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24201, 2420, 1, 'Deuteronomy', 'LXX Deuteronomy 18:15+8 18:15-48', 'Acts', 'SBLGNT Acts 7:37+64 7:37-9', 57877, 12, 21551, 12); -- εκ των αδελφων
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24201, 2420, 1, 'Deuteronomy', 'LXX Deuteronomy 18:15+23 18:15-40', 'Acts', 'SBLGNT Acts 7:37+80 7:37', 57892, 5, 21567, 5); -- ως εμε
 
 -- TODO: Add this as a quotation:
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
