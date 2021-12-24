@@ -4053,7 +4053,7 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (24201, 2420, 1, 'Deuteronomy', 'LXX Deuteronomy 18:15+23 18:15-40', 'Acts', 'SBLGNT Acts 7:37+80 7:37', 57892, 5, 21567, 5); -- ως εμε
 
--- TODO: Add this as a quotation:
+-- TODO: Add this as a quotation (if it is indeed from Job, the matching text is "σοφους εν τη", "wise in the"):
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (30011, 3001, 1, 'Job', null, 'Job 5:12-13', 'I_Corinthians', 'I_Corinthians 3:19', null, null, null, null, 'traditional');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
@@ -4069,6 +4069,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (3101, 1, null, 'αλλα'); -- αλλα = on the contrary
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (3101, 1, 'quotation', 'literal, fuzzy, synonym', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (31011, 'Romans', 'SBLGNT Romans 12:20 12:20-100', 26307, 26310);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (31011, 3101, 1, 'Proverbs', 'LXX Proverbs 25:21 25:22-28', 'Romans', 'SBLGNT Romans 12:20+4 12:20', 47241, 99, 26311, 100);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (31021, 3102, 1, 'Proverbs', null, 'LXX Proverbs 3:11+3 3:12', 'Hebrews', 'SBLGNT Hebrews 12:5+57 12:6', 4276, 108, 22341, 108, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
