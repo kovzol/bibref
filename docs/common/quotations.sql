@@ -4105,6 +4105,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (3103, 2, null, 'οτι'); -- οτι = because
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (3103, 2, 'quotation', 'literal, exact', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (31032, 'I_Peter', 'SBLGNT I_Peter 5:5+35 5:5-50', 8279, 8328);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (31032, 3103, 2, 'Proverbs', 'LXX Proverbs 3:34', 'I_Peter', 'SBLGNT I_Peter 5:5+85 5:5', 5750, 52, 8329, 50);
 -- TODO: Double check this:
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (31041, 3104, 1, 'Proverbs', null, 'LXX Proverbs 26:11', 'II_Peter', 'II_Peter 2:22', null, null, null, null, 'traditional');
