@@ -4093,6 +4093,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (3103, 1, null, 'διο λεγει'); -- διο λεγει = therefore it says
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (3103, 1, 'quotation', 'literal, exact', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (31031, 'James', 'SBLGNT James 4:6 4:6-50', 6121, 6150);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (31031, 3103, 1, 'Proverbs', 'LXX Proverbs 3:34', 'James', 'SBLGNT James 4:6+30 4:6', 5750, 52, 6151, 50);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (31032, 3103, 2, 'Proverbs', null, 'LXX Proverbs 3:34+4 3:34', 'I_Peter', 'SBLGNT I_Peter 5:5+87 5:5', 5754, 48, 8331, 48, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
