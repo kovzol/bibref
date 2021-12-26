@@ -4138,6 +4138,13 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (4201, 1, 'εν Ηλια ... η γραφη', 'λεγει'); -- εν Ηλια ... η γραφη = in Elijah ... the Scripture, λεγει = says
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (4201, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (42011, 'Romans', 'SBLGNT Romans 11:3 11:3-67', 22340, 22369);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (42011, 4201, 1, 'I_Kings', 'LXX I_Kings 19:10+72 19:10-96', 'Romans', 'SBLGNT Romans 11:3+30 11:3-41', 75874, 26, 22370, 26); -- τα θυσιαστηρια σου κατεσκαψαν
+-- TODO: Consider splitting this into two clasps:
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (42011, 4201, 1, 'I_Kings', 'LXX I_Kings 19:10+135 19:10-11', 'Romans', 'SBLGNT Romans 11:3+56 11:3', 75964, 21+27, 22436, 22+19); -- και υπολελειμμαι εγω μονωτατος + και ζητουσι την ψυχην μου -> καγω υπελειφθην μονος + και ζητουσιν την ψυχην μου
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (42021, 4202, 1, 'I_Kings', null, 'LXX I_Kings 19:18+60 19:18-35', 'Romans', 'SBLGNT Romans 11:4+77 11:4-5', 77001, 7, 22514, 7, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
