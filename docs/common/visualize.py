@@ -626,9 +626,11 @@ def nt_passage_info(conn, nt_quotation_id, format):
         clasp_ot_book.append(ot_book)
         clasp_jaccard.append(jaccard)
         jnum = (1 - jaccard) * 100
-        jaccard = str(round(jaccard, 2))
-        if jaccard == "0.0":
+        jaccard = str(round(jaccard * 100))
+        if jaccard == "0":
             jaccard = ""
+        else:
+            jaccard += "\%"
         found = False
         y = 1
         for m in ot_passages.keys():
@@ -640,7 +642,7 @@ def nt_passage_info(conn, nt_quotation_id, format):
         lpos = 0.5
         if ot_bookindex == 2:
            lpos = 0.85
-        jaccards += f"\\draw [<-,ForestGreen!{jnum},line width={lwidth}] (clasp {j}.south) -- ({ot_book} clasp {j}.north) node [right,pos={lpos},font=\\footnotesize] {{\\textcolor{{ForestGreen!{jnum}}}{{{jaccard}}}}};\n"
+        jaccards += f"\\draw [->,ForestGreen!{jnum},line width={lwidth}] (clasp {j}.south) -- ({ot_book} clasp {j}.north) node [right,pos={lpos},font=\\footnotesize] {{\\textcolor{{red!{jnum}}}{{{jaccard}}}}};\n"
         j += 1
 
     sort_positions()
@@ -900,6 +902,7 @@ def nt_passage_info_all(conn, format):
 
     if format == "latex":
         print ("\\documentclass{article}")
+        print ("\\usepackage[a4paper,margin=2cm]{geometry}")
         print ("\\usepackage[dvipsnames]{xcolor}")
         print ("\\usepackage{tikz}")
         print ("\\tikzstyle{nt_passage}=[rectangle,draw=cyan!50,fill=cyan!20,thick,minimum size=6mm]")
