@@ -4153,3 +4153,11 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (4202, 1, 'αυτω ... ο χρηματισμος', 'λεγει'); -- λεγει = spoken, αυτω ... ο χρηματισμος = to him [Elijah] ... the divine answer
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (4202, 1, 'quotation', 'far-fuzzy, synonym', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (42021, 'Romans', 'SBLGNT Romans 11:4 11:4-62', 22437, 22463);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (42021, 4202, 1, 'I_Kings', 'LXX I_Kings 19:18+3 19:18-88', 'Romans', 'SBLGNT Romans 11:4+27 11:4-53', 76944, 11, 22464, 9); -- καταλειψεις -> Κατελιπον
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (42021, 4202, 1, 'I_Kings', 'LXX I_Kings 19:18+22 19:18-62', 'Romans', 'SBLGNT Romans 11:4+42 11:4-27', 76963, 18, 22479, 20); -- επτα χιλιαδας ανδρων -> επτακισχιλιους ανδρας
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (42021, 4202, 1, 'I_Kings', 'LXX I_Kings 19:18+52 19:18-30', 'Romans', 'SBLGNT Romans 11:4+69 11:4', 76993, 20, 22506, 20); -- ουκ ωκλασαν γονυ τω βααλ -> ουκ εκαμψαν γονυ τη Βααλ
