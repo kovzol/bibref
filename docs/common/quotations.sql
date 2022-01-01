@@ -888,13 +888,13 @@ insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passag
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (361, 36, 3, 'Psalms', 95, 'LXX Psalms 95:11+31 95:11-3', 'Hebrews', 'SBLGNT Hebrews 3:18+26 3:18-24', 111232, 18, 4254, 18, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (361, 36, 3, 'Psalms', 95, 'LXX Psalms 95:11+2 95:11-3', 'Hebrews', 'SBLGNT Hebrews 3:18+7 3:18-24', 111202, 47, 4235, 37, 'manual');
+ (361, 36, 3, 'Psalms', 95, 'LXX Psalms 95:11+2 95:11-3', 'Hebrews', 'SBLGNT Hebrews 3:18+7 3:18-24', 111203, 47, 4235, 37, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (36, 3, null, null);
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (36, 3, 'repetition', 'literal, superset', 'Z.K.');
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
- (361, 36, 3, 'Psalms', 'LXX Psalms 95:11+20 95:11-3', 'Hebrews', 'SBLGNT Hebrews 3:18+15 3:18-24', 111220, 29, 4243, 29);
+ (361, 36, 3, 'Psalms', 'LXX Psalms 95:11+20 95:11-3', 'Hebrews', 'SBLGNT Hebrews 3:18+15 3:18-24', 111221, 29, 4243, 29);
 -- This clasp would be too short and far from being unique, even if there is connection between the texts:
 -- insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
 --  (361, 'Psalms', 'LXX Psalms 95:11+2 95:11-46', 'Hebrews', 'SBLGNT Hebrews 3:18+7 3:18-57', 111202, 4, 4235, 4);
@@ -1473,11 +1473,11 @@ insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1081, 108, 1, 'Isaiah', 'LXX Isaiah 52:7 52:7-125', 'Romans', 'SBLGNT Romans 10:15+44 10:15-35', 106484, 5, 21631, 5); -- ως ωρα
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
- (1081, 108, 1, 'Isaiah', 'LXX Isaiah 52:7+18 52:7-107', 'Romans', 'SBLGNT Romans 10:15+54 10:15-25', 106503, 5, 21641, 5); -- podes
+ (1081, 108, 1, 'Isaiah', 'LXX Isaiah 52:7+18 52:7-107', 'Romans', 'SBLGNT Romans 10:15+54 10:15-25', 106502, 5, 21641, 5); -- podes
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
- (1081, 108, 1, 'Isaiah', 'LXX Isaiah 52:7+23 52:7-92', 'Romans', 'SBLGNT Romans 10:15+62 10:15-7', 106508, 15, 21639, 15); -- ευαγγελιζομενου
+ (1081, 108, 1, 'Isaiah', 'LXX Isaiah 52:7+23 52:7-92', 'Romans', 'SBLGNT Romans 10:15+62 10:15-7', 106507, 15, 21649, 15); -- ευαγγελιζομενου -> ευαγγελιζομενων
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
- (1081, 108, 1, 'Isaiah', 'LXX Isaiah 52:7+67 52:7-58', 'Romans', 'SBLGNT Romans 10:15+79 10:15', 106523, 5, 21656, 5); -- αγαθα
+ (1081, 108, 1, 'Isaiah', 'LXX Isaiah 52:7+67 52:7-58', 'Romans', 'SBLGNT Romans 10:15+79 10:15', 106551, 5, 21666, 5); -- αγαθα
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1091, 109, 1, 'Isaiah', null, 'LXX Isaiah 53:1 53:1-31', 'Romans', 'SBLGNT Romans 10:16+45 10:16', 107401, 28, 21716, 28, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
@@ -2387,7 +2387,7 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1303, 1, 'quotation', 'literal, exact', 'Z.K.');
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
- (1041, 1303, 1, 'Hosea', 'LXX Hosea 1:10+3 1:10-135', 'Romans', 'SBLGNT Romans 9:27+30 9:27-45', 978, 17, 20017, 16);
+ (1041, 1303, 1, 'Hosea', 'LXX Hosea 1:10+3 1:10-135', 'Romans', 'SBLGNT Romans 9:27+30 9:27-45', 976, 17, 20017, 16);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (13041, 1304, 1, 'Hosea', null, 'LXX Hosea 11:1+38 11:1-11', 'Matthew', 'SBLGNT Matthew 2:15+77 2:15-9', 15030, 21, 3672, 18, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
@@ -4144,7 +4144,7 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
  (42011, 4201, 1, 'I_Kings', 'LXX I_Kings 19:10+72 19:10-96', 'Romans', 'SBLGNT Romans 11:3+30 11:3-41', 75874, 26, 22370, 26); -- τα θυσιαστηρια σου κατεσκαψαν
 -- TODO: Consider splitting this into two clasps:
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
- (42011, 4201, 1, 'I_Kings', 'LXX I_Kings 19:10+135 19:10-11', 'Romans', 'SBLGNT Romans 11:3+56 11:3', 75964, 21+27, 22436, 22+19); -- και υπολελειμμαι εγω μονωτατος + και ζητουσι την ψυχην μου -> καγω υπελειφθην μονος + και ζητουσιν την ψυχην μου
+ (42011, 4201, 1, 'I_Kings', 'LXX I_Kings 19:10+135 19:10-11', 'Romans', 'SBLGNT Romans 11:3+56 11:3', 75937, 21+27, 22396, 22+19); -- και υπολελειμμαι εγω μονωτατος + και ζητουσι την ψυχην μου -> καγω υπελειφθην μονος + και ζητουσιν την ψυχην μου
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (42021, 4202, 1, 'I_Kings', null, 'LXX I_Kings 19:18+60 19:18-35', 'Romans', 'SBLGNT Romans 11:4+77 11:4-5', 77001, 7, 22514, 7, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values

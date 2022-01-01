@@ -309,6 +309,84 @@ def getrefs_entries(conn):
     print(f"Done\u001b[{0}K")
     bibref.timeout = 5
 
+def clasp_entries(conn): # TODO: This is almost exactly the same as quotation_entries. Unify.
+    """
+    Check if clasp entries are correct.
+    :param conn: the Connection object
+    """
+
+    global bibref, errors
+    cur = conn.cursor()
+    cur.execute("SELECT ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length" +
+        " FROM clasps" +
+        " WHERE ot_passage != 'LXX Genesis 12:7+20 12:7-90'" # for some strange reason this cannot be found properly, FIXME (kai)
+        " AND ot_passage != 'LXX Isaiah 54:13 54:13-57'" # same problem (kai)
+        " AND ot_passage != 'LXX Isaiah 56:7+89 56:7-99'" # same problem (kai)
+        " AND ot_passage != 'LXX Isaiah 52:5+105 52:5-33'" # same problem (to)
+        " ORDER BY ot_passage, nt_passage")
+    rows = cur.fetchall()
+
+    spawn_bibref()
+    print("Checking clasp entries...")
+
+    r = 0
+    for row in rows:
+        ot_book = row[0]
+        ot_passage = row[1]
+        nt_book = row[2]
+        nt_passage = row[3]
+        ot_startpos = row[4]
+        ot_length = row[5]
+        nt_startpos = row[6]
+        nt_length = row[7]
+        command0 = "maxresults 1000000" # ~infinity
+        bibref.sendline(command0)
+        bibref.expect("Set to \w.")
+        command1 = "lookup1 " + ot_passage
+        bibref.sendline(command1)
+        bibref.expect("Stored internally as \w.")
+        command2 = "lookup2 " + nt_passage
+        bibref.sendline(command2)
+        bibref.expect("Stored internally as \w.")
+        command3 = "find1 LXX"
+        bibref.sendline(command3)
+        bibref.expect("[0-9]+ occurrences.")
+        ot_passage = ot_passage[4:] # trim leading LXX
+        expected_end = " (book position " + str(ot_startpos) + "-" + str(ot_startpos + ot_length - 1) + ")"
+        expected = "Found in " + ot_passage + expected_end
+        if bibref.before.decode('utf-8').find(expected) == -1:
+            ot_passage_s = ot_passage.split()
+            if len(ot_passage_s) == 2:
+                ot_passage = ot_passage_s[0] + " " + ot_passage_s[1] + " " + ot_passage_s[1] # end verse := start verse
+                expected = "Found in " + ot_passage + expected_end
+                if bibref.before.decode('utf-8').find(expected) == -1:
+                    print(f"Entry {ot_passage} is incorrect")
+                    errors += 1
+            else:
+                print(f"Entry {ot_passage} is incorrect")
+                errors += 1
+        command4 = "find2 SBLGNT"
+        bibref.sendline(command4)
+        bibref.expect("[0-9]+ occurrences.")
+        nt_passage = nt_passage[7:] # trim leading SBLGNT
+        expected_end = " (book position " + str(nt_startpos) + "-" + str(nt_startpos + nt_length - 1) + ")"
+        expected = "Found in " + nt_passage + expected_end
+        if bibref.before.decode('utf-8').find(expected) == -1:
+            nt_passage_s = nt_passage.split()
+            if len(nt_passage_s) == 2:
+                nt_passage = nt_passage_s[0] + " " + nt_passage_s[1] + " " + nt_passage_s[1] # end verse := start verse
+                expected = "Found in " + nt_passage + expected_end
+                if bibref.before.decode('utf-8').find(expected) == -1:
+                    print(f"Entry {nt_passage} is incorrect")
+                    errors += 1
+            else:
+                print(f"Entry {nt_passage} is incorrect")
+                errors += 1
+        percent = int(r/len(rows)*100)
+        print(f"{percent}% done\u001b[{0}K\r", end='')
+        r += 1
+    print(f"Done\u001b[{0}K")
+
 
 def main():
     database = r"quotations.sqlite3"
@@ -319,6 +397,7 @@ def main():
     quotation_entries_lengths(conn)
     nt_quotation_introduction_entries_lengths(conn)
     clasp_entries_lengths(conn)
+    clasp_entries(conn)
     if errors == 0:
         print("All tests passed")
     else:
