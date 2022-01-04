@@ -3694,6 +3694,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2403, 1, 'quotation', 'literal, fuzzy, subset, superset', 'Z.K.');
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1121, 2403, 1, 'Deuteronomy', 'LXX Deuteronomy 29:4+6 29:4-79', 'Romans', 'SBLGNT Romans 11:8+14 11:8-85', 89834, 6, 22717, 6); -- εδωκεν
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1121, 2403, 1, 'Deuteronomy', 'LXX Deuteronomy 29:4+18 29:4-68', 'Romans', 'SBLGNT Romans 11:8+26 11:8-74', 89846, 5, 22729, 5); -- ο θεος
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1121, 2403, 1, 'Deuteronomy', 'LXX Deuteronomy 29:4+53 29:4-25', 'Romans', 'SBLGNT Romans 11:8+61 11:8-31', 89881, 13, 22764, 13); -- βλεπειν και ωτα
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1121, 2403, 1, 'Deuteronomy', 'LXX Deuteronomy 29:4+66 29:4-12', 'Romans', 'SBLGNT Romans 11:8+79 11:8-13', 89894, 13, 22782, 13); -- ακουειν εως της
