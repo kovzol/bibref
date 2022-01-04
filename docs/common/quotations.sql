@@ -1370,6 +1370,7 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
  (1033, 103, 3, 'Isaiah', 'LXX Isaiah 52:5+90 52:5-44', 'Romans', 'SBLGNT Romans 2:24+17 2:24-39', 106357, 6, 4599, 6); -- di ymas
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1033, 103, 3, 'Isaiah', 'LXX Isaiah 52:5+115 52:5', 'Romans', 'SBLGNT Romans 2:24+23 2:24-14', 106382, 25, 4605, 25);
+
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1041, 104, 1, 'Isaiah', null, 'LXX Isaiah 10:22+18 10:22-64', 'Romans', 'SBLGNT Romans 9:27+46 9:27-18', 22157, 27, 20033, 27, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
@@ -1385,13 +1386,14 @@ insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1041, 104, 1, 'Isaiah', 'LXX Isaiah 10:22+3 10:22-103', 'Romans', 'SBLGNT Romans 9:27+27 9:27-61', 22142, 3, 20014, 3); -- ean
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
- (1041, 104, 1, 'Isaiah', 'LXX Isaiah 10:22+18 10:22-64', 'Romans', 'SBLGNT Romans 9:27+46 9:27-18', 22157, 27, 20033, 27);
+ (1041, 104, 1, 'Isaiah', 'LXX Isaiah 10:22+18 10:22-64', 'Romans', 'SBLGNT Romans 9:27+46 9:27-18', 22157, 27, 20033, 27); -- ισραηλ ως η αμμος της θαλασσης το
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1041, 104, 1, 'Isaiah', 'LXX Isaiah 10:22+49 10:22-54', 'Romans', 'SBLGNT Romans 9:27+76 9:27-9', 22188, 6, 20063, 6); -- leimma
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1041, 104, 1, 'Isaiah', 'LXX Isaiah 10:22+60 10:22-12', 'Romans', 'SBLGNT Romans 9:27+82 9:28-22', 22199, 37, 20069, 37);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1041, 104, 1, 'Isaiah', 'LXX Isaiah 10:23+21 10:23-21', 'Romans', 'SBLGNT Romans 9:28+28 9:28-15', 22269, 7, 20106, 7); -- ποιησει
+
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1051, 105, 1, 'Isaiah', null, 'LXX Isaiah 1:9+3 1:9', 'Romans', 'SBLGNT Romans 9:29+24 9:29', 809, 81, 20152, 81, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
@@ -2387,7 +2389,7 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1303, 1, 'quotation', 'literal, exact', 'Z.K.');
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
- (1041, 1303, 1, 'Hosea', 'LXX Hosea 1:10+3 1:10-135', 'Romans', 'SBLGNT Romans 9:27+30 9:27-45', 976, 17, 20017, 16);
+ (1041, 1303, 1, 'Hosea', 'LXX Hosea 1:10+3 1:10-110', 'Romans', 'SBLGNT Romans 9:27+30 9:27-20', 976, 17+25, 20017, 16+25);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (13041, 1304, 1, 'Hosea', null, 'LXX Hosea 11:1+38 11:1-11', 'Matthew', 'SBLGNT Matthew 2:15+77 2:15-9', 15030, 21, 3672, 18, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
