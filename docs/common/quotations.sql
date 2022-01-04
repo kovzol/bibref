@@ -2562,9 +2562,7 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1701, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
--- (1381, 1701, 1, 'Zechariah', 'LXX Zechariah 9:9+46 9:9-62', 'Matthew', 'SBLGNT Matthew 21:5+19 21:5-49', 14394, 26, 59140, 26);
- (1381, 1701, 1, 'Zechariah', 'LXX Zechariah 9:9+50 9:9-62', 'Matthew', 'SBLGNT Matthew 21:5+23 21:5-49', 14398, 22, 59144, 22);
--- FIXME: Implement overlapping in nt-passage-info.pdf and lengthen this clasp (above) by 4 letters at its start.
+ (1381, 1701, 1, 'Zechariah', 'LXX Zechariah 9:9+46 9:9-62', 'Matthew', 'SBLGNT Matthew 21:5+19 21:5-49', 14394, 26, 59140, 26);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1381, 1701, 1, 'Zechariah', 'LXX Zechariah 9:9+92 9:9', 'Matthew', 'SBLGNT Matthew 21:5+45 21:5', 14440, 42, 59166, 49);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values

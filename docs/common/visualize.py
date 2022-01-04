@@ -680,13 +680,22 @@ def nt_passage_info(conn, nt_quotation_id, format):
         ot_book, ot_passage, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length = row2
         ot_endpos = ot_startpos + ot_length - 1
         nt_endpos = nt_startpos + nt_length - 1
+        ol = False
         for k in range(nt_endpos - nt_startpos + 1):
             ol_len = len(nt_text[nt_startpos - nt_pos_start + k])
-            if  ol_len > 0:
-                overlapping_nt = True
-                overlappings.append(j-1) # hopefully (j-1) and j overlap... FIXME
-                overlappings_length.append(ol_len)
+            if ol_len > 0:
+                if not ol:
+                    ol_begin = k # register start
+                    ol_end = 0 # pre-register end
+                ol = True # local for this clasp
+                overlapping_nt = True # global for this passage
+            else:
+                if ol and ol_end == 0 :
+                    ol_end = k # register end
             nt_text[nt_startpos - nt_pos_start + k] += "c" + str(j) + "," # overlappings look like "c1,c2,"
+        if ol:
+            overlappings.append(j-1) # hopefully (j-1) and j overlap... FIXME
+            overlappings_length.append(ol_end - ol_begin)
         for k in range(ot_endpos - ot_startpos + 1):
             if len(ot_text[ot_book][ot_startpos - ot_pos_start[ot_book] + k]) > 0:
                 overlapping_ot = True
