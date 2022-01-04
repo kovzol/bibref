@@ -558,10 +558,11 @@ def nt_passage_info(conn, nt_quotation_id, format):
     comment("Introduction(s):", format)
 
     global nt_positions, nt_positions_info, nt_passages
-    nt_positions = []
-    nt_positions_info = []
-    nt_passages = []
+    nt_positions = [] # relevant positions in the text, two positions for each piece of text
+    nt_positions_info = [] # descriptions for each relevant position
+    nt_passages = [] # passage start for the stating position (empty for ending position)
     i = 1
+    # Register introductions:
     for row in rows:
         nt_book, nt_passage, nt_startpos, nt_endpos = row
         nt_positions.append(nt_startpos)
@@ -569,27 +570,30 @@ def nt_passage_info(conn, nt_quotation_id, format):
         nt_positions.append(nt_endpos)
         nt_positions_info.append("intro-end " + str(i))
         nt_passages.append(nt_passage)
-        nt_passages.append(0) # technical
+        nt_passages.append(0) # technical, empty for ending position
         comment(f"{nt_passage} (book position: {nt_startpos}-{nt_endpos})", format)
         i += 1
 
     cur.execute("SELECT c.ot_book, c.ot_passage, c.nt_passage, c.ot_startpos, c.ot_length, c.nt_startpos, c.nt_length" +
-        " FROM clasps c" +
+        " FROM clasps c, quotations_classifications qc" +
         " WHERE c.nt_quotation_id = " + str(nt_quotation_id) +
+        " AND c.ot_id = qc.quotation_ot_id AND c.nt_id = qc.quotation_nt_id AND qc.classification = 'quotation'" # ignore clasps that belong to repeated quotations
         " ORDER BY c.nt_startpos")
     rows2 = cur.fetchall()
     comment("Clasp(s):", format)
 
     global ot_positions, ot_positions_info, ot_passages
+    # for each OT book a different array is created, but the concept is same as for the nt_* arrays above
     ot_positions = dict()
     ot_positions_info = dict()
     ot_passages = dict()
     ot_begin = dict()
     ot_begin_pos = dict()
-    j = 1
+    j = 1 # clasp id
     clasp_ot_book = []
     clasp_jaccard = []
     jaccards = ""
+    # Register clasps:
     for row2 in rows2:
         ot_book, ot_passage, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length = row2
         ot_endpos = ot_startpos + ot_length - 1
@@ -610,7 +614,7 @@ def nt_passage_info(conn, nt_quotation_id, format):
         nt_passages.append(0) # technical
         ot_passages[ot_book].append(ot_passage)
         ot_passages[ot_book].append(0) # technical
-
+        # Read off difference:
         command1 = "lookup1 " + ot_passage
         bibref.sendline(command1)
         bibref.expect("Stored internally as \w.")
@@ -637,13 +641,13 @@ def nt_passage_info(conn, nt_quotation_id, format):
             if m == ot_book:
                 ot_bookindex = y
                 break
-            y += 1
+            y += 1 # for a different OT book there is a different display position needed
         lwidth = str(ot_bookindex * 0.5) + "pt"
-        lpos = 0.5
+        lpos = 0.7
         if ot_bookindex == 2:
            lpos = 0.85
         jaccards += f"\\draw [->,ForestGreen!{jnum},line width={lwidth}] (clasp {j}.south) -- ({ot_book} clasp {j}.north) node [right,pos={lpos},font=\\footnotesize] {{\\textcolor{{red!{jnum}}}{{{jaccard}}}}};\n"
-        j += 1
+        j += 1 # next clasp
 
     sort_positions()
 
@@ -670,14 +674,19 @@ def nt_passage_info(conn, nt_quotation_id, format):
         ot_text[m] = [""] * ot_len[m]
     overlapping_nt = False
     overlapping_ot = False
-    for row2 in rows2:
+    overlappings = []
+    overlappings_length = []
+    for row2 in rows2: # for each clasp
         ot_book, ot_passage, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length = row2
         ot_endpos = ot_startpos + ot_length - 1
         nt_endpos = nt_startpos + nt_length - 1
         for k in range(nt_endpos - nt_startpos + 1):
-            if len(nt_text[nt_startpos - nt_pos_start + k]) > 0:
+            ol_len = len(nt_text[nt_startpos - nt_pos_start + k])
+            if  ol_len > 0:
                 overlapping_nt = True
-            nt_text[nt_startpos - nt_pos_start + k] += "c" + str(j) + ","
+                overlappings.append(j-1) # hopefully (j-1) and j overlap... FIXME
+                overlappings_length.append(ol_len)
+            nt_text[nt_startpos - nt_pos_start + k] += "c" + str(j) + "," # overlappings look like "c1,c2,"
         for k in range(ot_endpos - ot_startpos + 1):
             if len(ot_text[ot_book][ot_startpos - ot_pos_start[ot_book] + k]) > 0:
                 overlapping_ot = True
@@ -722,11 +731,8 @@ def nt_passage_info(conn, nt_quotation_id, format):
     comment(f"{ot_positions} {ot_positions_info}", format)
     comment(f"{clasp_ot_book} {clasp_jaccard}", format)
 
-    if overlapping_nt:
-        comment("Warning: NT overlapping", format)
     if overlapping_ot:
         comment("Warning: OT overlapping", format)
-    if overlapping_nt or overlapping_ot:
         return
 
     found = False
@@ -767,6 +773,7 @@ def nt_passage_info(conn, nt_quotation_id, format):
     nt_out = ""
     latex_lastnode_nt = "nt_passage"
     nt_latex = ""
+    next_ot_shorter = 0
     connect_nodes = "\\draw "
     while p < len(nt_positions):
         words = nt_positions_info[p].split(" ")
@@ -820,9 +827,27 @@ def nt_passage_info(conn, nt_quotation_id, format):
                     nt_latex += ",fill=ForestGreen!" + str(jnum)
                     textcolor = "white"
                 nt_latex += "]"
-                nt_latex += " {\\textcolor{" + textcolor + "}{" + str(class_length) + "}};\n"
+                nt_latex += " {\\textcolor{" + textcolor + "}"
                 latex_lastnode_nt = cl[0] + " " + str(chunk)
                 connect_nodes += " (" + latex_lastnode_nt + ")"
+                # Handle overlappings:
+                nt_latex_overlap = ""
+                ol_found = False
+                if cl[0] == "clasp" and chunk in overlappings:
+                    ol_found = True
+                    ol_pos = overlappings.index(chunk)
+                    connect_nodes += "-- (overlap " + str(chunk) + ")"
+                    nt_latex_overlap = "\\node[overlap] (overlap " + str(chunk) + ")[right of=" + latex_lastnode_nt + "]"
+                    nt_latex_overlap += "{\\textcolor{yellow}"
+                    nt_latex_overlap += "{ " + str(overlappings_length[ol_pos]) + "}};\n"
+                    latex_lastnode_nt = "overlap " + str(chunk)
+                    next_ot_shorter = overlappings_length[ol_pos] # indicate shorter clasps for this and the next node
+                class_length -= next_ot_shorter
+                nt_latex += "{" + str(class_length) + "}};\n" # display clasp length
+                nt_latex += nt_latex_overlap
+                if not ol_found:
+                    next_ot_shorter = 0 # reset indicator
+
         p += 1
     connect_nodes += ";"
     comment(f"NT: {nt_out}", format)
@@ -909,6 +934,7 @@ def nt_passage_info_all(conn, format):
         print ("\\tikzstyle{ot_passage}=[rectangle,draw=yellow!50,fill=yellow!20,thick,minimum size=6mm]")
         print ("\\tikzstyle{intro}=[rectangle,draw=blue!50,fill=blue!20,thick,inner sep=0 pt,minimum size=6mm]")
         print ("\\tikzstyle{clasp}=[rectangle,draw=blue!50,fill=ForestGreen!20,thick,inner sep=0 pt,minimum size=6mm]")
+        print ("\\tikzstyle{overlap}=[rectangle,draw=yellow,fill=OliveGreen,thick,inner sep=0 pt,minimum size=6mm]")
         print ("\\tikzstyle{unidentified}=[rectangle,draw=blue!20,fill=black!5,thick,inner sep=0 pt,minimum size=6mm]")
         print ("\\tikzstyle{unquoted}=[rectangle,draw=blue!20,fill=black!5,thick,inner sep=0 pt,minimum size=6mm]")
         print ("\\begin{document}")
