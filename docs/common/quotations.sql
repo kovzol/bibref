@@ -210,21 +210,21 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2, 2, null, 'ειπεν'); -- ειπεν = did He say
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2, 2, 'quotation', 'exact, literal', 'Z.K.');
--- We assume that this is a repeated quotation of 22:
+-- We assume that this is a repeated quotation of 22, but it is considered as a different object (to simplify visualization):
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (22, 2, 3, 'Psalms', 2, 'Psalms 2:7', 'Hebrews', 'Hebrews 5:5', null, null, null, null, 'traditional');
+ (23, 2, 3, 'Psalms', 2, 'Psalms 2:7', 'Hebrews', 'Hebrews 5:5', null, null, null, null, 'traditional');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (22, 2, 3, 'Psalms', 2, 'LXX Psalms 2:7+44 2:7', 'Hebrews', 'SBLGNT Hebrews 5:5+70 5:5', 922, 32, 6283, 32, 'getrefs');
+ (23, 2, 3, 'Psalms', 2, 'LXX Psalms 2:7+44 2:7', 'Hebrews', 'SBLGNT Hebrews 5:5+70 5:5', 922, 32, 6283, 32, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (22, 2, 3, 'Psalms', 2, 'LXX Psalms 2:7+44 2:7', 'Hebrews', 'SBLGNT Hebrews 5:5+70 5:5', 922, 32, 6283, 32, 'manual');
+ (23, 2, 3, 'Psalms', 2, 'LXX Psalms 2:7+44 2:7', 'Hebrews', 'SBLGNT Hebrews 5:5+70 5:5', 922, 32, 6283, 32, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2, 3, null, 'λαλησας'); -- λαλησας = having said
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2, 3, 'repeated quotation', 'exact, literal', 'Z.K.');
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
- (22, 'Hebrews', 'SBLGNT Hebrews 5:5+53 5:5-32', 6266, 6282);
+ (23, 'Hebrews', 'SBLGNT Hebrews 5:5+53 5:5-32', 6266, 6282);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
- (22, 2, 3, 'Psalms', 'LXX Psalms 2:7+44 2:7', 'Hebrews', 'SBLGNT Hebrews 5:5+70 5:5', 922, 32, 6283, 32); -- perfect!
+ (23, 2, 3, 'Psalms', 'LXX Psalms 2:7+44 2:7', 'Hebrews', 'SBLGNT Hebrews 5:5+70 5:5', 922, 32, 6283, 32); -- perfect!
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (null, 3, 1, 'Psalms', 2, 'Psalms 2:9', 'Revelation_of_John', 'Revelation_of_John 2:27', null, null, null, null, 'traditional');
