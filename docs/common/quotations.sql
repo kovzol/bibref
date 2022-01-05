@@ -561,41 +561,41 @@ insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (211, 21, 1, 'Psalms', 'LXX Psalms 40:6 40:8-45', 'Hebrews', 'SBLGNT Hebrews 10:5+32 10:7', 44126, 157, 15590, 162);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (211, 21, 2, 'Psalms', 40, 'Psalms 40:6', 'Hebrews', 'Hebrews 10:8', null, null, null, null, 'traditional');
+ (212, 21, 2, 'Psalms', 40, 'Psalms 40:6', 'Hebrews', 'Hebrews 10:8', null, null, null, null, 'traditional');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (211, 21, 2, 'Psalms', 40, 'LXX Psalms 40:6+6 40:6-64', 'Hebrews', 'SBLGNT Hebrews 10:8+22 10:8-83', 44132, 11, 15774, 11, 'getrefs');
+ (212, 21, 2, 'Psalms', 40, 'LXX Psalms 40:6+6 40:6-64', 'Hebrews', 'SBLGNT Hebrews 10:8+22 10:8-83', 44132, 11, 15774, 11, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (211, 21, 2, 'Psalms', 40, 'LXX Psalms 40:6+56 40:6-5', 'Hebrews', 'SBLGNT Hebrews 10:8+48 10:8-48', 44182, 20, 15800, 20, 'getrefs');
+ (212, 21, 2, 'Psalms', 40, 'LXX Psalms 40:6+56 40:6-5', 'Hebrews', 'SBLGNT Hebrews 10:8+48 10:8-48', 44182, 20, 15800, 20, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (211, 21, 2, 'Psalms', 40, 'LXX Psalms 40:6', 'Hebrews', 'SBLGNT Hebrews 10:8+16 10:8-41', 44126, 81, 15768, 59, 'manual');
+ (212, 21, 2, 'Psalms', 40, 'LXX Psalms 40:6', 'Hebrews', 'SBLGNT Hebrews 10:8+16 10:8-41', 44126, 81, 15768, 59, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (21, 2, null, 'ανωτερον λεγων οτι'); -- ανωτερον λεγων οτι = above saying
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (21, 2, 'repeated quotation', 'literal, superset', 'Z.K.');
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
- (211, 'Hebrews', 'SBLGNT Hebrews 10:8 10:8-100', 15752, 15767);
+ (212, 'Hebrews', 'SBLGNT Hebrews 10:8 10:8-100', 15752, 15767);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
- (211, 21, 2, 'Psalms', 'LXX Psalms 40:6 40:6-64', 'Hebrews', 'SBLGNT Hebrews 10:8+16 10:8-83', 44126, 17, 15768, 17);
+ (212, 21, 2, 'Psalms', 'LXX Psalms 40:6 40:6-64', 'Hebrews', 'SBLGNT Hebrews 10:8+16 10:8-83', 44126, 17, 15768, 17);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
- (211, 21, 2, 'Psalms', 'LXX Psalms 40:6+47 40:6', 'Hebrews', 'SBLGNT Hebrews 10:8+37 10:8-41', 44173, 34, 15789, 38);
+ (212, 21, 2, 'Psalms', 'LXX Psalms 40:6+47 40:6', 'Hebrews', 'SBLGNT Hebrews 10:8+37 10:8-41', 44173, 34, 15789, 38);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (211, 21, 3, 'Psalms', 40, 'Psalms 40:7-8', 'Hebrews', 'Hebrews 10:9', null, null, null, null, 'traditional');
+ (213, 21, 3, 'Psalms', 40, 'Psalms 40:7-8', 'Hebrews', 'Hebrews 10:9', null, null, null, null, 'traditional');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (211, 21, 3, 'Psalms', 40, 'LXX Psalms 40:7+8 40:7-34', 'Hebrews', 'SBLGNT Hebrews 10:9+10 10:9-54', 44215, 8, 15878, 8, 'getrefs');
+ (213, 21, 3, 'Psalms', 40, 'LXX Psalms 40:7+8 40:7-34', 'Hebrews', 'SBLGNT Hebrews 10:9+10 10:9-54', 44215, 8, 15878, 8, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (211, 21, 3, 'Psalms', 40, 'LXX Psalms 40:8 40:8-50', 'Hebrews', 'SBLGNT Hebrews 10:9+18 10:9-33', 44257, 21, 15886, 21, 'getrefs');
+ (213, 21, 3, 'Psalms', 40, 'LXX Psalms 40:8 40:8-50', 'Hebrews', 'SBLGNT Hebrews 10:9+18 10:9-33', 44257, 21, 15886, 21, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (211, 21, 3, 'Psalms', 40, 'LXX Psalms 40:7+9 40:8-50', 'Hebrews', 'SBLGNT Hebrews 10:9+11 10:9-33', 44216, 62, 15879, 28, 'manual');
+ (213, 21, 3, 'Psalms', 40, 'LXX Psalms 40:7+9 40:8-50', 'Hebrews', 'SBLGNT Hebrews 10:9+11 10:9-33', 44216, 62, 15879, 28, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (21, 3, null, 'τοτε ειρηκεν'); -- τοτε ειρηκεν = then he said, TODO: Check if τοτε indeed belongs to the introduction. It is also there in the psalm.
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (21, 3, 'repeated quotation', 'literal, superset', 'Z.K.');
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
- (211, 'Hebrews', 'SBLGNT Hebrews 10:9 10:9-61', 15868, 15878);
+ (213, 'Hebrews', 'SBLGNT Hebrews 10:9 10:9-61', 15868, 15878);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
- (211, 21, 3, 'Psalms', 'LXX Psalms 40:7+9 40:7-34', 'Hebrews', 'SBLGNT Hebrews 10:9+11 10:9-54', 44216, 7, 15879, 7);
+ (213, 21, 3, 'Psalms', 'LXX Psalms 40:7+9 40:7-34', 'Hebrews', 'SBLGNT Hebrews 10:9+11 10:9-54', 44216, 7, 15879, 7);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
- (211, 21, 3, 'Psalms', 'LXX Psalms 40:8 40:8-50', 'Hebrews', 'SBLGNT Hebrews 10:9+18 10:9-33', 44257, 21, 15886, 21);
+ (213, 21, 3, 'Psalms', 'LXX Psalms 40:8 40:8-50', 'Hebrews', 'SBLGNT Hebrews 10:9+18 10:9-33', 44257, 21, 15886, 21);
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (221, 22, 1, 'Psalms', 41, 'Psalms 41:9', 'John', 'John 13:18', null, null, null, null, 'traditional');
