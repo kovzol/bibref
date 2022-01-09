@@ -7,8 +7,6 @@
 using namespace std;
 
 #include <iostream>
-#include <readline/readline.h>
-#include <readline/history.h>
 #include <algorithm>
 #include <string>
 #include <sstream>

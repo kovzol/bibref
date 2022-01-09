@@ -3,8 +3,10 @@
 #include <string>
 #include <algorithm>
 #include <vector>
+#ifndef __EMSCRIPTEN__
 #include <readline/readline.h>
 #include <readline/history.h>
+#endif
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/algorithm/string/split.hpp>
@@ -68,13 +70,25 @@ void add_vocabulary_item(string item) {
 }
 
 void error(string message) {
-    cerr << "\033[1;31m" << message << "\033[0m" << endl << flush;
+#ifndef __EMSCRIPTEN__
+    cerr << "\033[1;31m";
+#endif
+    cerr << message;
+#ifndef __EMSCRIPTEN__
+    cerr << "\033[0m";
+#endif
+    cerr << endl << flush;
 }
 
 void info(string message) {
+#ifndef __EMSCRIPTEN__
     cerr << output_prepend_set << message << endl << flush;
+#else
+    cout << message << endl << flush;
+#endif
 }
 
+#ifndef __EMSCRIPTEN__
 // readline related code was taken mostly from https://eli.thegreenplace.net/2016/basics-of-using-the-readline-library/
 char* completion_generator(const char* text, int state) {
     // This function is called with state=0 the first time; subsequent calls are
@@ -116,6 +130,7 @@ char** completer(const char* text, int start, int end) {
     // completer.
     return rl_completion_matches(text, completion_generator);
 }
+#endif
 
 int maxresults;
 bool sql;
@@ -125,7 +140,9 @@ string ot_color, nt_color, reset_color;
 void cli(const char *input_prepend, const char *output_prepend, bool addbooks, bool colored) {
     output_prepend_set = new char[4]; // FIXME: this is hardcoded.
     strcpy(output_prepend_set, output_prepend);
+#ifndef __EMSCRIPTEN__
     rl_attempted_completion_function = completer;
+#endif
     info("This is bibref-cli 2021May17, nice to meet you.");
     showAvailableBibles();
     if (addbooks) {
@@ -148,19 +165,33 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
         reset_color = "\033[0m";
         }
 
+#ifndef __EMSCRIPTEN__
     char* buf;
-
     struct passwd *pw = getpwuid(getuid());
     char *histfile = pw->pw_dir;
     strcat(histfile, "/.bibref_history");
     read_history(histfile);
+#endif
 
-    while ((buf = readline(input_prepend)) != nullptr) {
+#ifdef __EMSCRIPTEN__
+#define MAX_LINE_LENGTH 1024
+    char buf[MAX_LINE_LENGTH + 1];
+    string line;
+#endif
+
+    while (
+#ifndef __EMSCRIPTEN__
+        (buf = readline(input_prepend)) != nullptr
+#else
+        (getline(cin, line) && (strcpy(buf, line.c_str())))
+#endif
+        ) {
+#ifndef __EMSCRIPTEN__
         if (strlen(buf) > 0) {
             add_history(buf);
             write_history(histfile);
         }
-
+#endif
         string rawinput(buf);
         boost::algorithm::trim(rawinput);
         vector<string> commentTokens;
