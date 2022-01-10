@@ -30,7 +30,7 @@ SRC_DIRS ?= .
 SRCS := $(sort $(shell find $(SRC_DIRS) -name '*.cpp'))
 OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
 
-CPPFLAGS += -I/usr/include/sword
+CPPFLAGS += -I/usr/include/sword -I/usr/include
 
 LDFLAGS := $(shell find .. -name libsword.a | sort | head -1)
 LDFLAGS += -s SINGLE_FILE=1 -s USE_BOOST_HEADERS=1
