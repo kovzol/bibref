@@ -26,3 +26,21 @@ jobs:
       run: cd docs/common && make
     - name: doc-hu
       run: cd docs/hu && make
+    - name: emscripten
+      run: |
+        git clone https://github.com/emscripten-core/emsdk.git
+        cd emsdk
+        ./emsdk install 2.0.22
+        ./emsdk activate 2.0.22
+        cd ..
+    - name: sword-wasm
+      run: |
+        . emsdk/emsdk_env.sh
+        git clone https://github.com/kovzol/crosswire-sword-mirror
+        cd crosswire-sword-mirror
+        mkdir build
+        cd build
+        CMAKE_TOOLCHAIN_FILE=../../emdsk/upstream/cmake/Modules/Platform/Emscripten.cmake cmake ..
+        emmake make || true
+        cd ../..
+        emmake make
