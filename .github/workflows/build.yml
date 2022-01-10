@@ -18,19 +18,16 @@ jobs:
       run: >-
          wget http://http.us.debian.org/debian/pool/main/s/sm/r-cran-sm_2.2-5.6-1+b2_amd64.deb &&
          sudo dpkg -i r-cran-sm_2.2-5.6-1+b2_amd64.deb
-    - name: cmake
-      run: cmake .
-    - name: make
-      run: make
-    - name: emscripten
+    - name: make-native
+      run: |
+        mkdir build && cmake .. && make
+    - name: install-emscripten
       run: |
         git clone https://github.com/emscripten-core/emsdk.git
         cd emsdk
         ./emsdk install 2.0.22
         ./emsdk activate 2.0.22
-        ls -alR
-        cd ..
-    - name: sword-wasm
+    - name: make-sword-wasm
       run: |
         . emsdk/emsdk_env.sh
         git clone https://github.com/kovzol/crosswire-sword-mirror
@@ -39,8 +36,7 @@ jobs:
         cd build
         emcmake cmake ..
         emmake make || true
-        cd ../..
-    - name: bibref-wasm
+    - name: make-wasm
       run: |
         . emsdk/emsdk_env.sh
         emmake make
