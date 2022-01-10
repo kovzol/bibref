@@ -5,7 +5,7 @@
 # 0. Install all prerequisites of the native version, and build it properly (via cmake).
 # 1. Install Emscripten and enable that its utilities are available on your path.
 # 2. Build libsword.a by using https://github.com/kovzol/crosswire-sword-mirror
-#    and the cmake toolchain from Emscripten (specify CMAKE_TOOLCHAIN_FILE).
+#    and the cmake toolchain from Emscripten (via "ecmake cmake").
 #    You may need to have a recent cmake. The build may be incomplete,
 #    but libsword.a can be built successfully.
 # 3. Make sure that libsword.a is visible from the file system under the parent
@@ -21,6 +21,8 @@
 #
 # Known issues: some commands like getrefs and lookupN throw an exception
 # (they do not work yet).
+#
+# See also the GitHub actions in the .github/ folder for more information.
 
 TARGET_HTML ?= bibref.html
 
@@ -30,7 +32,7 @@ SRC_DIRS ?= .
 SRCS := $(sort $(shell find $(SRC_DIRS) -name '*.cpp'))
 OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
 
-CPPFLAGS += -I/usr/include/sword -I/usr/include
+CPPFLAGS += -I/usr/include/sword
 
 LDFLAGS := $(shell find .. -name libsword.a | sort | head -1)
 LDFLAGS += -s SINGLE_FILE=1 -s USE_BOOST_HEADERS=1

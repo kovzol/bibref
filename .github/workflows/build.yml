@@ -42,6 +42,7 @@ jobs:
     - name: make-wasm
       run: |
         . emsdk/emsdk_env.sh
+        rm -fr build # do not interfere with the native build
         emmake make
     - name: db-full
       run: cd docs/common && make
