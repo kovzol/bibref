@@ -3,7 +3,7 @@
 # Steps to perform:
 #
 # 0. Install all prerequisites of the native version, and build it properly (via cmake).
-# 1. Install Emscripten and enable that its utilities ara available on your path.
+# 1. Install Emscripten and enable that its utilities are available on your path.
 # 2. Build libsword.a by using https://github.com/kovzol/crosswire-sword-mirror
 #    and the cmake toolchain from Emscripten (specify CMAKE_TOOLCHAIN_FILE).
 #    You may need to have a recent cmake. The build may be incomplete,
