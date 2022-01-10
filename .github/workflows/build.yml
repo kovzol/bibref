@@ -37,7 +37,7 @@ jobs:
         cd crosswire-sword-mirror
         mkdir build
         cd build
-        CMAKE_TOOLCHAIN_FILE=/home/runner/work/bibref/bibref/emdsk/upstream/emscripten/cmake/Modules/Platform/Emscripten.cmake cmake ..
+        emcmake cmake ..
         emmake make || true
         cd ../..
     - name: bibref-wasm
