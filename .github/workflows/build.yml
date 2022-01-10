@@ -20,7 +20,10 @@ jobs:
          sudo dpkg -i r-cran-sm_2.2-5.6-1+b2_amd64.deb
     - name: make-native
       run: |
-        mkdir build && cmake .. && make
+        mkdir build
+        cd build
+        cmake ..
+        make
     - name: install-emscripten
       run: |
         git clone https://github.com/emscripten-core/emsdk.git
