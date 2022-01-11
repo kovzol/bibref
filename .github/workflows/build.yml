@@ -42,7 +42,7 @@ jobs:
     - name: make-wasm
       run: |
         . emsdk/emsdk_env.sh
-        emmake make
+        yes | emmake make
     - name: db-full
       run: cd docs/common && make
     - name: doc-hu
