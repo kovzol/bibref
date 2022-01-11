@@ -31,7 +31,7 @@ BUILD_DIR ?= ./wasm-build
 SRCS := book.cpp books.cpp cli.cpp fingerprint.cpp main.cpp
 OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
 
-CPPFLAGS += -I/usr/include/sword
+CPPFLAGS += -I/usr/include -I/usr/include/sword
 
 LDFLAGS := $(shell find .. -name libsword.a | sort | head -1)
 LDFLAGS += -s SINGLE_FILE=1 -s USE_BOOST_HEADERS=1
