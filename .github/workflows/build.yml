@@ -24,6 +24,7 @@ jobs:
         cd build
         cmake ..
         make
+        cp bibref ..
     - name: install-emscripten
       run: |
         git clone https://github.com/emscripten-core/emsdk.git
