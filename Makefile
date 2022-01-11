@@ -27,9 +27,8 @@
 TARGET_HTML ?= bibref.html
 
 BUILD_DIR ?= ./wasm-build
-SRC_DIRS ?= .
 
-SRCS := $(sort $(shell find $(SRC_DIRS) -name '*.cpp'))
+SRCS := book.cpp books.cpp cli.cpp fingerprint.cpp main.cpp
 OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
 
 CPPFLAGS += -I/usr/include/sword
