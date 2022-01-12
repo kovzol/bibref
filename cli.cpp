@@ -70,7 +70,6 @@ void add_vocabulary_item(string item) {
 }
 
 string collect_info = "";
-string collect_error = "";
 
 void error(string message) {
 #ifndef __EMSCRIPTEN__
@@ -81,7 +80,7 @@ void error(string message) {
     cerr << "\033[0m";
 #endif
     cerr << endl << flush;
-    collect_error = collect_error + message + "\n";
+    collect_info = collect_info + message + "\n";
 }
 
 void info(string message) {
