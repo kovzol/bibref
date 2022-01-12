@@ -62,7 +62,7 @@ CXXFLAGS := -s EXPORTED_FUNCTIONS=[_bibref_wasm] -s EXTRA_EXPORTED_RUNTIME_METHO
 LDFLAGS := $(shell find .. -name libsword.a | sort | head -1)
 LDFLAGS += -s SINGLE_FILE=1 -s USE_BOOST_HEADERS=1
 LDFLAGS += -s ALLOW_MEMORY_GROWTH=1
-LDFLAGS += -s TOTAL_MEMORY=2047MB
+# LDFLAGS += -s TOTAL_MEMORY=2047MB
 LDFLAGS += --preload-file ~/.sword@/ -O3
 LDFLAGS += -fexceptions -s EXTRA_EXPORTED_RUNTIME_METHODS=['cwrap']
 ifeq ($(TARGET_HTML),bibref.js)
