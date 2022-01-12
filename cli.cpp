@@ -166,6 +166,9 @@ string cli_process(char *buf) {
         }
 
         if (input.compare("help") == 0) {
+#ifdef __EMSCRIPTEN__
+            showAvailableBibles();
+#endif
             info("Please visit https://github.com/kovzol/bibref#bibref to get online help.");
             goto end;
         }
