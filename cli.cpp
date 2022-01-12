@@ -69,6 +69,9 @@ void add_vocabulary_item(string item) {
     vocabulary.push_back(item);
 }
 
+string collect_info = "";
+string collect_error = "";
+
 void error(string message) {
 #ifndef __EMSCRIPTEN__
     cerr << "\033[1;31m";
@@ -78,6 +81,7 @@ void error(string message) {
     cerr << "\033[0m";
 #endif
     cerr << endl << flush;
+    collect_error = collect_error + message + "\n";
 }
 
 void info(string message) {
@@ -86,6 +90,7 @@ void info(string message) {
 #else
     cout << message << endl << flush;
 #endif
+    collect_info = collect_info + message + "\n";
 }
 
 #ifndef __EMSCRIPTEN__
@@ -137,61 +142,7 @@ bool sql;
 char* output_prepend_set;
 string ot_color, nt_color, reset_color;
 
-void cli(const char *input_prepend, const char *output_prepend, bool addbooks, bool colored) {
-    output_prepend_set = new char[4]; // FIXME: this is hardcoded.
-    strcpy(output_prepend_set, output_prepend);
-#ifndef __EMSCRIPTEN__
-    rl_attempted_completion_function = completer;
-#endif
-    info("This is bibref-cli 2021May17, nice to meet you.");
-    showAvailableBibles();
-    if (addbooks) {
-        if (addBooks() == 0) {
-            booksAdded = true;
-            }
-        }
-
-    maxresults = 100;
-    sql = false;
-
-    ot_color = "";
-    nt_color = "";
-    reset_color = "";
-
-
-    if (colored) {
-        ot_color = "\033[1;33m";
-        nt_color = "\033[1;36m";
-        reset_color = "\033[0m";
-        }
-
-#ifndef __EMSCRIPTEN__
-    char* buf;
-    struct passwd *pw = getpwuid(getuid());
-    char *histfile = pw->pw_dir;
-    strcat(histfile, "/.bibref_history");
-    read_history(histfile);
-#endif
-
-#ifdef __EMSCRIPTEN__
-#define MAX_LINE_LENGTH 1024
-    char buf[MAX_LINE_LENGTH + 1];
-    string line;
-#endif
-
-    while (
-#ifndef __EMSCRIPTEN__
-        (buf = readline(input_prepend)) != nullptr
-#else
-        (getline(cin, line) && (strcpy(buf, line.c_str())))
-#endif
-        ) {
-#ifndef __EMSCRIPTEN__
-        if (strlen(buf) > 0) {
-            add_history(buf);
-            write_history(histfile);
-        }
-#endif
+string cli_process(char *buf) {
         string rawinput(buf);
         boost::algorithm::trim(rawinput);
         vector<string> commentTokens;
@@ -592,7 +543,88 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
             error(errorNotRecognized);
         }
 end:
+    string ret = collect_info;
+    collect_info = "";
+    return ret;
+        // readline malloc's a new buffer every time.
+        free(buf);
+    }
+
+void cli(const char *input_prepend, const char *output_prepend, bool addbooks, bool colored) {
+    output_prepend_set = new char[4]; // FIXME: this is hardcoded.
+    strcpy(output_prepend_set, output_prepend);
+#ifndef __EMSCRIPTEN__
+    rl_attempted_completion_function = completer;
+#endif
+    info("This is bibref-cli 2021May17, nice to meet you.");
+    showAvailableBibles();
+    if (addbooks) {
+        if (addBooks() == 0) {
+            booksAdded = true;
+            }
+        }
+
+    maxresults = 100;
+    sql = false;
+
+    ot_color = "";
+    nt_color = "";
+    reset_color = "";
+
+
+    if (colored) {
+        ot_color = "\033[1;33m";
+        nt_color = "\033[1;36m";
+        reset_color = "\033[0m";
+        }
+
+#ifndef __EMSCRIPTEN__
+    char* buf;
+    struct passwd *pw = getpwuid(getuid());
+    char *histfile = pw->pw_dir;
+    strcat(histfile, "/.bibref_history");
+    read_history(histfile);
+#endif
+
+#ifdef __EMSCRIPTEN__
+#define MAX_LINE_LENGTH 1024
+    char buf[MAX_LINE_LENGTH + 1];
+    string line;
+#endif
+
+    while (
+#ifndef __EMSCRIPTEN__
+        (buf = readline(input_prepend)) != nullptr
+#else
+        (getline(cin, line) && (strcpy(buf, line.c_str())))
+#endif
+        ) {
+#ifndef __EMSCRIPTEN__
+        if (strlen(buf) > 0) {
+            add_history(buf);
+            write_history(histfile);
+        }
+#endif
+        cli_process(buf);
         // readline malloc's a new buffer every time.
         free(buf);
     }
 }
+
+
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+// Taken from https://github.com/emscripten-core/emscripten/issues/6433
+extern "C" {
+    inline const char* cstr(const std::string& message) {
+        auto buffer = (char*) malloc(message.length() + 1);
+        buffer[message.length()] = '\0';
+        memcpy(buffer, message.data(), message.length());
+        return buffer;
+    }
+    EMSCRIPTEN_KEEPALIVE const char* bibref_wasm(char *input) {
+    string output = cli_process(input);
+    return cstr(output);
+    }
+}
+#endif

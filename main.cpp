@@ -52,6 +52,7 @@ void showHelp(const string &executable) {
     cout << " -c            use colored output\n";
 }
 
+#ifndef __EMSCRIPTEN__
 int main(int argc, char **argv) {
     InputParser input(argc, argv);
     if (input.cmdOptionExists("-h")) {
@@ -77,6 +78,7 @@ int main(int argc, char **argv) {
 
     exit(0);
 }
+#endif
 
 /*
  * Planned long term syntax:
