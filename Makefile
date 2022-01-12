@@ -41,6 +41,12 @@
 #    bibref("addbooks")
 #
 #    The web platform is somewhat slower than the native version, but fully functional.
+#
+# 9. In case you want to create an embedded version of bibref in an HTML page, you may
+#    want to use the template in the html/ folder. You need to create a JavaScript
+#    version of the web build of bibref by using "TARGET_HTML=bibref.js emmake make".
+#    Then simply copy the files wasm-build/bibref.html and wasm-build/bibref.data
+#    to the html/ folder, and finally the whole folder to a web server.
 
 TARGET_HTML ?= bibref.html
 
@@ -59,6 +65,9 @@ LDFLAGS += -s ALLOW_MEMORY_GROWTH=1
 LDFLAGS += -s TOTAL_MEMORY=2047MB
 LDFLAGS += --preload-file ~/.sword@/ -O3
 LDFLAGS += -fexceptions -s EXTRA_EXPORTED_RUNTIME_METHODS=['cwrap']
+ifeq ($(TARGET_HTML),bibref.js)
+LDFLAGS += -s MODULARIZE=1 -s EXPORT_NAME=bibref
+endif
 
 $(BUILD_DIR)/$(TARGET_HTML): $(OBJS)
 	$(MKDIR_P) $(dir $@)

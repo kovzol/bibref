@@ -1,0 +1,41 @@
+<title>bibref</title>
+
+<script src="bibref.js"></script>
+<script src="bibref-loader.js"></script>
+
+<body>
+     <center>
+         <textarea id="outputtext" name="outputtext" rows=25 cols=80 style="background-color: #d0d0ff"></textarea>
+         <form>
+             <input id="inputtext" name="inputtext" size=80 style="font-family: monospace; background-color: #ffd0d0">
+         </form>
+     </center>
+
+     <script type="text/javascript">
+     // sampleinput = "addbooks";
+     sampleinput = "lookup KJV Genesis 1:1";
+
+     function myinit() {
+         document.getElementById('inputtext').addEventListener('keypress', function(event) {
+             if (event.keyCode == 13) {
+                 event.preventDefault();
+                 process();
+                 }
+             });
+         var outputtext = document.getElementById("outputtext");
+         outputtext.innerHTML += "Welcome to the web version of bibref!\n";
+         outputtext.innerHTML += "Type a command on the pink line and press ENTER. Type 'help' to get help.\n";
+         input = document.getElementById("inputtext");
+         input.value = sampleinput;
+         input.focus();
+         }
+     function process() {
+         output = bibref_wasm(input.value);
+         outputtext.innerHTML += "&gt; " + input.value + "\n" + output;
+         outputtext.scrollTop = 99999;
+         input = document.getElementById("inputtext");
+         input.value = '';
+         }
+     </script>
+</body>
+</html>

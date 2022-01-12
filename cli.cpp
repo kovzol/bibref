@@ -167,7 +167,7 @@ string cli_process(char *buf) {
         }
 
         if (input.compare("help") == 0) {
-            info("Please visit https://github.com/kovzol/bibref to get online help.");
+            info("Please visit https://github.com/kovzol/bibref#bibref to get online help.");
             goto end;
         }
 
@@ -556,7 +556,7 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
 #ifndef __EMSCRIPTEN__
     rl_attempted_completion_function = completer;
 #endif
-    info("This is bibref-cli 2021May17, nice to meet you.");
+    info("This is bibref-cli 2022Jan12, nice to meet you.");
     showAvailableBibles();
     if (addbooks) {
         if (addBooks() == 0) {
