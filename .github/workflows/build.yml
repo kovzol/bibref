@@ -39,7 +39,7 @@ jobs:
         mkdir build
         cd build
         emcmake cmake ..
-        emmake make || true
+        emmake make sword_static
     - name: make-wasm
       run: |
         . emsdk/emsdk_env.sh

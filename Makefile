@@ -8,8 +8,8 @@
 #
 # 2. Build libsword.a by using https://github.com/kovzol/crosswire-sword-mirror
 #    and the cmake toolchain from Emscripten (via "ecmake cmake").
-#    You may need to have a recent cmake. The build may be incomplete,
-#    but libsword.a can be built successfully.
+#    You may need to have a recent cmake. Then run "make sword_static" to
+#    build libsword.a.
 #
 # 3. Make sure that libsword.a is visible from the file system under the parent
 #    folder of the current directory (..).
