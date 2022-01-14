@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 # Several pieces of this code were taken from https://www.sqlitetutorial.net/sqlite-python/sqlite-python-select/
 
-import sqlite3, sys
+import sqlite3, sys, pexpect, os
 from sqlite3 import Error
-import pexpect
 
 bibref = None
 
@@ -380,9 +379,19 @@ def spawn_bibref():
     if bibref is not None:
         return
     sys.stderr.write("Waiting for bibref's full startup...\n")
-    bibref = pexpect.spawn("../../bibref -a") # FIXME: path is hardcoded now
-    bibref.expect("Done loading books of SBLGNT.")
-    bibref.timeout = 5
+
+    for subdir, dirs, files in os.walk('../..'):
+        for file in files:
+            fullpath = os.path.join(subdir, file)
+            if os.access(fullpath, os.X_OK) and file == "bibref":
+                sys.stderr.write(f"Spawning {fullpath}...\n");
+                bibref = pexpect.spawn(fullpath + " -a")
+                bibref.expect("Done loading books of SBLGNT.")
+                bibref.timeout = 5
+                return
+
+    sys.stderr.write("Unsuccessful\n");
+    exit(1)
 
 def nt_jaccard_csv(conn, nt_book):
     """

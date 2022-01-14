@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-import sqlite3, sys
+import sqlite3, sys, os
 from sqlite3 import Error
 import pexpect
 
@@ -49,9 +49,19 @@ def spawn_bibref():
     if bibref is not None:
         return
     print("Waiting for bibref's full startup...")
-    bibref = pexpect.spawn("../../bibref -a") # FIXME: path is hardcoded now
-    bibref.expect("Done loading books of SBLGNT.")
-    bibref.timeout = 5
+
+    for subdir, dirs, files in os.walk('../..'):
+        for file in files:
+            fullpath = os.path.join(subdir, file)
+            if os.access(fullpath, os.X_OK) and file == "bibref":
+                sys.stderr.write(f"Spawning {fullpath}...\n");
+                bibref = pexpect.spawn(fullpath + " -a")
+                bibref.expect("Done loading books of SBLGNT.")
+                bibref.timeout = 5
+                return
+
+    sys.stderr.write("Unsuccessful\n");
+    exit(1)
 
 def quotation_entries_lengths(conn):
     """
