@@ -10,7 +10,7 @@ jobs:
     - name: prerequisites
       run: >-
          sudo apt update --allow-unauthenticated --allow-insecure-repositories &&
-         sudo apt install libsword-common libsword-dev git cmake build-essential libreadline-dev libboost-dev \
+         sudo apt install libsword-common libsword-dev git cmake build-essential libreadline-dev libboost-dev libboost-filesystem-dev\
               sqlite3 python3 python3-pexpect \
               texlive-latex-recommended texlive-latex-extra texlive-science texlive-lang-european texlive-lang-german \
               r-base-core
