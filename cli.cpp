@@ -548,8 +548,6 @@ end:
     string ret = collect_info;
     collect_info = "";
     return ret;
-        // readline malloc's a new buffer every time.
-        free(buf);
     }
 
 void cli(const char *input_prepend, const char *output_prepend, bool addbooks, bool colored) {

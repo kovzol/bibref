@@ -7,12 +7,14 @@ using namespace std;
 #include <limits>
 #include <string>
 #include <string.h>
+#include <stdio.h>
 #include <sstream>
 #include <vector>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/replace.hpp>
+#include <boost/filesystem.hpp>
 
 #include "swmgr.h"
 #include "swmodule.h"
@@ -281,12 +283,16 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
     SWOptionFilter *filter = new UTF8GreekAccents();
     filter->setOptionValue("off");
 
-    info("Loading " + moduleName + "...");;
+    info("Loading " + moduleName + "...");
+    string path = ".bibref/" + moduleName;
+    boost::filesystem::create_directories(path);
     add_vocabulary_item(moduleName);
 
     string lastBookName = splitVerseInfo(firstVerse).bookName;
     Book lastBook = Book(lastBookName);
     bool firstInfoSet = false;
+    FILE *lastBookVersesFile = NULL;
+
     // Iterate on verses of the whole Bible version:
     for (long v = bookStart; v <= bookEnd; ++v) {
         module->setIndex(v);
@@ -313,7 +319,11 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
             reference = vi.reference;
             if (lastBookName.compare(bookName) != 0) {
                 books.push_back(lastBook);
-                info(lastBookName + " contains " + to_string(lastBook.getText().length()) + " characters,");
+                string lastBookText = lastBook.getText();
+                FILE *lastBookFile = fopen((path + "/" + lastBookName + ".book").c_str(), "wa");
+                fprintf(lastBookFile, "%s\n", lastBookText.c_str());
+                fclose(lastBookFile);
+                info(lastBookName + " contains " + to_string(lastBookText.length()) + " characters,");
                 add_vocabulary_item(lastBookName);
                 // new book
                 Book book = Book(bookName);
@@ -321,10 +331,22 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
                 book.setInfo(moduleName);
                 lastBook = book;
                 lastBookName = bookName;
+                fclose(lastBookVersesFile);
+                lastBookVersesFile = fopen((path + "/" + lastBookName + ".verses").c_str(), "wa");
+            } else {
+                if (lastBookVersesFile == NULL)
+                   lastBookVersesFile = fopen((path + "/" + lastBookName + ".verses").c_str(), "wa");
             }
             lastBook.addVerse(verseText, reference);
+            int start = lastBook.getVerseStart(reference);
+            int end = lastBook.getVerseEnd(reference);
+            fprintf(lastBookVersesFile, "%s %d %d\n", reference.c_str(), start, end);
             if (verseInfo.compare(lastVerse)==0) {
                 books.push_back(lastBook);
+                string lastBookText = lastBook.getText();
+                FILE *lastBookFile = fopen((path + "/" + lastBookName + ".book").c_str(), "wa");
+                fprintf(lastBookFile, "%s\n", lastBookText.c_str());
+                fclose(lastBookFile);
                 info("and " + lastBookName + " contains " + to_string(lastBook.getText().length()) + " characters.");
                 add_vocabulary_item(lastBookName);
             }

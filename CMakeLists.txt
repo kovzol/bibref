@@ -13,7 +13,7 @@ include_directories(/usr/include/sword)
 
 add_executable(bibref main.cpp book.cpp book.h books.cpp books.h fingerprint.cpp fingerprint.h cli.cpp cli.h)
 
-target_link_libraries(bibref sword readline)
+target_link_libraries(bibref sword readline boost_system boost_filesystem)
 
 # Download and install LXX and SBLGNT
 set(ENV{SWORD_PATH} "$ENV{HOME}/.sword")

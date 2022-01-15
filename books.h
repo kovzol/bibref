@@ -3,7 +3,6 @@
 
 #include "fingerprint.h"
 
-void addLxx();
 int addBooks();
 string lookupVerse(string book, string info, string verse);
 fingerprint getTextFingerprint(string book, string info, int start, int length);
