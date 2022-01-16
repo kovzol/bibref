@@ -65,7 +65,7 @@ LDFLAGS := $(shell find .. -name libsword.a | sort | head -1)
 LDFLAGS += -s SINGLE_FILE=1 -s USE_BOOST_HEADERS=1
 LDFLAGS += -s ALLOW_MEMORY_GROWTH=1
 # LDFLAGS += -s TOTAL_MEMORY=2047MB
-LDFLAGS += --preload-file ~/.sword@/ --preload-file $(BIBREF_NATIVE_FOLDER)/.bibref@/.bibref -O3
+LDFLAGS += --preload-file ~/.sword@/ --preload-file .bibref@/.bibref -O3
 LDFLAGS += -fexceptions -s EXTRA_EXPORTED_RUNTIME_METHODS=['cwrap']
 ifeq ($(TARGET_HTML),bibref.js)
 LDFLAGS += -s MODULARIZE=1 -s EXPORT_NAME=bibref
@@ -73,7 +73,7 @@ endif
 
 $(BUILD_DIR)/$(TARGET_HTML): $(OBJS)
 	$(MKDIR_P) $(dir $@)
-	# echo "addbooks" | $(BIBREF_NATIVE) # Make sure bibref generates its cache.
+	echo addbooks | $(BIBREF_NATIVE_FOLDER)/bibref # Make sure bibref generates its cache.
 	$(CXX) $(OBJS) -o $@ $(LDFLAGS)
 
 $(BUILD_DIR)/%.cpp.o: %.cpp
