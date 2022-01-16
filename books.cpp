@@ -14,7 +14,9 @@ using namespace std;
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/replace.hpp>
+#ifndef __EMSCRIPTEN__
 #include <boost/filesystem.hpp>
+#endif
 
 #include "swmgr.h"
 #include "swmodule.h"
@@ -285,7 +287,9 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
 
     info("Loading " + moduleName + "...");
     string path = ".bibref/" + moduleName;
+#ifndef __EMSCRIPTEN__
     boost::filesystem::create_directories(path);
+#endif
     add_vocabulary_item(moduleName);
 
     string lastBookName = splitVerseInfo(firstVerse).bookName;
@@ -320,9 +324,11 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
             if (lastBookName.compare(bookName) != 0) {
                 books.push_back(lastBook);
                 string lastBookText = lastBook.getText();
+#ifndef __EMSCRIPTEN__
                 FILE *lastBookFile = fopen((path + "/" + lastBookName + ".book").c_str(), "wa");
                 fprintf(lastBookFile, "%s\n", lastBookText.c_str());
                 fclose(lastBookFile);
+#endif
                 info(lastBookName + " contains " + to_string(lastBookText.length()) + " characters,");
                 add_vocabulary_item(lastBookName);
                 // new book
@@ -338,15 +344,19 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
                    lastBookVersesFile = fopen((path + "/" + lastBookName + ".verses").c_str(), "wa");
             }
             lastBook.addVerse(verseText, reference);
+#ifndef __EMSCRIPTEN__
             int start = lastBook.getVerseStart(reference);
             int end = lastBook.getVerseEnd(reference);
             fprintf(lastBookVersesFile, "%s %d %d\n", reference.c_str(), start, end);
+#endif
             if (verseInfo.compare(lastVerse)==0) {
                 books.push_back(lastBook);
                 string lastBookText = lastBook.getText();
+#ifndef __EMSCRIPTEN__
                 FILE *lastBookFile = fopen((path + "/" + lastBookName + ".book").c_str(), "wa");
                 fprintf(lastBookFile, "%s\n", lastBookText.c_str());
                 fclose(lastBookFile);
+#endif
                 info("and " + lastBookName + " contains " + to_string(lastBook.getText().length()) + " characters.");
                 add_vocabulary_item(lastBookName);
             }
