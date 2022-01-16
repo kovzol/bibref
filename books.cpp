@@ -400,6 +400,7 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
                 FILE *lastBookFile = fopen((path + "/" + lastBookName + ".book").c_str(), "wa");
                 fprintf(lastBookFile, "%s\n", lastBookText.c_str());
                 fclose(lastBookFile);
+                fclose(lastBookVersesFile);
 #endif
                 info("and " + lastBookName + " contains " + to_string(lastBook.getText().length()) + " characters.");
                 add_vocabulary_item(lastBookName);
