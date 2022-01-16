@@ -279,7 +279,7 @@ int addBook_cached(string moduleName) {
         if ((dp = readdir(dirp)) != NULL) {
             string bookName = string(dp->d_name);
             if (boost::algorithm::ends_with(bookName, ".book")) {
-                  // printf("book %s\n", bookName.c_str());
+                  // printf("bookFile %s\n", bookName.c_str());
                   std::ifstream bookFile(path + "/" + bookName);
                   std::stringstream buffer;
                   buffer << bookFile.rdbuf();
@@ -289,7 +289,7 @@ int addBook_cached(string moduleName) {
                   // Loading verses:
                   string verseFileName = path + "/" + bookName + ".verses";
                   FILE *verseFile = fopen(verseFileName.c_str(), "r");
-                  char reference[7];
+                  char reference[8]; // Psalms 119:176 needs 7 characters + "\n"
                   int start, end;
                   while (fscanf(verseFile, "%s %d %d", &reference, &start, &end) != EOF) {
                       book.addVerse(start, end - start + 1, string(reference));
@@ -303,6 +303,7 @@ int addBook_cached(string moduleName) {
     } while (dp != NULL);
     closedir(dirp);
     info("Done loading books of " + moduleName + " (cached).");
+    return 0;
 }
 
 int addBook(string moduleName, string firstVerse, string lastVerse, bool removeAccents) {
