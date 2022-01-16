@@ -24,9 +24,14 @@ string Book::getInfo() {
 void Book::addVerse(string n, string i) {
     int start = text.length();
     int length = n.length();
-    Verse v = {start, length, i};
-    verses.push_back(v);
+    addVerse(start, length, i);
     text += n;
+}
+
+void Book::addVerse(int start, int length, string info) {
+    Verse v = {start, length, info};
+    // cerr << start << " " << length << " " << info << endl;
+    verses.push_back(v);
 }
 
 class InvalidVerseReference: public exception
@@ -58,6 +63,11 @@ string Book::getVerse(string i) {
 
 string Book::getText() {
     return text;
+}
+
+void Book::setText(string t) {
+    text = t;
+    // cerr << text << endl;
 }
 
 int Book::getVerseStart(string i) {

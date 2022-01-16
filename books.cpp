@@ -8,6 +8,8 @@ using namespace std;
 #include <string>
 #include <string.h>
 #include <stdio.h>
+#include <dirent.h>
+#include <fstream>
 #include <sstream>
 #include <vector>
 #include <boost/algorithm/string/trim.hpp>
@@ -268,7 +270,48 @@ int lookupTranslation(string moduleName, string book, string verse) {
     return 0;
 }
 
+int addBook_cached(string moduleName) {
+    string path = ".bibref/" + moduleName;
+    DIR *dirp = opendir(path.c_str());
+    struct dirent *dp;
+    do {
+        errno = 0;
+        if ((dp = readdir(dirp)) != NULL) {
+            string bookName = string(dp->d_name);
+            if (boost::algorithm::ends_with(bookName, ".book")) {
+                  // printf("book %s\n", bookName.c_str());
+                  std::ifstream bookFile(path + "/" + bookName);
+                  std::stringstream buffer;
+                  buffer << bookFile.rdbuf();
+                  bookName.erase(bookName.length() - string(".book").length());
+                  Book book = Book(bookName);
+                  book.setText(string(buffer.str()));
+                  // Loading verses:
+                  string verseFileName = path + "/" + bookName + ".verses";
+                  FILE *verseFile = fopen(verseFileName.c_str(), "r");
+                  char reference[7];
+                  int start, end;
+                  while (fscanf(verseFile, "%s %d %d", &reference, &start, &end) != EOF) {
+                      book.addVerse(start, end - start + 1, string(reference));
+                      }
+                  fclose(verseFile);
+                  add_vocabulary_item(bookName);
+                  book.setInfo(moduleName);
+                  books.push_back(book);
+              }
+        }
+    } while (dp != NULL);
+    closedir(dirp);
+    info("Done loading books of " + moduleName + " (cached).");
+}
+
 int addBook(string moduleName, string firstVerse, string lastVerse, bool removeAccents) {
+    DIR* cache_dir = opendir((".bibref/" + moduleName).c_str());
+    if (cache_dir) {
+        closedir(cache_dir);
+        addBook_cached(moduleName);
+        return 0;
+    }
     SWMgr library(new MarkupFilterMgr(FMT_PLAIN));
     SWModule *module;
     module = library.getModule(moduleName.c_str());
@@ -326,7 +369,7 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
                 string lastBookText = lastBook.getText();
 #ifndef __EMSCRIPTEN__
                 FILE *lastBookFile = fopen((path + "/" + lastBookName + ".book").c_str(), "wa");
-                fprintf(lastBookFile, "%s\n", lastBookText.c_str());
+                fprintf(lastBookFile, "%s", lastBookText.c_str());
                 fclose(lastBookFile);
 #endif
                 info(lastBookName + " contains " + to_string(lastBookText.length()) + " characters,");

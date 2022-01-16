@@ -29,6 +29,9 @@ public:
     string getText();
     int getVerseStart(string verseInfo);
     int getVerseEnd(string verseInfo);
+    // to load a book from cache:
+    void setText(string text);
+    void addVerse(int start, int length, string info);
 };
 
 #endif // BOOK_H
