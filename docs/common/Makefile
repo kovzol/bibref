@@ -51,11 +51,16 @@ nt-passage-info.tex: visualize.py quotations.sqlite3
 nt-passage-info.pdf: nt-passage-info.tex
 	pdflatex $<
 
+ot-passage-info.tex: visualize.py quotations.sqlite3
+	python3 visualize.py ot_passage_info all > $@
+ot-passage-info.pdf: ot-passage-info.tex
+	pdflatex $<
+
 jaccard: \
  $(ot-jaccard-Rplots-pdfs) $(ot-jaccard-sorted-txts) \
  $(nt-jaccard-Rplots-pdfs) $(nt-jaccard-sorted-txts) \
  nt-jaccard-multi-Rplots.pdf \
- nt-passage-info.pdf
+ nt-passage-info.pdf ot-passage-info.pdf
 # ot-jaccard-multi-Rplots.pdf
 
 

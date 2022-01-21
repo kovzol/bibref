@@ -932,7 +932,7 @@ def nt_passage_info(conn, nt_quotation_id, format):
         print (jaccards)
         print ("\\end{tikzpicture} \\par\\noindent\\rule{\\textwidth}{0.4pt}\\vspace{10pt}")
 
-def nt_passage_info_all(conn, format):
+def nt_passage_info_all(conn, format, order):
     """
     Show all relevant information on all NT quotations
     :param conn: the Connection object
@@ -960,10 +960,17 @@ def nt_passage_info_all(conn, format):
         print ("\\tikzstyle{unquoted}=[rectangle,draw=blue!20,fill=black!5,thick,inner sep=0 pt,minimum size=6mm]")
         print ("\\begin{document}")
 
-    cur.execute("SELECT DISTINCT qi.nt_quotation_id" +
-        " FROM nt_quotation_introductions qi, books b" +
-        " WHERE b.name = qi.nt_book"
-        " ORDER BY b.number, qi.nt_startpos")
+    if order == "ot":
+        cur.execute("SELECT DISTINCT qi.nt_quotation_id" +
+            " FROM nt_quotation_introductions qi, books b, clasps c" +
+            " WHERE b.name = c.ot_book"
+            " AND qi.nt_quotation_id = c.nt_quotation_id"
+            " ORDER BY b.number, c.ot_startpos")
+    else:
+        cur.execute("SELECT DISTINCT qi.nt_quotation_id" +
+            " FROM nt_quotation_introductions qi, books b" +
+            " WHERE b.name = qi.nt_book"
+            " ORDER BY b.number, qi.nt_startpos")
     rows = cur.fetchall()
     i = 1
     for row in rows:
@@ -1002,6 +1009,8 @@ def main():
         data = "Psalms"
     if result_type == "nt_passage_info":
         data = "all"
+    if result_type == "ot_passage_info":
+        data = "all"
 
     if len(sys.argv) > 2:
         data = sys.argv[2]
@@ -1033,6 +1042,8 @@ def main():
                 nt_passage_info_all(conn, "latex")
             else:
                 nt_passage_info(conn, int(data), "text")
+        elif result_type == "ot_passage_info":
+            nt_passage_info_all(conn, "latex", "ot")
         else:
             psalms_report_latex(conn, result_type, data)
 
