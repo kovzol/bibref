@@ -534,18 +534,29 @@ def comment(text, format):
     """
     Print a comment to stdout according to the given format
     :param text: the text of comment
-    :param format: expected format (latex, text, html)
+    :param format: expected format (latex, text, html, svg)
     """
     threshold = 2000 # this is needed for LaTeX since it cannot handle too long lines
     output = str(text)
-    if len(output) > threshold and format == "latex":
+    if len(output) > threshold and (format == "latex" or format == "svg"):
         output = str(output[0:threshold]) + "..."
-    if format == "latex":
+    if format == "latex" or format == "svg":
         print("%", output)
     if format == "html":
         print("<!--", output, "-->")
     if format == "text":
         print("#", output)
+
+def print_passage_header():
+        print ("\\renewcommand{\\familydefault}{\\sfdefault}")
+        print ("\\tikzstyle{nt_passage}=[rectangle,left color=cyan!50,right color=white,minimum size=6mm]")
+        print ("\\tikzstyle{ot_passage}=[rectangle,left color=yellow!50,right color=white,minimum size=6mm]")
+        print ("\\tikzstyle{intro}=[rectangle,draw=blue!50,fill=blue!20,thick,inner sep=0 pt,minimum size=6mm]")
+        print ("\\tikzstyle{clasp}=[rectangle,draw=blue!50,fill=ForestGreen!20,thick,inner sep=0 pt,minimum size=6mm]")
+        print ("\\tikzstyle{overlap}=[rectangle,draw=blue!50,fill=OliveGreen,thick,inner sep=0 pt,minimum size=6mm]")
+        print ("\\tikzstyle{unidentified}=[rectangle,draw=blue!20,fill=black!5,thick,inner sep=0 pt,minimum size=6mm]")
+        print ("\\tikzstyle{unquoted}=[rectangle,draw=blue!20,fill=black!5,thick,inner sep=0 pt,minimum size=6mm]")
+        print ("\\begin{document}")
 
 def nt_passage_info(conn, nt_quotation_id, format):
     """
@@ -556,6 +567,11 @@ def nt_passage_info(conn, nt_quotation_id, format):
 
     global bibref
     spawn_bibref()
+
+    if format == "svg":
+        print ("\\PassOptionsToPackage{dvipsnames}{xcolor}")
+        print ("\\documentclass[tikz,convert=pdf2svg]{standalone}")
+        print_passage_header()
 
     cur = conn.cursor()
 
@@ -781,7 +797,7 @@ def nt_passage_info(conn, nt_quotation_id, format):
             return
 
     # Print graphs
-    if format == "latex":
+    if format == "latex" or format == "svg":
         nt_passage_formatted = nt_begin.replace("_", " ")
         print ("\\noindent\\begin{tikzpicture}[node distance=8mm]")
         print(f"\\node[nt_passage] (nt_passage) at (0,0) {{{nt_passage_formatted}}};")
@@ -870,7 +886,7 @@ def nt_passage_info(conn, nt_quotation_id, format):
     connect_nodes += ";"
     comment(f"NT: {nt_out}", format)
 
-    if format == "latex":
+    if format == "latex" or format == "svg":
         print (nt_latex)
         print (connect_nodes)
 
@@ -884,7 +900,7 @@ def nt_passage_info(conn, nt_quotation_id, format):
         p = 0
         ot_out[m] = ""
         latex_lastnode_ot = "ot_passage " + m
-        if format == "latex":
+        if format == "latex" or format == "svg":
             ot_passage_formatted = ot_begin[m].replace("_", " ")
             print(f"\\node[ot_passage] (ot_passage {m}) at (0,{-y}) {{{ot_passage_formatted}}};")
 
@@ -924,15 +940,19 @@ def nt_passage_info(conn, nt_quotation_id, format):
             p += 1
         connect_nodes += ";"
         comment(f"OT/{m}: {ot_out[m]}", format)
-        if format == "latex":
+        if format == "latex" or format == "svg":
             print (ot_latex)
             print (connect_nodes)
 
-    if format == "latex":
+    if format == "latex" or format == "svg":
         print (jaccards)
-        print ("\\end{tikzpicture} \\par\\noindent\\rule{\\textwidth}{0.4pt}\\vspace{10pt}")
+        print ("\\end{tikzpicture}")
+    if format == "latex":
+        print ("\\par\\noindent\\rule{\\textwidth}{0.4pt}\\vspace{10pt}")
+    if format == "svg":
+        print ("\\end{document}")
 
-def nt_passage_info_all(conn, format, order):
+def nt_passage_info_all(conn, format, order=""):
     """
     Show all relevant information on all NT quotations
     :param conn: the Connection object
@@ -945,20 +965,10 @@ def nt_passage_info_all(conn, format, order):
 
     if format == "latex":
         print ("\\documentclass{article}")
-        print ("\\renewcommand{\\familydefault}{\\sfdefault}")
         print ("\\usepackage[a4paper,margin=2cm]{geometry}")
         print ("\\usepackage[dvipsnames]{xcolor}")
         print ("\\usepackage{tikz}")
-        # print ("\\tikzstyle{nt_passage}=[rectangle,draw=cyan!50,fill=cyan!20,thick,minimum size=6mm]")
-        print ("\\tikzstyle{nt_passage}=[rectangle,left color=cyan!50,right color=white,minimum size=6mm]")
-        # print ("\\tikzstyle{ot_passage}=[rectangle,draw=yellow!50,fill=yellow!20,thick,minimum size=6mm]")
-        print ("\\tikzstyle{ot_passage}=[rectangle,left color=yellow!50,right color=white,minimum size=6mm]")
-        print ("\\tikzstyle{intro}=[rectangle,draw=blue!50,fill=blue!20,thick,inner sep=0 pt,minimum size=6mm]")
-        print ("\\tikzstyle{clasp}=[rectangle,draw=blue!50,fill=ForestGreen!20,thick,inner sep=0 pt,minimum size=6mm]")
-        print ("\\tikzstyle{overlap}=[rectangle,draw=blue!50,fill=OliveGreen,thick,inner sep=0 pt,minimum size=6mm]")
-        print ("\\tikzstyle{unidentified}=[rectangle,draw=blue!20,fill=black!5,thick,inner sep=0 pt,minimum size=6mm]")
-        print ("\\tikzstyle{unquoted}=[rectangle,draw=blue!20,fill=black!5,thick,inner sep=0 pt,minimum size=6mm]")
-        print ("\\begin{document}")
+        print_passage_header()
 
     if order == "ot":
         cur.execute("SELECT DISTINCT qi.nt_quotation_id" +
@@ -1009,6 +1019,7 @@ def main():
         data = "Psalms"
     if result_type == "nt_passage_info":
         data = "all"
+        data2 = "text"
     if result_type == "ot_passage_info":
         data = "all"
 
@@ -1041,7 +1052,7 @@ def main():
             if data == "all":
                 nt_passage_info_all(conn, "latex")
             else:
-                nt_passage_info(conn, int(data), "text")
+                nt_passage_info(conn, int(data), data2)
         elif result_type == "ot_passage_info":
             nt_passage_info_all(conn, "latex", "ot")
         else:
