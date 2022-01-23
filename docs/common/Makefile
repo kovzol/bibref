@@ -64,7 +64,8 @@ jaccard: \
 # ot-jaccard-multi-Rplots.pdf
 
 # SVG outputs
-verified-quotations = 10011
+verified-quotations = 10011 181 1033 20021 20031 20041 20051 20061 21011 \
+ 13011 1051 14011 1091 131 24021 21031 22025 281 24051 1161 1171
 svgs: $(verified-quotations:%=svg/%.svg)
 svg/%.svg: svg/%.tex
 	cd svg && pdflatex -shell-escape $*
