@@ -63,6 +63,14 @@ jaccard: \
  nt-passage-info.pdf ot-passage-info.pdf
 # ot-jaccard-multi-Rplots.pdf
 
+# SVG outputs
+verified-quotations = 10011
+svgs: $(verified-quotations:%=svg/%.svg)
+svg/%.svg: svg/%.tex
+	cd svg && pdflatex -shell-escape $*
+svg/%.tex: visualize.py quotations.sqlite3
+	mkdir -p svg
+	python3 visualize.py nt_passage_info $* svg > $@
 
 # No-Jaccard (NT)
 getrefs-pngs = $(nt_inputs:%=%-getrefs.png)
