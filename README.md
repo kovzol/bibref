@@ -23,7 +23,7 @@ texts be cited in the Greek text?
 
 There are several research projects on this,
 and today it seems to be clear that many authors of
-the New Testament cite a Greek translation of
+the New Testament cited a Greek translation of
 the Hebrew text, namely the Septuagint, that
 was widely popular in the first centuries, and still popular
 in some Christian churches. Many
@@ -53,6 +53,10 @@ At the moment the project was tested on
 Ubuntu Linux 18.04, 19.10, 20.04 and 22.04 but it should work
 on many other systems.
 
+There is a web version of *bibref* available [online](https://matek.hu/zoltan/bibref/).
+It is somewhat slower than the installable version, but works immediately
+in a web browser.
+
 ### Installation
 
 ![build](https://github.com/kovzol/bibref/workflows/build/badge.svg)
@@ -60,12 +64,15 @@ on many other systems.
 The following commands
 should be entered on command line:
 ```commandline
-sudo apt install libsword-common libsword-dev libreadline-dev libboost-dev git cmake build-essential pkg-config
+sudo apt install libsword-common libsword-dev libreadline-dev libboost-dev libboost-filesystem-dev git cmake build-essential pkg-config
 git clone https://github.com/kovzol/bibref.git
 cd bibref
 cmake .
 make
 ```
+
+If you want to compile the web version, please have a look on
+the corresponding [GitHub action](https://github.com/kovzol/bibref/blob/master/.github/workflows/build.yml).
 
 ### Running
 
@@ -76,7 +83,7 @@ Enter the command
 
 ### Example
 
-The following session finds the corresponding citation of the LXX text of Psalm 82:6 in the SBLGNT:
+The following session finds the corresponding citation of the LXX text of Psalm 2:1 in the SBLGNT:
 ```commandline
 This is bibref-cli 2020Nov02, nice to meet you.
 >> addbooks
@@ -142,3 +149,5 @@ There may be other commands available that are not documented yet.
 
 Some [examples](/examples) are also available. See also [an incomplete draft (in Hungarian)](docs/hu/bibref.pdf) on the purpose of the commands.
 Also, a work-in-progress database can be found in [docs/common](/docs/common) which aims collecting all quotations.
+
+You may be interested in some [blog entries](https://matek.hu/zoltan/blog.php) that extensively use the web version of *bibref*.
