@@ -1440,8 +1440,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (107, 2, 'η γραφη', 'λεγει γαρ'); -- η γραφη = the Scripture, λεγει γαρ = says for
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (107, 2, 'repeated quotation', 'literal, exact', 'Z.K.');
-insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
- (1061, 'Romans', 'SBLGNT Romans 10:11 10:11-36', 21300, 21313); -- TODO: Consider adding the info that this belongs to 107, 2.
+# We need to disable this until it cannot be indicated that this introduction belongs to the repeated quotation part.
+# insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+#  (1061, 'Romans', 'SBLGNT Romans 10:11 10:11-36', 21300, 21313); -- TODO: Consider adding the info that this belongs to 107, 2.
+# Otherwise this will show up at the end of the hierarchical diagram -- we don't want that.
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1061, 107, 2, 'Isaiah', 'LXX Isaiah 28:16+113 28:16', 'Romans', 'SBLGNT Romans 10:11+17 10:11-5', 52805, 30, 21317, 28);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values

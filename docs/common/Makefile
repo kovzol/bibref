@@ -63,9 +63,10 @@ jaccard: \
  nt-passage-info.pdf ot-passage-info.pdf
 # ot-jaccard-multi-Rplots.pdf
 
-# SVG outputs (Romans: literal \n fuzzy)
+# SVG outputs (Romans: literal \n fuzzy \n Matthew 4:7 and Luke 4:12)
 verified-quotations = 181 1033 20021 20031 20041 20051 20061 21011 13011 1051 14011 1091 131 24021 21031 22025 281 24051 1161 1171 \
- 10011 251 51 20011 231 11011 21021 1041
+ 10011 251 51 20011 231 11011 21021 1041 \
+ 24081 24082
 
 svgs: $(verified-quotations:%=svg/%.svg)
 svg/%.svg: svg/%.tex
