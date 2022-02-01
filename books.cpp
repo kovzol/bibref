@@ -271,37 +271,52 @@ int lookupTranslation(string moduleName, string book, string verse) {
 }
 
 int addBook_cached(string moduleName) {
-    string path = ".bibref/" + moduleName;
-    DIR *dirp = opendir(path.c_str());
-    struct dirent *dp;
-    do {
-        errno = 0;
-        if ((dp = readdir(dirp)) != NULL) {
-            string bookName = string(dp->d_name);
-            if (boost::algorithm::ends_with(bookName, ".book")) {
-                  // printf("bookFile %s\n", bookName.c_str());
-                  std::ifstream bookFile(path + "/" + bookName);
-                  std::stringstream buffer;
-                  buffer << bookFile.rdbuf();
-                  bookName.erase(bookName.length() - string(".book").length());
-                  Book book = Book(bookName);
-                  book.setText(string(buffer.str()));
-                  // Loading verses:
-                  string verseFileName = path + "/" + bookName + ".verses";
-                  FILE *verseFile = fopen(verseFileName.c_str(), "r");
-                  char reference[8]; // Psalms 119:176 needs 7 characters + "\n"
-                  int start, end;
-                  while (fscanf(verseFile, "%s %d %d", &reference, &start, &end) != EOF) {
-                      book.addVerse(start, end - start + 1, string(reference));
-                      }
-                  fclose(verseFile);
-                  add_vocabulary_item(bookName);
-                  book.setInfo(moduleName);
-                  books.push_back(book);
-              }
+    vector<string> bookNames;
+    // This is needed for correct alphabetical ordering:
+    if (moduleName == "LXX") {
+        bookNames={"Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy",
+            "Joshua", "Judges", "Ruth",
+            "I_Samuel", "II_Samuel", "I_Kings", "II_Kings", "I_Chronicles", "II_Chronicles",
+            "Ezra", "Nehemiah", "Esther", "Job", "Psalms", "Proverbs", "Ecclesiastes", "Song_of_Solomon",
+            "Isaiah", "Jeremiah", "Lamentations", "Ezekiel", "Daniel",
+            "Hosea", "Joel", "Amos", "Obadiah", "Jonah", "Micah",
+                "Nahum", "Habakkuk", "Zephaniah", "Haggai", "Zechariah", "Malachi"};
         }
-    } while (dp != NULL);
-    closedir(dirp);
+    if (moduleName == "SBLGNT") {
+        bookNames={"Matthew", "Mark", "Luke", "John", "Acts",
+            "Romans", "I_Corinthians", "II_Corinthians", "Galatians",
+                "Ephesians", "Philippians", "Colossians",
+                "I_Thessalonians", "II_Thessalonians", "I_Timothy", "II_Timothy",
+                "Titus", "Philemon",
+            "Hebrews", "James",
+            "I_Peter", "II_Peter",
+            "I_John", "II_John", "III_John",
+            "Jude",
+            "Revelation_of_John"};
+        }
+
+    string path = ".bibref/" + moduleName;
+
+    for (vector<string>::iterator i=bookNames.begin(); i!=bookNames.end(); ++i) {
+        string bookName = *i;
+        std::ifstream bookFile(path + "/" + bookName + ".book");
+        std::stringstream buffer;
+        buffer << bookFile.rdbuf();
+        Book book = Book(bookName);
+        book.setText(string(buffer.str()));
+        // Loading verses:
+        string verseFileName = path + "/" + bookName + ".verses";
+        FILE *verseFile = fopen(verseFileName.c_str(), "r");
+        char reference[8]; // Psalms 119:176 needs 7 characters + "\n"
+        int start, end;
+        while (fscanf(verseFile, "%s %d %d", &reference, &start, &end) != EOF) {
+            book.addVerse(start, end - start + 1, string(reference));
+            }
+        fclose(verseFile);
+        add_vocabulary_item(bookName);
+        book.setInfo(moduleName);
+        books.push_back(book);
+        }
     info("Done loading books of " + moduleName + " (cached).");
     return 0;
 }
