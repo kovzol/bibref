@@ -2387,7 +2387,7 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1041, 1303, 1, 'Hosea', null, 'LXX Hosea 1:10+5 1:10-110', 'Romans', 'SBLGNT Romans 9:27+31 9:27-20', 978, 40, 20018, 40, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (1041, 1303, 1, 'Hosea', null, 'LXX Hosea 1:10+5 1:10-110', 'Romans', 'SBLGNT Romans 9:27+31 9:27-20', 978, 40, 20018, 40, 'manual');
+ (1041, 1303, 1, 'Hosea', null, 'LXX Hosea 1:10+3 1:10-110', 'Romans', 'SBLGNT Romans 9:27+30 9:27-20', 976, 42, 20017, 41, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (1303, 1, 'Ωσηε', 'λεγει'); -- Ωσηε = Hosea, λεγει = says (in Romans 9:25)
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
@@ -4148,7 +4148,7 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
  (42011, 'Romans', 'SBLGNT Romans 11:3 11:3-67', 22340, 22369);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
- (42011, 4201, 1, 'I_Kings', 'LXX I_Kings 19:10+72 19:10-96', 'Romans', 'SBLGNT Romans 11:3+30 11:3-41', 75874, 26, 22370, 26); -- τα θυσιαστηρια σου κατεσκαψαν
+ (42011, 4201, 1, 'I_Kings', 'LXX I_Kings 19:10+72 19:10-68', 'Romans', 'SBLGNT Romans 11:3+5 11:3-41', 75874, 54, 22345, 51); -- τα θυσιαστηρια σου κατεσκαψαν και τους προφητας σου απεκτειναν -> τους προφητας σου απεκτειναν, τα θυσιαστηρια σου κατεσκαψαν
 -- TODO: Consider splitting this into two clasps:
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (42011, 4201, 1, 'I_Kings', 'LXX I_Kings 19:10+135 19:10-11', 'Romans', 'SBLGNT Romans 11:3+56 11:3', 75937, 21+27, 22396, 22+19); -- και υπολελειμμαι εγω μονωτατος + και ζητουσι την ψυχην μου -> καγω υπελειφθην μονος + και ζητουσιν την ψυχην μου
