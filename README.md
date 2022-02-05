@@ -137,6 +137,7 @@ The available commands are:
 * `lookupN` *Bible* *book* *passage*: Search for the given *passage* in the given *book* in the given *Bible* and put its Latin transcription in clipboard N.
 * `minunique1` *Bible*: Search for minimal unique passages in clipboard 1 in the given *Bible*.
 * `extend` *Bible1* *Bible2* *book2* *passage2*: Extend the given passage in *Bible2* according to the longest possible citation from *Bible1*, based on the text of *book2* in *passage2*. In most cases `LXX` is used for *Bible1* and `SBLGNT` for *Bible2*.
+* `psalminfo` *Bible* *number*: Show the number of verses in Psalm *number* in the given *Bible*.
 * `getrefs` *Bible2* *Bible1* *book1* *passage1*: Search for references in *Bible2* on the passage in *Bible1* in book *book1* in *passage1*. Usually `SBLGNT` stands for *Bible2* and `LXX` for *Bible1*.
 * `maxresults` *number*: Set the maximal amount of results to be shown to *number*.
 * `compare12`: Compare the two clipboards with a 2-long substring-fingerprint (2-shingles) check, best match is reached at 1/(length1+length2).

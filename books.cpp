@@ -29,6 +29,15 @@ using namespace std;
 #include "book.h"
 #include "fingerprint.h"
 #include "cli.h"
+#include "psalmsinfo.h"
+
+class InvalidModule: public exception
+{
+  virtual const char* what() const throw()
+  {
+    return "Invalid module.";
+  }
+} InvalidModule;
 
 class InvalidBook: public exception
 {
@@ -65,6 +74,7 @@ class NoCitation: public exception
 using namespace sword;
 
 vector<Book> books;
+vector<PsalmsInfo> psalmsInfos;
 
 string greekToLatin(string word) {
     string rewritten;
@@ -297,6 +307,9 @@ int addBook_cached(string moduleName) {
 
     string path = ".bibref/" + moduleName;
 
+    PsalmsInfo pi = PsalmsInfo(moduleName);
+    for (int i=1; i<=151; i++) pi.setLastVerse(i, 0); // initialize
+
     for (vector<string>::iterator i=bookNames.begin(); i!=bookNames.end(); ++i) {
         string bookName = *i;
         std::ifstream bookFile(path + "/" + bookName + ".book");
@@ -310,6 +323,11 @@ int addBook_cached(string moduleName) {
         char reference[8]; // Psalms 119:176 needs 7 characters + "\n"
         int start, end;
         while (fscanf(verseFile, "%s %d %d", &reference, &start, &end) != EOF) {
+            if (bookName == "Psalms") {
+                vector<string> r;
+                boost::split(r, reference, boost::is_any_of(":"));
+                pi.setLastVerse(stoi(r[0]), stoi(r[1])); // this overwrites the previous entry
+                }
             book.addVerse(start, end - start + 1, string(reference));
             }
         fclose(verseFile);
@@ -317,6 +335,7 @@ int addBook_cached(string moduleName) {
         book.setInfo(moduleName);
         books.push_back(book);
         }
+    psalmsInfos.push_back(pi);
     info("Done loading books of " + moduleName + " (cached).");
     return 0;
 }
@@ -917,5 +936,15 @@ void showAvailableBibles() {
     }
     translations += ".";
     info(translations);
+}
+
+int getPsalmLastVerse(string moduleName, int psalm) {
+    for (vector<PsalmsInfo>::iterator i=psalmsInfos.begin(); i!=psalmsInfos.end(); ++i) {
+        PsalmsInfo pi = *i;
+        if (pi.getInfo() == moduleName) {
+            return pi.getLastVerse(psalm);
+        }
+    }
+    throw InvalidModule;
 }
 

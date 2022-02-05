@@ -39,6 +39,7 @@ string extendCmd = "extend";
 string getrefsCmd = "getrefs";
 string maxresultsCmd = "maxresults";
 string sqlCmd = "sql";
+string psalminfoCmd = "psalminfo";
 
 string errorNotRecognized = "Sorry, the command you entered was not recognized or its syntax is invalid.";
 string errorTextIncomplete = "Either " + textCmd + "1 or " + textCmd + "2 must be used.";
@@ -56,6 +57,7 @@ string errorExtendParameters = extendCmd + " requires 4 or 5 parameters.";
 string errorGetrefsParameters = getrefsCmd + " requires 3, 4 or 5 parameters.";
 string errorMaxresultsParameters = maxresultsCmd + " requires one parameter.";
 string errorSqlParameters = sqlCmd + " requires one parameter.";
+string errorPsalminfoParameters = psalminfoCmd + " requires 2 parameters.";
 
 vector<string> vocabulary {addbooksCmd, compareCmd + "12", jaccardCmd + "12",
                            textCmd + "1", textCmd + "2", lookupCmd + "1", lookupCmd + "2", "quit",
@@ -437,6 +439,23 @@ string cli_process(char *buf) {
             }
             string rest = input.substr(input.find(" ") + 1);
             find_min_unique(text[0], rest, 1);
+            goto end;
+        }
+
+        if (boost::starts_with(input, psalminfoCmd + " ")) {
+            vector<string> tokens;
+            boost::split(tokens, input, boost::is_any_of(" "));
+            int size = tokens.size();
+            if (size == 3) {
+                try {
+                    int psalmInfo = getPsalmLastVerse(tokens[1], stoi(tokens[2]));
+                    info(tokens[1] + " Psalm " + tokens[2] + " contains " + to_string(psalmInfo) + " verses.");
+                    } catch (exception &e) {
+                    error(e.what());
+                    }
+                } else {
+                error(errorPsalminfoParameters);
+            }
             goto end;
         }
 
