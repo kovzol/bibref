@@ -375,6 +375,9 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
     bool firstInfoSet = false;
     FILE *lastBookVersesFile = NULL;
 
+    PsalmsInfo pi = PsalmsInfo(moduleName);
+    for (int i=1; i<=151; i++) pi.setLastVerse(i, 0); // initialize
+
     // Iterate on verses of the whole Bible version:
     for (long v = bookStart; v <= bookEnd; ++v) {
         module->setIndex(v);
@@ -415,6 +418,7 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
                 book.setInfo(moduleName);
                 lastBook = book;
                 lastBookName = bookName;
+
                 fclose(lastBookVersesFile);
                 lastBookVersesFile = fopen((path + "/" + lastBookName + ".verses").c_str(), "wa");
             } else {
@@ -422,6 +426,13 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
                    lastBookVersesFile = fopen((path + "/" + lastBookName + ".verses").c_str(), "wa");
             }
             lastBook.addVerse(verseText, reference);
+
+            if (bookName == "Psalms") {
+                vector<string> r;
+                boost::split(r, reference, boost::is_any_of(":"));
+                pi.setLastVerse(stoi(r[0]), stoi(r[1])); // this overwrites the previous entry
+                }
+
 #ifndef __EMSCRIPTEN__
             int start = lastBook.getVerseStart(reference);
             int end = lastBook.getVerseEnd(reference);
@@ -441,6 +452,8 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
             }
         }
     }
+    psalmsInfos.push_back(pi);
+
     info("Done loading books of " + moduleName + ".");
     return 0;
 }
