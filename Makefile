@@ -52,7 +52,7 @@ TARGET_HTML ?= bibref.html
 
 BUILD_DIR ?= ./wasm-build
 
-SRCS := book.cpp books.cpp cli.cpp fingerprint.cpp main.cpp
+SRCS := book.cpp books.cpp cli.cpp fingerprint.cpp main.cpp psalmsinfo.cpp
 OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
 
 CPPFLAGS += -I/usr/include/sword -s USE_BOOST_HEADERS=1
