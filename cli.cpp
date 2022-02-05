@@ -63,7 +63,7 @@ vector<string> vocabulary {addbooksCmd, compareCmd + "12", jaccardCmd + "12",
                            textCmd + "1", textCmd + "2", lookupCmd + "1", lookupCmd + "2", "quit",
                                    "help", findCmd + "1", findCmd + "2", lengthCmd + "1", lengthCmd + "2",
                                    minuniqueCmd + "1", latintextCmd + "1", latintextCmd + "2",
-                                   extendCmd, getrefsCmd, lookupCmd, maxresultsCmd, sqlCmd
+                                   extendCmd, getrefsCmd, lookupCmd, maxresultsCmd, sqlCmd, psalminfoCmd
                           };
 
 void add_vocabulary_item(string item) {
@@ -532,8 +532,24 @@ string cli_process(char *buf) {
                 goto end;
             }
             if (restSize == 4) {
-                verse1S = tokens[3] + "+0";
-                verse1E = tokens[3] + "-0";
+                if (book1 == "Psalms") {
+                    vector<string> r;
+                    boost::split(r, tokens[3], boost::is_any_of(":"));
+                    if (r.size() == 1) { // only the psalm number is given
+                        verse1S = r[0] + ":1+0";
+                        try {
+                            verse1E = r[0] + ":" + to_string(getPsalmLastVerse(moduleName1, stoi(r[0]))) + "-0";
+                        } catch (exception &e) {
+                        error(e.what());
+                        }
+                    } else { // one verse is given in the psalm
+                    verse1S = tokens[3] + "+0";
+                    verse1E = tokens[3] + "-0";
+                    }
+                } else { // this is not a psalm and one verse is given
+                    verse1S = tokens[3] + "+0";
+                    verse1E = tokens[3] + "-0";
+                }
             } else if (restSize == 5) {
                 verse1S = tokens[3];
                 verse1E = tokens[4];
@@ -575,7 +591,7 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
 #ifndef __EMSCRIPTEN__
     rl_attempted_completion_function = completer;
 #endif
-    info("This is bibref-cli 2022Jan12, nice to meet you.");
+    info("This is bibref-cli 2022Feb05, nice to meet you.");
     showAvailableBibles();
     if (addbooks) {
         if (addBooks() == 0) {
