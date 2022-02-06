@@ -1277,6 +1277,8 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
  (301, 49, 1, 'Psalms', 'LXX Psalms 109:8+30 109:8', 'Acts', 'SBLGNT Acts 1:20+76 1:20', 130835, 31, 2103, 32);
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (501, 50, 1, 'Psalms', 132, 'LXX Psalms 132:11+47 132:11-32', 'Acts', 'SBLGNT Acts 2:30+48 2:30-35', 154632, 11, 5305, 11, 'getrefs');
+insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (501, 50, 1, 'Psalms', 132, 'LXX Psalms 132:11 132:11-3', 'Acts', 'SBLGNT Acts 2:30 2:30-5', 154585, 87, 5257, 89, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (50, 1, 'Δαυιδ', 'ειδως'); -- ειδως = knowing
