@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 # Several pieces of this code were taken from https://www.sqlitetutorial.net/sqlite-python/sqlite-python-select/
 
-import sqlite3, sys, pexpect, os
+import sqlite3, sys, pexpect, os, re
 from sqlite3 import Error
 
 bibref = None
@@ -58,53 +58,74 @@ def psalms_report_latex(conn, method, data):
     for psalm in range(1,151):
         if psalm % 10 == 1:
             print ("{\\bf ", round(psalm/10), "}&", end = '', sep = '')
-        cur.execute("SELECT q.ot_id, q.nt_id, q.nt_book, a.name" +
-            " FROM quotations_with_introduction q, authors a, books b " +
-            " WHERE q.psalm = " + str(psalm) +
-            " AND q.found_method = '" + method + "'" +
-            " AND a.name = b.author" +
-            " AND b.name = q.nt_book" +
-            " GROUP BY q.ot_id, q.nt_id" +
-            " ORDER BY q.ot_startpos, q.ot_id, b.number")
-        rows = cur.fetchall()
-        if len(rows) > 0:
-            print
+        if method == "bibref":
+            global bibref
+            spawn_bibref()
+            bibref.timeout = 180
+            command = "getrefs SBLGNT LXX Psalms " + str(psalm)
+            bibref.sendline(command)
+            bibref.expect("Finished")
+            lines = bibref.before.decode('utf-8').splitlines()
+            no_lines = len(lines)
+            length_regex = re.compile(r'length=([0-9]+),')
+            # print(lines[no_lines - 1])
+            found = length_regex.search(lines[no_lines - 1])
+            maxlength0 = found.group()
+            maxlength1 = maxlength0.split("=")
+            maxlength2 = maxlength1[1]
+            maxlength3 = maxlength2.split(",")
+            maxlength = maxlength3[0]
+            bibref.timeout = 5
             print ("\n", "% Psalm ", psalm, sep = '')
+            print (maxlength)
+        else:
+            cur.execute("SELECT q.ot_id, q.nt_id, q.nt_book, a.name" +
+                " FROM quotations_with_introduction q, authors a, books b " +
+                " WHERE q.psalm = " + str(psalm) +
+                " AND q.found_method = '" + method + "'" +
+                " AND a.name = b.author" +
+                " AND b.name = q.nt_book" +
+                " GROUP BY q.ot_id, q.nt_id" +
+                " ORDER BY q.ot_startpos, q.ot_id, b.number")
+            rows = cur.fetchall()
+            if len(rows) > 0:
+                print
+                print ("\n", "% Psalm ", psalm, sep = '')
 
-            old_ot_id = 0
-            for row in rows:
-                author = row[3]
-                ot_id = row[0]
-                nt_id = row[1]
-                if method == "getrefs" and data == 'pieces':
-                    cur.execute("SELECT COUNT(*) FROM quotations q" +
-                        " WHERE ot_id = " + str(ot_id) +
-                        " AND nt_id = " + str(nt_id) +
-                        " AND q.found_method = '" + method + "'");
-                    info = cur.fetchall()
-                    info = info[0][0]
-                if method == "traditional" and data == "manual_nt_length":
-                    cur.execute("SELECT nt_length FROM quotations q" +
-                        " WHERE ot_id = " + str(ot_id) +
-                        " AND nt_id = " + str(nt_id) +
-                        " AND q.found_method = 'manual'");
-                    info = cur.fetchall()
-                    number_str = str(info[0][0])
-                    f.write(number_str + "\n")
-                    info = "\scalebox{.6}[1.0]{" + number_str + "}"
-                if old_ot_id > 0 and ot_id != old_ot_id:
-                    print(",", sep = '', end = '')
-                else:
+                old_ot_id = 0
+                for row in rows:
+                    author = row[3]
+                    ot_id = row[0]
+                    nt_id = row[1]
+                    if method == "getrefs" and data == 'pieces':
+                        cur.execute("SELECT COUNT(*) FROM quotations q" +
+                            " WHERE ot_id = " + str(ot_id) +
+                            " AND nt_id = " + str(nt_id) +
+                            " AND q.found_method = '" + method + "'");
+                        info = cur.fetchall()
+                        info = info[0][0]
                     if method == "traditional" and data == "manual_nt_length":
-                        if old_ot_id != 0:
-                            info = "\," + info
-                if data != 'authors':
-                    print (info, sep='', end='')
-                else:
-                    print ("$\\", author, "$", sep = '', end = '')
-                old_ot_id = ot_id
-                print("%", row)
-                quotations += 1
+                        cur.execute("SELECT nt_length FROM quotations q" +
+                            " WHERE ot_id = " + str(ot_id) +
+                            " AND nt_id = " + str(nt_id) +
+                            " AND q.found_method = 'manual'");
+                        info = cur.fetchall()
+                        number_str = str(info[0][0])
+                        f.write(number_str + "\n")
+                        info = "\scalebox{.6}[1.0]{" + number_str + "}"
+                    if old_ot_id > 0 and ot_id != old_ot_id:
+                        print(",", sep = '', end = '')
+                    else:
+                        if method == "traditional" and data == "manual_nt_length":
+                            if old_ot_id != 0:
+                                info = "\," + info
+                    if data != 'authors':
+                        print (info, sep='', end='')
+                    else:
+                        print ("$\\", author, "$", sep = '', end = '')
+                    old_ot_id = ot_id
+                    print("%", row)
+                    quotations += 1
             psalms += 1
         if psalm % 10 == 0:
             print ("\\\\")
