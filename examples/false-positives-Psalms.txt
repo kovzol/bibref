@@ -1,3 +1,5 @@
+## (This file requires a major revision, some data seems incorrect or inaccurate.)
+##
 ## This is a list of results that are long matches but not quotations.
 ## The longest one is in Psalm 104:12 and the used expression is 31 characters long.
 ## (See also Psalm 115:15, Psalm 134:3, Psalm 33:6 and Psalm 145:17 that have
