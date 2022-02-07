@@ -63,12 +63,18 @@ jaccard: \
  nt-passage-info.pdf ot-passage-info.pdf
 # ot-jaccard-multi-Rplots.pdf
 
-# SVG outputs (Romans: literal \n fuzzy1 (introduction) \n fuzzy3 (rest) \n fuzzy2 (explanation) \n Matthew 4:7 and Luke 4:12)
+# SVG outputs:
+# Romans: literal \n fuzzy1 (introduction) \n fuzzy3 (rest) \n fuzzy2 (explanation) \n Matthew 4:7 and Luke 4:12)
 verified-quotations = 181 1033 20021 20031 20041 20051 20061 21011 13011 1051 14011 1091 131 24021 21031 22025 281 24051 1161 1171 \
  10011 251 51 20011 231 11011 21021 1041 \
  1061 22011 24011 1081 1101 1111 42011 42021 1121 291 1131 1031 24041 31011 1151 121 \
  441 \
  24081 24082
+# Psalms
+verified-quotations += 401 402 403 404 405 411 \
+ 221 \
+ 11 21 22 71 81 51 111 121 131 142 151 161 181 201 211 231 241 251 261 271 281 291 301 311 481 321 511 341 342 \
+  351 361 371 381 391 421 431 441 451 461 462 463 464 501
 
 svgs: $(verified-quotations:%=svg/%.svg)
 svg/%.svg: svg/%.tex
