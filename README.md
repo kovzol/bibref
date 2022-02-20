@@ -1,7 +1,7 @@
 # bibref
 
 *bibref* is a tool that helps discovering internal references in the Bible.
-It aims to find citations of the
+It aims at finding citations of the
 [Septuagint](https://en.wikipedia.org/wiki/Septuagint) in the
 [Greek New Testament](https://en.wikipedia.org/wiki/New_Testament)
 in a mechanical way.
@@ -149,6 +149,6 @@ The available commands are:
 There may be other commands available that are not documented yet.
 
 Some [examples](/examples) are also available. See also [an incomplete draft (in Hungarian)](docs/hu/bibref.pdf) on the purpose of the commands.
-Also, a work-in-progress database can be found in [docs/common](/docs/common) which aims collecting all quotations.
+Also, a work-in-progress database can be found in [docs/common](/docs/common) which aims at collecting all quotations.
 
 You may be interested in some [blog entries](https://matek.hu/zoltan/blog.php) that extensively use the web version of *bibref*.
