@@ -1,0 +1,30 @@
+name: bibref
+base: core20
+version: '2022Feb05'
+summary: A tool that helps discovering internal references in the Bible
+description: |
+  bibref aims at finding citations of the Septuagint
+  in the Greek New Testament in a mechanical way.
+
+grade: stable
+confinement: strict
+
+apps:
+  bibref:
+    command: usr/local/bin/bibref
+    environment:
+      SWORD_PATH: $SNAP/root/.sword
+    plugs:
+      - home
+
+parts:
+  bibref:
+    build-packages: [cmake, libsword-utils, libsword-common, libsword-dev, build-essential, libboost-dev, libboost-filesystem-dev, libreadline-dev, pkg-config]
+    source: https://github.com/kovzol/bibref.git
+    plugin: cmake
+    stage-packages: [libsword-1.8.1, libboost-filesystem1.71.0]
+  sword-modules:
+    plugin: nil
+    override-build: |
+      mkdir -p $SNAPCRAFT_PART_INSTALL/root
+      cp -a ~/.sword $SNAPCRAFT_PART_INSTALL/root
