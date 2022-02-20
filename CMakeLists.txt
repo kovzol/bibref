@@ -24,3 +24,4 @@ execute_process (COMMAND bash -c "echo yes | installmgr -r CrossWire")
 execute_process (COMMAND bash -c "installmgr -l | grep \"\\[LXX\\]\" || echo yes | installmgr -ri CrossWire LXX")
 execute_process (COMMAND bash -c "installmgr -l | grep \"\\[SBLGNT\\]\" || echo yes | installmgr -ri CrossWire SBLGNT")
 
+install(TARGETS bibref DESTINATION bin)
