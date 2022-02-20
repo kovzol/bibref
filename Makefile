@@ -65,7 +65,7 @@ LDFLAGS := $(shell find .. -name libsword.a | sort | head -1)
 LDFLAGS += -s SINGLE_FILE=1 -s USE_BOOST_HEADERS=1
 LDFLAGS += -s ALLOW_MEMORY_GROWTH=1
 # LDFLAGS += -s TOTAL_MEMORY=2047MB
-LDFLAGS += --preload-file ~/.sword@/ --preload-file .bibref@/.bibref -O3
+LDFLAGS += --preload-file ~/.sword@/ --preload-file bibref-addbooks-cache@/bibref-addbooks-cache -O3
 LDFLAGS += -fexceptions -s EXTRA_EXPORTED_RUNTIME_METHODS=['cwrap']
 ifeq ($(TARGET_HTML),bibref.js)
 LDFLAGS += -s MODULARIZE=1 -s EXPORT_NAME=bibref

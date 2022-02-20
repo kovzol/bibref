@@ -305,7 +305,7 @@ int addBook_cached(string moduleName) {
             "Revelation_of_John"};
         }
 
-    string path = ".bibref/" + moduleName;
+    string path = "bibref-addbooks-cache/" + moduleName;
 
     PsalmsInfo pi = PsalmsInfo(moduleName);
     for (int i=1; i<=151; i++) pi.setLastVerse(i, 0); // initialize
@@ -341,7 +341,7 @@ int addBook_cached(string moduleName) {
 }
 
 int addBook(string moduleName, string firstVerse, string lastVerse, bool removeAccents) {
-    DIR* cache_dir = opendir((".bibref/" + moduleName).c_str());
+    DIR* cache_dir = opendir(("bibref-addbooks-cache/" + moduleName).c_str());
     if (cache_dir) {
         closedir(cache_dir);
         addBook_cached(moduleName);
@@ -364,7 +364,7 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
     filter->setOptionValue("off");
 
     info("Loading " + moduleName + "...");
-    string path = ".bibref/" + moduleName;
+    string path = "bibref-addbooks-cache/" + moduleName;
 #ifndef __EMSCRIPTEN__
     boost::filesystem::create_directories(path);
 #endif
