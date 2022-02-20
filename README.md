@@ -67,8 +67,11 @@ should be entered on command line:
 sudo apt install libsword-common libsword-dev libreadline-dev libboost-dev libboost-filesystem-dev git cmake build-essential pkg-config
 git clone https://github.com/kovzol/bibref.git
 cd bibref
-cmake .
+mkdir build
+cd build
+cmake ..
 make
+make install || true
 ```
 
 If you want to compile the web version, please have a look on
@@ -151,4 +154,4 @@ There may be other commands available that are not documented yet.
 Some [examples](/examples) are also available. See also [an incomplete draft (in Hungarian)](docs/hu/bibref.pdf) on the purpose of the commands.
 Also, a work-in-progress database can be found in [docs/common](/docs/common) which aims at collecting all quotations.
 
-You may be interested in some [blog entries](https://matek.hu/zoltan/blog.php) that extensively use the web version of *bibref*.
+You may be interested in some [blog entries](https://matek.hu/zoltan/blog-topics.php?t=b) that extensively use the web version of *bibref*.

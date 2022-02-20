@@ -15,13 +15,14 @@ add_executable(bibref main.cpp book.cpp book.h books.cpp books.h fingerprint.cpp
 
 target_link_libraries(bibref sword readline boost_system boost_filesystem)
 
+install(
 # Download and install LXX and SBLGNT
-set(ENV{SWORD_PATH} "$ENV{HOME}/.sword")
-execute_process (COMMAND bash -c "test -d \"$SWORD_PATH/mods.d\" || \
-    (mkdir -p \"$SWORD_PATH/mods.d\"; echo yes | installmgr -init)")
-execute_process (COMMAND bash -c "installmgr -s | grep \"\\[CrossWire\\]\" || echo yes | installmgr -sc")
-execute_process (COMMAND bash -c "echo yes | installmgr -r CrossWire")
-execute_process (COMMAND bash -c "installmgr -l | grep \"\\[LXX\\]\" || echo yes | installmgr -ri CrossWire LXX")
-execute_process (COMMAND bash -c "installmgr -l | grep \"\\[SBLGNT\\]\" || echo yes | installmgr -ri CrossWire SBLGNT")
+ CODE " set(ENV{SWORD_PATH} \"$ENV{HOME}/.sword\") "
+ CODE " execute_process (COMMAND bash -c \"test -d \\\"$SWORD_PATH/mods.d\\\" || (mkdir -p \\\"$SWORD_PATH/mods.d\\\"; echo yes | installmgr -init)\") "
+ CODE " execute_process (COMMAND bash -c \"installmgr -s | grep \\\"\\\\[CrossWire\\\\]\\\" || echo yes | installmgr -sc\") "
+ CODE " execute_process (COMMAND bash -c \"echo yes | installmgr -r CrossWire\") "
+ CODE " execute_process (COMMAND bash -c \"installmgr -l | grep \\\"\\\\[LXX\\\\]\\\" || echo yes | installmgr -ri CrossWire LXX\") "
+ CODE " execute_process (COMMAND bash -c \"installmgr -l | grep \\\"\\\\[SBLGNT\\\\]\\\" || echo yes | installmgr -ri CrossWire SBLGNT\") "
+)
 
 install(TARGETS bibref DESTINATION bin)
