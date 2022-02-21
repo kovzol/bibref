@@ -1552,9 +1552,8 @@ insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt
  (1121, 'Romans', 'SBLGNT Romans 11:8 11:8-91', 22703, 22716);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1121, 112, 1, 'Isaiah', 'LXX Isaiah 29:10+22 29:10-84', 'Romans', 'SBLGNT Romans 11:8+31 11:8-58', 55055, 18, 22734, 16);
--- It is more probable that this is cited from Deuteronomy 29:4
--- insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
---  (1121, 112, 1, 'Isaiah', 'LXX Isaiah 29:10+51 29:10-60', 'Romans', 'SBLGNT Romans 11:8+47 11:8-46', 55084, 13, 22750, 12);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1121, 112, 1, 'Isaiah', 'LXX Isaiah 29:10+51 29:10-60', 'Romans', 'SBLGNT Romans 11:8+47 11:8-46', 55084, 13, 22750, 12); -- τους οφθαλμους
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1131, 113, 1, 'Isaiah', null, 'LXX Isaiah 59:20+13 59:20-29', 'Romans', 'SBLGNT Romans 11:26+46 11:26-26', 119274, 13, 24255, 13, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
