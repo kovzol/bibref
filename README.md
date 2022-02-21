@@ -49,15 +49,27 @@ This project is a work in progress.
 
 ## Using the software tool
 
+You need a Linux system (preferred) or a web browser (fallback) to use this tool.
+
 At the moment the project was tested on
 Ubuntu Linux 18.04, 19.10, 20.04 and 22.04 but it should work
 on many other systems.
 
+### Snap store installation (preferred)
+
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-white.svg)](https://snapcraft.io/bibref)
+
+After installation you need to use the command `bibref` via command line.
+In the snap version only the LXX and SBLGNT modules are present. If you want
+to use additional modules, please try installing the tool from source code (see below).
+
+### Web version (fallback)
+
 There is a web version of *bibref* available [online](https://matek.hu/zoltan/bibref/).
 It is somewhat slower than the installable version, but works immediately
-in a web browser.
+in a web browser. In the web version the modules LXX, SBLGNT and KJV are available.
 
-### Installation
+### Installation from source code (for developers)
 
 ![build](https://github.com/kovzol/bibref/workflows/build/badge.svg)
 
@@ -74,17 +86,16 @@ make
 make install || true
 ```
 
-If you want to compile the web version, please have a look on
-the corresponding [GitHub action](https://github.com/kovzol/bibref/blob/master/.github/workflows/build.yml).
-
-### Running
-
-Enter the command
+Finally enter the command
 ```commandline
-./bibref
+build/bibref -c
 ```
+to start the program with a user friendly command line interface (with colors).
 
-### Example
+(If you want to compile the web version, please have a look on
+the corresponding [GitHub action](https://github.com/kovzol/bibref/blob/master/.github/workflows/build.yml).)
+
+### Example use case
 
 The following session finds the corresponding citation of the LXX text of Psalm 2:1 in the SBLGNT:
 ```commandline
@@ -131,7 +142,7 @@ In all commands the *Bible* parameter can be either `LXX` or `SBLGNT`, except fo
 
 The available commands are:
 
-* `addbooks`: Load the books of LXX and SBLGNT. Most commands require that these books are already loaded.
+* `addbooks`: Load the books of LXX and SBLGNT. Most commands require that these books are already loaded. After using this command for the first time (it takes a couple of seconds), a folder named `bibref-addbooks-cache` will be created in the current working directory to speed up the next startup of this command.
 * `textN` *text*: Define a Greek *text* and put its Latin transcription in clipboard N.
 * `latintextN` *text*: Put the Latin transcription *text* in clipboard N.
 * `findN` *Bible*: Search for the text of clipboard N in the given *Bible*.
