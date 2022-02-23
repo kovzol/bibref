@@ -2,6 +2,7 @@ name: bibref
 base: core20
 version: '2022Feb05'
 summary: A tool that helps discovering internal references in the Bible
+icon: logo-Psalm40-256.png
 description: |
   bibref aims at finding citations of the Septuagint
   in the Greek New Testament in a mechanical way.
