@@ -365,8 +365,15 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
 
     info("Loading " + moduleName + "...");
     string path = "bibref-addbooks-cache/" + moduleName;
+    bool create_cache = true;
+
 #ifndef __EMSCRIPTEN__
-    boost::filesystem::create_directories(path);
+    try {
+        boost::filesystem::create_directories(path);
+    } catch (exception &e) {
+        error("The addbooks cache cannot be saved in this folder.");
+        create_cache = false;
+    }
 #endif
     add_vocabulary_item(moduleName);
 
@@ -406,9 +413,11 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
                 books.push_back(lastBook);
                 string lastBookText = lastBook.getText();
 #ifndef __EMSCRIPTEN__
-                FILE *lastBookFile = fopen((path + "/" + lastBookName + ".book").c_str(), "wa");
-                fprintf(lastBookFile, "%s", lastBookText.c_str());
-                fclose(lastBookFile);
+                if (create_cache) {
+                    FILE *lastBookFile = fopen((path + "/" + lastBookName + ".book").c_str(), "wa");
+                    fprintf(lastBookFile, "%s", lastBookText.c_str());
+                    fclose(lastBookFile);
+                    }
 #endif
                 info(lastBookName + " contains " + to_string(lastBookText.length()) + " characters,");
                 add_vocabulary_item(lastBookName);
@@ -419,10 +428,12 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
                 lastBook = book;
                 lastBookName = bookName;
 
-                fclose(lastBookVersesFile);
-                lastBookVersesFile = fopen((path + "/" + lastBookName + ".verses").c_str(), "wa");
+                if (create_cache) {
+                    fclose(lastBookVersesFile);
+                    lastBookVersesFile = fopen((path + "/" + lastBookName + ".verses").c_str(), "wa");
+                    }
             } else {
-                if (lastBookVersesFile == NULL)
+                if (lastBookVersesFile == NULL && create_cache)
                    lastBookVersesFile = fopen((path + "/" + lastBookName + ".verses").c_str(), "wa");
             }
             lastBook.addVerse(verseText, reference);
@@ -434,18 +445,22 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
                 }
 
 #ifndef __EMSCRIPTEN__
-            int start = lastBook.getVerseStart(reference);
-            int end = lastBook.getVerseEnd(reference);
-            fprintf(lastBookVersesFile, "%s %d %d\n", reference.c_str(), start, end);
+            if (create_cache) {
+                int start = lastBook.getVerseStart(reference);
+                int end = lastBook.getVerseEnd(reference);
+                fprintf(lastBookVersesFile, "%s %d %d\n", reference.c_str(), start, end);
+                }
 #endif
             if (verseInfo.compare(lastVerse)==0) {
                 books.push_back(lastBook);
                 string lastBookText = lastBook.getText();
 #ifndef __EMSCRIPTEN__
-                FILE *lastBookFile = fopen((path + "/" + lastBookName + ".book").c_str(), "wa");
-                fprintf(lastBookFile, "%s\n", lastBookText.c_str());
-                fclose(lastBookFile);
-                fclose(lastBookVersesFile);
+                if (create_cache) {
+                    FILE *lastBookFile = fopen((path + "/" + lastBookName + ".book").c_str(), "wa");
+                    fprintf(lastBookFile, "%s\n", lastBookText.c_str());
+                    fclose(lastBookFile);
+                    fclose(lastBookVersesFile);
+                    }
 #endif
                 info("and " + lastBookName + " contains " + to_string(lastBook.getText().length()) + " characters.");
                 add_vocabulary_item(lastBookName);
