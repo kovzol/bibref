@@ -2089,9 +2089,10 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
  (139, 2, 'quotation', 'literal, fuzzy', 'Z.K.');
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
  (1392, 'Luke', 'SBLGNT Luke 22:37 22:37-48', 85085, 85135);
--- TODO: Here the word "kai" should be inserted as another clasp.
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
- (1392, 139, 2, 'Isaiah', 'LXX Isaiah 53:12+98 53:12-61', 'Luke', 'SBLGNT Luke 22:37+60 22:37-25', 108735, 15, 85145, 14);
+ (1392, 139, 2, 'Isaiah', 'LXX Isaiah 53:12+89 53:12-82', 'Luke', 'SBLGNT Luke 22:37+53 22:37-43', 108726, 3, 85138, 3); -- και
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1392, 139, 2, 'Isaiah', 'LXX Isaiah 53:12+98 53:12-61', 'Luke', 'SBLGNT Luke 22:37+60 22:37-25', 108735, 15, 85145, 14); -- ανομοις ελογισθη -> ανομων ελογισθη
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1401, 140, 1, 'Isaiah', null, 'LXX Isaiah 61:1 61:1-78', 'Luke', 'SBLGNT Luke 4:18 4:18-74', 121799, 68, 14360, 68, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
