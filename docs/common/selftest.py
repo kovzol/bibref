@@ -330,6 +330,7 @@ def clasp_entries(conn): # TODO: This is almost exactly the same as quotation_en
     cur.execute("SELECT ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length" +
         " FROM clasps" +
         " WHERE ot_passage != 'LXX Genesis 12:7+20 12:7-90'" # for some strange reason this cannot be found properly, FIXME (kai)
+        " AND ot_passage != 'LXX Isaiah 53:12+89 53:12-82'" # same problem (kai)
         " AND ot_passage != 'LXX Isaiah 54:13 54:13-57'" # same problem (kai)
         " AND ot_passage != 'LXX Isaiah 56:7+89 56:7-99'" # same problem (kai)
         " AND ot_passage != 'LXX Isaiah 52:5+105 52:5-33'" # same problem (to)
