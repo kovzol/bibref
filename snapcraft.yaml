@@ -19,7 +19,7 @@ apps:
 
 parts:
   bibref:
-    build-packages: [cmake, libsword-utils, libsword-common, libsword-dev, build-essential, libboost-dev, libboost-filesystem-dev, libreadline-dev, pkg-config]
+    build-packages: [cmake, libsword-utils, libsword-common, libsword-dev, build-essential, libboost-dev, libboost-filesystem-dev, libreadline-dev, pkg-config, unzip]
     source: https://github.com/kovzol/bibref.git
     plugin: cmake
     stage-packages: [libsword-1.8.1, libboost-filesystem1.71.0]
