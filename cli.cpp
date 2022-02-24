@@ -25,10 +25,12 @@
 #define OT_COLOR "\033[1;33m"
 #define NT_COLOR "\033[1;36m"
 #define RESET_COLOR "\033[0m"
+#define ERROR_COLOR "\033[1;31m"
 #else
 #define OT_COLOR "<span style=\"color: #626600\">"
 #define NT_COLOR "<span style=\"color: #006662\">"
 #define RESET_COLOR "</span>"
+#define ERROR_COLOR "<span style=\"color: red\">"
 #endif
 
 using namespace std;
@@ -94,18 +96,6 @@ void add_vocabulary_item(string item) {
 
 string collect_info = "";
 
-void error(string message) {
-#ifndef __EMSCRIPTEN__
-    cerr << "\033[1;31m";
-#endif
-    cerr << message;
-#ifndef __EMSCRIPTEN__
-    cerr << "\033[0m";
-#endif
-    cerr << endl << flush;
-    collect_info = collect_info + message + "\n";
-}
-
 void info(string message) {
 #ifndef __EMSCRIPTEN__
     cerr << output_prepend_set << message << endl << flush;
@@ -159,24 +149,24 @@ char** completer(const char* text, int start, int end) {
 }
 #endif
 
+int maxresults;
+bool sql;
+char* output_prepend_set;
+string ot_color, nt_color, reset_color, error_color;
 
 void set_colors(bool colored) {
     ot_color = "";
     nt_color = "";
     reset_color = "";
+    error_color = "";
 
     if (colored) {
         ot_color = OT_COLOR;
         nt_color = NT_COLOR;
         reset_color = RESET_COLOR;
+        error_color = ERROR_COLOR;
         }
     }
-
-
-int maxresults;
-bool sql;
-char* output_prepend_set;
-string ot_color, nt_color, reset_color;
 
 string cli_process(char *buf) {
         string rawinput(buf);
@@ -773,7 +763,6 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
     }
 }
 
-
 #ifdef __EMSCRIPTEN__
 #include <emscripten.h>
 // Taken from https://github.com/emscripten-core/emscripten/issues/6433
@@ -790,3 +779,11 @@ extern "C" {
     }
 }
 #endif
+
+void error(string message) {
+    cerr << error_color;
+    cerr << message;
+    cerr << reset_color;
+    cerr << endl << flush;
+    collect_info = collect_info + message + "\n";
+}
