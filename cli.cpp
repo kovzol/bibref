@@ -40,6 +40,7 @@ string getrefsCmd = "getrefs";
 string maxresultsCmd = "maxresults";
 string sqlCmd = "sql";
 string psalminfoCmd = "psalminfo";
+string rawCmd = "raw";
 
 string errorNotRecognized = "Sorry, the command you entered was not recognized or its syntax is invalid.";
 string errorTextIncomplete = "Either " + textCmd + "1 or " + textCmd + "2 must be used.";
@@ -58,12 +59,13 @@ string errorGetrefsParameters = getrefsCmd + " requires 3, 4 or 5 parameters.";
 string errorMaxresultsParameters = maxresultsCmd + " requires one parameter.";
 string errorSqlParameters = sqlCmd + " requires one parameter.";
 string errorPsalminfoParameters = psalminfoCmd + " requires 2 parameters.";
+string errorRawParameters = rawCmd + " requires 4 parameters.";
 
 vector<string> vocabulary {addbooksCmd, compareCmd + "12", jaccardCmd + "12",
                            textCmd + "1", textCmd + "2", lookupCmd + "1", lookupCmd + "2", "quit",
                                    "help", findCmd + "1", findCmd + "2", lengthCmd + "1", lengthCmd + "2",
                                    minuniqueCmd + "1", latintextCmd + "1", latintextCmd + "2",
-                                   extendCmd, getrefsCmd, lookupCmd, maxresultsCmd, sqlCmd, psalminfoCmd
+                                   extendCmd, getrefsCmd, lookupCmd, maxresultsCmd, sqlCmd, psalminfoCmd, rawCmd
                           };
 
 void add_vocabulary_item(string item) {
@@ -455,6 +457,27 @@ string cli_process(char *buf) {
                     }
                 } else {
                 error(errorPsalminfoParameters);
+            }
+            goto end;
+        }
+
+        if (boost::starts_with(input, rawCmd + " ")) {
+            vector<string> tokens;
+            boost::split(tokens, input, boost::is_any_of(" "));
+            int size = tokens.size();
+            if (size == 5) {
+                try {
+                    string module = tokens[1];
+                    string book = tokens[2];
+                    int startPos = stoi(tokens[3]);
+                    int length = stoi(tokens[4]);
+                    string text = getRaw(module, book, startPos - 1, length);
+                    info(text);
+                    } catch (exception &e) {
+                    error(e.what());
+                    }
+                } else {
+                error(errorRawParameters);
             }
             goto end;
         }

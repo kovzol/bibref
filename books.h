@@ -25,5 +25,6 @@ void getrefs(string moduleName2, string moduleName1, string book1, string verse1
 int lookupTranslation(string moduleName, string book, string verse);
 void showAvailableBibles();
 int getPsalmLastVerse(string moduleName, int psalm);
+string getRaw(string modulename, string book, int startPos, int length);
 
 #endif // BOOKS_H

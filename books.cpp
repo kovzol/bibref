@@ -976,3 +976,10 @@ int getPsalmLastVerse(string moduleName, int psalm) {
     throw InvalidModule;
 }
 
+string getRaw(string moduleName, string bookName, int startPos, int length) {
+    Book b = getBook(bookName, moduleName);
+    string text = b.getText();
+    if (startPos >= text.length() || startPos < 0 || length < 1 || startPos + length > text.length())
+        throw InvalidPassage;
+    return text.substr(startPos, length);
+}
