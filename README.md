@@ -150,6 +150,7 @@ The available commands are:
 * `lookup` *Bible* *book* *verse*: Search for the given *passage* in the given *book* in the given *Bible*. Here *Bible* can be any translation that is already [installed as a module](https://www.crosswire.org/sword/modules/ModDisp.jsp?modType=Bibles) on the computer.
 * `lookupN` *Bible* *book* *passage*: Search for the given *passage* in the given *book* in the given *Bible* and put its Latin transcription in clipboard N.
 * `raw` *Bible* *book* *start* *length*: Show the raw Latin transcription of a passage in the given *book* in the given *Bible*, beginning with the *start* position on *length* characters.
+* `rawN` *Bible* *book* *start* *length*: Put a passage in the given *book* in the given *Bible*, beginning with the *start* position on *length* characters, in clipboard N.
 * `minunique1` *Bible*: Search for minimal unique passages in clipboard 1 in the given *Bible*.
 * `extend` *Bible1* *Bible2* *book2* *passage2*: Extend the given passage in *Bible2* according to the longest possible citation from *Bible1*, based on the text of *book2* in *passage2*. In most cases `LXX` is used for *Bible1* and `SBLGNT` for *Bible2*.
 * `psalminfo` *Bible* *number*: Show the number of verses in Psalm *number* in the given *Bible*.

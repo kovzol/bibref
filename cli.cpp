@@ -60,12 +60,14 @@ string errorMaxresultsParameters = maxresultsCmd + " requires one parameter.";
 string errorSqlParameters = sqlCmd + " requires one parameter.";
 string errorPsalminfoParameters = psalminfoCmd + " requires 2 parameters.";
 string errorRawParameters = rawCmd + " requires 4 parameters.";
+string errorRawIncomplete = "Either " + rawCmd + "1 or " + rawCmd + "2 must be used.";
 
 vector<string> vocabulary {addbooksCmd, compareCmd + "12", jaccardCmd + "12",
                            textCmd + "1", textCmd + "2", lookupCmd + "1", lookupCmd + "2", "quit",
                                    "help", findCmd + "1", findCmd + "2", lengthCmd + "1", lengthCmd + "2",
                                    minuniqueCmd + "1", latintextCmd + "1", latintextCmd + "2",
-                                   extendCmd, getrefsCmd, lookupCmd, maxresultsCmd, sqlCmd, psalminfoCmd, rawCmd
+                                   extendCmd, getrefsCmd, lookupCmd, maxresultsCmd, sqlCmd, psalminfoCmd,
+                                   rawCmd, rawCmd + "1", rawCmd + "2"
                           };
 
 void add_vocabulary_item(string item) {
@@ -461,25 +463,66 @@ string cli_process(char *buf) {
             goto end;
         }
 
-        if (boost::starts_with(input, rawCmd + " ")) {
+        if (boost::starts_with(input, rawCmd)) {
+            int index;
+            int commandLength = rawCmd.length();
+            if (input.length() == commandLength) {
+                error(errorRawIncomplete);
+                goto end;
+            }
+            if (input.at(commandLength) == ' ') {
+                string rest = input.substr(input.find(" ") + 1);
+                vector<string> tokens;
+                boost::split(tokens, rest, boost::is_any_of(" "));
+                int restSize = tokens.size();
+                if (restSize == 4) {
+                    try {
+                        string module = tokens[0];
+                        string book = tokens[1];
+                        int startPos = stoi(tokens[2]);
+                        int length = stoi(tokens[3]);
+                        string text = getRaw(module, book, startPos - 1, length);
+                        info(text);
+                        goto end;
+                        } catch (exception &e) {
+                        error(e.what());
+                        }
+                    } else {
+                    error(errorRawParameters);
+                    goto end;
+                }
+            }
+            if (input.at(commandLength) == '1') {
+                index = 0;
+            }
+            else if (input.at(commandLength) ==  '2') {
+                index = 1;
+            } else {
+                error(errorRawIncomplete);
+                goto end;
+            }
+            string rest = input.substr(input.find(" ") + 1);
             vector<string> tokens;
-            boost::split(tokens, input, boost::is_any_of(" "));
-            int size = tokens.size();
-            if (size == 5) {
+            boost::split(tokens, rest, boost::is_any_of(" "));
+            int restSize = tokens.size();
+            if (restSize == 4) {
+                // TODO: This part is same as above. Unify.
                 try {
-                    string module = tokens[1];
-                    string book = tokens[2];
-                    int startPos = stoi(tokens[3]);
-                    int length = stoi(tokens[4]);
-                    string text = getRaw(module, book, startPos - 1, length);
-                    info(text);
+                    string module = tokens[0];
+                    string book = tokens[1];
+                    int startPos = stoi(tokens[2]);
+                    int length = stoi(tokens[3]);
+                    text[index] = getRaw(module, book, startPos - 1, length);
+                    textset[index] = true;
+                    info("Stored.");
+                    goto end;
                     } catch (exception &e) {
                     error(e.what());
                     }
                 } else {
-                error(errorRawParameters);
-            }
+            error(errorRawParameters);
             goto end;
+            }
         }
 
         if (boost::starts_with(input, extendCmd)) {
