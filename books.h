@@ -26,5 +26,6 @@ int lookupTranslation(string moduleName, string book, string verse);
 void showAvailableBibles();
 int getPsalmLastVerse(string moduleName, int psalm);
 string getRaw(string modulename, string book, int startPos, int length);
+string latinToGreek(string latin);
 
 #endif // BOOKS_H

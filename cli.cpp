@@ -1,3 +1,5 @@
+#define BIBREF_VERSION "2022Feb24"
+
 #include <iostream>
 #include <string.h>
 #include <string>
@@ -34,6 +36,7 @@ string latintextCmd = "latintext";
 string lookupCmd = "lookup";
 string findCmd = "find";
 string lengthCmd = "length";
+string printCmd = "print";
 string minuniqueCmd = "minunique";
 string extendCmd = "extend";
 string getrefsCmd = "getrefs";
@@ -53,6 +56,7 @@ string errorFindIncomplete = "Either " + textCmd + "1 or " + textCmd + "2 must b
 string errorFindParameters = findCmd + " requires one parameter.";
 string errorFindEmpty = "No text to find is defined yet.";
 string errorLengthIncomplete = "Either " + lengthCmd + "1 or " + lengthCmd + "2 must be used.";
+string errorPrintIncomplete = "Either " + printCmd + "1 or " + printCmd + "2 must be used.";
 string errorMinuniqueParameters = minuniqueCmd + " requires one parameter";
 string errorExtendParameters = extendCmd + " requires 4 or 5 parameters.";
 string errorGetrefsParameters = getrefsCmd + " requires 3, 4 or 5 parameters.";
@@ -67,7 +71,8 @@ vector<string> vocabulary {addbooksCmd, compareCmd + "12", jaccardCmd + "12",
                                    "help", findCmd + "1", findCmd + "2", lengthCmd + "1", lengthCmd + "2",
                                    minuniqueCmd + "1", latintextCmd + "1", latintextCmd + "2",
                                    extendCmd, getrefsCmd, lookupCmd, maxresultsCmd, sqlCmd, psalminfoCmd,
-                                   rawCmd, rawCmd + "1", rawCmd + "2"
+                                   rawCmd, rawCmd + "1", rawCmd + "2",
+                                   printCmd + "1", printCmd + "2"
                           };
 
 void add_vocabulary_item(string item) {
@@ -380,6 +385,26 @@ string cli_process(char *buf) {
             goto end;
         }
 
+        if (boost::starts_with(input, printCmd)) {
+            int index;
+            int commandLength = printCmd.length();
+            if (input.length() == commandLength) {
+                error(errorPrintIncomplete);
+                goto end;
+            }
+            if (input.at(commandLength) == '1') {
+                index = 0;
+            }
+            else if (input.at(commandLength) ==  '2') {
+                index = 1;
+            } else {
+                error(errorPrintIncomplete);
+                goto end;
+            }
+            info(latinToGreek(text[index]));
+            goto end;
+        }
+
         if (boost::starts_with(input, maxresultsCmd)) {
             int index;
             int commandLength = maxresultsCmd.length();
@@ -657,7 +682,7 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
 #ifndef __EMSCRIPTEN__
     rl_attempted_completion_function = completer;
 #endif
-    info("This is bibref-cli 2022Feb05, nice to meet you.");
+    info("This is bibref " BIBREF_VERSION ", nice to meet you.");
     showAvailableBibles();
     if (addbooks) {
         if (addBooks() == 0) {

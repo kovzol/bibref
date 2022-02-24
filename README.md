@@ -99,7 +99,7 @@ the corresponding [GitHub action](https://github.com/kovzol/bibref/blob/master/.
 
 The following session finds the corresponding citation of the LXX text of Psalm 2:1 in the SBLGNT:
 ```commandline
-This is bibref-cli 2020Nov02, nice to meet you.
+This is bibref 2022Feb24, nice to meet you.
 >> addbooks
 Loading LXX...
 Genesis contains 150801 characters,
@@ -113,7 +113,7 @@ Jude contains 2550 characters,
 and Revelation of John contains 45581 characters.
 Done loading books of SBLGNT.
 >> getrefs SBLGNT LXX Psalms 2:1
-LXX Psalms 2:1 2:2-8 = SBLGNT Acts 4:25+58 4:26 (length=131, pos1=502, pos2=11596)
+LXX Psalms 2:1 2:2-8 = SBLGNT Acts 4:25+58 4:26 (length=131, pos1=502, pos2=11601)
 >> quit
 Goodbye.
 ```
@@ -147,6 +147,7 @@ The available commands are:
 * `latintextN` *text*: Put the Latin transcription *text* in clipboard N.
 * `findN` *Bible*: Search for the text of clipboard N in the given *Bible*.
 * `lengthN`: Compute the length of the text in clipboard N.
+* `printN`: Show the Greek text in clipboard N (without punctuation and spaces).
 * `lookup` *Bible* *book* *verse*: Search for the given *passage* in the given *book* in the given *Bible*. Here *Bible* can be any translation that is already [installed as a module](https://www.crosswire.org/sword/modules/ModDisp.jsp?modType=Bibles) on the computer.
 * `lookupN` *Bible* *book* *passage*: Search for the given *passage* in the given *book* in the given *Bible* and put its Latin transcription in clipboard N.
 * `raw` *Bible* *book* *start* *length*: Show the raw Latin transcription of a passage in the given *book* in the given *Bible*, beginning with the *start* position on *length* characters.

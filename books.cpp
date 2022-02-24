@@ -76,6 +76,36 @@ using namespace sword;
 vector<Book> books;
 vector<PsalmsInfo> psalmsInfos;
 
+string latinToGreek(string latin) {
+    string greek = latin;
+    boost::replace_all(greek, "a", "α");
+    boost::replace_all(greek, "b", "β");
+    boost::replace_all(greek, "c", "ψ");
+    boost::replace_all(greek, "d", "δ");
+    boost::replace_all(greek, "e", "ε");
+    boost::replace_all(greek, "f", "φ");
+    boost::replace_all(greek, "g", "γ");
+    boost::replace_all(greek, "h", "η");
+    boost::replace_all(greek, "i", "ι");
+    boost::replace_all(greek, "j", "ξ");
+    boost::replace_all(greek, "k", "κ");
+    boost::replace_all(greek, "l", "λ");
+    boost::replace_all(greek, "m", "μ");
+    boost::replace_all(greek, "n", "ν");
+    boost::replace_all(greek, "o", "ο");
+    boost::replace_all(greek, "p", "π");
+    boost::replace_all(greek, "q", "ζ");
+    boost::replace_all(greek, "r", "ρ");
+    boost::replace_all(greek, "s", "σ");
+    boost::replace_all(greek, "t", "τ");
+    boost::replace_all(greek, "u", "θ");
+    boost::replace_all(greek, "v", "ω");
+    boost::replace_all(greek, "w", "ς");
+    boost::replace_all(greek, "x", "χ");
+    boost::replace_all(greek, "y", "υ");
+    return greek;
+    }
+
 string greekToLatin(string word) {
     string rewritten;
     for (int i = 0; i < word.length(); i += 2) {
