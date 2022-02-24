@@ -781,9 +781,13 @@ extern "C" {
 #endif
 
 void error(string message) {
+#ifndef __EMSCRIPTEN__
     cerr << error_color;
+#endif
     cerr << message;
+#ifndef __EMSCRIPTEN__
     cerr << reset_color;
+#endif
     cerr << endl << flush;
-    collect_info = collect_info + message + "\n";
+    collect_info = collect_info + error_color + message + reset_color + "\n";
 }
