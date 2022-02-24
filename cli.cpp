@@ -26,8 +26,8 @@
 #define NT_COLOR "\033[1;36m"
 #define RESET_COLOR "\033[0m"
 #else
-#define OT_COLOR "<span style=\"color: #313300\">"
-#define NT_COLOR "<span style=\"color: #003332\">"
+#define OT_COLOR "<span style=\"color: #626600\">"
+#define NT_COLOR "<span style=\"color: #006662\">"
 #define RESET_COLOR "</span>"
 #endif
 
@@ -377,7 +377,7 @@ string cli_process(char *buf) {
                 error(errorFindIncomplete);
                 goto end;
             }
-            if (input.length() < lookupCmd.length() + 1) {
+            if (input.length() < findCmd.length() + 1) {
                 error(errorFindParameters);
                 goto end;
             }

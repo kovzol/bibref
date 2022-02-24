@@ -305,7 +305,8 @@ int lookupTranslation(string moduleName, string book, string verse) {
     if (moduleName == "SBLGNT")
         text += nt_color;
     text += module->renderText().c_str();
-    text += reset_color;
+    if (moduleName == "LXX" || moduleName == "SBLGNT")
+        text += reset_color;
     info(text);
     return 0;
 }
