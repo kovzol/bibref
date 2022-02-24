@@ -160,6 +160,7 @@ The available commands are:
 * `compare12`: Compare the two clipboards with a 2-long substring-fingerprint (2-shingles) check, best match is reached at 1/(length1+length2).
 * `jaccard12`: Compare the two clipboards the same way how `compare12` does but use the "Jaccard similarity for bags" algorithm, best match is reached at 0.
 * `sql` *switch*: Set some outputs to be shown also as an SQL query if *switch* is `on`.
+* `colors` *switch*: Show some outputs colored if *switch* is `on`.
 * `help`: Show some hints on usage.
 * `quit`: Exit program.
 
@@ -169,3 +170,7 @@ Some [examples](/examples) are also available. See also [an incomplete draft (in
 Also, a work-in-progress database can be found in [docs/common](/docs/common) which aims at collecting all quotations.
 
 You may be interested in some [blog entries](https://matek.hu/zoltan/blog-topics.php?t=b) that extensively use the web version of *bibref*.
+
+### Command line options
+
+Issue `bibref -h` to learn about the available command line options.

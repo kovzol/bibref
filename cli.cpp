@@ -21,6 +21,16 @@
 #include "cli.h"
 #include "swmgr.h"
 
+#ifndef __EMSCRIPTEN__
+#define OT_COLOR "\033[1;33m"
+#define NT_COLOR "\033[1;36m"
+#define RESET_COLOR "\033[0m"
+#else
+#define OT_COLOR "<span style=\"color: #313300\">"
+#define NT_COLOR "<span style=\"color: #003332\">"
+#define RESET_COLOR "</span>"
+#endif
+
 using namespace std;
 using namespace sword;
 
@@ -44,6 +54,7 @@ string maxresultsCmd = "maxresults";
 string sqlCmd = "sql";
 string psalminfoCmd = "psalminfo";
 string rawCmd = "raw";
+string colorsCmd = "colors";
 
 string errorNotRecognized = "Sorry, the command you entered was not recognized or its syntax is invalid.";
 string errorTextIncomplete = "Either " + textCmd + "1 or " + textCmd + "2 must be used.";
@@ -65,6 +76,7 @@ string errorSqlParameters = sqlCmd + " requires one parameter.";
 string errorPsalminfoParameters = psalminfoCmd + " requires 2 parameters.";
 string errorRawParameters = rawCmd + " requires 4 parameters.";
 string errorRawIncomplete = "Either " + rawCmd + "1 or " + rawCmd + "2 must be used.";
+string errorColorsParameters = colorsCmd + " requires one parameter.";
 
 vector<string> vocabulary {addbooksCmd, compareCmd + "12", jaccardCmd + "12",
                            textCmd + "1", textCmd + "2", lookupCmd + "1", lookupCmd + "2", "quit",
@@ -72,7 +84,7 @@ vector<string> vocabulary {addbooksCmd, compareCmd + "12", jaccardCmd + "12",
                                    minuniqueCmd + "1", latintextCmd + "1", latintextCmd + "2",
                                    extendCmd, getrefsCmd, lookupCmd, maxresultsCmd, sqlCmd, psalminfoCmd,
                                    rawCmd, rawCmd + "1", rawCmd + "2",
-                                   printCmd + "1", printCmd + "2"
+                                   printCmd + "1", printCmd + "2", colorsCmd
                           };
 
 void add_vocabulary_item(string item) {
@@ -146,6 +158,20 @@ char** completer(const char* text, int start, int end) {
     return rl_completion_matches(text, completion_generator);
 }
 #endif
+
+
+void set_colors(bool colored) {
+    ot_color = "";
+    nt_color = "";
+    reset_color = "";
+
+    if (colored) {
+        ot_color = OT_COLOR;
+        nt_color = NT_COLOR;
+        reset_color = RESET_COLOR;
+        }
+    }
+
 
 int maxresults;
 bool sql;
@@ -437,6 +463,25 @@ string cli_process(char *buf) {
             goto end;
         }
 
+        if (boost::starts_with(input, colorsCmd)) {
+            int index;
+            int commandLength = colorsCmd.length();
+            if (input.length() == commandLength) {
+                error(errorColorsParameters);
+                goto end;
+            }
+            string rest = input.substr(input.find(" ") + 1);
+            if (rest.compare("on")==0 || rest.compare("1")==0 || rest.compare("true")==0) {
+                set_colors(true);
+                info("Colors enabled.");
+            } else
+            {
+                set_colors(false);
+                info("Colors disabled.");
+            }
+            goto end;
+        }
+
         if (boost::starts_with(input, compareCmd + "12")) {
             if (textset.at(0) && textset.at(1)) {
                 compareLatin(text[0], text[1]);
@@ -693,16 +738,7 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
     maxresults = 100;
     sql = false;
 
-    ot_color = "";
-    nt_color = "";
-    reset_color = "";
-
-
-    if (colored) {
-        ot_color = "\033[1;33m";
-        nt_color = "\033[1;36m";
-        reset_color = "\033[0m";
-        }
+    set_colors(colored);
 
 #ifndef __EMSCRIPTEN__
     char* buf;
