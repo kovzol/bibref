@@ -845,6 +845,7 @@ def nt_passage_info(conn, nt_quotation_id, format, texts=False):
     nt_latex = ""
     next_ot_shorter = 0
     connect_nodes = "\\draw "
+    overlapping_text = ""
     while p < len(nt_positions):
         words = nt_positions_info[p].split(" ")
         cl = words[0].split("-")
@@ -908,22 +909,28 @@ def nt_passage_info(conn, nt_quotation_id, format, texts=False):
                 # Handle overlappings:
                 nt_latex_overlap = ""
                 ol_found = False
-
                 if cl[0] == "clasp" and chunk in overlappings:
                     ol_found = True
                     ol_pos = overlappings.index(chunk)
+
+                    length1 = len(clasp_nt_content[chunk - 1]) # length of this chunk
+                    ol_length = overlappings_length[ol_pos]
+                    overlapping_text = clasp_nt_content[chunk - 1][length1-ol_length:] # store the overlapping text
+                    clasp_nt_content[chunk - 1] = clasp_nt_content[chunk - 1][:length1-ol_length] # trim its end
+                    clasp_nt_content[chunk] = clasp_nt_content[chunk][ol_length:] # trim the 3rd part
+
                     connect_nodes += "-- (overlap " + str(chunk) + ")"
                     nt_latex_overlap = "\\node[overlap] (overlap " + str(chunk) + ")[right=0 cm of " + latex_lastnode_nt + "]"
                     nt_latex_overlap += "{\\textcolor{yellow}"
-                    nt_latex_overlap += "{ " + str(overlappings_length[ol_pos]) + "}};\n"
-                    latex_lastnode_nt = "overlap " + str(chunk)
-                    next_ot_shorter = overlappings_length[ol_pos] # indicate shorter clasps for this and the next node
-                class_length -= next_ot_shorter
-                if texts:
-                    if cl[0] == "clasp":
-                        nt_latex += "{\\tiny " + str(clasp_nt_content[chunk - 1]) + "}};\n" # display clasp content
+                    if texts:
+                        nt_latex_overlap += "{\\tiny " + overlapping_text + "}};\n"
                     else:
-                        nt_latex += "{" + str(class_length) + "}};\n" # display clasp length
+                        nt_latex_overlap += "{ " + str(ol_length) + "}};\n"
+                    latex_lastnode_nt = "overlap " + str(chunk)
+                    next_ot_shorter = ol_length # indicate shorter clasps for this and the next node
+                class_length -= next_ot_shorter
+                if texts and cl[0] == "clasp":
+                        nt_latex += "{\\tiny " + str(clasp_nt_content[chunk - 1]) + "}};\n" # display clasp content
                 else:
                     nt_latex += "{" + str(class_length) + "}};\n" # display clasp length
                 nt_latex += nt_latex_overlap
