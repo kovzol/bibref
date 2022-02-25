@@ -569,6 +569,7 @@ def comment(text, format):
         print("#", output)
 
 def print_passage_header():
+        print ("\\usetikzlibrary{positioning}")
         print ("\\renewcommand{\\familydefault}{\\sfdefault}")
         print ("\\tikzstyle{nt_passage}=[rectangle,left color=cyan!50,right color=white,minimum size=6mm]")
         print ("\\tikzstyle{ot_passage}=[rectangle,left color=yellow!50,right color=white,minimum size=6mm]")
@@ -579,7 +580,7 @@ def print_passage_header():
         print ("\\tikzstyle{unquoted}=[rectangle,draw=blue!20,fill=black!5,thick,inner sep=0 pt,minimum size=6mm]")
         print ("\\begin{document}")
 
-def nt_passage_info(conn, nt_quotation_id, format):
+def nt_passage_info(conn, nt_quotation_id, format, texts=False):
     """
     Show all relevant information on a given NT quotation
     :param conn: the Connection object
@@ -606,7 +607,7 @@ def nt_passage_info(conn, nt_quotation_id, format):
     global nt_positions, nt_positions_info, nt_passages
     nt_positions = [] # relevant positions in the text, two positions for each piece of text
     nt_positions_info = [] # descriptions for each relevant position
-    nt_passages = [] # passage start for the stating position (empty for ending position)
+    nt_passages = [] # passage start for the starting position (empty for ending position)
     i = 1
     # Register introductions:
     for row in rows:
@@ -633,11 +634,14 @@ def nt_passage_info(conn, nt_quotation_id, format):
     ot_positions = dict()
     ot_positions_info = dict()
     ot_passages = dict()
+    ot_contents = dict()
     ot_begin = dict()
     ot_begin_pos = dict()
     j = 1 # clasp id
     clasp_ot_book = []
     clasp_jaccard = []
+    clasp_nt_content = [] # Latin text
+    clasp_ot_content = [] # Latin text
     jaccards = ""
     # Register clasps:
     for row2 in rows2:
@@ -672,9 +676,19 @@ def nt_passage_info(conn, nt_quotation_id, format):
         bibref.expect("Jaccard distance is ([0-9]+\.[0-9]+).")
         jaccard12 = bibref.match.groups()
         jaccard = float(jaccard12[0])
-        comment(f"{ot_passage} -> {nt_passage} (book positions: {ot_startpos}-{ot_endpos} -> {nt_startpos}-{nt_endpos}, jaccard={jaccard:.6f})", format)
+        command4 = "compare12"
+        bibref.sendline(command4)
+        # Comparing 'enarxhepoihsenoueostonoyranonkaithnghn' ~ 'kaisynetelesuhsanooyranoskaihghkaipasokosmosaytvn' = 61
+        bibref.expect("Comparing '([a-z]+)' ~ '([a-z]+)' = [0-9]+.")
+        ot_content_array = bibref.match.groups()
+        ot_content = ot_content_array[0].decode('utf-8')
+        nt_content = ot_content_array[1].decode('utf-8')
+        comment(f"{ot_passage} \"{ot_content}\" -> {nt_passage} \"{nt_content}\" (book positions: {ot_startpos}-{ot_endpos} -> {nt_startpos}-{nt_endpos}, jaccard={jaccard:.6f})", format)
         clasp_ot_book.append(ot_book)
         clasp_jaccard.append(jaccard)
+        clasp_ot_content.append(ot_content)
+        clasp_nt_content.append(nt_content)
+
         jnum = (1 - jaccard) * 100
         jaccard = str(round(jaccard * 100))
         if jaccard == "0":
@@ -692,6 +706,7 @@ def nt_passage_info(conn, nt_quotation_id, format):
         lpos = 0.7
         if ot_bookindex == 2:
            lpos = 0.85
+
         jaccards += f"\\draw [->,ForestGreen!{jnum},line width={lwidth}] (clasp {j}.south) -- ({ot_book} clasp {j}.north) node [right,pos={lpos},font=\\footnotesize] {{\\textcolor{{red!{jnum}}}{{{jaccard}}}}};\n"
         j += 1 # next clasp
 
@@ -838,7 +853,7 @@ def nt_passage_info(conn, nt_quotation_id, format):
             nt_out += "[intro"
             nt_latex += "\\node[intro] (intro " + str(chunk) + ") ["
             node_content = ""
-            nt_latex += ",right of=" + latex_lastnode_nt
+            nt_latex += ",right=0.2 cm of " + latex_lastnode_nt
             if latex_lastnode_nt == "nt_passage":
                 nt_latex += ",node distance=3cm"
             else:
@@ -871,7 +886,12 @@ def nt_passage_info(conn, nt_quotation_id, format):
                 nt_out += "]"
 
                 nt_latex += "\\node[" + cl[0]+ "] (" + cl[0] + " " + str(chunk) + ")"
-                nt_latex += "[right of=" + latex_lastnode_nt
+                nt_latex += "[right="
+                if (chunk - 1) in overlappings:
+                    nt_latex += "0 cm"
+                else:
+                    nt_latex += "0.2 cm"
+                nt_latex += " of " + latex_lastnode_nt
                 if latex_lastnode_nt == "nt_passage":
                     nt_latex += ",node distance=3cm"
                 else:
@@ -888,17 +908,24 @@ def nt_passage_info(conn, nt_quotation_id, format):
                 # Handle overlappings:
                 nt_latex_overlap = ""
                 ol_found = False
+
                 if cl[0] == "clasp" and chunk in overlappings:
                     ol_found = True
                     ol_pos = overlappings.index(chunk)
                     connect_nodes += "-- (overlap " + str(chunk) + ")"
-                    nt_latex_overlap = "\\node[overlap] (overlap " + str(chunk) + ")[right of=" + latex_lastnode_nt + "]"
+                    nt_latex_overlap = "\\node[overlap] (overlap " + str(chunk) + ")[right=0 cm of " + latex_lastnode_nt + "]"
                     nt_latex_overlap += "{\\textcolor{yellow}"
                     nt_latex_overlap += "{ " + str(overlappings_length[ol_pos]) + "}};\n"
                     latex_lastnode_nt = "overlap " + str(chunk)
                     next_ot_shorter = overlappings_length[ol_pos] # indicate shorter clasps for this and the next node
                 class_length -= next_ot_shorter
-                nt_latex += "{" + str(class_length) + "}};\n" # display clasp length
+                if texts:
+                    if cl[0] == "clasp":
+                        nt_latex += "{\\tiny " + str(clasp_nt_content[chunk - 1]) + "}};\n" # display clasp content
+                    else:
+                        nt_latex += "{" + str(class_length) + "}};\n" # display clasp length
+                else:
+                    nt_latex += "{" + str(class_length) + "}};\n" # display clasp length
                 nt_latex += nt_latex_overlap
                 if not ol_found:
                     next_ot_shorter = 0 # reset indicator
@@ -946,7 +973,7 @@ def nt_passage_info(conn, nt_quotation_id, format):
                 if latex_lastnode_ot.startswith("ot_passage"):
                     ot_latex += "below of=clasp " + str(chunk) + ",node distance=" + str(y) + "cm"
                 else:
-                    ot_latex += "right of=" + latex_lastnode_ot
+                    ot_latex += "right=0.2 cm of " + latex_lastnode_ot
                     connect_nodes += " --"
                 textcolor = "black"
                 if cl[0] == "clasp":
@@ -954,7 +981,14 @@ def nt_passage_info(conn, nt_quotation_id, format):
                     textcolor = "white"
                     ot_latex += ",fill=ForestGreen!" + str(jnum)
                 ot_latex += "]"
-                ot_latex += " {\\textcolor{" + textcolor + "}{" + str(class_length) + "}};\n"
+                ot_latex += " {\\textcolor{" + textcolor + "}"
+                if texts:
+                    if cl[0] == "clasp":
+                        ot_latex += "{\\tiny " + str(clasp_ot_content[chunk - 1]) + "}};\n" # display clasp content
+                    else:
+                        ot_latex += "{" + str(class_length) + "}};\n" # display clasp length
+                else:
+                    ot_latex += "{" + str(class_length) + "}};\n" # display clasp length
                 latex_lastnode_ot = m + " " + cl[0] + " " + str(chunk)
                 connect_nodes += " (" + latex_lastnode_ot + ")"
 
@@ -973,7 +1007,7 @@ def nt_passage_info(conn, nt_quotation_id, format):
     if format == "svg":
         print ("\\end{document}")
 
-def nt_passage_info_all(conn, format, order=""):
+def nt_passage_info_all(conn, format, order="", texts=False):
     """
     Show all relevant information on all NT quotations
     :param conn: the Connection object
@@ -1008,7 +1042,7 @@ def nt_passage_info_all(conn, format, order=""):
         nt_quotation_id = row[0]
         comment("", format)
         comment(f"{i}. nt_quotation_id={nt_quotation_id}", format)
-        nt_passage_info(conn, nt_quotation_id, format)
+        nt_passage_info(conn, nt_quotation_id, format, texts)
         i += 1
     if format == "latex":
         print ("\\end{document}")
@@ -1076,6 +1110,13 @@ def main():
                 nt_passage_info(conn, int(data), data2)
         elif result_type == "ot_passage_info":
             nt_passage_info_all(conn, "latex", "ot")
+        elif result_type == "nt_passage_info_content":
+            if data == "all":
+                nt_passage_info_all(conn, "latex", "nt", True)
+            else:
+                nt_passage_info(conn, int(data), data2, True)
+        elif result_type == "ot_passage_info_content":
+            nt_passage_info_all(conn, "latex", "ot", True)
         else:
             psalms_report_latex(conn, result_type, data)
 

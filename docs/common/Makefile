@@ -56,6 +56,16 @@ ot-passage-info.tex: visualize.py quotations.sqlite3
 ot-passage-info.pdf: ot-passage-info.tex
 	pdflatex $<
 
+nt-passage-info-content.tex: visualize.py quotations.sqlite3
+	python3 visualize.py nt_passage_info_content all > $@
+nt-passage-info-content.pdf: nt-passage-info-content.tex
+	pdflatex $<
+
+ot-passage-info-content.tex: visualize.py quotations.sqlite3
+	python3 visualize.py ot_passage_info_content all > $@
+ot-passage-info-content.pdf: ot-passage-info-content.tex
+	pdflatex $<
+
 jaccard: \
  $(ot-jaccard-Rplots-pdfs) $(ot-jaccard-sorted-txts) \
  $(nt-jaccard-Rplots-pdfs) $(nt-jaccard-sorted-txts) \
@@ -86,6 +96,16 @@ svg/%.svg: svg/%.tex
 svg/%.tex: visualize.py quotations.sqlite3
 	mkdir -p svg
 	python3 visualize.py nt_passage_info $* svg > $@
+
+verified-quotations-content = 1364
+
+c-svgs: $(verified-quotations-content:%=c-svg/%.svg)
+c-svg/%.svg: c-svg/%.tex
+	cd c-svg && pdflatex -shell-escape $*
+c-svg/%.tex: visualize.py quotations.sqlite3
+	mkdir -p c-svg
+	python3 visualize.py nt_passage_info_content $* svg > $@
+
 
 # No-Jaccard (NT)
 getrefs-pngs = $(nt_inputs:%=%-getrefs.png)
