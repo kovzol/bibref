@@ -744,17 +744,19 @@ def nt_passage_info(conn, nt_quotation_id, format, texts=False):
         ol = False
         for k in range(nt_endpos - nt_startpos + 1):
             ol_len = len(nt_text[nt_startpos - nt_pos_start + k])
-            if ol_len > 0:
-                if not ol:
+            if ol_len > 0: # there is an overlap with a former entry
+                if not ol: # if not registered yet
                     ol_begin = k # register start
                     ol_end = 0 # pre-register end
-                ol = True # local for this clasp
-                overlapping_nt = True # global for this passage
-            else:
-                if ol and ol_end == 0 :
+                    ol = True # local for this clasp
+                    overlapping_nt = True # global for this passage
+            else: # there is no overlap anymore
+                if ol and ol_end == 0: # the former characters were in an overlapping
                     ol_end = k # register end
             nt_text[nt_startpos - nt_pos_start + k] += "c" + str(j) + "," # overlappings look like "c1,c2,"
         if ol:
+            if ol_end == 0: # the end was not determined
+                ol_end = k+1 # register final end at last
             overlappings.append(j-1) # hopefully (j-1) and j overlap... FIXME
             overlappings_length.append(ol_end - ol_begin)
         for k in range(ot_endpos - ot_startpos + 1):
