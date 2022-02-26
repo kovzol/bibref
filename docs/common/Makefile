@@ -97,7 +97,7 @@ svg/%.tex: visualize.py quotations.sqlite3
 	mkdir -p svg
 	python3 visualize.py nt_passage_info $* svg > $@
 
-verified-quotations-content = 1364
+verified-quotations-content = 1121
 
 cl-svgs: $(verified-quotations-content:%=cl-svg/%.svg)
 cl-svg/%.svg: cl-svg/%.tex
