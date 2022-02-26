@@ -573,11 +573,11 @@ def print_passage_header():
         print ("\\renewcommand{\\familydefault}{\\sfdefault}")
         print ("\\tikzstyle{nt_passage}=[rectangle,left color=cyan!50,right color=white,minimum size=6mm]")
         print ("\\tikzstyle{ot_passage}=[rectangle,left color=yellow!50,right color=white,minimum size=6mm]")
-        print ("\\tikzstyle{intro}=[rectangle,draw=blue!50,fill=blue!20,thick,inner sep=0 pt,minimum size=6mm]")
-        print ("\\tikzstyle{clasp}=[rectangle,draw=blue!50,fill=ForestGreen!20,thick,inner sep=0 pt,minimum size=6mm]")
-        print ("\\tikzstyle{overlap}=[rectangle,draw=blue!50,fill=OliveGreen,thick,inner sep=0 pt,minimum size=6mm]")
-        print ("\\tikzstyle{unidentified}=[rectangle,draw=blue!20,fill=black!5,thick,inner sep=0 pt,minimum size=6mm]")
-        print ("\\tikzstyle{unquoted}=[rectangle,draw=blue!20,fill=black!5,thick,inner sep=0 pt,minimum size=6mm]")
+        print ("\\tikzstyle{intro}=[rectangle,draw=blue!50,fill=blue!20,thick,inner sep=1mm,minimum size=6mm]")
+        print ("\\tikzstyle{clasp}=[rectangle,draw=blue!50,fill=ForestGreen!20,thick,inner sep=1mm,minimum size=6mm]")
+        print ("\\tikzstyle{overlap}=[rectangle,draw=blue!50,fill=OliveGreen,thick,inner sep=1mm,minimum size=6mm]")
+        print ("\\tikzstyle{unidentified}=[rectangle,draw=blue!20,fill=black!5,thick,inner sep=1mm,minimum size=6mm]")
+        print ("\\tikzstyle{unquoted}=[rectangle,draw=blue!20,fill=black!5,thick,inner sep=1mm,minimum size=6mm]")
         print ("\\begin{document}")
 
 def nt_passage_info(conn, nt_quotation_id, format, texts=False):
