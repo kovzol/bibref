@@ -57,12 +57,12 @@ ot-passage-info.pdf: ot-passage-info.tex
 	pdflatex $<
 
 nt-passage-info-content.tex: visualize.py quotations.sqlite3
-	python3 visualize.py nt_passage_info_content all > $@
+	python3 visualize.py nt_passage_info_content all 2 > $@
 nt-passage-info-content.pdf: nt-passage-info-content.tex
 	pdflatex $<
 
 ot-passage-info-content.tex: visualize.py quotations.sqlite3
-	python3 visualize.py ot_passage_info_content all > $@
+	python3 visualize.py ot_passage_info_content all 2 > $@
 ot-passage-info-content.pdf: ot-passage-info-content.tex
 	pdflatex $<
 
@@ -99,12 +99,21 @@ svg/%.tex: visualize.py quotations.sqlite3
 
 verified-quotations-content = 1364
 
-c-svgs: $(verified-quotations-content:%=c-svg/%.svg)
-c-svg/%.svg: c-svg/%.tex
-	cd c-svg && pdflatex -shell-escape $*
-c-svg/%.tex: visualize.py quotations.sqlite3
-	mkdir -p c-svg
-	python3 visualize.py nt_passage_info_content $* svg > $@
+cl-svgs: $(verified-quotations-content:%=cl-svg/%.svg)
+cl-svg/%.svg: cl-svg/%.tex
+	cd cl-svg && pdflatex -shell-escape $*
+cl-svg/%.tex: visualize.py quotations.sqlite3
+	mkdir -p cl-svg
+	python3 visualize.py nt_passage_info_content $* svg 1 > $@
+
+cg-svgs: $(verified-quotations-content:%=cg-svg/%.svg)
+cg-svg/%.svg: cg-svg/%.tex
+	cd cg-svg && pdflatex -shell-escape $*
+cg-svg/%.tex: visualize.py quotations.sqlite3
+	mkdir -p cg-svg
+	python3 visualize.py nt_passage_info_content $* svg 2 > $@
+
+
 
 
 # No-Jaccard (NT)

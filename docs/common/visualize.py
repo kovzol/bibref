@@ -20,6 +20,66 @@ def create_connection(db_file):
 
     return conn
 
+def latin_to_greek(latin):
+    greek = latin
+    # First, an utf-8 conversion:
+    greek = greek.replace("a", "α");
+    greek = greek.replace("b", "β");
+    greek = greek.replace("c", "ψ");
+    greek = greek.replace("d", "δ");
+    greek = greek.replace("e", "ε");
+    greek = greek.replace("f", "φ");
+    greek = greek.replace("g", "γ");
+    greek = greek.replace("h", "η");
+    greek = greek.replace("i", "ι");
+    greek = greek.replace("j", "ξ");
+    greek = greek.replace("k", "κ");
+    greek = greek.replace("l", "λ");
+    greek = greek.replace("m", "μ");
+    greek = greek.replace("n", "ν");
+    greek = greek.replace("o", "ο");
+    greek = greek.replace("p", "π");
+    greek = greek.replace("q", "ζ");
+    greek = greek.replace("r", "ρ");
+    greek = greek.replace("s", "σ");
+    greek = greek.replace("t", "τ");
+    greek = greek.replace("u", "θ");
+    greek = greek.replace("v", "ω");
+    greek = greek.replace("w", "ς"); # unused
+    greek = greek.replace("x", "χ");
+    greek = greek.replace("y", "υ");
+    return "\selectlanguage{greek}" + greek + "\selectlanguage{english}"
+
+    # This part is not used, because the Greek letters in math mode
+    # will be italicized automatically and that's too wide.
+    # ...Then, each utf-8 character will be converted into plain latex:
+    greek = greek.replace("α", "\\alpha ")
+    greek = greek.replace("β", "\\beta ")
+    greek = greek.replace("ψ", "\psi ")
+    greek = greek.replace("δ", "\delta ")
+    greek = greek.replace("ε", "\\varepsilon ")
+    greek = greek.replace("φ", "\phi ")
+    greek = greek.replace("γ", "\gamma ")
+    greek = greek.replace("η", "\eta ")
+    greek = greek.replace("ι", "\iota ")
+    greek = greek.replace("ξ", "\\xi ")
+    greek = greek.replace("κ", "\kappa ")
+    greek = greek.replace("λ", "\lambda ")
+    greek = greek.replace("μ", "\mu ")
+    greek = greek.replace("ν", "\\nu ")
+    greek = greek.replace("ο", "o")
+    greek = greek.replace("π", "\pi ")
+    greek = greek.replace("ζ", "\zeta ")
+    greek = greek.replace("ρ", "\\rho ")
+    greek = greek.replace("σ", "\sigma ")
+    greek = greek.replace("τ", "\\tau ")
+    greek = greek.replace("θ", "\\theta ")
+    greek = greek.replace("ω", "\\omega ")
+    greek = greek.replace("ς", "c") # unused
+    greek = greek.replace("χ", "\chi ")
+    greek = greek.replace("υ", "\\upsilon ")
+    return "$" + greek + "$"
+
 def psalms_report_latex(conn, method, data):
     """
     Query all entries in the Psalms database rows and show them as a LaTeX table on stdout
@@ -569,6 +629,8 @@ def comment(text, format):
         print("#", output)
 
 def print_passage_header():
+        print ("\\usepackage[utf8]{inputenc}")
+        print ("\\usepackage[greek,english]{babel}")
         print ("\\usetikzlibrary{positioning}")
         print ("\\renewcommand{\\familydefault}{\\sfdefault}")
         print ("\\tikzstyle{nt_passage}=[rectangle,left color=cyan!50,right color=white,minimum size=6mm]")
@@ -580,11 +642,13 @@ def print_passage_header():
         print ("\\tikzstyle{unquoted}=[rectangle,draw=blue!20,fill=black!5,thick,inner sep=1mm,minimum size=6mm]")
         print ("\\begin{document}")
 
-def nt_passage_info(conn, nt_quotation_id, format, texts=False):
+def nt_passage_info(conn, nt_quotation_id, format, texts=0):
     """
     Show all relevant information on a given NT quotation
     :param conn: the Connection object
     :param nt_quotation_id: NT quotation identifier
+    :param format: latex, svg, html, text
+    :texts: 0 if the length is used, 1 for Latin text, 2 for Greek text
     """
 
     global bibref
@@ -924,15 +988,20 @@ def nt_passage_info(conn, nt_quotation_id, format, texts=False):
                     connect_nodes += "-- (overlap " + str(chunk) + ")"
                     nt_latex_overlap = "\\node[overlap] (overlap " + str(chunk) + ")[right=0 cm of " + latex_lastnode_nt + "]"
                     nt_latex_overlap += "{\\textcolor{yellow}"
-                    if texts:
+                    if texts > 0:
+                        if texts == 2:
+                            overlapping_text = latin_to_greek(overlapping_text)
                         nt_latex_overlap += "{\\tiny " + overlapping_text + "}};\n"
                     else:
                         nt_latex_overlap += "{ " + str(ol_length) + "}};\n"
                     latex_lastnode_nt = "overlap " + str(chunk)
                     next_ot_shorter = ol_length # indicate shorter clasps for this and the next node
                 class_length -= next_ot_shorter
-                if texts and cl[0] == "clasp":
-                        nt_latex += "{\\tiny " + str(clasp_nt_content[chunk - 1]) + "}};\n" # display clasp content
+                if texts > 0 and cl[0] == "clasp":
+                    displayed_text = clasp_nt_content[chunk - 1]
+                    if texts == 2:
+                        displayed_text = latin_to_greek(displayed_text)
+                    nt_latex += "{\\tiny " + displayed_text + "}};\n" # display clasp content
                 else:
                     nt_latex += "{" + str(class_length) + "}};\n" # display clasp length
                 nt_latex += nt_latex_overlap
@@ -991,9 +1060,12 @@ def nt_passage_info(conn, nt_quotation_id, format, texts=False):
                     ot_latex += ",fill=ForestGreen!" + str(jnum)
                 ot_latex += "]"
                 ot_latex += " {\\textcolor{" + textcolor + "}"
-                if texts:
+                if texts > 0:
                     if cl[0] == "clasp":
-                        ot_latex += "{\\tiny " + str(clasp_ot_content[chunk - 1]) + "}};\n" # display clasp content
+                        displayed_text = clasp_ot_content[chunk - 1]
+                        if texts == 2:
+                            displayed_text = latin_to_greek(displayed_text)
+                        ot_latex += "{\\tiny " + displayed_text + "}};\n" # display clasp content
                     else:
                         ot_latex += "{" + str(class_length) + "}};\n" # display clasp length
                 else:
@@ -1016,7 +1088,7 @@ def nt_passage_info(conn, nt_quotation_id, format, texts=False):
     if format == "svg":
         print ("\\end{document}")
 
-def nt_passage_info_all(conn, format, order="", texts=False):
+def nt_passage_info_all(conn, format, order="", texts=0):
     """
     Show all relevant information on all NT quotations
     :param conn: the Connection object
@@ -1086,6 +1158,11 @@ def main():
         data2 = "text"
     if result_type == "ot_passage_info":
         data = "all"
+    if result_type == "nt_passage_info_content":
+        data = "all"
+        data2 = "text"
+    if result_type == "ot_passage_info_content":
+        data = "all"
 
     if len(sys.argv) > 2:
         data = sys.argv[2]
@@ -1121,11 +1198,11 @@ def main():
             nt_passage_info_all(conn, "latex", "ot")
         elif result_type == "nt_passage_info_content":
             if data == "all":
-                nt_passage_info_all(conn, "latex", "nt", True)
+                nt_passage_info_all(conn, "latex", "nt", int(data3))
             else:
-                nt_passage_info(conn, int(data), data2, True)
+                nt_passage_info(conn, int(data), data2, int(data3))
         elif result_type == "ot_passage_info_content":
-            nt_passage_info_all(conn, "latex", "ot", True)
+            nt_passage_info_all(conn, "latex", "ot", int(data2))
         else:
             psalms_report_latex(conn, result_type, data)
 
