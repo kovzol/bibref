@@ -2009,7 +2009,9 @@ insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1364, 136, 4, 'Isaiah', 'LXX Isaiah 6:9+63 6:9', 'Mark', 'SBLGNT Mark 4:12+3 4:12-64', 12471, 28, 9850, 27); -- βλεποντες βλεψετε και ου μη ιδητε -> βλεποντες βλεπωσι και μη ιδωσιν
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
- (1364, 136, 4, 'Isaiah', 'LXX Isaiah 6:10+126 6:10-31', 'Mark', 'SBLGNT Mark 4:12+42 4:12-32', 12625, 27, 9889, 20); -- ακουσωσιν και τη καρδια συνωσιν -> ακουωσι και μη συνιωσιν
+ (1364, 136, 4, 'Isaiah', 'LXX Isaiah 6:10+126 6:10-46', 'Mark', 'SBLGNT Mark 4:12+42 4:12-42', 12625, 12, 9889, 10); -- ακουσωσιν και -> ακουωσι και
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1364, 136, 4, 'Isaiah', 'LXX Isaiah 6:10+146 6:10-31', 'Mark', 'SBLGNT Mark 4:12+54 4:12-32', 12645, 7, 9901, 8); -- ακουσωσιν και τη καρδια συνωσιν -> ακουωσι και μη συνιωσιν
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1364, 136, 4, 'Isaiah', 'LXX Isaiah 6:10+90 6:10-88', 'Mark', 'SBLGNT Mark 4:12+62 4:12-26', 12589, 6, 9909, 6); -- μηποτε
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
