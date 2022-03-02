@@ -88,7 +88,8 @@ verified-quotations += 401 402 403 404 405 411 \
 # Isaiah
 verified-quotations += 1011 1231 1092 1261 1362 1363 1365 1181 1371 1372 1242 1244 1301 1431 1321 1271 1101 1111 1421 \
  1241 1031 1032 1251 1221 1161 1131 1451 1281 1151 \
-1243
+1243 \
+1121 1364 1361 91361
 
 svgs: $(verified-quotations:%=svg/%.svg)
 svg/%.svg: svg/%.tex
@@ -97,7 +98,7 @@ svg/%.tex: visualize.py quotations.sqlite3
 	mkdir -p svg
 	python3 visualize.py nt_passage_info $* svg > $@
 
-verified-quotations-content = 1121
+verified-quotations-content = 1121 1364 1361 91361
 
 cl-svgs: $(verified-quotations-content:%=cl-svg/%.svg)
 cl-svg/%.svg: cl-svg/%.tex

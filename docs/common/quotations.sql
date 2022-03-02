@@ -1968,6 +1968,20 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
  (1361, 136, 1, 'Isaiah', 'LXX Isaiah 6:10+138 6:10-38', 'John', 'SBLGNT John 12:40+89 12:40-28', 12637, 8, 44371, 8); -- τη καρδια
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1361, 136, 1, 'Isaiah', 'LXX Isaiah 6:10+153 6:10', 'John', 'SBLGNT John 12:40+97 12:40', 12652, 31, 44379, 28); -- και επιστρεψωσιν και ιασομαι αυτους -> και στραφωσιν, και ιασομαι αυτους
+-- An alternative way, by adding "kardia" as an extra clasp:
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (91361, 'John', 'SBLGNT John 12:39 12:39', 44235, 44281);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (91361, 136, 1, 'Isaiah', 'LXX Isaiah 6:10+63 6:10-103', 'John', 'SBLGNT John 12:40+10 12:40-97', 12562, 18, 44292, 18); -- τους οφθαλμους αυτων -> αυτων τους οφθαλμους
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (91361, 136, 1, 'Isaiah', 'LXX Isaiah 6:10+96 6:10-66', 'John', 'SBLGNT John 12:40+59 12:40-44', 12595, 22, 44341, 22); -- ιδωσιν τοις οφθαλμοις και
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (91361, 136, 1, 'Isaiah', 'LXX Isaiah 6:10+138 6:10-38', 'John', 'SBLGNT John 12:40+89 12:40-28', 12637, 8, 44371, 8); -- τη καρδια
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (91361, 136, 1, 'Isaiah', 'LXX Isaiah 6:10+153 6:10', 'John', 'SBLGNT John 12:40+97 12:40', 12652, 31, 44379, 28); -- και επιστρεψωσιν και ιασομαι αυτους -> και στραφωσιν, και ιασομαι αυτους
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (91361, 136, 1, 'Isaiah', 'LXX Isaiah 6:10+12 6:10-166', 'John', 'SBLGNT John 12:40+47 12:40-72', 12511, 6, 44329, 6); -- kardia
+-- End of alternation.
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1362, 136, 2, 'Isaiah', null, 'LXX Isaiah 6:9+35 6:10-142', 'Acts', 'SBLGNT Acts 28:26+39 28:27-137', 12443, 98, 95175, 98, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
