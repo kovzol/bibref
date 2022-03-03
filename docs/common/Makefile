@@ -70,7 +70,9 @@ jaccard: \
  $(ot-jaccard-Rplots-pdfs) $(ot-jaccard-sorted-txts) \
  $(nt-jaccard-Rplots-pdfs) $(nt-jaccard-sorted-txts) \
  nt-jaccard-multi-Rplots.pdf \
- nt-passage-info.pdf ot-passage-info.pdf
+ nt-passage-info.pdf ot-passage-info.pdf \
+ nt-passage-info-content.pdf ot-passage-info-content.pdf \
+ svgs cl-svgs cg-svgs
 # ot-jaccard-multi-Rplots.pdf
 
 # SVG outputs:

@@ -685,10 +685,11 @@ def nt_passage_info(conn, nt_quotation_id, format, texts=0):
         comment(f"{nt_passage} (book position: {nt_startpos}-{nt_endpos})", format)
         i += 1
 
-    cur.execute("SELECT c.ot_book, c.ot_passage, c.nt_passage, c.ot_startpos, c.ot_length, c.nt_startpos, c.nt_length" +
-        " FROM clasps c, quotations_classifications qc" +
+    cur.execute("SELECT c.ot_book, c.ot_passage, c.nt_passage, c.ot_startpos, c.ot_length, c.nt_startpos, c.nt_length, qp.source_given" +
+        " FROM clasps c, quotations_classifications qc, quotations_properties qp" +
         " WHERE c.nt_quotation_id = " + str(nt_quotation_id) +
         " AND c.ot_id = qc.quotation_ot_id AND c.nt_id = qc.quotation_nt_id AND qc.classification = 'quotation'" # ignore clasps that belong to repeated quotations
+        " AND c.ot_id = qp.quotation_ot_id AND c.nt_id = qp.quotation_nt_id"
         " ORDER BY c.nt_startpos")
     rows2 = cur.fetchall()
     comment("Clasp(s):", format)
@@ -709,7 +710,7 @@ def nt_passage_info(conn, nt_quotation_id, format, texts=0):
     jaccards = ""
     # Register clasps:
     for row2 in rows2:
-        ot_book, ot_passage, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length = row2
+        ot_book, ot_passage, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, source_given = row2
         ot_endpos = ot_startpos + ot_length - 1
         nt_endpos = nt_startpos + nt_length - 1
         if not ot_book in ot_positions:
@@ -801,8 +802,9 @@ def nt_passage_info(conn, nt_quotation_id, format, texts=0):
     overlapping_ot = False
     overlappings = []
     overlappings_length = []
+
     for row2 in rows2: # for each clasp
-        ot_book, ot_passage, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length = row2
+        ot_book, ot_passage, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, source_given = row2
         ot_endpos = ot_startpos + ot_length - 1
         nt_endpos = nt_startpos + nt_length - 1
         ol = False
@@ -934,6 +936,8 @@ def nt_passage_info(conn, nt_quotation_id, format, texts=0):
                 intro_length = nt_positions[q] - nt_positions[p] + 1
                 nt_out += f" ({intro_length})"
                 node_content = str(intro_length)
+            if source_given:
+                nt_latex += ",fill=blue!40"
             nt_out += "]"
             nt_latex += "] {" + node_content+ "};\n"
             latex_lastnode_nt = "intro " + str(chunk)
@@ -1198,7 +1202,7 @@ def main():
             nt_passage_info_all(conn, "latex", "ot")
         elif result_type == "nt_passage_info_content":
             if data == "all":
-                nt_passage_info_all(conn, "latex", "nt", int(data3))
+                nt_passage_info_all(conn, "latex", "nt", int(data2))
             else:
                 nt_passage_info(conn, int(data), data2, int(data3))
         elif result_type == "ot_passage_info_content":

@@ -4167,7 +4167,7 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (4201, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
- (42011, 'Romans', 'SBLGNT Romans 11:3 11:3-67', 22340, 22369);
+ (42011, 'Romans', 'SBLGNT Romans 11:2+36 11:2', 22281, 22339);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (42011, 4201, 1, 'I_Kings', 'LXX I_Kings 19:10+72 19:10-68', 'Romans', 'SBLGNT Romans 11:3+5 11:3-41', 75874, 54, 22345, 51); -- τα θυσιαστηρια σου κατεσκαψαν και τους προφητας σου απεκτειναν -> τους προφητας σου απεκτειναν, τα θυσιαστηρια σου κατεσκαψαν
 -- TODO: Consider splitting this into two clasps:
