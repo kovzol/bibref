@@ -685,11 +685,10 @@ def nt_passage_info(conn, nt_quotation_id, format, texts=0):
         comment(f"{nt_passage} (book position: {nt_startpos}-{nt_endpos})", format)
         i += 1
 
-    cur.execute("SELECT c.ot_book, c.ot_passage, c.nt_passage, c.ot_startpos, c.ot_length, c.nt_startpos, c.nt_length, qp.source_given" +
-        " FROM clasps c, quotations_classifications qc, quotations_properties qp" +
+    cur.execute("SELECT c.ot_book, c.ot_passage, c.nt_passage, c.ot_startpos, c.ot_length, c.nt_startpos, c.nt_length, c.ot_id, c.nt_id" +
+        " FROM clasps c, quotations_classifications qc" +
         " WHERE c.nt_quotation_id = " + str(nt_quotation_id) +
         " AND c.ot_id = qc.quotation_ot_id AND c.nt_id = qc.quotation_nt_id AND qc.classification = 'quotation'" # ignore clasps that belong to repeated quotations
-        " AND c.ot_id = qp.quotation_ot_id AND c.nt_id = qp.quotation_nt_id"
         " ORDER BY c.nt_startpos")
     rows2 = cur.fetchall()
     comment("Clasp(s):", format)
@@ -708,9 +707,17 @@ def nt_passage_info(conn, nt_quotation_id, format, texts=0):
     clasp_nt_content = [] # Latin text
     clasp_ot_content = [] # Latin text
     jaccards = ""
+    source_given = False
     # Register clasps:
     for row2 in rows2:
-        ot_book, ot_passage, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, source_given = row2
+        ot_book, ot_passage, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, ot_id, nt_id = row2
+
+        # We use a different color if the source is given in the quotation (this affect one of the claps now, FIXME: database issue)
+        cur.execute(f"SELECT COUNT(source_given) FROM quotations_properties WHERE quotation_ot_id = {ot_id} AND quotation_nt_id = {nt_id}")
+        rows3 = cur.fetchall()
+        if int(rows3[0][0]) > 0:
+            source_given = True
+
         ot_endpos = ot_startpos + ot_length - 1
         nt_endpos = nt_startpos + nt_length - 1
         if not ot_book in ot_positions:
@@ -804,7 +811,7 @@ def nt_passage_info(conn, nt_quotation_id, format, texts=0):
     overlappings_length = []
 
     for row2 in rows2: # for each clasp
-        ot_book, ot_passage, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, source_given = row2
+        ot_book, ot_passage, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, ot_id, nt_id = row2
         ot_endpos = ot_startpos + ot_length - 1
         nt_endpos = nt_startpos + nt_length - 1
         ol = False
