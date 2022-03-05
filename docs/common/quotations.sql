@@ -1697,7 +1697,9 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
  (1222, 'Matthew', 'SBLGNT Matthew 4:14 4:14', 7172, 7216);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
- (1222, 122, 2, 'Isaiah', 'LXX Isaiah 9:1+71 9:1-88', 'Matthew', 'SBLGNT Matthew 4:15+2 4:15-32', 17783, 31, 7219, 33); -- ζαβουλων η γη νεφθαλιμ οδον θαλασσης -> Ζαβουλων και γη Νεφθαλιμ, οδον θαλασσης
+ (1222, 122, 2, 'Isaiah', 'LXX Isaiah 9:1+71 9:1-88', 'Matthew', 'SBLGNT Matthew 4:15 4:15-32', 17783, 31, 7217, 35); -- ζαβουλων η γη νεφθαλιμ οδον θαλασσης -> Γη Ζαβουλων και γη Νεφθαλιμ, οδον θαλασσης
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1222, 122, 2, 'Isaiah', 'LXX Isaiah 9:1+141 9:1-17', 'Matthew', 'SBLGNT Matthew 4:15+35 4:15', 17853, 32, 7252, 32); -- περαν του ιορδανου γαλιλαια των εθνων
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1222, 122, 2, 'Isaiah', 'LXX Isaiah 9:2 9:2-12', 'Matthew', 'SBLGNT Matthew 4:16 4:16-15', 17902, 74, 7284, 75);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
