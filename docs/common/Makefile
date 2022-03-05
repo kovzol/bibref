@@ -100,7 +100,7 @@ svg/%.tex: visualize.py quotations.sqlite3
 	mkdir -p svg
 	python3 visualize.py nt_passage_info $* svg > $@
 
-verified-quotations-content = 1121 1364 1361 91361
+verified-quotations-content = 1121 1364 1361 91361 1061
 
 cl-svgs: $(verified-quotations-content:%=cl-svg/%.svg)
 cl-svg/%.svg: cl-svg/%.tex
@@ -115,9 +115,6 @@ cg-svg/%.svg: cg-svg/%.tex
 cg-svg/%.tex: visualize.py quotations.sqlite3
 	mkdir -p cg-svg
 	python3 visualize.py nt_passage_info_content $* svg 2 > $@
-
-
-
 
 # No-Jaccard (NT)
 getrefs-pngs = $(nt_inputs:%=%-getrefs.png)

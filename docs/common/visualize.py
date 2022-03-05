@@ -965,7 +965,7 @@ def nt_passage_info(conn, nt_quotation_id, format, texts=0):
 
                 nt_latex += "\\node[" + cl[0]+ "] (" + cl[0] + " " + str(chunk) + ")"
                 nt_latex += "[right="
-                if (chunk - 1) in overlappings:
+                if cl[0] == "clasp" and (chunk - 1) in overlappings:
                     nt_latex += "0 cm"
                 else:
                     nt_latex += "0.2 cm"
