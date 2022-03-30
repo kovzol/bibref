@@ -17,7 +17,8 @@ create table nt_quotation_introductions (
  nt_book,
  nt_passage text not null,
  nt_startpos int,
- nt_endpos int);
+ nt_endpos int,
+ alternative bool default false);
 
 create table quotations (
  nt_quotation_id int,
@@ -1396,8 +1397,8 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1041, 104, 1, 'Isaiah', 'LXX Isaiah 10:23+21 10:23-21', 'Romans', 'SBLGNT Romans 9:28+28 9:28-15', 22269, 7, 20106, 7); -- ποιησει
 -- Alternatively:
-insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
- (91041, 'Romans', 'SBLGNT Romans 9:27 9:27-64', 19987, 20013);
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos, alternative) values
+ (91041, 'Romans', 'SBLGNT Romans 9:27 9:27-64', 19987, 20013, true);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (91041, 104, 1, 'Isaiah', 'LXX Isaiah 10:22+3 10:22-103', 'Romans', 'SBLGNT Romans 9:27+27 9:27-61', 22142, 3, 20014, 3); -- ean
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
@@ -1987,8 +1988,8 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1361, 136, 1, 'Isaiah', 'LXX Isaiah 6:10+153 6:10', 'John', 'SBLGNT John 12:40+97 12:40', 12652, 31, 44379, 28); -- και επιστρεψωσιν και ιασομαι αυτους -> και στραφωσιν, και ιασομαι αυτους
 -- An alternative way, by adding "kardia" as an extra clasp:
-insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
- (91361, 'John', 'SBLGNT John 12:39 12:39', 44235, 44281);
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos, alternative) values
+ (91361, 'John', 'SBLGNT John 12:39 12:39', 44235, 44281, true);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (91361, 136, 1, 'Isaiah', 'LXX Isaiah 6:10+63 6:10-103', 'John', 'SBLGNT John 12:40+10 12:40-97', 12562, 18, 44292, 18); -- τους οφθαλμους αυτων -> αυτων τους οφθαλμους
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
@@ -2221,6 +2222,16 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
  (1451, 145, 1, 'Isaiah', 'LXX Isaiah 49:6+104 49:6-62', 'Acts', 'SBLGNT Acts 13:47+29 13:47-45', 99422, 12, 45085, 12); -- Τεθεικα σε εις
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1451, 145, 1, 'Isaiah', 'LXX Isaiah 49:6+130 49:6', 'Acts', 'SBLGNT Acts 13:47+38 13:47', 99448, 48, 45094, 48); -- εις φως εθνων του ειναι σε εις σωτηριαν εως εσχατου της γης, the leading "εις" overlaps the end of the first clasp
+insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1461, 146, 1, 'Isaiah', null, 'LXX Isaiah 58:6+108 58:6-29', 'Luke', 'SBLGNT Luke 4:18+111 4:18', 116010, 30, 14471, 31, 'manual');
+insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1461, 146, 1, 'Isaiah', null, 'LXX Isaiah 58:6+117 58:6-28', 'Luke', 'SBLGNT Luke 4:18+121 4:19-26', 116019, 22, 14481, 22, 'getrefs');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (146, 1, 'του προφητου Ησαΐου', 'ην γεγραμμενον'); -- ην γεγραμμενον = it was written
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (146, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1401, 146, 1, 'Isaiah', 'LXX Isaiah 58:6+108 58:6-29', 'Luke', 'SBLGNT Luke 4:18+111 4:18', 116010, 30, 14471, 31); -- αποστελλε τεθραυσμενους εν αφεσει -> αποστειλαι τεθραυσμενους εν αφεσει
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2011, 201, 1, 'Jeremiah', null, 'LXX Jeremiah 31:15+50 31:15-64', 'Matthew', 'SBLGNT Matthew 2:18+25 2:18-66', 80265, 9, 3951, 9, 'getrefs');
@@ -2955,8 +2966,8 @@ insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (20091, 2009, 1, 'Genesis', 'LXX Genesis 2:7+82 2:7', 'I_Corinthians', 'SBLGNT I_Corinthians 15:45+17 15:45-30', 3941, 29, 30050, 39);
 -- Alternative way:
-insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
- (920091, 'I_Corinthians', 'SBLGNT I_Corinthians 15:45 15:45-69', 30033, 30049);
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos, alternative) values
+ (920091, 'I_Corinthians', 'SBLGNT I_Corinthians 15:45 15:45-69', 30033, 30049, true);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (920091, 2009, 1, 'Genesis', 'LXX Genesis 2:7+98 2:7', 'I_Corinthians', 'SBLGNT I_Corinthians 15:45+43 15:45-30', 3957, 13, 30076, 13);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
@@ -3105,8 +3116,8 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (20181, 2018, 1, 'Genesis', 'LXX Genesis 15:14+32 15:14-22', 'Acts', 'SBLGNT Acts 7:7+47 7:7-31', 35157, 23, 18860, 21);
 -- Alternative way:
-insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
- (920181, 'Acts', 'SBLGNT Acts 7:6 7:6-85', 18708, 18727);
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos, alternative) values
+ (920181, 'Acts', 'SBLGNT Acts 7:6 7:6-85', 18708, 18727, true);
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
  (920181, 'Acts', 'SBLGNT Acts 7:7+34 7:7-55', 18847, 18856);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
