@@ -90,3 +90,6 @@ compare12
 # difference = 0.471795
 
 ## There should be a command to shorten both texts in the comparison until the difference is minimal.
+
+## The study at https://www.evidenceunseen.com/bible-difficulties-2/nt-difficulties/romans-2/1-cor-29-why-does-paul-quote-isaiah-644-and-6517/
+## mentions Isaiah 64:4 and 65:17. It is, however, difficult to see if there is indeed a literal match here.
