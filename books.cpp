@@ -221,6 +221,9 @@ string processWord(string word) {
         if (c1 == 0x80) {
             i--;
         }
+        if (c1 == '|') { // in BHPGNT, e.g. "kyrios" is preceded with this
+            i--;
+        }
         if (c1 == '(' || c1 == ')') {
             i--;
         }
@@ -287,6 +290,16 @@ VerseInfo splitVerseInfo(string verseInfo) {
     throw InvalidPassage;
 }
 
+bool isOTBook(string moduleName) {
+    if (moduleName == "LXX") return true;
+    return false;
+    }
+
+bool isNTBook(string moduleName) {
+    if (moduleName == "SBLGNT" || moduleName == "BHPGNT") return true;
+    return false;
+    }
+
 int lookupTranslation(string moduleName, string book, string verse) {
     SWMgr library(new MarkupFilterMgr(FMT_PLAIN));
     SWModule *module;
@@ -300,12 +313,12 @@ int lookupTranslation(string moduleName, string book, string verse) {
     string lookupString = book + " " + verse;
     module->setKey(lookupString.c_str());
     string text;
-    if (moduleName == "LXX")
+    if (isOTBook(moduleName))
         text += ot_color;
-    if (moduleName == "SBLGNT")
+    if (isNTBook(moduleName))
         text += nt_color;
     text += module->renderText().c_str();
-    if (moduleName == "LXX" || moduleName == "SBLGNT")
+    if (isOTBook(moduleName) || isNTBook(moduleName))
         text += reset_color;
     info(text);
     return 0;
@@ -314,7 +327,7 @@ int lookupTranslation(string moduleName, string book, string verse) {
 int addBook_cached(string moduleName) {
     vector<string> bookNames;
     // This is needed for correct alphabetical ordering:
-    if (moduleName == "LXX") {
+    if (isOTBook(moduleName)) {
         bookNames={"Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy",
             "Joshua", "Judges", "Ruth",
             "I_Samuel", "II_Samuel", "I_Kings", "II_Kings", "I_Chronicles", "II_Chronicles",
@@ -323,7 +336,7 @@ int addBook_cached(string moduleName) {
             "Hosea", "Joel", "Amos", "Obadiah", "Jonah", "Micah",
                 "Nahum", "Habakkuk", "Zephaniah", "Haggai", "Zechariah", "Malachi"};
         }
-    if (moduleName == "SBLGNT") {
+    if (isNTBook(moduleName)) {
         bookNames={"Matthew", "Mark", "Luke", "John", "Acts",
             "Romans", "I_Corinthians", "II_Corinthians", "Galatians",
                 "Ephesians", "Philippians", "Colossians",
@@ -510,6 +523,9 @@ int addBooks() {
         success = 1;
     }
     if (addBook("SBLGNT", "Matthew 1:1", "Revelation of John 22:21", true) != 0) {
+        success = 1;
+    }
+    if (addBook("BHPGNT", "Matthew 1:1", "Revelation of John 22:21", true) != 0) {
         success = 1;
     }
     return success;
