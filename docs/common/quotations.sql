@@ -79,6 +79,7 @@ insert into authors (name, info) values ('Ezekiel', 'Ezekiel');
 insert into authors (name, info) values ('Joel', 'Joel');
 insert into authors (name, info) values ('Amos', 'Amos');
 insert into authors (name, info) values ('Hosea', 'Hosea');
+insert into authors (name, info) values ('Jonah', 'Jonah');
 insert into authors (name, info) values ('Micah', 'Micah');
 insert into authors (name, info) values ('Habakkuk', 'Habakkuk');
 insert into authors (name, info) values ('Haggai', 'Haggai');
@@ -120,6 +121,7 @@ insert into books (name, author, info, number) values ('Daniel', 'Daniel', 'Book
 insert into books (name, author, info, number) values ('Hosea', 'Hosea', 'Book of Hosea', 28);
 insert into books (name, author, info, number) values ('Joel', 'Joel', 'Book of Joel', 29);
 insert into books (name, author, info, number) values ('Amos', 'Amos', 'Book of Amos', 30);
+insert into books (name, author, info, number) values ('Jonah', 'Jonah', 'Book of Jonah', 32);
 insert into books (name, author, info, number) values ('Micah', 'Micah', 'Book of Micah', 33);
 insert into books (name, author, info, number) values ('Habakkuk', 'Habakkuk', 'Book of Habakkuk', 35);
 insert into books (name, author, info, number) values ('Haggai', 'Haggai', 'Book of Haggai', 37);
@@ -2547,6 +2549,18 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
  (14012, 1401, 2, 'Joel', 'LXX Joel 2:28 2:28-168', 'Acts', 'SBLGNT Acts 2:17 2:17-189', 5165, 8, 3969, 8); -- και εσται
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (14012, 1401, 2, 'Joel', 'LXX Joel 2:28+20 2:32-103', 'Acts', 'SBLGNT Acts 2:17+39 2:21', 5185, 430, 4008, 472); -- this can be split into some other ones, consider doing it, TODO
+
+-- https://projekte.isbtf.de/lxx-nt/index.php, 5473
+insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (14511, 1451, 1, 'Jonah', null, 'LXX Jonah 1:17+50 1:17', 'Matthew', 'SBLGNT Matthew 12:40+8 12:40-67', 1910, 51, 33085, 51, 'getrefs');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (1451, 1, 'Ιωνας', 'ωσπερ γαρ'); -- ωσπερ γαρ = just as for
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (1451, 1, 'quotation', 'literal', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (14511, 'Matthew', 'SBLGNT Matthew 12:40 12:40-118', 33077, 33084);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (14511, 1451, 1, 'Jonah', 'LXX Jonah 1:17+50 1:17', 'Matthew', 'SBLGNT Matthew 12:40+8 12:40-67', 1910, 51, 33085, 51);
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (15011, 1501, 1, 'Micah', null, 'LXX Micah 5:2 5:2-132', 'Matthew', 'SBLGNT Matthew 2:6 2:6-103', 6563, 12, 2608, 12, 'getrefs');
