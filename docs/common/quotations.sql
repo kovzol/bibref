@@ -1930,9 +1930,20 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (133, 1, null, null);
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (133, 1, 'strong allusion', 'literal, fuzzy', 'Z.K.');
--- TODO: Find passage in Isaiah.
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1341, 134, 1, 'Isaiah', null, 'LXX Isaiah 53:4', 'Matthew', 'Matthew 8:17', null, null, null, null, 'traditional');
+insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1341, 134, 1, 'Isaiah', null, 'LXX Isaiah 53:4+1 53:4-92', 'Matthew', 'SBLGNT Matthew 8:17+47 8:17-39', 107716, 8, 19103, 8, 'getrefs');
+insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1341, 134, 1, 'Isaiah', null, 'LXX Isaiah 53:4 53:4-81', 'Matthew', 'SBLGNT Matthew 8:17+46 8:17-27', 107715, 20, 19102, 21, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (134, 1, 'Ησαΐου του προφητου', 'λεγοντος'); -- ρηθεν ... λεγοντος = having spoken ... saying
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (134, 1, 'quotation', 'fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (1341, 'Matthew', 'SBLGNT Matthew 8:17 8:17-48', 19056, 19101);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1341, 134, 1, 'Isaiah', 'LXX Isaiah 53:4 53:4-81', 'Matthew', 'SBLGNT Matthew 8:17+46 8:17-27', 107715, 20, 19102, 21); -- ουτος τας αμαρτιας ημων -> Αυτος τας ασθενειας ημων
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1351, 135, 1, 'Isaiah', null, 'LXX Isaiah 42:1+77 42:1-23', 'Matthew', 'SBLGNT Matthew 12:18+59 12:18-28', 83409, 19, 31171, 19, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
