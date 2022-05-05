@@ -15,6 +15,7 @@ apps:
     command: usr/local/bin/bibref
     environment:
       SWORD_PATH: $SNAP/root/.sword
+      LC_ALL: C.UTF-8
     plugs:
       - home
 
