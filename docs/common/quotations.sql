@@ -2939,11 +2939,11 @@ insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passag
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (20073, 2007, 3, 'Genesis', null, 'LXX Genesis 2:24 2:24', 'Matthew', 'SBLGNT Matthew 19:5+8 19:5', 5486, 126, 53783, 106, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
- (2007, 3, 'ο κτισας απ αρχης', 'Ουκ ανεγνωτε οτι'); -- ο κτισας απ αρχης = the One having created from the beginning, Ουκ ανεγνωτε οτι = Not have you read that (in Matthew 19:4)
+ (2007, 3, 'ο', 'και ειπεν'); -- και ειπεν = and said (the source is the same as in Matthew 19:4, that is, God: ο = the One)
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2007, 3, 'quotation', 'literal, fuzzy', 'Z.K.');
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
- (20073, 'Matthew', 'SBLGNT Matthew 19:4 19:4-40', 53703, 53734);
+ (20073, 'Matthew', 'SBLGNT Matthew 19:5 19:5-106', 53775, 53782);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (20073, 2007, 3, 'Genesis', 'LXX Genesis 2:24 2:24', 'Matthew', 'SBLGNT Matthew 19:5+8 19:5', 5486, 126, 53783, 106);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
@@ -2969,15 +2969,15 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2008, 1, 'quotation', 'literal, exact', 'Z.K.');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (20073, 2008, 2, 'Genesis', null, 'LXX Genesis 1:27+53 1:27', 'Matthew', 'SBLGNT Matthew 19:4+46 19:4', 2703, 26, 53749, 26, 'manual');
+ (20082, 2008, 2, 'Genesis', null, 'LXX Genesis 1:27+53 1:27', 'Matthew', 'SBLGNT Matthew 19:4+46 19:4', 2703, 26, 53749, 26, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
- (2008, 2, 'ο κτισας απ αρχης', 'Ουκ ανεγνωτε οτι'); -- ο κτισας απ αρχης = the One having created from the beginning, Ουκ ανεγνωτε οτι = Not have you read that
+ (2008, 2, 'ο', 'Ουκ ανεγνωτε οτι'); -- ο = the One, Ουκ ανεγνωτε οτι = Not have you read that
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2008, 2, 'quotation', 'literal, exact', 'Z.K.');
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
- (20073, 'Matthew', 'SBLGNT Matthew 19:5 19:5-106', 53775, 53782);
+ (20082, 'Matthew', 'SBLGNT Matthew 19:4 19:4-40', 53703, 53734);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
- (20073, 2008, 2, 'Genesis', 'LXX Genesis 1:27+53 1:27', 'Matthew', 'SBLGNT Matthew 19:4+46 19:4', 2703, 26, 53749, 26);
+ (20082, 2008, 2, 'Genesis', 'LXX Genesis 1:27+53 1:27', 'Matthew', 'SBLGNT Matthew 19:4+46 19:4', 2703, 26, 53749, 26);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (20091, 2009, 1, 'Genesis', null, 'LXX Genesis 2:7+98 2:7', 'I_Corinthians', 'SBLGNT I_Corinthians 15:45+43 15:45-30', 3957, 13, 30076, 13, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
