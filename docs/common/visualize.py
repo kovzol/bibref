@@ -1119,10 +1119,10 @@ def nt_passage_info_all(conn, format, order="", texts=0):
 
     if order == "ot":
         cur.execute("SELECT DISTINCT qi.nt_quotation_id" +
-            " FROM nt_quotation_introductions qi, books b, clasps c" +
-            " WHERE b.name = c.ot_book"
+            " FROM nt_quotation_introductions qi, books bo, books bn, clasps c" +
+            " WHERE bo.name = c.ot_book AND bn.name = c.nt_book "
             " AND qi.nt_quotation_id = c.nt_quotation_id"
-            " ORDER BY b.number, c.ot_startpos")
+            " ORDER BY bo.number, c.ot_startpos, bn.number")
     else:
         cur.execute("SELECT DISTINCT qi.nt_quotation_id" +
             " FROM nt_quotation_introductions qi, books b" +
