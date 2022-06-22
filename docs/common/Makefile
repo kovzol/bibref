@@ -197,6 +197,17 @@ nt_frequencies.csv: visualize.py quotations.sqlite3
 ot_frequencies.csv: visualize.py quotations.sqlite3
 	python3 visualize.py ot_freq_csv
 
+graphviz: ot_nt.png
+
+ot_nt.dot: visualize.py quotations.sqlite3
+	python3 visualize.py ot_nt_graphviz
+
+ot_nt.png: ot_nt.dot
+	fdp -T png $< > $@
+
+ot_nt.gif: ot_nt.dot
+	./ot_nt_gif
+
 selftest:
 	./selftest.py
 

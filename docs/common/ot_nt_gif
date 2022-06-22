@@ -1,0 +1,36 @@
+#!/bin/bash
+# This script creates a GIF animation (ot_nt.gif) based on the file ot_not.dot
+# by changing all "dotted" entries to "invis" first and then
+# draw them stepwise back.
+
+WIDTH=1000 # 1487 by default
+FPS=20 # 10 by default
+GIF=gif # working directory
+
+rm -fr $GIF ot_nt.gif
+mkdir -p $GIF
+
+cat ot_nt.dot | sed 's/dotted/invis/g' > $GIF/ot_nt_invis.dot
+
+FRAMES=`cat ot_nt.dot | grep dotted | wc -l`
+for i in `seq 1 $FRAMES`; do
+ if (( i<10 )); then
+  i=0$i
+  fi
+
+ # Prepare the frame
+ cat $GIF/ot_nt_invis.dot > $GIF/ot_nt_$i.dot
+ for j in `seq 1 $i`; do
+  sed -i.bak -z s/invis/dotted/1 $GIF/ot_nt_$i.dot # replace always the first occurrence
+  done
+ sed -i.bak -z s/dotted/solid/g $GIF/ot_nt_$i.dot # change dotted to solid
+
+ fdp -T png $GIF/ot_nt_$i.dot > $GIF/ot_nt_$i.png # create the frame as PNG
+
+ echo "Frame $i created"
+
+done
+
+cd $GIF
+# convert -delay 10 -loop 0 ot_nt_*.png ../ot_nt.gif # this is extremely slow
+ffmpeg -f image2 -framerate 1 -i ot_nt_%02d.png -vf "fps=$FPS,scale=$WIDTH:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop -1 ../ot_nt.gif

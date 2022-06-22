@@ -455,6 +455,76 @@ def ot_frequencies_csv(conn):
     f.write("Total," + str(total) + "\n")
     f.close()
 
+def ot_nt_graphviz(conn):
+    """
+    Show all connections in a GraphViz diagram
+    :param conn: the Connection object
+    """
+
+    f = open("ot_nt.dot", "w")
+    f.write("digraph G {\n")
+    f.write(" start=\"random1\";\n") # ensure deterministic output
+    f.write(" outputorder=\"edgesfirst\";\n")
+
+
+    f.write(" subgraph cluster_0 { style=filled; color=lightblue;\n")
+    f.write("  node [style=filled, color=cyan];\n")
+
+    cur = conn.cursor()
+    # NT books that contain quotations:
+    cur.execute("SELECT DISTINCT q.nt_book " +
+        " FROM quotations_with_introduction q, books b" +
+        " WHERE q.nt_book = b.name" +
+        " ORDER BY b.number")
+    rows = cur.fetchall()
+    for row in rows:
+        book = row[0]
+        f.write(f"  {book};\n")
+    # NT books that do not contain quotations:
+    cur.execute("SELECT name, number FROM books WHERE number > 100 EXCEPT SELECT DISTINCT q.nt_book, b.number" +
+        " FROM quotations_with_introduction_manual q, books b" +
+        " WHERE q.nt_book = b.name" +
+        " ORDER BY number")
+    rows = cur.fetchall()
+    for row in rows:
+        book = row[0]
+        f.write(f"  {book} [style=filled, color=cyan3];\n")
+    f.write(" }\n")
+
+    # OT books that contain quotations:
+    cur.execute("SELECT DISTINCT q.ot_book " +
+        " FROM quotations_with_introduction_manual q, books b" +
+        " WHERE q.ot_book = b.name" +
+        " ORDER BY b.number")
+    rows = cur.fetchall()
+    for row in rows:
+        book = row[0]
+        f.write(f" {book} [style=filled, color=yellow];\n")
+    # OT books that do not contain quotations:
+    cur.execute("SELECT name, number FROM books WHERE number < 100 EXCEPT SELECT DISTINCT q.ot_book, b.number" +
+        " FROM quotations_with_introduction_manual q, books b" +
+        " WHERE q.ot_book = b.name" +
+        " ORDER BY number")
+    rows = cur.fetchall()
+    for row in rows:
+        book = row[0]
+        f.write(f" {book} [style=filled, color=yellow3];\n")
+
+    cur.execute("SELECT q.ot_book, q.nt_book, COUNT(*), b1.number, b2.number " +
+        " FROM quotations_with_introduction_manual q, books b1, books b2" +
+        " WHERE b1.name = q.ot_book AND b2.name = q.nt_book"
+        " GROUP BY q.ot_book, q.nt_book" +
+        " ORDER BY b2.number, b1.number")
+    rows = cur.fetchall()
+    for row in rows:
+        ot_book, nt_book, c = row[0],row[1],row[2]
+        if c == 1:
+            c = " " # do not label single connections
+        f.write(f" {ot_book}->{nt_book} [labeljust=\"r\", label=\"{c}\", style=\"dotted\"];\n")
+
+    f.write("}\n")
+    f.close()
+
 def spawn_bibref():
     global bibref
     if bibref is not None:
@@ -1214,6 +1284,8 @@ def main():
                 nt_passage_info(conn, int(data), data2, int(data3))
         elif result_type == "ot_passage_info_content":
             nt_passage_info_all(conn, "latex", "ot", int(data2))
+        elif result_type == "ot_nt_graphviz":
+            ot_nt_graphviz(conn)
         else:
             psalms_report_latex(conn, result_type, data)
 
