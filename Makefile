@@ -57,7 +57,7 @@ OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
 
 CPPFLAGS += -I/usr/include/sword -s USE_BOOST_HEADERS=1
 
-CXXFLAGS := -s EXPORTED_FUNCTIONS=[_bibref_wasm] -s EXTRA_EXPORTED_RUNTIME_METHODS=['cwrap'] -fexceptions
+CXXFLAGS := -s EXPORTED_FUNCTIONS=[_bibref_wasm,_bibref_wasm_vocabulary] -s EXTRA_EXPORTED_RUNTIME_METHODS=['cwrap'] -fexceptions
 
 BIBREF_NATIVE_FOLDER := $(shell find . -name bibref -executable -printf "%h\n" | sort | head -1)
 

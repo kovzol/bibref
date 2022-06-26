@@ -1,0 +1,57 @@
+<html>
+<!-- This version is based on jquery.terminal. -->
+<body>
+<script src="bibref.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/2.33.2/js/jquery.terminal.min.js"></script>
+<script src="https://unpkg.com/jquery.terminal/js/autocomplete_menu.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/2.33.2/css/jquery.terminal.min.css" rel="stylesheet"/>
+
+<script>
+
+bibref().then(function(Module) {
+    bibref_wasm = Module.cwrap("bibref_wasm", "string", ["string"]);
+    bibref_wasm_vocabulary = Module.cwrap("bibref_wasm_vocabulary", "string", []);
+    bibref_wasm("colors 1");
+    bibref_wasm("addbooks");
+    bibref_wasm("help"); // This updates the keywords.
+
+    keywords = [...new Set(bibref_wasm_vocabulary().split(",").sort())];
+
+    bibref_term = $('body').terminal(function(cmd, term) {
+            var input = cmd;
+            var output = "";
+            try {
+                output = bibref_wasm(input);
+                term.echo(output.replaceAll("\n","<br>"), {raw: true, newline: true});
+                keywords = [...new Set(bibref_wasm_vocabulary().split(",").sort())]; // updating
+            }
+            catch (error) {
+                term.echo("[[b;red;]Sorry, an internal error is occurred.]");
+            }
+        }, {
+            checkArity: false,
+            autocompleteMenu: true,
+            // completion: keywords,
+            completion: function(string, callback) {
+                callback(keywords);
+                },
+            name: "bibref",
+            greetings: "Welcome to the web version of bibref!\nType 'help' to get help."
+        });
+
+    $.terminal.defaults.formatters.push(function(string) {
+        if (string.startsWith("%noformat%")) return string.substring(10);
+        return string.split(/((?:\s|&nbsp;|\(|\))+)/).map(function(string) {
+            if (keywords.indexOf(string) != -1) {
+                return '[[b;white;]' + string + ']';
+            } else {
+                return string;
+            }
+        }).join('');
+    });
+});
+
+</script>
+</body>
+</html>

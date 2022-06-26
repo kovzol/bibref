@@ -777,6 +777,13 @@ extern "C" {
     string output = cli_process(input);
     return cstr(output);
     }
+    EMSCRIPTEN_KEEPALIVE const char* bibref_wasm_vocabulary() {
+    string output = "";
+    for (auto word : vocabulary) {
+        output += word + ",";
+        }
+    return cstr(output);
+    }
 }
 #endif
 
