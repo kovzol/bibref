@@ -1,3 +1,5 @@
+![A bibref version based on jquery.terminal](jt-demo.png)
+
 # bibref
 
 *bibref* is a tool that helps discovering internal references in the Bible.
@@ -36,14 +38,15 @@ not yet widely identified.
 
 This software project attempts to support finding citations
 of the Septuagint in the New Testament automatically.
-The work is based on The SWORD Project.
+The work is based on [The SWORD Project](https://www.crosswire.org/sword/index.jsp).
 
 The *bibref* package offers several tools that help in comparing
 the verses of the Septuagint with the verses of the Greek New Testament.
 The tools consider the texts of full books of the Bible as one unit instead
 of considering just separated verses.
 The texts are provided by the SWORD project
-from the modules LXX and SBLGNT.
+from the modules [LXX](http://www.crosswire.org/sword/modules/ModInfo.jsp?modName=LXX) and
+[SBLGNT](http://www.crosswire.org/sword/modules/ModInfo.jsp?modName=SBLGNT).
 
 This project is a work in progress.
 
@@ -65,9 +68,14 @@ to use additional modules, please try installing the tool from source code (see 
 
 ### Web version (fallback)
 
-There is a web version of *bibref* available [online](https://matek.hu/zoltan/bibref/).
+
+There are two online web versions of *bibref* available: [a simple version](https://matek.hu/zoltan/bibref/)
+and [another one based on jquery.terminal](https://matek.hu/zoltan/bibref-2022Jun27/index-jt.html).
 It is somewhat slower than the installable version, but works immediately
-in a web browser. In the web version the modules LXX, SBLGNT and KJV are available.
+in a web browser. In the web versions the modules LXX, SBLGNT and KJV are available
+(in the second version, in addition, the [BHPGNT](https://github.com/greekcntr/BHP) module as well).
+
+(The figure above shows the version based on [jquery.terminal](https://terminal.jcubic.pl/).)
 
 ### Installation from source code (for developers)
 
