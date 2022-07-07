@@ -4240,6 +4240,12 @@ insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (41011, 4101, 1, 'II_Samuel', 'LXX II_Samuel 7:14 7:14-71', 'Hebrews', 'SBLGNT Hebrews 1:5+66 1:5', 20344, 45, 472, 45);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (15011, 4102, 1, 'II_Samuel', null, 'LXX II_Samuel 5:2+95 5:2-33', 'Matthew', 'SBLGNT Matthew 2:6+88 2:6', 13368, 28, 2696, 27, 'manual');
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (4102, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (15011, 4102, 1, 'II_Samuel', 'LXX II_Samuel 5:2+95 5:2-33', 'Matthew', 'SBLGNT Matthew 2:6+88 2:6', 13368, 28, 2696, 27); -- ποιμανεις τον λαον μου τον ισραηλ -> ποιμανει τον λαον μου τον Ισραηλ
+insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (42011, 4201, 1, 'I_Kings', null, 'LXX I_Kings 19:10+72 19:10-94', 'Romans', 'SBLGNT Romans 11:3+30 11:3-39', 75874, 28, 22370, 28, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (42011, 4201, 1, 'I_Kings', null, 'LXX I_Kings 19:10+72 19:10-11', 'Romans', 'SBLGNT Romans 11:3+5 11:3', 75874, 111, 22345, 92, 'manual');
