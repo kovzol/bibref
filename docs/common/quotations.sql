@@ -4161,6 +4161,21 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
  (24201, 2420, 1, 'Deuteronomy', 'LXX Deuteronomy 18:15+8 18:15-48', 'Acts', 'SBLGNT Acts 7:37+64 7:37-9', 57877, 12, 21551, 12); -- εκ των αδελφων
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (24201, 2420, 1, 'Deuteronomy', 'LXX Deuteronomy 18:15+23 18:15-40', 'Acts', 'SBLGNT Acts 7:37+80 7:37', 57892, 5, 21567, 5); -- ως εμε
+insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (24211, 2421, 1, 'Deuteronomy', null, 'LXX Deuteronomy 19:15+105 19:15-44', 'Matthew', 'SBLGNT Matthew 18:16+41 18:16-18', 60565, 22, 51782, 22, 'getrefs');
+insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (24211, 2421, 1, 'Deuteronomy', null, 'LXX Deuteronomy 19:15+105 19:15', 'Matthew', 'SBLGNT Matthew 18:16+41 18:16', 60565, 66, 51782, 40, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2421, 1, '', 'ινα'); -- ινα = that
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2421, 1, 'quotation', 'literal, fuzzy, superset', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (24211, 'Matthew', 'SBLGNT Matthew 18:16+38 18:16-40', 51779, 51781);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24211, 2421, 1, 'Deuteronomy', 'LXX Deuteronomy 19:15+105 19:15', 'Matthew', 'SBLGNT Matthew 18:16+41 18:16', 60565, 66, 51782, 40);
+-- TODO: The same passage is quoted in II_Corinthians 13:1, but without any introduction. This is something exceptional... Add this (or not).
+-- insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+--  (24212, 2421, 2, 'Deuteronomy', null, 'LXX Deuteronomy 19:15+105 19:15-41', 'II_Corinthians', 'SBLGNT II_Corinthians 13:1+26 13:1-22', 60565, 25, 21162, 25, 'getrefs');
 
 -- TODO: Add this as a quotation (if it is indeed from Job, the matching text is "σοφους εν τη", "wise in the"):
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
