@@ -1334,6 +1334,13 @@ insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (511, 51, 1, 'Psalms', 'LXX Psalms 89:20 89:20-34', 'Acts', 'SBLGNT Acts 13:22+68 13:22-58', 103496, 13, 42868, 13);
 
+-- TODO: Complete these entries if quotations with just contextual evidence will be accepted for the database. (See also II_Corinthians 13:1.)
+insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (521, 52, 1, 'Psalms', 118, 'LXX Psalms 118:26 118:26-28', 'Matthew', 'SBLGNT Matthew 21:9+75 21:9-20', 138698, 36, 59524, 36, 'getrefs');
+insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (531, 53, 1, 'Psalms', 148, 'LXX Psalms 148:1+67 148:1', 'Matthew', 'SBLGNT Matthew 21:9+117 21:9', 169576, 14, 59566, 14, 'getrefs');
+-- Also, there are references in the other Gospels. TODO.
+
 -- Non-psalms:
 
 -- TODO: Add traditional data (eventually).
