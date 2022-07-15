@@ -4122,7 +4122,9 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
  (24173, 'Mark', 'SBLGNT Mark 12:28 12:29-40', 40628, 40773);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
- (24173, 2417, 3, 'Deuteronomy', 'LXX Deuteronomy 6:4+103 6:5', 'Mark', 'SBLGNT Mark 12:29+28 12:30-21', 22171, 130, 40774, 130);
+ (24173, 2417, 3, 'Deuteronomy', 'LXX Deuteronomy 6:4+103 6:5-11', 'Mark', 'SBLGNT Mark 12:29+28 12:30-32', 22171, 119, 40774, 119);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24173, 2417, 3, 'Deuteronomy', 'LXX Deuteronomy 6:5+87 6:5', 'Mark', 'SBLGNT Mark 12:30+87 12:30-21', 22298, 3, 40901, 3); -- σου
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (24181, 2418, 1, 'Deuteronomy', null, 'LXX Deuteronomy 4:35+38 4:35-12', 'Mark', 'SBLGNT Mark 12:32+57 12:32-14', 16688, 17, 41054, 17, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
@@ -4183,6 +4185,15 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
 -- TODO: The same passage is quoted in II_Corinthians 13:1, but without any introduction. This is something exceptional... Add this (or not).
 -- insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
 --  (24212, 2421, 2, 'Deuteronomy', null, 'LXX Deuteronomy 19:15+105 19:15-41', 'II_Corinthians', 'SBLGNT II_Corinthians 13:1+26 13:1-22', 60565, 25, 21162, 25, 'getrefs');
+
+insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (24173, 2501, 1, 'Joshua', null, 'LXX Joshua 22:5+197 22:5-25', 'Mark', 'SBLGNT Mark 12:30+70 12:30-24', 60942, 17, 40884, 17, 'getrefs');
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24173, 2501, 1, 'Joshua', 'LXX Joshua 22:5+197 22:5-25', 'Mark', 'SBLGNT Mark 12:30+70 12:30-24', 60942, 17, 40884, 17);
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2501, 1, 'ποια εντολη μεγαλη εν τω νομω', null); -- ποια εντολη μεγαλη εν τω νομω = which is the greatest commandment in the law (see 2417,3)
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2501, 1, 'quotation', 'literal, exact', 'Z.K.');
 
 -- TODO: Add this as a quotation (if it is indeed from Job, the matching text is "σοφους εν τη", "wise in the"):
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
