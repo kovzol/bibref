@@ -4098,7 +4098,9 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
  (24171, 'Matthew', 'SBLGNT Matthew 22:36 22:37-78', 65687, 65729);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
- (24171, 2417, 1, 'Deuteronomy', 'LXX Deuteronomy 6:5+3 6:5', 'Matthew', 'SBLGNT Matthew 22:37+10 22:37', 22214, 87, 65730, 78);
+ (24171, 2417, 1, 'Deuteronomy', 'LXX Deuteronomy 6:5+3 6:5-11', 'Matthew', 'SBLGNT Matthew 22:37+10 22:37-10', 22214, 76, 65730, 68);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24171, 2417, 1, 'Deuteronomy', 'LXX Deuteronomy 6:5+87 6:5', 'Matthew', 'SBLGNT Matthew 22:37+85 22:37', 22298, 3, 65805, 3); -- σου
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (24172, 2417, 2, 'Deuteronomy', null, 'LXX Deuteronomy 6:5+3 6:5-39', 'Luke', 'SBLGNT Luke 10:27+18 10:27-76', 22214, 48, 43043, 48, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
@@ -4188,12 +4190,22 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (24173, 2501, 1, 'Joshua', null, 'LXX Joshua 22:5+197 22:5-25', 'Mark', 'SBLGNT Mark 12:30+70 12:30-24', 60942, 17, 40884, 17, 'getrefs');
+insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (24173, 2501, 1, 'Joshua', null, 'LXX Joshua 22:5+197 22:5-25', 'Mark', 'SBLGNT Mark 12:30+70 12:30-24', 60942, 17, 40884, 17, 'manual');
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (24173, 2501, 1, 'Joshua', 'LXX Joshua 22:5+197 22:5-25', 'Mark', 'SBLGNT Mark 12:30+70 12:30-24', 60942, 17, 40884, 17);
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (2501, 1, 'ποια εντολη μεγαλη εν τω νομω', null); -- ποια εντολη μεγαλη εν τω νομω = which is the greatest commandment in the law (see 2417,3)
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2501, 1, 'quotation', 'literal, exact', 'Z.K.');
+insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (24171, 2501, 2, 'Joshua', null, 'LXX Joshua 22:5+197 22:5-25', 'Matthew', 'SBLGNT Matthew 22:37+71 22:37-3', 60942, 17, 65791, 14, 'manual');
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24171, 2501, 2, 'Joshua', 'LXX Joshua 22:5+197 22:5-25', 'Matthew', 'SBLGNT Matthew 22:37+71 22:37-3', 60942, 17, 65791, 14);
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2501, 2, 'ποια εντολη μεγαλη εν τω νομω', null); -- ποια εντολη μεγαλη εν τω νομω = which is the greatest commandment in the law (see 2417,1)
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2501, 2, 'quotation', 'literal, fuzzy', 'Z.K.');
 
 -- TODO: Add this as a quotation (if it is indeed from Job, the matching text is "σοφους εν τη", "wise in the"):
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
