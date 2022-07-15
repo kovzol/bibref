@@ -4206,6 +4206,14 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (2501, 2, 'ποια εντολη μεγαλη εν τω νομω', null); -- ποια εντολη μεγαλη εν τω νομω = which is the greatest commandment in the law (see 2417,1)
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2501, 2, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (24172, 2501, 3, 'Joshua', null, 'LXX Joshua 22:5+197 22:5-25', 'Luke', 'SBLGNT Luke 10:27+100 10:27-28', 60942, 17, 43125, 14, 'manual');
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (24172, 2501, 3, 'Joshua', 'LXX Joshua 22:5+197 22:5-25', 'Luke', 'SBLGNT Luke 10:27+100 10:27-28', 60942, 17, 43125, 14);
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2501, 3, 'Εν τω νομω', 'τι γεγραπται; πως αναγινωσκεις'); -- Εν τω νομω = in the law, τι γεγραπται; πως αναγινωσκεις = what has been written; how read you (see 2417,2)
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2501, 3, 'quotation', 'literal, fuzzy', 'Z.K.');
 
 -- TODO: Add this as a quotation (if it is indeed from Job, the matching text is "σοφους εν τη", "wise in the"):
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
