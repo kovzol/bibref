@@ -1407,7 +1407,6 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
  (1033, 103, 3, 'Isaiah', 'LXX Isaiah 52:5+90 52:5-44', 'Romans', 'SBLGNT Romans 2:24+17 2:24-39', 106357, 6, 4599, 6); -- di ymas
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1033, 103, 3, 'Isaiah', 'LXX Isaiah 52:5+115 52:5', 'Romans', 'SBLGNT Romans 2:24+23 2:24-14', 106382, 25, 4605, 25);
-
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1041, 104, 1, 'Isaiah', null, 'LXX Isaiah 10:22+18 10:22-64', 'Romans', 'SBLGNT Romans 9:27+46 9:27-18', 22157, 27, 20033, 27, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
@@ -1444,7 +1443,6 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (91041, 104, 1, 'Isaiah', 'LXX Isaiah 10:23+21 10:23-21', 'Romans', 'SBLGNT Romans 9:28+28 9:28-15', 22269, 7, 20106, 7); -- ποιησει
 -- End of alternation.
-
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (1051, 105, 1, 'Isaiah', null, 'LXX Isaiah 1:9+3 1:9', 'Romans', 'SBLGNT Romans 9:29+24 9:29', 809, 81, 20152, 81, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
@@ -2289,6 +2287,18 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
  (146, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1401, 146, 1, 'Isaiah', 'LXX Isaiah 58:6+108 58:6-29', 'Luke', 'SBLGNT Luke 4:18+111 4:18', 116010, 30, 14471, 31); -- αποστελλε τεθραυσμενους εν αφεσει -> αποστειλαι τεθραυσμενους εν αφεσει
+insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1471, 147, 1, 'Isaiah', null, 'LXX Isaiah 55:10+102 55:10', 'II_Corinthians', 'SBLGNT II_Corinthians 9:10+19 9:10-71', 111473, 28, 14439, 28, 'getrefs');
+insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1471, 147, 1, 'Isaiah', null, 'LXX Isaiah 55:10+96 55:10', 'II_Corinthians', 'SBLGNT II_Corinthians 9:10+13 9:10-71', 111467, 34, 14433, 34, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (147, 1, null, 'ο δε επιχορηγων'); -- ο δε επιχορηγων = the [One] now supplying
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (147, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (1471, 'II_Corinthians', 'SBLGNT II_Corinthians 9:10 9:10-105', 14420, 14432);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1471, 147, 1, 'Isaiah', 'LXX Isaiah 55:10+96 55:10', 'II_Corinthians', 'SBLGNT II_Corinthians 9:10+13 9:10-71', 111467, 34, 14433, 34);
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2011, 201, 1, 'Jeremiah', null, 'LXX Jeremiah 31:15+50 31:15-64', 'Matthew', 'SBLGNT Matthew 2:18+25 2:18-66', 80265, 9, 3951, 9, 'getrefs');
