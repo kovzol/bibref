@@ -303,10 +303,12 @@ def nt_report_latex(conn, book):
     """
 
     print ("\\documentclass{article}")
+    print ("\\usepackage{geometry}")
+    print ("\\geometry{a4paper,margin=1.5cm}")
     print ("\\begin{document}")
     print ("\\thispagestyle{empty}")
-    print ("\\centering")
     print ("\\begin{table}")
+    print ("\\centering")
     print ("\\begin{tabular}{rrlc}")
     print (f"&&&{{\\bf getrefs}}\\\\")
     print (f"{{\\bf No.}}&{{\\bf {book} passage}}&{{\\bf OT passage}}&{{\\bf chunks}}\\\\")
@@ -355,10 +357,12 @@ def ot_report_latex(conn, book):
     """
 
     print ("\\documentclass{article}")
+    print ("\\usepackage{geometry}")
+    print ("\\geometry{a4paper,margin=1.5cm}")
     print ("\\begin{document}")
     print ("\\thispagestyle{empty}")
-    print ("\\centering")
     print ("\\begin{table}")
+    print ("\\centering")
     print ("\\begin{tabular}{rrlc}")
     print (f"&&&{{\\bf getrefs}}\\\\")
     print (f"{{\\bf No.}}&{{\\bf {book} passage}}&{{\\bf NT passage}}&{{\\bf chunks}}\\\\")
