@@ -1788,7 +1788,7 @@ insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passag
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (124, 2, 'εν βιβλω λογων Ησαΐου του προφητου', 'ως γεγραπται'); -- εν βιβλω λογων Ησαΐου του προφητου = in the book of the words of Isaiah the prophet, ως γεγραπται = as it has been written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
- (124, 2, 'quotation', 'literal, exact, supertext', 'Z.K.');
+ (124, 2, 'quotation', 'literal, exact, superset', 'Z.K.');
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
  (1242, 'Luke', 'SBLGNT Luke 3:4 3:4-72', 10521, 10560);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
@@ -2299,6 +2299,16 @@ insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt
  (1471, 'II_Corinthians', 'SBLGNT II_Corinthians 9:10 9:10-105', 14420, 14432);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1471, 147, 1, 'Isaiah', 'LXX Isaiah 55:10+96 55:10', 'II_Corinthians', 'SBLGNT II_Corinthians 9:10+13 9:10-71', 111467, 34, 14433, 34);
+insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1481, 148, 1, 'Isaiah', null, 'LXX Isaiah 2:2+2 2:2-106', 'Acts', 'SBLGNT Acts 2:17+2 2:17-168', 3073, 27, 3971, 27, 'getrefs');
+insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1481, 148, 1, 'Isaiah', null, 'LXX Isaiah 2:2+3 2:2-106', 'Acts', 'SBLGNT Acts 2:17+3 2:17-168', 3074, 26, 3972, 26, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (148, 1, 'προφητου Ιωηλ', 'ειρημενον'); -- προφητου Ιωηλ = prophet Joel, ειρημενον = having been spoken
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (148, 1, 'quotation', 'literal, exact', 'Z.K.');
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (14012, 148, 1, 'Isaiah', 'LXX Isaiah 2:2+3 2:2-106', 'Acts', 'SBLGNT Acts 2:17+3 2:17-168', 3074, 26, 3972, 26);
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2011, 201, 1, 'Jeremiah', null, 'LXX Jeremiah 31:15+50 31:15-64', 'Matthew', 'SBLGNT Matthew 2:18+25 2:18-66', 80265, 9, 3951, 9, 'getrefs');
@@ -3602,7 +3612,7 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
 -- insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
 --  (2116, 1, 'τω Ααρων', 'ειποντες'); -- ειποντες = having said
 -- insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
---  (2116, 1, 'quotation', 'literal, fuzzy, supertext', 'Z.K.');
+--  (2116, 1, 'quotation', 'literal, fuzzy, superset', 'Z.K.');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (21171, 2117, 1, 'Exodus', null, 'LXX Exodus 22:28+22 22:28', 'Acts', 'SBLGNT Acts 23:5+59 23:5', 64257, 30, 76956, 30, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
