@@ -796,9 +796,20 @@ string find(string text, string moduleName) {
 }
 
 vector<string> find_min_unique(string text, string moduleName, int verb) {
+    int long_limit = 10000;
+    int extreme_limit = 50000;
     vector<string> retval;
     int l = text.length();
+    if (l > extreme_limit) {
+        error("Input is extremely long (" + to_string(l) + " characters), expect out of memory error.");
+        } else if (l > long_limit) {
+        error("Input is very long (" + to_string(l) + " characters), expect very slow operation.");
+        }
     vector<vector<int>> is_unique(l, vector<int> (l)); // TODO: improve this to use just the half
+    if (l > long_limit) {
+        error("Memory successfully reserved.");
+        }
+
     // Initialization:
     for (int i = 0; i < l; ++i) {
         for (int j = 0; j < l - i; ++j) {
