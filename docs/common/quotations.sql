@@ -3218,6 +3218,18 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (920181, 2018, 1, 'Genesis', 'LXX Genesis 15:14+32 15:14-22', 'Acts', 'SBLGNT Acts 7:7+47 7:7-31', 35157, 23, 18860, 21); -- μετα δε ταυτα εξελευσονται
 -- End of alternative way.
+insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (20191, 2019, 1, 'Genesis', null, 'LXX Genesis 17:19+130 17:19', 'Acts', 'SBLGNT Acts 7:5+87 7:5-18', 39279, 27, 18663, 27, 'getrefs');
+insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (20191, 2019, 1, 'Genesis', null, 'LXX Genesis 17:19+130 17:19', 'Acts', 'SBLGNT Acts 7:5+87 7:5-18', 39279, 27, 18663, 27, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2019, 1, null, 'επηγγειλατο'); -- επηγγειλατο = [God] promised
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2019, 1, 'quotation', 'literal, exact', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (20191, 'Acts', 'SBLGNT Acts 7:5+49 7:5-72', 18625, 18635);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (20191, 2019, 1, 'Genesis', 'LXX Genesis 17:19+130 17:19', 'Acts', 'SBLGNT Acts 7:5+87 7:5-18', 39279, 27, 18663, 27);
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (21011, 2101, 1, 'Exodus', null, 'LXX Exodus 33:19+86 33:19', 'Romans', 'SBLGNT Romans 9:15+15 9:15', 99825, 38, 19131, 38, 'getrefs');
