@@ -3608,6 +3608,7 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
  (21141, 2114, 1, 'Exodus', 'LXX Exodus 12:10+30 12:10-48', 'John', 'SBLGNT John 19:36+31 19:36', 31881, 25, 64533, 26);
 -- This does not seem to be a formal quotation. Stephan recalls many parts of a long story. Even if there are
 -- longer parts that are literally the same, this is a kind of mixture of story telling and non-strict quoting.
+-- On the other hand, a quoted text of 93 characters with full match cannot be just something random!
 -- TODO: Maybe handle the whole story as one text and find the clasps---there are many shorter and longer ones too.
 -- insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
 --  (21151, 2115, 1, 'Exodus', null, 'LXX Exodus 2:14+7 2:14-53', 'Acts', 'SBLGNT Acts 7:27+35 7:29-72', 3240, 93, 20629, 93, 'getrefs');
