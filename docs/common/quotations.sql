@@ -4310,6 +4310,20 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
 -- TODO: Double check this:
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (31041, 3104, 1, 'Proverbs', null, 'LXX Proverbs 26:11', 'II_Peter', 'II_Peter 2:22', null, null, null, null, 'traditional');
+insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (31051, 3105, 1, 'Proverbs', null, 'LXX Proverbs 11:31+6 11:31', 'I_Peter', 'SBLGNT I_Peter 4:18+6 4:18', 20518, 49, 7758, 49, 'getrefs');
+insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (31051, 3105, 1, 'Proverbs', null, 'LXX Proverbs 11:31 11:31', 'I_Peter', 'SBLGNT I_Peter 4:18+3 4:18', 20512, 55, 7755, 52, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (3105, 1, null, 'και'); -- και = and
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (3105, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (31051, 'I_Peter', 'SBLGNT I_Peter 4:18 4:18-52', 7752, 7754);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (31051, 3105, 1, 'Proverbs', 'LXX Proverbs 11:31 11:31-52', 'I_Peter', 'SBLGNT I_Peter 4:18+3 4:18-49', 20512, 3, 7755, 3);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (31051, 3105, 1, 'Proverbs', 'LXX Proverbs 11:31+6 11:31', 'I_Peter', 'SBLGNT I_Peter 4:18+6 4:18', 20518, 49, 7758, 49);
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (51, 3201, 1, 'Ecclesiastes', null, 'LXX Ecclesiastes 7:20+11 7:20-38', 'Romans', 'SBLGNT Romans 3:10+17 3:10-7', 12724, 15, 5770, 15, 'manual');
