@@ -1339,7 +1339,7 @@ insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passag
  (521, 52, 1, 'Psalms', 118, 'LXX Psalms 118:26 118:26-28', 'Matthew', 'SBLGNT Matthew 21:9+75 21:9-20', 138698, 36, 59524, 36, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (531, 53, 1, 'Psalms', 148, 'LXX Psalms 148:1+67 148:1', 'Matthew', 'SBLGNT Matthew 21:9+117 21:9', 169576, 14, 59566, 14, 'getrefs');
--- Also, there are references in the other Gospels. TODO.
+-- Also, there are references in the other Gospels (Mark 11:9, John 12:13, Luke 13:35, Matthew 23:39). TODO.
 
 -- Non-psalms:
 
