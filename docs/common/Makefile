@@ -208,6 +208,17 @@ ot_nt.png: ot_nt.dot
 ot_nt.gif: ot_nt.dot
 	./ot_nt_gif
 
+graphviz_hu: ot_nt-hu.png
+
+ot_nt-hu.dot: visualize.py quotations.sqlite3
+	python3 visualize.py ot_nt_graphviz hu
+
+ot_nt-hu.png: ot_nt-hu.dot
+	dot -Kneato -Tpng $< > $@
+
+ot_nt-hu.gif: ot_nt-hu.dot
+	./ot_nt_gif ot_nt-hu.gif
+
 selftest:
 	./selftest.py
 

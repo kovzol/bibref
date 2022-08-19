@@ -459,13 +459,17 @@ def ot_frequencies_csv(conn):
     f.write("Total," + str(total) + "\n")
     f.close()
 
-def ot_nt_graphviz(conn):
+def ot_nt_graphviz(conn, lang=None):
     """
     Show all connections in a GraphViz diagram
     :param conn: the Connection object
+    :param lang: use language lang
     """
 
-    f = open("ot_nt.dot", "w")
+    if lang == "hu":
+        f = open("ot_nt-hu.dot", "w")
+    else:
+        f = open("ot_nt.dot", "w")
     f.write("digraph G {\n")
     f.write(" start=\"random1\";\n") # ensure deterministic output
     f.write(" outputorder=\"edgesfirst\";\n")
@@ -479,9 +483,13 @@ def ot_nt_graphviz(conn):
         " ORDER BY b.number")
     rows = cur.fetchall()
     for row in rows:
+        # The following lines are the same in all 4 cases, TODO: unify
         book = row[0]
         pos = graphviz_positions[book]
-        f.write(f" {book} [pos=\"{pos}\"];\n")
+        label = book
+        if lang == "hu":
+            label = books_translated_hu[book]
+        f.write(f" {book} [label=\"{label}\", pos=\"{pos}\"];\n")
     # NT books that do not contain quotations:
     cur.execute("SELECT name, number FROM books WHERE number > 100 EXCEPT SELECT DISTINCT q.nt_book, b.number" +
         " FROM quotations_with_introduction_manual q, books b" +
@@ -491,7 +499,10 @@ def ot_nt_graphviz(conn):
     for row in rows:
         book = row[0]
         pos = graphviz_positions[book]
-        f.write(f" {book} [style=filled, color=cyan3, pos=\"{pos}\"];\n")
+        label = book
+        if lang == "hu":
+            label = books_translated_hu[book]
+        f.write(f" {book} [label=\"{label}\", style=filled, color=cyan3, pos=\"{pos}\"];\n")
 
     # OT books that contain quotations:
     cur.execute("SELECT DISTINCT q.ot_book " +
@@ -502,7 +513,10 @@ def ot_nt_graphviz(conn):
     for row in rows:
         book = row[0]
         pos = graphviz_positions[book]
-        f.write(f" {book} [style=filled, color=yellow, pos=\"{pos}\"];\n")
+        label = book
+        if lang == "hu":
+            label = books_translated_hu[book]
+        f.write(f" {book} [label=\"{label}\", style=filled, color=yellow, pos=\"{pos}\"];\n")
     # OT books that do not contain quotations:
     cur.execute("SELECT name, number FROM books WHERE number < 100 EXCEPT SELECT DISTINCT q.ot_book, b.number" +
         " FROM quotations_with_introduction_manual q, books b" +
@@ -512,7 +526,10 @@ def ot_nt_graphviz(conn):
     for row in rows:
         book = row[0]
         pos = graphviz_positions[book]
-        f.write(f" {book} [style=filled, color=yellow3, pos=\"{pos}\"];\n")
+        label = book
+        if lang == "hu":
+            label = books_translated_hu[book]
+        f.write(f" {book} [label=\"{label}\", style=filled, color=yellow3, pos=\"{pos}\"];\n")
 
     cur.execute("SELECT q.ot_book, q.nt_book, COUNT(*), b1.number, b2.number " +
         " FROM quotations_with_introduction_manual q, books b1, books b2" +
@@ -1289,7 +1306,7 @@ def main():
         elif result_type == "ot_passage_info_content":
             nt_passage_info_all(conn, "latex", "ot", int(data2))
         elif result_type == "ot_nt_graphviz":
-            ot_nt_graphviz(conn)
+            ot_nt_graphviz(conn, data)
         else:
             psalms_report_latex(conn, result_type, data)
 
@@ -1363,6 +1380,74 @@ graphviz_positions = {
     'Revelation_of_John': "12,-6!"
     }
 
+books_translated_hu = {
+    'Genesis': "1Móz",
+    'Exodus': "2Móz",
+    'Leviticus': "3Móz",
+    'Numbers': "4Móz",
+    'Deuteronomy': "5Móz",
+    'Joshua': "Józs",
+    'Judges': "Bír",
+    'Ruth': "Ruth",
+    'I_Samuel': "1Sám",
+    'II_Samuel': "2Sám",
+    'I_Kings': "1Kir",
+    'II_Kings': "2Kir",
+    'I_Chronicles': "1Krón",
+    'II_Chronicles': "2Krón",
+    'Ezra': "Ezsd",
+    'Nehemiah': "Neh",
+    'Esther': "Esz",
+    'Job': "Jób",
+    'Psalms': "Zsolt",
+    'Proverbs': "Péld",
+    'Ecclesiastes': "Préd",
+    'Song_of_Solomon': "Énekek",
+    'Isaiah': "Ézs",
+    'Jeremiah': "Jer",
+    'Lamentations': "JSir",
+    'Ezekiel': "Ez",
+    'Daniel': "Dán",
+    'Hosea': "Hós",
+    'Joel': "Jóel",
+    'Amos': "Ám",
+    'Obadiah': "Abd",
+    'Jonah': "Jón",
+    'Micah': "Mik",
+    'Nahum': "Náh",
+    'Habakkuk': "Hab",
+    'Zephaniah': "Zof",
+    'Haggai': "Hagg",
+    'Zechariah': "Zak",
+    'Malachi': "Mal",
+    'Matthew': "Mt",
+    'Mark': "Mk",
+    'Luke': "Lk",
+    'John': "Jn",
+    'Acts': "ApCsel",
+    'Romans': "Róm",
+    'I_Corinthians': "1Kor",
+    'II_Corinthians': "2Kor",
+    'Galatians': "Gal",
+    'Ephesians': "Ef",
+    'Philippians': "Fil",
+    'Colossians': "Kol",
+    'I_Thessalonians': "1Thessz",
+    'II_Thessalonians': "2Thessz",
+    'I_Timothy': "1Tim",
+    'II_Timothy': "2Tim",
+    'Titus': "Tit",
+    'Philemon': "Filem",
+    'Hebrews': "Zsid",
+    'James': "Jak",
+    'I_Peter': "1Pt",
+    'II_Peter': "2Pt",
+    'I_John': "1Ján",
+    'II_John': "2Ján",
+    'III_John': "3Ján",
+    'Jude': "Júd",
+    'Revelation_of_John': "Jel"
+    }
 
 if __name__ == '__main__':
     main()
