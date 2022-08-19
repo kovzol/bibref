@@ -1,9 +1,9 @@
 #!/bin/bash
-# This script creates a GIF animation (ot_nt.gif) based on the file ot_not.dot
+# This script creates a GIF animation (ot_nt.gif) based on the file ot_nt.dot
 # by changing all "dotted" entries to "invis" first and then
 # draw them stepwise back.
 
-WIDTH=1000 # 1487 by default
+WIDTH=1920 # 1487 by default
 FPS=20 # 10 by default
 GIF=gif # working directory
 
@@ -25,7 +25,8 @@ for i in `seq 1 $FRAMES`; do
   done
  sed -i.bak -z s/dotted/solid/g $GIF/ot_nt_$i.dot # change dotted to solid
 
- fdp -T png $GIF/ot_nt_$i.dot > $GIF/ot_nt_$i.png # create the frame as PNG
+ # fdp -T png $GIF/ot_nt_$i.dot > $GIF/ot_nt_$i.png # create the frame as PNG # too random
+ dot -Kneato -Tpng $GIF/ot_nt_$i.dot > $GIF/ot_nt_$i.png # create the frame as PNG
 
  echo "Frame $i created"
 

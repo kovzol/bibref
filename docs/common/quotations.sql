@@ -2628,6 +2628,8 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
 -- https://projekte.isbtf.de/lxx-nt/index.php, 5473
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (14511, 1451, 1, 'Jonah', null, 'LXX Jonah 1:17+50 1:17', 'Matthew', 'SBLGNT Matthew 12:40+8 12:40-67', 1910, 51, 33085, 51, 'getrefs');
+insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (14511, 1451, 1, 'Jonah', null, 'LXX Jonah 1:17+50 1:17', 'Matthew', 'SBLGNT Matthew 12:40+8 12:40-67', 1910, 51, 33085, 51, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (1451, 1, 'Ιωνας', 'ωσπερ γαρ'); -- ωσπερ γαρ = just as for
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values

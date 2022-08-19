@@ -203,7 +203,7 @@ ot_nt.dot: visualize.py quotations.sqlite3
 	python3 visualize.py ot_nt_graphviz
 
 ot_nt.png: ot_nt.dot
-	fdp -T png $< > $@
+	dot -Kneato -Tpng $< > $@
 
 ot_nt.gif: ot_nt.dot
 	./ot_nt_gif

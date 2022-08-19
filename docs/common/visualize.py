@@ -469,10 +469,7 @@ def ot_nt_graphviz(conn):
     f.write("digraph G {\n")
     f.write(" start=\"random1\";\n") # ensure deterministic output
     f.write(" outputorder=\"edgesfirst\";\n")
-
-
-    f.write(" subgraph cluster_0 { style=filled; color=lightblue;\n")
-    f.write("  node [style=filled, color=cyan];\n")
+    f.write(" node [style=filled, color=cyan];\n")
 
     cur = conn.cursor()
     # NT books that contain quotations:
@@ -483,7 +480,8 @@ def ot_nt_graphviz(conn):
     rows = cur.fetchall()
     for row in rows:
         book = row[0]
-        f.write(f"  {book};\n")
+        pos = graphviz_positions[book]
+        f.write(f" {book} [pos=\"{pos}\"];\n")
     # NT books that do not contain quotations:
     cur.execute("SELECT name, number FROM books WHERE number > 100 EXCEPT SELECT DISTINCT q.nt_book, b.number" +
         " FROM quotations_with_introduction_manual q, books b" +
@@ -492,8 +490,8 @@ def ot_nt_graphviz(conn):
     rows = cur.fetchall()
     for row in rows:
         book = row[0]
-        f.write(f"  {book} [style=filled, color=cyan3];\n")
-    f.write(" }\n")
+        pos = graphviz_positions[book]
+        f.write(f" {book} [style=filled, color=cyan3, pos=\"{pos}\"];\n")
 
     # OT books that contain quotations:
     cur.execute("SELECT DISTINCT q.ot_book " +
@@ -503,7 +501,8 @@ def ot_nt_graphviz(conn):
     rows = cur.fetchall()
     for row in rows:
         book = row[0]
-        f.write(f" {book} [style=filled, color=yellow];\n")
+        pos = graphviz_positions[book]
+        f.write(f" {book} [style=filled, color=yellow, pos=\"{pos}\"];\n")
     # OT books that do not contain quotations:
     cur.execute("SELECT name, number FROM books WHERE number < 100 EXCEPT SELECT DISTINCT q.ot_book, b.number" +
         " FROM quotations_with_introduction_manual q, books b" +
@@ -512,7 +511,8 @@ def ot_nt_graphviz(conn):
     rows = cur.fetchall()
     for row in rows:
         book = row[0]
-        f.write(f" {book} [style=filled, color=yellow3];\n")
+        pos = graphviz_positions[book]
+        f.write(f" {book} [style=filled, color=yellow3, pos=\"{pos}\"];\n")
 
     cur.execute("SELECT q.ot_book, q.nt_book, COUNT(*), b1.number, b2.number " +
         " FROM quotations_with_introduction_manual q, books b1, books b2" +
@@ -1292,6 +1292,77 @@ def main():
             ot_nt_graphviz(conn)
         else:
             psalms_report_latex(conn, result_type, data)
+
+
+graphviz_positions = {
+    'Genesis': "-4,3!",
+    'Exodus': "-4,1!",
+    'Leviticus': "-4,-1!",
+    'Numbers': "-4,-3!",
+    'Deuteronomy': "-4,-5!",
+    'Joshua': "1,4!",
+    'Judges': "3,4!",
+    'Ruth': "5,4!",
+    'I_Samuel': "7,4!",
+    'II_Samuel': "9,4!",
+    'I_Kings': "11,4!",
+    'II_Kings': "13,4!",
+    'I_Chronicles': "15,4!",
+    'II_Chronicles': "17,4!",
+    'Ezra': "19,4!",
+    'Nehemiah': "21,4!",
+    'Esther': "23,4!",
+    'Job': "28,3!",
+    'Psalms': "28,1!",
+    'Proverbs': "28,-1!",
+    'Ecclesiastes': "28,-3!",
+    'Song_of_Solomon': "28,-5!",
+    'Isaiah': "-4,-10!",
+    'Jeremiah': "-2,-10!",
+    'Lamentations': "0,-10!",
+    'Ezekiel': "2,-10!",
+    'Daniel': "4,-10!",
+    'Hosea': "6,-10!",
+    'Joel': "8,-10!",
+    'Amos': "10,-10!",
+    'Obadiah': "12,-10!",
+    'Jonah': "14,-10!",
+    'Micah': "16,-10!",
+    'Nahum': "18,-10!",
+    'Habakkuk': "20,-10!",
+    'Zephaniah': "22,-10!",
+    'Haggai': "24,-10!",
+    'Zechariah': "26,-10!",
+    'Malachi': "28,-10!",
+    'Matthew': "7,0!",
+    'Mark': "9,0!",
+    'Luke': "11,0!",
+    'John': "13,0!",
+    'Acts': "17,0!",
+    'Romans': "0,-2!",
+    'I_Corinthians': "2,-2!",
+    'II_Corinthians': "4,-2!",
+    'Galatians': "6,-2!",
+    'Ephesians': "8,-2!",
+    'Philippians': "10,-2!",
+    'Colossians': "12,-2!",
+    'I_Thessalonians': "14,-2!",
+    'II_Thessalonians': "16,-2!",
+    'I_Timothy': "18,-2!",
+    'II_Timothy': "20,-2!",
+    'Titus': "22,-2!",
+    'Philemon': "24,-2!",
+    'Hebrews': "5,-4!",
+    'James': "7,-4!",
+    'I_Peter': "9,-4!",
+    'II_Peter': "11,-4!",
+    'I_John': "13,-4!",
+    'II_John': "15,-4!",
+    'III_John': "17,-4!",
+    'Jude': "19,-4!",
+    'Revelation_of_John': "12,-6!"
+    }
+
 
 if __name__ == '__main__':
     main()
