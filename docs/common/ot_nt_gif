@@ -6,16 +6,18 @@
 WIDTH=1920 # 1487 by default
 FPS=20 # 10 by default
 GIF=gif # working directory
+INPUT=ot_nt.dot
 OUTPUT=ot_nt.gif
 
 if [ "$1" != "" ]; then
- OUTPUT="$1"
+ INPUT=ot_nt-$1.dot
+ OUTPUT=ot_nt-$1.gif
  fi
 
 rm -fr $GIF $OUTPUT
 mkdir -p $GIF
 
-cat ot_nt.dot | sed 's/dotted/invis/g' > $GIF/ot_nt_invis.dot
+cat $INPUT | sed 's/dotted/invis/g' > $GIF/ot_nt_invis.dot
 
 FRAMES=`cat ot_nt.dot | grep dotted | wc -l`
 for i in `seq 1 $FRAMES`; do

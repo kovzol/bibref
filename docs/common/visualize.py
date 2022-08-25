@@ -466,14 +466,19 @@ def ot_nt_graphviz(conn, lang=None):
     :param lang: use language lang
     """
 
+    fontsize = 24
     if lang == "hu":
         f = open("ot_nt-hu.dot", "w")
     else:
-        f = open("ot_nt.dot", "w")
+        if lang == "en":
+            f = open("ot_nt-en.dot", "w")
+        else:
+            f = open("ot_nt.dot", "w")
+            fontsize = 14
     f.write("digraph G {\n")
     f.write(" start=\"random1\";\n") # ensure deterministic output
     f.write(" outputorder=\"edgesfirst\";\n")
-    f.write(" node [style=filled, color=cyan];\n")
+    f.write(f" node [style=filled, color=cyan, fontsize=\"{fontsize}pt\"];\n")
 
     cur = conn.cursor()
     # NT books that contain quotations:
@@ -489,6 +494,8 @@ def ot_nt_graphviz(conn, lang=None):
         label = book
         if lang == "hu":
             label = books_translated_hu[book]
+        if lang == "en":
+            label = books_translated_en[book]
         f.write(f" {book} [label=\"{label}\", pos=\"{pos}\"];\n")
     # NT books that do not contain quotations:
     cur.execute("SELECT name, number FROM books WHERE number > 100 EXCEPT SELECT DISTINCT q.nt_book, b.number" +
@@ -502,6 +509,8 @@ def ot_nt_graphviz(conn, lang=None):
         label = book
         if lang == "hu":
             label = books_translated_hu[book]
+        if lang == "en":
+            label = books_translated_en[book]
         f.write(f" {book} [label=\"{label}\", style=filled, color=cyan3, pos=\"{pos}\"];\n")
 
     # OT books that contain quotations:
@@ -516,6 +525,8 @@ def ot_nt_graphviz(conn, lang=None):
         label = book
         if lang == "hu":
             label = books_translated_hu[book]
+        if lang == "en":
+            label = books_translated_en[book]
         f.write(f" {book} [label=\"{label}\", style=filled, color=yellow, pos=\"{pos}\"];\n")
     # OT books that do not contain quotations:
     cur.execute("SELECT name, number FROM books WHERE number < 100 EXCEPT SELECT DISTINCT q.ot_book, b.number" +
@@ -529,6 +540,8 @@ def ot_nt_graphviz(conn, lang=None):
         label = book
         if lang == "hu":
             label = books_translated_hu[book]
+        if lang == "en":
+            label = books_translated_en[book]
         f.write(f" {book} [label=\"{label}\", style=filled, color=yellow3, pos=\"{pos}\"];\n")
 
     cur.execute("SELECT q.ot_book, q.nt_book, COUNT(*), b1.number, b2.number " +
@@ -1447,6 +1460,75 @@ books_translated_hu = {
     'III_John': "3Ján",
     'Jude': "Júd",
     'Revelation_of_John': "Jel"
+    }
+
+books_translated_en = {
+    'Genesis': "Gen",
+    'Exodus': "Ex",
+    'Leviticus': "Lev",
+    'Numbers': "Num",
+    'Deuteronomy': "Deut",
+    'Joshua': "Josh",
+    'Judges': "Judg",
+    'Ruth': "Ruth",
+    'I_Samuel': "1 Sam",
+    'II_Samuel': "2 Sam",
+    'I_Kings': "1 Kings",
+    'II_Kings': "2 Kings",
+    'I_Chronicles': "1 Chron",
+    'II_Chronicles': "2 Chron",
+    'Ezra': "Ezra",
+    'Nehemiah': "Neh",
+    'Esther': "Est",
+    'Job': "Job",
+    'Psalms': "Ps",
+    'Proverbs': "Prov",
+    'Ecclesiastes': "Eccles",
+    'Song_of_Solomon': "Song",
+    'Isaiah': "Isa",
+    'Jeremiah': "Jer",
+    'Lamentations': "Lam",
+    'Ezekiel': "Ezek",
+    'Daniel': "Dan",
+    'Hosea': "Hos",
+    'Joel': "Joel",
+    'Amos': "Amos",
+    'Obadiah': "Obad",
+    'Jonah': "Jonah",
+    'Micah': "Mic",
+    'Nahum': "Nah",
+    'Habakkuk': "Hab",
+    'Zephaniah': "Zeph",
+    'Haggai': "Hag",
+    'Zechariah': "Zech",
+    'Malachi': "Mal",
+    'Matthew': "Matt",
+    'Mark': "Mark",
+    'Luke': "Luke",
+    'John': "John",
+    'Acts': "Acts",
+    'Romans': "Rom",
+    'I_Corinthians': "1 Cor",
+    'II_Corinthians': "2 Cor",
+    'Galatians': "Gal",
+    'Ephesians': "Eph",
+    'Philippians': "Phil",
+    'Colossians': "Col",
+    'I_Thessalonians': "1 Thess",
+    'II_Thessalonians': "2 Thess",
+    'I_Timothy': "1 Tim",
+    'II_Timothy': "2 Tim",
+    'Titus': "Titus",
+    'Philemon': "Philem",
+    'Hebrews': "Heb",
+    'James': "James",
+    'I_Peter': "1 Pet",
+    'II_Peter': "2 Pet",
+    'I_John': "1 John",
+    'II_John': "2 John",
+    'III_John': "3 John",
+    'Jude': "Jude",
+    'Revelation_of_John': "Rev"
     }
 
 if __name__ == '__main__':
