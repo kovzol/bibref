@@ -402,6 +402,7 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
     string version = module->getConfigEntry("Version");
     if (moduleName == "LXX" && version == "3.0") {
       removeAccents = true; // force removing accents
+      lastVerse = "Daniel 12:13"; // order of books is different
     }
 
     module->setKey(firstVerse.c_str());
