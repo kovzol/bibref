@@ -398,6 +398,12 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
         error("The SWORD module " + moduleName + " is not installed.");
         return 1;
     }
+
+    string version = module->getConfigEntry("Version");
+    if (moduleName == "LXX" && version == "3.0") {
+      removeAccents = true; // force removing accents
+    }
+
     module->setKey(firstVerse.c_str());
     int bookStart = module->getIndex();
     module->setKey(lastVerse.c_str());
