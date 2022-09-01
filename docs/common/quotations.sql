@@ -1431,7 +1431,7 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
  (1041, 104, 1, 'Isaiah', 'LXX Isaiah 10:23+21 10:23-21', 'Romans', 'SBLGNT Romans 9:28+28 9:28-15', 22269, 7, 20106, 7); -- ποιησει
 -- Alternatively:
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos, alternative) values
- (91041, 'Romans', 'SBLGNT Romans 9:27 9:27-64', 19987, 20013, true);
+ (91041, 'Romans', 'SBLGNT Romans 9:27 9:27-64', 19987, 20013, 1);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (91041, 104, 1, 'Isaiah', 'LXX Isaiah 10:22+3 10:22-103', 'Romans', 'SBLGNT Romans 9:27+27 9:27-61', 22142, 3, 20014, 3); -- ean
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
@@ -1493,10 +1493,10 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
  (107, 2, 'η γραφη', 'λεγει γαρ'); -- η γραφη = the Scripture, λεγει γαρ = says for
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (107, 2, 'repeated quotation', 'literal, exact', 'Z.K.');
-# We need to disable this until it cannot be indicated that this introduction belongs to the repeated quotation part.
-# insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
-#  (1061, 'Romans', 'SBLGNT Romans 10:11 10:11-36', 21300, 21313); -- TODO: Consider adding the info that this belongs to 107, 2.
-# Otherwise this will show up at the end of the hierarchical diagram -- we don't want that.
+-- We need to disable this until it cannot be indicated that this introduction belongs to the repeated quotation part.
+-- insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+--  (1061, 'Romans', 'SBLGNT Romans 10:11 10:11-36', 21300, 21313); -- TODO: Consider adding the info that this belongs to 107, 2.
+-- Otherwise this will show up at the end of the hierarchical diagram -- we don't want that.
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1061, 107, 2, 'Isaiah', 'LXX Isaiah 28:16+113 28:16', 'Romans', 'SBLGNT Romans 10:11+17 10:11-5', 52805, 30, 21317, 28);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
@@ -2044,7 +2044,7 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
  (1361, 136, 1, 'Isaiah', 'LXX Isaiah 6:10+153 6:10', 'John', 'SBLGNT John 12:40+97 12:40', 12652, 31, 44379, 28); -- και επιστρεψωσιν και ιασομαι αυτους -> και στραφωσιν, και ιασομαι αυτους
 -- An alternative way, by adding "kardia" as an extra clasp:
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos, alternative) values
- (91361, 'John', 'SBLGNT John 12:39 12:39', 44235, 44281, true);
+ (91361, 'John', 'SBLGNT John 12:39 12:39', 44235, 44281, 1);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (91361, 136, 1, 'Isaiah', 'LXX Isaiah 6:10+63 6:10-103', 'John', 'SBLGNT John 12:40+10 12:40-97', 12562, 18, 44292, 18); -- τους οφθαλμους αυτων -> αυτων τους οφθαλμους
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
@@ -3058,7 +3058,7 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
  (20091, 2009, 1, 'Genesis', 'LXX Genesis 2:7+82 2:7', 'I_Corinthians', 'SBLGNT I_Corinthians 15:45+17 15:45-30', 3941, 29, 30050, 39);
 -- Alternative way:
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos, alternative) values
- (920091, 'I_Corinthians', 'SBLGNT I_Corinthians 15:45 15:45-69', 30033, 30049, true);
+ (920091, 'I_Corinthians', 'SBLGNT I_Corinthians 15:45 15:45-69', 30033, 30049, 1);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (920091, 2009, 1, 'Genesis', 'LXX Genesis 2:7+98 2:7', 'I_Corinthians', 'SBLGNT I_Corinthians 15:45+43 15:45-30', 3957, 13, 30076, 13);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
@@ -3208,7 +3208,7 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
  (20181, 2018, 1, 'Genesis', 'LXX Genesis 15:14+32 15:14-22', 'Acts', 'SBLGNT Acts 7:7+47 7:7-31', 35157, 23, 18860, 21);
 -- Alternative way:
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos, alternative) values
- (920181, 'Acts', 'SBLGNT Acts 7:6 7:6-85', 18708, 18727, true);
+ (920181, 'Acts', 'SBLGNT Acts 7:6 7:6-85', 18708, 18727, 1);
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
  (920181, 'Acts', 'SBLGNT Acts 7:7+34 7:7-55', 18847, 18856);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
