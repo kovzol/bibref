@@ -554,7 +554,7 @@ def ot_nt_graphviz(conn, lang=None):
         ot_book, nt_book, c = row[0],row[1],row[2]
         if c == 1:
             c = " " # do not label single connections
-        f.write(f" {ot_book}->{nt_book} [labeljust=\"r\", label=\"{c}\", style=\"dotted\"];\n")
+        f.write(f" {nt_book}->{ot_book} [labeljust=\"r\", label=\"{c}\", style=\"dotted\"];\n")
 
     f.write("}\n")
     f.close()
