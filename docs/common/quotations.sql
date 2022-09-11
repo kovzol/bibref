@@ -3232,6 +3232,19 @@ insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt
  (20191, 'Acts', 'SBLGNT Acts 7:5+49 7:5-72', 18625, 18635);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (20191, 2019, 1, 'Genesis', 'LXX Genesis 17:19+130 17:19', 'Acts', 'SBLGNT Acts 7:5+87 7:5-18', 39279, 27, 18663, 27);
+-- This is just a reference but not a quotation:
+-- insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+--  (20201, 2020, 1, 'Genesis', null, 'LXX Genesis 46:27+4 46:27', 'Acts', 'SBLGNT Acts 7:14+10 7:14', 138115, 103, 19514, 83, 'manual');
+insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (20211, 2021, 1, 'Genesis', null, 'LXX Genesis 47:27+68 47:27-6', 'Acts', 'SBLGNT Acts 7:17+59 7:17-9', 142227, 24, 19810, 24, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2021, 1, null, 'επαγγελιας ης ωμολογησεν ο θεος τω Αβρααμ'); -- επαγγελιας ης ωμολογησεν ο θεος τω Αβρααμ = promise that had made God to Abraham
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2021, 1, 'quotation', 'fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (20211, 'Acts', 'SBLGNT Acts 7:17 7:17-33', 19751, 19809);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (20211, 2021, 1, 'Genesis', 'LXX Genesis 47:27+68 47:27-6', 'Acts', 'SBLGNT Acts 7:17+59 7:17-9', 142227, 24, 19810, 24);
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (21011, 2101, 1, 'Exodus', null, 'LXX Exodus 33:19+86 33:19', 'Romans', 'SBLGNT Romans 9:15+15 9:15', 99825, 38, 19131, 38, 'getrefs');
@@ -3638,6 +3651,18 @@ insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt
  (21171, 'Acts', 'SBLGNT Acts 23:5+44 23:5-30', 76941, 76955);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (21171, 2117, 1, 'Exodus', 'LXX Exodus 22:28+22 22:28', 'Acts', 'SBLGNT Acts 23:5+59 23:5', 64257, 30, 76956, 30);
+insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (21181, 2118, 1, 'Exodus', null, 'LXX Exodus 1:8+8 1:8', 'Acts', 'SBLGNT Acts 7:18+12 7:18', 406, 41, 19855, 41, 'getrefs');
+insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (21181, 2118, 1, 'Exodus', null, 'LXX Exodus 1:8 1:8', 'Acts', 'SBLGNT Acts 7:18+6 7:18', 398, 49, 19849, 47, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2118, 1, null, 'αχρι ου'); -- αχρι ου = until that
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2118, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (21181, 'Acts', 'SBLGNT Acts 7:18 7:18-47', 19843, 19848);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (21181, 2118, 1, 'Exodus', 'LXX Exodus 1:8 1:8', 'Acts', 'SBLGNT Acts 7:18+6 7:18', 398, 49, 19849, 47);
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (22011, 2201, 1, 'Leviticus', null, 'LXX Leviticus 18:5+69 18:5-21', 'Romans', 'SBLGNT Romans 10:5+46 10:5-1', 57053, 27, 20846, 27, 'getrefs');
