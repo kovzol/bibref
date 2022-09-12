@@ -3675,6 +3675,18 @@ insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt
  (21191, 'Acts', 'SBLGNT Acts 7:23+39 7:23-44', 20249, 20271);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (21191, 2119, 1, 'Exodus', 'LXX Exodus 2:11+72 2:11-93', 'Acts', 'SBLGNT Acts 7:23+74 7:23', 2924, 32, 20284, 32);
+insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (21201, 2120, 1, 'Exodus', null, 'LXX Exodus 2:12+40 2:12-19', 'Acts', 'SBLGNT Acts 7:24+64 7:25-85', 3089, 20, 20380, 20, 'getrefs');
+insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (21201, 2120, 1, 'Exodus', null, 'LXX Exodus 2:12+40 2:12-20', 'Acts', 'SBLGNT Acts 7:24+64 7:24', 3089, 19, 20380, 19, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (2120, 1, null, 'και ιδων τινα αδικουμενον'); -- και ιδων τινα αδικουμενον = and having seen a certain one being wronged
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (2120, 1, 'quotation', 'literal, exact', 'Z.K.');
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (21201, 'Acts', 'SBLGNT Acts 7:24 7:24-61', 20316, 20337);
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (21201, 2120, 1, 'Exodus', 'LXX Exodus 2:12+40 2:12-20', 'Acts', 'SBLGNT Acts 7:24+64 7:24', 3089, 19, 20380, 19);
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (22011, 2201, 1, 'Leviticus', null, 'LXX Leviticus 18:5+69 18:5-21', 'Romans', 'SBLGNT Romans 10:5+46 10:5-1', 57053, 27, 20846, 27, 'getrefs');
