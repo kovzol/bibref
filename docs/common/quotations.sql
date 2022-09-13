@@ -2309,6 +2309,16 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
  (148, 1, 'quotation', 'literal, exact', 'Z.K.');
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (14012, 148, 1, 'Isaiah', 'LXX Isaiah 2:2+3 2:2-106', 'Acts', 'SBLGNT Acts 2:17+3 2:17-168', 3074, 26, 3972, 26);
+insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1421, 149, 1, 'Isaiah', null, 'LXX Isaiah 41:20+58 41:20-28', 'Acts', 'SBLGNT Acts 7:50+10 7:50', 82448, 20, 22785, 20, 'getrefs');
+insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+ (1421, 149, 1, 'Isaiah', null, 'LXX Isaiah 41:20+50 41:20-28', 'Acts', 'SBLGNT Acts 7:50+5 7:50', 82440, 28, 22780, 25, 'manual');
+insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+ (149, 1, 'ο προφητης', 'καθως ... λεγει'); -- καθως ... λεγει = as ... says
+insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
+ (149, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
+insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
+ (1421, 149, 1, 'Isaiah', 'LXX Isaiah 41:20+50 41:20-28', 'Acts', 'SBLGNT Acts 7:50+5 7:50', 82440, 28, 22780, 25);
 
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (2011, 201, 1, 'Jeremiah', null, 'LXX Jeremiah 31:15+50 31:15-64', 'Matthew', 'SBLGNT Matthew 2:18+25 2:18-66', 80265, 9, 3951, 9, 'getrefs');
