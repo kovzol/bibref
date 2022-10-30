@@ -296,7 +296,7 @@ bool isOTBook(string moduleName) {
     }
 
 bool isNTBook(string moduleName) {
-    if (moduleName == "SBLGNT" || moduleName == "BHPGNT") return true;
+    if (moduleName == "SBLGNT" || moduleName == "BHPGNT" || moduleName == "SRGNT") return true;
     return false;
     }
 
@@ -533,6 +533,9 @@ int addBooks() {
         success = 1;
     }
     if (addBook("BHPGNT", "Matthew 1:1", "Revelation of John 22:21", true) != 0) {
+        success = 1;
+    }
+    if (addBook("SRGNT", "Matthew 1:1", "Revelation of John 22:21", true) != 0) {
         success = 1;
     }
     return success;
