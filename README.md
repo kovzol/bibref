@@ -46,7 +46,8 @@ The tools consider the texts of full books of the Bible as one unit instead
 of considering just separated verses.
 The texts are provided by the SWORD project
 from the modules [LXX](http://www.crosswire.org/sword/modules/ModInfo.jsp?modName=LXX) and
-[SBLGNT](http://www.crosswire.org/sword/modules/ModInfo.jsp?modName=SBLGNT).
+[SBLGNT](http://www.crosswire.org/sword/modules/ModInfo.jsp?modName=SBLGNT). In the newest versions
+the modules [BHPGNT](https://github.com/kovzol/BHP/releases) and [SRGNT](https://github.com/kovzol/SR/releases) are also supported.
 
 This project is a work in progress.
 
@@ -146,17 +147,17 @@ with the classic notation or a modifier can be appended:
 For example, `Genesis 1:1`, `Genesis 1:1+0 1:1-0`, `Genesis 1:1+0 1:1`, `Genesis 1:1 1:1-0` define the same first verse
 of Genesis. On the other hand, `Genesis 1:1+2 1:1-3` defines the first verse of Genesis without the first two and the last three letters.
 
-In all commands the *Bible* parameter can be either `LXX` or `SBLGNT`, except for the command `lookup`.
+In all commands the *Bible* parameter can be either `LXX`, `SBLGNT`, `BHPGNT` or `SRGNT`, except for the command `lookup`.
 
 The available commands are:
 
-* `addbooks`: Load the books of LXX and SBLGNT. Most commands require that these books are already loaded. After using this command for the first time (it takes a couple of seconds), a folder named `bibref-addbooks-cache` will be created in the current working directory to speed up the next startup of this command.
+* `addbooks`: Load the books of LXX, SBLGNT, BHPGNT and SRGNT (if any of these are available). Most commands require that these books are already loaded. After using this command for the first time (it takes a couple of seconds), a folder named `bibref-addbooks-cache` will be created in the current working directory to speed up the next startup of this command.
 * `textN` *text*: Define a Greek *text* and put its Latin transcription in clipboard N.
 * `latintextN` *text*: Put the Latin transcription *text* in clipboard N.
 * `findN` *Bible*: Search for the text of clipboard N in the given *Bible*.
 * `lengthN`: Compute the length of the text in clipboard N.
 * `printN`: Show the Greek text in clipboard N (without punctuation and spaces).
-* `lookup` *Bible* *book* *verse*: Search for the given *passage* in the given *book* in the given *Bible*. Here *Bible* can be any translation that is already [installed as a module](https://www.crosswire.org/sword/modules/ModDisp.jsp?modType=Bibles) on the computer.
+* `lookup` *Bible* *book* *verse*: Search for the given *verse* in the given *book* in the given *Bible*. Here *Bible* can be any translation that is already [installed as a module](https://www.crosswire.org/sword/modules/ModDisp.jsp?modType=Bibles) on the computer.
 * `lookupN` *Bible* *book* *passage*: Search for the given *passage* in the given *book* in the given *Bible* and put its Latin transcription in clipboard N.
 * `raw` *Bible* *book* *start* *length*: Show the raw Latin transcription of a passage in the given *book* in the given *Bible*, beginning with the *start* position on *length* characters.
 * `rawN` *Bible* *book* *start* *length*: Put a passage in the given *book* in the given *Bible*, beginning with the *start* position on *length* characters, in clipboard N.
@@ -169,6 +170,7 @@ The available commands are:
 * `jaccard12`: Compare the two clipboards the same way how `compare12` does but use the "Jaccard similarity for bags" algorithm, best match is reached at 0.
 * `sql` *switch*: Set some outputs to be shown also as an SQL query if *switch* is `on`.
 * `colors` *switch*: Show some outputs colored if *switch* is `on`.
+* `tokens` *Bible* *book* *verse*: Search for the given *verse* in the given *book* in the given *Bible* (see command `lookup`), but the output is shown in a tokenized form. Tokenization is done via Strong's numbers.
 * `help`: Show some hints on usage.
 * `quit`: Exit program.
 

@@ -21,15 +21,18 @@ string Book::getInfo() {
     return info;
 }
 
-void Book::addVerse(string n, string i) {
+void Book::addVerse(string n, string i, vector<int> t) {
     int start = text.length();
     int length = n.length();
-    addVerse(start, length, i);
+    int tokensStart = tokens.size();
+    int tokensLength = t.size();
+    addVerse(start, length, i, tokensStart, tokensLength);
     text += n;
+    tokens.insert(tokens.end(), t.begin(), t.end());
 }
 
-void Book::addVerse(int start, int length, string info) {
-    Verse v = {start, length, info};
+void Book::addVerse(int start, int length, string info, int tokensStart, int tokensLength) {
+    Verse v = {start, length, tokensStart, tokensLength, info};
     // cerr << start << " " << length << " " << info << endl;
     verses.push_back(v);
 }
@@ -61,13 +64,37 @@ string Book::getVerse(string i) {
     throw InvalidVerseReference;
 }
 
+vector<int> Book::getVerseTokens(string i) {
+  for (int j=0; j<verses.size(); ++j) {
+      int match = verses[j].info.compare(i);
+      if (match == 0) {
+          vector<int> found;
+          for (int k=0; k<verses[j].tokensLength; k++) {
+            found.push_back(tokens[verses[j].tokensStart + k]);
+          }
+
+          return found;
+      }
+  }
+  throw InvalidVerseReference;
+}
+
+
 string Book::getText() {
     return text;
+}
+
+vector<int> Book::getTokens() {
+    return tokens;
 }
 
 void Book::setText(string t) {
     text = t;
     // cerr << text << endl;
+}
+
+void Book::setTokens(vector<int> t) {
+    tokens = t;
 }
 
 int Book::getVerseStart(string i) {
@@ -86,6 +113,28 @@ int Book::getVerseEnd(string i) {
         int match = verses[j].info.compare(i);
         if (match == 0) {
             int found = verses[j].start + verses[j].length - 1;
+            return found;
+        }
+    }
+    throw InvalidVerseReference;
+}
+
+int Book::getVerseTokensStart(string i) {
+    for (int j=0; j<verses.size(); ++j) {
+        int match = verses[j].info.compare(i);
+        if (match == 0) {
+            int found = verses[j].tokensStart;
+            return found;
+        }
+    }
+    throw InvalidVerseReference;
+}
+
+int Book::getVerseTokensEnd(string i) {
+    for (int j=0; j<verses.size(); ++j) {
+        int match = verses[j].info.compare(i);
+        if (match == 0) {
+            int found = verses[j].tokensStart + verses[j].tokensLength - 1;
             return found;
         }
     }

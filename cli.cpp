@@ -1,4 +1,4 @@
-#define BIBREF_VERSION "2022Feb24"
+#define BIBREF_VERSION "2023Apr09"
 
 #include <iostream>
 #include <string.h>
@@ -57,6 +57,7 @@ string sqlCmd = "sql";
 string psalminfoCmd = "psalminfo";
 string rawCmd = "raw";
 string colorsCmd = "colors";
+string tokensCmd = "tokens";
 
 string errorNotRecognized = "Sorry, the command you entered was not recognized or its syntax is invalid.";
 string errorTextIncomplete = "Either " + textCmd + "1 or " + textCmd + "2 must be used.";
@@ -79,6 +80,7 @@ string errorPsalminfoParameters = psalminfoCmd + " requires 2 parameters.";
 string errorRawParameters = rawCmd + " requires 4 parameters.";
 string errorRawIncomplete = "Either " + rawCmd + "1 or " + rawCmd + "2 must be used.";
 string errorColorsParameters = colorsCmd + " requires one parameter.";
+string errorTokensParameters = tokensCmd + " requires 3 or 4 parameters.";
 
 vector<string> vocabulary {addbooksCmd, compareCmd + "12", jaccardCmd + "12",
                            textCmd + "1", textCmd + "2", lookupCmd + "1", lookupCmd + "2", "quit",
@@ -86,7 +88,7 @@ vector<string> vocabulary {addbooksCmd, compareCmd + "12", jaccardCmd + "12",
                                    minuniqueCmd + "1", latintextCmd + "1", latintextCmd + "2",
                                    extendCmd, getrefsCmd, lookupCmd, maxresultsCmd, sqlCmd, psalminfoCmd,
                                    rawCmd, rawCmd + "1", rawCmd + "2",
-                                   printCmd + "1", printCmd + "2", colorsCmd
+                                   printCmd + "1", printCmd + "2", colorsCmd, tokensCmd
                           };
 
 void add_vocabulary_item(string item) {
@@ -348,6 +350,23 @@ string cli_process(char *buf) {
                 goto end;
             }
             error(errorLookupParameters);
+            goto end;
+        }
+
+        if (boost::starts_with(input, tokensCmd)) {
+            string rest = input.substr(input.find(" ") + 1);
+            vector<string> tokens;
+            boost::split(tokens, rest, boost::is_any_of(" "));
+            int restSize = tokens.size();
+            if (restSize == 3) {
+                try {
+                    getTokens(tokens[0], tokens[1], tokens[2]);
+                    } catch (exception &e) {
+                    error(e.what());
+                    }
+                } else {
+                error(errorTokensParameters);
+                }
             goto end;
         }
 

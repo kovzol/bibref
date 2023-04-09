@@ -258,6 +258,54 @@ string processWord(string word) {
     return rewritten;
 }
 
+int processWordAsToken(string word) {
+  int num = 0;
+  for (int i = 0; i < word.length(); i += 2) {
+      auto c1 = static_cast<unsigned char>(word[i]);
+      auto c2 = static_cast<unsigned char>(word[i + 1]);
+      // keep care of special characters
+      if (c1 == 0x80) {
+          i--;
+      }
+      if (c1 == '|') { // in BHPGNT, e.g. "kyrios" is preceded with this
+          i--;
+      }
+      if (c1 == '(' || c1 == ')') {
+          i--;
+      }
+      if (c1 == 0xe2) {
+          i++; // handle ⸂ (0xe2 0xb8 0x82), fix issue #4
+      }
+      if (c1 == 'c') { // Some systems do not support greek ϲ so we fall back sometimes to latin c in the input
+          i--;
+      }
+      // check Greek characters
+      if (c1 == 0xCE || c1 == 0xCF) {
+          // force lowercase
+          if (c1 == 0xCE && c2 < 0xB1 &&
+                  !(c2 >= 0xA0 && c2 <= 0xA9)) {
+              // letters before Pi (excluding Chi, Pi, Omega, Y, Sigma, Tau, Psi, Phi)
+              c2 += 0x20;
+          }
+          if (c1 == 0xCE && c2 >= 0xA0 && c2 <= 0xA9) {
+              // Chi, Pi, Omega, Y, Sigma, Tau, Psi, Phi
+              c1 = 0xCF;
+              c2 -= 0x20;
+          }
+          if (c1 == 0xCF && c2 < 0x80) {
+              c2 += 0x20;
+          }
+      }
+      if (c1 >= '0' && c1 <= '9') {
+        // glue this after num, e.g. 123 will be processed like ((0+1)*10+2)*10+3
+        num *= 10;
+        num += (c1 - '0');
+        i--;
+      }
+  }
+  return num;
+}
+
 string processVerse(const string &verse) {
     string out;
     string word;
@@ -266,6 +314,21 @@ string processVerse(const string &verse) {
     while (ss >> word) {
         word = greekToLatin(processWord(word));
         out.append(word);
+    }
+
+    return out;
+}
+
+vector<int> processTokens(const string &verse) {
+    vector<int> out;
+    string word;
+    stringstream ss(verse);
+
+    while (ss >> word) {
+        int token = processWordAsToken(word);
+        if (token > 0) {
+          out.push_back(token);
+        }
     }
 
     return out;
@@ -361,19 +424,37 @@ int addBook_cached(string moduleName) {
         buffer << bookFile.rdbuf();
         Book book = Book(bookName);
         book.setText(string(buffer.str()));
+
+        std::ifstream tokensFile(path + "/" + bookName + ".tokens");
+        vector<int> tokens;
+        int t;
+        while (tokensFile >> t)
+        {
+            tokens.push_back(t);
+        }
+        book.setTokens(tokens);
+
         // Loading verses:
         string verseFileName = path + "/" + bookName + ".verses";
         FILE *verseFile = fopen(verseFileName.c_str(), "r");
         char reference[8]; // Psalms 119:176 needs 7 characters + "\n"
-        int start, end;
-        while (fscanf(verseFile, "%s %d %d", &reference, &start, &end) != EOF) {
+        int start, end, tokensStart, tokensEnd;
+        try {
+        while (fscanf(verseFile, "%s %d %d %d %d", &reference, &start, &end, &tokensStart, &tokensEnd) != EOF) {
             if (bookName == "Psalms") {
                 vector<string> r;
                 boost::split(r, reference, boost::is_any_of(":"));
                 pi.setLastVerse(stoi(r[0]), stoi(r[1])); // this overwrites the previous entry
                 }
-            book.addVerse(start, end - start + 1, string(reference));
+            book.addVerse(start, end - start + 1, string(reference), tokensStart, tokensEnd - tokensStart + 1);
             }
+           } catch (exception &e) {
+           error("Data loading error from cache file " + verseFileName + ".");
+           error("Cache may be corrupt or incompatible with this version. Consider removing it, then retry.");
+           error("To avoid data corruption, bibref exits now. Sorry for any inconveniences.");
+           exit(1);
+           }
+
         fclose(verseFile);
         add_vocabulary_item(bookName);
         book.setInfo(moduleName);
@@ -413,6 +494,7 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
     SWBuf verse;
     SWOptionFilter *filter = new UTF8GreekAccents();
     filter->setOptionValue("off");
+    library.setGlobalOption("Strong's Numbers", "On");
 
     info("Loading " + moduleName + "...");
     string path = "bibref-addbooks-cache/" + moduleName;
@@ -451,6 +533,7 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
                 firstInfoSet = true;
             }
             string verseText = processVerse(verse.c_str());
+            vector<int> tokens = processTokens(verse.c_str());
             // split book name and verse reference
             bool found = false;
             string reference;
@@ -463,11 +546,17 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
             if (lastBookName.compare(bookName) != 0) {
                 books.push_back(lastBook);
                 string lastBookText = lastBook.getText();
+                vector<int> lastBookTokens = lastBook.getTokens();
 #ifndef __EMSCRIPTEN__
                 if (create_cache) {
                     FILE *lastBookFile = fopen((path + "/" + lastBookName + ".book").c_str(), "wa");
                     fprintf(lastBookFile, "%s", lastBookText.c_str());
                     fclose(lastBookFile);
+                    FILE *lastTokensFile = fopen((path + "/" + lastBookName + ".tokens").c_str(), "wa");
+                    for (auto t: lastBookTokens) {
+                        fprintf(lastTokensFile, "%d ", t);
+                        }
+                    fclose(lastTokensFile);
                     }
 #endif
                 info(lastBookName + " contains " + to_string(lastBookText.length()) + " characters,");
@@ -487,7 +576,7 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
                 if (lastBookVersesFile == NULL && create_cache)
                    lastBookVersesFile = fopen((path + "/" + lastBookName + ".verses").c_str(), "wa");
             }
-            lastBook.addVerse(verseText, reference);
+            lastBook.addVerse(verseText, reference, tokens);
 
             if (bookName == "Psalms") {
                 vector<string> r;
@@ -499,17 +588,27 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
             if (create_cache) {
                 int start = lastBook.getVerseStart(reference);
                 int end = lastBook.getVerseEnd(reference);
-                fprintf(lastBookVersesFile, "%s %d %d\n", reference.c_str(), start, end);
+                int tokensStart = lastBook.getVerseTokensStart(reference);
+                int tokensEnd = lastBook.getVerseTokensEnd(reference);
+                fprintf(lastBookVersesFile, "%s %d %d %d %d\n", reference.c_str(), start, end, tokensStart, tokensEnd);
                 }
 #endif
             if (verseInfo.compare(lastVerse)==0) {
                 books.push_back(lastBook);
                 string lastBookText = lastBook.getText();
+                vector<int> lastBookTokens = lastBook.getTokens();
 #ifndef __EMSCRIPTEN__
                 if (create_cache) {
                     FILE *lastBookFile = fopen((path + "/" + lastBookName + ".book").c_str(), "wa");
                     fprintf(lastBookFile, "%s\n", lastBookText.c_str());
                     fclose(lastBookFile);
+
+                    FILE *lastTokensFile = fopen((path + "/" + lastBookName + ".tokens").c_str(), "wa");
+                    for (auto t: lastBookTokens) {
+                        fprintf(lastTokensFile, "%d ", t);
+                        }
+                    fclose(lastTokensFile);
+
                     fclose(lastBookVersesFile);
                     }
 #endif
@@ -1050,4 +1149,14 @@ string getRaw(string moduleName, string bookName, int startPos, int length) {
     if (startPos >= text.length() || startPos < 0 || length < 1 || startPos + length > text.length())
         throw InvalidPassage;
     return text.substr(startPos, length);
+}
+
+int getTokens(string moduleName, string book, string verse) {
+    Book b = getBook(book, moduleName);
+    vector<int> tokens = b.getVerseTokens(verse);
+    for (auto t: tokens) {
+      printf("%d ", t);
+    }
+    printf("\n");
+    return 0;
 }
