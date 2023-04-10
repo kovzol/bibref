@@ -29,6 +29,8 @@ public:
     string getVerse(string verseInfo);
     string getVerseInfoStart(int position);
     string getVerseInfoEnd(int position);
+    string getVerseTokensInfoStart(int position);
+    string getVerseTokensInfoEnd(int position);
     string getText();
     vector<int> getVerseTokens(string verseInfo);
     vector<int> getTokens();

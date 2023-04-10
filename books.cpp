@@ -1162,7 +1162,6 @@ int getTokens(string moduleName, string book, string verse) {
 }
 
 int searchTokenset(string moduleName, vector<int> pattern, int length) {
-    // error("This feature is not yet implemented.");
     vector<string> retval;
     int found = 0;
     size_t pos;
@@ -1190,7 +1189,10 @@ int searchTokenset(string moduleName, vector<int> pattern, int length) {
             }
             // Did we find all tokens in the pattern?
             if (tokensFound == pattern.size()) {
-              info("Found in " + book + " at position " + to_string(tpos));
+              string infoStart = b.getVerseTokensInfoStart(tpos);
+              string infoEnd = b.getVerseTokensInfoEnd(tpos + length - 1);
+              info("Found in " + book + " " + infoStart + " " + infoEnd +
+                   " (tpos=" + to_string(tpos) + "-" + to_string(tpos + length - 1) + ")");
             }
           }
       }

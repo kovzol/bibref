@@ -174,3 +174,37 @@ string Book::getVerseInfoEnd(int position) {
     }
     throw InvalidPosition;
 }
+
+string Book::getVerseTokensInfoStart(int position) {
+    for (int j=0; j<verses.size(); ++j) {
+        if (verses[j].tokensStart <= position && verses[j].tokensStart + verses[j].tokensLength > position) {
+            int plus = position - verses[j].tokensStart;
+            string retVal = verses[j].info;
+            if (plus == 0) {
+                return retVal;
+            }
+            if (plus > 0) {
+                retVal += "+" + to_string(plus);
+            }
+            return retVal;
+        }
+    }
+    throw InvalidPosition;
+}
+
+string Book::getVerseTokensInfoEnd(int position) {
+    for (int j=0; j<verses.size(); ++j) {
+        if (verses[j].tokensStart <= position && verses[j].tokensStart + verses[j].tokensLength > position) {
+            int minus = verses[j].tokensStart + verses[j].tokensLength - position - 1;
+            string retVal = verses[j].info;
+            if (minus == 0) {
+                return retVal;
+            }
+            if (minus > 0) {
+                retVal += "-" + to_string(minus);
+            }
+            return retVal;
+        }
+    }
+    throw InvalidPosition;
+}
