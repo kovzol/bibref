@@ -1,6 +1,7 @@
 #define BIBREF_VERSION "2023Apr09"
 
 #include <iostream>
+#include <sstream>
 #include <string.h>
 #include <string>
 #include <algorithm>
@@ -58,6 +59,7 @@ string psalminfoCmd = "psalminfo";
 string rawCmd = "raw";
 string colorsCmd = "colors";
 string tokensCmd = "tokens";
+string searchCmd = "search";
 
 string errorNotRecognized = "Sorry, the command you entered was not recognized or its syntax is invalid.";
 string errorTextIncomplete = "Either " + textCmd + "1 or " + textCmd + "2 must be used.";
@@ -81,6 +83,7 @@ string errorRawParameters = rawCmd + " requires 4 parameters.";
 string errorRawIncomplete = "Either " + rawCmd + "1 or " + rawCmd + "2 must be used.";
 string errorColorsParameters = colorsCmd + " requires one parameter.";
 string errorTokensParameters = tokensCmd + " requires 3 or 4 parameters.";
+string errorSearchParameters = searchCmd + " requires at least one parameter.";
 
 vector<string> vocabulary {addbooksCmd, compareCmd + "12", jaccardCmd + "12",
                            textCmd + "1", textCmd + "2", lookupCmd + "1", lookupCmd + "2", "quit",
@@ -88,7 +91,7 @@ vector<string> vocabulary {addbooksCmd, compareCmd + "12", jaccardCmd + "12",
                                    minuniqueCmd + "1", latintextCmd + "1", latintextCmd + "2",
                                    extendCmd, getrefsCmd, lookupCmd, maxresultsCmd, sqlCmd, psalminfoCmd,
                                    rawCmd, rawCmd + "1", rawCmd + "2",
-                                   printCmd + "1", printCmd + "2", colorsCmd, tokensCmd
+                                   printCmd + "1", printCmd + "2", colorsCmd, tokensCmd, searchCmd
                           };
 
 void add_vocabulary_item(string item) {
@@ -243,6 +246,41 @@ string cli_process(char *buf) {
             info("Stored internally as " + processed + ".");
             goto end;
         }
+
+        if (boost::starts_with(input, searchCmd)) {
+            int index;
+            if (input.length() < searchCmd.length() + 1) {
+                error(errorSearchParameters);
+                goto end;
+            }
+            string rest = input.substr(input.find(" ") + 1);
+
+            vector<int> pattern;
+            std::stringstream ss(rest);
+
+            int s = 0;
+            int t;
+            while (ss >> t) {
+              pattern.push_back(t);
+              s += 1;
+            }
+            if (s==0) {
+              error(errorSearchParameters);
+              goto end;
+            }
+
+            s--;
+            int length = pattern.at(s);
+            pattern.pop_back();
+            info("Read " + to_string(s) + " tokens, searching for an extension of max. " + to_string(length) + " tokens.");
+            if (length < s) {
+                error("Surely, this will not be working.");
+            } else {
+                searchTokenset(pattern, length);
+            }
+            goto end;
+        }
+
 
         if (boost::starts_with(input, latintextCmd)) {
             int index;

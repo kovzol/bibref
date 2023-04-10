@@ -1160,3 +1160,8 @@ int getTokens(string moduleName, string book, string verse) {
     printf("\n");
     return 0;
 }
+
+int searchTokenset(vector<int> pattern, int length) {
+    error("This feature is not yet implemented.");
+    return 0;
+}
