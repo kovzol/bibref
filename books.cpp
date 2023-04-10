@@ -1161,7 +1161,40 @@ int getTokens(string moduleName, string book, string verse) {
     return 0;
 }
 
-int searchTokenset(vector<int> pattern, int length) {
-    error("This feature is not yet implemented.");
+int searchTokenset(string moduleName, vector<int> pattern, int length) {
+    // error("This feature is not yet implemented.");
+    vector<string> retval;
+    int found = 0;
+    size_t pos;
+    string book;
+    for (int i=0; i<books.size(); i++) {
+      Book b = books[i];
+      if (b.getInfo().compare(moduleName) == 0) {
+          book = b.getName();
+          vector<int> bookTokens = b.getTokens();
+          int tokensLength = bookTokens.size();
+          // Check all possible consecutive tokensets in the book:
+          for (int tpos=0; tpos < tokensLength - length; tpos++) {
+            int tokensFound = 0;
+            // For each token we check if it is in the tokenset:
+            for (auto token: pattern) {
+              bool tokenFound = false;
+              for (int j=0; j < length && !tokenFound; j++) {
+                if (bookTokens.at(tpos + j) == token) {
+                  tokenFound = true;
+                }
+              }
+              if (tokenFound) {
+                tokensFound++;
+              }
+            }
+            // Did we find all tokens in the pattern?
+            if (tokensFound == pattern.size()) {
+              info("Found in " + book + " at position " + to_string(tpos));
+            }
+          }
+      }
+    }
+
     return 0;
 }

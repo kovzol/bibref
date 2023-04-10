@@ -254,6 +254,9 @@ string cli_process(char *buf) {
                 goto end;
             }
             string rest = input.substr(input.find(" ") + 1);
+            index = rest.find(" ");
+            string moduleName = rest.substr(0, index);
+            rest = rest.substr(index + 1);
 
             vector<int> pattern;
             std::stringstream ss(rest);
@@ -276,7 +279,7 @@ string cli_process(char *buf) {
             if (length < s) {
                 error("Surely, this will not be working.");
             } else {
-                searchTokenset(pattern, length);
+                searchTokenset(moduleName, pattern, length);
             }
             goto end;
         }
