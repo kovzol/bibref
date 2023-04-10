@@ -1,0 +1,9 @@
+## An example of searching for tokens on a maximal given length.
+## Tokens are the Greek Strong's numbers at the moment.
+
+addbooks
+search LXX 2097 1515 189 3
+# Read 3 tokens, searching for an extension of max. 3 tokens.
+# Found in Isaiah 52:7+7 52:7-14 (tpos=20703-20705)
+tokens LXX Isaiah 52:7
+# 5613 5610 1909 3588 3735 5613 4228 2097 189 1515 5613 2097 18 3754 4160 3588 4991 4675 3004 4622 936 4675 3588 2316
