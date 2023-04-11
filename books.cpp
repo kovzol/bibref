@@ -1172,7 +1172,7 @@ int getTokens(string moduleName, string book, string verse) {
   return 0;
 }
 
-int searchTokenset(string moduleName, vector<int> pattern, int length) {
+vector<string> searchTokenset(string moduleName, vector<int> pattern, int length, bool verbose) {
   vector<string> retval;
   int found = 0;
   size_t pos;
@@ -1202,12 +1202,15 @@ int searchTokenset(string moduleName, vector<int> pattern, int length) {
         if (tokensFound == pattern.size()) {
           string infoStart = b.getVerseTokensInfoStart(tpos);
           string infoEnd = b.getVerseTokensInfoEnd(tpos + length - 1);
-          info("Found in " + book + " " + infoStart + " " + infoEnd +
-               " (tpos=" + to_string(tpos) + "-" + to_string(tpos + length - 1) + ")");
+          retval.push_back(book + "," + to_string(tpos));
+          if (verbose) {
+            info("Found in " + book + " " + infoStart + " " + infoEnd +
+                 " (tpos=" + to_string(tpos) + "-" + to_string(tpos + length - 1) + ")");
+          }
         }
       }
     }
   }
-
-  return 0;
+  return retval;
 }
+

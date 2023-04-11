@@ -28,6 +28,6 @@ int getPsalmLastVerse(string moduleName, int psalm);
 string getRaw(string modulename, string book, int startPos, int length);
 string latinToGreek(string latin);
 int getTokens(string moduleName, string book, string verse);
-int searchTokenset(string moduleName, vector<int> pattern, int length);
+vector<string> searchTokenset(string moduleName, vector<int> pattern, int length, bool verbose);
 
 #endif // BOOKS_H

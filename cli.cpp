@@ -281,7 +281,7 @@ string cli_process(char *buf) {
     if (length < s) {
       error("Surely, this will not be working.");
     } else {
-      searchTokenset(moduleName, pattern, length);
+      searchTokenset(moduleName, pattern, length, true);
     }
     goto end;
   }
