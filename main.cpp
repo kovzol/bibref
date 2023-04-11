@@ -4,13 +4,13 @@
  * and contributed by Zoltán Kovács <zoltan@geogebra.org>.
  */
 
-using namespace std;
-
 #include <iostream>
 #include <algorithm>
 #include <string>
 #include <sstream>
 #include <vector>
+
+using namespace std;
 
 #include "books.h"
 #include "fingerprint.h"
@@ -19,64 +19,64 @@ using namespace std;
 // @author Iain Hull (https://stackoverflow.com/a/868894/1044586)
 class InputParser {
 public:
-    InputParser(int &argc, char **argv) {
-        for (int i = 1; i < argc; ++i)
-            this->tokens.emplace_back(argv[i]);
-    }
+  InputParser(int &argc, char **argv) {
+    for (int i = 1; i < argc; ++i)
+      this->tokens.emplace_back(argv[i]);
+  }
 
-    const string &getCmdOption(const string &option) const {
-        vector<string>::const_iterator itr;
-        itr = find(this->tokens.cbegin(), this->tokens.cend(), option);
-        if (itr != this->tokens.end() && ++itr != this->tokens.end()) {
-            return *itr;
-        }
-        static const string empty_string;
-        return empty_string;
+  const string &getCmdOption(const string &option) const {
+    vector<string>::const_iterator itr;
+    itr = find(this->tokens.cbegin(), this->tokens.cend(), option);
+    if (itr != this->tokens.end() && ++itr != this->tokens.end()) {
+      return *itr;
     }
+    static const string empty_string;
+    return empty_string;
+  }
 
-    bool cmdOptionExists(const string &option) const {
-        return find(this->tokens.begin(), this->tokens.end(), option)
-               != this->tokens.end();
-    }
+  bool cmdOptionExists(const string &option) const {
+    return find(this->tokens.begin(), this->tokens.end(), option)
+        != this->tokens.end();
+  }
 
 private:
-    vector<string> tokens;
+  vector<string> tokens;
 };
 
 void showHelp(const string &executable) {
-    cout << "Usage: " << executable << " [options]\n";
-    cout << " where options can be:\n";
-    cout << " -h            this help\n";
-    cout << " -e            show input/output to fit examples\n";
-    cout << " -a            run the addbooks command on startup\n";
-    cout << " -c            use colored output\n";
+  cout << "Usage: " << executable << " [options]\n";
+  cout << " where options can be:\n";
+  cout << " -h            this help\n";
+  cout << " -e            show input/output to fit examples\n";
+  cout << " -a            run the addbooks command on startup\n";
+  cout << " -c            use colored output\n";
 }
 
 #ifndef __EMSCRIPTEN__
 int main(int argc, char **argv) {
-    InputParser input(argc, argv);
-    if (input.cmdOptionExists("-h")) {
-        showHelp(argv[0]);
-        exit(0);
-    }
-
-    bool ab = false;
-    if (input.cmdOptionExists("-a")) {
-        ab = true;
-    }
-
-    bool c = false;
-    if (input.cmdOptionExists("-c")) {
-        c = true;
-    }
-
-    if (input.cmdOptionExists("-e")) {
-        cli("", "# ", ab, c);
-    } else {
-        cli(">> ", "", ab, c);
-    }
-
+  InputParser input(argc, argv);
+  if (input.cmdOptionExists("-h")) {
+    showHelp(argv[0]);
     exit(0);
+  }
+
+  bool ab = false;
+  if (input.cmdOptionExists("-a")) {
+    ab = true;
+  }
+
+  bool c = false;
+  if (input.cmdOptionExists("-c")) {
+    c = true;
+  }
+
+  if (input.cmdOptionExists("-e")) {
+    cli("", "# ", ab, c);
+  } else {
+    cli(">> ", "", ab, c);
+  }
+
+  exit(0);
 }
 #endif
 

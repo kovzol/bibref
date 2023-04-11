@@ -1,8 +1,9 @@
 #ifndef CLI_H
 #define CLI_H
 
-using namespace std;
 #include <string>
+
+using namespace std;
 
 char** completer(const char* text, int start, int end);
 void cli(const char *input_prepend, const char* output_prepend, bool addbooks, bool colored);

@@ -1,8 +1,8 @@
 #include <iostream>
 
-#include "psalmsinfo.h"
-
 using namespace std;
+
+#include "psalmsinfo.h"
 
 class InvalidPsalm: public exception
 {
@@ -13,19 +13,19 @@ class InvalidPsalm: public exception
 } InvalidPsalm;
 
 PsalmsInfo::PsalmsInfo (string n) {
-    info = n;
+  info = n;
 }
 
 string PsalmsInfo::getInfo() {
-    return info;
+  return info;
 }
 
 int PsalmsInfo::getLastVerse(int p) {
-    if (p<1 || p>151) throw InvalidPsalm;
-    return lastVerse[p];
+  if (p<1 || p>151) throw InvalidPsalm;
+  return lastVerse[p];
 }
 
 void PsalmsInfo::setLastVerse(int p, int v) {
-    if (p<1 || p>151) throw InvalidPsalm;
-    lastVerse[p] = v;
+  if (p<1 || p>151) throw InvalidPsalm;
+  lastVerse[p] = v;
 }

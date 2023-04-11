@@ -6,7 +6,7 @@
 #include "book.h"
 
 typedef struct fingerprint {
-    unsigned short int data [N][N];
+  unsigned short int data [N][N];
 } fingerprint;
 
 fingerprint getFingerprint(Book b, int start, int length);

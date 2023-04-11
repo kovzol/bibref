@@ -6,6 +6,9 @@
 #include <string>
 #include <algorithm>
 #include <vector>
+
+using namespace std;
+
 #ifndef __EMSCRIPTEN__
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -34,7 +37,6 @@
 #define ERROR_COLOR "<span style=\"color: red\">"
 #endif
 
-using namespace std;
 using namespace sword;
 
 bool booksAdded = false;
@@ -86,71 +88,71 @@ string errorTokensParameters = tokensCmd + " requires 3 or 4 parameters.";
 string errorSearchParameters = searchCmd + " requires at least one parameter.";
 
 vector<string> vocabulary {addbooksCmd, compareCmd + "12", jaccardCmd + "12",
-                           textCmd + "1", textCmd + "2", lookupCmd + "1", lookupCmd + "2", "quit",
-                                   "help", findCmd + "1", findCmd + "2", lengthCmd + "1", lengthCmd + "2",
-                                   minuniqueCmd + "1", latintextCmd + "1", latintextCmd + "2",
-                                   extendCmd, getrefsCmd, lookupCmd, maxresultsCmd, sqlCmd, psalminfoCmd,
-                                   rawCmd, rawCmd + "1", rawCmd + "2",
-                                   printCmd + "1", printCmd + "2", colorsCmd, tokensCmd, searchCmd
+      textCmd + "1", textCmd + "2", lookupCmd + "1", lookupCmd + "2", "quit",
+      "help", findCmd + "1", findCmd + "2", lengthCmd + "1", lengthCmd + "2",
+      minuniqueCmd + "1", latintextCmd + "1", latintextCmd + "2",
+      extendCmd, getrefsCmd, lookupCmd, maxresultsCmd, sqlCmd, psalminfoCmd,
+      rawCmd, rawCmd + "1", rawCmd + "2",
+      printCmd + "1", printCmd + "2", colorsCmd, tokensCmd, searchCmd
                           };
 
 void add_vocabulary_item(string item) {
-    replace(item.begin(), item.end(), ' ', '_');
-    vocabulary.push_back(item);
+  replace(item.begin(), item.end(), ' ', '_');
+  vocabulary.push_back(item);
 }
 
 string collect_info = "";
 
 void info(string message) {
 #ifndef __EMSCRIPTEN__
-    cerr << output_prepend_set << message << endl << flush;
+  cerr << output_prepend_set << message << endl << flush;
 #else
-    cout << message << endl << flush;
+  cout << message << endl << flush;
 #endif
-    collect_info = collect_info + message + "\n";
+  collect_info = collect_info + message + "\n";
 }
 
 #ifndef __EMSCRIPTEN__
 // readline related code was taken mostly from https://eli.thegreenplace.net/2016/basics-of-using-the-readline-library/
 char* completion_generator(const char* text, int state) {
-    // This function is called with state=0 the first time; subsequent calls are
-    // with a nonzero state. state=0 can be used to perform one-time
-    // initialization for this completion session.
-    static vector<string> matches;
-    static size_t match_index = 0;
+  // This function is called with state=0 the first time; subsequent calls are
+  // with a nonzero state. state=0 can be used to perform one-time
+  // initialization for this completion session.
+  static vector<string> matches;
+  static size_t match_index = 0;
 
-    if (state == 0) {
-        // During initialization, compute the actual matches for 'text' and keep
-        // them in a static vector.
-        matches.clear();
-        match_index = 0;
+  if (state == 0) {
+    // During initialization, compute the actual matches for 'text' and keep
+    // them in a static vector.
+    matches.clear();
+    match_index = 0;
 
-        // Collect a vector of matches: vocabulary words that begin with text.
-        string textstr = string(text);
-        for (auto word : vocabulary) {
-            if (word.size() >= textstr.size() &&
-                    word.compare(0, textstr.size(), textstr) == 0) {
-                matches.push_back(word);
-            }
-        }
+    // Collect a vector of matches: vocabulary words that begin with text.
+    string textstr = string(text);
+    for (auto word : vocabulary) {
+      if (word.size() >= textstr.size() &&
+          word.compare(0, textstr.size(), textstr) == 0) {
+        matches.push_back(word);
+      }
     }
+  }
 
-    if (match_index >= matches.size()) {
-        // We return nullptr to notify the caller no more matches are available.
-        return nullptr;
-    } else {
-        // Return a malloc'd char* for the match. The caller frees it.
-        return strdup(matches[match_index++].c_str());
-    }
+  if (match_index >= matches.size()) {
+    // We return nullptr to notify the caller no more matches are available.
+    return nullptr;
+  } else {
+    // Return a malloc'd char* for the match. The caller frees it.
+    return strdup(matches[match_index++].c_str());
+  }
 }
 
 char** completer(const char* text, int start, int end) {
-    // Don't do filename completion even if our generator finds no matches.
-    rl_attempted_completion_over = 1;
+  // Don't do filename completion even if our generator finds no matches.
+  rl_attempted_completion_over = 1;
 
-    // Note: returning nullptr here will make readline use the default filename
-    // completer.
-    return rl_completion_matches(text, completion_generator);
+  // Note: returning nullptr here will make readline use the default filename
+  // completer.
+  return rl_completion_matches(text, completion_generator);
 }
 #endif
 
@@ -160,701 +162,701 @@ char* output_prepend_set;
 string ot_color, nt_color, reset_color, error_color;
 
 void set_colors(bool colored) {
-    ot_color = "";
-    nt_color = "";
-    reset_color = "";
-    error_color = "";
+  ot_color = "";
+  nt_color = "";
+  reset_color = "";
+  error_color = "";
 
-    if (colored) {
-        ot_color = OT_COLOR;
-        nt_color = NT_COLOR;
-        reset_color = RESET_COLOR;
-        error_color = ERROR_COLOR;
-        }
-    }
+  if (colored) {
+    ot_color = OT_COLOR;
+    nt_color = NT_COLOR;
+    reset_color = RESET_COLOR;
+    error_color = ERROR_COLOR;
+  }
+}
 
 string cli_process(char *buf) {
-        string rawinput(buf);
-        boost::algorithm::trim(rawinput);
-        vector<string> commentTokens;
-        boost::split(commentTokens, rawinput, boost::is_any_of("#"));
-        string input = commentTokens[0];
-        boost::algorithm::trim(input);
+  string rawinput(buf);
+  boost::algorithm::trim(rawinput);
+  vector<string> commentTokens;
+  boost::split(commentTokens, rawinput, boost::is_any_of("#"));
+  string input = commentTokens[0];
+  boost::algorithm::trim(input);
 
-        if (input.compare(addbooksCmd) == 0) {
-            if (booksAdded) {
-                cerr << "Books already added." << endl << flush;
-            } else {
-                if (addBooks() == 0) {
-                    booksAdded = true;
-                }
-            }
-            goto end;
-        }
+  if (input.compare(addbooksCmd) == 0) {
+    if (booksAdded) {
+      cerr << "Books already added." << endl << flush;
+    } else {
+      if (addBooks() == 0) {
+        booksAdded = true;
+      }
+    }
+    goto end;
+  }
 
-        if (input.compare("quit") == 0) {
-            info("Goodbye.");
-            exit(0);
-        }
+  if (input.compare("quit") == 0) {
+    info("Goodbye.");
+    exit(0);
+  }
 
-        if (input.compare("help") == 0) {
+  if (input.compare("help") == 0) {
 #ifdef __EMSCRIPTEN__
-            showAvailableBibles();
+    showAvailableBibles();
 #endif
-            info("Please visit https://github.com/kovzol/bibref#bibref to get online help.");
-            goto end;
-        }
+    info("Please visit https://github.com/kovzol/bibref#bibref to get online help.");
+    goto end;
+  }
 
-        if (boost::starts_with(input, textCmd)) {
-            int index;
-            int commandLength = textCmd.length();
-            if (input.length() == commandLength) {
-                error(errorTextIncomplete);
-                goto end;
-            }
-            if (input.at(commandLength) == '1') {
-                index = 0;
-            }
-            else if (input.at(commandLength) ==  '2') {
-                index = 1;
-            } else {
-                error(errorTextIncomplete);
-                goto end;
-            }
-            if (input.length() < textCmd.length() + 2) {
-                error(errorTextParameters);
-                goto end;
-            }
-            if (input.at(commandLength + 1) != ' ') {
-                error("Either " + textCmd + "1 or " + textCmd + "2 must be used.");
-                goto end;
-            }
-            string rest = input.substr(input.find(" ") + 1);
-            // Remove accidental Greek accents first:
-            SWMgr manager;
-            manager.setGlobalOption("Greek Accents", "Off");
-            SWBuf to_convert = rest.data();
-            manager.filterText("Greek Accents", to_convert);
-            // Convert Greek to Latin:
-            string processed = processVerse(to_convert.c_str());
-            if (processed.length() == 0) {
-                error("Text does not contain Greek letters, ignored.");
-                goto end;
-            }
-            text[index] = processed;
-            textset[index] = true;
-            info("Stored internally as " + processed + ".");
-            goto end;
-        }
+  if (boost::starts_with(input, textCmd)) {
+    int index;
+    int commandLength = textCmd.length();
+    if (input.length() == commandLength) {
+      error(errorTextIncomplete);
+      goto end;
+    }
+    if (input.at(commandLength) == '1') {
+      index = 0;
+    }
+    else if (input.at(commandLength) ==  '2') {
+      index = 1;
+    } else {
+      error(errorTextIncomplete);
+      goto end;
+    }
+    if (input.length() < textCmd.length() + 2) {
+      error(errorTextParameters);
+      goto end;
+    }
+    if (input.at(commandLength + 1) != ' ') {
+      error("Either " + textCmd + "1 or " + textCmd + "2 must be used.");
+      goto end;
+    }
+    string rest = input.substr(input.find(" ") + 1);
+    // Remove accidental Greek accents first:
+    SWMgr manager;
+    manager.setGlobalOption("Greek Accents", "Off");
+    SWBuf to_convert = rest.data();
+    manager.filterText("Greek Accents", to_convert);
+    // Convert Greek to Latin:
+    string processed = processVerse(to_convert.c_str());
+    if (processed.length() == 0) {
+      error("Text does not contain Greek letters, ignored.");
+      goto end;
+    }
+    text[index] = processed;
+    textset[index] = true;
+    info("Stored internally as " + processed + ".");
+    goto end;
+  }
 
-        if (boost::starts_with(input, searchCmd)) {
-            int index;
-            if (input.length() < searchCmd.length() + 1) {
-                error(errorSearchParameters);
-                goto end;
-            }
-            string rest = input.substr(input.find(" ") + 1);
-            index = rest.find(" ");
-            string moduleName = rest.substr(0, index);
-            rest = rest.substr(index + 1);
+  if (boost::starts_with(input, searchCmd)) {
+    int index;
+    if (input.length() < searchCmd.length() + 1) {
+      error(errorSearchParameters);
+      goto end;
+    }
+    string rest = input.substr(input.find(" ") + 1);
+    index = rest.find(" ");
+    string moduleName = rest.substr(0, index);
+    rest = rest.substr(index + 1);
 
-            vector<int> pattern;
-            std::stringstream ss(rest);
+    vector<int> pattern;
+    std::stringstream ss(rest);
 
-            int s = 0;
-            int t;
-            while (ss >> t) {
-              pattern.push_back(t);
-              s += 1;
-            }
-            if (s==0) {
-              error(errorSearchParameters);
-              goto end;
-            }
-
-            s--;
-            int length = pattern.at(s);
-            pattern.pop_back();
-            info("Read " + to_string(s) + " tokens, searching for an extension of max. " + to_string(length) + " tokens.");
-            if (length < s) {
-                error("Surely, this will not be working.");
-            } else {
-                searchTokenset(moduleName, pattern, length);
-            }
-            goto end;
-        }
-
-
-        if (boost::starts_with(input, latintextCmd)) {
-            int index;
-            int commandLength = latintextCmd.length();
-            if (input.length() == commandLength) {
-                error(errorLatintextIncomplete);
-                goto end;
-            }
-            if (input.at(commandLength) == '1') {
-                index = 0;
-            }
-            else if (input.at(commandLength) ==  '2') {
-                index = 1;
-            } else {
-                error(errorLatintextIncomplete);
-                goto end;
-            }
-            if (input.length() < textCmd.length() + 2) {
-                error(errorLatintextParameters);
-                goto end;
-            }
-            if (input.at(commandLength + 1) != ' ') {
-                error("Either " + latintextCmd + "1 or " + latintextCmd + "2 must be used.");
-                goto end;
-            }
-            string rest = input.substr(input.find(" ") + 1);
-            text[index] = rest;
-            textset[index] = true;
-            info("Stored.");
-            goto end;
-        }
-
-        if (boost::starts_with(input, lookupCmd)) {
-            int index;
-            int commandLength = lookupCmd.length();
-            if (input.length() == commandLength) {
-                error(errorLookupIncomplete);
-                goto end;
-            }
-            if (input.at(commandLength) == ' ') {
-                string rest = input.substr(input.find(" ") + 1);
-                vector<string> tokens;
-                boost::split(tokens, rest, boost::is_any_of(" "));
-                int restSize = tokens.size();
-                if (restSize == 3) {
-                    lookupTranslation(tokens[0], tokens[1], tokens[2]);
-                } else {
-                    error(errorLookupParameters);
-                }
-                goto end;
-            }
-            if (input.at(commandLength) == '1') {
-                index = 0;
-            }
-            else if (input.at(commandLength) ==  '2') {
-                index = 1;
-            } else {
-                error(errorLookupIncomplete);
-                goto end;
-            }
-            if (input.length() < lookupCmd.length() + 2) {
-                error(errorLookupParameters);
-                goto end;
-            }
-            if (input.at(commandLength + 1) != ' ') {
-                error(errorLookupIncomplete);
-                goto end;
-            }
-            string rest = input.substr(input.find(" ") + 1);
-            vector<string> tokens;
-            boost::split(tokens, rest, boost::is_any_of(" "));
-            int restSize = tokens.size();
-            if (restSize == 3) {
-                string verse = "";
-                try {
-                    verse = lookupVerse(tokens[1], tokens[0], tokens[2]);
-                    text[index] = verse;
-                    textset[index] = true;
-                    info("Stored internally as " + verse + ".");
-                } catch (exception &e) {
-                    error(e.what());
-                }
-                goto end;
-            }
-            if (restSize == 4) {
-                string verse = "";
-                try {
-                    vector<string> tokens2, tokens3;
-                    int start = 0, end = 0;
-                    boost::split(tokens2, tokens[2], boost::is_any_of("+"));
-                    if (tokens2.size() > 1) {
-                        start = stoi(tokens2[1]);
-                    }
-                    boost::split(tokens3, tokens[3], boost::is_any_of("-"));
-                    if (tokens3.size() > 1) {
-                        end = stoi(tokens3[1]);
-                    }
-                    verse = getText(tokens[1], tokens[0], tokens2.at(0), tokens3.at(0), start, end);
-                    text[index] = verse;
-                    textset[index] = true;
-                    info("Stored internally as " + verse + ".");
-                } catch (exception &e) {
-                    error(e.what());
-                }
-                goto end;
-            }
-            error(errorLookupParameters);
-            goto end;
-        }
-
-        if (boost::starts_with(input, tokensCmd)) {
-            string rest = input.substr(input.find(" ") + 1);
-            vector<string> tokens;
-            boost::split(tokens, rest, boost::is_any_of(" "));
-            int restSize = tokens.size();
-            if (restSize == 3) {
-                try {
-                    getTokens(tokens[0], tokens[1], tokens[2]);
-                    } catch (exception &e) {
-                    error(e.what());
-                    }
-                } else {
-                error(errorTokensParameters);
-                }
-            goto end;
-        }
-
-        if (boost::starts_with(input, findCmd)) {
-            int index;
-            int commandLength = findCmd.length();
-            if (input.length() == commandLength) {
-                error(errorFindIncomplete);
-                goto end;
-            }
-            if (input.at(commandLength) == '1') {
-                index = 0;
-            }
-            else if (input.at(commandLength) ==  '2') {
-                index = 1;
-            } else {
-                error(errorFindIncomplete);
-                goto end;
-            }
-            if (input.length() < findCmd.length() + 1) {
-                error(errorFindParameters);
-                goto end;
-            }
-            string rest = input.substr(input.find(" ") + 1);
-            if (text[index].length() == 0) {
-                error(errorFindEmpty);
-                goto end;
-            }
-            find(text[index], rest, maxresults, 1);
-            goto end;
-        }
-
-        if (boost::starts_with(input, lengthCmd)) {
-            int index;
-            int commandLength = lengthCmd.length();
-            if (input.length() == commandLength) {
-                error(errorLengthIncomplete);
-                goto end;
-            }
-            if (input.at(commandLength) == '1') {
-                index = 0;
-            }
-            else if (input.at(commandLength) ==  '2') {
-                index = 1;
-            } else {
-                error(errorLengthIncomplete);
-                goto end;
-            }
-            info("Length of text " + to_string(index + 1) + " is "
-                 + to_string(text[index].length()) + ".");
-            goto end;
-        }
-
-        if (boost::starts_with(input, printCmd)) {
-            int index;
-            int commandLength = printCmd.length();
-            if (input.length() == commandLength) {
-                error(errorPrintIncomplete);
-                goto end;
-            }
-            if (input.at(commandLength) == '1') {
-                index = 0;
-            }
-            else if (input.at(commandLength) ==  '2') {
-                index = 1;
-            } else {
-                error(errorPrintIncomplete);
-                goto end;
-            }
-            info(latinToGreek(text[index]));
-            goto end;
-        }
-
-        if (boost::starts_with(input, maxresultsCmd)) {
-            int index;
-            int commandLength = maxresultsCmd.length();
-            if (input.length() == commandLength) {
-                error(errorMaxresultsParameters);
-                goto end;
-            }
-            string rest = input.substr(input.find(" ") + 1);
-            maxresults = stoi(rest);
-            info("Set to " + to_string(maxresults) + ".");
-            goto end;
-        }
-
-        if (boost::starts_with(input, sqlCmd)) {
-            int index;
-            int commandLength = sqlCmd.length();
-            if (input.length() == commandLength) {
-                error(errorSqlParameters);
-                goto end;
-            }
-            string rest = input.substr(input.find(" ") + 1);
-            if (rest.compare("on")==0 || rest.compare("1")==0 || rest.compare("true")==0) {
-                sql = true;
-                info("SQL output enabled.");
-            } else
-            {
-                sql = false;
-                info("SQL output disabled.");
-            }
-            goto end;
-        }
-
-        if (boost::starts_with(input, colorsCmd)) {
-            int index;
-            int commandLength = colorsCmd.length();
-            if (input.length() == commandLength) {
-                error(errorColorsParameters);
-                goto end;
-            }
-            string rest = input.substr(input.find(" ") + 1);
-            if (rest.compare("on")==0 || rest.compare("1")==0 || rest.compare("true")==0) {
-                set_colors(true);
-                info("Colors enabled.");
-            } else
-            {
-                set_colors(false);
-                info("Colors disabled.");
-            }
-            goto end;
-        }
-
-        if (boost::starts_with(input, compareCmd + "12")) {
-            if (textset.at(0) && textset.at(1)) {
-                compareLatin(text[0], text[1]);
-            } else {
-                error("Text 1 or 2 is not set.");
-            }
-            goto end;
-        }
-
-        if (boost::starts_with(input, jaccardCmd + "12")) {
-            if (textset.at(0) && textset.at(1)) {
-                double jd = jaccard_dist(text[0], text[1]);
-                info("Jaccard distance is " + to_string(jd) + ".");
-            } else {
-                error("Text 1 or 2 is not set.");
-            }
-            goto end;
-        }
-
-        if (boost::starts_with(input, minuniqueCmd + "1")) {
-            int commandLength = minuniqueCmd.length();
-            if (input.length() == commandLength) {
-                error(errorMinuniqueParameters);
-                goto end;
-            }
-            if (input.length() < minuniqueCmd.length() + 2) {
-                error(errorMinuniqueParameters);
-                goto end;
-            }
-            string rest = input.substr(input.find(" ") + 1);
-            find_min_unique(text[0], rest, 1);
-            goto end;
-        }
-
-        if (boost::starts_with(input, psalminfoCmd + " ")) {
-            vector<string> tokens;
-            boost::split(tokens, input, boost::is_any_of(" "));
-            int size = tokens.size();
-            if (size == 3) {
-                try {
-                    int psalmInfo = getPsalmLastVerse(tokens[1], stoi(tokens[2]));
-                    info(tokens[1] + " Psalm " + tokens[2] + " contains " + to_string(psalmInfo) + " verses.");
-                    } catch (exception &e) {
-                    error(e.what());
-                    }
-                } else {
-                error(errorPsalminfoParameters);
-            }
-            goto end;
-        }
-
-        if (boost::starts_with(input, rawCmd)) {
-            int index;
-            int commandLength = rawCmd.length();
-            if (input.length() == commandLength) {
-                error(errorRawIncomplete);
-                goto end;
-            }
-            if (input.at(commandLength) == ' ') {
-                string rest = input.substr(input.find(" ") + 1);
-                vector<string> tokens;
-                boost::split(tokens, rest, boost::is_any_of(" "));
-                int restSize = tokens.size();
-                if (restSize == 4) {
-                    try {
-                        string module = tokens[0];
-                        string book = tokens[1];
-                        int startPos = stoi(tokens[2]);
-                        int length = stoi(tokens[3]);
-                        string text = getRaw(module, book, startPos - 1, length);
-                        info(text);
-                        goto end;
-                        } catch (exception &e) {
-                        error(e.what());
-                        }
-                    } else {
-                    error(errorRawParameters);
-                    goto end;
-                }
-            }
-            if (input.at(commandLength) == '1') {
-                index = 0;
-            }
-            else if (input.at(commandLength) ==  '2') {
-                index = 1;
-            } else {
-                error(errorRawIncomplete);
-                goto end;
-            }
-            string rest = input.substr(input.find(" ") + 1);
-            vector<string> tokens;
-            boost::split(tokens, rest, boost::is_any_of(" "));
-            int restSize = tokens.size();
-            if (restSize == 4) {
-                // TODO: This part is same as above. Unify.
-                try {
-                    string module = tokens[0];
-                    string book = tokens[1];
-                    int startPos = stoi(tokens[2]);
-                    int length = stoi(tokens[3]);
-                    text[index] = getRaw(module, book, startPos - 1, length);
-                    textset[index] = true;
-                    info("Stored.");
-                    goto end;
-                    } catch (exception &e) {
-                    error(e.what());
-                    }
-                } else {
-            error(errorRawParameters);
-            goto end;
-            }
-        }
-
-        if (boost::starts_with(input, extendCmd)) {
-            int commandLength = extendCmd.length();
-            if (input.length() == commandLength) {
-                error(errorExtendParameters);
-                goto end;
-            }
-            if (input.at(commandLength) != ' ') {
-                error(errorExtendParameters);
-                goto end;
-            }
-            string rest = input.substr(input.find(" ") + 1);
-            vector<string> tokens;
-            boost::split(tokens, rest, boost::is_any_of(" "));
-            int restSize = tokens.size();
-            string moduleName1 = tokens[0];
-            string moduleName2 = tokens[1];
-            string book2 = tokens[2];
-            string verse2S, verse2E;
-            if (restSize == 4) {
-                verse2S = tokens[3] + "+0";
-                verse2E = tokens[3] + "-0";
-            } else if (restSize == 5) {
-                verse2S = tokens[3];
-                verse2E = tokens[4];
-            } else {
-                error(errorExtendParameters);
-                goto end;
-            }
-            vector<string> verse2ST, verse2ET;
-            int start = 0, end = 0;
-            boost::split(verse2ST, verse2S, boost::is_any_of("+"));
-            if (verse2ST.size() > 1) {
-                start = stoi(verse2ST[1]);
-            }
-            boost::split(verse2ET, verse2E, boost::is_any_of("-"));
-            if (verse2ET.size() > 1) {
-                end = stoi(verse2ET[1]);
-            }
-            try {
-                extend(moduleName1, moduleName2, book2, verse2ST[0], start, verse2ET[0], end);
-            } catch (exception &e) {
-                error(e.what());
-            }
-            goto end;
-        }
-
-        if (boost::starts_with(input, getrefsCmd)) {
-            int commandLength = getrefsCmd.length();
-            if (input.length() == commandLength) {
-                error(errorGetrefsParameters);
-                goto end;
-            }
-            if (input.at(commandLength) != ' ') {
-                error(errorGetrefsParameters);
-                goto end;
-            }
-            string rest = input.substr(input.find(" ") + 1);
-            vector<string> tokens;
-            boost::split(tokens, rest, boost::is_any_of(" "));
-            int restSize = tokens.size();
-            if (restSize < 3) {
-                error(errorGetrefsParameters);
-                goto end;
-            }
-            string moduleName2 = tokens[0];
-            string moduleName1 = tokens[1];
-            string book1 = tokens[2];
-            string verse1S, verse1E;
-            if (restSize == 3) { // TODO: implement this
-                error("Getting references from full books is not yet implemented, sorry.");
-                goto end;
-            }
-            if (restSize == 4) {
-                if (book1 == "Psalms") {
-                    vector<string> r;
-                    boost::split(r, tokens[3], boost::is_any_of(":"));
-                    if (r.size() == 1) { // only the psalm number is given
-                        verse1S = r[0] + ":1+0";
-                        try {
-                            verse1E = r[0] + ":" + to_string(getPsalmLastVerse(moduleName1, stoi(r[0]))) + "-0";
-                        } catch (exception &e) {
-                        error(e.what());
-                        }
-                    } else { // one verse is given in the psalm
-                    verse1S = tokens[3] + "+0";
-                    verse1E = tokens[3] + "-0";
-                    }
-                } else { // this is not a psalm and one verse is given
-                    verse1S = tokens[3] + "+0";
-                    verse1E = tokens[3] + "-0";
-                }
-            } else if (restSize == 5) {
-                verse1S = tokens[3];
-                verse1E = tokens[4];
-            } else {
-                error(errorExtendParameters);
-                goto end;
-            }
-            vector<string> verse1ST, verse1ET;
-            int start = 0, end = 0;
-            boost::split(verse1ST, verse1S, boost::is_any_of("+"));
-            if (verse1ST.size() > 1) {
-                start = stoi(verse1ST[1]);
-            }
-            boost::split(verse1ET, verse1E, boost::is_any_of("-"));
-            if (verse1ET.size() > 1) {
-                end = stoi(verse1ET[1]);
-            }
-            try {
-                getrefs(moduleName2, moduleName1, book1, verse1ST[0], start, verse1ET[0], end);
-            } catch (exception &e) {
-                error(e.what());
-            }
-            info("Finished");
-            goto end;
-        }
-
-        if (input.length() != 0) {
-            error(errorNotRecognized);
-        }
-end:
-    string ret = collect_info;
-    collect_info = "";
-    return ret;
+    int s = 0;
+    int t;
+    while (ss >> t) {
+      pattern.push_back(t);
+      s += 1;
+    }
+    if (s==0) {
+      error(errorSearchParameters);
+      goto end;
     }
 
-void cli(const char *input_prepend, const char *output_prepend, bool addbooks, bool colored) {
-    output_prepend_set = new char[4]; // FIXME: this is hardcoded.
-    strcpy(output_prepend_set, output_prepend);
-#ifndef __EMSCRIPTEN__
-    rl_attempted_completion_function = completer;
-#endif
-    info("This is bibref " BIBREF_VERSION ", nice to meet you.");
-    showAvailableBibles();
-    if (addbooks) {
-        if (addBooks() == 0) {
-            booksAdded = true;
-            }
+    s--;
+    int length = pattern.at(s);
+    pattern.pop_back();
+    info("Read " + to_string(s) + " tokens, searching for an extension of max. " + to_string(length) + " tokens.");
+    if (length < s) {
+      error("Surely, this will not be working.");
+    } else {
+      searchTokenset(moduleName, pattern, length);
+    }
+    goto end;
+  }
+
+
+  if (boost::starts_with(input, latintextCmd)) {
+    int index;
+    int commandLength = latintextCmd.length();
+    if (input.length() == commandLength) {
+      error(errorLatintextIncomplete);
+      goto end;
+    }
+    if (input.at(commandLength) == '1') {
+      index = 0;
+    }
+    else if (input.at(commandLength) ==  '2') {
+      index = 1;
+    } else {
+      error(errorLatintextIncomplete);
+      goto end;
+    }
+    if (input.length() < textCmd.length() + 2) {
+      error(errorLatintextParameters);
+      goto end;
+    }
+    if (input.at(commandLength + 1) != ' ') {
+      error("Either " + latintextCmd + "1 or " + latintextCmd + "2 must be used.");
+      goto end;
+    }
+    string rest = input.substr(input.find(" ") + 1);
+    text[index] = rest;
+    textset[index] = true;
+    info("Stored.");
+    goto end;
+  }
+
+  if (boost::starts_with(input, lookupCmd)) {
+    int index;
+    int commandLength = lookupCmd.length();
+    if (input.length() == commandLength) {
+      error(errorLookupIncomplete);
+      goto end;
+    }
+    if (input.at(commandLength) == ' ') {
+      string rest = input.substr(input.find(" ") + 1);
+      vector<string> tokens;
+      boost::split(tokens, rest, boost::is_any_of(" "));
+      int restSize = tokens.size();
+      if (restSize == 3) {
+        lookupTranslation(tokens[0], tokens[1], tokens[2]);
+      } else {
+        error(errorLookupParameters);
+      }
+      goto end;
+    }
+    if (input.at(commandLength) == '1') {
+      index = 0;
+    }
+    else if (input.at(commandLength) ==  '2') {
+      index = 1;
+    } else {
+      error(errorLookupIncomplete);
+      goto end;
+    }
+    if (input.length() < lookupCmd.length() + 2) {
+      error(errorLookupParameters);
+      goto end;
+    }
+    if (input.at(commandLength + 1) != ' ') {
+      error(errorLookupIncomplete);
+      goto end;
+    }
+    string rest = input.substr(input.find(" ") + 1);
+    vector<string> tokens;
+    boost::split(tokens, rest, boost::is_any_of(" "));
+    int restSize = tokens.size();
+    if (restSize == 3) {
+      string verse = "";
+      try {
+        verse = lookupVerse(tokens[1], tokens[0], tokens[2]);
+        text[index] = verse;
+        textset[index] = true;
+        info("Stored internally as " + verse + ".");
+      } catch (exception &e) {
+        error(e.what());
+      }
+      goto end;
+    }
+    if (restSize == 4) {
+      string verse = "";
+      try {
+        vector<string> tokens2, tokens3;
+        int start = 0, end = 0;
+        boost::split(tokens2, tokens[2], boost::is_any_of("+"));
+        if (tokens2.size() > 1) {
+          start = stoi(tokens2[1]);
         }
+        boost::split(tokens3, tokens[3], boost::is_any_of("-"));
+        if (tokens3.size() > 1) {
+          end = stoi(tokens3[1]);
+        }
+        verse = getText(tokens[1], tokens[0], tokens2.at(0), tokens3.at(0), start, end);
+        text[index] = verse;
+        textset[index] = true;
+        info("Stored internally as " + verse + ".");
+      } catch (exception &e) {
+        error(e.what());
+      }
+      goto end;
+    }
+    error(errorLookupParameters);
+    goto end;
+  }
 
-    maxresults = 100;
-    sql = false;
+  if (boost::starts_with(input, tokensCmd)) {
+    string rest = input.substr(input.find(" ") + 1);
+    vector<string> tokens;
+    boost::split(tokens, rest, boost::is_any_of(" "));
+    int restSize = tokens.size();
+    if (restSize == 3) {
+      try {
+        getTokens(tokens[0], tokens[1], tokens[2]);
+      } catch (exception &e) {
+        error(e.what());
+      }
+    } else {
+      error(errorTokensParameters);
+    }
+    goto end;
+  }
 
-    set_colors(colored);
+  if (boost::starts_with(input, findCmd)) {
+    int index;
+    int commandLength = findCmd.length();
+    if (input.length() == commandLength) {
+      error(errorFindIncomplete);
+      goto end;
+    }
+    if (input.at(commandLength) == '1') {
+      index = 0;
+    }
+    else if (input.at(commandLength) ==  '2') {
+      index = 1;
+    } else {
+      error(errorFindIncomplete);
+      goto end;
+    }
+    if (input.length() < findCmd.length() + 1) {
+      error(errorFindParameters);
+      goto end;
+    }
+    string rest = input.substr(input.find(" ") + 1);
+    if (text[index].length() == 0) {
+      error(errorFindEmpty);
+      goto end;
+    }
+    find(text[index], rest, maxresults, 1);
+    goto end;
+  }
+
+  if (boost::starts_with(input, lengthCmd)) {
+    int index;
+    int commandLength = lengthCmd.length();
+    if (input.length() == commandLength) {
+      error(errorLengthIncomplete);
+      goto end;
+    }
+    if (input.at(commandLength) == '1') {
+      index = 0;
+    }
+    else if (input.at(commandLength) ==  '2') {
+      index = 1;
+    } else {
+      error(errorLengthIncomplete);
+      goto end;
+    }
+    info("Length of text " + to_string(index + 1) + " is "
+         + to_string(text[index].length()) + ".");
+    goto end;
+  }
+
+  if (boost::starts_with(input, printCmd)) {
+    int index;
+    int commandLength = printCmd.length();
+    if (input.length() == commandLength) {
+      error(errorPrintIncomplete);
+      goto end;
+    }
+    if (input.at(commandLength) == '1') {
+      index = 0;
+    }
+    else if (input.at(commandLength) ==  '2') {
+      index = 1;
+    } else {
+      error(errorPrintIncomplete);
+      goto end;
+    }
+    info(latinToGreek(text[index]));
+    goto end;
+  }
+
+  if (boost::starts_with(input, maxresultsCmd)) {
+    int index;
+    int commandLength = maxresultsCmd.length();
+    if (input.length() == commandLength) {
+      error(errorMaxresultsParameters);
+      goto end;
+    }
+    string rest = input.substr(input.find(" ") + 1);
+    maxresults = stoi(rest);
+    info("Set to " + to_string(maxresults) + ".");
+    goto end;
+  }
+
+  if (boost::starts_with(input, sqlCmd)) {
+    int index;
+    int commandLength = sqlCmd.length();
+    if (input.length() == commandLength) {
+      error(errorSqlParameters);
+      goto end;
+    }
+    string rest = input.substr(input.find(" ") + 1);
+    if (rest.compare("on")==0 || rest.compare("1")==0 || rest.compare("true")==0) {
+      sql = true;
+      info("SQL output enabled.");
+    } else
+    {
+      sql = false;
+      info("SQL output disabled.");
+    }
+    goto end;
+  }
+
+  if (boost::starts_with(input, colorsCmd)) {
+    int index;
+    int commandLength = colorsCmd.length();
+    if (input.length() == commandLength) {
+      error(errorColorsParameters);
+      goto end;
+    }
+    string rest = input.substr(input.find(" ") + 1);
+    if (rest.compare("on")==0 || rest.compare("1")==0 || rest.compare("true")==0) {
+      set_colors(true);
+      info("Colors enabled.");
+    } else
+    {
+      set_colors(false);
+      info("Colors disabled.");
+    }
+    goto end;
+  }
+
+  if (boost::starts_with(input, compareCmd + "12")) {
+    if (textset.at(0) && textset.at(1)) {
+      compareLatin(text[0], text[1]);
+    } else {
+      error("Text 1 or 2 is not set.");
+    }
+    goto end;
+  }
+
+  if (boost::starts_with(input, jaccardCmd + "12")) {
+    if (textset.at(0) && textset.at(1)) {
+      double jd = jaccard_dist(text[0], text[1]);
+      info("Jaccard distance is " + to_string(jd) + ".");
+    } else {
+      error("Text 1 or 2 is not set.");
+    }
+    goto end;
+  }
+
+  if (boost::starts_with(input, minuniqueCmd + "1")) {
+    int commandLength = minuniqueCmd.length();
+    if (input.length() == commandLength) {
+      error(errorMinuniqueParameters);
+      goto end;
+    }
+    if (input.length() < minuniqueCmd.length() + 2) {
+      error(errorMinuniqueParameters);
+      goto end;
+    }
+    string rest = input.substr(input.find(" ") + 1);
+    find_min_unique(text[0], rest, 1);
+    goto end;
+  }
+
+  if (boost::starts_with(input, psalminfoCmd + " ")) {
+    vector<string> tokens;
+    boost::split(tokens, input, boost::is_any_of(" "));
+    int size = tokens.size();
+    if (size == 3) {
+      try {
+        int psalmInfo = getPsalmLastVerse(tokens[1], stoi(tokens[2]));
+        info(tokens[1] + " Psalm " + tokens[2] + " contains " + to_string(psalmInfo) + " verses.");
+      } catch (exception &e) {
+        error(e.what());
+      }
+    } else {
+      error(errorPsalminfoParameters);
+    }
+    goto end;
+  }
+
+  if (boost::starts_with(input, rawCmd)) {
+    int index;
+    int commandLength = rawCmd.length();
+    if (input.length() == commandLength) {
+      error(errorRawIncomplete);
+      goto end;
+    }
+    if (input.at(commandLength) == ' ') {
+      string rest = input.substr(input.find(" ") + 1);
+      vector<string> tokens;
+      boost::split(tokens, rest, boost::is_any_of(" "));
+      int restSize = tokens.size();
+      if (restSize == 4) {
+        try {
+          string module = tokens[0];
+          string book = tokens[1];
+          int startPos = stoi(tokens[2]);
+          int length = stoi(tokens[3]);
+          string text = getRaw(module, book, startPos - 1, length);
+          info(text);
+          goto end;
+        } catch (exception &e) {
+          error(e.what());
+        }
+      } else {
+        error(errorRawParameters);
+        goto end;
+      }
+    }
+    if (input.at(commandLength) == '1') {
+      index = 0;
+    }
+    else if (input.at(commandLength) ==  '2') {
+      index = 1;
+    } else {
+      error(errorRawIncomplete);
+      goto end;
+    }
+    string rest = input.substr(input.find(" ") + 1);
+    vector<string> tokens;
+    boost::split(tokens, rest, boost::is_any_of(" "));
+    int restSize = tokens.size();
+    if (restSize == 4) {
+      // TODO: This part is same as above. Unify.
+      try {
+        string module = tokens[0];
+        string book = tokens[1];
+        int startPos = stoi(tokens[2]);
+        int length = stoi(tokens[3]);
+        text[index] = getRaw(module, book, startPos - 1, length);
+        textset[index] = true;
+        info("Stored.");
+        goto end;
+      } catch (exception &e) {
+        error(e.what());
+      }
+    } else {
+      error(errorRawParameters);
+      goto end;
+    }
+  }
+
+  if (boost::starts_with(input, extendCmd)) {
+    int commandLength = extendCmd.length();
+    if (input.length() == commandLength) {
+      error(errorExtendParameters);
+      goto end;
+    }
+    if (input.at(commandLength) != ' ') {
+      error(errorExtendParameters);
+      goto end;
+    }
+    string rest = input.substr(input.find(" ") + 1);
+    vector<string> tokens;
+    boost::split(tokens, rest, boost::is_any_of(" "));
+    int restSize = tokens.size();
+    string moduleName1 = tokens[0];
+    string moduleName2 = tokens[1];
+    string book2 = tokens[2];
+    string verse2S, verse2E;
+    if (restSize == 4) {
+      verse2S = tokens[3] + "+0";
+      verse2E = tokens[3] + "-0";
+    } else if (restSize == 5) {
+      verse2S = tokens[3];
+      verse2E = tokens[4];
+    } else {
+      error(errorExtendParameters);
+      goto end;
+    }
+    vector<string> verse2ST, verse2ET;
+    int start = 0, end = 0;
+    boost::split(verse2ST, verse2S, boost::is_any_of("+"));
+    if (verse2ST.size() > 1) {
+      start = stoi(verse2ST[1]);
+    }
+    boost::split(verse2ET, verse2E, boost::is_any_of("-"));
+    if (verse2ET.size() > 1) {
+      end = stoi(verse2ET[1]);
+    }
+    try {
+      extend(moduleName1, moduleName2, book2, verse2ST[0], start, verse2ET[0], end);
+    } catch (exception &e) {
+      error(e.what());
+    }
+    goto end;
+  }
+
+  if (boost::starts_with(input, getrefsCmd)) {
+    int commandLength = getrefsCmd.length();
+    if (input.length() == commandLength) {
+      error(errorGetrefsParameters);
+      goto end;
+    }
+    if (input.at(commandLength) != ' ') {
+      error(errorGetrefsParameters);
+      goto end;
+    }
+    string rest = input.substr(input.find(" ") + 1);
+    vector<string> tokens;
+    boost::split(tokens, rest, boost::is_any_of(" "));
+    int restSize = tokens.size();
+    if (restSize < 3) {
+      error(errorGetrefsParameters);
+      goto end;
+    }
+    string moduleName2 = tokens[0];
+    string moduleName1 = tokens[1];
+    string book1 = tokens[2];
+    string verse1S, verse1E;
+    if (restSize == 3) { // TODO: implement this
+      error("Getting references from full books is not yet implemented, sorry.");
+      goto end;
+    }
+    if (restSize == 4) {
+      if (book1 == "Psalms") {
+        vector<string> r;
+        boost::split(r, tokens[3], boost::is_any_of(":"));
+        if (r.size() == 1) { // only the psalm number is given
+          verse1S = r[0] + ":1+0";
+          try {
+            verse1E = r[0] + ":" + to_string(getPsalmLastVerse(moduleName1, stoi(r[0]))) + "-0";
+          } catch (exception &e) {
+            error(e.what());
+          }
+        } else { // one verse is given in the psalm
+          verse1S = tokens[3] + "+0";
+          verse1E = tokens[3] + "-0";
+        }
+      } else { // this is not a psalm and one verse is given
+        verse1S = tokens[3] + "+0";
+        verse1E = tokens[3] + "-0";
+      }
+    } else if (restSize == 5) {
+      verse1S = tokens[3];
+      verse1E = tokens[4];
+    } else {
+      error(errorExtendParameters);
+      goto end;
+    }
+    vector<string> verse1ST, verse1ET;
+    int start = 0, end = 0;
+    boost::split(verse1ST, verse1S, boost::is_any_of("+"));
+    if (verse1ST.size() > 1) {
+      start = stoi(verse1ST[1]);
+    }
+    boost::split(verse1ET, verse1E, boost::is_any_of("-"));
+    if (verse1ET.size() > 1) {
+      end = stoi(verse1ET[1]);
+    }
+    try {
+      getrefs(moduleName2, moduleName1, book1, verse1ST[0], start, verse1ET[0], end);
+    } catch (exception &e) {
+      error(e.what());
+    }
+    info("Finished");
+    goto end;
+  }
+
+  if (input.length() != 0) {
+    error(errorNotRecognized);
+  }
+end:
+  string ret = collect_info;
+  collect_info = "";
+  return ret;
+}
+
+void cli(const char *input_prepend, const char *output_prepend, bool addbooks, bool colored) {
+  output_prepend_set = new char[4]; // FIXME: this is hardcoded.
+  strcpy(output_prepend_set, output_prepend);
+#ifndef __EMSCRIPTEN__
+  rl_attempted_completion_function = completer;
+#endif
+  info("This is bibref " BIBREF_VERSION ", nice to meet you.");
+  showAvailableBibles();
+  if (addbooks) {
+    if (addBooks() == 0) {
+      booksAdded = true;
+    }
+  }
+
+  maxresults = 100;
+  sql = false;
+
+  set_colors(colored);
 
 #ifndef __EMSCRIPTEN__
-    char* buf;
-    struct passwd *pw = getpwuid(getuid());
-    char *histfile = pw->pw_dir;
-    strcat(histfile, "/.bibref_history");
-    read_history(histfile);
+  char* buf;
+  struct passwd *pw = getpwuid(getuid());
+  char *histfile = pw->pw_dir;
+  strcat(histfile, "/.bibref_history");
+  read_history(histfile);
 #endif
 
 #ifdef __EMSCRIPTEN__
 #define MAX_LINE_LENGTH 1024
-    char buf[MAX_LINE_LENGTH + 1];
-    string line;
+  char buf[MAX_LINE_LENGTH + 1];
+  string line;
 #endif
 
-    while (
+  while (
+       #ifndef __EMSCRIPTEN__
+         (buf = readline(input_prepend)) != nullptr
+       #else
+         (getline(cin, line) && (strcpy(buf, line.c_str())))
+       #endif
+         ) {
 #ifndef __EMSCRIPTEN__
-        (buf = readline(input_prepend)) != nullptr
-#else
-        (getline(cin, line) && (strcpy(buf, line.c_str())))
-#endif
-        ) {
-#ifndef __EMSCRIPTEN__
-        if (strlen(buf) > 0) {
-            add_history(buf);
-            write_history(histfile);
-        }
-#endif
-        cli_process(buf);
-        // readline malloc's a new buffer every time.
-        free(buf);
+    if (strlen(buf) > 0) {
+      add_history(buf);
+      write_history(histfile);
     }
+#endif
+    cli_process(buf);
+    // readline malloc's a new buffer every time.
+    free(buf);
+  }
 }
 
 #ifdef __EMSCRIPTEN__
 #include <emscripten.h>
 // Taken from https://github.com/emscripten-core/emscripten/issues/6433
 extern "C" {
-    inline const char* cstr(const std::string& message) {
-        auto buffer = (char*) malloc(message.length() + 1);
-        buffer[message.length()] = '\0';
-        memcpy(buffer, message.data(), message.length());
-        return buffer;
-    }
-    EMSCRIPTEN_KEEPALIVE const char* bibref_wasm(char *input) {
-    string output = cli_process(input);
-    return cstr(output);
-    }
-    EMSCRIPTEN_KEEPALIVE const char* bibref_wasm_vocabulary() {
-    string output = "";
-    for (auto word : vocabulary) {
-        output += word + ",";
-        }
-    return cstr(output);
-    }
+inline const char* cstr(const std::string& message) {
+  auto buffer = (char*) malloc(message.length() + 1);
+  buffer[message.length()] = '\0';
+  memcpy(buffer, message.data(), message.length());
+  return buffer;
+}
+EMSCRIPTEN_KEEPALIVE const char* bibref_wasm(char *input) {
+  string output = cli_process(input);
+  return cstr(output);
+}
+EMSCRIPTEN_KEEPALIVE const char* bibref_wasm_vocabulary() {
+  string output = "";
+  for (auto word : vocabulary) {
+    output += word + ",";
+  }
+  return cstr(output);
+}
 }
 #endif
 
 void error(string message) {
 #ifndef __EMSCRIPTEN__
-    cerr << error_color;
+  cerr << error_color;
 #endif
-    cerr << message;
+  cerr << message;
 #ifndef __EMSCRIPTEN__
-    cerr << reset_color;
+  cerr << reset_color;
 #endif
-    cerr << endl << flush;
-    collect_info = collect_info + error_color + message + reset_color + "\n";
+  cerr << endl << flush;
+  collect_info = collect_info + error_color + message + reset_color + "\n";
 }
