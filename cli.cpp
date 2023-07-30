@@ -1,4 +1,4 @@
-#define BIBREF_VERSION "2023Apr09"
+#define BIBREF_VERSION "2023Jul30"
 
 #include <iostream>
 #include <sstream>

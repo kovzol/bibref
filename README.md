@@ -47,7 +47,7 @@ of considering just separated verses.
 The texts are provided by the SWORD project
 from the modules [LXX](http://www.crosswire.org/sword/modules/ModInfo.jsp?modName=LXX) and
 [SBLGNT](http://www.crosswire.org/sword/modules/ModInfo.jsp?modName=SBLGNT). In the newest versions
-the modules [BHPGNT](https://github.com/kovzol/BHP/releases) and [SRGNT](https://github.com/kovzol/SR/releases) are also supported.
+the module [StatResGNT](https://github.com/kovzol/SR/releases) is also supported.
 
 This project is a work in progress.
 
@@ -74,7 +74,8 @@ There are two online web versions of *bibref* available: [a simple version](http
 and [another one based on jquery.terminal](https://matek.hu/zoltan/bibref-2022Jun27/index-jt.html).
 It is somewhat slower than the installable version, but works immediately
 in a web browser. In the web versions the modules LXX, SBLGNT and KJV are available
-(in the second version, in addition, the [BHPGNT](https://github.com/greekcntr/BHP) module as well).
+(in the second version, in addition, the [BHPGNT](https://github.com/greekcntr/BHP) module as well,
+an earlier prototype version of StatResGNT).
 
 (The figure above shows the version based on [jquery.terminal](https://terminal.jcubic.pl/).)
 
@@ -147,11 +148,11 @@ with the classic notation or a modifier can be appended:
 For example, `Genesis 1:1`, `Genesis 1:1+0 1:1-0`, `Genesis 1:1+0 1:1`, `Genesis 1:1 1:1-0` define the same first verse
 of Genesis. On the other hand, `Genesis 1:1+2 1:1-3` defines the first verse of Genesis without the first two and the last three letters.
 
-In all commands the *Bible* parameter can be either `LXX`, `SBLGNT`, `BHPGNT` or `SRGNT`, except for the command `lookup`.
+In all commands the *Bible* parameter can be either `LXX`, `SBLGNT`, `StatResGNT`, except for the command `lookup`.
 
 The available commands are:
 
-* `addbooks`: Load the books of LXX, SBLGNT, BHPGNT and SRGNT (if any of these are available). Most commands require that these books are already loaded. After using this command for the first time (it takes a couple of seconds), a folder named `bibref-addbooks-cache` will be created in the current working directory to speed up the next startup of this command.
+* `addbooks`: Load the books of LXX, SBLGNT and StatResGNT (if any of these are available). Most commands require that these books are already loaded. After using this command for the first time (it takes a couple of seconds), a folder named `bibref-addbooks-cache` will be created in the current working directory to speed up the next startup of this command.
 * `textN` *text*: Define a Greek *text* and put its Latin transcription in clipboard N.
 * `latintextN` *text*: Put the Latin transcription *text* in clipboard N.
 * `findN` *Bible*: Search for the text of clipboard N in the given *Bible*.
