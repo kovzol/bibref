@@ -26,8 +26,9 @@ install(
 ## CODE " execute_process (COMMAND bash -c \"installmgr -l | grep \\\"\\\\[LXX\\\\]\\\" || echo yes | installmgr -ri CrossWire LXX\") "
 ## CODE " execute_process (COMMAND bash -c \"installmgr -l | grep \\\"\\\\[SBLGNT\\\\]\\\" || echo yes | installmgr -ri CrossWire SBLGNT\") "
 ## CODE " execute_process (COMMAND bash -c \"installmgr -l | grep \\\"\\\\[StatResGNT\\\\]\\\" || echo yes | installmgr -ri CrossWire StatResGNT\") "
+## CODE " execute_process (COMMAND bash -c \"installmgr -l | grep \\\"\\\\[KJV\\\\]\\\" || echo yes | installmgr -ri CrossWire KJV\") "
 # If it was unsuccessful, as fallback, unzip bundled LXX and SBLGNT (this may be required on snap-packaging in a CI sandbox)
- CODE " execute_process (COMMAND bash -c \"test -r \\\"$SWORD_PATH/mods.d/lxx.conf\\\" || unzip -d ~ ${CMAKE_SOURCE_DIR}/sword-lxx-sblgnt-statresgnt-fallback.zip\") "
+ CODE " execute_process (COMMAND bash -c \"test -r \\\"$SWORD_PATH/mods.d/lxx.conf\\\" || unzip -d ~ ${CMAKE_SOURCE_DIR}/sword-lxx-sblgnt-statresgnt-kjv-fallback.zip\") "
 )
 
 install(TARGETS bibref DESTINATION bin)

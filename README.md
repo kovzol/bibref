@@ -47,7 +47,7 @@ of considering just separated verses.
 The texts are provided by the SWORD project
 from the modules [LXX](http://www.crosswire.org/sword/modules/ModInfo.jsp?modName=LXX) and
 [SBLGNT](http://www.crosswire.org/sword/modules/ModInfo.jsp?modName=SBLGNT). In the newest versions
-the module [StatResGNT](https://github.com/kovzol/SR/releases) is also supported.
+the module [StatResGNT](http://www.crosswire.org/sword/modules/ModInfo.jsp?modName=StatResGNT) is also supported.
 
 This project is a work in progress.
 
@@ -64,20 +64,14 @@ on many other systems.
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-white.svg)](https://snapcraft.io/bibref)
 
 After installation you need to use the command `bibref` via command line.
-In the snap version only the LXX and SBLGNT modules are present. If you want
-to use additional modules, please try installing the tool from source code (see below).
+In the snap version only the LXX, SBLGNT, StatResGNT and [KJV]((http://www.crosswire.org/sword/modules/ModInfo.jsp?modName=KJV) modules are present.
+If you want to use additional modules, please try installing the tool from source code (see below).
 
 ### Web version (fallback)
 
-
-There are two online web versions of *bibref* available: [a simple version](https://matek.hu/zoltan/bibref/)
-and [another one based on jquery.terminal](https://matek.hu/zoltan/bibref-2022Jun27/index-jt.html).
-It is somewhat slower than the installable version, but works immediately
-in a web browser. In the web versions the modules LXX, SBLGNT and KJV are available
-(in the second version, in addition, the [BHPGNT](https://github.com/greekcntr/BHP) module as well,
-an earlier prototype version of StatResGNT).
-
-(The figure above shows the version based on [jquery.terminal](https://terminal.jcubic.pl/).)
+Currently there is an online web version of *bibref* available: [a simple version](https://matek.hu/zoltan/bibref/)
+that is based on [jquery.terminal](https://terminal.jcubic.pl/). It is somewhat slower than the installable version, but works immediately
+in a web browser (you may need to wait a couple of seconds before the start). In the web versions the modules LXX, SBLGNT, StatResGNT and KJV are available.
 
 ### Installation from source code (for developers)
 
