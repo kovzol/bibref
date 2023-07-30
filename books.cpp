@@ -1162,10 +1162,11 @@ string getRaw(string moduleName, string bookName, int startPos, int length) {
 int getTokens(string moduleName, string book, string verse) {
   Book b = getBook(book, moduleName);
   vector<int> tokens = b.getVerseTokens(verse);
+  string tokensS = "";
   for (auto t: tokens) {
-    printf("%d ", t);
+    tokensS += to_string(t) + " ";
   }
-  printf("\n");
+  info(tokensS);
   return 0;
 }
 
