@@ -34,3 +34,214 @@ lookup LXX Psalms 107:33
 ## This is still too far, and the context does not match, either.
 
 ## Seemingly this "riddle" cannot be solved just by using the Greek texts.
+
+##################################################################################################
+
+## As another approach, we can check the tokens of John 7:38:
+
+tokens StatResGNT John 7:38
+# 3588 4100 1519 1473 2531 3004 3588 1124 4215 1537 3588 2836 846 4482 5204 2198
+lookup StatResGNT John 7:38
+# Ο πιστευων εις εμε, καθως ειπεν η Γραφη, ‘Ποταμοι εκ της κοιλιας αυτου ρευσουσιν υδατος ζωντος.”
+## (This is actually the same as in SBLGNT.)
+
+## Here are the tokens of Menken's suggestions:
+tokens LXX Psalms 78:16
+# 2532 1806 5204 1537 4073 2532 2609 5613 4215 5204 
+tokens LXX Psalms 78:20
+# 1893 3960 4073 2532 4483 5204 2532 5493 2626 3361 2532 740 1410 1325 3588 2090 5132 3588 2992 846 
+tokens LXX Psalms 105:41
+# 1284 4073 2532 4483 5204 4198 1722 504 4215
+
+## The quoted part is after "Scripture" ("Γραφη", 1124):
+lookup LXX John 7:38
+# He that believeth on me, as the scripture hath said, out of his belly shall flow rivers of living water.
+
+## Psalms 78:16 seems a good candidate since it includes 4215, 1537 and 5204. But 4215 and 1537 are
+## not neighbors.
+
+search LXX 4215 5204 2
+# Read 2 tokens, searching for an extension of max. 2 tokens.
+# Found in Psalms 78:16+8 78:16 (tpos=17300-17301)
+# Found in Jeremiah 2:18+19 2:18 (tpos=734-735)
+# Found in Jeremiah 46:7+7 46:7 (tpos=22969-22970)
+# Found in Nahum 3:8+9 3:8-11 (tpos=640-641)
+
+## We try to find where 4215 and 1537 appear as neighbors:
+search LXX 4215 1537 2
+# Read 2 tokens, searching for an extension of max. 2 tokens.
+# Found in Joshua 5:1+27 5:1-27 (tpos=1974-1975)
+search LXX 4215 1537 3
+# Read 2 tokens, searching for an extension of max. 3 tokens.
+# Found in Genesis 41:2+3 41:2-14 (tpos=23860-23862)
+# Found in Genesis 41:3+7 41:3-15 (tpos=23884-23886)
+# Found in Genesis 41:18+2 41:18-13 (tpos=24158-24160)
+# Found in Genesis 41:19+8 41:19-17 (tpos=24182-24184)
+# Found in Exodus 7:21+18 7:21-8 (tpos=3667-3669)
+# Found in Joshua 5:1+26 5:1-27 (tpos=1973-1975)
+# Found in Joshua 5:1+27 5:1-26 (tpos=1974-1976)
+# Found in Zephaniah 3:10 3:10-4 (tpos=902-904)
+search LXX 4215 1537 4
+# Read 2 tokens, searching for an extension of max. 4 tokens.
+# Found in Genesis 2:10 2:10-8 (tpos=930-933)
+# Found in Genesis 36:37+7 36:37 (tpos=21399-21402)
+# Found in Genesis 41:2+2 41:2-14 (tpos=23859-23862)
+# Found in Genesis 41:2+3 41:2-13 (tpos=23860-23863)
+# Found in Genesis 41:3+6 41:3-15 (tpos=23883-23886)
+# Found in Genesis 41:3+7 41:3-14 (tpos=23884-23887)
+# Found in Genesis 41:17+16 41:18-15 (tpos=24155-24158)
+# Found in Genesis 41:18+1 41:18-13 (tpos=24157-24160)
+# Found in Genesis 41:18+2 41:18-12 (tpos=24158-24161)
+# Found in Genesis 41:19+7 41:19-17 (tpos=24181-24184)
+# Found in Genesis 41:19+8 41:19-16 (tpos=24182-24185)
+# Found in Exodus 7:21+17 7:21-8 (tpos=3666-3669)
+# Found in Exodus 7:21+18 7:21-7 (tpos=3667-3670)
+# Found in Joshua 5:1+25 5:1-27 (tpos=1972-1975)
+# Found in Joshua 5:1+26 5:1-26 (tpos=1973-1976)
+# Found in Joshua 5:1+27 5:1-25 (tpos=1974-1977)
+# Found in I_Chronicles 1:48+7 1:48 (tpos=218-221)
+# Found in Ezekiel 29:4+22 29:4-8 (tpos=15536-15539)
+# Found in Zephaniah 3:9+20 3:10-4 (tpos=901-904)
+# Found in Zephaniah 3:10 3:10-3 (tpos=902-905)
+search LXX 4215 1537 5
+# Read 2 tokens, searching for an extension of max. 5 tokens.
+# Found in Genesis 2:9+34 2:10-8 (tpos=929-933)
+# Found in Genesis 2:10 2:10-7 (tpos=930-934)
+# Found in Genesis 36:37+6 36:37 (tpos=21398-21402)
+# Found in Genesis 36:37+7 36:38-7 (tpos=21399-21403)
+# Found in Genesis 41:1+13 41:2-16 (tpos=23856-23860)
+# Found in Genesis 41:2+1 41:2-14 (tpos=23858-23862)
+# Found in Genesis 41:2+2 41:2-13 (tpos=23859-23863)
+# Found in Genesis 41:2+3 41:2-12 (tpos=23860-23864)
+# Found in Genesis 41:3+5 41:3-15 (tpos=23882-23886)
+# Found in Genesis 41:3+6 41:3-14 (tpos=23883-23887)
+# Found in Genesis 41:3+7 41:3-13 (tpos=23884-23888)
+# Found in Genesis 41:17+15 41:18-15 (tpos=24154-24158)
+# Found in Genesis 41:17+16 41:18-14 (tpos=24155-24159)
+# Found in Genesis 41:18 41:18-13 (tpos=24156-24160)
+# Found in Genesis 41:18+1 41:18-12 (tpos=24157-24161)
+# Found in Genesis 41:18+2 41:18-11 (tpos=24158-24162)
+# Found in Genesis 41:19+6 41:19-17 (tpos=24180-24184)
+# Found in Genesis 41:19+7 41:19-16 (tpos=24181-24185)
+# Found in Genesis 41:19+8 41:19-15 (tpos=24182-24186)
+# Found in Exodus 7:21+16 7:21-8 (tpos=3665-3669)
+# Found in Exodus 7:21+17 7:21-7 (tpos=3666-3670)
+# Found in Exodus 7:21+18 7:21-6 (tpos=3667-3671)
+# Found in Joshua 5:1+24 5:1-27 (tpos=1971-1975)
+# Found in Joshua 5:1+25 5:1-26 (tpos=1972-1976)
+# Found in Joshua 5:1+26 5:1-25 (tpos=1973-1977)
+# Found in Joshua 5:1+27 5:1-24 (tpos=1974-1978)
+# Found in Joshua 24:3+7 24:3-16 (tpos=12599-12603)
+# Found in II_Samuel 10:16+7 10:16-8 (tpos=5285-5289)
+# Found in I_Chronicles 1:48+6 1:48 (tpos=217-221)
+# Found in I_Chronicles 1:48+7 1:49-7 (tpos=218-222)
+# Found in I_Chronicles 19:16+13 19:16-4 (tpos=8758-8762)
+# Found in Job 28:9+6 28:10-8 (tpos=7730-7734)
+# Found in Ezekiel 29:4+21 29:4-8 (tpos=15535-15539)
+# Found in Ezekiel 29:4+22 29:4-7 (tpos=15536-15540)
+# Found in Zephaniah 3:9+19 3:10-4 (tpos=900-904)
+# Found in Zephaniah 3:9+20 3:10-3 (tpos=901-905)
+# Found in Zephaniah 3:10 3:10-2 (tpos=902-906)
+search LXX 4215 1537 6
+# Read 2 tokens, searching for an extension of max. 6 tokens.
+# Found in Genesis 2:9+33 2:10-8 (tpos=928-933)
+# Found in Genesis 2:9+34 2:10-7 (tpos=929-934)
+# Found in Genesis 2:10 2:10-6 (tpos=930-935)
+# Found in Genesis 36:37+5 36:37 (tpos=21397-21402)
+# Found in Genesis 36:37+6 36:38-7 (tpos=21398-21403)
+# Found in Genesis 36:37+7 36:38-6 (tpos=21399-21404)
+# Found in Genesis 41:1+12 41:2-16 (tpos=23855-23860)
+# Found in Genesis 41:1+13 41:2-15 (tpos=23856-23861)
+# Found in Genesis 41:2 41:2-14 (tpos=23857-23862)
+# Found in Genesis 41:2+1 41:2-13 (tpos=23858-23863)
+# Found in Genesis 41:2+2 41:2-12 (tpos=23859-23864)
+# Found in Genesis 41:2+3 41:2-11 (tpos=23860-23865)
+# Found in Genesis 41:3+4 41:3-15 (tpos=23881-23886)
+# Found in Genesis 41:3+5 41:3-14 (tpos=23882-23887)
+# Found in Genesis 41:3+6 41:3-13 (tpos=23883-23888)
+# Found in Genesis 41:3+7 41:3-12 (tpos=23884-23889)
+# Found in Genesis 41:17+14 41:18-15 (tpos=24153-24158)
+# Found in Genesis 41:17+15 41:18-14 (tpos=24154-24159)
+# Found in Genesis 41:17+16 41:18-13 (tpos=24155-24160)
+# Found in Genesis 41:18 41:18-12 (tpos=24156-24161)
+# Found in Genesis 41:18+1 41:18-11 (tpos=24157-24162)
+# Found in Genesis 41:18+2 41:18-10 (tpos=24158-24163)
+# Found in Genesis 41:19+5 41:19-17 (tpos=24179-24184)
+# Found in Genesis 41:19+6 41:19-16 (tpos=24180-24185)
+# Found in Genesis 41:19+7 41:19-15 (tpos=24181-24186)
+# Found in Genesis 41:19+8 41:19-14 (tpos=24182-24187)
+# Found in Exodus 7:21+15 7:21-8 (tpos=3664-3669)
+# Found in Exodus 7:21+16 7:21-7 (tpos=3665-3670)
+# Found in Exodus 7:21+17 7:21-6 (tpos=3666-3671)
+# Found in Exodus 7:21+18 7:21-5 (tpos=3667-3672)
+# Found in Joshua 5:1+23 5:1-27 (tpos=1970-1975)
+# Found in Joshua 5:1+24 5:1-26 (tpos=1971-1976)
+# Found in Joshua 5:1+25 5:1-25 (tpos=1972-1977)
+# Found in Joshua 5:1+26 5:1-24 (tpos=1973-1978)
+# Found in Joshua 5:1+27 5:1-23 (tpos=1974-1979)
+# Found in Joshua 24:3+6 24:3-16 (tpos=12598-12603)
+# Found in Joshua 24:3+7 24:3-15 (tpos=12599-12604)
+# Found in II_Samuel 10:16+6 10:16-8 (tpos=5284-5289)
+# Found in II_Samuel 10:16+7 10:16-7 (tpos=5285-5290)
+# Found in I_Kings 4:24+5 4:24-4 (tpos=3264-3269)
+# Found in I_Chronicles 1:48+5 1:48 (tpos=216-221)
+# Found in I_Chronicles 1:48+6 1:49-7 (tpos=217-222)
+# Found in I_Chronicles 1:48+7 1:49-6 (tpos=218-223)
+# Found in I_Chronicles 19:16+12 19:16-4 (tpos=8757-8762)
+# Found in I_Chronicles 19:16+13 19:16-3 (tpos=8758-8763)
+# Found in Job 28:9+5 28:10-8 (tpos=7729-7734)
+# Found in Job 28:9+6 28:10-7 (tpos=7730-7735)
+# Found in Psalms 78:16+3 78:16-1 (tpos=17295-17300)
+# Found in Ezekiel 29:4+20 29:4-8 (tpos=15534-15539)
+# Found in Ezekiel 29:4+21 29:4-7 (tpos=15535-15540)
+# Found in Ezekiel 29:4+22 29:4-6 (tpos=15536-15541)
+# Found in Zephaniah 3:9+18 3:10-4 (tpos=899-904)
+# Found in Zephaniah 3:9+19 3:10-3 (tpos=900-905)
+# Found in Zephaniah 3:9+20 3:10-2 (tpos=901-906)
+# Found in Zephaniah 3:10 3:10-1 (tpos=902-907)
+
+## Now we search for the last two words of John 7:38:
+
+search LXX 5204 2198 2
+# Read 2 tokens, searching for an extension of max. 2 tokens.
+# Found in Genesis 21:19+10 21:19-11 (tpos=10480-10481)
+# Found in Genesis 26:19+12 26:19 (tpos=14112-14113)
+# Found in Leviticus 14:5+13 14:5 (tpos=7929-7930)
+# Found in Leviticus 14:6+30 14:6 (tpos=7961-7962)
+# Found in Leviticus 14:50+9 14:50 (tpos=8991-8992)
+# Found in Leviticus 14:51+25 14:51-7 (tpos=9018-9019)
+# Found in Numbers 19:17+14 19:17-2 (tpos=12787-12788)
+# Found in Song_of_Solomon 4:15+3 4:15-4 (tpos=899-900)
+# Found in Zechariah 14:8+6 14:8-26 (tpos=4371-4372)
+
+## The concept of garden (the King's spouse) from Song of Solomon may be a connection here,
+## see 4:12 and 4:15.
+
+## Another idea is "living waters shall go out from Jerusalem" (Zechariah 14:8),
+## and this may be identified to be the Christian church.
+
+##################################################################################################
+
+## Yet another approach. Maybe John 7:37 contains the quotation and not 7:38.
+## In this case, Isaiah 55:1 can be a candidate.
+
+>> search LXX 1372 2532 4095 12
+Read 3 tokens, searching for an extension of max. 12 tokens.
+Found in Ruth 2:9+19 2:9-4 (tpos=667-678)
+Found in Ruth 2:9+20 2:9-3 (tpos=668-679)
+Found in Ruth 2:9+21 2:9-2 (tpos=669-680)
+Found in Ruth 2:9+22 2:9-1 (tpos=670-681)
+Found in Ruth 2:9+23 2:9 (tpos=671-682)
+Found in Isaiah 29:8+10 29:8-22 (tpos=10483-10494)
+Found in Isaiah 29:8+11 29:8-21 (tpos=10484-10495)
+Found in Isaiah 29:8+12 29:8-20 (tpos=10485-10496)
+Found in Isaiah 29:8+13 29:8-19 (tpos=10486-10497)
+Found in Isaiah 29:8+14 29:8-18 (tpos=10487-10498)
+Found in Isaiah 29:8+15 29:8-17 (tpos=10488-10499)
+Found in Isaiah 29:8+16 29:8-16 (tpos=10489-10500)
+Found in Isaiah 29:8+17 29:8-15 (tpos=10490-10501)
+Found in Isaiah 29:8+18 29:8-14 (tpos=10491-10502)
+Found in Isaiah 29:8+19 29:8-13 (tpos=10492-10503)
+Found in Isaiah 29:8+20 29:8-12 (tpos=10493-10504)
+Found in Isaiah 29:8+21 29:8-11 (tpos=10494-10505)
+Found in Isaiah 55:1+1 55:1-6 (tpos=21492-21503)
