@@ -1,0 +1,10 @@
+PROJECT_NAME = bibref
+PROJECT_NUMBER = 2023-12-17
+PROJECT_BRIEF = A tool to find internal references in the Bible
+PROJECT_LOGO = logo-Psalm40-doxygen.png
+
+EXTRACT_ALL = YES
+EXTRACT_PRIVATE = YES
+
+HTML_OUTPUT = docs/html
+LATEX_OUTPUT = docs/latex

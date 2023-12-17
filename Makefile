@@ -80,6 +80,14 @@ $(BUILD_DIR)/%.cpp.o: %.cpp
 	$(MKDIR_P) $(dir $@)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
 
+documentation: docs/latex/refman.pdf docs/html
+
+docs/latex/refman.pdf: docs/latex
+	$(MAKE) -C docs/latex
+
+docs/html docs/latex: Doxyfile $(SRCS) logo-Psalm40-doxygen.png
+	doxygen Doxyfile
+
 .PHONY: clean
 
 clean:
