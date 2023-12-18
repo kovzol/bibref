@@ -1,0 +1,22 @@
+/**
+ * @file psalmsinfo.cpp
+ * A technical class to store the last verse for each psalm for a given Bible edition.
+ */
+
+class PsalmsInfo
+{
+private:
+  /// The Bible edition.
+  string info;
+  /// The number of verses for each Psalm (the 0th one is unused).
+  int lastVerse[152];
+public:
+  /// Create dataspace for a given Bible edition.
+  PsalmsInfo(string info);
+  /// Set the number of verses for a given Psalm.
+  void setLastVerse(int psalm, int lastVerse);
+  /// Get the number of verses for a given Psalm.
+  int getLastVerse(int psalm);
+  /// Get the Bible edition.
+  string getInfo();
+};

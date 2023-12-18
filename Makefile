@@ -54,7 +54,7 @@ BUILD_DIR ?= ./wasm-build
 
 SRCS := book.cpp books.cpp cli.cpp fingerprint.cpp main.cpp psalmsinfo.cpp
 OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
-DOXS := book.dox books.dox cli.dox
+DOXS := book.dox books.dox cli.dox fingerprint.dox psalmsinfo.dox
 
 CPPFLAGS += -I/usr/include/sword -s USE_BOOST_HEADERS=1
 
