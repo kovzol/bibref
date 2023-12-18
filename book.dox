@@ -1,19 +1,23 @@
 /**
- * @file book.h
- * A book in a Bible. For example, Genesis in LXX, or Matthew in SRGNT.
+ * @file book.cpp
+ * A book in a Bible. For example, Genesis in LXX, or Matthew in StatResGNT.
  * Each book is considered as a long string, containing characters a-z
  * that correspond to Greek characters. Also, each book can be tokenized.
  * Tokens are currently encoded with the Strong numbers.
  */
 
+///
 /// A book in a Bible, for example Genesis in LXX.
 class Book
 {
 private:
+  ///
   /// The name of the book. For example, "Genesis".
   string name;
+  ///
   /// Sword module name of the book, e.g. "LXX".
   string info; 
+  ///
   /// A Bible verse, in its traditional meaning.
   typedef struct Verse {
     /// Beginning of the string of a given verse in characters.
