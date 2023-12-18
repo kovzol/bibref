@@ -1,0 +1,97 @@
+/**
+ * @file book.h
+ * A book in a Bible. For example, Genesis in LXX, or Matthew in SRGNT.
+ * Each book is considered as a long string, containing characters a-z
+ * that correspond to Greek characters. Also, each book can be tokenized.
+ * Tokens are currently encoded with the Strong numbers.
+ */
+
+/// A book in a Bible, for example Genesis in LXX.
+class Book
+{
+private:
+  /// The name of the book. For example, "Genesis".
+  string name;
+  /// Sword module name of the book, e.g. "LXX".
+  string info; 
+  /// A Bible verse, in its traditional meaning.
+  typedef struct Verse {
+    /// Beginning of the string of a given verse in characters.
+    int start;
+    /// Length of a verse in characters.
+    int length;
+    /// Beginning of the tokenized verse in the token flow.
+    int tokensStart;
+    /// Length of a verse in tokens.
+    int tokensLength;
+    /// Traditional numbering of a verse, e.g. "3:16".
+    string info;
+  } Verse;
+  /// All verses in a book.
+  vector<Verse> verses;
+  /// All characters of a book, given as a string.
+  string text;
+  /// All tokens of a book, given as a vector of tokens.
+  vector<int> tokens; 
+public:
+  /// Create a new book with a name, e.g. "Genesis".
+  Book(string name);
+  /// Set the Sword module for the book, e.g. "LXX".
+  void setInfo(string info);
+  /// Get the Sword module name for the book, e.g. "LXX".
+  string getInfo();
+  /// Get the book name, e.g. "Genesis".
+  string getName();
+  /// Add a verse to a book.
+  void addVerse(string text, string verseInfo, vector<int> tokens) {
+   /// @short Add a verse to a book.
+   /// Append a new verse to a Bible book by specifying the verse of the text
+   /// in a-z encoding (without spaces and punctuation and setting the tokens).
+   /// @param text The Greek text in a-z encoding, with no spaces or punctuation.
+   /// @param verseInfo The traditional verse numbering, e.g. "3:16".
+   /// @param tokens Tokenized form of the verse.
+};
+
+  /// Get the a-z encoded string of the verse defined by traditional numbering, e.g. "3:16".
+  string getVerse(string verseInfo);
+  /// Get the traditional numbering of the verse that contains the given character position in the book,
+  /// by appending a position modifier +N that gives the shift of characters to the beginning of the verse.
+  string getVerseInfoStart(int position);
+  /// Get the traditional numbering of the verse that contains the given character position in the book,
+  /// by appending a position modifier -N that gives the shift of characters to the end of the verse.
+  string getVerseInfoEnd(int position);
+  /// Get the traditional numbering of the verse that contains the given character position in the book,
+  /// by appending a position modifier +N that gives the shift of tokens to the beginning of the verse.
+  string getVerseTokensInfoStart(int position);
+  /// Get the traditional numbering of the verse that contains the given character position in the book,
+  /// by appending a position modifier -N that gives the shift of tokens to the end of the verse.
+  string getVerseTokensInfoEnd(int position);
+  /// Get the a-z encoded string of the whole book.
+  string getText();
+  /// Get the tokenized form of the verse defined by traditional numbering, e.g. "3:16".
+  vector<int> getVerseTokens(string verseInfo);
+  /// Get the tokenized form of the whole book.
+  vector<int> getTokens();
+  /// Get the character position of the start of verse defined by traditional numbering, e.g. "3:16".
+  int getVerseStart(string verseInfo);
+  /// Get the character position of the end of verse defined by traditional numbering, e.g. "3:16".
+  int getVerseEnd(string verseInfo);
+  /// Get the token position of the start of verse defined by traditional numbering, e.g. "3:16".
+  int getVerseTokensStart(string verseInfo);
+  /// Get the token position of the end of verse defined by traditional numbering, e.g. "3:16".
+  int getVerseTokensEnd(string verseInfo);
+  /// Set the text of a whole book. It is useful if the book is created by using the cache.
+  void setText(string text);
+
+  /// Create a verse entry after a whole book is created via text and tokens.
+  /// It is useful if the book is created by using the cache.
+  void addVerse(int start, int length, string info, int tokensStart, int tokensLength) {
+   /// @param start The beginning character position of a verse in the a-z encoding.
+   /// @param length The length of a verse in the a-z encoding.
+   /// @param info The traditional numbering of the verse, e.g. "3:16".
+   /// @param tokensStart The beginning token position of a verse.
+   /// @param tokensLength The length of a verse in tokens.
+  };
+  /// Set the tokens of a whole book. It is useful if the book is created by using the cache.
+  void setTokens(vector<int> tokens);
+};
