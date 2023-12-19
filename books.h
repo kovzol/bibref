@@ -16,8 +16,8 @@ int findBestFit(string book1, string info1, string verseInfo1s, string verseInfo
                 string book2, string info2, string verseInfo2s, string verseInfo2e);
 string processVerse(const string &verse);
 string getText(string book, string info, string VerseInfoS, string VerseInfoE, int startOffset, int endOffset);
-int find(string text, string moduleName, int maxFound, int verb);
-vector<string> find_min_unique(string text, string moduleName, int verb);
+int find(string text, string moduleName, int maxFound, bool verbose);
+vector<string> find_min_unique(string text, string moduleName, bool verbose);
 void extend(string moduleName1, string moduleName2, string book2, string verse2S,
             int start, string verse2E, int end);
 void getrefs(string moduleName2, string moduleName1, string book1, string verse1S,

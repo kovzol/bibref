@@ -438,7 +438,7 @@ string cli_process(char *buf) {
       error(errorFindEmpty);
       goto end;
     }
-    find(text[index], rest, maxresults, 1);
+    find(text[index], rest, maxresults, true);
     goto end;
   }
 
@@ -564,7 +564,7 @@ string cli_process(char *buf) {
       goto end;
     }
     string rest = input.substr(input.find(" ") + 1);
-    find_min_unique(text[0], rest, 1);
+    find_min_unique(text[0], rest, true);
     goto end;
   }
 

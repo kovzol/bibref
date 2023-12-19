@@ -10,7 +10,7 @@ class Book
 {
 private:
   string name;
-  string info;
+  string moduleName;
   typedef struct Verse {
     int start;
     int length;
@@ -23,22 +23,22 @@ private:
   vector<int> tokens;
 public:
   Book(string name);
-  void setInfo(string info);
-  string getInfo();
+  void setModuleName(string moduleName);
+  string getModuleName();
   string getName();
-  void addVerse(string text, string verseInfo, vector<int> tokens);
-  string getVerse(string verseInfo);
+  void addVerse(string text, string info, vector<int> tokens);
+  string getVerse(string info);
   string getVerseInfoStart(int position);
   string getVerseInfoEnd(int position);
   string getVerseTokensInfoStart(int position);
   string getVerseTokensInfoEnd(int position);
   string getText();
-  vector<int> getVerseTokens(string verseInfo);
+  vector<int> getVerseTokens(string info);
   vector<int> getTokens();
-  int getVerseStart(string verseInfo);
-  int getVerseEnd(string verseInfo);
-  int getVerseTokensStart(string verseInfo);
-  int getVerseTokensEnd(string verseInfo);
+  int getVerseStart(string info);
+  int getVerseEnd(string info);
+  int getVerseTokensStart(string info);
+  int getVerseTokensEnd(string info);
   // to load a book from cache:
   void setText(string text);
   void addVerse(int start, int length, string info, int tokensStart, int tokensLength);

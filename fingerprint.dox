@@ -9,8 +9,8 @@ typedef struct fingerprint {
 } fingerprint;
 
 /// Compute the fingerprint of a passage.
-fingerprint getFingerprint(Book b, int start, int length) {
- /// @param b A book in a Bible edition.
+fingerprint getFingerprint(Book book, int start, int length) {
+ /// @param book A book in a Bible edition.
  /// @param start Start of the passage in characters.
  /// @param length Length of the passage in characters.
 };

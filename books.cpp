@@ -450,7 +450,7 @@ int addBook_cached(string moduleName) {
     char reference[8]; // Psalms 119:176 needs 7 characters + "\n"
     int start, end, tokensStart, tokensEnd;
     try {
-      while (fscanf(verseFile, "%s %d %d %d %d", &reference, &start, &end, &tokensStart, &tokensEnd) != EOF) {
+      while (fscanf(verseFile, "%7s %d %d %d %d", reference, &start, &end, &tokensStart, &tokensEnd) != EOF) {
         if (bookName == "Psalms") {
           vector<string> r;
           boost::split(r, reference, boost::is_any_of(":"));
@@ -467,7 +467,7 @@ int addBook_cached(string moduleName) {
 
     fclose(verseFile);
     add_vocabulary_item(bookName);
-    book.setInfo(moduleName);
+    book.setModuleName(moduleName);
     books.push_back(book);
   }
   psalmsInfos.push_back(pi);
@@ -538,8 +538,8 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
     if (verse.size() > 0) {
       string verseInfo = module->getKeyText();
       if (!firstInfoSet) {
-        lastBook.setInfo(module->getBibliography().c_str());
-        lastBook.setInfo(moduleName);
+        lastBook.setModuleName(module->getBibliography().c_str());
+        lastBook.setModuleName(moduleName);
         firstInfoSet = true;
       }
       string verseText = processVerse(verse.c_str());
@@ -573,8 +573,8 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
         add_vocabulary_item(lastBookName);
         // new book
         Book book = Book(bookName);
-        book.setInfo(module->getBibliography().c_str());
-        book.setInfo(moduleName);
+        book.setModuleName(module->getBibliography().c_str());
+        book.setModuleName(moduleName);
         lastBook = book;
         lastBookName = bookName;
 
@@ -650,7 +650,7 @@ int addBooks() {
 Book getBook(string book, string info) {
   for (int i=0; i<books.size(); i++) {
     Book b = books[i];
-    if (b.getName().compare(book) == 0 && b.getInfo().compare(info) == 0) {
+    if (b.getName().compare(book) == 0 && b.getModuleName().compare(info) == 0) {
       return b;
     }
   }
@@ -864,18 +864,18 @@ int findBestFit(string book1, string info1, string verseInfo1s, string verseInfo
   return 0;
 }
 
-string _find(string text, string moduleName, int maxFound, int verb) {
+string _find(string text, string moduleName, int maxFound, bool verbose) {
   int found = 0;
   size_t pos;
   string book;
   for (int i=0; i<books.size(); i++) {
     Book b = books[i];
-    if (b.getInfo().compare(moduleName) == 0) {
+    if (b.getModuleName().compare(moduleName) == 0) {
       book = b.getName();
       string bookText = b.getText();
       pos = bookText.find(text);
       while (pos != std::string::npos) {
-        if (verb == 1) {
+        if (verbose) {
           info("Found in " + book + " " + b.getVerseInfoStart(pos) + " "
                + b.getVerseInfoEnd(pos + text.length() - 1)
                + " (book position " + to_string(pos + 1)
@@ -892,14 +892,14 @@ string _find(string text, string moduleName, int maxFound, int verb) {
     }
   }
 end:
-  if (verb == 1) {
+  if (verbose) {
     info(to_string(found) + " occurrences.");
   }
   return to_string(found) + "," + book + "," + to_string(pos);
 }
 
-int find(string text, string moduleName, int maxFound, int verb) {
-  string f = _find(text, moduleName, maxFound, verb);
+int find(string text, string moduleName, int maxFound, bool verbose) {
+  string f = _find(text, moduleName, maxFound, verbose);
   vector<string> info;
   boost::split(info, f, boost::is_any_of(","));
   return stoi(info[0]);
@@ -912,7 +912,7 @@ string find(string text, string moduleName) {
   return info[1] + "," + info[2];
 }
 
-vector<string> find_min_unique(string text, string moduleName, int verb) {
+vector<string> find_min_unique(string text, string moduleName, bool verbose) {
   int long_limit = 10000;
   int extreme_limit = 50000;
   vector<string> retval;
@@ -942,7 +942,7 @@ vector<string> find_min_unique(string text, string moduleName, int verb) {
         int unique = find(subtext, moduleName, 2, 0);
         if (unique == 1) {
           is_unique[i][j] = 1;
-          if (verb == 1) {
+          if (verbose) {
             info("Text " + subtext + " is minimal unique.");
           }
           retval.push_back(subtext);
@@ -955,7 +955,7 @@ vector<string> find_min_unique(string text, string moduleName, int verb) {
   return retval;
 }
 
-string _extend(string moduleName1, string moduleName2, string book2, int pos2S, int pos2E, int verb) {
+string _extend(string moduleName1, string moduleName2, string book2, int pos2S, int pos2E, bool verbose) {
   Book b2 = getBook(book2, moduleName2);
   string text = b2.getText().substr(pos2S, pos2E - pos2S + 1);
 
@@ -995,7 +995,7 @@ string _extend(string moduleName1, string moduleName2, string book2, int pos2S, 
   string verse1infoE = b1.getVerseInfoEnd(pos1E);
   string verse2infoS = b2.getVerseInfoStart(pos2S);
   string verse2infoE = b2.getVerseInfoEnd(pos2E);
-  if (verb == 1) {
+  if (verbose) {
     info("Extended match is " + ot_color + moduleName1 + " " + book1 + " "
          + verse1infoS + " " + verse1infoE + reset_color + " = " + nt_color + moduleName2 + " "
          + book2 + " " + verse2infoS + " " + verse2infoE + reset_color + " ("
@@ -1023,7 +1023,7 @@ vector<string> find_all(string text, string moduleName, int maxFound) {
   string book;
   for (int i=0; i<books.size(); i++) {
     Book b = books[i];
-    if (b.getInfo().compare(moduleName) == 0) {
+    if (b.getModuleName().compare(moduleName) == 0) {
       book = b.getName();
       string bookText = b.getText();
       pos = bookText.find(text);
@@ -1177,7 +1177,7 @@ vector<string> searchTokenset(string moduleName, vector<int> pattern, int length
   string book;
   for (int i=0; i<books.size(); i++) {
     Book b = books[i];
-    if (b.getInfo().compare(moduleName) == 0) {
+    if (b.getModuleName().compare(moduleName) == 0) {
       book = b.getName();
       vector<int> bookTokens = b.getTokens();
       int tokensLength = bookTokens.size();

@@ -9,16 +9,16 @@ Book::Book (string n) {
   // cerr << "Book " << n << " created" << endl;
 }
 
-void Book::setInfo(string n) {
-  info = n;
+void Book::setModuleName(string n) {
+  moduleName = n;
 }
 
 string Book::getName() {
   return name;
 }
 
-string Book::getInfo() {
-  return info;
+string Book::getModuleName() {
+  return moduleName;
 }
 
 void Book::addVerse(string n, string i, vector<int> t) {

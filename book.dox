@@ -16,7 +16,7 @@ private:
   string name;
   ///
   /// Sword module name of the book, e.g. "LXX".
-  string info; 
+  string moduleName;
   ///
   /// A Bible verse, in its traditional meaning.
   typedef struct Verse {
@@ -41,23 +41,23 @@ public:
   /// Create a new book with a name, e.g. "Genesis".
   Book(string name);
   /// Set the Sword module for the book, e.g. "LXX".
-  void setInfo(string info);
+  void setModuleName(string moduleName);
   /// Get the Sword module name for the book, e.g. "LXX".
-  string getInfo();
+  string getModuleName();
   /// Get the book name, e.g. "Genesis".
   string getName();
   /// Add a verse to a book.
-  void addVerse(string text, string verseInfo, vector<int> tokens) {
+  void addVerse(string text, string info, vector<int> tokens) {
    /// @short Add a verse to a book.
    /// Append a new verse to a Bible book by specifying the verse of the text
    /// in a-z encoding (without spaces and punctuation and setting the tokens).
    /// @param text The Greek text in a-z encoding, with no spaces or punctuation.
-   /// @param verseInfo The traditional verse numbering, e.g. "3:16".
+   /// @param info The traditional verse numbering, e.g. "3:16".
    /// @param tokens Tokenized form of the verse.
 };
 
   /// Get the a-z encoded string of the verse defined by traditional numbering, e.g. "3:16".
-  string getVerse(string verseInfo);
+  string getVerse(string info);
   /// Get the traditional numbering of the verse that contains the given character position in the book,
   /// by appending a position modifier +N that gives the shift of characters to the beginning of the verse.
   string getVerseInfoStart(int position);
@@ -73,17 +73,17 @@ public:
   /// Get the a-z encoded string of the whole book.
   string getText();
   /// Get the tokenized form of the verse defined by traditional numbering, e.g. "3:16".
-  vector<int> getVerseTokens(string verseInfo);
+  vector<int> getVerseTokens(string info);
   /// Get the tokenized form of the whole book.
   vector<int> getTokens();
   /// Get the character position of the start of verse defined by traditional numbering, e.g. "3:16".
-  int getVerseStart(string verseInfo);
+  int getVerseStart(string info);
   /// Get the character position of the end of verse defined by traditional numbering, e.g. "3:16".
-  int getVerseEnd(string verseInfo);
+  int getVerseEnd(string info);
   /// Get the token position of the start of verse defined by traditional numbering, e.g. "3:16".
-  int getVerseTokensStart(string verseInfo);
+  int getVerseTokensStart(string info);
   /// Get the token position of the end of verse defined by traditional numbering, e.g. "3:16".
-  int getVerseTokensEnd(string verseInfo);
+  int getVerseTokensEnd(string info);
   /// Set the text of a whole book. It is useful if the book is created by using the cache.
   void setText(string text);
 
