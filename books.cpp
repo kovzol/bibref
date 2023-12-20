@@ -97,20 +97,22 @@ string latinToGreek(const string& latin) {
   return greek;
 }
 
+/// Convert the input word to a-y encoding.
 string greekToLatin(string word) {
-  string rewritten;
-  for (int i = 0; i < word.length(); i += 2) {
-    auto c1 = static_cast<unsigned char>(word[i]);
-    auto c2 = static_cast<unsigned char>(word[i + 1]);
+  // This could be simplified, similarly to the latinToGreek conversion.
+  string rewritten; // Here we store the output step by step, for each letter.
+  for (int i = 0; i < word.length(); i += 2) { // jumping by 2 bytes in Unicode
+    auto c1 = static_cast<unsigned char>(word[i]); // first Unicode byte
+    auto c2 = static_cast<unsigned char>(word[i + 1]); // second Unicode byte
     // keep care of special characters
     if (c1 == 0x80) {
-      i--;
+      i--; // jump 1 byte back
     }
     // keep only Greek characters
-    if (c1 == 0xCE || c1 == 0xCF) {
+    if (c1 == 0xCE || c1 == 0xCF) { // Greek characters begin with one of these two bytes.
       char c;
       switch (c1) {
-      case 0xCE:
+      case 0xCE: // Characters from alpha to omicron...
         switch (c2) {
         case 0xB1:
           c = 'a';
@@ -159,7 +161,7 @@ string greekToLatin(string word) {
           break;
         }
         break;
-      case 0xCF:
+      case 0xCF: // Characters from pi to omega...
         switch (c2) {
         case 0x80:
           c = 'p';
@@ -195,9 +197,9 @@ string greekToLatin(string word) {
         }
         break;
       default:
-        break;
+        break; // by default, no character will be stored
       }
-      rewritten.push_back(c);
+      rewritten.push_back(c); // store c in the output
     }
   }
   return rewritten;
@@ -456,27 +458,30 @@ int addBook_cached(string moduleName) {
   return 0;
 }
 
+/// Load a Bible edition, and save it on the disk for a future cache (if there is no cache saved yet).
 int addBook(string moduleName, string firstVerse, string lastVerse, bool removeAccents) {
-  DIR* cache_dir = opendir(("bibref-addbooks-cache/" + moduleName).c_str());
-  if (cache_dir) {
+  DIR* cache_dir = opendir(("bibref-addbooks-cache/" + moduleName).c_str()); // This is hardcoded.
+  if (cache_dir) { // If there is a cache saved on the disk, we'll use it.
     closedir(cache_dir);
-    addBook_cached(moduleName);
-    return 0;
+    addBook_cached(moduleName); // Load the book from the cache.
+    return 0; // No further operation is required.
   }
   SWMgr library(new MarkupFilterMgr(FMT_PLAIN));
   SWModule *module;
-  module = library.getModule(moduleName.c_str());
+  module = library.getModule(moduleName.c_str()); // Trying to load the Sword module.
   if (!module) {
     error("The SWORD module " + moduleName + " is not installed.");
-    return 1;
+    return 1; // If not possible, return with an error.
   }
 
   string version = module->getConfigEntry("Version");
+  // It's better to avoid LXX 3.0, it is a completely different edition!
   if (moduleName == "LXX" && version == "3.0") {
     removeAccents = true; // force removing accents
     lastVerse = "Daniel 12:13"; // order of books is different
   }
 
+  // Set first and last verses of the book.
   module->setKey(firstVerse.c_str());
   int bookStart = module->getIndex();
   module->setKey(lastVerse.c_str());
@@ -489,24 +494,25 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
 
   info("Loading " + moduleName + "...");
   string path = "bibref-addbooks-cache/" + moduleName;
-  bool create_cache = true;
+  bool create_cache = true; // Hopefully we can set up a new cache.
 
-#ifndef __EMSCRIPTEN__
+#ifndef __EMSCRIPTEN__ // In the web version we don't save the cache, but assume that it exists.
   try {
     boost::filesystem::create_directories(path);
   } catch (exception &e) {
     error("The addbooks cache cannot be saved in this folder.");
-    create_cache = false;
+    create_cache = false; // No, we cannot use a cache in this session.
   }
 #endif
-  add_vocabulary_item(moduleName);
+  add_vocabulary_item(moduleName); // Add the name of this Bible edition to the readline vocabulary.
 
   string lastBookName = splitVerseInfo(firstVerse).m_bookName;
   Book lastBook = Book(lastBookName);
   bool firstInfoSet = false;
   FILE *lastBookVersesFile = NULL;
 
-  PsalmsInfo pi = PsalmsInfo(moduleName);
+  PsalmsInfo pi = PsalmsInfo(moduleName); // We store the number of verses for the Psalms.
+  // TODO: This is probably unnecessary, remove it, if it is not required:
   for (int i=1; i<=151; i++) pi.setLastVerse(i, 0); // initialize
 
   // Iterate on verses of the whole Bible version:
@@ -539,7 +545,7 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
         string lastBookText = lastBook.getText();
         vector<int> lastBookTokens = lastBook.getTokens();
 #ifndef __EMSCRIPTEN__
-        if (create_cache) {
+        if (create_cache) { // Create the cache if it is possible. Open the raw book and tokens.
           FILE *lastBookFile = fopen((path + "/" + lastBookName + ".book").c_str(), "wa");
           fprintf(lastBookFile, "%s", lastBookText.c_str());
           fclose(lastBookFile);
@@ -551,7 +557,7 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
         }
 #endif
         info(lastBookName + " contains " + to_string(lastBookText.length()) + " characters,");
-        add_vocabulary_item(lastBookName);
+        add_vocabulary_item(lastBookName); // Add the name of the current book to the readline vocabulary.
         // new book
         Book book = Book(bookName);
         book.setModuleName(module->getBibliography().c_str());
@@ -581,22 +587,23 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
         int end = lastBook.getVerseEnd(reference);
         int tokensStart = lastBook.getVerseTokensStart(reference);
         int tokensEnd = lastBook.getVerseTokensEnd(reference);
+        // Save the character positions for the a-y raw text and for the tokens.
         fprintf(lastBookVersesFile, "%s %d %d %d %d\n", reference.c_str(), start, end, tokensStart, tokensEnd);
       }
 #endif
       if (verseInfo.compare(lastVerse)==0) {
-        books.push_back(lastBook);
+        books.push_back(lastBook); // Add this book to the Bible edition.
         string lastBookText = lastBook.getText();
         vector<int> lastBookTokens = lastBook.getTokens();
 #ifndef __EMSCRIPTEN__
         if (create_cache) {
           FILE *lastBookFile = fopen((path + "/" + lastBookName + ".book").c_str(), "wa");
-          fprintf(lastBookFile, "%s\n", lastBookText.c_str());
+          fprintf(lastBookFile, "%s\n", lastBookText.c_str()); // Dump the a-y raw book as string.
           fclose(lastBookFile);
 
           FILE *lastTokensFile = fopen((path + "/" + lastBookName + ".tokens").c_str(), "wa");
           for (auto t: lastBookTokens) {
-            fprintf(lastTokensFile, "%d ", t);
+            fprintf(lastTokensFile, "%d ", t); // Save the tokens as numbers.
           }
           fclose(lastTokensFile);
 
@@ -604,14 +611,14 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
         }
 #endif
         info("and " + lastBookName + " contains " + to_string(lastBook.getText().length()) + " characters.");
-        add_vocabulary_item(lastBookName);
+        add_vocabulary_item(lastBookName); // Add the name of the last book to the readline vocabulary.
       }
     }
   }
-  psalmsInfos.push_back(pi);
+  psalmsInfos.push_back(pi); // Save the last verse numbers of the Psalms.
 
   info("Done loading books of " + moduleName + ".");
-  return 0;
+  return 0; // Success!
 }
 
 int addBooks() {
@@ -1156,7 +1163,7 @@ vector<string> searchTokenset(string moduleName, vector<int> pattern, int length
   // int found = 0;
   size_t pos;
   string book;
-  for (int i=0; i<books.size(); i++) {
+  for (int i=0; i<books.size(); i++) { // Search in all books in a given Bible edition...
     Book b = books[i];
     if (b.getModuleName().compare(moduleName) == 0) {
       book = b.getName();
@@ -1174,15 +1181,15 @@ vector<string> searchTokenset(string moduleName, vector<int> pattern, int length
             }
           }
           if (tokenFound) {
-            tokensFound++;
+            tokensFound++; // Count the number of tokens being found.
           }
         }
         // Did we find all tokens in the pattern?
         if (tokensFound == pattern.size()) {
           string infoStart = b.getVerseTokensInfoStart(tpos);
           string infoEnd = b.getVerseTokensInfoEnd(tpos + length - 1);
-          retval.push_back(book + "," + to_string(tpos));
-          if (verbose) {
+          retval.push_back(book + "," + to_string(tpos)); // Store the raw result.
+          if (verbose) { // Return some informative answer...
             info("Found in " + book + " " + infoStart + " " + infoEnd +
                  " (tpos=" + to_string(tpos) + "-" + to_string(tpos + length - 1) + ")");
           }
@@ -1190,6 +1197,6 @@ vector<string> searchTokenset(string moduleName, vector<int> pattern, int length
       }
     }
   }
-  return retval;
+  return retval; // Return the raw result as a vector of strings.
 }
 
