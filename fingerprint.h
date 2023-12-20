@@ -5,15 +5,15 @@
 
 #include "book.h"
 
-typedef struct fingerprint {
-  unsigned short int data [N][N];
-} fingerprint;
+typedef struct Fingerprint {
+  unsigned short int m_data [N][N];
+} Fingerprint;
 
-fingerprint getFingerprint(Book book, int start, int length);
-fingerprint getFingerprint(string text);
-int dist(fingerprint f1, fingerprint f2);
-int dist(string text1, string text2);
-void printDist(fingerprint f1, fingerprint f2);
-double jaccard_dist(string text1, string text2);
+Fingerprint getFingerprint(Book book, int start, int length);
+Fingerprint getFingerprint(string text);
+int dist(Fingerprint f1, Fingerprint f2);
+int dist(const string& text1, const string& text2);
+void printDist(Fingerprint f1, Fingerprint f2);
+double jaccard_dist(const string& text1, const string& text2);
 
 #endif // FINGERPRINT_H

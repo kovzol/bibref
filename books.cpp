@@ -30,53 +30,53 @@ using namespace std;
 #include "cli.h"
 #include "psalmsinfo.h"
 
-class InvalidModule: public exception
+class InvalidModuleException: public exception
 {
   virtual const char* what() const throw()
   {
     return "Invalid module.";
   }
-} InvalidModule;
+} InvalidModuleException;
 
-class InvalidBook: public exception
+class InvalidBookException: public exception
 {
   virtual const char* what() const throw()
   {
     return "Invalid book.";
   }
-} InvalidBook;
+} InvalidBookException;
 
-class InvalidVerse: public exception
+class InvalidVerseException: public exception
 {
   virtual const char* what() const throw()
   {
     return "Invalid verse.";
   }
-} InvalidVerse;
+} InvalidVerseException;
 
-class InvalidPassage: public exception
+class InvalidPassageException: public exception
 {
   virtual const char* what() const throw()
   {
     return "Invalid passage.";
   }
-} InvalidPassage;
+} InvalidPassageException;
 
-class NoCitation: public exception
+class NoCitationException: public exception
 {
   virtual const char* what() const throw()
   {
     return "Passage is not a citation.";
   }
-} NoCitation;
+} NoCitationException;
 
-class InternalError: public exception
+class InternalErrorException: public exception
 {
   virtual const char* what() const throw()
   {
     return "Internal error.";
   }
-} InternalError;
+} InternalErrorException;
 
 
 
@@ -85,7 +85,7 @@ using namespace sword;
 vector<Book> books;
 vector<PsalmsInfo> psalmsInfos;
 
-string latinToGreek(string latin) {
+string latinToGreek(const string& latin) {
   string greek = latin;
   string to[25] = {"α", "β", "ψ", "δ", "ε", "φ", "γ", "η", "ι", "ξ", "κ",
     "λ", "μ", "ν", "ο", "π", "ζ", "ρ", "σ", "τ", "θ", "ω", "ς", "χ", "υ"};
@@ -102,13 +102,13 @@ string greekToLatin(string word) {
   for (int i = 0; i < word.length(); i += 2) {
     auto c1 = static_cast<unsigned char>(word[i]);
     auto c2 = static_cast<unsigned char>(word[i + 1]);
-    char c;
     // keep care of special characters
     if (c1 == 0x80) {
       i--;
     }
     // keep only Greek characters
     if (c1 == 0xCE || c1 == 0xCF) {
+      char c;
       switch (c1) {
       case 0xCE:
         switch (c2) {
@@ -326,8 +326,8 @@ vector<int> processTokens(const string &verse) {
 }
 
 typedef struct VerseInfo {
-  string bookName;
-  string reference;
+  string m_bookName;
+  string m_reference;
 } VerseInfo;
 
 VerseInfo splitVerseInfo(string verseInfo) {
@@ -341,20 +341,20 @@ VerseInfo splitVerseInfo(string verseInfo) {
       return {bookName, reference};
     }
   }
-  throw InvalidPassage;
+  throw InvalidPassageException;
 }
 
-bool isOTBook(string moduleName) {
+bool isOTBook(const string& moduleName) {
   if (moduleName == "LXX") return true;
   return false;
 }
 
-bool isNTBook(string moduleName) {
+bool isNTBook(const string& moduleName) {
   if (moduleName == "SBLGNT" || moduleName == "StatResGNT") return true;
   return false;
 }
 
-int lookupTranslation(string moduleName, string book, string verse) {
+int lookupTranslation(string moduleName, string book, const string& verse) {
   SWMgr library(new MarkupFilterMgr(FMT_PLAIN));
   SWModule *module;
   library.setGlobalOption("Greek Accents", "Off");
@@ -428,9 +428,9 @@ int addBook_cached(string moduleName) {
     // Loading verses:
     string verseFileName = path + "/" + bookName + ".verses";
     FILE *verseFile = fopen(verseFileName.c_str(), "r");
-    char reference[8]; // Psalms 119:176 needs 7 characters + "\n"
     int start, end, tokensStart, tokensEnd;
     try {
+      char reference[8]; // Psalms 119:176 needs 7 characters + "\n"
       while (fscanf(verseFile, "%7s %d %d %d %d", reference, &start, &end, &tokensStart, &tokensEnd) != EOF) {
         if (bookName == "Psalms") {
           vector<string> r;
@@ -501,7 +501,7 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
 #endif
   add_vocabulary_item(moduleName);
 
-  string lastBookName = splitVerseInfo(firstVerse).bookName;
+  string lastBookName = splitVerseInfo(firstVerse).m_bookName;
   Book lastBook = Book(lastBookName);
   bool firstInfoSet = false;
   FILE *lastBookVersesFile = NULL;
@@ -530,10 +530,10 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
       string reference;
       string bookName;
       VerseInfo vi = splitVerseInfo(verseInfo);
-      bookName = vi.bookName;
+      bookName = vi.m_bookName;
       // Use I_Peter instead of "I Peter" on all occurrences:
       boost::replace_all(bookName, " ", "_");
-      reference = vi.reference;
+      reference = vi.m_reference;
       if (lastBookName.compare(bookName) != 0) {
         books.push_back(lastBook);
         string lastBookText = lastBook.getText();
@@ -635,40 +635,40 @@ Book getBook(string book, string info) {
       return b;
     }
   }
-  throw InvalidBook;
+  throw InvalidBookException;
 }
 
-string lookupVerse(string book, string info, string verse) {
+string lookupVerse(const string& book, const string& info, const string& verse) {
   try {
     Book b = getBook(book, info);
     string ret = b.getVerse(verse);
     if (ret.length() == 0) {
-      throw InvalidVerse;
+      throw InvalidVerseException;
     }
     return ret;
   } catch (exception &e) {
     error(e.what());
-    throw InvalidVerse;
+    throw InvalidVerseException;
   }
 }
 
-fingerprint getTextFingerprint(string book, string info, int start, int length) {
+Fingerprint getTextFingerprint(const string& book, const string& info, int start, int length) {
   return getFingerprint(getBook(book, info), start, length);
 }
 
-fingerprint getTextFingerprint(string book, string info, string start, string end, int startOffset, int endOffset) {
+Fingerprint getTextFingerprint(const string& book, const string& info, const string& start, const string& end, int startOffset, int endOffset) {
   Book b = getBook(book, info);
   int startPos = b.getVerseStart(start) + startOffset;
   int endPos = b.getVerseEnd(end) - endOffset;
   return getFingerprint(b, startPos, endPos - startPos + 1);
 }
 
-fingerprint getTextFingerprint(string book, string info, string start, string end) {
+Fingerprint getTextFingerprint(const string& book, const string& info, const string& start, const string& end) {
   return getTextFingerprint(book, info, start, end, 0, 0);
 }
 
-int compare(string book1, string info1, string verseInfo1s, string verseInfo1e, int startOffset1, int endOffset1,
-            string book2, string info2, string verseInfo2s, string verseInfo2e, int startOffset2, int endOffset2) {
+int compare(const string& book1, const string& info1, const string& verseInfo1s, const string& verseInfo1e, int startOffset1, int endOffset1,
+            const string& book2, const string& info2, const string& verseInfo2s, const string& verseInfo2e, int startOffset2, int endOffset2) {
   info("Comparing " + book1 + " (" + info1 + ") " + verseInfo1s + "-" + verseInfo1e + " and "
        + book2 + " (" + info2 + ") " + verseInfo2s + "-" + verseInfo2e);
   Book b1 = getBook(book1, info1);
@@ -678,8 +678,8 @@ int compare(string book1, string info1, string verseInfo1s, string verseInfo1e, 
   string verse1part = b1.getText().substr(verse1s, verse1e - verse1s + 1);
   int verse2s = b2.getVerseStart(verseInfo2s) + startOffset2;
   int verse2e = b2.getVerseEnd(verseInfo2e) - endOffset2;
-  fingerprint f1 = getTextFingerprint(book1, info1, verseInfo1s, verseInfo1e, startOffset1, endOffset1);
-  fingerprint f2 = getTextFingerprint(book2, info2, verseInfo2s, verseInfo2e, startOffset2, endOffset2);
+  Fingerprint f1 = getTextFingerprint(book1, info1, verseInfo1s, verseInfo1e, startOffset1, endOffset1);
+  Fingerprint f2 = getTextFingerprint(book2, info2, verseInfo2s, verseInfo2e, startOffset2, endOffset2);
   string verse2part = b2.getText().substr(verse2s, verse2e - verse2s + 1);
   int d = dist(f1, f2);
   info(verse1part + " ~ " + verse2part + " = " + to_string(d));
@@ -689,12 +689,12 @@ int compare(string book1, string info1, string verseInfo1s, string verseInfo1e, 
   return d;
 }
 
-string getText(string book, string info, string verseInfoS, string verseInfoE, int startOffset, int endOffset) {
+string getText(const string& book, const string& info, const string& verseInfoS, const string& verseInfoE, int startOffset, int endOffset) {
   Book b = getBook(book, info);
   int verseS = b.getVerseStart(verseInfoS) + startOffset;
   int verseE = b.getVerseEnd(verseInfoE) - endOffset;
   if (verseS > verseE) {
-    throw InvalidPassage;
+    throw InvalidPassageException;
   }
   string text = b.getText().substr(verseS, verseE - verseS + 1);
   return text;
@@ -716,35 +716,35 @@ int compare(string verse1, string verse2) {
   return d;
 }
 
-typedef struct fingerprintInfo {
-  fingerprint fp;
-  Book *book;
-  int start, length;
-} fingerprintInfo;
+typedef struct FingerprintInfo {
+  Fingerprint m_fp;
+  Book *m_book;
+  int m_start, m_length;
+} FingerprintInfo;
 
-vector<fingerprintInfo> fingerprints;
+vector<FingerprintInfo> fingerprints;
 
-void addFingerprint(fingerprint f, Book &b, int s, int l) {
-  fingerprintInfo fpi = { f, &b, s, l };
+void addFingerprint(Fingerprint f, Book &b, int s, int l) {
+  FingerprintInfo fpi = { f, &b, s, l };
   fingerprints.push_back(fpi);
 }
 
-fingerprint getFingerprintCached(Book &b, int s, int l) {
+Fingerprint getFingerprintCached(Book &b, int s, int l) {
   for (int i = 0; i<fingerprints.size(); ++i) {
-    fingerprintInfo fpi = fingerprints.at(i);
-    if (fpi.book == &b)
-      if ((fpi.start == s) && (fpi.length == l))
-        return fpi.fp;
+    FingerprintInfo fpi = fingerprints.at(i);
+    if (fpi.m_book == &b)
+      if ((fpi.m_start == s) && (fpi.m_length == l))
+        return fpi.m_fp;
   }
-  throw InternalError;
+  throw InternalErrorException;
 }
 
-typedef struct int2 {
-  int coords[2];
-} int2;
+typedef struct Int2 {
+  int m_coords[2];
+} Int2;
 
-int findBestFit(string book1, string info1, string verseInfo1s, string verseInfo1e,
-                string book2, string info2, string verseInfo2s, string verseInfo2e) {
+int findBestFit(const string& book1, const string& info1, const string& verseInfo1s, const string& verseInfo1e,
+                const string& book2, const string& info2, const string& verseInfo2s, const string& verseInfo2e) {
   info("Comparing " + book1 + " (" + info1 + ") " + verseInfo1s + "-" + verseInfo1e + " and "
        + book2 + " (" + info2 + ") " + verseInfo2s + "-" + verseInfo2e);
   fingerprints.clear();
@@ -756,8 +756,8 @@ int findBestFit(string book1, string info1, string verseInfo1s, string verseInfo
   int verse2s = b2.getVerseStart(verseInfo2s);
   int verse2e = b2.getVerseEnd(verseInfo2e);
   int verse2len = verse2e - verse2s;
-  int minlen = min(verse1len, verse2len);
-  int maxlen = max(verse1len, verse2len);
+  // int minlen = min(verse1len, verse2len);
+  // int maxlen = max(verse1len, verse2len);
   int bestValues[verse1len - MIN_CITATION_LENGTH + 1][verse2len - MIN_CITATION_LENGTH + 1],
       best1s[verse1len - MIN_CITATION_LENGTH + 1][verse2len - MIN_CITATION_LENGTH + 1],
       best1e[verse1len - MIN_CITATION_LENGTH + 1][verse2len - MIN_CITATION_LENGTH + 1],
@@ -771,14 +771,14 @@ int findBestFit(string book1, string info1, string verseInfo1s, string verseInfo
   for (int i=0; i<verse1len - MIN_CITATION_LENGTH + 1; ++i) {
     int jmax = verse1len;
     for (int j=i + MIN_CITATION_LENGTH - 1; j<jmax; ++j) {
-      fingerprint f = getTextFingerprint(book1, info1, verseInfo1s, verseInfo1e, i, verse1len - j);
+      Fingerprint f = getTextFingerprint(book1, info1, verseInfo1s, verseInfo1e, i, verse1len - j);
       addFingerprint(f, b1, i, j-i+1);
     }
   }
   for (int i=0; i<verse2len - MIN_CITATION_LENGTH + 1; ++i) {
     int jmax = verse2len;
     for (int j=i + MIN_CITATION_LENGTH - 1; j<jmax; ++j) {
-      fingerprint f = getTextFingerprint(book2, info2, verseInfo2s, verseInfo2e, i, verse2len - j);
+      Fingerprint f = getTextFingerprint(book2, info2, verseInfo2s, verseInfo2e, i, verse2len - j);
       addFingerprint(f, b2, i, j-i+1);
     }
   }
@@ -791,8 +791,8 @@ int findBestFit(string book1, string info1, string verseInfo1s, string verseInfo
       for (int k=0; k<kmax; ++k) {
         int lmax = verse2len;
         for (int l=k+MIN_CITATION_LENGTH - 1; l<lmax; ++l) {
-          fingerprint f1 = getFingerprintCached(b1, i, j-i+1);
-          fingerprint f2 = getFingerprintCached(b2, k, l-k+1);
+          Fingerprint f1 = getFingerprintCached(b1, i, j-i+1);
+          Fingerprint f2 = getFingerprintCached(b2, k, l-k+1);
 
           int v1start = b1.getVerseStart(verseInfo1s);
           string t1 = b1.getText().substr(v1start+i,j-i+1);
@@ -800,7 +800,7 @@ int findBestFit(string book1, string info1, string verseInfo1s, string verseInfo
           string t2 = b2.getText().substr(v2start+k,l-k+1);
 
           int d = dist(f1, f2);
-          int length = max(j-i, l-k) + 1;
+          // int length = max(j-i, l-k) + 1;
           if (d < bestValues[j-i-MIN_CITATION_LENGTH][l-k-MIN_CITATION_LENGTH]) {
             bestValues[j-i-MIN_CITATION_LENGTH][l-k-MIN_CITATION_LENGTH] = d;
             best1s[j-i-MIN_CITATION_LENGTH][l-k-MIN_CITATION_LENGTH] = i;
@@ -814,7 +814,7 @@ int findBestFit(string book1, string info1, string verseInfo1s, string verseInfo
   }
   cout << endl;
 
-  vector<int2> candidates;
+  vector<Int2> candidates;
   for (int i=0; i<verse1len-MIN_CITATION_LENGTH; ++i) {
     for (int j=0; j<verse2len-MIN_CITATION_LENGTH; ++j) {
       printf("%4d", bestValues[i][j]);
@@ -833,9 +833,9 @@ int findBestFit(string book1, string info1, string verseInfo1s, string verseInfo
   }
 
   for (int k=0; k<candidates.size(); ++k) {
-    int2 c = candidates.at(k);
-    int i = c.coords[0];
-    int j = c.coords[1];
+    Int2 c = candidates.at(k);
+    int i = c.m_coords[0];
+    int j = c.m_coords[1];
     compare(book1, info1, verseInfo1s, verseInfo1e, best1s[i][j],
             best1e[i][j],
             book2, info2, verseInfo2s, verseInfo2e, best2s[i][j],
@@ -879,21 +879,21 @@ end:
   return to_string(found) + "," + book + "," + to_string(pos);
 }
 
-int find(string text, string moduleName, int maxFound, bool verbose) {
+int find(const string& text, const string& moduleName, int maxFound, bool verbose) {
   string f = _find(text, moduleName, maxFound, verbose);
   vector<string> info;
   boost::split(info, f, boost::is_any_of(","));
   return stoi(info[0]);
 }
 
-string find(string text, string moduleName) {
+string find(const string& text, const string& moduleName) {
   string f = _find(text, moduleName, 1, 0);
   vector<string> info;
   boost::split(info, f, boost::is_any_of(","));
   return info[1] + "," + info[2];
 }
 
-vector<string> find_min_unique(string text, string moduleName, bool verbose) {
+vector<string> find_min_unique(string text, const string& moduleName, bool verbose) {
   int long_limit = 10000;
   int extreme_limit = 50000;
   vector<string> retval;
@@ -936,13 +936,13 @@ vector<string> find_min_unique(string text, string moduleName, bool verbose) {
   return retval;
 }
 
-string _extend(string moduleName1, string moduleName2, string book2, int pos2S, int pos2E, bool verbose) {
+string _extend(const string& moduleName1, const string& moduleName2, const string& book2, int pos2S, int pos2E, bool verbose) {
   Book b2 = getBook(book2, moduleName2);
   string text = b2.getText().substr(pos2S, pos2E - pos2S + 1);
 
   // checking the input
   if (find(text, moduleName1, 2, 0) != 1) {
-    throw NoCitation;
+    throw NoCitationException;
   }
 
   bool citation = true;
@@ -989,8 +989,8 @@ string _extend(string moduleName1, string moduleName2, string book2, int pos2S, 
       + to_string(pos1S) + "," + to_string(pos1E - pos1S + 1) + "," + to_string(pos2S);
 }
 
-void extend(string moduleName1, string moduleName2, string book2, string verse2S,
-            int start, string verse2E, int end) {
+void extend(const string& moduleName1, const string& moduleName2, const string& book2, const string& verse2S,
+            int start, const string& verse2E, int end) {
   Book b2 = getBook(book2, moduleName2);
   int pos2S = b2.getVerseStart(verse2S) + start;
   int pos2E = b2.getVerseEnd(verse2E) - end;
@@ -1024,23 +1024,23 @@ end:
 }
 
 struct Reference {
-  int pos1, pos2;
-  int length;
-  string text;
+  int m_pos1, m_pos2;
+  int m_length;
+  string m_text;
 };
 
 // Sort references.
 bool compareReference(Reference r1, Reference r2) {
-  return ((r1.length == r2.length) && r1.text.compare(r2.text) < 0)
-      || r1.length < r2.length;
+  return ((r1.m_length == r2.m_length) && r1.m_text.compare(r2.m_text) < 0)
+      || r1.m_length < r2.m_length;
 }
 
 bool equalReference(Reference r1, Reference r2) {
-  return (r1.text.compare(r2.text) == 0);
+  return (r1.m_text.compare(r2.m_text) == 0);
 }
 
-void getrefs(string moduleName2, string moduleName1, string book1, string verse1S,
-             int start, string verse1E, int end) {
+void getrefs(const string& moduleName2, const string& moduleName1, const string& book1, const string& verse1S,
+             int start, const string& verse1E, int end) {
   vector<Reference> refs;
   Book b1 = getBook(book1, moduleName1);
   int pos1S = b1.getVerseStart(verse1S) + start;
@@ -1065,8 +1065,8 @@ void getrefs(string moduleName2, string moduleName1, string book1, string verse1
   it = unique(refs.begin(), refs.end(), equalReference);
   refs.resize(distance(refs.begin(), it));
   for (Reference r : refs) {
-    info(r.text + " (length=" + to_string(r.length) + ", pos1=" + ot_color + to_string(r.pos1 + 1) + reset_color +
-         ", pos2=" + nt_color + to_string(r.pos2 + 1) + reset_color + ")");
+    info(r.m_text + " (length=" + to_string(r.m_length) + ", pos1=" + ot_color + to_string(r.m_pos1 + 1) + reset_color +
+         ", pos2=" + nt_color + to_string(r.m_pos2 + 1) + reset_color + ")");
     if (sql) {
       info("insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values");
       string output = " (?, ?, ?, '" + ot_color + book1 + reset_color + "', ";
@@ -1081,7 +1081,7 @@ void getrefs(string moduleName2, string moduleName1, string book1, string verse1
       output += reset_color;
       output += ", ";
       vector<string> reference_split;
-      boost::split(reference_split, r.text, boost::is_any_of("="));
+      boost::split(reference_split, r.m_text, boost::is_any_of("="));
       boost::algorithm::trim(reference_split[0]);
       boost::algorithm::trim(reference_split[1]);
       output += "'" + ot_color + reference_split[0] + reset_color + "', ";
@@ -1091,10 +1091,10 @@ void getrefs(string moduleName2, string moduleName1, string book1, string verse1
       output += "'" + nt_color + verse2_split[1] + reset_color + "', ";
       output += "'" + nt_color + reference_split[1] + reset_color + "', ";
 
-      output += ot_color + to_string(r.pos1 + 1) + reset_color + ", ";
-      output += ot_color + to_string(r.length) + reset_color + ", ";
-      output += nt_color + to_string(r.pos2 + 1) + reset_color + ", ";
-      output += nt_color + to_string(r.length) + reset_color + ", ";
+      output += ot_color + to_string(r.m_pos1 + 1) + reset_color + ", ";
+      output += ot_color + to_string(r.m_length) + reset_color + ", ";
+      output += nt_color + to_string(r.m_pos2 + 1) + reset_color + ", ";
+      output += nt_color + to_string(r.m_length) + reset_color + ", ";
       output += "'getrefs');";
 
       info(output);
@@ -1122,25 +1122,25 @@ void showAvailableBibles() {
   info(translations);
 }
 
-int getPsalmLastVerse(string moduleName, int psalm) {
+int getPsalmLastVerse(const string& moduleName, int psalm) {
   for (vector<PsalmsInfo>::iterator i=psalmsInfos.begin(); i!=psalmsInfos.end(); ++i) {
     PsalmsInfo pi = *i;
     if (pi.getInfo() == moduleName) {
       return pi.getLastVerse(psalm);
     }
   }
-  throw InvalidModule;
+  throw InvalidModuleException;
 }
 
-string getRaw(string moduleName, string bookName, int startPos, int length) {
+string getRaw(const string& moduleName, const string& bookName, int startPos, int length) {
   Book b = getBook(bookName, moduleName);
   string text = b.getText();
   if (startPos >= text.length() || startPos < 0 || length < 1 || startPos + length > text.length())
-    throw InvalidPassage;
+    throw InvalidPassageException;
   return text.substr(startPos, length);
 }
 
-int getTokens(string moduleName, string book, string verse) {
+int getTokens(const string& moduleName, const string& book, const string& verse) {
   Book b = getBook(book, moduleName);
   vector<int> tokens = b.getVerseTokens(verse);
   string tokensS = "";
@@ -1153,7 +1153,7 @@ int getTokens(string moduleName, string book, string verse) {
 
 vector<string> searchTokenset(string moduleName, vector<int> pattern, int length, bool verbose) {
   vector<string> retval;
-  int found = 0;
+  // int found = 0;
   size_t pos;
   string book;
   for (int i=0; i<books.size(); i++) {

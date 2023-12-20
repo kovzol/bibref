@@ -7,12 +7,12 @@ class PsalmsInfo
 {
 private:
   /// The Bible edition.
-  string info;
+  string m_info;
   /// The number of verses for each Psalm (the 0th one is unused).
-  int lastVerse[152];
+  int m_lastVerse[152];
 public:
   /// Create dataspace for a given Bible edition.
-  PsalmsInfo(string info);
+  PsalmsInfo(const string& info): m_info(info);
   /// Set the number of verses for a given Psalm.
   void setLastVerse(int psalm, int lastVerse);
   /// Get the number of verses for a given Psalm.

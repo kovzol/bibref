@@ -106,7 +106,7 @@ void add_vocabulary_item(string item) {
 
 string collect_info = "";
 
-void info(string message) {
+void info(const string& message) {
 #ifndef __EMSCRIPTEN__
   cerr << output_prepend_set << message << endl << flush;
 #else
@@ -516,7 +516,7 @@ void processColorsCmd(string input) {
   }
 }
 
-void processCompareCmd(string input) {
+void processCompareCmd() {
   if (textset.at(0) && textset.at(1)) {
     compareLatin(text[0], text[1]);
   } else {
@@ -524,7 +524,7 @@ void processCompareCmd(string input) {
   }
 }
 
-void processJaccardCmd(string input) {
+void processJaccardCmd() {
   if (textset.at(0) && textset.at(1)) {
     double jd = jaccard_dist(text[0], text[1]);
     info("Jaccard distance is " + to_string(jd) + ".");
@@ -745,9 +745,12 @@ string cli_process(char *buf) {
   boost::algorithm::trim(rawinput);
   vector<string> commentTokens;
   boost::split(commentTokens, rawinput, boost::is_any_of("#"));
-  string input = commentTokens[0];
-  boost::algorithm::trim(input);
+  string input = commentTokens[0]; // Do not use any characters before "#".
+  boost::algorithm::trim(input); // Trim the input.
 
+  // Check if the input command is one of the available commands.
+
+  // Commands with no parameters...
   if (input.compare(addbooksCmd) == 0) {
     processAddbooksCmd();
     goto end;
@@ -763,6 +766,7 @@ string cli_process(char *buf) {
     goto end;
   }
 
+  // Commands with some parameters...
   if (boost::starts_with(input, textCmd)) {
     processTextCmd(input);
     goto end;
@@ -819,12 +823,12 @@ string cli_process(char *buf) {
   }
 
   if (boost::starts_with(input, compareCmd + "12")) {
-    processCompareCmd(input);
+    processCompareCmd();
     goto end;
   }
 
   if (boost::starts_with(input, jaccardCmd + "12")) {
-    processJaccardCmd(input);
+    processJaccardCmd();
     goto end;
   }
 
@@ -853,10 +857,12 @@ string cli_process(char *buf) {
     goto end;
   }
 
+  // If the input is not recognized, we show an error...
   if (input.length() != 0) {
     error(errorNotRecognized);
   }
 
+  // Finally, we return with the previously collected info and clear that variable...
 end:
   string ret = collect_info;
   collect_info = "";
@@ -867,7 +873,7 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
   output_prepend_set = new char[4]; // FIXME: this is hardcoded.
   strcpy(output_prepend_set, output_prepend);
 #ifndef __EMSCRIPTEN__
-  rl_attempted_completion_function = completer;
+  rl_attempted_completion_function = completer; // Initialize readline.
 #endif
   info("This is bibref " BIBREF_VERSION ", nice to meet you.");
   showAvailableBibles();
@@ -877,12 +883,13 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
     }
   }
 
-  maxresults = 100;
-  sql = false;
+  maxresults = 100; // Query results are maximized in 100 results by default.
+  sql = false; // SQL output is disabled by default.
 
-  set_colors(colored);
+  set_colors(colored); // Set default coloring.
 
 #ifndef __EMSCRIPTEN__
+  // Load the readline history...
   char* buf;
   struct passwd *pw = getpwuid(getuid());
   char *histfile = pw->pw_dir;
@@ -896,6 +903,7 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
   string line;
 #endif
 
+  // The main input/output loop...
   while (
        #ifndef __EMSCRIPTEN__
          (buf = readline(input_prepend)) != nullptr
@@ -909,7 +917,7 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
       write_history(histfile);
     }
 #endif
-    cli_process(buf);
+    cli_process(buf); // Process the input.
     // readline malloc's a new buffer every time.
     free(buf);
   }
@@ -939,7 +947,7 @@ EMSCRIPTEN_KEEPALIVE const char* bibref_wasm_vocabulary() {
 }
 #endif
 
-void error(string message) {
+void error(const string& message) {
 #ifndef __EMSCRIPTEN__
   cerr << error_color;
 #endif
