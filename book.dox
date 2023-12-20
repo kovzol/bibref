@@ -50,13 +50,13 @@ public:
   void addVerse(string text, string info, vector<int> tokens) {
    /// @short Add a verse to a book.
    /// Append a new verse to a Bible book by specifying the verse of the text
-   /// in a-z encoding (without spaces and punctuation and setting the tokens).
-   /// @param text The Greek text in a-z encoding, with no spaces or punctuation.
+   /// in a-y encoding (without spaces and punctuation and setting the tokens).
+   /// @param text The Greek text in a-y encoding, with no spaces or punctuation.
    /// @param info The traditional verse numbering, e.g. "3:16".
    /// @param tokens Tokenized form of the verse.
 };
 
-  /// Get the a-z encoded string of the verse defined by traditional numbering, e.g. "3:16".
+  /// Get the a-y encoded string of the verse defined by traditional numbering, e.g. "3:16".
   string getVerse(string info);
   /// Get the traditional numbering of the verse that contains the given character position in the book,
   /// by appending a position modifier +N that gives the shift of characters to the beginning of the verse.
@@ -70,7 +70,7 @@ public:
   /// Get the traditional numbering of the verse that contains the given character position in the book,
   /// by appending a position modifier -N that gives the shift of tokens to the end of the verse.
   string getVerseTokensInfoEnd(int position);
-  /// Get the a-z encoded string of the whole book.
+  /// Get the a-y encoded string of the whole book.
   string getText();
   /// Get the tokenized form of the verse defined by traditional numbering, e.g. "3:16".
   vector<int> getVerseTokens(string info);
@@ -90,8 +90,8 @@ public:
   /// Create a verse entry after a whole book is created via text and tokens.
   /// It is useful if the book is created by using the cache.
   void addVerse(int start, int length, string info, int tokensStart, int tokensLength) {
-   /// @param start The beginning character position of a verse in the a-z encoding.
-   /// @param length The length of a verse in the a-z encoding.
+   /// @param start The beginning character position of a verse in the a-y encoding.
+   /// @param length The length of a verse in the a-y encoding.
    /// @param info The traditional numbering of the verse, e.g. "3:16".
    /// @param tokensStart The beginning token position of a verse.
    /// @param tokensLength The length of a verse in tokens.

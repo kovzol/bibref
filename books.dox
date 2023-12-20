@@ -45,14 +45,14 @@ int compare(string book1, string info1, string verseInfo1s, string verseInfo1e, 
 /// Inputs are given in Greek characters.
 int compare(string verse1, string verse2);
 /// Compare two passages via fingerprints and their distance.
-/// Inputs are given in a-z encoding.
+/// Inputs are given in a-y encoding.
 int compareLatin(string verse1, string verse2);
 ///
 /// @deprecated Assume that two passages are in correlation, find their best fit.
 int findBestFit(string book1, string info1, string verseInfo1s, string verseInfo1e,
                 string book2, string info2, string verseInfo2s, string verseInfo2e);
 ///
-/// Convert raw input verse to a-z encoding.
+/// Convert raw input verse to a-y encoding.
 string processVerse(const string &verse);
 ///
 /// Get text from a given Bible edition, book, passage, with given shifts.
@@ -68,7 +68,7 @@ string getText(string book, string info, string VerseInfoS, string VerseInfoE, i
 ///
 /// Find a passage (verbatim) in a Bible edition.
 int find(string text, string moduleName, int maxFound, int verb) {
- /// @param text The passage to be found in a-z encoding.
+ /// @param text The passage to be found in a-y encoding.
  /// @param moduleName The Bible edition to search, e.g. "LXX".
  /// @param maxFound The maximal amount of occurrences, then stop.
  /// @param verb Request verbose mode (1 if yes).
@@ -77,7 +77,7 @@ int find(string text, string moduleName, int maxFound, int verb) {
 ///
 /// Find a minimally unique subtext in the input text.
 vector<string> find_min_unique(string text, string moduleName, int verb) {
- /// @param text The input text in a-z encoding.
+ /// @param text The input text in a-y encoding.
  /// @param moduleName The Bible edition to search in, e.g. "LXX".
  /// @param verb Verbose mode (1 if yes).
 };
@@ -124,12 +124,12 @@ int getPsalmLastVerse(string moduleName, int psalm) {
  /// @param psalm The Psalm number, e.g. 82.
  /// @return The number of verses.
 };
-/// Get the raw passage text in a-z encoding.
+/// Get the raw passage text in a-y encoding.
 string getRaw(string modulename, string book, int startPos, int length) {
  /// @param moduleName A Bible edition, e.g. "LXX".
  /// @param book A book in the give Bible, e.g. "Psalms".
- /// @param startPos First position in the a-z encoded text, in characters.
- /// @param length Length of the a-z encoded text.
+ /// @param startPos First position in the a-y encoded text, in characters.
+ /// @param length Length of the a-y encoded text.
 };
 ///
 /// Convert Latin text to Greek.
