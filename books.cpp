@@ -1,6 +1,5 @@
 #define MIN_CITATION_LENGTH 10
 // FIXME: static arrays are too big here, find a dynamic solution
-#define MAXSIZE 1000
 
 #include <limits>
 #include <string>
