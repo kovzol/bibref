@@ -4,9 +4,9 @@
  * They contain several books like Genesis and Exodus, or Matthew and Mark (and others).
  */
 
-///
-/// Automatically add all traditional books to a Bible edition.
-int addBooks();
+/// Load and index the default Bible editions wrt. their a-y encoded texts.
+/// Currently LXX, SBLGNT and StatResGNT are loaded.
+int addBibles();
 ///
 /// Lookup a verse in a Bible edition, in a given book, a given passage.
 string lookupVerse(const string& book, const string& info, const string& verse) {
@@ -48,9 +48,13 @@ int compare(string verse1, string verse2);
 /// Inputs are given in a-y encoding.
 int compareLatin(string verse1, string verse2);
 ///
+
+/*
 /// @deprecated Assume that two passages are in correlation, find their best fit.
 int findBestFit(const string& book1, const string& info1, const string& verseInfo1s, const string& verseInfo1e,
                 const string& book2, const string& info2, const string& verseInfo2s, const string& verseInfo2e);
+ */
+
 ///
 /// Convert raw input verse to a-y encoding.
 string processVerse(const string &verse);
@@ -66,13 +70,13 @@ string getText(const string& book, const string& info, const string& VerseInfoS,
  /// @return The requested text.
 };
 ///
-/// Find a passage (verbatim) in a Bible edition.
+/// Find a passage (verbatim) in a Bible edition and return the number of occurrences.
 int find(const string& text, const string& moduleName, int maxFound, int verb) {
  /// @param text The passage to be found in a-y encoding.
  /// @param moduleName The Bible edition to search, e.g. "LXX".
  /// @param maxFound The maximal amount of occurrences, then stop.
  /// @param verb Request verbose mode (1 if yes).
- /// @return if the process was successul.
+ /// @return the number of occurrences.
 };
 ///
 /// Find a minimally unique subtext in the input text.

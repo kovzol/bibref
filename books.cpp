@@ -1,6 +1,3 @@
-#define MIN_CITATION_LENGTH 10
-// FIXME: static arrays are too big here, find a dynamic solution
-
 #include <limits>
 #include <string>
 #include <string.h>
@@ -380,10 +377,11 @@ int lookupTranslation(string moduleName, string book, const string& verse) {
   return 0;
 }
 
-int addBook_cached(string moduleName) {
+/// Loaded all books of a Bible edition.
+int addBooks_cached(string moduleName) {
   vector<string> bookNames;
   // This is needed for correct alphabetical ordering:
-  if (isOTBook(moduleName)) {
+  if (isOTBook(moduleName)) { // These books should be loaded from the Old Testament...
     bookNames={"Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy",
                "Joshua", "Judges", "Ruth",
                "I_Samuel", "II_Samuel", "I_Kings", "II_Kings", "I_Chronicles", "II_Chronicles",
@@ -392,7 +390,7 @@ int addBook_cached(string moduleName) {
                "Hosea", "Joel", "Amos", "Obadiah", "Jonah", "Micah",
                "Nahum", "Habakkuk", "Zephaniah", "Haggai", "Zechariah", "Malachi"};
   }
-  if (isNTBook(moduleName)) {
+  if (isNTBook(moduleName)) { // These books should be loaded from the New Testament...
     bookNames={"Matthew", "Mark", "Luke", "John", "Acts",
                "Romans", "I_Corinthians", "II_Corinthians", "Galatians",
                "Ephesians", "Philippians", "Colossians",
@@ -405,25 +403,25 @@ int addBook_cached(string moduleName) {
                "Revelation_of_John"};
   }
 
-  string path = "bibref-addbooks-cache/" + moduleName;
+  string path = "bibref-addbooks-cache/" + moduleName; // hardcoded path
 
-  PsalmsInfo pi = PsalmsInfo(moduleName);
+  PsalmsInfo pi = PsalmsInfo(moduleName); // create database for Psalms
   for (int i=1; i<=151; i++) pi.setLastVerse(i, 0); // initialize
 
   for (vector<string>::iterator i=bookNames.begin(); i!=bookNames.end(); ++i) {
     string bookName = *i;
-    std::ifstream bookFile(path + "/" + bookName + ".book");
+    std::ifstream bookFile(path + "/" + bookName + ".book"); // open a-y encoded raw book
     std::stringstream buffer;
     buffer << bookFile.rdbuf();
     Book book = Book(bookName);
     book.setText(string(buffer.str()));
 
-    std::ifstream tokensFile(path + "/" + bookName + ".tokens");
+    std::ifstream tokensFile(path + "/" + bookName + ".tokens"); // open tokens for the given book
     vector<int> tokens;
     int t;
     while (tokensFile >> t)
     {
-      tokens.push_back(t);
+      tokens.push_back(t); // read tokens
     }
     book.setTokens(tokens);
 
@@ -445,25 +443,25 @@ int addBook_cached(string moduleName) {
       error("Data loading error from cache file " + verseFileName + ".");
       error("Cache may be corrupt or incompatible with this version. Consider removing it, then retry.");
       error("To avoid data corruption, bibref exits now. Sorry for any inconveniences.");
-      exit(1);
+      exit(1); // Inform the user and exit, since this is a fatal error.
     }
 
     fclose(verseFile);
-    add_vocabulary_item(bookName);
-    book.setModuleName(moduleName);
+    add_vocabulary_item(bookName); // add readline entry for this book
+    book.setModuleName(moduleName); // put this book in the given Bible edition
     books.push_back(book);
   }
-  psalmsInfos.push_back(pi);
+  psalmsInfos.push_back(pi); // store Psalm database
   info("Done loading books of " + moduleName + " (cached).");
-  return 0;
+  return 0; // Success!
 }
 
 /// Load a Bible edition, and save it on the disk for a future cache (if there is no cache saved yet).
-int addBook(string moduleName, string firstVerse, string lastVerse, bool removeAccents) {
+int addBooks(string moduleName, string firstVerse, string lastVerse, bool removeAccents) {
   DIR* cache_dir = opendir(("bibref-addbooks-cache/" + moduleName).c_str()); // This is hardcoded.
   if (cache_dir) { // If there is a cache saved on the disk, we'll use it.
     closedir(cache_dir);
-    addBook_cached(moduleName); // Load the book from the cache.
+    addBooks_cached(moduleName); // Load the book from the cache.
     return 0; // No further operation is required.
   }
   SWMgr library(new MarkupFilterMgr(FMT_PLAIN));
@@ -621,15 +619,15 @@ int addBook(string moduleName, string firstVerse, string lastVerse, bool removeA
   return 0; // Success!
 }
 
-int addBooks() {
+int addBibles() {
   int success = 0;
-  if (addBook("LXX", "Genesis 1:1", "Malachi 4:6", false) !=0 ) {
+  if (addBooks("LXX", "Genesis 1:1", "Malachi 4:6", false) !=0 ) {
     success = 1;
   }
-  if (addBook("SBLGNT", "Matthew 1:1", "Revelation of John 22:21", true) != 0) {
+  if (addBooks("SBLGNT", "Matthew 1:1", "Revelation of John 22:21", true) != 0) {
     success = 1;
   }
-  if (addBook("StatResGNT", "Matthew 1:1", "Revelation of John 22:21", true) != 0) {
+  if (addBooks("StatResGNT", "Matthew 1:1", "Revelation of John 22:21", true) != 0) {
     success = 1;
   }
   return success;
@@ -723,6 +721,10 @@ int compare(string verse1, string verse2) {
   return d;
 }
 
+
+/* The following part is experimental code and currently unmaintained. */
+
+/*
 typedef struct FingerprintInfo {
   Fingerprint m_fp;
   Book *m_book;
@@ -749,6 +751,9 @@ Fingerprint getFingerprintCached(Book &b, int s, int l) {
 typedef struct Int2 {
   int m_coords[2];
 } Int2;
+
+#define MIN_CITATION_LENGTH 10
+// FIXME: static arrays are too big here, find a dynamic solution
 
 int findBestFit(const string& book1, const string& info1, const string& verseInfo1s, const string& verseInfo1e,
                 const string& book2, const string& info2, const string& verseInfo2s, const string& verseInfo2e) {
@@ -852,40 +857,47 @@ int findBestFit(const string& book1, const string& info1, const string& verseInf
   return 0;
 }
 
+*/
+
+/* End of experimental code. */
+
+/// Low level algorithm to find exact string match in the a-y encoded books.
+/// @return "f,b,p" where f is the number of occurrences, b is the book name of the last occurrence and p is its position.
 string _find(string text, string moduleName, int maxFound, bool verbose) {
-  int found = 0;
-  size_t pos;
-  string book;
-  for (int i=0; i<books.size(); i++) {
+  int found = 0; // number of occurrences
+  size_t pos; // character position of last result
+  string book; // book to search for
+  for (int i=0; i<books.size(); i++) { // iterate on all books...
     Book b = books[i];
-    if (b.getModuleName().compare(moduleName) == 0) {
+    if (b.getModuleName().compare(moduleName) == 0) { // ...in this Bible edition
       book = b.getName();
       string bookText = b.getText();
-      pos = bookText.find(text);
-      while (pos != std::string::npos) {
+      pos = bookText.find(text); // find first occurrence
+      while (pos != std::string::npos) { // if found
         if (verbose) {
           info("Found in " + book + " " + b.getVerseInfoStart(pos) + " "
                + b.getVerseInfoEnd(pos + text.length() - 1)
                + " (book position " + to_string(pos + 1)
                + "-" + to_string(pos + text.length())
-               + ")");
+               + ")"); // report success in verbose mode is on
         }
         maxFound--;
         found++;
         if (maxFound == 0) {
-          goto end;
+          goto end; // stop searching if the limit is reached
         }
-        pos = bookText.find(text, pos + text.size());
+        pos = bookText.find(text, pos + text.size()); // find next occurrence
       }
     }
   }
 end:
   if (verbose) {
-    info(to_string(found) + " occurrences.");
+    info(to_string(found) + " occurrences."); // verbose report the number of occurrences
   }
-  return to_string(found) + "," + book + "," + to_string(pos);
+  return to_string(found) + "," + book + "," + to_string(pos); // return concise data
 }
 
+/// Return the number of occurrences of an a-y encoded text in Bible edition moduleName.
 int find(const string& text, const string& moduleName, int maxFound, bool verbose) {
   string f = _find(text, moduleName, maxFound, verbose);
   vector<string> info;
@@ -893,6 +905,8 @@ int find(const string& text, const string& moduleName, int maxFound, bool verbos
   return stoi(info[0]);
 }
 
+/// Return the book name and position of the last occurrence of an a-y encoded text in Bible edition moduleName.
+/// @return "b,p" where b is the book name of the last occurrence and p is its position.
 string find(const string& text, const string& moduleName) {
   string f = _find(text, moduleName, 1, 0);
   vector<string> info;
@@ -901,11 +915,11 @@ string find(const string& text, const string& moduleName) {
 }
 
 vector<string> find_min_unique(string text, const string& moduleName, bool verbose) {
-  int long_limit = 10000;
-  int extreme_limit = 50000;
+  int long_limit = 10000; // below this the algorithm should work fast enough
+  int extreme_limit = 50000; // above this there is no hope to get a result because of out of memory error
   vector<string> retval;
   int l = text.length();
-  if (l > extreme_limit) {
+  if (l > extreme_limit) { // warn the user, but don't stop
     error("Input is extremely long (" + to_string(l) + " characters), expect out of memory error.");
   } else if (l > long_limit) {
     error("Input is very long (" + to_string(l) + " characters), expect very slow operation.");
@@ -924,61 +938,62 @@ vector<string> find_min_unique(string text, const string& moduleName, bool verbo
   for (int i = 0; i < l; ++i) {
     for (int j = 0; j < l - i; ++j) {
       if (i > 0 && (is_unique[i - 1][j + 1] > 0 || is_unique[i - 1][j] > 0)) {
-        is_unique[i][j] = 2;
+        is_unique[i][j] = 2; // this entry can already be ignored
       } else {
         string subtext = text.substr(j, i+1);
-        int unique = find(subtext, moduleName, 2, 0);
+        int unique = find(subtext, moduleName, 2, 0); // decide if this subtext is unique
         if (unique == 1) {
-          is_unique[i][j] = 1;
+          is_unique[i][j] = 1; // if yes, fill in the database
           if (verbose) {
-            info("Text " + subtext + " is minimal unique.");
+            info("Text " + subtext + " is minimal unique."); // inform the user if needed
           }
-          retval.push_back(subtext);
+          retval.push_back(subtext); // store this result
         } else {
-          is_unique[i][j] = 0;
+          is_unique[i][j] = 0; // if no, fill in the database
         }
       }
     }
   }
-  return retval;
+  return retval; // return the list of minimally unique subtexts
 }
 
+/// Low level algorithm to extend a passage that is unique in another edition to be maximally long, and keep verbatim equality.
 string _extend(const string& moduleName1, const string& moduleName2, const string& book2, int pos2S, int pos2E, bool verbose) {
-  Book b2 = getBook(book2, moduleName2);
-  string text = b2.getText().substr(pos2S, pos2E - pos2S + 1);
+  Book b2 = getBook(book2, moduleName2); // the book where the passage will be extended
+  string text = b2.getText().substr(pos2S, pos2E - pos2S + 1); // the passage to extend
 
   // checking the input
   if (find(text, moduleName1, 2, 0) != 1) {
-    throw NoCitationException;
+    throw NoCitationException; // this passage is not present in the assumed Bible edition, that's an error
   }
 
   bool citation = true;
   string found = find(text, moduleName1);
   vector<string> info1;
   boost::split(info1, found, boost::is_any_of(","));
-  string book1 = info1[0];
+  string book1 = info1[0]; // last occurrence of passage in the other edition is in book1
   Book b1 = getBook(book1, moduleName1);
-  int pos1S = stoi(info1[1]);
+  int pos1S = stoi(info1[1]); // last position of passage in the other edition is pos1S
 
-  string text1 = b1.getText();
-  string text2 = b2.getText();
+  string text1 = b1.getText(); // the whole Bible text of the other edition
+  string text2 = b2.getText(); // the whole Bible text of the edition of the passage
 
-  while (citation && pos1S > 0 && pos2S > 0) {
+  while (citation && pos1S > 0 && pos2S > 0) { // shift left in both Bible editions
     pos1S--;
     pos2S--;
-    citation = text1.at(pos1S) == text2.at(pos2S);
+    citation = text1.at(pos1S) == text2.at(pos2S); // until there is no plausible verbatim citation anymore
   }
-  pos1S++;
-  pos2S++;
+  pos1S++; // fix start pointer for the other edition
+  pos2S++; // fix start pointer for the edition of the input passage
   citation = true;
   int pos1E = pos1S + pos2E - pos2S;
-  while (citation && pos1E < text1.length() - 1 && pos2E < text2.length() - 1) {
+  while (citation && pos1E < text1.length() - 1 && pos2E < text2.length() - 1) { // shift right in both editions
     pos1E++;
     pos2E++;
     citation = text1.at(pos1E) == text2.at(pos2E);
   }
-  pos1E--;
-  pos2E--;
+  pos1E--; // fix end pointer for the other edition
+  pos2E--; // fix end pointer for the edition of the input passage
   string verse1infoS = b1.getVerseInfoStart(pos1S);
   string verse1infoE = b1.getVerseInfoEnd(pos1E);
   string verse2infoS = b2.getVerseInfoStart(pos2S);
@@ -988,12 +1003,12 @@ string _extend(const string& moduleName1, const string& moduleName2, const strin
          + verse1infoS + " " + verse1infoE + reset_color + " = " + nt_color + moduleName2 + " "
          + book2 + " " + verse2infoS + " " + verse2infoE + reset_color + " ("
          + ot_color + text1.substr(pos1S, pos1E - pos1S + 1) + reset_color + ", length "
-         + to_string(pos1E - pos1S + 1) + ").");
+         + to_string(pos1E - pos1S + 1) + ")."); // report info verbosely
   }
   return ot_color + moduleName1 + " " + book1 + " "
       + verse1infoS + " " + verse1infoE + reset_color + " = " + nt_color + moduleName2 + " "
       + book2 + " " + verse2infoS + " " + verse2infoE + reset_color + ","
-      + to_string(pos1S) + "," + to_string(pos1E - pos1S + 1) + "," + to_string(pos2S);
+      + to_string(pos1S) + "," + to_string(pos1E - pos1S + 1) + "," + to_string(pos2S); // return concise report
 }
 
 void extend(const string& moduleName1, const string& moduleName2, const string& book2, const string& verse2S,
@@ -1048,37 +1063,37 @@ bool equalReference(Reference r1, Reference r2) {
 
 void getrefs(const string& moduleName2, const string& moduleName1, const string& book1, const string& verse1S,
              int start, const string& verse1E, int end) {
-  vector<Reference> refs;
-  Book b1 = getBook(book1, moduleName1);
-  int pos1S = b1.getVerseStart(verse1S) + start;
-  int pos1E = b1.getVerseEnd(verse1E) - end;
-  string text = b1.getText().substr(pos1S, pos1E - pos1S + 1);
-  vector<string> minunique = find_min_unique(text, moduleName1, 0);
-  for (string m : minunique) {
-    vector<string> found = find_all(m, moduleName2, maxresults);
-    for (string f : found) {
+  vector<Reference> refs; // store plausible references in a vector
+  Book b1 = getBook(book1, moduleName1); // the input passage is in book b1
+  int pos1S = b1.getVerseStart(verse1S) + start; // exact start position of the input passage
+  int pos1E = b1.getVerseEnd(verse1E) - end; // exact end position of the input passage
+  string text = b1.getText().substr(pos1S, pos1E - pos1S + 1); // the input passage
+  vector<string> minunique = find_min_unique(text, moduleName1, 0); // get all minimally unique subtexts of the input
+  for (string m : minunique) { // For each subtext...
+    vector<string> found = find_all(m, moduleName2, maxresults); // find all plausible verbatim quotations in the other edition
+    for (string f : found) { // For each candidate...
       vector<string> info1, info2;
       boost::split(info1, f, boost::is_any_of(","));
-      string book2 = info1[0];
-      int pos = stoi(info1[1]);
-      string ext = _extend(moduleName1, moduleName2, book2, pos, pos + m.length() - 1, 0);
+      string book2 = info1[0]; // book2 contains the book of the other edition
+      int pos = stoi(info1[1]); // pos stores the position of plausible verbatim quotation in the other edition
+      string ext = _extend(moduleName1, moduleName2, book2, pos, pos + m.length() - 1, 0); // Extend the plausible quotation...
       boost::split(info2, ext, boost::is_any_of(","));
       Reference r = {stoi(info2[1]), stoi(info2[3]), stoi(info2[2]), info2[0]};
-      refs.push_back(r);
+      refs.push_back(r); // Store the result.
     }
   }
-  sort(refs.begin(), refs.end(), compareReference);
+  sort(refs.begin(), refs.end(), compareReference); // Sort the results by text length (of the extension).
   vector<Reference>::iterator it;
-  it = unique(refs.begin(), refs.end(), equalReference);
-  refs.resize(distance(refs.begin(), it));
-  for (Reference r : refs) {
+  it = unique(refs.begin(), refs.end(), equalReference); // Delete duplicates.
+  refs.resize(distance(refs.begin(), it)); // Free memory.
+  for (Reference r : refs) { // Show all references.
     info(r.m_text + " (length=" + to_string(r.m_length) + ", pos1=" + ot_color + to_string(r.m_pos1 + 1) + reset_color +
          ", pos2=" + nt_color + to_string(r.m_pos2 + 1) + reset_color + ")");
-    if (sql) {
+    if (sql) { // In sql mode output the required SQL statement skeleton as well.
       info("insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values");
       string output = " (?, ?, ?, '" + ot_color + book1 + reset_color + "', ";
       output += ot_color;
-      if (book1.compare("Psalms") == 0) {
+      if (book1.compare("Psalms") == 0) { // handle Psalms in a special way (because of the SQL database)
         vector<string> verse1_split;
         boost::split(verse1_split, verse1S, boost::is_any_of(":"));
         output += verse1_split[0];
@@ -1104,7 +1119,7 @@ void getrefs(const string& moduleName2, const string& moduleName1, const string&
       output += nt_color + to_string(r.m_length) + reset_color + ", ";
       output += "'getrefs');";
 
-      info(output);
+      info(output); // End of sql mode.
     }
   }
 }

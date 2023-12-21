@@ -3,7 +3,7 @@
 
 #include "fingerprint.h"
 
-int addBooks();
+int addBibles();
 string lookupVerse(const string& book, const string& info, const string& verse);
 Fingerprint getTextFingerprint(const string& book, const string& info, int start, int length);
 Fingerprint getTextFingerprint(const string& book, const string& info, const string& start, const string& end);
@@ -12,8 +12,10 @@ int compare(const string& book1, const string& info1, const string& verseInfo1s,
             const string& book2, const string& info2, const string& verseInfo2s, const string& verseInfo2e, int startOffset2, int endOffset2);
 int compare(string verse1, string verse2);
 int compareLatin(string verse1, string verse2);
+/*
 int findBestFit(const string& book1, const string& info1, const string& verseInfo1s, const string& verseInfo1e,
                 const string& book2, const string& info2, const string& verseInfo2s, const string& verseInfo2e);
+*/
 string processVerse(const string &verse);
 string getText(const string& book, const string& info, const string& VerseInfoS, const string& VerseInfoE, int startOffset, int endOffset);
 int find(const string& text, const string& moduleName, int maxFound, bool verbose);

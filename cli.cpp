@@ -182,7 +182,7 @@ void processAddbooksCmd() {
   if (booksAdded) {
     error("Books already added.");
   } else {
-    if (addBooks() == 0) {
+    if (addBibles() == 0) {
       booksAdded = true;
     }
   }
@@ -823,7 +823,7 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
   info("This is bibref " BIBREF_VERSION ", nice to meet you.");
   showAvailableBibles();
   if (addbooks) {
-    if (addBooks() == 0) {
+    if (addBibles() == 0) {
       booksAdded = true;
     }
   }
