@@ -1,3 +1,5 @@
+#define BIBREF_ADDBOOKS_CACHE_DIR "bibref-addbooks-cache/" // this is hardcoded
+
 #include <limits>
 #include <string>
 #include <string.h>
@@ -66,16 +68,6 @@ class NoCitationException: public exception
     return "Passage is not a citation.";
   }
 } NoCitationException;
-
-class InternalErrorException: public exception
-{
-  virtual const char* what() const throw()
-  {
-    return "Internal error.";
-  }
-} InternalErrorException;
-
-
 
 using namespace sword;
 
@@ -403,7 +395,7 @@ int addBooks_cached(string moduleName) {
                "Revelation_of_John"};
   }
 
-  string path = "bibref-addbooks-cache/" + moduleName; // hardcoded path
+  string path = BIBREF_ADDBOOKS_CACHE_DIR + moduleName;
 
   PsalmsInfo pi = PsalmsInfo(moduleName); // create database for Psalms
   for (int i=1; i<=151; i++) pi.setLastVerse(i, 0); // initialize
@@ -458,7 +450,7 @@ int addBooks_cached(string moduleName) {
 
 /// Load a Bible edition, and save it on the disk for a future cache (if there is no cache saved yet).
 int addBooks(string moduleName, string firstVerse, string lastVerse, bool removeAccents) {
-  DIR* cache_dir = opendir(("bibref-addbooks-cache/" + moduleName).c_str()); // This is hardcoded.
+  DIR* cache_dir = opendir((BIBREF_ADDBOOKS_CACHE_DIR + moduleName).c_str());
   if (cache_dir) { // If there is a cache saved on the disk, we'll use it.
     closedir(cache_dir);
     addBooks_cached(moduleName); // Load the book from the cache.
@@ -725,6 +717,15 @@ int compare(string verse1, string verse2) {
 /* The following part is experimental code and currently unmaintained. */
 
 /*
+
+class InternalErrorException: public exception
+{
+  virtual const char* what() const throw()
+  {
+    return "Internal error.";
+  }
+} InternalErrorException;
+
 typedef struct FingerprintInfo {
   Fingerprint m_fp;
   Book *m_book;
