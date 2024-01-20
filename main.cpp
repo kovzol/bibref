@@ -21,13 +21,13 @@ class InputParser {
 public:
   InputParser(int &argc, char **argv) {
     for (int i = 1; i < argc; ++i)
-      this->tokens.emplace_back(argv[i]);
+      this->m_tokens.emplace_back(argv[i]);
   }
 
   const string &getCmdOption(const string &option) const {
     vector<string>::const_iterator itr;
-    itr = find(this->tokens.cbegin(), this->tokens.cend(), option);
-    if (itr != this->tokens.end() && ++itr != this->tokens.end()) {
+    itr = find(this->m_tokens.cbegin(), this->m_tokens.cend(), option);
+    if (itr != this->m_tokens.end() && ++itr != this->m_tokens.end()) {
       return *itr;
     }
     static const string empty_string;
@@ -35,12 +35,12 @@ public:
   }
 
   bool cmdOptionExists(const string &option) const {
-    return find(this->tokens.begin(), this->tokens.end(), option)
-        != this->tokens.end();
+    return find(this->m_tokens.begin(), this->m_tokens.end(), option)
+        != this->m_tokens.end();
   }
 
 private:
-  vector<string> tokens;
+  vector<string> m_tokens;
 };
 
 void showHelp(const string &executable) {

@@ -1,0 +1,31 @@
+/**
+ * @mainpage
+ * BibRef, a project dedicated to find citations of the
+ * Septuagint in the Greek New Testament.
+ *
+ * This code is in the public domain
+ * and contributed by Zoltán Kovács <zoltan@geogebra.org>.
+ */
+
+/**
+ * @file main.cpp
+ * The main program.
+ */
+
+/// Parse the command line input.
+/// @author Iain Hull (https://stackoverflow.com/a/868894/1044586)
+class InputParser {
+public:
+  /// Parse the command line input.
+  InputParser(int &argc, char **argv);
+  /// Get the command option.
+  const string &getCmdOption(const string &option) const;
+  /// Is a specific command line option given?
+  bool cmdOptionExists(const string &option) const;
+};
+
+/// Show the command line help.
+void showHelp(const string &executable);
+
+/// The main program.
+int main(int argc, char **argv);

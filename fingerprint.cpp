@@ -6,16 +6,16 @@ using namespace std;
 #include "book.h"
 #include "fingerprint.h"
 
-fingerprint getFingerprint(string text) {
-  fingerprint f;
+Fingerprint getFingerprint(string text) {
+  Fingerprint f;
   for (int i=0; i<N; ++i)
     for (int j=0; j<N; ++j) {
-      f.data[i][j] = 0;
+      f.m_data[i][j] = 0;
     }
   for (int i=0; i<text.length() - 1; ++i) {
     char first = text.at(i) - 'a';
     char second = text.at(i+1) - 'a';
-    (f.data[first][second])++;
+    (f.m_data[first][second])++;
   }
   /*
   int u = 0;
@@ -33,21 +33,21 @@ fingerprint getFingerprint(string text) {
   return f;
 }
 
-fingerprint getFingerprint(Book b, int start, int length) {
+Fingerprint getFingerprint(Book b, int start, int length) {
   string text = b.getText().substr(start, length);
   return getFingerprint(text);
 }
 
-int dist(fingerprint f1, fingerprint f2) {
+int dist(Fingerprint f1, Fingerprint f2) {
   int d = 0;
   for (int i=0; i<N; ++i)
     for (int j=0; j<N; ++j) {
-      d += abs(f1.data[i][j]-f2.data[i][j]);
+      d += abs(f1.m_data[i][j]-f2.m_data[i][j]);
     }
   return d;
 }
 
-void printDist(fingerprint f1, fingerprint f2) {
+void printDist(Fingerprint f1, Fingerprint f2) {
   cout << " ";
   for (int j=0; j<N; ++j)
     printf("%c", j + 'a');
@@ -55,30 +55,30 @@ void printDist(fingerprint f1, fingerprint f2) {
   for (int i=0; i<N; ++i) {
     printf("%c", i + 'a');
     for (int j=0; j<N; ++j) {
-      if (f1.data[i][j] == 0 && f2.data[i][j] == 0)
+      if (f1.m_data[i][j] == 0 && f2.m_data[i][j] == 0)
         cout << " ";
       else
-        printf("%1d", abs(f1.data[i][j]-f2.data[i][j]));
+        printf("%1d", abs(f1.m_data[i][j]-f2.m_data[i][j]));
     }
     cout << endl;
   }
 }
 
-int dist(string text1, string text2) {
+int dist(const string& text1, const string& text2) {
   return dist(getFingerprint(text1), getFingerprint(text2));
 }
 
-double jaccard_dist(string text1, string text2) {
+double jaccard_dist(const string& text1, const string& text2) {
   int d1 = 0;
   int d2 = 0;
   int d = 0;
-  fingerprint f1 = getFingerprint(text1);
-  fingerprint f2 = getFingerprint(text2);
+  Fingerprint f1 = getFingerprint(text1);
+  Fingerprint f2 = getFingerprint(text2);
   for (int i=0; i<N; ++i)
     for (int j=0; j<N; ++j) {
-      d1 += f1.data[i][j];
-      d2 += f2.data[i][j];
-      d += min(f1.data[i][j], f2.data[i][j]);
+      d1 += f1.m_data[i][j];
+      d2 += f2.m_data[i][j];
+      d += min(f1.m_data[i][j], f2.m_data[i][j]);
     }
   /* We compute the Jaccard similarity for bags
      * (see Leskovec, Rajamaran, Ullman: Mining of massive datasets,

@@ -4,28 +4,24 @@ using namespace std;
 
 #include "psalmsinfo.h"
 
-class InvalidPsalm: public exception
+class InvalidPsalmException: public exception
 {
   virtual const char* what() const throw()
   {
     return "Invalid psalm.";
   }
-} InvalidPsalm;
-
-PsalmsInfo::PsalmsInfo (string n) {
-  info = n;
-}
+} InvalidPsalmException;
 
 string PsalmsInfo::getInfo() {
-  return info;
+  return m_info;
 }
 
 int PsalmsInfo::getLastVerse(int p) {
-  if (p<1 || p>151) throw InvalidPsalm;
-  return lastVerse[p];
+  if (p<1 || p>151) throw InvalidPsalmException;
+  return m_lastVerse[p];
 }
 
 void PsalmsInfo::setLastVerse(int p, int v) {
-  if (p<1 || p>151) throw InvalidPsalm;
-  lastVerse[p] = v;
+  if (p<1 || p>151) throw InvalidPsalmException;
+  m_lastVerse[p] = v;
 }

@@ -9,40 +9,40 @@ using namespace std;
 class Book
 {
 private:
-  string name;
-  string info;
+  string m_name;
+  string m_moduleName;
   typedef struct Verse {
-    int start;
-    int length;
-    int tokensStart;
-    int tokensLength;
-    string info;
+    int m_start;
+    int m_length;
+    int m_tokensStart;
+    int m_tokensLength;
+    string m_info;
   } Verse;
-  vector<Verse> verses;
-  string text;
-  vector<int> tokens;
+  vector<Verse> m_verses;
+  string m_text;
+  vector<int> m_tokens;
 public:
-  Book(string name);
-  void setInfo(string info);
-  string getInfo();
+  Book(const string& name): m_name(name) {};
+  void setModuleName(const string& moduleName);
+  string getModuleName();
   string getName();
-  void addVerse(string text, string verseInfo, vector<int> tokens);
-  string getVerse(string verseInfo);
+  void addVerse(const string& text, const string& info, vector<int> tokens);
+  string getVerse(string info);
   string getVerseInfoStart(int position);
   string getVerseInfoEnd(int position);
   string getVerseTokensInfoStart(int position);
   string getVerseTokensInfoEnd(int position);
   string getText();
-  vector<int> getVerseTokens(string verseInfo);
+  vector<int> getVerseTokens(string info);
   vector<int> getTokens();
-  int getVerseStart(string verseInfo);
-  int getVerseEnd(string verseInfo);
-  int getVerseTokensStart(string verseInfo);
-  int getVerseTokensEnd(string verseInfo);
+  int getVerseStart(string info);
+  int getVerseEnd(string info);
+  int getVerseTokensStart(string info);
+  int getVerseTokensEnd(string info);
   // to load a book from cache:
-  void setText(string text);
+  void setText(const string& text);
   void addVerse(int start, int length, string info, int tokensStart, int tokensLength);
-  void setTokens(vector<int> tokens);
+  void setTokens(vector<int>& tokens);
 };
 
 #endif // BOOK_H

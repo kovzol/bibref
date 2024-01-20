@@ -1,0 +1,19 @@
+PROJECT_NAME = bibref
+PROJECT_NUMBER = 2023-12-18
+PROJECT_BRIEF = A tool to find internal references in the Bible
+PROJECT_LOGO = logo-Psalm40-doxygen.png
+
+EXTRACT_ALL = YES
+EXTRACT_PRIVATE = YES
+
+# Important: Here the .h files are not listed. Otherwise we get duplications.
+FILE_PATTERNS = *.dox *.cpp *.md
+
+# This is important for multiline comments (beginning with "///", for example).
+JAVADOC_AUTOBRIEF = YES
+
+# We put the generated output in docs/. Note that html/ in the root folder is used for something different.
+HTML_OUTPUT = docs/html
+LATEX_OUTPUT = docs/latex
+
+IMAGE_PATH = .

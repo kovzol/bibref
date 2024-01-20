@@ -1,0 +1,35 @@
+/**
+ * @file fingerprint.cpp
+ * Computing fingerprint of a passage and mathematical distances of two passages.
+ */
+
+// Set the number of characters in the a-y alphabet.
+#define N 25
+
+/// Number of 2-shingles for a text, called "fingerprint" in this program.
+typedef struct Fingerprint {
+  unsigned short int data [N][N];
+} Fingerprint;
+
+/// Compute the fingerprint of a passage.
+Fingerprint getFingerprint(Book book, int start, int length) {
+ /// @param book A book in a Bible edition.
+ /// @param start Start of the passage in characters.
+ /// @param length Length of the passage in characters.
+};
+
+/// Compute the fingerprint of a passage.
+Fingerprint getFingerprint(string text);
+
+/// Compute the distance of two fingerprints by counting the number of different 2-shingles.
+int dist(Fingerprint f1, Fingerprint f2);
+
+/// Compute the fingerprint distance of two passages by counting the number of different 2-shingles.
+int dist(const string& text1, const string& text2);
+
+/// Print the distance of two fingerprints by counting the number of different 2-shingles (for debugging).
+void printDist(Fingerprint f1, Fingerprint f2);
+
+/// Compute the Jaccard similirity for bags. See Leskovec-Rajamaran-Ullman: Mining of massive datasets,
+/// Cambridge University Press, 2014, p. 77-78 (see footnote 2 on page 77).
+double jaccard_dist(const string& text1, const string& text2);

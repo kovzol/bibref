@@ -1,4 +1,4 @@
-#define BIBREF_VERSION "2023Jul30"
+#define BIBREF_VERSION "2023Dec21"
 
 #include <iostream>
 #include <sstream>
@@ -62,6 +62,8 @@ string rawCmd = "raw";
 string colorsCmd = "colors";
 string tokensCmd = "tokens";
 string searchCmd = "search";
+string quitCmd = "quit";
+string helpCmd = "help";
 
 string errorNotRecognized = "Sorry, the command you entered was not recognized or its syntax is invalid.";
 string errorTextIncomplete = "Either " + textCmd + "1 or " + textCmd + "2 must be used.";
@@ -86,10 +88,11 @@ string errorRawIncomplete = "Either " + rawCmd + "1 or " + rawCmd + "2 must be u
 string errorColorsParameters = colorsCmd + " requires one parameter.";
 string errorTokensParameters = tokensCmd + " requires 3 or 4 parameters.";
 string errorSearchParameters = searchCmd + " requires at least one parameter.";
+string errorMisc = "Sorry, there were some problems with the command you entered.";
 
 vector<string> vocabulary {addbooksCmd, compareCmd + "12", jaccardCmd + "12",
-      textCmd + "1", textCmd + "2", lookupCmd + "1", lookupCmd + "2", "quit",
-      "help", findCmd + "1", findCmd + "2", lengthCmd + "1", lengthCmd + "2",
+      textCmd + "1", textCmd + "2", lookupCmd + "1", lookupCmd + "2", quitCmd,
+      helpCmd, findCmd + "1", findCmd + "2", lengthCmd + "1", lengthCmd + "2",
       minuniqueCmd + "1", latintextCmd + "1", latintextCmd + "2",
       extendCmd, getrefsCmd, lookupCmd, maxresultsCmd, sqlCmd, psalminfoCmd,
       rawCmd, rawCmd + "1", rawCmd + "2",
@@ -103,7 +106,7 @@ void add_vocabulary_item(string item) {
 
 string collect_info = "";
 
-void info(string message) {
+void info(const string& message) {
 #ifndef __EMSCRIPTEN__
   cerr << output_prepend_set << message << endl << flush;
 #else
@@ -175,599 +178,637 @@ void set_colors(bool colored) {
   }
 }
 
-string cli_process(char *buf) {
-  string rawinput(buf);
-  boost::algorithm::trim(rawinput);
-  vector<string> commentTokens;
-  boost::split(commentTokens, rawinput, boost::is_any_of("#"));
-  string input = commentTokens[0];
-  boost::algorithm::trim(input);
-
-  if (input.compare(addbooksCmd) == 0) {
-    if (booksAdded) {
-      cerr << "Books already added." << endl << flush;
-    } else {
-      if (addBooks() == 0) {
-        booksAdded = true;
-      }
+void processAddbooksCmd() {
+  if (booksAdded) {
+    error("Books already added.");
+  } else {
+    if (addBibles() == 0) {
+      booksAdded = true;
     }
-    goto end;
   }
+}
 
-  if (input.compare("quit") == 0) {
-    info("Goodbye.");
-    exit(0);
-  }
+void processQuitCmd() {
+  info("Goodbye.");
+  exit(0);
+}
 
-  if (input.compare("help") == 0) {
+void processHelpCmd() {
 #ifdef __EMSCRIPTEN__
     showAvailableBibles();
 #endif
     info("Please visit https://github.com/kovzol/bibref#bibref to get online help.");
-    goto end;
+}
+
+void processTextCmd(string input) {
+  int index; // clipboard number (0 or 1), if used
+  int commandLength = textCmd.length();
+  if (input.length() == commandLength) {
+    error(errorTextIncomplete);
+    return;
+  }
+  if (input.at(commandLength) == '1') {
+    index = 0; // using clipboard 1
+  }
+  else if (input.at(commandLength) ==  '2') {
+    index = 1; // using clipboard 2
+  } else {
+    error(errorTextIncomplete);
+    return;
+  }
+  if (input.length() < textCmd.length() + 2) {
+    error(errorTextParameters);
+    return;
+  }
+  if (input.at(commandLength + 1) != ' ') {
+    error("Either " + textCmd + "1 or " + textCmd + "2 must be used.");
+    return;
+  }
+  string rest = input.substr(input.find(" ") + 1);
+  // Remove accidental Greek accents first:
+  SWMgr manager;
+  manager.setGlobalOption("Greek Accents", "Off"); // disable accents
+  SWBuf to_convert = rest.data();
+  manager.filterText("Greek Accents", to_convert);
+  // Convert Greek to Latin:
+  string processed = processVerse(to_convert.c_str());
+  if (processed.length() == 0) {
+    error("Text does not contain Greek letters, ignored.");
+    return; // Success, but nothing happened.
+  }
+  text[index] = processed; // Store result.
+  textset[index] = true; // activate clipboard
+  info("Stored internally as " + processed + "."); // Success!
+}
+
+void processSearchCmd(string input) {
+  int index;
+  if (input.length() < searchCmd.length() + 1) {
+    error(errorSearchParameters);
+    return;
+  }
+  string rest = input.substr(input.find(" ") + 1);
+  index = rest.find(" ");
+  string moduleName = rest.substr(0, index); // Search in the given Bible edition...
+  rest = rest.substr(index + 1);
+
+  vector<int> pattern; // the token pattern to be searched
+  std::stringstream ss(rest);
+
+  int s = 0;
+  int t;
+  while (ss >> t) {
+    pattern.push_back(t);
+    s += 1; // count the tokens in the pattern
+  }
+  if (s==0) { // no pattern was defined
+    error(errorSearchParameters);
+    return;
   }
 
-  if (boost::starts_with(input, textCmd)) {
-    int index;
-    int commandLength = textCmd.length();
-    if (input.length() == commandLength) {
-      error(errorTextIncomplete);
-      goto end;
-    }
-    if (input.at(commandLength) == '1') {
-      index = 0;
-    }
-    else if (input.at(commandLength) ==  '2') {
-      index = 1;
-    } else {
-      error(errorTextIncomplete);
-      goto end;
-    }
-    if (input.length() < textCmd.length() + 2) {
-      error(errorTextParameters);
-      goto end;
-    }
-    if (input.at(commandLength + 1) != ' ') {
-      error("Either " + textCmd + "1 or " + textCmd + "2 must be used.");
-      goto end;
-    }
+  s--;
+  int length = pattern.at(s); // the last parameter
+  pattern.pop_back(); // remove it from the token pattern
+  info("Read " + to_string(s) + " tokens, searching for an extension of max. " + to_string(length) + " tokens.");
+  if (length < s) { // the length must be at least the length of the pattern
+    error("Surely, this will not be working.");
+  } else {
+    searchTokenset(moduleName, pattern, length, true); // Start search...
+  }
+}
+
+void processLatintextCmd(string input) {
+  int index; // clipboard number (0 or 1), if used
+  int commandLength = latintextCmd.length();
+  if (input.length() == commandLength) {
+    error(errorLatintextIncomplete);
+    return;
+  }
+  if (input.at(commandLength) == '1') {
+    index = 0; // using clipboard 1
+  }
+  else if (input.at(commandLength) ==  '2') {
+    index = 1; // using clipboard 2
+  } else {
+    error(errorLatintextIncomplete);
+    return;
+  }
+  if (input.length() < latintextCmd.length() + 2) {
+    error(errorLatintextParameters);
+    return;
+  }
+  if (input.at(commandLength + 1) != ' ') {
+    error("Either " + latintextCmd + "1 or " + latintextCmd + "2 must be used.");
+    return;
+  }
+  string rest = input.substr(input.find(" ") + 1);
+  text[index] = rest; // The remaining part of the input is stored as is.
+  textset[index] = true; // activate clipboard
+  info("Stored."); // Success!
+}
+
+void processLookupCmd(string input) {
+  int index; // clipboard number (0 or 1), if used
+  int commandLength = lookupCmd.length();
+  if (input.length() == commandLength) {
+    error(errorLookupIncomplete);
+    return;
+  }
+  if (input.at(commandLength) == ' ') { // no clipboard is requested
     string rest = input.substr(input.find(" ") + 1);
-    // Remove accidental Greek accents first:
-    SWMgr manager;
-    manager.setGlobalOption("Greek Accents", "Off");
-    SWBuf to_convert = rest.data();
-    manager.filterText("Greek Accents", to_convert);
-    // Convert Greek to Latin:
-    string processed = processVerse(to_convert.c_str());
-    if (processed.length() == 0) {
-      error("Text does not contain Greek letters, ignored.");
-      goto end;
-    }
-    text[index] = processed;
-    textset[index] = true;
-    info("Stored internally as " + processed + ".");
-    goto end;
-  }
-
-  if (boost::starts_with(input, searchCmd)) {
-    int index;
-    if (input.length() < searchCmd.length() + 1) {
-      error(errorSearchParameters);
-      goto end;
-    }
-    string rest = input.substr(input.find(" ") + 1);
-    index = rest.find(" ");
-    string moduleName = rest.substr(0, index);
-    rest = rest.substr(index + 1);
-
-    vector<int> pattern;
-    std::stringstream ss(rest);
-
-    int s = 0;
-    int t;
-    while (ss >> t) {
-      pattern.push_back(t);
-      s += 1;
-    }
-    if (s==0) {
-      error(errorSearchParameters);
-      goto end;
-    }
-
-    s--;
-    int length = pattern.at(s);
-    pattern.pop_back();
-    info("Read " + to_string(s) + " tokens, searching for an extension of max. " + to_string(length) + " tokens.");
-    if (length < s) {
-      error("Surely, this will not be working.");
+    vector<string> tokens;
+    boost::split(tokens, rest, boost::is_any_of(" "));
+    int restSize = tokens.size();
+    if (restSize == 3) { // e.g. lookup LXX Genesis 1:1
+      lookupTranslation(tokens[0], tokens[1], tokens[2]); // simple lookup via Sword
     } else {
-      searchTokenset(moduleName, pattern, length, true);
-    }
-    goto end;
-  }
-
-
-  if (boost::starts_with(input, latintextCmd)) {
-    int index;
-    int commandLength = latintextCmd.length();
-    if (input.length() == commandLength) {
-      error(errorLatintextIncomplete);
-      goto end;
-    }
-    if (input.at(commandLength) == '1') {
-      index = 0;
-    }
-    else if (input.at(commandLength) ==  '2') {
-      index = 1;
-    } else {
-      error(errorLatintextIncomplete);
-      goto end;
-    }
-    if (input.length() < textCmd.length() + 2) {
-      error(errorLatintextParameters);
-      goto end;
-    }
-    if (input.at(commandLength + 1) != ' ') {
-      error("Either " + latintextCmd + "1 or " + latintextCmd + "2 must be used.");
-      goto end;
-    }
-    string rest = input.substr(input.find(" ") + 1);
-    text[index] = rest;
-    textset[index] = true;
-    info("Stored.");
-    goto end;
-  }
-
-  if (boost::starts_with(input, lookupCmd)) {
-    int index;
-    int commandLength = lookupCmd.length();
-    if (input.length() == commandLength) {
-      error(errorLookupIncomplete);
-      goto end;
-    }
-    if (input.at(commandLength) == ' ') {
-      string rest = input.substr(input.find(" ") + 1);
-      vector<string> tokens;
-      boost::split(tokens, rest, boost::is_any_of(" "));
-      int restSize = tokens.size();
-      if (restSize == 3) {
-        lookupTranslation(tokens[0], tokens[1], tokens[2]);
-      } else {
-        error(errorLookupParameters);
-      }
-      goto end;
-    }
-    if (input.at(commandLength) == '1') {
-      index = 0;
-    }
-    else if (input.at(commandLength) ==  '2') {
-      index = 1;
-    } else {
-      error(errorLookupIncomplete);
-      goto end;
-    }
-    if (input.length() < lookupCmd.length() + 2) {
       error(errorLookupParameters);
-      goto end;
     }
-    if (input.at(commandLength + 1) != ' ') {
-      error(errorLookupIncomplete);
-      goto end;
-    }
-    string rest = input.substr(input.find(" ") + 1);
-    vector<string> tokens;
-    boost::split(tokens, rest, boost::is_any_of(" "));
-    int restSize = tokens.size();
-    if (restSize == 3) {
-      string verse = "";
-      try {
-        verse = lookupVerse(tokens[1], tokens[0], tokens[2]);
-        text[index] = verse;
-        textset[index] = true;
-        info("Stored internally as " + verse + ".");
-      } catch (exception &e) {
-        error(e.what());
-      }
-      goto end;
-    }
-    if (restSize == 4) {
-      string verse = "";
-      try {
-        vector<string> tokens2, tokens3;
-        int start = 0, end = 0;
-        boost::split(tokens2, tokens[2], boost::is_any_of("+"));
-        if (tokens2.size() > 1) {
-          start = stoi(tokens2[1]);
-        }
-        boost::split(tokens3, tokens[3], boost::is_any_of("-"));
-        if (tokens3.size() > 1) {
-          end = stoi(tokens3[1]);
-        }
-        verse = getText(tokens[1], tokens[0], tokens2.at(0), tokens3.at(0), start, end);
-        text[index] = verse;
-        textset[index] = true;
-        info("Stored internally as " + verse + ".");
-      } catch (exception &e) {
-        error(e.what());
-      }
-      goto end;
-    }
+    return; // Success!
+  }
+  if (input.at(commandLength) == '1') {
+    index = 0; // using clipboard 1
+  }
+  else if (input.at(commandLength) ==  '2') {
+    index = 1; // using clipboard 2
+  } else {
+    error(errorLookupIncomplete);
+    return;
+  }
+  if (input.length() < lookupCmd.length() + 2) {
     error(errorLookupParameters);
-    goto end;
+    return;
   }
+  if (input.at(commandLength + 1) != ' ') {
+    error(errorLookupIncomplete);
+    return;
+  }
+  string rest = input.substr(input.find(" ") + 1);
+  vector<string> tokens;
+  boost::split(tokens, rest, boost::is_any_of(" "));
+  int restSize = tokens.size();
+  if (restSize == 3) {
+    string verse = "";
+    try { // e.g. lookup1 LXX Genesis 1:1
+      verse = lookupVerse(tokens[1], tokens[0], tokens[2]); // lookup in the a-y database
+      text[index] = verse; // Store result.
+      textset[index] = true; // activate clipboard
+      info("Stored internally as " + verse + ".");
+    } catch (exception &e) {
+      error(errorMisc);
+    }
+    return; // Success!
+  }
+  if (restSize == 4) { // e.g. lookup1 LXX Genesis 1:1+3 1:2-4
+    string verse = "";
+    try {
+      vector<string> tokens2, tokens3;
+      int start = 0, end = 0;
+      boost::split(tokens2, tokens[2], boost::is_any_of("+"));
+      if (tokens2.size() > 1) {
+        start = stoi(tokens2[1]); // read off the plus shift
+      }
+      boost::split(tokens3, tokens[3], boost::is_any_of("-"));
+      if (tokens3.size() > 1) {
+        end = stoi(tokens3[1]); // read off the minus shift
+      }
+      // Shift-allowed lookup in the a-y database...
+      verse = getText(tokens[1], tokens[0], tokens2.at(0), tokens3.at(0), start, end);
+      text[index] = verse; // Store result.
+      textset[index] = true; // activate clipboard
+      info("Stored internally as " + verse + ".");
+    } catch (exception &e) {
+      error(errorMisc);
+    }
+    return; // Success!
+  }
+  error(errorLookupParameters); // another amount of parameters are given
+}
 
-  if (boost::starts_with(input, tokensCmd)) {
+void processTokensCmd(string input) {
+  string rest = input.substr(input.find(" ") + 1);
+  vector<string> tokens;
+  boost::split(tokens, rest, boost::is_any_of(" "));
+  int restSize = tokens.size();
+  if (restSize == 3) {
+    try {
+      getTokens(tokens[0], tokens[1], tokens[2]);
+    } catch (exception &e) {
+      error(errorMisc);
+    }
+  } else {
+    error(errorTokensParameters);
+  }
+}
+
+void processFindCmd(string input) {
+  int index;
+  int commandLength = findCmd.length();
+  if (input.length() == commandLength) {
+    error(errorFindIncomplete);
+    return;
+  }
+  if (input.at(commandLength) == '1') {
+    index = 0;
+  }
+  else if (input.at(commandLength) ==  '2') {
+    index = 1;
+  } else {
+    error(errorFindIncomplete);
+    return;
+  }
+  if (input.length() < findCmd.length() + 1) {
+    error(errorFindParameters);
+    return;
+  }
+  string rest = input.substr(input.find(" ") + 1);
+  if (text[index].length() == 0) {
+    error(errorFindEmpty);
+    return;
+  }
+  find(text[index], rest, maxresults, true);
+}
+
+void processLengthCmd(string input) {
+  int index;
+  int commandLength = lengthCmd.length();
+  if (input.length() == commandLength) {
+    error(errorLengthIncomplete);
+    return;
+  }
+  if (input.at(commandLength) == '1') {
+    index = 0;
+  }
+  else if (input.at(commandLength) ==  '2') {
+    index = 1;
+  } else {
+    error(errorLengthIncomplete);
+    return;
+  }
+  info("Length of text " + to_string(index + 1) + " is "
+       + to_string(text[index].length()) + ".");
+  return;
+}
+
+void processPrintCmd(string input) {
+  int index;
+  int commandLength = printCmd.length();
+  if (input.length() == commandLength) {
+    error(errorPrintIncomplete);
+    return;
+  }
+  if (input.at(commandLength) == '1') {
+    index = 0;
+  }
+  else if (input.at(commandLength) ==  '2') {
+    index = 1;
+  } else {
+    error(errorPrintIncomplete);
+    return;
+  }
+  info(latinToGreek(text[index]));
+}
+
+void processMaxresultsCmd(string input) {
+  int index;
+  int commandLength = maxresultsCmd.length();
+  if (input.length() == commandLength) {
+    error(errorMaxresultsParameters);
+    return;
+  }
+  string rest = input.substr(input.find(" ") + 1);
+  maxresults = stoi(rest);
+  info("Set to " + to_string(maxresults) + ".");
+}
+
+void processSqlCmd(string input) {
+  int index;
+  int commandLength = sqlCmd.length();
+  if (input.length() == commandLength) {
+    error(errorSqlParameters);
+    return;
+  }
+  string rest = input.substr(input.find(" ") + 1);
+  if (rest.compare("on")==0 || rest.compare("1")==0 || rest.compare("true")==0) {
+    sql = true;
+    info("SQL output enabled.");
+  } else
+  {
+    sql = false;
+    info("SQL output disabled.");
+  }
+}
+
+void processColorsCmd(string input) {
+  int index;
+  int commandLength = colorsCmd.length();
+  if (input.length() == commandLength) {
+    error(errorColorsParameters);
+    return;
+  }
+  string rest = input.substr(input.find(" ") + 1);
+  if (rest.compare("on")==0 || rest.compare("1")==0 || rest.compare("true")==0) {
+    set_colors(true);
+    info("Colors enabled.");
+  } else
+  {
+    set_colors(false);
+    info("Colors disabled.");
+  }
+}
+
+void processCompareCmd() {
+  if (textset.at(0) && textset.at(1)) {
+    compareLatin(text[0], text[1]);
+  } else {
+    error("Text 1 or 2 is not set.");
+  }
+}
+
+void processJaccardCmd() {
+  if (textset.at(0) && textset.at(1)) {
+    double jd = jaccard_dist(text[0], text[1]);
+    info("Jaccard distance is " + to_string(jd) + ".");
+  } else {
+    error("Text 1 or 2 is not set.");
+  }
+}
+
+void processPsalminfoCmd(string input) {
+  vector<string> tokens;
+  boost::split(tokens, input, boost::is_any_of(" "));
+  int size = tokens.size();
+  if (size == 3) {
+    try {
+      int psalmInfo = getPsalmLastVerse(tokens[1], stoi(tokens[2]));
+      info(tokens[1] + " Psalm " + tokens[2] + " contains " + to_string(psalmInfo) + " verses.");
+    } catch (exception &e) {
+      error(errorMisc);
+    }
+  } else {
+    error(errorPsalminfoParameters);
+  }
+}
+
+void processMinuniqueCmd(string input) {
+  int commandLength = minuniqueCmd.length();
+  if (input.length() == commandLength) {
+    error(errorMinuniqueParameters);
+    return;
+  }
+  if (input.length() < minuniqueCmd.length() + 2) {
+    error(errorMinuniqueParameters);
+    return;
+  }
+  string rest = input.substr(input.find(" ") + 1);
+  find_min_unique(text[0], rest, true);
+}
+
+void processRawCmd(string input) {
+  int index; // clipboard number (0 or 1), if used
+  int commandLength = rawCmd.length();
+  if (input.length() == commandLength) {
+    error(errorRawIncomplete);
+    return;
+  }
+  if (input.at(commandLength) == ' ') { // no clipboard is requested
     string rest = input.substr(input.find(" ") + 1);
     vector<string> tokens;
     boost::split(tokens, rest, boost::is_any_of(" "));
     int restSize = tokens.size();
-    if (restSize == 3) {
+    if (restSize == 4) { // e.g. raw LXX Genesis 1 10
       try {
-        getTokens(tokens[0], tokens[1], tokens[2]);
+        string module = tokens[0]; // LXX
+        string book = tokens[1]; // Genesis
+        int startPos = stoi(tokens[2]); // 1
+        int length = stoi(tokens[3]); // 10
+        string text = getRaw(module, book, startPos - 1, length); // Obtain the raw text...
+        info(text); // Report the result.
+        return; // Success!
       } catch (exception &e) {
-        error(e.what());
-      }
-    } else {
-      error(errorTokensParameters);
-    }
-    goto end;
-  }
-
-  if (boost::starts_with(input, findCmd)) {
-    int index;
-    int commandLength = findCmd.length();
-    if (input.length() == commandLength) {
-      error(errorFindIncomplete);
-      goto end;
-    }
-    if (input.at(commandLength) == '1') {
-      index = 0;
-    }
-    else if (input.at(commandLength) ==  '2') {
-      index = 1;
-    } else {
-      error(errorFindIncomplete);
-      goto end;
-    }
-    if (input.length() < findCmd.length() + 1) {
-      error(errorFindParameters);
-      goto end;
-    }
-    string rest = input.substr(input.find(" ") + 1);
-    if (text[index].length() == 0) {
-      error(errorFindEmpty);
-      goto end;
-    }
-    find(text[index], rest, maxresults, 1);
-    goto end;
-  }
-
-  if (boost::starts_with(input, lengthCmd)) {
-    int index;
-    int commandLength = lengthCmd.length();
-    if (input.length() == commandLength) {
-      error(errorLengthIncomplete);
-      goto end;
-    }
-    if (input.at(commandLength) == '1') {
-      index = 0;
-    }
-    else if (input.at(commandLength) ==  '2') {
-      index = 1;
-    } else {
-      error(errorLengthIncomplete);
-      goto end;
-    }
-    info("Length of text " + to_string(index + 1) + " is "
-         + to_string(text[index].length()) + ".");
-    goto end;
-  }
-
-  if (boost::starts_with(input, printCmd)) {
-    int index;
-    int commandLength = printCmd.length();
-    if (input.length() == commandLength) {
-      error(errorPrintIncomplete);
-      goto end;
-    }
-    if (input.at(commandLength) == '1') {
-      index = 0;
-    }
-    else if (input.at(commandLength) ==  '2') {
-      index = 1;
-    } else {
-      error(errorPrintIncomplete);
-      goto end;
-    }
-    info(latinToGreek(text[index]));
-    goto end;
-  }
-
-  if (boost::starts_with(input, maxresultsCmd)) {
-    int index;
-    int commandLength = maxresultsCmd.length();
-    if (input.length() == commandLength) {
-      error(errorMaxresultsParameters);
-      goto end;
-    }
-    string rest = input.substr(input.find(" ") + 1);
-    maxresults = stoi(rest);
-    info("Set to " + to_string(maxresults) + ".");
-    goto end;
-  }
-
-  if (boost::starts_with(input, sqlCmd)) {
-    int index;
-    int commandLength = sqlCmd.length();
-    if (input.length() == commandLength) {
-      error(errorSqlParameters);
-      goto end;
-    }
-    string rest = input.substr(input.find(" ") + 1);
-    if (rest.compare("on")==0 || rest.compare("1")==0 || rest.compare("true")==0) {
-      sql = true;
-      info("SQL output enabled.");
-    } else
-    {
-      sql = false;
-      info("SQL output disabled.");
-    }
-    goto end;
-  }
-
-  if (boost::starts_with(input, colorsCmd)) {
-    int index;
-    int commandLength = colorsCmd.length();
-    if (input.length() == commandLength) {
-      error(errorColorsParameters);
-      goto end;
-    }
-    string rest = input.substr(input.find(" ") + 1);
-    if (rest.compare("on")==0 || rest.compare("1")==0 || rest.compare("true")==0) {
-      set_colors(true);
-      info("Colors enabled.");
-    } else
-    {
-      set_colors(false);
-      info("Colors disabled.");
-    }
-    goto end;
-  }
-
-  if (boost::starts_with(input, compareCmd + "12")) {
-    if (textset.at(0) && textset.at(1)) {
-      compareLatin(text[0], text[1]);
-    } else {
-      error("Text 1 or 2 is not set.");
-    }
-    goto end;
-  }
-
-  if (boost::starts_with(input, jaccardCmd + "12")) {
-    if (textset.at(0) && textset.at(1)) {
-      double jd = jaccard_dist(text[0], text[1]);
-      info("Jaccard distance is " + to_string(jd) + ".");
-    } else {
-      error("Text 1 or 2 is not set.");
-    }
-    goto end;
-  }
-
-  if (boost::starts_with(input, minuniqueCmd + "1")) {
-    int commandLength = minuniqueCmd.length();
-    if (input.length() == commandLength) {
-      error(errorMinuniqueParameters);
-      goto end;
-    }
-    if (input.length() < minuniqueCmd.length() + 2) {
-      error(errorMinuniqueParameters);
-      goto end;
-    }
-    string rest = input.substr(input.find(" ") + 1);
-    find_min_unique(text[0], rest, 1);
-    goto end;
-  }
-
-  if (boost::starts_with(input, psalminfoCmd + " ")) {
-    vector<string> tokens;
-    boost::split(tokens, input, boost::is_any_of(" "));
-    int size = tokens.size();
-    if (size == 3) {
-      try {
-        int psalmInfo = getPsalmLastVerse(tokens[1], stoi(tokens[2]));
-        info(tokens[1] + " Psalm " + tokens[2] + " contains " + to_string(psalmInfo) + " verses.");
-      } catch (exception &e) {
-        error(e.what());
-      }
-    } else {
-      error(errorPsalminfoParameters);
-    }
-    goto end;
-  }
-
-  if (boost::starts_with(input, rawCmd)) {
-    int index;
-    int commandLength = rawCmd.length();
-    if (input.length() == commandLength) {
-      error(errorRawIncomplete);
-      goto end;
-    }
-    if (input.at(commandLength) == ' ') {
-      string rest = input.substr(input.find(" ") + 1);
-      vector<string> tokens;
-      boost::split(tokens, rest, boost::is_any_of(" "));
-      int restSize = tokens.size();
-      if (restSize == 4) {
-        try {
-          string module = tokens[0];
-          string book = tokens[1];
-          int startPos = stoi(tokens[2]);
-          int length = stoi(tokens[3]);
-          string text = getRaw(module, book, startPos - 1, length);
-          info(text);
-          goto end;
-        } catch (exception &e) {
-          error(e.what());
-        }
-      } else {
-        error(errorRawParameters);
-        goto end;
-      }
-    }
-    if (input.at(commandLength) == '1') {
-      index = 0;
-    }
-    else if (input.at(commandLength) ==  '2') {
-      index = 1;
-    } else {
-      error(errorRawIncomplete);
-      goto end;
-    }
-    string rest = input.substr(input.find(" ") + 1);
-    vector<string> tokens;
-    boost::split(tokens, rest, boost::is_any_of(" "));
-    int restSize = tokens.size();
-    if (restSize == 4) {
-      // TODO: This part is same as above. Unify.
-      try {
-        string module = tokens[0];
-        string book = tokens[1];
-        int startPos = stoi(tokens[2]);
-        int length = stoi(tokens[3]);
-        text[index] = getRaw(module, book, startPos - 1, length);
-        textset[index] = true;
-        info("Stored.");
-        goto end;
-      } catch (exception &e) {
-        error(e.what());
+        error(errorMisc);
+        return;
       }
     } else {
       error(errorRawParameters);
-      goto end;
+      return;
     }
   }
-
-  if (boost::starts_with(input, extendCmd)) {
-    int commandLength = extendCmd.length();
-    if (input.length() == commandLength) {
-      error(errorExtendParameters);
-      goto end;
-    }
-    if (input.at(commandLength) != ' ') {
-      error(errorExtendParameters);
-      goto end;
-    }
-    string rest = input.substr(input.find(" ") + 1);
-    vector<string> tokens;
-    boost::split(tokens, rest, boost::is_any_of(" "));
-    int restSize = tokens.size();
-    string moduleName1 = tokens[0];
-    string moduleName2 = tokens[1];
-    string book2 = tokens[2];
-    string verse2S, verse2E;
-    if (restSize == 4) {
-      verse2S = tokens[3] + "+0";
-      verse2E = tokens[3] + "-0";
-    } else if (restSize == 5) {
-      verse2S = tokens[3];
-      verse2E = tokens[4];
-    } else {
-      error(errorExtendParameters);
-      goto end;
-    }
-    vector<string> verse2ST, verse2ET;
-    int start = 0, end = 0;
-    boost::split(verse2ST, verse2S, boost::is_any_of("+"));
-    if (verse2ST.size() > 1) {
-      start = stoi(verse2ST[1]);
-    }
-    boost::split(verse2ET, verse2E, boost::is_any_of("-"));
-    if (verse2ET.size() > 1) {
-      end = stoi(verse2ET[1]);
-    }
+  if (input.at(commandLength) == '1') {
+    index = 0; // using clipboard 1
+  }
+  else if (input.at(commandLength) == '2') {
+    index = 1; // using clipboard 1
+  } else {
+    error(errorRawIncomplete);
+    return;
+  }
+  string rest = input.substr(input.find(" ") + 1);
+  vector<string> tokens;
+  boost::split(tokens, rest, boost::is_any_of(" "));
+  int restSize = tokens.size();
+  if (restSize == 4) { // e.g. raw1 LXX Genesis 1 10
+    // TODO: This part is same as above. Unify.
     try {
-      extend(moduleName1, moduleName2, book2, verse2ST[0], start, verse2ET[0], end);
+      string module = tokens[0]; // LXX
+      string book = tokens[1]; // Genesis
+      int startPos = stoi(tokens[2]); // 1
+      int length = stoi(tokens[3]); // 10
+      text[index] = getRaw(module, book, startPos - 1, length); // Obtain the raw text...
+      textset[index] = true; // Report the result.
+      info("Stored.");
+      return; // Success!
     } catch (exception &e) {
-      error(e.what());
+      error(errorMisc);
+      return;
     }
-    goto end;
+  } else {
+    error(errorRawParameters);
+    return;
   }
+}
 
-  if (boost::starts_with(input, getrefsCmd)) {
-    int commandLength = getrefsCmd.length();
-    if (input.length() == commandLength) {
-      error(errorGetrefsParameters);
-      goto end;
-    }
-    if (input.at(commandLength) != ' ') {
-      error(errorGetrefsParameters);
-      goto end;
-    }
-    string rest = input.substr(input.find(" ") + 1);
-    vector<string> tokens;
-    boost::split(tokens, rest, boost::is_any_of(" "));
-    int restSize = tokens.size();
-    if (restSize < 3) {
-      error(errorGetrefsParameters);
-      goto end;
-    }
-    string moduleName2 = tokens[0];
-    string moduleName1 = tokens[1];
-    string book1 = tokens[2];
-    string verse1S, verse1E;
-    if (restSize == 3) { // TODO: implement this
-      error("Getting references from full books is not yet implemented, sorry.");
-      goto end;
-    }
-    if (restSize == 4) {
-      if (book1 == "Psalms") {
-        vector<string> r;
-        boost::split(r, tokens[3], boost::is_any_of(":"));
-        if (r.size() == 1) { // only the psalm number is given
-          verse1S = r[0] + ":1+0";
-          try {
-            verse1E = r[0] + ":" + to_string(getPsalmLastVerse(moduleName1, stoi(r[0]))) + "-0";
-          } catch (exception &e) {
-            error(e.what());
-          }
-        } else { // one verse is given in the psalm
-          verse1S = tokens[3] + "+0";
-          verse1E = tokens[3] + "-0";
+void processExtendCmd(string input) {
+  int commandLength = extendCmd.length();
+  if (input.length() == commandLength) {
+    error(errorExtendParameters);
+    return;
+  }
+  if (input.at(commandLength) != ' ') {
+    error(errorExtendParameters);
+    return;
+  }
+  string rest = input.substr(input.find(" ") + 1);
+  vector<string> tokens;
+  boost::split(tokens, rest, boost::is_any_of(" "));
+  int restSize = tokens.size();
+  string moduleName1 = tokens[0]; // Old Testament
+  string moduleName2 = tokens[1]; // New Testament
+  string book2 = tokens[2]; // a book from the New Testament
+  string verse2S, verse2E;
+  if (restSize == 4) { // e.g. extend LXX StatResGNT Romans 3:13
+    verse2S = tokens[3] + "+0"; // add zero plus shift implicitly
+    verse2E = tokens[3] + "-0"; // add zero minus shift implicitly
+  } else if (restSize == 5) { // e.g. extend LXX StatResGNT Romans 15:11+38 15:11-22
+    verse2S = tokens[3];
+    verse2E = tokens[4];
+  } else {
+    error(errorExtendParameters);
+    return;
+  }
+  vector<string> verse2ST, verse2ET;
+  int start = 0, end = 0;
+  boost::split(verse2ST, verse2S, boost::is_any_of("+"));
+  if (verse2ST.size() > 1) {
+    start = stoi(verse2ST[1]); // read off plus shift
+  }
+  boost::split(verse2ET, verse2E, boost::is_any_of("-"));
+  if (verse2ET.size() > 1) {
+    end = stoi(verse2ET[1]); // read off minus shift
+  }
+  try {
+    // Compute...
+    extend(moduleName1, moduleName2, book2, verse2ST[0], start, verse2ET[0], end);
+  } catch (exception &e) {
+    error(errorMisc);
+  }
+  // Success!
+}
+
+void processGetrefsCmd(string input) {
+  int commandLength = getrefsCmd.length();
+  if (input.length() == commandLength) {
+    error(errorGetrefsParameters);
+    return;
+  }
+  if (input.at(commandLength) != ' ') {
+    error(errorGetrefsParameters);
+    return;
+  }
+  string rest = input.substr(input.find(" ") + 1);
+  vector<string> tokens;
+  boost::split(tokens, rest, boost::is_any_of(" "));
+  int restSize = tokens.size();
+  if (restSize < 3) {
+    error(errorGetrefsParameters);
+    return;
+  }
+  string moduleName2 = tokens[0]; // New Testament
+  string moduleName1 = tokens[1]; // Old Testament
+  string book1 = tokens[2]; // a book from the Old Testament
+  string verse1S, verse1E;
+  if (restSize == 3) { // TODO: implement this
+    error("Getting references from full books is not yet implemented, sorry.");
+    return;
+  }
+  if (restSize == 4) { // e.g. getrefs StatResGNT LXX Isaiah 9:2
+    if (book1 == "Psalms") {
+      vector<string> r;
+      boost::split(r, tokens[3], boost::is_any_of(":"));
+      if (r.size() == 1) { // only the psalm number is given, e.g. getrefs StatResGNT LXX Psalms 51
+        verse1S = r[0] + ":1+0";
+        try {
+          verse1E = r[0] + ":" + to_string(getPsalmLastVerse(moduleName1, stoi(r[0]))) + "-0";
+        } catch (exception &e) {
+          error(errorMisc);
         }
-      } else { // this is not a psalm and one verse is given
-        verse1S = tokens[3] + "+0";
-        verse1E = tokens[3] + "-0";
+      } else { // one verse is given in the psalm, e.g. getrefs StatResGNT LXX Psalms 51:4
+        verse1S = tokens[3] + "+0"; // add zero plus shift implicitly
+        verse1E = tokens[3] + "-0"; // add zero minus shift implicitly
       }
-    } else if (restSize == 5) {
-      verse1S = tokens[3];
-      verse1E = tokens[4];
-    } else {
-      error(errorExtendParameters);
-      goto end;
+    } else { // this is not a psalm and one verse is given
+      verse1S = tokens[3] + "+0"; // add zero plus shift implicitly
+      verse1E = tokens[3] + "-0"; // add zero negative shift implicitly
     }
-    vector<string> verse1ST, verse1ET;
-    int start = 0, end = 0;
-    boost::split(verse1ST, verse1S, boost::is_any_of("+"));
-    if (verse1ST.size() > 1) {
-      start = stoi(verse1ST[1]);
-    }
-    boost::split(verse1ET, verse1E, boost::is_any_of("-"));
-    if (verse1ET.size() > 1) {
-      end = stoi(verse1ET[1]);
-    }
-    try {
-      getrefs(moduleName2, moduleName1, book1, verse1ST[0], start, verse1ET[0], end);
-    } catch (exception &e) {
-      error(e.what());
-    }
-    info("Finished");
-    goto end;
+  } else if (restSize == 5) { // e.g. getrefs StatResGNT LXX Psalms 51:4 51:5
+    verse1S = tokens[3];
+    verse1E = tokens[4];
+  } else {
+    error(errorExtendParameters);
+    return;
   }
+  vector<string> verse1ST, verse1ET;
+  int start = 0, end = 0;
+  boost::split(verse1ST, verse1S, boost::is_any_of("+"));
+  if (verse1ST.size() > 1) {
+    start = stoi(verse1ST[1]); // read off plus shift
+  }
+  boost::split(verse1ET, verse1E, boost::is_any_of("-"));
+  if (verse1ET.size() > 1) {
+    end = stoi(verse1ET[1]); // read off minus shift
+  }
+  try {
+    // Compute...
+    getrefs(moduleName2, moduleName1, book1, verse1ST[0], start, verse1ET[0], end);
+  } catch (exception &e) {
+    error(errorMisc);
+  }
+  info("Finished"); // Success!
+}
 
-  if (input.length() != 0) {
+string cli_process(char *buf) {
+  string rawinput(buf); // Convert the input to string.
+  boost::algorithm::trim(rawinput); // Trim the input.
+  vector<string> commentTokens;
+  boost::split(commentTokens, rawinput, boost::is_any_of("#"));
+  string input = commentTokens[0]; // Do not use any characters before "#".
+  boost::algorithm::trim(input); // Trim the remaining parts of the input.
+
+  // Check if the input command is one of the available commands.
+
+  // Commands with no parameters...
+  if (input.compare(addbooksCmd) == 0)
+    processAddbooksCmd();
+  else if (input.compare(quitCmd) == 0)
+    processQuitCmd();
+  else if (input.compare(helpCmd) == 0)
+    processHelpCmd();
+  // Commands with some parameters...
+  // TODO: This list is not ordered, it should be listed alphabetically,
+  // or even better, an array could be defined to combine strings and functions.
+  else if (boost::starts_with(input, textCmd))
+    processTextCmd(input);
+  else if (boost::starts_with(input, searchCmd))
+    processSearchCmd(input);
+  else if (boost::starts_with(input, latintextCmd))
+    processLatintextCmd(input);
+  else if (boost::starts_with(input, lookupCmd))
+    processLookupCmd(input);
+  else if (boost::starts_with(input, tokensCmd))
+    processTokensCmd(input);
+  else if (boost::starts_with(input, findCmd))
+    processFindCmd(input);
+  else if (boost::starts_with(input, lengthCmd))
+    processLengthCmd(input);
+  else if (boost::starts_with(input, printCmd))
+    processPrintCmd(input);
+  else if (boost::starts_with(input, maxresultsCmd))
+    processMaxresultsCmd(input);
+  else if (boost::starts_with(input, sqlCmd))
+    processSqlCmd(input);
+  else if (boost::starts_with(input, colorsCmd))
+    processColorsCmd(input);
+  // Commands that require an appendix...
+  else if (boost::starts_with(input, compareCmd + "12"))
+    processCompareCmd();
+  else if (boost::starts_with(input, jaccardCmd + "12"))
+    processJaccardCmd();
+  else if (boost::starts_with(input, minuniqueCmd + "1"))
+    processMinuniqueCmd(input);
+  // TODO: Consider using this trick for the other commands:
+  else if (boost::starts_with(input, psalminfoCmd + " "))
+    processPsalminfoCmd(input);
+  else if (boost::starts_with(input, rawCmd))
+    processRawCmd(input);
+  else if (boost::starts_with(input, extendCmd))
+    processExtendCmd(input);
+  else if (boost::starts_with(input, getrefsCmd))
+    processGetrefsCmd(input);
+  // If the input is not recognized, we show an error...
+  else if (input.length() != 0) // unless there was no input at all
     error(errorNotRecognized);
-  }
-end:
+
+  // Finally, we return with the previously collected info and clear that variable...
   string ret = collect_info;
   collect_info = "";
   return ret;
@@ -777,22 +818,23 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
   output_prepend_set = new char[4]; // FIXME: this is hardcoded.
   strcpy(output_prepend_set, output_prepend);
 #ifndef __EMSCRIPTEN__
-  rl_attempted_completion_function = completer;
+  rl_attempted_completion_function = completer; // Initialize readline.
 #endif
   info("This is bibref " BIBREF_VERSION ", nice to meet you.");
   showAvailableBibles();
   if (addbooks) {
-    if (addBooks() == 0) {
+    if (addBibles() == 0) {
       booksAdded = true;
     }
   }
 
-  maxresults = 100;
-  sql = false;
+  maxresults = 100; // Query results are maximized in 100 results by default.
+  sql = false; // SQL output is disabled by default.
 
-  set_colors(colored);
+  set_colors(colored); // Set default coloring.
 
 #ifndef __EMSCRIPTEN__
+  // Load the readline history...
   char* buf;
   struct passwd *pw = getpwuid(getuid());
   char *histfile = pw->pw_dir;
@@ -806,6 +848,7 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
   string line;
 #endif
 
+  // The main input/output loop...
   while (
        #ifndef __EMSCRIPTEN__
          (buf = readline(input_prepend)) != nullptr
@@ -819,7 +862,7 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
       write_history(histfile);
     }
 #endif
-    cli_process(buf);
+    cli_process(buf); // Process the input.
     // readline malloc's a new buffer every time.
     free(buf);
   }
@@ -849,7 +892,7 @@ EMSCRIPTEN_KEEPALIVE const char* bibref_wasm_vocabulary() {
 }
 #endif
 
-void error(string message) {
+void error(const string& message) {
 #ifndef __EMSCRIPTEN__
   cerr << error_color;
 #endif
