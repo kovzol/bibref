@@ -1,0 +1,73 @@
+addbooks
+
+lookup KJV I_Corinthians 1:31
+# That, according as it is written, He that glorieth, let him glory in the Lord.
+
+lookup StatResGNT I_Corinthians 1:31
+# ινα καθως γεγραπται, “Ο καυχωμενος, εν ˚Κυριω καυχασθω.”
+
+## Clearly, this must be a quotation. But what exactly is quoted here?
+
+tokens StatResGNT I_Corinthians 1:31
+# 2443 2531 1125 3588 2744 1722 2962 2744
+
+lookup StatResGNT II_Corinthians 10:17
+# Ο δε καυχωμενος, εν ˚Κυριω καυχασθω.
+
+tokens StatResGNT II_Corinthians 10:17
+# 3588 1161 2744 1722 2962 2744
+
+## It is quite clear that Paul uses the same words in II_Corinthians 10:17 (however, an extra word is added in II_Corinthians).
+## According to some commentaries, Paul may refer to Jeremiah 9:23-24.
+
+lookup KJV Jeremiah 9:23
+#
+# Thus saith the LORD, Let not the wise man glory in his wisdom, neither let the mighty man glory in his might, let not the rich man glory in his riches:
+lookup KJV Jeremiah 9:24
+# But let him that glorieth glory in this, that he understandeth and knoweth me, that I am the LORD which exercise lovingkindness, judgment, and righteousness, in the earth: for in these things I delight, saith the LORD.
+
+tokens LXX Jeremiah 9:24
+# 235 3588 1722 5129 2744 3588 2744 4920 2532 1097 3754 1473 1510 2962 4160 1656 2532 2917 2532 1343 1909 3588 1093 3754 1722 5125 3588 2307 3450 3004 2962 
+
+getrefs StatResGNT LXX Jeremiah 9:23
+# LXX Jeremiah 9:23+28 9:23-82 = StatResGNT Luke 1:41+63 1:41-44 (length=7, pos1=26722, pos2=3312)
+# LXX Jeremiah 9:23+28 9:23-82 = StatResGNT Luke 1:44+73 1:44-9 (length=7, pos1=26722, pos2=3571)
+# LXX Jeremiah 9:23+38 9:23-68 = StatResGNT Matthew 16:28+113 17:1-111 (length=11, pos1=26732, pos2=47762)
+# Finished
+getrefs StatResGNT LXX Jeremiah 9:24
+# LXX Jeremiah 9:24+47 9:24-85 = StatResGNT Matthew 20:15+60 20:15-10 (length=8, pos1=26858, pos2=57146)
+# LXX Jeremiah 9:24+47 9:24-85 = StatResGNT Revelation_of_John 3:9+155 3:9-9 (length=8, pos1=26858, pos2=5968)
+# LXX Jeremiah 9:24+125 9:24-6 = StatResGNT John 21:15+124 21:16-99 (length=9, pos1=26936, pos2=69389)
+# LXX Jeremiah 9:24+125 9:24-6 = StatResGNT John 21:16+100 21:17-156 (length=9, pos1=26936, pos2=69493)
+# LXX Jeremiah 9:24+125 9:24-6 = StatResGNT John 2:4+47 2:5-45 (length=9, pos1=26936, pos2=4042)
+# LXX Jeremiah 9:24+47 9:24-84 = StatResGNT John 16:26+49 16:26-23 (length=9, pos1=26858, pos2=54844)
+# LXX Jeremiah 9:24+100 9:24-28 = StatResGNT Revelation_of_John 18:23+101 18:23-35 (length=12, pos1=26911, pos2=36530)
+# LXX Jeremiah 9:24+47 9:24-81 = StatResGNT John 10:7+40 10:7-16 (length=12, pos1=26858, pos2=34100)
+# LXX Jeremiah 9:24+47 9:24-81 = StatResGNT John 18:8+21 18:8-34 (length=12, pos1=26858, pos2=58116)
+# LXX Jeremiah 9:24+58 9:24-70 = StatResGNT Acts 15:17+101 15:17-5 (length=12, pos1=26869, pos2=49811)
+# Finished
+
+## A literal match can hardly be identified.
+
+lookup LXX Jeremiah 9:23
+# ταδε λεγει κυριος μη καυχασθω ο σοφος εν τη σοφια αυτου και μη καυχασθω ο ισχυρος εν τη ισχυι αυτου και μη καυχασθω ο πλουσιος εν τω πλουτω αυτου
+lookup LXX Jeremiah 9:24
+# αλλ η εν τουτω καυχασθω ο καυχωμενος συνιειν και γινωσκειν οτι εγω ειμι κυριος ποιων ελεος και κριμα και δικαιοσυνην επι της γης οτι εν τουτοις το θελημα μου λεγει κυριος
+
+## So we try a token based search.
+
+search LXX 2744 1722 2962 3
+# Read 3 tokens, searching for an extension of max. 3 tokens.
+search LXX 2744 1722 2962 4
+# Read 3 tokens, searching for an extension of max. 4 tokens.
+search LXX 2744 1722 2962 5
+# Read 3 tokens, searching for an extension of max. 5 tokens.
+search LXX 2744 1722 2962 6
+# Read 3 tokens, searching for an extension of max. 6 tokens.
+# Found in Jeremiah 9:23+2 9:23-21 (tpos=5221-5226)
+search StatResGNT 2744 1722 2962 3
+# Read 3 tokens, searching for an extension of max. 3 tokens.
+# Found in I_Corinthians 1:31+4 1:31-1 (tpos=491-493)
+# Found in I_Corinthians 1:31+5 1:31 (tpos=492-494)
+# Found in II_Corinthians 10:17+2 10:17-1 (tpos=3304-3306)
+# Found in II_Corinthians 10:17+3 10:17 (tpos=3305-3307)
