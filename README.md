@@ -167,7 +167,7 @@ The available commands are:
 * `sql` *switch*: Set some outputs to be shown also as an SQL query if *switch* is `on`.
 * `colors` *switch*: Show some outputs colored if *switch* is `on`.
 * `tokens` *Bible* *book* *verse*: Search for the given *verse* in the given *book* in the given *Bible* (see command `lookup`), but the output is shown in a tokenized form. Tokenization is done via Strong's numbers.
-* `help`: Show some hints on usage.
+* `help` *command*: Show some hints on usage of *command*, or get general help if no parameter is given.
 * `quit`: Exit program.
 
 There may be other commands available that are not documented yet.
