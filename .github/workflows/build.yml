@@ -8,14 +8,14 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: prerequisites
-      run: >-
+      run: |
          sudo apt update --allow-unauthenticated --allow-insecure-repositories &&
          sudo apt install libsword-common libsword-dev git cmake build-essential libreadline-dev libboost-dev libboost-filesystem-dev\
               sqlite3 python3 python3-pexpect \
               texlive-latex-recommended texlive-latex-extra texlive-science texlive-lang-european texlive-lang-german \
               r-base-core pdf2svg
     - name: prerequisites2
-      run: >-
+      run: |
          wget http://http.us.debian.org/debian/pool/main/s/sm/r-cran-sm_2.2-5.6-1+b2_amd64.deb &&
          sudo dpkg -i r-cran-sm_2.2-5.6-1+b2_amd64.deb
     - name: make-native
@@ -26,8 +26,8 @@ jobs:
         make
         make install || true
     - name: prerequisites-qt
-      run: >-
-         sudo apt install qt6-base-dev qt6-tools-dev qt6-tools-dev-tools qt6-l10n-tools linguist-qt6
+      run: |
+         sudo apt install qt6-base-dev qt6-tools-dev qt6-tools-dev-tools qt6-l10n-tools
     - name: make-qt
       run: |
         mkdir build-qt
