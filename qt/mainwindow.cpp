@@ -30,6 +30,11 @@ QString getClipboardInfos() {
         else
             intro += " contains " + latinToGreek(text[i]) + " (" + text[i] + ").";
     }
+    if (textset[0] && textset[1]) {
+        // double c = dist(text[0], text[1]);
+        double j = jaccard_dist(text[0], text[1]);
+        intro += "<br>Their Jaccard distance is " + QString::number(j) + ".";
+    }
     return intro;
 }
 
