@@ -27,8 +27,11 @@ QString getClipboardInfos() {
         intro += "<br>Clipboard " + QString::number(i + 1);
         if (text[i].empty())
             intro += " is empty.";
-        else
-            intro += " contains " + latinToGreek(text[i]) + " (" + text[i] + ").";
+        else {
+            intro += " contains " + latinToGreek(text[i]) + " (" + text[i] + "),"
+                     + " length ";
+            intro += QString::number(text[i].length()) + ".";
+        }
     }
     if (textset[0] && textset[1]) {
         // double c = dist(text[0], text[1]);
@@ -48,6 +51,7 @@ MainWindow::MainWindow()
     infoLabel = new QLabel(getClipboardInfos());
     infoLabel->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
     infoLabel->setAlignment(Qt::AlignCenter);
+    infoLabel->setWordWrap(true);
 
     QWidget *bottomFiller = new QWidget;
     bottomFiller->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
