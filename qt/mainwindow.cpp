@@ -22,13 +22,13 @@ extern string text[2];
 extern vector<bool> textset;
 
 QString getClipboardInfos() {
-    QString intro = "<b>Contents of the clipboards in a-y notation</b>";
+    QString intro = "<b>Contents of the clipboards in Greek (and in a-y notation)</b>";
     for (int i = 0; i < 2; ++i) {
         intro += "<br>Clipboard " + QString::number(i + 1);
         if (text[i].empty())
             intro += " is empty.";
         else
-            intro += " contains " + text[i] + ".";
+            intro += " contains " + latinToGreek(text[i]) + " (" + text[i] + ").";
     }
     return intro;
 }
@@ -116,16 +116,48 @@ void MainWindow::greekText1()
     this->greekText(0);
 }
 
-
 void MainWindow::greekText2()
 {
     this->greekText(1);
 }
 
+void MainWindow::latinText(int index)
+{
+    QInputDialog inputDialog(this);
+    inputDialog.setWindowTitle(tr("Put a Latin (a-y) transcription in clipboard"));
+    inputDialog.setLabelText(tr("Latin text:"));
+    if (textset[index]) {
+        inputDialog.setTextValue(text[index].c_str());
+    }
+    if (inputDialog.exec() != QDialog::Accepted)
+        return;
+    const QString value = inputDialog.textValue().trimmed();
+    if (value.isEmpty())
+        return;
+    string rest = value.toStdString();
+
+    text[index] = rest;
+    textset[index] = true; // activate clipboard
+    info("Stored."); // Success!
+
+    infoLabel->setText(getClipboardInfos());
+}
+
+void MainWindow::latinText1()
+{
+    this->latinText(0);
+}
+
+void MainWindow::latinText2()
+{
+    this->latinText(1);
+}
+
+
 void MainWindow::about()
 {
     QMessageBox::about(this, tr("About Menu"),
-        tr("<i>bibref</i> is a tool that helps discovering internal references in the Bible."
+        tr("<a href=\"https://github.com/kovzol/bibref\">bibref</a> is a tool that helps discovering internal references in the Bible."
         "<br>It aims at finding citations of the <a href=\"https://en.wikipedia.org/wiki/Septuagint\">Septuagint</a>"
         " in the <a href=\"https://en.wikipedia.org/wiki/New_Testament\">Greek New Testament</a>"
         " in a mechanical way."));
@@ -151,9 +183,17 @@ void MainWindow::createActions()
     greekText1Act->setStatusTip(tr("Define a Greek text and put its Latin transcription in clipboard 1"));
     connect(greekText1Act, &QAction::triggered, this, &MainWindow::greekText1);
 
-    greekText2Act = new QAction(tr("&Text 2"), this);
+    greekText2Act = new QAction(tr("Text 2"), this);
     greekText2Act->setStatusTip(tr("Define a Greek text and put its Latin transcription in clipboard 2"));
     connect(greekText2Act, &QAction::triggered, this, &MainWindow::greekText2);
+
+    latinText1Act = new QAction(tr("&Latin text 1"), this);
+    latinText1Act->setStatusTip(tr("Put a Latin (a-y) transcription in clipboard 1"));
+    connect(latinText1Act, &QAction::triggered, this, &MainWindow::latinText1);
+
+    latinText2Act = new QAction(tr("Latin text 2"), this);
+    latinText2Act->setStatusTip(tr("Put a Latin (a-y) transcription in clipboard 2"));
+    connect(latinText2Act, &QAction::triggered, this, &MainWindow::latinText2);
 
     aboutAct = new QAction(tr("&About"), this);
     aboutAct->setStatusTip(tr("Show the application's About box"));
@@ -164,6 +204,7 @@ void MainWindow::createActions()
     connect(aboutQtAct, &QAction::triggered, qApp, &QApplication::aboutQt);
     connect(aboutQtAct, &QAction::triggered, this, &MainWindow::aboutQt);
 }
+
 void MainWindow::createMenus()
 {
     fileMenu = menuBar()->addMenu(tr("&File"));
@@ -174,6 +215,8 @@ void MainWindow::createMenus()
     editMenu = menuBar()->addMenu(tr("&Edit"));
     editMenu->addAction(greekText1Act);
     editMenu->addAction(greekText2Act);
+    editMenu->addAction(latinText1Act);
+    editMenu->addAction(latinText2Act);
 
     helpMenu = menuBar()->addMenu(tr("&Help"));
     helpMenu->addAction(aboutAct);

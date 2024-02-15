@@ -23,6 +23,8 @@ private slots:
     void addBibles();
     void greekText1();
     void greekText2();
+    void latinText1();
+    void latinText2();
     void about();
     void aboutQt();
 
@@ -30,6 +32,7 @@ private:
     void createActions();
     void createMenus();
     void greekText(int n);
+    void latinText(int n);
 
     QMenu *fileMenu;
     QMenu *editMenu;
@@ -38,6 +41,8 @@ private:
     QAction *exitAct;
     QAction *greekText1Act;
     QAction *greekText2Act;
+    QAction *latinText1Act;
+    QAction *latinText2Act;
     QAction *aboutAct;
     QAction *aboutQtAct;
     QLabel *infoLabel;
