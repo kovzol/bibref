@@ -93,6 +93,7 @@ void addBiblesThread(MainWindow* window) {
     QString message = "Bibles are loaded.";
     window->statusBar()->showMessage(message);
     booksAdded = true;
+    window->addBiblesAct->setEnabled(false);
     window->lookup1Act->setEnabled(true);
     window->lookup2Act->setEnabled(true);
     window->find1Act->setEnabled(true);
@@ -109,7 +110,7 @@ void MainWindow::addBibles()
 void MainWindow::greekTextN(int index)
 {
     QInputDialog inputDialog(this);
-    inputDialog.setWindowTitle(tr("Text " + index));
+    inputDialog.setWindowTitle("Text " + QString::number(index + 1));
     inputDialog.setLabelText(tr("Greek text:"));
     if (textset[index]) {
         inputDialog.setTextValue(latinToGreek(text[index]).c_str());
@@ -151,7 +152,7 @@ void MainWindow::greekText2()
 void MainWindow::latinTextN(int index)
 {
     QInputDialog inputDialog(this);
-    inputDialog.setWindowTitle(tr("Latin text " + index));
+    inputDialog.setWindowTitle("Latin text " + QString::number(index + 1));
     inputDialog.setLabelText(tr("Latin text:"));
     if (textset[index]) {
         inputDialog.setTextValue(text[index].c_str());
@@ -215,7 +216,7 @@ void MainWindow::lookup()
 void MainWindow::lookupN(int index)
 {
     QInputDialog inputDialog(this);
-    inputDialog.setWindowTitle(tr("Lookup " + index));
+    inputDialog.setWindowTitle("Lookup " + QString::number(index + 1));
     inputDialog.setLabelText(tr("Verse:"));
     inputDialog.setTextValue(lookupText.c_str());
     if (inputDialog.exec() != QDialog::Accepted)
@@ -288,10 +289,34 @@ void MainWindow::findN(int index)
         return;
     }
 
+    QInputDialog inputDialog ;
+
+    QStringList items;
+    extern vector<Book> books;
+    // This is not the best way to collect the available Bible editions,
+    // because we iterate on each Bible book (for each edition).
+    // It would be better to maintain the available Bible editions by storing it globally.
+    for (Book book : books) {
+        string moduleName = book.getModuleName();
+        if (!items.contains(moduleName.c_str())) {
+            items.append(moduleName.c_str());
+        }
+    }
+    inputDialog.setOptions(QInputDialog::UseListViewForComboBoxItems);
+    inputDialog.setComboBoxItems(items);
+    inputDialog.setWindowTitle("Find " + QString::number(index + 1));
+    inputDialog.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    inputDialog.setLabelText("Select a Bible edition:");
+    inputDialog.setFixedSize(60,3);
+
+    /*
+     * Alternative way for selection: typing.
     QInputDialog inputDialog(this);
-    inputDialog.setWindowTitle(tr("Find " + index));
+    inputDialog.setWindowTitle(tr("Find " + QString::number(index + 1)));
     inputDialog.setLabelText(tr("Bible edition:"));
     inputDialog.setTextValue(findText.c_str());
+    */
+
     if (inputDialog.exec() != QDialog::Accepted)
         return;
     const QString value = inputDialog.textValue().trimmed();

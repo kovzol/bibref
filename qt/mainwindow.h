@@ -17,6 +17,7 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow();
+    QAction *addBiblesAct;
     QAction *lookup1Act;
     QAction *lookup2Act;
     QAction *find1Act;
@@ -50,7 +51,6 @@ private:
     QMenu *editMenu;
     QMenu *passageMenu;
     QMenu *helpMenu;
-    QAction *addBiblesAct;
     QAction *exitAct;
     QAction *greekText1Act;
     QAction *greekText2Act;
