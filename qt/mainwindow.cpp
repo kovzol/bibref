@@ -1,10 +1,11 @@
-#include <QtWidgets>
-
 #include "mainwindow.h"
 
 #include "books.h"
 #include "cli.h"
 #include "swmgr.h"
+
+#include <boost/algorithm/string/trim.hpp>
+#include <boost/algorithm/string/split.hpp>
 
 #include <QCoreApplication>
 #include <qtconcurrentrun.h>
@@ -20,6 +21,9 @@ using namespace sword;
 extern bool booksAdded;
 extern string text[2];
 extern vector<bool> textset;
+extern string collect_info;
+
+string lookupText = "LXX Genesis 1:1"; // example
 
 QString getClipboardInfos() {
     QString intro = "<b>Contents of the clipboards in Greek (and in a-y notation)</b>";
@@ -48,19 +52,24 @@ MainWindow::MainWindow()
     QWidget *topFiller = new QWidget;
     topFiller->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-    infoLabel = new QLabel(getClipboardInfos());
-    infoLabel->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
-    infoLabel->setAlignment(Qt::AlignCenter);
-    infoLabel->setWordWrap(true);
+    clipboardInfos = new QLabel(getClipboardInfos());
+    clipboardInfos->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
+    clipboardInfos->setAlignment(Qt::AlignCenter);
+    clipboardInfos->setWordWrap(true);
 
     QWidget *bottomFiller = new QWidget;
     bottomFiller->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
+    passageInfos = new QTextEdit;
+    passageInfos->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
     QVBoxLayout *layout = new QVBoxLayout;
     layout->setContentsMargins(5, 5, 5, 5);
     layout->addWidget(topFiller);
-    layout->addWidget(infoLabel);
+    layout->addWidget(clipboardInfos);
+    layout->addWidget(passageInfos);
     layout->addWidget(bottomFiller);
+
     widget->setLayout(layout);
     createActions();
     createMenus();
@@ -87,10 +96,10 @@ void MainWindow::addBibles()
     QFuture<void> future = QtConcurrent::run(addBiblesThread, statusBar());
 }
 
-void MainWindow::greekText(int index)
+void MainWindow::greekTextN(int index)
 {
     QInputDialog inputDialog(this);
-    inputDialog.setWindowTitle(tr("Define a Greek text and put its Latin transcription in clipboard"));
+    inputDialog.setWindowTitle(tr("Text " + index));
     inputDialog.setLabelText(tr("Greek text:"));
     if (textset[index]) {
         inputDialog.setTextValue(latinToGreek(text[index]).c_str());
@@ -117,23 +126,23 @@ void MainWindow::greekText(int index)
     textset[index] = true; // activate clipboard
     info("Stored internally as " + processed + "."); // Success!
 
-    infoLabel->setText(getClipboardInfos());
+    clipboardInfos->setText(getClipboardInfos());
 }
 
 void MainWindow::greekText1()
 {
-    this->greekText(0);
+    this->greekTextN(0);
 }
 
 void MainWindow::greekText2()
 {
-    this->greekText(1);
+    this->greekTextN(1);
 }
 
-void MainWindow::latinText(int index)
+void MainWindow::latinTextN(int index)
 {
     QInputDialog inputDialog(this);
-    inputDialog.setWindowTitle(tr("Put a Latin (a-y) transcription in clipboard"));
+    inputDialog.setWindowTitle(tr("Latin text " + index));
     inputDialog.setLabelText(tr("Latin text:"));
     if (textset[index]) {
         inputDialog.setTextValue(text[index].c_str());
@@ -149,18 +158,71 @@ void MainWindow::latinText(int index)
     textset[index] = true; // activate clipboard
     info("Stored."); // Success!
 
-    infoLabel->setText(getClipboardInfos());
+    clipboardInfos->setText(getClipboardInfos());
 }
 
 void MainWindow::latinText1()
 {
-    this->latinText(0);
+    this->latinTextN(0);
 }
 
 void MainWindow::latinText2()
 {
-    this->latinText(1);
+    this->latinTextN(1);
 }
+
+void MainWindow::lookup()
+{
+    QInputDialog inputDialog(this);
+    inputDialog.setWindowTitle(tr("Lookup"));
+    inputDialog.setLabelText(tr("Verse:"));
+    inputDialog.setTextValue(lookupText.c_str());
+    if (inputDialog.exec() != QDialog::Accepted)
+        return;
+    const QString value = inputDialog.textValue().trimmed();
+    if (value.isEmpty())
+        return;
+    lookupText = value.toStdString();
+    string rest = lookupText;
+
+    // Mostly taken from cli:
+    vector<string> tokens;
+    boost::split(tokens, rest, boost::is_any_of(" "));
+    int restSize = tokens.size();
+    if (restSize == 3) { // e.g. lookup LXX Genesis 1:1
+        collect_info = ""; // reset communication buffer
+        lookupTranslation(tokens[0], tokens[1], tokens[2]); // simple lookup via Sword
+        passageInfos->append(("<b>" + rest + "</b>" + "<br>" + collect_info).c_str());
+
+        QTextCursor tc = passageInfos->textCursor();
+        tc.setPosition(passageInfos->document()->characterCount() - 1);
+        passageInfos->setTextCursor(tc); // Move cursor to the end.
+    } else {
+        // QErrorMessage m;
+        // m.showMessage("Invalid input.");
+        // m.exec();
+        QString message = "Invalid input (3 words are needed: Bible edition, book, chapter:verse).";
+        statusBar()->showMessage(message);
+    }
+    return; // Success!
+}
+
+void MainWindow::lookupN(int n)
+{
+
+}
+
+void MainWindow::lookup1()
+{
+    this->lookupN(1);
+}
+
+void MainWindow::lookup2()
+{
+    this->lookupN(2);
+}
+
+
 
 
 void MainWindow::about()
@@ -204,6 +266,20 @@ void MainWindow::createActions()
     latinText2Act->setStatusTip(tr("Put a Latin (a-y) transcription in clipboard 2"));
     connect(latinText2Act, &QAction::triggered, this, &MainWindow::latinText2);
 
+    lookupAct = new QAction(tr("&Lookup"), this);
+    lookupAct->setStatusTip(tr("Search for a verse in a book in the given Bible"));
+    connect(lookupAct, &QAction::triggered, this, &MainWindow::lookup);
+
+    lookup1Act = new QAction(tr("Lookup &1"), this);
+    lookup1Act->setStatusTip(tr("Search for a passage in a book in the given Bible and put it in clipboard 1"));
+    connect(lookup1Act, &QAction::triggered, this, &MainWindow::lookup1);
+    lookup1Act->setDisabled(true);
+
+    lookup2Act = new QAction(tr("Lookup &2"), this);
+    lookup2Act->setStatusTip(tr("Search for a passage in a book in the given Bible and put it in clipboard 1"));
+    connect(lookup2Act, &QAction::triggered, this, &MainWindow::lookup2);
+    lookup2Act->setDisabled(true);
+
     aboutAct = new QAction(tr("&About"), this);
     aboutAct->setStatusTip(tr("Show the application's About box"));
     connect(aboutAct, &QAction::triggered, this, &MainWindow::about);
@@ -226,6 +302,12 @@ void MainWindow::createMenus()
     editMenu->addAction(greekText2Act);
     editMenu->addAction(latinText1Act);
     editMenu->addAction(latinText2Act);
+
+    passageMenu = menuBar()->addMenu(tr("&Passage"));
+    passageMenu->addAction(lookupAct);
+    passageMenu->addSeparator();
+    passageMenu->addAction(lookup1Act);
+    passageMenu->addAction(lookup2Act);
 
     helpMenu = menuBar()->addMenu(tr("&Help"));
     helpMenu->addAction(aboutAct);

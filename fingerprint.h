@@ -1,12 +1,12 @@
 #ifndef FINGERPRINT_H
 #define FINGERPRINT_H
 
-#define N 25
+#define N_GREEK_LETTERS 25
 
 #include "book.h"
 
 typedef struct Fingerprint {
-  unsigned short int m_data [N][N];
+  unsigned short int m_data [N_GREEK_LETTERS][N_GREEK_LETTERS];
 } Fingerprint;
 
 Fingerprint getFingerprint(Book book, int start, int length);

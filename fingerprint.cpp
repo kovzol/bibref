@@ -8,8 +8,8 @@ using namespace std;
 
 Fingerprint getFingerprint(string text) {
   Fingerprint f;
-  for (int i=0; i<N; ++i)
-    for (int j=0; j<N; ++j) {
+  for (int i=0; i<N_GREEK_LETTERS; ++i)
+    for (int j=0; j<N_GREEK_LETTERS; ++j) {
       f.m_data[i][j] = 0;
     }
   for (int i=0; i<text.length() - 1; ++i) {
@@ -40,8 +40,8 @@ Fingerprint getFingerprint(Book b, int start, int length) {
 
 int dist(Fingerprint f1, Fingerprint f2) {
   int d = 0;
-  for (int i=0; i<N; ++i)
-    for (int j=0; j<N; ++j) {
+  for (int i=0; i<N_GREEK_LETTERS; ++i)
+    for (int j=0; j<N_GREEK_LETTERS; ++j) {
       d += abs(f1.m_data[i][j]-f2.m_data[i][j]);
     }
   return d;
@@ -49,12 +49,12 @@ int dist(Fingerprint f1, Fingerprint f2) {
 
 void printDist(Fingerprint f1, Fingerprint f2) {
   cout << " ";
-  for (int j=0; j<N; ++j)
+  for (int j=0; j<N_GREEK_LETTERS; ++j)
     printf("%c", j + 'a');
   cout << endl;
-  for (int i=0; i<N; ++i) {
+  for (int i=0; i<N_GREEK_LETTERS; ++i) {
     printf("%c", i + 'a');
-    for (int j=0; j<N; ++j) {
+    for (int j=0; j<N_GREEK_LETTERS; ++j) {
       if (f1.m_data[i][j] == 0 && f2.m_data[i][j] == 0)
         cout << " ";
       else
@@ -74,8 +74,8 @@ double jaccard_dist(const string& text1, const string& text2) {
   int d = 0;
   Fingerprint f1 = getFingerprint(text1);
   Fingerprint f2 = getFingerprint(text2);
-  for (int i=0; i<N; ++i)
-    for (int j=0; j<N; ++j) {
+  for (int i=0; i<N_GREEK_LETTERS; ++i)
+    for (int j=0; j<N_GREEK_LETTERS; ++j) {
       d1 += f1.m_data[i][j];
       d2 += f2.m_data[i][j];
       d += min(f1.m_data[i][j], f2.m_data[i][j]);

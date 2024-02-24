@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QtWidgets>
 
 QT_BEGIN_NAMESPACE
 class QAction;
@@ -25,17 +26,22 @@ private slots:
     void greekText2();
     void latinText1();
     void latinText2();
+    void lookup();
+    void lookup1();
+    void lookup2();
     void about();
     void aboutQt();
 
 private:
     void createActions();
     void createMenus();
-    void greekText(int n);
-    void latinText(int n);
+    void greekTextN(int n);
+    void latinTextN(int n);
+    void lookupN(int n);
 
     QMenu *fileMenu;
     QMenu *editMenu;
+    QMenu *passageMenu;
     QMenu *helpMenu;
     QAction *addBiblesAct;
     QAction *exitAct;
@@ -43,9 +49,13 @@ private:
     QAction *greekText2Act;
     QAction *latinText1Act;
     QAction *latinText2Act;
+    QAction *lookupAct;
+    QAction *lookup1Act;
+    QAction *lookup2Act;
     QAction *aboutAct;
     QAction *aboutQtAct;
-    QLabel *infoLabel;
+    QLabel *clipboardInfos;
+    QTextEdit *passageInfos;
 };
 
 #endif
