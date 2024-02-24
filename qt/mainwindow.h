@@ -19,6 +19,8 @@ public:
     MainWindow();
     QAction *lookup1Act;
     QAction *lookup2Act;
+    QAction *find1Act;
+    QAction *find2Act;
 
 protected:
 
@@ -31,6 +33,8 @@ private slots:
     void lookup();
     void lookup1();
     void lookup2();
+    void find1();
+    void find2();
     void about();
     void aboutQt();
 
@@ -40,6 +44,7 @@ private:
     void greekTextN(int n);
     void latinTextN(int n);
     void lookupN(int n);
+    void findN(int n);
 
     QMenu *fileMenu;
     QMenu *editMenu;

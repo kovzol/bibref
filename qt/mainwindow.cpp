@@ -4,8 +4,9 @@
 #include "cli.h"
 #include "swmgr.h"
 
-#include <boost/algorithm/string/trim.hpp>
+#include <boost/algorithm/string/replace.hpp>
 #include <boost/algorithm/string/split.hpp>
+#include <boost/algorithm/string/trim.hpp>
 
 #include <QCoreApplication>
 #include <qtconcurrentrun.h>
@@ -24,6 +25,7 @@ extern vector<bool> textset;
 extern string collect_info;
 
 string lookupText = "LXX Genesis 1:1"; // example
+string findText = "LXX"; // example
 
 QString getClipboardInfos() {
     QString intro = "<b>Contents of the clipboards in Greek (and in a-y notation)</b>";
@@ -47,6 +49,7 @@ QString getClipboardInfos() {
 
 MainWindow::MainWindow()
 {
+
     QWidget *widget = new QWidget;
     setCentralWidget(widget);
     QWidget *topFiller = new QWidget;
@@ -92,6 +95,8 @@ void addBiblesThread(MainWindow* window) {
     booksAdded = true;
     window->lookup1Act->setEnabled(true);
     window->lookup2Act->setEnabled(true);
+    window->find1Act->setEnabled(true);
+    window->find2Act->setEnabled(true);
 }
 
 void MainWindow::addBibles()
@@ -275,8 +280,50 @@ void MainWindow::lookup2()
     this->lookupN(1);
 }
 
+void MainWindow::findN(int index)
+{
+    // Taken mostly from cli:
+    if (text[index].length() == 0) {
+        statusBar()->showMessage("Clipboard is empty, no search possible.");
+        return;
+    }
 
+    QInputDialog inputDialog(this);
+    inputDialog.setWindowTitle(tr("Find " + index));
+    inputDialog.setLabelText(tr("Bible edition:"));
+    inputDialog.setTextValue(findText.c_str());
+    if (inputDialog.exec() != QDialog::Accepted)
+        return;
+    const QString value = inputDialog.textValue().trimmed();
+    if (value.isEmpty())
+        return;
+    findText = value.toStdString();
+    string rest = findText;
 
+    collect_info = "";
+
+    extern int find(const string &text, const string &moduleName, int maxFound, bool verbose);
+    find(text[index], rest, maxresults, true);
+
+    boost::trim(collect_info);
+    boost::replace_all(collect_info, "\n", "<br>");
+
+    passageInfos->append(("<b>Searching for " + text[index] + " in " + rest + "</b>" + "<br>" + collect_info).c_str());
+
+    QTextCursor tc = passageInfos->textCursor();
+    tc.setPosition(passageInfos->document()->characterCount() - 1);
+    passageInfos->setTextCursor(tc); // Move cursor to the end.
+}
+
+void MainWindow::find1()
+{
+    this->findN(0);
+}
+
+void MainWindow::find2()
+{
+    this->findN(1);
+}
 
 void MainWindow::about()
 {
@@ -319,6 +366,16 @@ void MainWindow::createActions()
     latinText2Act->setStatusTip(tr("Put a Latin (a-y) transcription in clipboard 2"));
     connect(latinText2Act, &QAction::triggered, this, &MainWindow::latinText2);
 
+    find1Act = new QAction(tr("&Find 1"), this);
+    find1Act->setStatusTip(tr("Search for the text of clipboard 1 in a Bible"));
+    connect(find1Act, &QAction::triggered, this, &MainWindow::find1);
+    find1Act->setDisabled(true);
+
+    find2Act = new QAction(tr("Find 2"), this);
+    find2Act->setStatusTip(tr("Search for the text of clipboard 2 in a Bible"));
+    connect(find2Act, &QAction::triggered, this, &MainWindow::find2);
+    find2Act->setDisabled(true);
+
     lookupAct = new QAction(tr("&Lookup"), this);
     lookupAct->setStatusTip(tr("Search for a verse in a book in the given Bible"));
     connect(lookupAct, &QAction::triggered, this, &MainWindow::lookup);
@@ -355,6 +412,9 @@ void MainWindow::createMenus()
     editMenu->addAction(greekText2Act);
     editMenu->addAction(latinText1Act);
     editMenu->addAction(latinText2Act);
+    editMenu->addSeparator();
+    editMenu->addAction(find1Act);
+    editMenu->addAction(find2Act);
 
     passageMenu = menuBar()->addMenu(tr("&Passage"));
     passageMenu->addAction(lookupAct);
