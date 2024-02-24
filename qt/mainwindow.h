@@ -17,6 +17,8 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow();
+    QAction *lookup1Act;
+    QAction *lookup2Act;
 
 protected:
 
@@ -50,8 +52,6 @@ private:
     QAction *latinText1Act;
     QAction *latinText2Act;
     QAction *lookupAct;
-    QAction *lookup1Act;
-    QAction *lookup2Act;
     QAction *aboutAct;
     QAction *aboutQtAct;
     QLabel *clipboardInfos;

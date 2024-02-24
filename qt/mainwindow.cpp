@@ -56,12 +56,14 @@ MainWindow::MainWindow()
     clipboardInfos->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
     clipboardInfos->setAlignment(Qt::AlignCenter);
     clipboardInfos->setWordWrap(true);
+    clipboardInfos->setTextInteractionFlags(Qt::TextSelectableByMouse); // selectable
 
     QWidget *bottomFiller = new QWidget;
     bottomFiller->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
     passageInfos = new QTextEdit;
     passageInfos->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    passageInfos->setReadOnly(true); // it's preferred to not edit
 
     QVBoxLayout *layout = new QVBoxLayout;
     layout->setContentsMargins(5, 5, 5, 5);
@@ -82,18 +84,21 @@ MainWindow::MainWindow()
     resize(480, 320);
 }
 
-void addBiblesThread(QStatusBar* statusBar) {
+//void addBiblesThread(QStatusBar* statusBar) {
+void addBiblesThread(MainWindow* window) {
     addBibles();
     QString message = "Bibles are loaded.";
-    statusBar->showMessage(message);
+    window->statusBar()->showMessage(message);
     booksAdded = true;
+    window->lookup1Act->setEnabled(true);
+    window->lookup2Act->setEnabled(true);
 }
 
 void MainWindow::addBibles()
 {
     QString message = tr("Please wait...");
     statusBar()->showMessage(message);
-    QFuture<void> future = QtConcurrent::run(addBiblesThread, statusBar());
+    QFuture<void> future = QtConcurrent::run(addBiblesThread, this);
 }
 
 void MainWindow::greekTextN(int index)
@@ -124,7 +129,6 @@ void MainWindow::greekTextN(int index)
     }
     text[index] = processed; // Store result.
     textset[index] = true; // activate clipboard
-    info("Stored internally as " + processed + "."); // Success!
 
     clipboardInfos->setText(getClipboardInfos());
 }
@@ -156,7 +160,6 @@ void MainWindow::latinTextN(int index)
 
     text[index] = rest;
     textset[index] = true; // activate clipboard
-    info("Stored."); // Success!
 
     clipboardInfos->setText(getClipboardInfos());
 }
@@ -198,28 +201,78 @@ void MainWindow::lookup()
         tc.setPosition(passageInfos->document()->characterCount() - 1);
         passageInfos->setTextCursor(tc); // Move cursor to the end.
     } else {
-        // QErrorMessage m;
-        // m.showMessage("Invalid input.");
-        // m.exec();
         QString message = "Invalid input (3 words are needed: Bible edition, book, chapter:verse).";
         statusBar()->showMessage(message);
     }
     return; // Success!
 }
 
-void MainWindow::lookupN(int n)
+void MainWindow::lookupN(int index)
 {
+    QInputDialog inputDialog(this);
+    inputDialog.setWindowTitle(tr("Lookup " + index));
+    inputDialog.setLabelText(tr("Verse:"));
+    inputDialog.setTextValue(lookupText.c_str());
+    if (inputDialog.exec() != QDialog::Accepted)
+        return;
+    const QString value = inputDialog.textValue().trimmed();
+    if (value.isEmpty())
+        return;
+    lookupText = value.toStdString();
+    string rest = lookupText;
 
+    // Mostly taken from cli:
+    vector<string> tokens;
+    boost::split(tokens, rest, boost::is_any_of(" "));
+    int restSize = tokens.size();
+    if (restSize == 3) {
+        string verse = "";
+        try { // e.g. lookup1 LXX Genesis 1:1
+            verse = lookupVerse(tokens[1], tokens[0], tokens[2]); // lookup in the a-y database
+            text[index] = verse; // Store result.
+            textset[index] = true; // activate clipboard
+            statusBar()->showMessage("Stored.");
+            clipboardInfos->setText(getClipboardInfos());
+        } catch (exception &e) {
+            statusBar()->showMessage("Unsuccessful lookup.");
+        }
+        return; // Success!
+    }
+    if (restSize == 4) { // e.g. lookup1 LXX Genesis 1:1+3 1:2-4
+        string verse = "";
+        try {
+            vector<string> tokens2, tokens3;
+            int start = 0, end = 0;
+            boost::split(tokens2, tokens[2], boost::is_any_of("+"));
+            if (tokens2.size() > 1) {
+                start = stoi(tokens2[1]); // read off the plus shift
+            }
+            boost::split(tokens3, tokens[3], boost::is_any_of("-"));
+            if (tokens3.size() > 1) {
+                end = stoi(tokens3[1]); // read off the minus shift
+            }
+            // Shift-allowed lookup in the a-y database...
+            verse = getText(tokens[1], tokens[0], tokens2.at(0), tokens3.at(0), start, end);
+            text[index] = verse; // Store result.
+            textset[index] = true; // activate clipboard
+            statusBar()->showMessage("Stored.");
+            clipboardInfos->setText(getClipboardInfos());
+        } catch (exception &e) {
+            statusBar()->showMessage("Unsuccessul lookup.");
+        }
+        return; // Success!
+    }
+    statusBar()->showMessage("Wrong amount of parameters is given.");
 }
 
 void MainWindow::lookup1()
 {
-    this->lookupN(1);
+    this->lookupN(0);
 }
 
 void MainWindow::lookup2()
 {
-    this->lookupN(2);
+    this->lookupN(1);
 }
 
 
