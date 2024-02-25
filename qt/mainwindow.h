@@ -52,7 +52,7 @@ private:
     QMenu *fileMenu;
     QMenu *editMenu;
     QMenu *passageMenu;
-    QMenu *quotationsMenu;
+    QMenu *quotationMenu;
     QMenu *helpMenu;
     QAction *exitAct;
     QAction *greekText1Act;

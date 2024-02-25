@@ -60,6 +60,7 @@ MainWindow::MainWindow()
     clipboardInfos->setAlignment(Qt::AlignCenter);
     clipboardInfos->setWordWrap(true);
     clipboardInfos->setTextInteractionFlags(Qt::TextSelectableByMouse); // selectable
+    clipboardInfos->setToolTip("Show information on the two clipboards.");
 
     QWidget *bottomFiller = new QWidget;
     bottomFiller->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -67,6 +68,7 @@ MainWindow::MainWindow()
     passageInfos = new QTextEdit;
     passageInfos->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     passageInfos->setReadOnly(true); // it's preferred to not edit
+    passageInfos->setToolTip("Show detailed information on lookups and searches.");
 
     QVBoxLayout *layout = new QVBoxLayout;
     layout->setContentsMargins(5, 5, 5, 5);
@@ -282,16 +284,8 @@ void MainWindow::lookup2()
     this->lookupN(1);
 }
 
-void MainWindow::minunique1()
+QStringList getModuleNames()
 {
-    // Taken mostly from cli:
-    if (text[0].length() == 0) {
-        statusBar()->showMessage("Clipboard is empty, no search possible.");
-        return;
-    }
-
-    QInputDialog inputDialog;
-
     QStringList items;
     extern vector<Book> books;
     // This is not the best way to collect the available Bible editions,
@@ -303,8 +297,21 @@ void MainWindow::minunique1()
             items.append(moduleName.c_str());
         }
     }
+    return items;
+}
+
+void MainWindow::minunique1()
+{
+    // Taken mostly from cli:
+    if (text[0].length() == 0) {
+        statusBar()->showMessage("Clipboard is empty, no search possible.");
+        return;
+    }
+
+    QInputDialog inputDialog;
+
     inputDialog.setOptions(QInputDialog::UseListViewForComboBoxItems);
-    inputDialog.setComboBoxItems(items);
+    inputDialog.setComboBoxItems(getModuleNames());
     inputDialog.setWindowTitle("Min. unique 1");
     inputDialog.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     inputDialog.setLabelText("Select a Bible edition:");
@@ -330,7 +337,6 @@ void MainWindow::minunique1()
     QTextCursor tc = passageInfos->textCursor();
     tc.setPosition(passageInfos->document()->characterCount() - 1);
     passageInfos->setTextCursor(tc); // Move cursor to the end.
-
 }
 
 void MainWindow::findN(int index)
@@ -343,19 +349,8 @@ void MainWindow::findN(int index)
 
     QInputDialog inputDialog ;
 
-    QStringList items;
-    extern vector<Book> books;
-    // This is not the best way to collect the available Bible editions,
-    // because we iterate on each Bible book (for each edition).
-    // It would be better to maintain the available Bible editions by storing it globally.
-    for (Book book : books) {
-        string moduleName = book.getModuleName();
-        if (!items.contains(moduleName.c_str())) {
-            items.append(moduleName.c_str());
-        }
-    }
     inputDialog.setOptions(QInputDialog::UseListViewForComboBoxItems);
-    inputDialog.setComboBoxItems(items);
+    inputDialog.setComboBoxItems(getModuleNames());
     inputDialog.setWindowTitle("Find " + QString::number(index + 1));
     inputDialog.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     inputDialog.setLabelText("Select a Bible edition:");
@@ -504,8 +499,8 @@ void MainWindow::createMenus()
     passageMenu->addAction(lookup1Act);
     passageMenu->addAction(lookup2Act);
 
-    quotationsMenu = menuBar()->addMenu(tr("&Quotations"));
-    quotationsMenu->addAction(minunique1Act);
+    quotationMenu = menuBar()->addMenu(tr("&Quotation"));
+    quotationMenu->addAction(minunique1Act);
 
     helpMenu = menuBar()->addMenu(tr("&Help"));
     helpMenu->addAction(aboutAct);
