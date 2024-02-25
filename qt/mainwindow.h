@@ -25,6 +25,7 @@ public:
     QAction *minunique1Act;
     QAction *extendAct;
     QAction *getrefsAct;
+    QTextEdit *passageInfos;
 
 protected:
 
@@ -67,7 +68,6 @@ private:
     QAction *aboutAct;
     QAction *aboutQtAct;
     QLabel *clipboardInfos;
-    QTextEdit *passageInfos;
 };
 
 #endif

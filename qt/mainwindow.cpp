@@ -50,7 +50,6 @@ QString getClipboardInfos() {
 
 MainWindow::MainWindow()
 {
-
     QWidget *widget = new QWidget;
     setCentralWidget(widget);
     QWidget *topFiller = new QWidget;
@@ -90,7 +89,6 @@ MainWindow::MainWindow()
     resize(480, 320);
 }
 
-//void addBiblesThread(QStatusBar* statusBar) {
 void addBiblesThread(MainWindow* window) {
     addBibles();
     QString message = "Bibles are loaded.";
@@ -104,6 +102,35 @@ void addBiblesThread(MainWindow* window) {
     window->minunique1Act->setEnabled(true);
     window->extendAct->setEnabled(true);
     window->getrefsAct->setEnabled(true);
+}
+
+// Used for communication between caller and thread:
+string moduleName2, moduleName1, book1, getrefsRest, verse1ST0, verse1ET0;
+int getrefsStart, getrefsEnd;
+
+void getrefsThread(MainWindow* window) {
+    try {
+        // Compute...
+        collect_info = "";
+        extern void getrefs(const string& moduleName2, const string& moduleName1, const string& book1, const string& verse1S,
+                            int start, const string& verse1E, int end);
+        getrefs(moduleName2, moduleName1, book1, verse1ST0, getrefsStart, verse1ET0, getrefsEnd);
+        QString message = "Finished.";
+        window->statusBar()->showMessage(message);
+
+        boost::trim(collect_info);
+        boost::replace_all(collect_info, "\n", "<br>");
+
+        window->passageInfos->append(("<b>Get refs " + getrefsRest + "</b>" + "<br>" + collect_info).c_str());
+
+        QTextCursor tc = window->passageInfos->textCursor();
+        tc.setPosition(window->passageInfos->document()->characterCount() - 1);
+        window->passageInfos->setTextCursor(tc); // Move cursor to the end.
+    } catch (exception &e) {
+        window->statusBar()->showMessage("Computation error.");
+        return;
+    }
+
 }
 
 void MainWindow::addBibles()
@@ -475,24 +502,24 @@ void MainWindow::getrefs()
     if (value.isEmpty())
         return;
     getrefsText = value.toStdString();
-    string rest = getrefsText;
+    getrefsRest = getrefsText;
 
     // Mostly taken from cli:
     vector<string> tokens;
-    boost::split(tokens, rest, boost::is_any_of(" "));
+    boost::split(tokens, getrefsRest, boost::is_any_of(" "));
     int restSize = tokens.size();
     if (restSize < 3) {
         statusBar()->showMessage("Invalid number of parameters.");
         return;
     }
-    string moduleName2 = tokens[0]; // New Testament
-    string moduleName1 = tokens[1]; // Old Testament
-    string book1 = tokens[2]; // a book from the Old Testament
-    string verse1S, verse1E;
+    moduleName2 = tokens[0]; // New Testament
+    moduleName1 = tokens[1]; // Old Testament
+    book1 = tokens[2]; // a book from the Old Testament
     if (restSize == 3) { // TODO: implement this
         statusBar()->showMessage("Getting references from full books is not yet implemented, sorry.");
         return;
     }
+    string verse1S, verse1E;
     if (restSize == 4) { // e.g. getrefs StatResGNT LXX Isaiah 9:2
         if (book1 == "Psalms") {
             vector<string> r;
@@ -521,30 +548,20 @@ void MainWindow::getrefs()
         return;
     }
     vector<string> verse1ST, verse1ET;
-    int start = 0, end = 0;
     boost::split(verse1ST, verse1S, boost::is_any_of("+"));
     if (verse1ST.size() > 1) {
-        start = stoi(verse1ST[1]); // read off plus shift
+        getrefsStart = stoi(verse1ST[1]); // read off plus shift
     }
     boost::split(verse1ET, verse1E, boost::is_any_of("-"));
     if (verse1ET.size() > 1) {
-        end = stoi(verse1ET[1]); // read off minus shift
+        getrefsEnd = stoi(verse1ET[1]); // read off minus shift
     }
+    verse1ST0 = verse1ST[0];
+    verse1ET0 = verse1ET[0];
     try {
-        // Compute...
-        collect_info = "";
-        extern void getrefs(const string& moduleName2, const string& moduleName1, const string& book1, const string& verse1S,
-                     int start, const string& verse1E, int end);
-        getrefs(moduleName2, moduleName1, book1, verse1ST[0], start, verse1ET[0], end);
-
-        boost::trim(collect_info);
-        boost::replace_all(collect_info, "\n", "<br>");
-
-        passageInfos->append(("<b>Get refs " + rest + "</b>" + "<br>" + collect_info).c_str());
-
-        QTextCursor tc = passageInfos->textCursor();
-        tc.setPosition(passageInfos->document()->characterCount() - 1);
-        passageInfos->setTextCursor(tc); // Move cursor to the end.
+        QString message = tr("Please wait...");
+        statusBar()->showMessage(message);
+        QFuture<void> future = QtConcurrent::run(getrefsThread, this);
     } catch (exception &e) {
         statusBar()->showMessage("Computation error.");
         return;
