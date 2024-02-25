@@ -98,6 +98,7 @@ void addBiblesThread(MainWindow* window) {
     window->lookup2Act->setEnabled(true);
     window->find1Act->setEnabled(true);
     window->find2Act->setEnabled(true);
+    window->minunique1Act->setEnabled(true);
 }
 
 void MainWindow::addBibles()
@@ -281,6 +282,57 @@ void MainWindow::lookup2()
     this->lookupN(1);
 }
 
+void MainWindow::minunique1()
+{
+    // Taken mostly from cli:
+    if (text[0].length() == 0) {
+        statusBar()->showMessage("Clipboard is empty, no search possible.");
+        return;
+    }
+
+    QInputDialog inputDialog;
+
+    QStringList items;
+    extern vector<Book> books;
+    // This is not the best way to collect the available Bible editions,
+    // because we iterate on each Bible book (for each edition).
+    // It would be better to maintain the available Bible editions by storing it globally.
+    for (Book book : books) {
+        string moduleName = book.getModuleName();
+        if (!items.contains(moduleName.c_str())) {
+            items.append(moduleName.c_str());
+        }
+    }
+    inputDialog.setOptions(QInputDialog::UseListViewForComboBoxItems);
+    inputDialog.setComboBoxItems(items);
+    inputDialog.setWindowTitle("Min. unique 1");
+    inputDialog.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    inputDialog.setLabelText("Select a Bible edition:");
+    inputDialog.setFixedSize(200,3);
+
+    if (inputDialog.exec() != QDialog::Accepted)
+        return;
+    const QString value = inputDialog.textValue().trimmed();
+    if (value.isEmpty())
+        return;
+    string rest = value.toStdString();
+
+    collect_info = "";
+
+    extern vector<string> find_min_unique(string text, const string& moduleName, bool verbose);
+    find_min_unique(text[0], rest, true);
+
+    boost::trim(collect_info);
+    boost::replace_all(collect_info, "\n", "<br>");
+
+    passageInfos->append(("<b>Minimal unique subtexts of " + text[0] + " in " + rest + "</b>" + "<br>" + collect_info).c_str());
+
+    QTextCursor tc = passageInfos->textCursor();
+    tc.setPosition(passageInfos->document()->characterCount() - 1);
+    passageInfos->setTextCursor(tc); // Move cursor to the end.
+
+}
+
 void MainWindow::findN(int index)
 {
     // Taken mostly from cli:
@@ -401,6 +453,11 @@ void MainWindow::createActions()
     connect(find2Act, &QAction::triggered, this, &MainWindow::find2);
     find2Act->setDisabled(true);
 
+    minunique1Act = new QAction(tr("Min. unique 1"), this);
+    minunique1Act->setStatusTip(tr("Search for minimal unique passages in clipboard 1 in a Bible"));
+    connect(minunique1Act, &QAction::triggered, this, &MainWindow::minunique1);
+    minunique1Act->setDisabled(true);
+
     lookupAct = new QAction(tr("&Lookup"), this);
     lookupAct->setStatusTip(tr("Search for a verse in a book in the given Bible"));
     connect(lookupAct, &QAction::triggered, this, &MainWindow::lookup);
@@ -446,6 +503,9 @@ void MainWindow::createMenus()
     passageMenu->addSeparator();
     passageMenu->addAction(lookup1Act);
     passageMenu->addAction(lookup2Act);
+
+    quotationsMenu = menuBar()->addMenu(tr("&Quotations"));
+    quotationsMenu->addAction(minunique1Act);
 
     helpMenu = menuBar()->addMenu(tr("&Help"));
     helpMenu->addAction(aboutAct);

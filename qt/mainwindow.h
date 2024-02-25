@@ -22,6 +22,7 @@ public:
     QAction *lookup2Act;
     QAction *find1Act;
     QAction *find2Act;
+    QAction *minunique1Act;
 
 protected:
 
@@ -36,6 +37,7 @@ private slots:
     void lookup2();
     void find1();
     void find2();
+    void minunique1();
     void about();
     void aboutQt();
 
@@ -50,6 +52,7 @@ private:
     QMenu *fileMenu;
     QMenu *editMenu;
     QMenu *passageMenu;
+    QMenu *quotationsMenu;
     QMenu *helpMenu;
     QAction *exitAct;
     QAction *greekText1Act;
