@@ -26,6 +26,7 @@ extern string collect_info;
 
 string lookupText = "LXX Genesis 1:1"; // example
 string extendText = "LXX StatResGNT Romans 3:13"; // example
+string getrefsText = "StatResGNT LXX Psalms 117:1"; // example
 
 QString getClipboardInfos() {
     QString intro = "<b>Contents of the clipboards in Greek (and in a-y notation)</b>";
@@ -102,6 +103,7 @@ void addBiblesThread(MainWindow* window) {
     window->find2Act->setEnabled(true);
     window->minunique1Act->setEnabled(true);
     window->extendAct->setEnabled(true);
+    window->getrefsAct->setEnabled(true);
 }
 
 void MainWindow::addBibles()
@@ -459,6 +461,98 @@ void MainWindow::extend()
     return; // Success!
 }
 
+void MainWindow::getrefs()
+{
+    QInputDialog inputDialog(this);
+    inputDialog.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    inputDialog.setFixedSize(300,3);
+    inputDialog.setWindowTitle(tr("Get refs"));
+    inputDialog.setLabelText(tr("Parameters:"));
+    inputDialog.setTextValue(getrefsText.c_str());
+    if (inputDialog.exec() != QDialog::Accepted)
+        return;
+    const QString value = inputDialog.textValue().trimmed();
+    if (value.isEmpty())
+        return;
+    getrefsText = value.toStdString();
+    string rest = getrefsText;
+
+    // Mostly taken from cli:
+    vector<string> tokens;
+    boost::split(tokens, rest, boost::is_any_of(" "));
+    int restSize = tokens.size();
+    if (restSize < 3) {
+        statusBar()->showMessage("Invalid number of parameters.");
+        return;
+    }
+    string moduleName2 = tokens[0]; // New Testament
+    string moduleName1 = tokens[1]; // Old Testament
+    string book1 = tokens[2]; // a book from the Old Testament
+    string verse1S, verse1E;
+    if (restSize == 3) { // TODO: implement this
+        statusBar()->showMessage("Getting references from full books is not yet implemented, sorry.");
+        return;
+    }
+    if (restSize == 4) { // e.g. getrefs StatResGNT LXX Isaiah 9:2
+        if (book1 == "Psalms") {
+            vector<string> r;
+            boost::split(r, tokens[3], boost::is_any_of(":"));
+            if (r.size() == 1) { // only the psalm number is given, e.g. getrefs StatResGNT LXX Psalms 51
+                verse1S = r[0] + ":1+0";
+                try {
+                    verse1E = r[0] + ":" + to_string(getPsalmLastVerse(moduleName1, stoi(r[0]))) + "-0";
+                } catch (exception &e) {
+                    statusBar()->showMessage("Computation error.");
+                    return;
+                }
+            } else { // one verse is given in the psalm, e.g. getrefs StatResGNT LXX Psalms 51:4
+                verse1S = tokens[3] + "+0"; // add zero plus shift implicitly
+                verse1E = tokens[3] + "-0"; // add zero minus shift implicitly
+            }
+        } else { // this is not a psalm and one verse is given
+            verse1S = tokens[3] + "+0"; // add zero plus shift implicitly
+            verse1E = tokens[3] + "-0"; // add zero negative shift implicitly
+        }
+    } else if (restSize == 5) { // e.g. getrefs StatResGNT LXX Psalms 51:4 51:5
+        verse1S = tokens[3];
+        verse1E = tokens[4];
+    } else {
+        statusBar()->showMessage("Computation error.");
+        return;
+    }
+    vector<string> verse1ST, verse1ET;
+    int start = 0, end = 0;
+    boost::split(verse1ST, verse1S, boost::is_any_of("+"));
+    if (verse1ST.size() > 1) {
+        start = stoi(verse1ST[1]); // read off plus shift
+    }
+    boost::split(verse1ET, verse1E, boost::is_any_of("-"));
+    if (verse1ET.size() > 1) {
+        end = stoi(verse1ET[1]); // read off minus shift
+    }
+    try {
+        // Compute...
+        collect_info = "";
+        extern void getrefs(const string& moduleName2, const string& moduleName1, const string& book1, const string& verse1S,
+                     int start, const string& verse1E, int end);
+        getrefs(moduleName2, moduleName1, book1, verse1ST[0], start, verse1ET[0], end);
+
+        boost::trim(collect_info);
+        boost::replace_all(collect_info, "\n", "<br>");
+
+        passageInfos->append(("<b>Get refs " + rest + "</b>" + "<br>" + collect_info).c_str());
+
+        QTextCursor tc = passageInfos->textCursor();
+        tc.setPosition(passageInfos->document()->characterCount() - 1);
+        passageInfos->setTextCursor(tc); // Move cursor to the end.
+    } catch (exception &e) {
+        statusBar()->showMessage("Computation error.");
+        return;
+    }
+
+    return; // Success!
+}
+
 
 void MainWindow::about()
 {
@@ -485,61 +579,66 @@ void MainWindow::createActions()
     exitAct->setStatusTip(tr("Exit the application"));
     connect(exitAct, &QAction::triggered, this, &QWidget::close);
 
-    greekText1Act = new QAction(tr("&Text 1"), this);
+    greekText1Act = new QAction(tr("&Text 1…"), this);
     greekText1Act->setStatusTip(tr("Define a Greek text and put its Latin transcription in clipboard 1"));
     connect(greekText1Act, &QAction::triggered, this, &MainWindow::greekText1);
 
-    greekText2Act = new QAction(tr("Text 2"), this);
+    greekText2Act = new QAction(tr("Text 2…"), this);
     greekText2Act->setStatusTip(tr("Define a Greek text and put its Latin transcription in clipboard 2"));
     connect(greekText2Act, &QAction::triggered, this, &MainWindow::greekText2);
 
-    latinText1Act = new QAction(tr("&Latin text 1"), this);
+    latinText1Act = new QAction(tr("&Latin text 1…"), this);
     latinText1Act->setStatusTip(tr("Put a Latin (a-y) transcription in clipboard 1"));
     connect(latinText1Act, &QAction::triggered, this, &MainWindow::latinText1);
 
-    latinText2Act = new QAction(tr("Latin text 2"), this);
+    latinText2Act = new QAction(tr("Latin text 2…"), this);
     latinText2Act->setStatusTip(tr("Put a Latin (a-y) transcription in clipboard 2"));
     connect(latinText2Act, &QAction::triggered, this, &MainWindow::latinText2);
 
-    find1Act = new QAction(tr("&Find 1"), this);
+    find1Act = new QAction(tr("&Find 1…"), this);
     find1Act->setStatusTip(tr("Search for the text of clipboard 1 in a Bible"));
     connect(find1Act, &QAction::triggered, this, &MainWindow::find1);
     find1Act->setDisabled(true);
 
-    find2Act = new QAction(tr("Find 2"), this);
+    find2Act = new QAction(tr("Find 2…"), this);
     find2Act->setStatusTip(tr("Search for the text of clipboard 2 in a Bible"));
     connect(find2Act, &QAction::triggered, this, &MainWindow::find2);
     find2Act->setDisabled(true);
 
-    minunique1Act = new QAction(tr("&Min. unique 1"), this);
+    minunique1Act = new QAction(tr("&Min. unique 1…"), this);
     minunique1Act->setStatusTip(tr("Search for minimal unique passages in clipboard 1 in a Bible"));
     connect(minunique1Act, &QAction::triggered, this, &MainWindow::minunique1);
     minunique1Act->setDisabled(true);
 
-    extendAct = new QAction(tr("&Extend"), this);
+    extendAct = new QAction(tr("&Extend…"), this);
     extendAct->setStatusTip(tr("Extend a passage to the longest possible quotation from another Bible"));
     connect(extendAct, &QAction::triggered, this, &MainWindow::extend);
     extendAct->setDisabled(true);
 
-    lookupAct = new QAction(tr("&Lookup"), this);
+    getrefsAct = new QAction(tr("&Get refs…"), this);
+    getrefsAct->setStatusTip(tr("Search for references in a Bible on the passage in another Bible"));
+    connect(getrefsAct, &QAction::triggered, this, &MainWindow::getrefs);
+    getrefsAct->setDisabled(true);
+
+    lookupAct = new QAction(tr("&Lookup…"), this);
     lookupAct->setStatusTip(tr("Search for a verse in a book in the given Bible"));
     connect(lookupAct, &QAction::triggered, this, &MainWindow::lookup);
 
-    lookup1Act = new QAction(tr("Lookup &1"), this);
+    lookup1Act = new QAction(tr("Lookup &1…"), this);
     lookup1Act->setStatusTip(tr("Search for a passage in a book in the given Bible and put it in clipboard 1"));
     connect(lookup1Act, &QAction::triggered, this, &MainWindow::lookup1);
     lookup1Act->setDisabled(true);
 
-    lookup2Act = new QAction(tr("Lookup &2"), this);
+    lookup2Act = new QAction(tr("Lookup &2…"), this);
     lookup2Act->setStatusTip(tr("Search for a passage in a book in the given Bible and put it in clipboard 1"));
     connect(lookup2Act, &QAction::triggered, this, &MainWindow::lookup2);
     lookup2Act->setDisabled(true);
 
-    aboutAct = new QAction(tr("&About"), this);
-    aboutAct->setStatusTip(tr("Show the application's About box"));
+    aboutAct = new QAction(tr("&About bibref…"), this);
+    aboutAct->setStatusTip(tr("Show a short description of the program"));
     connect(aboutAct, &QAction::triggered, this, &MainWindow::about);
 
-    aboutQtAct = new QAction(tr("About &Qt"), this);
+    aboutQtAct = new QAction(tr("About &Qt…"), this);
     aboutQtAct->setStatusTip(tr("Show the Qt library's About box"));
     connect(aboutQtAct, &QAction::triggered, qApp, &QApplication::aboutQt);
     connect(aboutQtAct, &QAction::triggered, this, &MainWindow::aboutQt);
@@ -570,6 +669,7 @@ void MainWindow::createMenus()
     quotationMenu = menuBar()->addMenu(tr("&Quotation"));
     quotationMenu->addAction(minunique1Act);
     quotationMenu->addAction(extendAct);
+    quotationMenu->addAction(getrefsAct);
 
     helpMenu = menuBar()->addMenu(tr("&Help"));
     helpMenu->addAction(aboutAct);

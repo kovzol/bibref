@@ -24,7 +24,7 @@ public:
     QAction *find2Act;
     QAction *minunique1Act;
     QAction *extendAct;
-
+    QAction *getrefsAct;
 
 protected:
 
@@ -41,6 +41,7 @@ private slots:
     void find2();
     void minunique1();
     void extend();
+    void getrefs();
     void about();
     void aboutQt();
 
