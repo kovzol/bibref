@@ -27,6 +27,7 @@ extern string collect_info;
 string lookupText = "LXX Genesis 1:1"; // example
 string extendText = "LXX StatResGNT Romans 3:13"; // example
 string getrefsText = "StatResGNT LXX Psalms 117:1"; // example
+string rawText = "LXX Genesis 1 10"; // example
 
 QString getClipboardInfos() {
     QString intro = "<b>Contents of the clipboards in Greek (and in a-y notation)</b>";
@@ -102,6 +103,9 @@ void addBiblesThread(MainWindow* window) {
     window->minunique1Act->setEnabled(true);
     window->extendAct->setEnabled(true);
     window->getrefsAct->setEnabled(true);
+    window->rawAct->setEnabled(true);
+    window->raw1Act->setEnabled(true);
+    window->raw2Act->setEnabled(true);
 }
 
 // Used for communication between caller and thread:
@@ -313,6 +317,64 @@ void MainWindow::lookup2()
 {
     this->lookupN(1);
 }
+
+void MainWindow::raw()
+{
+
+}
+
+void MainWindow::rawN(int index)
+{
+    QInputDialog inputDialog(this);
+    inputDialog.setWindowTitle("Raw " + QString::number(index + 1));
+    inputDialog.setLabelText(tr("Parameters:"));
+    inputDialog.setTextValue(rawText.c_str());
+    if (inputDialog.exec() != QDialog::Accepted)
+        return;
+    const QString value = inputDialog.textValue().trimmed();
+    if (value.isEmpty())
+        return;
+    rawText = value.toStdString();
+    string rest = rawText;
+
+    // Mostly taken from cli:
+    vector<string> tokens;
+    boost::split(tokens, rest, boost::is_any_of(" "));
+    int restSize = tokens.size();
+    if (restSize == 4) { // e.g. raw1 LXX Genesis 1 10
+        // TODO: This part is same as above. Unify.
+        try {
+            string module = tokens[0]; // LXX
+            string book = tokens[1]; // Genesis
+            int startPos = stoi(tokens[2]); // 1
+            int length = stoi(tokens[3]); // 10
+            text[index] = getRaw(module, book, startPos - 1, length); // Obtain the raw text...
+            textset[index] = true; // Report the result.
+            statusBar()->showMessage("Stored.");
+            clipboardInfos->setText(getClipboardInfos());
+            return; // Success!
+        } catch (exception &e) {
+            statusBar()->showMessage("Error in the parameters.");
+            return;
+        }
+    } else {
+        statusBar()->showMessage("Error in the number of parameters.");
+        return;
+    }
+}
+
+void MainWindow::raw1()
+{
+    this->rawN(0);
+}
+
+void MainWindow::raw2()
+{
+    this->rawN(1);
+}
+
+
+
 
 QStringList getModuleNames()
 {
@@ -651,6 +713,20 @@ void MainWindow::createActions()
     connect(lookup2Act, &QAction::triggered, this, &MainWindow::lookup2);
     lookup2Act->setDisabled(true);
 
+    rawAct = new QAction(tr("&Raw…"), this);
+    rawAct->setStatusTip(tr("Show the a-y transcription of a positioned text in a given book"));
+    connect(rawAct, &QAction::triggered, this, &MainWindow::raw);
+
+    raw1Act = new QAction(tr("Raw &1…"), this);
+    raw1Act->setStatusTip(tr("Put the a-y transcription of a positioned text in a given book in clipboard 1"));
+    connect(raw1Act, &QAction::triggered, this, &MainWindow::raw1);
+    raw1Act->setDisabled(true);
+
+    raw2Act = new QAction(tr("Raw &2…"), this);
+    raw2Act->setStatusTip(tr("Put the a-y transcription of a positioned text in a given book in clipboard 1"));
+    connect(raw2Act, &QAction::triggered, this, &MainWindow::raw2);
+    raw2Act->setDisabled(true);
+
     aboutAct = new QAction(tr("&About bibref…"), this);
     aboutAct->setStatusTip(tr("Show a short description of the program"));
     connect(aboutAct, &QAction::triggered, this, &MainWindow::about);
@@ -687,6 +763,12 @@ void MainWindow::createMenus()
     quotationMenu->addAction(minunique1Act);
     quotationMenu->addAction(extendAct);
     quotationMenu->addAction(getrefsAct);
+
+    rawMenu = menuBar()->addMenu(tr("&Raw"));
+    rawMenu->addAction(rawAct);
+    rawMenu->addSeparator();
+    rawMenu->addAction(raw1Act);
+    rawMenu->addAction(raw2Act);
 
     helpMenu = menuBar()->addMenu(tr("&Help"));
     helpMenu->addAction(aboutAct);

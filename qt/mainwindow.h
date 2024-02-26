@@ -20,6 +20,9 @@ public:
     QAction *addBiblesAct;
     QAction *lookup1Act;
     QAction *lookup2Act;
+    QAction *rawAct;
+    QAction *raw1Act;
+    QAction *raw2Act;
     QAction *find1Act;
     QAction *find2Act;
     QAction *minunique1Act;
@@ -38,6 +41,9 @@ private slots:
     void lookup();
     void lookup1();
     void lookup2();
+    void raw();
+    void raw1();
+    void raw2();
     void find1();
     void find2();
     void minunique1();
@@ -53,11 +59,13 @@ private:
     void latinTextN(int n);
     void lookupN(int n);
     void findN(int n);
+    void rawN(int n);
 
     QMenu *fileMenu;
     QMenu *editMenu;
     QMenu *passageMenu;
     QMenu *quotationMenu;
+    QMenu *rawMenu;
     QMenu *helpMenu;
     QAction *exitAct;
     QAction *greekText1Act;
