@@ -99,6 +99,7 @@ void addBiblesThread(MainWindow* window) {
     window->addBiblesAct->setEnabled(false);
     window->lookup1Act->setEnabled(true);
     window->lookup2Act->setEnabled(true);
+    window->lookup2Act->setEnabled(true);
     window->find1Act->setEnabled(true);
     window->find2Act->setEnabled(true);
     window->minunique1Act->setEnabled(true);
@@ -107,6 +108,7 @@ void addBiblesThread(MainWindow* window) {
     window->rawAct->setEnabled(true);
     window->raw1Act->setEnabled(true);
     window->raw2Act->setEnabled(true);
+    window->tokensAct->setEnabled(true);
 }
 
 // Used for communication between caller and thread:
@@ -249,6 +251,43 @@ void MainWindow::lookup()
         statusBar()->showMessage(message);
     }
     return; // Success!
+}
+
+void MainWindow::tokens()
+{
+    QInputDialog inputDialog(this);
+    inputDialog.setWindowTitle(tr("Tokens"));
+    inputDialog.setLabelText(tr("Verse:"));
+    inputDialog.setTextValue(lookupText.c_str());
+    if (inputDialog.exec() != QDialog::Accepted)
+        return;
+    const QString value = inputDialog.textValue().trimmed();
+    if (value.isEmpty())
+        return;
+    lookupText = value.toStdString();
+    string rest = lookupText;
+
+    // Mostly taken from cli:
+    vector<string> tokens;
+    boost::split(tokens, rest, boost::is_any_of(" "));
+    int restSize = tokens.size();
+    if (restSize == 3) {
+        try {
+            collect_info = ""; // reset communication buffer
+            getTokens(tokens[0], tokens[1], tokens[2]);
+            passageInfos->append(("<b>" + rest + ", tokens</b>" + "<br>" + collect_info).c_str());
+
+            QTextCursor tc = passageInfos->textCursor();
+            tc.setPosition(passageInfos->document()->characterCount() - 1);
+            passageInfos->setTextCursor(tc); // Move cursor to the end.
+        } catch (exception &e) {
+            QString message = "Computation error.";
+            statusBar()->showMessage(message);
+        }
+    } else {
+        QString message = "Invalid input (3 words are needed: Bible edition, book, chapter:verse).";
+        statusBar()->showMessage(message);
+    }
 }
 
 void MainWindow::lookupN(int index)
@@ -757,6 +796,12 @@ void MainWindow::createActions()
     connect(lookup2Act, &QAction::triggered, this, &MainWindow::lookup2);
     lookup2Act->setDisabled(true);
 
+    tokensAct = new QAction(tr("&Tokens…"), this);
+    tokensAct->setIcon(QIcon::fromTheme("view-sort-ascending"));
+    tokensAct->setStatusTip(tr("Search for a tokenized verse in a book in the given Bible"));
+    connect(tokensAct, &QAction::triggered, this, &MainWindow::tokens);
+    tokensAct->setDisabled(true);
+
     rawAct = new QAction(tr("&Raw…"), this);
     rawAct->setIcon(QIcon::fromTheme("media-flash"));
     rawAct->setStatusTip(tr("Show the a-y transcription of a positioned text in a given book"));
@@ -809,6 +854,8 @@ void MainWindow::createMenus()
     passageMenu->addSeparator();
     passageMenu->addAction(lookup1Act);
     passageMenu->addAction(lookup2Act);
+    passageMenu->addSeparator();
+    passageMenu->addAction(tokensAct);
 
     quotationMenu = menuBar()->addMenu(tr("&Quotation"));
     quotationMenu->addAction(minunique1Act);
