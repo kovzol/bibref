@@ -16,6 +16,8 @@
 #include <QtConcurrent/qtconcurrentmap.h>
 #include <QtCore/qelapsedtimer.h>
 
+#include <cstdio>
+
 using namespace std;
 
 using namespace sword;
@@ -33,21 +35,20 @@ string rawText = "LXX Genesis 1 10"; // example
 string searchText = "LXX 2097 1515 189 3"; // example
 
 QString getClipboardInfos() {
-    QString intro = "<b>Contents of the clipboards in Greek (and in a-y notation)</b>";
+    QString intro = "<b>" + MainWindow::tr("Contents of the clipboards in Greek (and in a-y notation)") + "</b>";
     for (int i = 0; i < 2; ++i) {
-        intro += "<br>Clipboard " + QString::number(i + 1);
+
         if (text[i].empty())
-            intro += " is empty.";
+            intro += "<br>" + MainWindow::tr("Clipboard %1 is empty.").arg(i+1);
         else {
-            intro += " contains " + latinToGreek(text[i]) + " (" + text[i] + "),"
-                     + " length ";
-            intro += QString::number(text[i].length()) + ".";
+            intro += "<br>" + MainWindow::tr("Clipboard %1 contains %2 (%3), length %4.").
+                              arg(i+1).arg(QString(latinToGreek(text[i]).c_str())).
+                              arg(QString(text[i].c_str())).arg(text[i].length());
         }
     }
     if (textset[0] && textset[1]) {
-        // double c = dist(text[0], text[1]);
         double j = jaccard_dist(text[0], text[1]);
-        intro += "<br>Their Jaccard distance is " + QString::number(j) + ".";
+        intro += "<br>" + MainWindow::tr("Their Jaccard distance is %1.").arg(j);
     }
     return intro;
 }
@@ -64,7 +65,7 @@ MainWindow::MainWindow()
     clipboardInfos->setAlignment(Qt::AlignCenter);
     clipboardInfos->setWordWrap(true);
     clipboardInfos->setTextInteractionFlags(Qt::TextSelectableByMouse); // selectable
-    clipboardInfos->setToolTip("Show information on the two clipboards.");
+    clipboardInfos->setToolTip(tr("Show information on the two clipboards."));
 
     QWidget *bottomFiller = new QWidget;
     bottomFiller->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -72,7 +73,7 @@ MainWindow::MainWindow()
     passageInfos = new QTextEdit;
     passageInfos->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     passageInfos->setReadOnly(true); // it's preferred to not edit
-    passageInfos->setToolTip("Show detailed information on lookups and searches.");
+    passageInfos->setToolTip(tr("Show detailed information on lookups and searches."));
 
     QVBoxLayout *layout = new QVBoxLayout;
     layout->setContentsMargins(5, 5, 5, 5);
@@ -88,14 +89,14 @@ MainWindow::MainWindow()
     QString message = tr("Welcome to bibref!");
     statusBar()->showMessage(message);
 
-    setWindowTitle(tr("bibref"));
+    setWindowTitle("bibref");
     setMinimumSize(160, 160);
     resize(480, 320);
 }
 
 void addBiblesThread(MainWindow* window) {
     addBibles();
-    QString message = "Bibles are loaded.";
+    QString message = MainWindow::tr("Bibles are loaded.");
     window->statusBar()->showMessage(message);
     booksAdded = true;
     window->addBiblesAct->setEnabled(false);
@@ -125,7 +126,7 @@ void getrefsThread(MainWindow* window) {
         extern void getrefs(const string& moduleName2, const string& moduleName1, const string& book1, const string& verse1S,
                             int start, const string& verse1E, int end);
         getrefs(moduleName2, moduleName1, book1, verse1ST0, getrefsStart, verse1ET0, getrefsEnd);
-        QString message = "Finished.";
+        QString message = MainWindow::tr("Finished.");
         window->statusBar()->showMessage(message);
 
         boost::trim(collect_info);
@@ -173,7 +174,7 @@ void MainWindow::greekTextN(int index)
     // Convert Greek to Latin:
     string processed = processVerse(to_convert.c_str());
     if (processed.length() == 0) {
-        error("Text does not contain Greek letters, ignored.");
+        statusBar()->showMessage(tr("Text does not contain Greek letters, ignored."));
         return; // Success, but nothing happened.
     }
     text[index] = processed; // Store result.
@@ -226,7 +227,7 @@ void MainWindow::latinText2()
 void MainWindow::lookup()
 {
     QInputDialog inputDialog(this);
-    inputDialog.setWindowTitle(tr("Lookup"));
+    inputDialog.setWindowTitle("Lookup");
     inputDialog.setLabelText(tr("Verse:"));
     inputDialog.setTextValue(lookupText.c_str());
     if (inputDialog.exec() != QDialog::Accepted)
@@ -250,7 +251,7 @@ void MainWindow::lookup()
         tc.setPosition(passageInfos->document()->characterCount() - 1);
         passageInfos->setTextCursor(tc); // Move cursor to the end.
     } else {
-        QString message = "Invalid input (3 words are needed: Bible edition, book, chapter:verse).";
+        QString message = tr("Invalid input (3 words are needed: Bible edition, book, chapter:verse).");
         statusBar()->showMessage(message);
     }
     return; // Success!
@@ -259,7 +260,7 @@ void MainWindow::lookup()
 void MainWindow::tokens()
 {
     QInputDialog inputDialog(this);
-    inputDialog.setWindowTitle(tr("Tokens"));
+    inputDialog.setWindowTitle("Tokens");
     inputDialog.setLabelText(tr("Verse:"));
     inputDialog.setTextValue(lookupText.c_str());
     if (inputDialog.exec() != QDialog::Accepted)
@@ -278,17 +279,18 @@ void MainWindow::tokens()
         try {
             collect_info = ""; // reset communication buffer
             getTokens(tokens[0], tokens[1], tokens[2]);
-            passageInfos->append(("<b>" + rest + ", tokens</b>" + "<br>" + collect_info).c_str());
+            passageInfos->append(("<b>" + rest + ", " + tr("tokens").toStdString() +
+                "</b>" + "<br>" + collect_info).c_str());
 
             QTextCursor tc = passageInfos->textCursor();
             tc.setPosition(passageInfos->document()->characterCount() - 1);
             passageInfos->setTextCursor(tc); // Move cursor to the end.
         } catch (exception &e) {
-            QString message = "Computation error.";
+            QString message = tr("Computation error.");
             statusBar()->showMessage(message);
         }
     } else {
-        QString message = "Invalid input (3 words are needed: Bible edition, book, chapter:verse).";
+        QString message = tr("Invalid input (3 words are needed: Bible edition, book, chapter:verse).");
         statusBar()->showMessage(message);
     }
 }
@@ -296,7 +298,7 @@ void MainWindow::tokens()
 void MainWindow::search()
 {
     QInputDialog inputDialog(this);
-    inputDialog.setWindowTitle(tr("Search"));
+    inputDialog.setWindowTitle("Search");
     inputDialog.setLabelText(tr("Parameters:"));
     inputDialog.setTextValue(searchText.c_str());
     if (inputDialog.exec() != QDialog::Accepted)
@@ -329,9 +331,9 @@ void MainWindow::search()
     s--;
     int length = pattern.at(s); // the last parameter
     pattern.pop_back(); // remove it from the token pattern
-    string info = to_string(s) + " tokens given, search for an extension of max. " + to_string(length) + " tokens.";
+    string info = tr("%1 tokens given, search for an extension of max. %2 tokens.").arg(s).arg(length).toStdString();
     if (length < s) { // the length must be at least the length of the pattern
-        info += " Impossible.";
+        info += tr(" Impossible.").toStdString();
         statusBar()->showMessage(info.c_str());
     } else {
         statusBar()->showMessage(info.c_str());
@@ -369,10 +371,10 @@ void MainWindow::lookupN(int index)
             verse = lookupVerse(tokens[1], tokens[0], tokens[2]); // lookup in the a-y database
             text[index] = verse; // Store result.
             textset[index] = true; // activate clipboard
-            statusBar()->showMessage("Stored.");
+            statusBar()->showMessage(tr("Stored."));
             clipboardInfos->setText(getClipboardInfos());
         } catch (exception &e) {
-            statusBar()->showMessage("Unsuccessful lookup.");
+            statusBar()->showMessage(tr("Unsuccessful lookup."));
         }
         return; // Success!
     }
@@ -393,14 +395,14 @@ void MainWindow::lookupN(int index)
             verse = getText(tokens[1], tokens[0], tokens2.at(0), tokens3.at(0), start, end);
             text[index] = verse; // Store result.
             textset[index] = true; // activate clipboard
-            statusBar()->showMessage("Stored.");
+            statusBar()->showMessage(tr("Stored."));
             clipboardInfos->setText(getClipboardInfos());
         } catch (exception &e) {
-            statusBar()->showMessage("Unsuccessul lookup.");
+            statusBar()->showMessage(tr("Unsuccessul lookup."));
         }
         return; // Success!
     }
-    statusBar()->showMessage("Wrong amount of parameters is given.");
+    statusBar()->showMessage(tr("Wrong amount of parameters is given."));
 }
 
 void MainWindow::lookup1()
@@ -416,7 +418,7 @@ void MainWindow::lookup2()
 void MainWindow::raw()
 {
     QInputDialog inputDialog(this);
-    inputDialog.setWindowTitle(tr("Raw"));
+    inputDialog.setWindowTitle("Raw");
     inputDialog.setLabelText(tr("Parameters:"));
     inputDialog.setTextValue(rawText.c_str());
     if (inputDialog.exec() != QDialog::Accepted)
@@ -443,7 +445,7 @@ void MainWindow::raw()
         tc.setPosition(passageInfos->document()->characterCount() - 1);
         passageInfos->setTextCursor(tc); // Move cursor to the end.
     } else {
-        QString message = "Wrong amount of parameters.";
+        QString message = tr("Wrong amount of parameters.");
         statusBar()->showMessage(message);
     }
 }
@@ -475,15 +477,15 @@ void MainWindow::rawN(int index)
             int length = stoi(tokens[3]); // 10
             text[index] = getRaw(module, book, startPos - 1, length); // Obtain the raw text...
             textset[index] = true; // Report the result.
-            statusBar()->showMessage("Stored.");
+            statusBar()->showMessage(tr("Stored."));
             clipboardInfos->setText(getClipboardInfos());
             return; // Success!
         } catch (exception &e) {
-            statusBar()->showMessage("Error in the parameters.");
+            statusBar()->showMessage(tr("Error in the parameters."));
             return;
         }
     } else {
-        statusBar()->showMessage("Error in the number of parameters.");
+        statusBar()->showMessage(tr("Wrong number of parameters."));
         return;
     }
 }
@@ -518,7 +520,7 @@ void MainWindow::minunique1()
 {
     // Taken mostly from cli:
     if (text[0].length() == 0) {
-        statusBar()->showMessage("Clipboard is empty, no search possible.");
+        statusBar()->showMessage(tr("Clipboard is empty, no search possible."));
         return;
     }
 
@@ -528,7 +530,7 @@ void MainWindow::minunique1()
     inputDialog.setComboBoxItems(getModuleNames());
     inputDialog.setWindowTitle("Min. unique 1");
     inputDialog.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    inputDialog.setLabelText("Select a Bible edition:");
+    inputDialog.setLabelText(tr("Select a Bible edition:"));
     inputDialog.setFixedSize(200,3);
 
     if (inputDialog.exec() != QDialog::Accepted)
@@ -546,7 +548,10 @@ void MainWindow::minunique1()
     boost::trim(collect_info);
     boost::replace_all(collect_info, "\n", "<br>");
 
-    passageInfos->append(("<b>Minimal unique subtexts of " + text[0] + " in " + rest + "</b>" + "<br>" + collect_info).c_str());
+    QString translated = tr("Minimal unique subtexts of %1 in %2").
+        arg(QString(text[0].c_str())).arg(QString(rest.c_str()));
+    passageInfos->append(("<b>" + translated.toStdString()
+        + "</b><br>" + collect_info).c_str());
 
     QTextCursor tc = passageInfos->textCursor();
     tc.setPosition(passageInfos->document()->characterCount() - 1);
@@ -557,7 +562,7 @@ void MainWindow::findN(int index)
 {
     // Taken mostly from cli:
     if (text[index].length() == 0) {
-        statusBar()->showMessage("Clipboard is empty, no search possible.");
+        statusBar()->showMessage(tr("Clipboard is empty, no search possible."));
         return;
     }
 
@@ -567,7 +572,7 @@ void MainWindow::findN(int index)
     inputDialog.setComboBoxItems(getModuleNames());
     inputDialog.setWindowTitle("Find " + QString::number(index + 1));
     inputDialog.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    inputDialog.setLabelText("Select a Bible edition:");
+    inputDialog.setLabelText(tr("Select a Bible edition:"));
     inputDialog.setFixedSize(60,3);
 
     if (inputDialog.exec() != QDialog::Accepted)
@@ -585,7 +590,8 @@ void MainWindow::findN(int index)
     boost::trim(collect_info);
     boost::replace_all(collect_info, "\n", "<br>");
 
-    passageInfos->append(("<b>Searching for " + text[index] + " in " + rest + "</b>" + "<br>" + collect_info).c_str());
+    QString translated = tr("Searching for %1 in %2").arg(QString(text[index].c_str())).arg(QString(rest.c_str()));
+    passageInfos->append(("<b>" + translated.toStdString() + "</b><br>" + collect_info).c_str());
 
     QTextCursor tc = passageInfos->textCursor();
     tc.setPosition(passageInfos->document()->characterCount() - 1);
@@ -607,7 +613,7 @@ void MainWindow::extend()
     QInputDialog inputDialog(this);
     inputDialog.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     inputDialog.setFixedSize(300,3);
-    inputDialog.setWindowTitle(tr("Extend"));
+    inputDialog.setWindowTitle("Extend");
     inputDialog.setLabelText(tr("Parameters:"));
     inputDialog.setTextValue(extendText.c_str());
     if (inputDialog.exec() != QDialog::Accepted)
@@ -633,7 +639,7 @@ void MainWindow::extend()
         verse2S = tokens[3];
         verse2E = tokens[4];
     } else {
-        statusBar()->showMessage("Invalid number of parameters.");
+        statusBar()->showMessage(tr("Wrong number of parameters."));
         return;
     }
     vector<string> verse2ST, verse2ET;
@@ -658,7 +664,7 @@ void MainWindow::extend()
         tc.setPosition(passageInfos->document()->characterCount() - 1);
         passageInfos->setTextCursor(tc); // Move cursor to the end.
     } catch (exception &e) {
-        statusBar()->showMessage("Computation error.");
+        statusBar()->showMessage(tr("Computation error."));
         return;
     }
     return; // Success!
@@ -669,7 +675,7 @@ void MainWindow::getrefs()
     QInputDialog inputDialog(this);
     inputDialog.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     inputDialog.setFixedSize(300,3);
-    inputDialog.setWindowTitle(tr("Get refs"));
+    inputDialog.setWindowTitle("Get refs");
     inputDialog.setLabelText(tr("Parameters:"));
     inputDialog.setTextValue(getrefsText.c_str());
     if (inputDialog.exec() != QDialog::Accepted)
@@ -685,14 +691,14 @@ void MainWindow::getrefs()
     boost::split(tokens, getrefsRest, boost::is_any_of(" "));
     int restSize = tokens.size();
     if (restSize < 3) {
-        statusBar()->showMessage("Invalid number of parameters.");
+        statusBar()->showMessage(tr("Wrong number of parameters."));
         return;
     }
     moduleName2 = tokens[0]; // New Testament
     moduleName1 = tokens[1]; // Old Testament
     book1 = tokens[2]; // a book from the Old Testament
     if (restSize == 3) { // TODO: implement this
-        statusBar()->showMessage("Getting references from full books is not yet implemented, sorry.");
+        statusBar()->showMessage(tr("Getting references from full books is not yet implemented, sorry."));
         return;
     }
     string verse1S, verse1E;
@@ -705,7 +711,7 @@ void MainWindow::getrefs()
                 try {
                     verse1E = r[0] + ":" + to_string(getPsalmLastVerse(moduleName1, stoi(r[0]))) + "-0";
                 } catch (exception &e) {
-                    statusBar()->showMessage("Computation error.");
+                    statusBar()->showMessage(tr("Computation error."));
                     return;
                 }
             } else { // one verse is given in the psalm, e.g. getrefs StatResGNT LXX Psalms 51:4
@@ -720,7 +726,7 @@ void MainWindow::getrefs()
         verse1S = tokens[3];
         verse1E = tokens[4];
     } else {
-        statusBar()->showMessage("Computation error.");
+        statusBar()->showMessage(tr("Computation error."));
         return;
     }
     vector<string> verse1ST, verse1ET;
@@ -739,7 +745,7 @@ void MainWindow::getrefs()
         statusBar()->showMessage(message);
         QFuture<void> future = QtConcurrent::run(getrefsThread, this);
     } catch (exception &e) {
-        statusBar()->showMessage("Computation error.");
+        statusBar()->showMessage(tr("Computation error."));
         return;
     }
     return; // Success!
@@ -757,13 +763,12 @@ void MainWindow::about()
 void MainWindow::aboutSword()
 {
     QMessageBox::about(this, tr("About SWORD"),
-        "<a href=\"https://www.crosswire.org/sword/index.jsp\">The SWORD Project</a> is an effort to create an ever-expanding software package "
+        tr("<a href=\"https://www.crosswire.org/sword/index.jsp\">The SWORD Project</a> is an effort to create an ever-expanding software package "
         "for research and study of God and His Word. The SWORD Project framework "
         "allows easy use and study of Bible texts, commentaries, lexicons, "
         "dictionaries, and other books. Many frontends are built using this framework. "
-        "An installed set of books may be shared among all frontends using the framework."
-        "<br><br>This program uses version " + QString(SWVersion().currentVersion)
-        + " of the SWORD library.");
+        "An installed set of books may be shared among all frontends using the framework.") +
+        "<br><br>" + tr("This program uses version %1 of the SWORD library.").arg(QString(SWVersion().currentVersion)));
 }
 
 void MainWindow::aboutQt()
@@ -772,107 +777,110 @@ void MainWindow::aboutQt()
 
 void MainWindow::createActions()
 {
-    addBiblesAct = new QAction(tr("&Add books"), this);
+    addBiblesAct = new QAction("&Add books", this);
     addBiblesAct->setIcon(QIcon::fromTheme("document-new"));
     addBiblesAct->setShortcuts(QKeySequence::New);
     addBiblesAct->setStatusTip(tr("Load and index the default Bible editions"));
     connect(addBiblesAct, &QAction::triggered, this, &MainWindow::addBibles);
 
-    exitAct = new QAction(tr("E&xit"), this);
+    exitAct = new QAction("&Quit", this);
     exitAct->setIcon(QIcon::fromTheme("application-exit"));
     exitAct->setShortcuts(QKeySequence::Quit);
     exitAct->setStatusTip(tr("Exit the application"));
     connect(exitAct, &QAction::triggered, this, &QWidget::close);
 
-    greekText1Act = new QAction(tr("&Text 1…"), this);
+    string greekStatusTip = "Define a Greek text and put its Latin transcription in clipboard %1";
+    greekText1Act = new QAction("&Text 1…", this);
     greekText1Act->setIcon(QIcon::fromTheme("flag-gr"));
-    greekText1Act->setStatusTip(tr("Define a Greek text and put its Latin transcription in clipboard 1"));
+    greekText1Act->setStatusTip(tr(greekStatusTip.c_str()).arg(1));
     connect(greekText1Act, &QAction::triggered, this, &MainWindow::greekText1);
 
-    greekText2Act = new QAction(tr("Text 2…"), this);
+    greekText2Act = new QAction("Text 2…", this);
     greekText2Act->setIcon(QIcon::fromTheme("flag-gr"));
-    greekText2Act->setStatusTip(tr("Define a Greek text and put its Latin transcription in clipboard 2"));
+    greekText2Act->setStatusTip(tr(greekStatusTip.c_str()).arg(2));
     connect(greekText2Act, &QAction::triggered, this, &MainWindow::greekText2);
 
-    latinText1Act = new QAction(tr("&Latin text 1…"), this);
+    string latinStatusTip = "Put a Latin (a-y) transcription in clipboard %1";
+    latinText1Act = new QAction("&Latin text 1…", this);
     latinText1Act->setIcon(QIcon::fromTheme("insert-text"));
-    latinText1Act->setStatusTip(tr("Put a Latin (a-y) transcription in clipboard 1"));
+    latinText1Act->setStatusTip(tr(latinStatusTip.c_str()).arg(1));
     connect(latinText1Act, &QAction::triggered, this, &MainWindow::latinText1);
 
     latinText2Act = new QAction(tr("Latin text 2…"), this);
     latinText2Act->setIcon(QIcon::fromTheme("insert-text"));
-    latinText2Act->setStatusTip(tr("Put a Latin (a-y) transcription in clipboard 2"));
+    latinText2Act->setStatusTip(tr(latinStatusTip.c_str()).arg(2));
     connect(latinText2Act, &QAction::triggered, this, &MainWindow::latinText2);
 
-    find1Act = new QAction(tr("&Find 1…"), this);
+    string findStatusTip = "Search for the text of clipboard %1 in a Bible";
+    find1Act = new QAction("&Find 1…", this);
     find1Act->setIcon(QIcon::fromTheme("edit-find"));
-    find1Act->setStatusTip(tr("Search for the text of clipboard 1 in a Bible"));
+    find1Act->setStatusTip(tr(findStatusTip.c_str()).arg(1));
     connect(find1Act, &QAction::triggered, this, &MainWindow::find1);
     find1Act->setDisabled(true);
 
-    find2Act = new QAction(tr("Find 2…"), this);
+    find2Act = new QAction("Find 2…", this);
     find2Act->setIcon(QIcon::fromTheme("edit-find"));
-    find2Act->setStatusTip(tr("Search for the text of clipboard 2 in a Bible"));
+    find2Act->setStatusTip(tr(findStatusTip.c_str()).arg(2));
     connect(find2Act, &QAction::triggered, this, &MainWindow::find2);
     find2Act->setDisabled(true);
 
-    minunique1Act = new QAction(tr("&Min. unique 1…"), this);
+    minunique1Act = new QAction("&Min. unique 1…", this);
     minunique1Act->setIcon(QIcon::fromTheme("go-previous"));
     minunique1Act->setStatusTip(tr("Search for minimal unique passages in clipboard 1 in a Bible"));
     connect(minunique1Act, &QAction::triggered, this, &MainWindow::minunique1);
     minunique1Act->setDisabled(true);
 
-    extendAct = new QAction(tr("&Extend…"), this);
+    extendAct = new QAction("&Extend…", this);
     extendAct->setIcon(QIcon::fromTheme("go-next"));
     extendAct->setStatusTip(tr("Extend a passage to the longest possible quotation from another Bible"));
     connect(extendAct, &QAction::triggered, this, &MainWindow::extend);
     extendAct->setDisabled(true);
 
-    getrefsAct = new QAction(tr("&Get refs…"), this);
+    getrefsAct = new QAction("&Get refs…", this);
     getrefsAct->setIcon(QIcon::fromTheme("scanner"));
     getrefsAct->setStatusTip(tr("Search for references in a Bible on the passage in another Bible"));
     connect(getrefsAct, &QAction::triggered, this, &MainWindow::getrefs);
     getrefsAct->setDisabled(true);
 
-    lookupAct = new QAction(tr("&Lookup…"), this);
+    lookupAct = new QAction("&Lookup…", this);
     lookupAct->setIcon(QIcon::fromTheme("document-open"));
     lookupAct->setStatusTip(tr("Search for a verse in a book in the given Bible"));
     connect(lookupAct, &QAction::triggered, this, &MainWindow::lookup);
 
-    lookup1Act = new QAction(tr("Lookup &1…"), this);
+    lookup1Act = new QAction("Lookup &1…", this);
     lookup1Act->setStatusTip(tr("Search for a passage in a book in the given Bible and put it in clipboard 1"));
     connect(lookup1Act, &QAction::triggered, this, &MainWindow::lookup1);
     lookup1Act->setDisabled(true);
 
-    lookup2Act = new QAction(tr("Lookup &2…"), this);
+    lookup2Act = new QAction("Lookup &2…", this);
     lookup2Act->setStatusTip(tr("Search for a passage in a book in the given Bible and put it in clipboard 1"));
     connect(lookup2Act, &QAction::triggered, this, &MainWindow::lookup2);
     lookup2Act->setDisabled(true);
 
-    tokensAct = new QAction(tr("&Tokens…"), this);
+    tokensAct = new QAction("&Tokens…", this);
     tokensAct->setIcon(QIcon::fromTheme("view-sort-ascending"));
     tokensAct->setStatusTip(tr("Search for a tokenized verse in a book in the given Bible"));
     connect(tokensAct, &QAction::triggered, this, &MainWindow::tokens);
     tokensAct->setDisabled(true);
 
-    searchAct = new QAction(tr("&Search…"), this);
+    searchAct = new QAction("&Search…", this);
     searchAct->setIcon(QIcon::fromTheme("view-sort-ascending"));
     searchAct->setStatusTip(tr("Search for a set of tokens on a maximal length in a Bible"));
     connect(searchAct, &QAction::triggered, this, &MainWindow::search);
     searchAct->setDisabled(true);
 
-    rawAct = new QAction(tr("&Raw…"), this);
+    rawAct = new QAction("&Raw…", this);
     rawAct->setIcon(QIcon::fromTheme("media-flash"));
     rawAct->setStatusTip(tr("Show the a-y transcription of a positioned text in a given book"));
     connect(rawAct, &QAction::triggered, this, &MainWindow::raw);
     rawAct->setDisabled(true);
 
-    raw1Act = new QAction(tr("Raw &1…"), this);
+    raw1Act = new QAction("Raw &1…", this);
     raw1Act->setStatusTip(tr("Put the a-y transcription of a positioned text in a given book in clipboard 1"));
     connect(raw1Act, &QAction::triggered, this, &MainWindow::raw1);
     raw1Act->setDisabled(true);
 
-    raw2Act = new QAction(tr("Raw &2…"), this);
+    raw2Act = new QAction("Raw &2…", this);
     raw2Act->setStatusTip(tr("Put the a-y transcription of a positioned text in a given book in clipboard 2"));
     connect(raw2Act, &QAction::triggered, this, &MainWindow::raw2);
     raw2Act->setDisabled(true);
