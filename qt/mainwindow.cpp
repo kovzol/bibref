@@ -681,57 +681,69 @@ void MainWindow::aboutQt()
 void MainWindow::createActions()
 {
     addBiblesAct = new QAction(tr("&Add books"), this);
+    addBiblesAct->setIcon(QIcon::fromTheme("document-new"));
     addBiblesAct->setShortcuts(QKeySequence::New);
     addBiblesAct->setStatusTip(tr("Load and index the default Bible editions"));
     connect(addBiblesAct, &QAction::triggered, this, &MainWindow::addBibles);
 
     exitAct = new QAction(tr("E&xit"), this);
+    exitAct->setIcon(QIcon::fromTheme("application-exit"));
     exitAct->setShortcuts(QKeySequence::Quit);
     exitAct->setStatusTip(tr("Exit the application"));
     connect(exitAct, &QAction::triggered, this, &QWidget::close);
 
     greekText1Act = new QAction(tr("&Text 1…"), this);
+    greekText1Act->setIcon(QIcon::fromTheme("flag-gr"));
     greekText1Act->setStatusTip(tr("Define a Greek text and put its Latin transcription in clipboard 1"));
     connect(greekText1Act, &QAction::triggered, this, &MainWindow::greekText1);
 
     greekText2Act = new QAction(tr("Text 2…"), this);
+    greekText2Act->setIcon(QIcon::fromTheme("flag-gr"));
     greekText2Act->setStatusTip(tr("Define a Greek text and put its Latin transcription in clipboard 2"));
     connect(greekText2Act, &QAction::triggered, this, &MainWindow::greekText2);
 
     latinText1Act = new QAction(tr("&Latin text 1…"), this);
+    latinText1Act->setIcon(QIcon::fromTheme("insert-text"));
     latinText1Act->setStatusTip(tr("Put a Latin (a-y) transcription in clipboard 1"));
     connect(latinText1Act, &QAction::triggered, this, &MainWindow::latinText1);
 
     latinText2Act = new QAction(tr("Latin text 2…"), this);
+    latinText2Act->setIcon(QIcon::fromTheme("insert-text"));
     latinText2Act->setStatusTip(tr("Put a Latin (a-y) transcription in clipboard 2"));
     connect(latinText2Act, &QAction::triggered, this, &MainWindow::latinText2);
 
     find1Act = new QAction(tr("&Find 1…"), this);
+    find1Act->setIcon(QIcon::fromTheme("edit-find"));
     find1Act->setStatusTip(tr("Search for the text of clipboard 1 in a Bible"));
     connect(find1Act, &QAction::triggered, this, &MainWindow::find1);
     find1Act->setDisabled(true);
 
     find2Act = new QAction(tr("Find 2…"), this);
+    find2Act->setIcon(QIcon::fromTheme("edit-find"));
     find2Act->setStatusTip(tr("Search for the text of clipboard 2 in a Bible"));
     connect(find2Act, &QAction::triggered, this, &MainWindow::find2);
     find2Act->setDisabled(true);
 
     minunique1Act = new QAction(tr("&Min. unique 1…"), this);
+    minunique1Act->setIcon(QIcon::fromTheme("go-previous"));
     minunique1Act->setStatusTip(tr("Search for minimal unique passages in clipboard 1 in a Bible"));
     connect(minunique1Act, &QAction::triggered, this, &MainWindow::minunique1);
     minunique1Act->setDisabled(true);
 
     extendAct = new QAction(tr("&Extend…"), this);
+    extendAct->setIcon(QIcon::fromTheme("go-next"));
     extendAct->setStatusTip(tr("Extend a passage to the longest possible quotation from another Bible"));
     connect(extendAct, &QAction::triggered, this, &MainWindow::extend);
     extendAct->setDisabled(true);
 
     getrefsAct = new QAction(tr("&Get refs…"), this);
+    getrefsAct->setIcon(QIcon::fromTheme("scanner"));
     getrefsAct->setStatusTip(tr("Search for references in a Bible on the passage in another Bible"));
     connect(getrefsAct, &QAction::triggered, this, &MainWindow::getrefs);
     getrefsAct->setDisabled(true);
 
     lookupAct = new QAction(tr("&Lookup…"), this);
+    lookupAct->setIcon(QIcon::fromTheme("document-open"));
     lookupAct->setStatusTip(tr("Search for a verse in a book in the given Bible"));
     connect(lookupAct, &QAction::triggered, this, &MainWindow::lookup);
 
@@ -746,6 +758,7 @@ void MainWindow::createActions()
     lookup2Act->setDisabled(true);
 
     rawAct = new QAction(tr("&Raw…"), this);
+    rawAct->setIcon(QIcon::fromTheme("media-flash"));
     rawAct->setStatusTip(tr("Show the a-y transcription of a positioned text in a given book"));
     connect(rawAct, &QAction::triggered, this, &MainWindow::raw);
     rawAct->setDisabled(true);
@@ -761,6 +774,7 @@ void MainWindow::createActions()
     raw2Act->setDisabled(true);
 
     aboutAct = new QAction(tr("About &bibref…"), this);
+    aboutAct->setIcon(QIcon::fromTheme("help-about"));
     aboutAct->setStatusTip(tr("Show a short description of the program"));
     connect(aboutAct, &QAction::triggered, this, &MainWindow::about);
 
