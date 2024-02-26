@@ -133,7 +133,7 @@
     </message>
     <message>
         <source>&lt;a href=&quot;https://github.com/kovzol/bibref&quot;&gt;bibref&lt;/a&gt; is a tool that helps discovering internal references in the Bible.&lt;br&gt;It aims at finding quotations of the &lt;a href=&quot;https://en.wikipedia.org/wiki/Septuagint&quot;&gt;Septuagint&lt;/a&gt; in the &lt;a href=&quot;https://en.wikipedia.org/wiki/New_Testament&quot;&gt;Greek New Testament&lt;/a&gt; in a mechanical way.</source>
-        <translation>A &lt;a href=&quot;https://github.com/kovzol/bibref&quot;&gt;bibref&lt;/a&gt; program segítségével a Biblia belső hivatkozásai deríthetők fel.&lt;br&gt;A &lt;a href=&quot;https://en.wikipedia.org/wiki/Septuagint&quot;&gt;Septuagintában&lt;/a&gt; található szövegeket lehet vele a &lt;a href=&quot;https://en.wikipedia.org/wiki/New_Testament&quot;&gt;görög Újszövetségben&lt;/a&gt; mechanikusan megkeresni.</translation>
+        <translation>A &lt;a href=&quot;https://github.com/kovzol/bibref&quot;&gt;bibref&lt;/a&gt; program segítségével a Biblia belső hivatkozásai deríthetők fel.&lt;br&gt;A &lt;a href=&quot;https://hu.wikipedia.org/wiki/Septuaginta&quot;&gt;Szeptuagintában&lt;/a&gt; található szövegeket lehet vele a &lt;a href=&quot;https://hu.wikipedia.org/wiki/%C3%9Ajsz%C3%B6vets%C3%A9g&quot;&gt;görög Újszövetségben&lt;/a&gt; mechanikusan megkeresni.</translation>
     </message>
     <message>
         <source>About SWORD</source>
