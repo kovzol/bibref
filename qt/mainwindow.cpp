@@ -320,7 +320,37 @@ void MainWindow::lookup2()
 
 void MainWindow::raw()
 {
+    QInputDialog inputDialog(this);
+    inputDialog.setWindowTitle(tr("Raw"));
+    inputDialog.setLabelText(tr("Parameters:"));
+    inputDialog.setTextValue(rawText.c_str());
+    if (inputDialog.exec() != QDialog::Accepted)
+        return;
+    const QString value = inputDialog.textValue().trimmed();
+    if (value.isEmpty())
+        return;
+    rawText = value.toStdString();
+    string rest = rawText;
 
+    // Mostly taken from cli:
+    vector<string> tokens;
+    boost::split(tokens, rest, boost::is_any_of(" "));
+    int restSize = tokens.size();
+    if (restSize == 4) { // e.g. raw LXX Genesis 1 10
+        string module = tokens[0]; // LXX
+        string book = tokens[1]; // Genesis
+        int startPos = stoi(tokens[2]); // 1
+        int length = stoi(tokens[3]); // 10
+        string text = getRaw(module, book, startPos - 1, length);
+        passageInfos->append(("<b>Raw " + rest + "</b>" + "<br>" + text).c_str());
+
+        QTextCursor tc = passageInfos->textCursor();
+        tc.setPosition(passageInfos->document()->characterCount() - 1);
+        passageInfos->setTextCursor(tc); // Move cursor to the end.
+    } else {
+        QString message = "Wrong amount of parameters.";
+        statusBar()->showMessage(message);
+    }
 }
 
 void MainWindow::rawN(int index)
@@ -372,9 +402,6 @@ void MainWindow::raw2()
 {
     this->rawN(1);
 }
-
-
-
 
 QStringList getModuleNames()
 {
@@ -447,14 +474,6 @@ void MainWindow::findN(int index)
     inputDialog.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     inputDialog.setLabelText("Select a Bible edition:");
     inputDialog.setFixedSize(60,3);
-
-    /*
-     * Alternative way for selection: typing.
-    QInputDialog inputDialog(this);
-    inputDialog.setWindowTitle(tr("Find " + QString::number(index + 1)));
-    inputDialog.setLabelText(tr("Bible edition:"));
-    inputDialog.setTextValue(findText.c_str());
-    */
 
     if (inputDialog.exec() != QDialog::Accepted)
         return;
@@ -716,6 +735,7 @@ void MainWindow::createActions()
     rawAct = new QAction(tr("&Raw…"), this);
     rawAct->setStatusTip(tr("Show the a-y transcription of a positioned text in a given book"));
     connect(rawAct, &QAction::triggered, this, &MainWindow::raw);
+    rawAct->setDisabled(true);
 
     raw1Act = new QAction(tr("Raw &1…"), this);
     raw1Act->setStatusTip(tr("Put the a-y transcription of a positioned text in a given book in clipboard 1"));
@@ -723,7 +743,7 @@ void MainWindow::createActions()
     raw1Act->setDisabled(true);
 
     raw2Act = new QAction(tr("Raw &2…"), this);
-    raw2Act->setStatusTip(tr("Put the a-y transcription of a positioned text in a given book in clipboard 1"));
+    raw2Act->setStatusTip(tr("Put the a-y transcription of a positioned text in a given book in clipboard 2"));
     connect(raw2Act, &QAction::triggered, this, &MainWindow::raw2);
     raw2Act->setDisabled(true);
 
