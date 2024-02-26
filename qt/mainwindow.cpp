@@ -3,6 +3,7 @@
 #include "books.h"
 #include "cli.h"
 #include "swmgr.h"
+#include "swversion.h"
 
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/algorithm/string/split.hpp>
@@ -654,11 +655,23 @@ void MainWindow::getrefs()
 
 void MainWindow::about()
 {
-    QMessageBox::about(this, tr("About Menu"),
+    QMessageBox::about(this, tr("About bibref"),
         tr("<a href=\"https://github.com/kovzol/bibref\">bibref</a> is a tool that helps discovering internal references in the Bible."
         "<br>It aims at finding quotations of the <a href=\"https://en.wikipedia.org/wiki/Septuagint\">Septuagint</a>"
         " in the <a href=\"https://en.wikipedia.org/wiki/New_Testament\">Greek New Testament</a>"
         " in a mechanical way."));
+}
+
+void MainWindow::aboutSword()
+{
+    QMessageBox::about(this, tr("About SWORD"),
+        "<a href=\"https://www.crosswire.org/sword/index.jsp\">The SWORD Project</a> is an effort to create an ever-expanding software package "
+        "for research and study of God and His Word. The SWORD Project framework "
+        "allows easy use and study of Bible texts, commentaries, lexicons, "
+        "dictionaries, and other books. Many frontends are built using this framework. "
+        "An installed set of books may be shared among all frontends using the framework."
+        "<br><br>This program uses version " + QString(SWVersion().currentVersion)
+        + " of the SWORD library.");
 }
 
 void MainWindow::aboutQt()
@@ -747,9 +760,13 @@ void MainWindow::createActions()
     connect(raw2Act, &QAction::triggered, this, &MainWindow::raw2);
     raw2Act->setDisabled(true);
 
-    aboutAct = new QAction(tr("&About bibref…"), this);
+    aboutAct = new QAction(tr("About &bibref…"), this);
     aboutAct->setStatusTip(tr("Show a short description of the program"));
     connect(aboutAct, &QAction::triggered, this, &MainWindow::about);
+
+    aboutSwordAct = new QAction(tr("About &SWORD…"), this);
+    aboutSwordAct->setStatusTip(tr("Show information on the SWORD library"));
+    connect(aboutSwordAct, &QAction::triggered, this, &MainWindow::aboutSword);
 
     aboutQtAct = new QAction(tr("About &Qt…"), this);
     aboutQtAct->setStatusTip(tr("Show the Qt library's About box"));
@@ -792,5 +809,6 @@ void MainWindow::createMenus()
 
     helpMenu = menuBar()->addMenu(tr("&Help"));
     helpMenu->addAction(aboutAct);
+    helpMenu->addAction(aboutSwordAct);
     helpMenu->addAction(aboutQtAct);
 }

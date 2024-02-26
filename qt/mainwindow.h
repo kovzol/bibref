@@ -50,6 +50,7 @@ private slots:
     void extend();
     void getrefs();
     void about();
+    void aboutSword();
     void aboutQt();
 
 private:
@@ -74,6 +75,7 @@ private:
     QAction *latinText2Act;
     QAction *lookupAct;
     QAction *aboutAct;
+    QAction *aboutSwordAct;
     QAction *aboutQtAct;
     QLabel *clipboardInfos;
 };
