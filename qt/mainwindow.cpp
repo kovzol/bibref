@@ -2,6 +2,7 @@
 
 #include "books.h"
 #include "cli.h"
+
 #include "swmgr.h"
 #include "swversion.h"
 
@@ -29,6 +30,7 @@ string lookupText = "LXX Genesis 1:1"; // example
 string extendText = "LXX StatResGNT Romans 3:13"; // example
 string getrefsText = "StatResGNT LXX Psalms 117:1"; // example
 string rawText = "LXX Genesis 1 10"; // example
+string searchText = "LXX 2097 1515 189 3"; // example
 
 QString getClipboardInfos() {
     QString intro = "<b>Contents of the clipboards in Greek (and in a-y notation)</b>";
@@ -109,6 +111,7 @@ void addBiblesThread(MainWindow* window) {
     window->raw1Act->setEnabled(true);
     window->raw2Act->setEnabled(true);
     window->tokensAct->setEnabled(true);
+    window->searchAct->setEnabled(true);
 }
 
 // Used for communication between caller and thread:
@@ -287,6 +290,58 @@ void MainWindow::tokens()
     } else {
         QString message = "Invalid input (3 words are needed: Bible edition, book, chapter:verse).";
         statusBar()->showMessage(message);
+    }
+}
+
+void MainWindow::search()
+{
+    QInputDialog inputDialog(this);
+    inputDialog.setWindowTitle(tr("Search"));
+    inputDialog.setLabelText(tr("Parameters:"));
+    inputDialog.setTextValue(searchText.c_str());
+    if (inputDialog.exec() != QDialog::Accepted)
+        return;
+    const QString value = inputDialog.textValue().trimmed();
+    if (value.isEmpty())
+        return;
+    searchText = value.toStdString();
+    string rest = searchText;
+
+    // Taken mostly from cli:
+    int index = rest.find(" ");
+    string moduleName = rest.substr(0, index); // Search in the given Bible edition...
+    rest = rest.substr(index + 1);
+
+    vector<int> pattern; // the token pattern to be searched
+    std::stringstream ss(rest);
+
+    int s = 0;
+    int t;
+    while (ss >> t) {
+        pattern.push_back(t);
+        s += 1; // count the tokens in the pattern
+    }
+    if (s==0) { // no pattern was defined
+        statusBar()->showMessage("No pattern was defined.");
+        return;
+    }
+
+    s--;
+    int length = pattern.at(s); // the last parameter
+    pattern.pop_back(); // remove it from the token pattern
+    string info = to_string(s) + " tokens given, search for an extension of max. " + to_string(length) + " tokens.";
+    if (length < s) { // the length must be at least the length of the pattern
+        info += " Impossible.";
+        statusBar()->showMessage(info.c_str());
+    } else {
+        statusBar()->showMessage(info.c_str());
+        collect_info = ""; // reset communication buffer
+        searchTokenset(moduleName, pattern, length, true); // Start search...
+        passageInfos->append(("<b>Search " + moduleName + " " + rest + "</b>" + "<br>" + collect_info).c_str());
+
+        QTextCursor tc = passageInfos->textCursor();
+        tc.setPosition(passageInfos->document()->characterCount() - 1);
+        passageInfos->setTextCursor(tc); // Move cursor to the end.
     }
 }
 
@@ -687,10 +742,8 @@ void MainWindow::getrefs()
         statusBar()->showMessage("Computation error.");
         return;
     }
-
     return; // Success!
 }
-
 
 void MainWindow::about()
 {
@@ -802,6 +855,12 @@ void MainWindow::createActions()
     connect(tokensAct, &QAction::triggered, this, &MainWindow::tokens);
     tokensAct->setDisabled(true);
 
+    searchAct = new QAction(tr("&Search…"), this);
+    searchAct->setIcon(QIcon::fromTheme("view-sort-ascending"));
+    searchAct->setStatusTip(tr("Search for a set of tokens on a maximal length in a Bible"));
+    connect(searchAct, &QAction::triggered, this, &MainWindow::search);
+    searchAct->setDisabled(true);
+
     rawAct = new QAction(tr("&Raw…"), this);
     rawAct->setIcon(QIcon::fromTheme("media-flash"));
     rawAct->setStatusTip(tr("Show the a-y transcription of a positioned text in a given book"));
@@ -848,6 +907,7 @@ void MainWindow::createMenus()
     editMenu->addSeparator();
     editMenu->addAction(find1Act);
     editMenu->addAction(find2Act);
+    editMenu->addAction(searchAct);
 
     passageMenu = menuBar()->addMenu(tr("&Passage"));
     passageMenu->addAction(lookupAct);

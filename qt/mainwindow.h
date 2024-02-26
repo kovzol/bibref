@@ -29,6 +29,7 @@ public:
     QAction *extendAct;
     QAction *getrefsAct;
     QAction *tokensAct;
+    QAction *searchAct;
     QTextEdit *passageInfos;
 
 protected:
@@ -41,6 +42,7 @@ private slots:
     void latinText2();
     void lookup();
     void tokens();
+    void search();
     void lookup1();
     void lookup2();
     void raw();
