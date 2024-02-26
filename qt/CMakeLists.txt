@@ -6,9 +6,17 @@ find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Concurrent)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(sword REQUIRED sword)
 
+find_package(Qt6LinguistTools)
+file(GLOB TRANSLATION_FILES ${CMAKE_CURRENT_SOURCE_DIR}/*.ts)
+set_source_files_properties(${TRANSLATION_FILES}
+    PROPERTIES OUTPUT_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}")
+qt6_add_translation(QM_FILES ${TRANSLATION_FILES})
+
 include_directories(/usr/include/sword)
 
 qt_standard_project_setup()
+
+add_definitions(-DPROJECT_SOURCE_DIR="${PROJECT_SOURCE_DIR}")
 
 qt_add_executable(bibref-qt
     main.cpp
@@ -18,6 +26,8 @@ qt_add_executable(bibref-qt
     cli.cpp cli.h
     fingerprint.cpp fingerprint.h
     psalmsinfo.cpp psalmsinfo.h
+    ${QM_FILES}
+    bibref.qrc
 )
 
 set_target_properties(bibref-qt PROPERTIES

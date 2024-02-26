@@ -333,7 +333,7 @@ void MainWindow::search()
     pattern.pop_back(); // remove it from the token pattern
     string info = tr("%1 tokens given, search for an extension of max. %2 tokens.").arg(s).arg(length).toStdString();
     if (length < s) { // the length must be at least the length of the pattern
-        info += tr(" Impossible.").toStdString();
+        info += " " + tr("Impossible.").toStdString();
         statusBar()->showMessage(info.c_str());
     } else {
         statusBar()->showMessage(info.c_str());
@@ -398,7 +398,7 @@ void MainWindow::lookupN(int index)
             statusBar()->showMessage(tr("Stored."));
             clipboardInfos->setText(getClipboardInfos());
         } catch (exception &e) {
-            statusBar()->showMessage(tr("Unsuccessul lookup."));
+            statusBar()->showMessage(tr("Unsuccessful lookup."));
         }
         return; // Success!
     }
@@ -806,7 +806,7 @@ void MainWindow::createActions()
     latinText1Act->setStatusTip(tr(latinStatusTip.c_str()).arg(1));
     connect(latinText1Act, &QAction::triggered, this, &MainWindow::latinText1);
 
-    latinText2Act = new QAction(tr("Latin text 2…"), this);
+    latinText2Act = new QAction("Latin text 2…", this);
     latinText2Act->setIcon(QIcon::fromTheme("insert-text"));
     latinText2Act->setStatusTip(tr(latinStatusTip.c_str()).arg(2));
     connect(latinText2Act, &QAction::triggered, this, &MainWindow::latinText2);
@@ -847,13 +847,14 @@ void MainWindow::createActions()
     lookupAct->setStatusTip(tr("Search for a verse in a book in the given Bible"));
     connect(lookupAct, &QAction::triggered, this, &MainWindow::lookup);
 
+    string lookupStatusTip = "Search for a passage in a book in the given Bible and put it in clipboard %1";
     lookup1Act = new QAction("Lookup &1…", this);
-    lookup1Act->setStatusTip(tr("Search for a passage in a book in the given Bible and put it in clipboard 1"));
+    lookup1Act->setStatusTip(tr(lookupStatusTip.c_str()).arg(1));
     connect(lookup1Act, &QAction::triggered, this, &MainWindow::lookup1);
     lookup1Act->setDisabled(true);
 
     lookup2Act = new QAction("Lookup &2…", this);
-    lookup2Act->setStatusTip(tr("Search for a passage in a book in the given Bible and put it in clipboard 1"));
+    lookup2Act->setStatusTip(tr(lookupStatusTip.c_str()).arg(2));
     connect(lookup2Act, &QAction::triggered, this, &MainWindow::lookup2);
     lookup2Act->setDisabled(true);
 
@@ -875,13 +876,14 @@ void MainWindow::createActions()
     connect(rawAct, &QAction::triggered, this, &MainWindow::raw);
     rawAct->setDisabled(true);
 
+    string rawStatusTip = "Put the a-y transcription of a positioned text in a given book in clipboard %1";
     raw1Act = new QAction("Raw &1…", this);
-    raw1Act->setStatusTip(tr("Put the a-y transcription of a positioned text in a given book in clipboard 1"));
+    raw1Act->setStatusTip(tr(rawStatusTip.c_str()).arg(1));
     connect(raw1Act, &QAction::triggered, this, &MainWindow::raw1);
     raw1Act->setDisabled(true);
 
     raw2Act = new QAction("Raw &2…", this);
-    raw2Act->setStatusTip(tr("Put the a-y transcription of a positioned text in a given book in clipboard 2"));
+    raw2Act->setStatusTip(tr(rawStatusTip.c_str()).arg(2));
     connect(raw2Act, &QAction::triggered, this, &MainWindow::raw2);
     raw2Act->setDisabled(true);
 
