@@ -789,7 +789,7 @@ void MainWindow::createActions()
     exitAct->setStatusTip(tr("Exit the application"));
     connect(exitAct, &QAction::triggered, this, &QWidget::close);
 
-    string greekStatusTip = "Define a Greek text and put its Latin transcription in clipboard %1";
+    string greekStatusTip = tr("Define a Greek text and put its Latin transcription in clipboard %1").toStdString();
     greekText1Act = new QAction("&Text 1…", this);
     greekText1Act->setIcon(QIcon::fromTheme("flag-gr"));
     greekText1Act->setStatusTip(tr(greekStatusTip.c_str()).arg(1));
@@ -800,7 +800,7 @@ void MainWindow::createActions()
     greekText2Act->setStatusTip(tr(greekStatusTip.c_str()).arg(2));
     connect(greekText2Act, &QAction::triggered, this, &MainWindow::greekText2);
 
-    string latinStatusTip = "Put a Latin (a-y) transcription in clipboard %1";
+    string latinStatusTip = tr("Put a Latin (a-y) transcription in clipboard %1").toStdString();
     latinText1Act = new QAction("&Latin text 1…", this);
     latinText1Act->setIcon(QIcon::fromTheme("insert-text"));
     latinText1Act->setStatusTip(tr(latinStatusTip.c_str()).arg(1));
@@ -811,7 +811,7 @@ void MainWindow::createActions()
     latinText2Act->setStatusTip(tr(latinStatusTip.c_str()).arg(2));
     connect(latinText2Act, &QAction::triggered, this, &MainWindow::latinText2);
 
-    string findStatusTip = "Search for the text of clipboard %1 in a Bible";
+    string findStatusTip = tr("Search for the text of clipboard %1 in a Bible").toStdString();
     find1Act = new QAction("&Find 1…", this);
     find1Act->setIcon(QIcon::fromTheme("edit-find"));
     find1Act->setStatusTip(tr(findStatusTip.c_str()).arg(1));
@@ -847,7 +847,7 @@ void MainWindow::createActions()
     lookupAct->setStatusTip(tr("Search for a verse in a book in the given Bible"));
     connect(lookupAct, &QAction::triggered, this, &MainWindow::lookup);
 
-    string lookupStatusTip = "Search for a passage in a book in the given Bible and put it in clipboard %1";
+    string lookupStatusTip = tr("Search for a passage in a book in the given Bible and put it in clipboard %1").toStdString();
     lookup1Act = new QAction("Lookup &1…", this);
     lookup1Act->setStatusTip(tr(lookupStatusTip.c_str()).arg(1));
     connect(lookup1Act, &QAction::triggered, this, &MainWindow::lookup1);
@@ -876,7 +876,7 @@ void MainWindow::createActions()
     connect(rawAct, &QAction::triggered, this, &MainWindow::raw);
     rawAct->setDisabled(true);
 
-    string rawStatusTip = "Put the a-y transcription of a positioned text in a given book in clipboard %1";
+    string rawStatusTip = tr("Put the a-y transcription of a positioned text in a given book in clipboard %1").toStdString();
     raw1Act = new QAction("Raw &1…", this);
     raw1Act->setStatusTip(tr(rawStatusTip.c_str()).arg(1));
     connect(raw1Act, &QAction::triggered, this, &MainWindow::raw1);

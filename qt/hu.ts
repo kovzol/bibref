@@ -231,5 +231,25 @@
         <source>&amp;Help</source>
         <translation>Se&amp;gítség</translation>
     </message>
+    <message>
+        <source>Define a Greek text and put its Latin transcription in clipboard %1</source>
+        <translation>Görög szöveg feltöltése a(z) %1. vágólapra</translation>
+    </message>
+    <message>
+        <source>Put a Latin (a-y) transcription in clipboard %1</source>
+        <translation>Latin (a-y) kódolású szöveg feltöltése a(z) %1. vágólapra</translation>
+    </message>
+    <message>
+        <source>Search for the text of clipboard %1 in a Bible</source>
+        <translation>Bibliai keresés a(z) %1. vágólap tartalmára</translation>
+    </message>
+    <message>
+        <source>Search for a passage in a book in the given Bible and put it in clipboard %1</source>
+        <translation>Bibliai szakasz keresése és a(z) %1. vágólapra másolása</translation>
+    </message>
+    <message>
+        <source>Put the a-y transcription of a positioned text in a given book in clipboard %1</source>
+        <translation>Pozícióval megadott a-y kódolású szöveg másolása a(z) %1. vágólapra</translation>
+    </message>
 </context>
 </TS>
