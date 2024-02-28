@@ -121,7 +121,7 @@
     </message>
     <message>
         <source>Searching for %1 in %2</source>
-        <translation>Keresés a(z) szövegre %1 a(z) %2 szövegben</translation>
+        <translation>Keresés a(z) %1 szövegre a(z) %2 paraméterekben</translation>
     </message>
     <message>
         <source>Getting references from full books is not yet implemented, sorry.</source>
@@ -250,6 +250,82 @@
     <message>
         <source>Put the a-y transcription of a positioned text in a given book in clipboard %1</source>
         <translation>Pozícióval megadott a-y kódolású szöveg másolása a(z) %1. vágólapra</translation>
+    </message>
+    <message>
+        <source>Introduction</source>
+        <translation>Bevezetés</translation>
+    </message>
+    <message>
+        <source>This Bible study tool offers work on texts that are close to the oldest manuscripts. Since there are no punctuation (spaces, commas, periods) in the old texts, and there is no verse numbering, we consider each book of a Bible edition as a continuous raw text of Greek characters from α to ω. (To simplify working with texts, Greek characters are transcribed to latin characters a-y.)</source>
+        <translation>Ez a bibliatanulmányozó program olyan szövegekkel dolgozik, amelyek a legrégebbi kéziratokhoz állnak közel. Mivel a régi szövegekben nincs központozás (szóközök, vesszők, pontok), sem versszámok, egy bibliakiadás könyvét görög betűkből álló nyers szövegnek tekintjük. (Az α és ω közötti görög betűket az egyszerűség kedvéért a-y latin átírással jelöljük.)</translation>
+    </message>
+    <message>
+        <source>A Bible edition is defined as an old compilation of books that are considered canonical. Definitely, we work with a set of Old Testament books, translated into Greek and presented as the electronic version of the Septuagint, identified with the name &lt;a href=&quot;https://www.crosswire.org/sword/modules/ModInfo.jsp?modName=LXX&quot;&gt;LXX&lt;/a&gt;. Also, a set of Greek New Testament books are present, identified with the name &lt;a href=&quot;https://www.crosswire.org/sword/modules/ModInfo.jsp?modName=StatResGNT&quot;&gt;StatResGNT&lt;/a&gt;.</source>
+        <translation>Bibliakiadásként értelmezzük az olyan régi könyvgyűjteményeket, amelyeket az egyházi kánon annak tart. Ez azt jelenti, hogy az Ószövetség bizonyos részeinek görögre fordított elektronikus változatával dolgozunk, a Septuaginta &lt;a href=&quot;https://www.crosswire.org/sword/modules/ModInfo.jsp?modName=LXX&quot;&gt;LXX&lt;/a&gt; moduljával. Hasonlóan teszünk a görög Újszövetség könyveivel, melyekből a &lt;a href=&quot;https://www.crosswire.org/sword/modules/ModInfo.jsp?modName=StatResGNT&quot;&gt;StatResGNT&lt;/a&gt; modult emeljük ki.</translation>
+    </message>
+    <message>
+        <source>Research questions like &lt;i&gt;Is an Old Testament passage quoted properly?&lt;/i&gt; can be studied with this program. Non-punctuated texts can be compared without loading Bible databases. Also, if the default databases are loaded (via File&amp;gt;Add books…), Greek Bible texts can also be compared directly.</source>
+        <translation>Olyan típusú kérdéseket fogunk vizsgálni, mint pl. &lt;i&gt;Egy bizonyos ószövetségi szakaszt hibátlanul idéz-e az Újszövetség?&lt;/i&gt; A központozás nélküli szövegeket a program anélkül is össze tudja hasonlítani, hogy beolvasnánk a bibliai adatbázisokat. Továbbá, amikor az alapértelmezett adatbázisok betöltődnek (a File&amp;gt;Add books… menüben), a görög nyelvű bibliai szövegek közvetlenül is összehasonlíthatók.</translation>
+    </message>
+    <message>
+        <source>The program is command-driven. Its graphical user interface follows the conventions of the terminal based application. Therefore, the commands provided by the menus are literally the same as in the terminal based application and not translated into other languages, either.</source>
+        <translation>A program parancsvezérelt. A felhasználói felület a terminál alapú eredeti alkalmazás szóhasználatára épül. Ezért a menük parancsai betű szerint ugyanazok, mint a terminál alapú eredeti alkalmazásban: ezek szándékosan nincsenek magyarra lefordítva.</translation>
+    </message>
+    <message>
+        <source>Example uses</source>
+        <translation>Alkalmazási példák</translation>
+    </message>
+    <message>
+        <source>The words κλεψεις and κλεπτεις are similar. In the a-y transcription they are shown as &lt;b&gt;kleceis&lt;/b&gt; and &lt;b&gt;klepteis&lt;/b&gt;. The user may want to enter these words with their a-y transcriptions in Edit&amp;gt;Latin Text 1… and Edit&amp;gt;Latin Text 2… Their Jaccard distance is near 0.42 (which is a bit closer).</source>
+        <translation>A κλεψεις és κλεπτεις görög szavak hasonlóak. Az a-y átírásban ezek rendre &lt;b&gt;kleceis&lt;/b&gt; és &lt;b&gt;klepteis&lt;/b&gt; formában jelennek meg. A felhasználó beviheti ezeket a szavakat a-y átírásban is a Szerkesztés&amp;gt;Latin Text 1… és Szerkersztés&amp;gt;Latin Text 2… opciókkal. A szavak Jaccard távolsága kb. 0.42 (ami egy kicsit közelebbi).</translation>
+    </message>
+    <message>
+        <source>Now, the user loads the indexed Bibles via File&amp;gt;Add books… Several features of the program can be used from now on. For example, the user can put the a-y transcription of a part of Psalms 40:13-17 and 70:1-5 in the two clipboards. (Note that these texts are numbered as 40:14-18 and 70:1-6 in some Bible editions.) This is achievable via Passage&amp;gt;Lookup 1… and Passage&amp;gt;Lookup 2… by typing &lt;b&gt;LXX Psalms 40:13+23 40:17&lt;/b&gt; and &lt;b&gt;LXX Psalms 70:1+37 70:5&lt;/b&gt;, respectively. This notation allows to cut the first 23 or 37 letters of the passages. (Analogously, appending a number with a minus sign to the end of the passage definition, it is possible to cut some of the last letters of the passages.) The Jaccard distance is near 0.19 (which means a close relationship).</source>
+        <translation>Most ha a felhasználó a File&amp;gt;Add books… funkciót indítja, sok új lehetőség áll rendelkezésre. Például a Zsoltárok 40:13-17 és 70:1-5 egy részét gyorsan felviheti a vágólapra. (Ezeket a szövegeket bizonyos bibliafordítások 40:14-18 és 70:1-6 versszámozással tartalmazzák.) Erre a Szakasz&amp;gt;Lookup 1… és Passage&amp;gt;Lookup 2… menükben van lehetőség a &lt;b&gt;LXX Psalms 40:13+23 40:17&lt;/b&gt; ill. &lt;b&gt;LXX Psalms 70:1+37 70:5&lt;/b&gt; paraméterek megadásával. Ezzel a jelöléssel rendre levágjuk az első 23 ill. 37 betűjét az egyes szakaszoknak. (Analóg módon, ha egy mínusz jel után adunk meg egy számot a szakasz végét jelző vershez írva, akkor a vers végének utolsó néhány betűjét vághatjuk le.) A Jaccard-távolság most 0.19 körüli (ami egy egészen közeli kapcsolatot jelent).</translation>
+    </message>
+    <message>
+        <source>The user wants to check if Exodus 20:13-17 is repeated in the Old Testament. By putting this passage in Passage&amp;gt;Lookup 1… by typing &lt;b&gt;LXX Exodus 20:13 20:17&lt;/b&gt; it is possible to start a search for an exact match via Edit&amp;gt;Search 1… By selecting &lt;b&gt;LXX&lt;/b&gt;, the program finds another match in Deuteronomy 5:17-21. Book position 19880-20171 means that the second match can be found in Raw&amp;gt;Raw… by entering &lt;b&gt;LXX Deuteronomy 19880 292&lt;/b&gt; (here 292 is the length), or stored in clipboard 2 with the same input in Raw&amp;gt;Raw 2… Here, the Jaccard distance of the texts in the clipboards is 0 (because they are identical).</source>
+        <translation>Szeretnénk megtudni, hogy az Exodus 20:13-17 szövege többször is előfordul-e az Ószövetségben. Ezért a Szakasz&amp;gt;Lookup 1… menüben beírjuk: &lt;b&gt;LXX Exodus 20:13 20:17&lt;/b&gt;, majd a Szerkesztés&amp;gt;Search 1… segítségével elkezdjük a keresést. Itt ki kell válasszuk, hol keresünk, esetünkben az &lt;b&gt;LXX&lt;/b&gt;-ben, mire a  program megtalálja, hogy a Deuteronomy 5:17-21-ben pontosan ugyanez a szöveg található. A &lt;i&gt;Book position 19880-20171&lt;/i&gt; üzenet azt jelenti, hogy a második találatot a Nyers szöveg&amp;gt;Raw… menüben az &lt;b&gt;LXX Deuteronomy 19880 292&lt;/b&gt; paraméterrel (ahol 292 a szöveghosszat jelenti) karakterenként is lehívhatjuk, sőt a 2. vágólapon is tárolhatjuk a Nyers szöveg&amp;gt;Raw 2… opcióval. Ha most a Jaccard-távolságra pillantunk, az éppen 0 lesz (mivel a két szöveg teljesen azonos).</translation>
+    </message>
+    <message>
+        <source>The user thinks that parts of Psalm 117 are quoted somewhere in the New Testament. The command Quotation&amp;gt;Get refs… with parameters &lt;b&gt;StatResGNT LXX Psalms 117&lt;/b&gt; starts a search for all possible matches where the Old Testament passage can be a unique text that is quoted in the New Testament. Among other candidates, Romans 15:11 seems to be a plausible result.</source>
+        <translation>Arra gyanakszunk, hogy a 117. zsoltár az Újszövetségben is előjön. Az Idézet&amp;gt;Get refs… parancs a &lt;b&gt;StatResGNT LXX Psalms 117&lt;/b&gt; paraméterrel nekilát felkutatni a lehetséges betű szerinti egyezéseket, amelyekben az ószövetségi szakaszok mindenképpen egyedi módon jelennek meg az esetleges újszövetségi idézetekben. Néhány egyéb ötlet mellett a Róma 15:11 tűnik a leginkább megfelelő válasznak.</translation>
+    </message>
+    <message>
+        <source>The user would like to identify the quotation mentioned by Paul in I Corinthians 1:31. This is a difficult task, so a tokenized transcription of the verse is obtained via the command Passage&amp;gt;Tokens… with parameters &lt;b&gt;StatResGNT I_Corinthians 1:31&lt;/b&gt; (note the underscore) and the tokens 2443 2531 1125 3588 2744 1722 2962 2744 are shown. (Currently, these are &lt;a href=&quot;https://en.wikipedia.org/wiki/Strong%27s_Concordance#Strong&apos;s_numbers&quot;&gt;Strong&apos;s numbers&lt;/a&gt;.) After checking these numbers, 2744, 1722 and 2962 seem relevant. A search via Edit&amp;gt;Search… with parameters &lt;b&gt;LXX 2744 1722 2962 6&lt;/b&gt; shows that on a length of 6 tokens there is only one match in the Old Testament, namely, in Jeremiah 9:23. Another search with parameters &lt;b&gt;StatResGNT 2744 1722 2962 3&lt;/b&gt; informs the user on a second match in the New Testament, namely, in II Corinthians 10:17.</source>
+        <translation type="unfinished">Szeretnénk rájönni, honnan idéz Pál az 1Korinthus 1:31-ben. Ezt nem is olyan egyszerű megmondani, ezért egy kódolt átírással próbálkozunk, melyet a Szakasz&amp;gt;Tokens… parancs segítségével, a &lt;b&gt;StatResGNT I_Corinthians 1:31&lt;/b&gt; paraméterrel adunk meg (figyeljünk az aláhúzás karakterre!), mire a 2443 2531 1125 3588 2744 1722 2962 2744 kódokat látjuk. (Ezek a kódok az ún. &lt;a href=&quot;https://hu.wikipedia.org/wiki/Strong-konkordancia&quot;&gt;Strong-féle számok&lt;/a&gt;, legalábbis jelenleg.) Ezen számokat ellenőrizve a 2744, 1722 és 2962 tűnnek relevénsnak. Ha most a Szerkesztés&amp;gt;Search… menüben az &lt;b&gt;LXX 2744 1722 2962 6&lt;/b&gt; paramétereket adjuk meg, akkor láthatjuk, hogy az ezt a 3 kódot tartalmazó legfeljebb 6 hosszúságú kódot csak egyszer találjuk meg az Ószövetségben, nevezetesen a Jeremiás 9:23-ban. Egy újabb keresés a &lt;b&gt;StatResGNT 2744 1722 2962 3&lt;/b&gt; paraméterekkel arra utal, hogy az Újszövetségben még egyszer megjelenik ez a gondolat, mégpedig a 2Korinthus 10:17-ben.</translation>
+    </message>
+    <message>
+        <source>For further examples we point the reader to &lt;a href=&quot;https://matek.hu/zoltan/blog-topics.php?t=b&quot;&gt;Zoltán Kovács&apos;s blog on bibref&lt;/a&gt;.</source>
+        <translation>További példákat találunk &lt;a href=&quot;https://matek.hu/zoltan/blog-topics.php?t=b&quot;&gt;Kovács Zoltán blogjában&lt;/a&gt;.</translation>
+    </message>
+    <message>
+        <source>Quick tutorial</source>
+        <translation>Gyorstalpaló</translation>
+    </message>
+    <message>
+        <source>Quick tutorial…</source>
+        <translation>Gyorstalpaló...</translation>
+    </message>
+    <message>
+        <source>Show a short introduction to the program</source>
+        <translation>A program lehetőségeinek gyors ismertetése</translation>
+    </message>
+    <message>
+        <source>In Romans 2:21 Paul seems to quote the Law. In the program in menu Passage&amp;gt;Lookup… the user types &lt;b&gt;KJV Romans 2:21&lt;/b&gt; to check the English version of the text, and similarly, &lt;b&gt;StatResGNT Romans 2:21&lt;/b&gt; to get the Greek version. (Importantly, the modules KJV and StatResGNT need to be installed by the system administrator in advance. See Help&amp;gt;Show available Bibles for your options in simple lookups.) By doing the same for Romans 2:22, Exodus 20:14 and 20:15, the user decides to compare the Greek texts &lt;b&gt;ου μοιχευσεις ου κλεψεις&lt;/b&gt; and &lt;b&gt;κλεπτεις ο λεγων μη μοιχευειν μοιχευεις&lt;/b&gt;. These should copied and pasted in Edit&amp;gt;Text 1… and Edit&amp;gt;Text 2… After then, the program informs the user that the two texts have a Jaccard distance near 0.63 (which is a substantial distance).</source>
+        <translation>A Róma 2:21-ben úgy tűnik, Pál a Törvényt idézi. A program Szakasz&amp;gt;Lookup… menüjében beírhatjuk, hogy &lt;b&gt;KJV Romans 2:21&lt;/b&gt;, mellyel az angol King James fordítás jeleníthető meg. (Amennyiben rendelkezésünkre áll, úgy a KJV helyett magyar fordítást is megadhatunk, pl. a HunRUF jelenti a református fordítást.) Hasonlóan, a &lt;b&gt;StatResGNT Romans 2:21&lt;/b&gt; paraméterrel a görög fordításhoz jutunk. (Fontos, hogy a KJV, a HunRUF ill. a StatResGNT modulok előre telepítve kell legyenek. A Segítség&amp;gt;Elérhető bibliák listája mutatja, hogy a Lookup parancs használatakor milyen lehetőségeink vannak.) Ugyanezt megismételve a Romans 2:22, Exodus 20:14 és 20:15 inputokkal, szeretnénk a &lt;b&gt;ου μοιχευσεις ου κλεψεις&lt;/b&gt; és &lt;b&gt;κλεπτεις ο λεγων μη μοιχευειν μοιχευεις&lt;/b&gt; görög szövegeket összehasonlítani. Ezeket kimásolva és beszúrva a Szerkesztés&amp;gt;Text 1… és Szerkesztés&amp;gt;Text 2… opciókhoz, az összehasonlítás automatikusan megtörténik és a program tájékoztat bennünket, hogy a szövegek Jaccard-eltérése kb. 0.63 (ami elég nagy eltérést jelent).</translation>
+    </message>
+    <message>
+        <source>Show available Bibles</source>
+        <translation>Rendelkezésre álló Bibliák</translation>
+    </message>
+    <message>
+        <source>Available Bible translations:</source>
+        <translation>Rendelkezésre álló bibliafordítások:</translation>
+    </message>
+    <message>
+        <source>Show available Bibles via SWORD</source>
+        <translation>A SWORD rendszeren keresztül elérhető Bibliák</translation>
     </message>
 </context>
 </TS>
