@@ -11,10 +11,10 @@
 #include <boost/algorithm/string/trim.hpp>
 
 #include <QCoreApplication>
-#include <qtconcurrentrun.h>
 #include <QThread>
 #include <QtConcurrent/qtconcurrentmap.h>
 #include <QtCore/qelapsedtimer.h>
+#include <qtconcurrentrun.h>
 
 #include <cstdio>
 
@@ -28,22 +28,37 @@ extern string text[2];
 extern vector<bool> textset;
 extern string collect_info;
 
-string lookupText = "LXX Genesis 1:1"; // example
-string extendText = "LXX StatResGNT Romans 3:13"; // example
+string lookupText = "LXX Genesis 1:1";              // example
+string extendText = "LXX StatResGNT Romans 3:13";   // example
 string getrefsText = "StatResGNT LXX Psalms 117:1"; // example
-string rawText = "LXX Genesis 1 10"; // example
-string searchText = "LXX 2097 1515 189 3"; // example
+string rawText = "LXX Genesis 1 10";                // example
+string searchText = "LXX 2097 1515 189 3";          // example
 
-QString getClipboardInfos() {
-    QString intro = "<b>" + MainWindow::tr("Contents of the clipboards in Greek (and in a-y notation)") + "</b>";
+int maxClipboardShow = 100;
+
+QString getClipboardInfos()
+{
+    string textShown[2];
+    QString greekShown[2];
+    QString intro = "<b>"
+                    + MainWindow::tr("Contents of the clipboards in Greek (and in a-y notation)")
+                    + "</b>";
     for (int i = 0; i < 2; ++i) {
-
         if (text[i].empty())
-            intro += "<br>" + MainWindow::tr("Clipboard %1 is empty.").arg(i+1);
+            intro += "<br>" + MainWindow::tr("Clipboard %1 is empty.").arg(i + 1);
         else {
-            intro += "<br>" + MainWindow::tr("Clipboard %1 contains %2 (%3), length %4.").
-                              arg(i+1).arg(QString(latinToGreek(text[i]).c_str())).
-                              arg(QString(text[i].c_str())).arg(text[i].length());
+            textShown[i] = text[i];
+            greekShown[i] = latinToGreek(text[i]).c_str();
+            if (text[i].length() > maxClipboardShow) {
+                textShown[i] = textShown[i].substr(0, maxClipboardShow) + "…";
+                greekShown[i] = greekShown[i].left(maxClipboardShow) + "…";
+            }
+            intro += "<br>"
+                     + MainWindow::tr("Clipboard %1 contains %2 (%3), length %4.")
+                           .arg(i + 1)
+                           .arg(QString(greekShown[i]))
+                           .arg(QString(textShown[i].c_str()))
+                           .arg(text[i].length());
         }
     }
     if (textset[0] && textset[1]) {
@@ -77,10 +92,10 @@ MainWindow::MainWindow()
 
     QVBoxLayout *layout = new QVBoxLayout;
     layout->setContentsMargins(5, 5, 5, 5);
-    layout->addWidget(topFiller);
+    // layout->addWidget(topFiller);
     layout->addWidget(clipboardInfos);
     layout->addWidget(passageInfos);
-    layout->addWidget(bottomFiller);
+    // layout->addWidget(bottomFiller);
 
     widget->setLayout(layout);
     createActions();
@@ -94,7 +109,8 @@ MainWindow::MainWindow()
     resize(480, 320);
 }
 
-void addBiblesThread(MainWindow* window) {
+void addBiblesThread(MainWindow *window)
+{
     addBibles();
     QString message = MainWindow::tr("Bibles are loaded.");
     window->statusBar()->showMessage(message);
@@ -119,12 +135,18 @@ void addBiblesThread(MainWindow* window) {
 string moduleName2, moduleName1, book1, getrefsRest, verse1ST0, verse1ET0;
 int getrefsStart, getrefsEnd;
 
-void getrefsThread(MainWindow* window) {
+void getrefsThread(MainWindow *window)
+{
     try {
         // Compute...
         collect_info = "";
-        extern void getrefs(const string& moduleName2, const string& moduleName1, const string& book1, const string& verse1S,
-                            int start, const string& verse1E, int end);
+        extern void getrefs(const string &moduleName2,
+                            const string &moduleName1,
+                            const string &book1,
+                            const string &verse1S,
+                            int start,
+                            const string &verse1E,
+                            int end);
         getrefs(moduleName2, moduleName1, book1, verse1ST0, getrefsStart, verse1ET0, getrefsEnd);
         QString message = MainWindow::tr("Finished.");
         window->statusBar()->showMessage(message);
@@ -132,7 +154,8 @@ void getrefsThread(MainWindow* window) {
         boost::trim(collect_info);
         boost::replace_all(collect_info, "\n", "<br>");
 
-        window->passageInfos->append(("<b>Get refs " + getrefsRest + "</b>" + "<br>" + collect_info).c_str());
+        window->passageInfos->append(
+            ("<b>Get refs " + getrefsRest + "</b>" + "<br>" + collect_info).c_str());
 
         QTextCursor tc = window->passageInfos->textCursor();
         tc.setPosition(window->passageInfos->document()->characterCount() - 1);
@@ -141,7 +164,6 @@ void getrefsThread(MainWindow* window) {
         window->statusBar()->showMessage("Computation error.");
         return;
     }
-
 }
 
 void MainWindow::addBibles()
@@ -178,7 +200,7 @@ void MainWindow::greekTextN(int index)
         return; // Success, but nothing happened.
     }
     text[index] = processed; // Store result.
-    textset[index] = true; // activate clipboard
+    textset[index] = true;   // activate clipboard
 
     clipboardInfos->setText(getClipboardInfos());
 }
@@ -242,8 +264,8 @@ void MainWindow::lookup()
     vector<string> tokens;
     boost::split(tokens, rest, boost::is_any_of(" "));
     int restSize = tokens.size();
-    if (restSize == 3) { // e.g. lookup LXX Genesis 1:1
-        collect_info = ""; // reset communication buffer
+    if (restSize == 3) {                                    // e.g. lookup LXX Genesis 1:1
+        collect_info = "";                                  // reset communication buffer
         lookupTranslation(tokens[0], tokens[1], tokens[2]); // simple lookup via Sword
         passageInfos->append(("<b>" + rest + "</b>" + "<br>" + collect_info).c_str());
 
@@ -251,7 +273,8 @@ void MainWindow::lookup()
         tc.setPosition(passageInfos->document()->characterCount() - 1);
         passageInfos->setTextCursor(tc); // Move cursor to the end.
     } else {
-        QString message = tr("Invalid input (3 words are needed: Bible edition, book, chapter:verse).");
+        QString message = tr(
+            "Invalid input (3 words are needed: Bible edition, book, chapter:verse).");
         statusBar()->showMessage(message);
     }
     return; // Success!
@@ -279,8 +302,9 @@ void MainWindow::tokens()
         try {
             collect_info = ""; // reset communication buffer
             getTokens(tokens[0], tokens[1], tokens[2]);
-            passageInfos->append(("<b>" + rest + ", " + tr("tokens").toStdString() +
-                "</b>" + "<br>" + collect_info).c_str());
+            passageInfos->append(
+                ("<b>" + rest + ", " + tr("tokens").toStdString() + "</b>" + "<br>" + collect_info)
+                    .c_str());
 
             QTextCursor tc = passageInfos->textCursor();
             tc.setPosition(passageInfos->document()->characterCount() - 1);
@@ -290,7 +314,8 @@ void MainWindow::tokens()
             statusBar()->showMessage(message);
         }
     } else {
-        QString message = tr("Invalid input (3 words are needed: Bible edition, book, chapter:verse).");
+        QString message = tr(
+            "Invalid input (3 words are needed: Bible edition, book, chapter:verse).");
         statusBar()->showMessage(message);
     }
 }
@@ -323,23 +348,27 @@ void MainWindow::search()
         pattern.push_back(t);
         s += 1; // count the tokens in the pattern
     }
-    if (s==0) { // no pattern was defined
+    if (s == 0) { // no pattern was defined
         statusBar()->showMessage("No pattern was defined.");
         return;
     }
 
     s--;
     int length = pattern.at(s); // the last parameter
-    pattern.pop_back(); // remove it from the token pattern
-    string info = tr("%1 tokens given, search for an extension of max. %2 tokens.").arg(s).arg(length).toStdString();
+    pattern.pop_back();         // remove it from the token pattern
+    string info = tr("%1 tokens given, search for an extension of max. %2 tokens.")
+                      .arg(s)
+                      .arg(length)
+                      .toStdString();
     if (length < s) { // the length must be at least the length of the pattern
         info += " " + tr("Impossible.").toStdString();
         statusBar()->showMessage(info.c_str());
     } else {
         statusBar()->showMessage(info.c_str());
-        collect_info = ""; // reset communication buffer
+        collect_info = "";                                 // reset communication buffer
         searchTokenset(moduleName, pattern, length, true); // Start search...
-        passageInfos->append(("<b>Search " + moduleName + " " + rest + "</b>" + "<br>" + collect_info).c_str());
+        passageInfos->append(
+            ("<b>Search " + moduleName + " " + rest + "</b>" + "<br>" + collect_info).c_str());
 
         QTextCursor tc = passageInfos->textCursor();
         tc.setPosition(passageInfos->document()->characterCount() - 1);
@@ -367,10 +396,10 @@ void MainWindow::lookupN(int index)
     int restSize = tokens.size();
     if (restSize == 3) {
         string verse = "";
-        try { // e.g. lookup1 LXX Genesis 1:1
+        try {                                                     // e.g. lookup1 LXX Genesis 1:1
             verse = lookupVerse(tokens[1], tokens[0], tokens[2]); // lookup in the a-y database
-            text[index] = verse; // Store result.
-            textset[index] = true; // activate clipboard
+            text[index] = verse;                                  // Store result.
+            textset[index] = true;                                // activate clipboard
             statusBar()->showMessage(tr("Stored."));
             clipboardInfos->setText(getClipboardInfos());
         } catch (exception &e) {
@@ -393,7 +422,7 @@ void MainWindow::lookupN(int index)
             }
             // Shift-allowed lookup in the a-y database...
             verse = getText(tokens[1], tokens[0], tokens2.at(0), tokens3.at(0), start, end);
-            text[index] = verse; // Store result.
+            text[index] = verse;   // Store result.
             textset[index] = true; // activate clipboard
             statusBar()->showMessage(tr("Stored."));
             clipboardInfos->setText(getClipboardInfos());
@@ -433,11 +462,11 @@ void MainWindow::raw()
     vector<string> tokens;
     boost::split(tokens, rest, boost::is_any_of(" "));
     int restSize = tokens.size();
-    if (restSize == 4) { // e.g. raw LXX Genesis 1 10
-        string module = tokens[0]; // LXX
-        string book = tokens[1]; // Genesis
+    if (restSize == 4) {                // e.g. raw LXX Genesis 1 10
+        string module = tokens[0];      // LXX
+        string book = tokens[1];        // Genesis
         int startPos = stoi(tokens[2]); // 1
-        int length = stoi(tokens[3]); // 10
+        int length = stoi(tokens[3]);   // 10
         string text = getRaw(module, book, startPos - 1, length);
         passageInfos->append(("<b>Raw " + rest + "</b>" + "<br>" + text).c_str());
 
@@ -471,12 +500,12 @@ void MainWindow::rawN(int index)
     if (restSize == 4) { // e.g. raw1 LXX Genesis 1 10
         // TODO: This part is same as above. Unify.
         try {
-            string module = tokens[0]; // LXX
-            string book = tokens[1]; // Genesis
-            int startPos = stoi(tokens[2]); // 1
-            int length = stoi(tokens[3]); // 10
+            string module = tokens[0];                                // LXX
+            string book = tokens[1];                                  // Genesis
+            int startPos = stoi(tokens[2]);                           // 1
+            int length = stoi(tokens[3]);                             // 10
             text[index] = getRaw(module, book, startPos - 1, length); // Obtain the raw text...
-            textset[index] = true; // Report the result.
+            textset[index] = true;                                    // Report the result.
             statusBar()->showMessage(tr("Stored."));
             clipboardInfos->setText(getClipboardInfos());
             return; // Success!
@@ -531,7 +560,7 @@ void MainWindow::minunique1()
     inputDialog.setWindowTitle("Min. unique 1");
     inputDialog.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     inputDialog.setLabelText(tr("Select a Bible edition:"));
-    inputDialog.setFixedSize(200,3);
+    inputDialog.setFixedSize(200, 3);
 
     if (inputDialog.exec() != QDialog::Accepted)
         return;
@@ -542,16 +571,16 @@ void MainWindow::minunique1()
 
     collect_info = "";
 
-    extern vector<string> find_min_unique(string text, const string& moduleName, bool verbose);
+    extern vector<string> find_min_unique(string text, const string &moduleName, bool verbose);
     find_min_unique(text[0], rest, true);
 
     boost::trim(collect_info);
     boost::replace_all(collect_info, "\n", "<br>");
 
-    QString translated = tr("Minimal unique subtexts of %1 in %2").
-        arg(QString(text[0].c_str())).arg(QString(rest.c_str()));
-    passageInfos->append(("<b>" + translated.toStdString()
-        + "</b><br>" + collect_info).c_str());
+    QString translated = tr("Minimal unique subtexts of %1 in %2")
+                             .arg(QString(text[0].c_str()))
+                             .arg(QString(rest.c_str()));
+    passageInfos->append(("<b>" + translated.toStdString() + "</b><br>" + collect_info).c_str());
 
     QTextCursor tc = passageInfos->textCursor();
     tc.setPosition(passageInfos->document()->characterCount() - 1);
@@ -566,14 +595,14 @@ void MainWindow::findN(int index)
         return;
     }
 
-    QInputDialog inputDialog ;
+    QInputDialog inputDialog;
 
     inputDialog.setOptions(QInputDialog::UseListViewForComboBoxItems);
     inputDialog.setComboBoxItems(getModuleNames());
     inputDialog.setWindowTitle("Find " + QString::number(index + 1));
     inputDialog.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     inputDialog.setLabelText(tr("Select a Bible edition:"));
-    inputDialog.setFixedSize(60,3);
+    inputDialog.setFixedSize(60, 3);
 
     if (inputDialog.exec() != QDialog::Accepted)
         return;
@@ -590,7 +619,8 @@ void MainWindow::findN(int index)
     boost::trim(collect_info);
     boost::replace_all(collect_info, "\n", "<br>");
 
-    QString translated = tr("Searching for %1 in %2").arg(QString(text[index].c_str())).arg(QString(rest.c_str()));
+    QString translated
+        = tr("Searching for %1 in %2").arg(QString(text[index].c_str())).arg(QString(rest.c_str()));
     passageInfos->append(("<b>" + translated.toStdString() + "</b><br>" + collect_info).c_str());
 
     QTextCursor tc = passageInfos->textCursor();
@@ -612,7 +642,7 @@ void MainWindow::extend()
 {
     QInputDialog inputDialog(this);
     inputDialog.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    inputDialog.setFixedSize(300,3);
+    inputDialog.setFixedSize(300, 3);
     inputDialog.setWindowTitle("Extend");
     inputDialog.setLabelText(tr("Parameters:"));
     inputDialog.setTextValue(extendText.c_str());
@@ -630,12 +660,12 @@ void MainWindow::extend()
     int restSize = tokens.size();
     string moduleName1 = tokens[0]; // Old Testament
     string moduleName2 = tokens[1]; // New Testament
-    string book2 = tokens[2]; // a book from the New Testament
+    string book2 = tokens[2];       // a book from the New Testament
     string verse2S, verse2E;
-    if (restSize == 4) { // e.g. extend LXX StatResGNT Romans 3:13
+    if (restSize == 4) {            // e.g. extend LXX StatResGNT Romans 3:13
         verse2S = tokens[3] + "+0"; // add zero plus shift implicitly
         verse2E = tokens[3] + "-0"; // add zero minus shift implicitly
-    } else if (restSize == 5) { // e.g. extend LXX StatResGNT Romans 15:11+38 15:11-22
+    } else if (restSize == 5) {     // e.g. extend LXX StatResGNT Romans 15:11+38 15:11-22
         verse2S = tokens[3];
         verse2E = tokens[4];
     } else {
@@ -655,8 +685,13 @@ void MainWindow::extend()
     try {
         // Compute...
         collect_info = "";
-        extern void extend(const string& moduleName1, const string& moduleName2, const string& book2, const string& verse2S,
-                           int start, const string& verse2E, int end);
+        extern void extend(const string &moduleName1,
+                           const string &moduleName2,
+                           const string &book2,
+                           const string &verse2S,
+                           int start,
+                           const string &verse2E,
+                           int end);
         extend(moduleName1, moduleName2, book2, verse2ST[0], start, verse2ET[0], end);
         passageInfos->append(("<b>Extend " + rest + "</b>" + "<br>" + collect_info).c_str());
 
@@ -674,7 +709,7 @@ void MainWindow::getrefs()
 {
     QInputDialog inputDialog(this);
     inputDialog.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    inputDialog.setFixedSize(300,3);
+    inputDialog.setFixedSize(300, 3);
     inputDialog.setWindowTitle("Get refs");
     inputDialog.setLabelText(tr("Parameters:"));
     inputDialog.setTextValue(getrefsText.c_str());
@@ -696,9 +731,10 @@ void MainWindow::getrefs()
     }
     moduleName2 = tokens[0]; // New Testament
     moduleName1 = tokens[1]; // Old Testament
-    book1 = tokens[2]; // a book from the Old Testament
-    if (restSize == 3) { // TODO: implement this
-        statusBar()->showMessage(tr("Getting references from full books is not yet implemented, sorry."));
+    book1 = tokens[2];       // a book from the Old Testament
+    if (restSize == 3) {     // TODO: implement this
+        statusBar()->showMessage(
+            tr("Getting references from full books is not yet implemented, sorry."));
         return;
     }
     string verse1S, verse1E;
@@ -706,10 +742,12 @@ void MainWindow::getrefs()
         if (book1 == "Psalms") {
             vector<string> r;
             boost::split(r, tokens[3], boost::is_any_of(":"));
-            if (r.size() == 1) { // only the psalm number is given, e.g. getrefs StatResGNT LXX Psalms 51
+            if (r.size()
+                == 1) { // only the psalm number is given, e.g. getrefs StatResGNT LXX Psalms 51
                 verse1S = r[0] + ":1+0";
                 try {
-                    verse1E = r[0] + ":" + to_string(getPsalmLastVerse(moduleName1, stoi(r[0]))) + "-0";
+                    verse1E = r[0] + ":" + to_string(getPsalmLastVerse(moduleName1, stoi(r[0])))
+                              + "-0";
                 } catch (exception &e) {
                     statusBar()->showMessage(tr("Computation error."));
                     return;
@@ -718,7 +756,7 @@ void MainWindow::getrefs()
                 verse1S = tokens[3] + "+0"; // add zero plus shift implicitly
                 verse1E = tokens[3] + "-0"; // add zero minus shift implicitly
             }
-        } else { // this is not a psalm and one verse is given
+        } else {                        // this is not a psalm and one verse is given
             verse1S = tokens[3] + "+0"; // add zero plus shift implicitly
             verse1E = tokens[3] + "-0"; // add zero negative shift implicitly
         }
@@ -753,27 +791,159 @@ void MainWindow::getrefs()
 
 void MainWindow::about()
 {
-    QMessageBox::about(this, tr("About bibref"),
-        tr("<a href=\"https://github.com/kovzol/bibref\">bibref</a> is a tool that helps discovering internal references in the Bible."
-        "<br>It aims at finding quotations of the <a href=\"https://en.wikipedia.org/wiki/Septuagint\">Septuagint</a>"
-        " in the <a href=\"https://en.wikipedia.org/wiki/New_Testament\">Greek New Testament</a>"
-        " in a mechanical way."));
+    QMessageBox::about(
+        this,
+        tr("About bibref"),
+        tr("<a href=\"https://github.com/kovzol/bibref\">bibref</a> is a tool that helps "
+           "discovering internal references in the Bible."
+           "<br>It aims at finding quotations of the <a "
+           "href=\"https://en.wikipedia.org/wiki/Septuagint\">Septuagint</a>"
+           " in the <a href=\"https://en.wikipedia.org/wiki/New_Testament\">Greek New Testament</a>"
+           " in a mechanical way."));
 }
 
 void MainWindow::aboutSword()
 {
-    QMessageBox::about(this, tr("About SWORD"),
-        tr("<a href=\"https://www.crosswire.org/sword/index.jsp\">The SWORD Project</a> is an effort to create an ever-expanding software package "
-        "for research and study of God and His Word. The SWORD Project framework "
-        "allows easy use and study of Bible texts, commentaries, lexicons, "
-        "dictionaries, and other books. Many frontends are built using this framework. "
-        "An installed set of books may be shared among all frontends using the framework.") +
-        "<br><br>" + tr("This program uses version %1 of the SWORD library.").arg(QString(SWVersion().currentVersion)));
+    QMessageBox::about(
+        this,
+        tr("About SWORD"),
+        tr("<a href=\"https://www.crosswire.org/sword/index.jsp\">The SWORD Project</a> is an "
+           "effort to create an ever-expanding software package "
+           "for research and study of God and His Word. The SWORD Project framework "
+           "allows easy use and study of Bible texts, commentaries, lexicons, "
+           "dictionaries, and other books. Many frontends are built using this framework. "
+           "An installed set of books may be shared among all frontends using the framework.")
+            + "<br><br>"
+            + tr("This program uses version %1 of the SWORD library.")
+                  .arg(QString(SWVersion().currentVersion)));
 }
 
-void MainWindow::aboutQt()
+void MainWindow::tutorial()
 {
+    QWidget *widget = new QWidget;
+    // setCentralWidget(widget);
+
+    QVBoxLayout *layout = new QVBoxLayout;
+    layout->setContentsMargins(5, 5, 5, 5);
+
+    QTextBrowser *tutorialText = new QTextBrowser;
+    tutorialText->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    tutorialText->setOpenExternalLinks(true);
+    layout->addWidget(tutorialText);
+
+    QString tutorialContent
+        = "<h2>" + tr("Introduction") + "</h2>"
+          + tr("This Bible study tool offers work on texts that are close to "
+               "the oldest manuscripts. Since there are no punctuation "
+               "(spaces, commas, periods) in the old texts, and there is no "
+               "verse numbering, we consider each book of a Bible edition "
+               "as a continuous raw text of Greek characters from α to ω. "
+               "(To simplify working with texts, Greek characters are transcribed to "
+               "latin characters a-y.)")
+          + "<br>"
+          + tr("A Bible edition is defined as an old compilation of books "
+               "that are considered canonical. Definitely, we work "
+               "with a set of Old Testament books, translated into Greek "
+               "and presented as the electronic version of the Septuagint, "
+               "identified with the name <a "
+               "href=\"https://www.crosswire.org/sword/modules/ModInfo.jsp?modName=LXX\">LXX</a>. "
+               "Also, a set of Greek New Testament books are present, identified with the name "
+               "<a "
+               "href=\"https://www.crosswire.org/sword/modules/"
+               "ModInfo.jsp?modName=StatResGNT\">StatResGNT</a>.")
+          + "<br>"
+          + tr("Research questions like <i>Is an Old Testament passage quoted properly?</i> "
+               "can be studied with this program. Non-punctuated texts can be "
+               "compared without loading Bible databases. Also, if the default databases "
+               "are loaded (via File&gt;Add books...), Greek Bible texts can also "
+               "be compared directly.")
+          + "<br>"
+          + tr("The program is command-driven. Its graphical user interface follows "
+               "the conventions of the terminal based application. Therefore, the commands "
+               "provided by the menus are literally the same as in the terminal based "
+               "application and not translated into other languages, either.")
+          + "<h2>" + tr("Example uses") + "</h2>" + "<ol><li>"
+          + tr("In Romans 2:21 Paul seems to quote the Law. "
+               "In the program in menu Passage&gt;Lookup... the user types <b>KJV Romans 2:21</b> "
+               "to check the English version of the text, and similarly, "
+               "<b>StatResGNT Romans 2:21</b> to get the Greek version. "
+               "(Importantly, the modules KJV and StatResGNT need to be installed by the system "
+               "administrator in advance.) "
+               "By doing the same for Romans 2:22, Exodus 20:14 and 20:15, the "
+               "user decides to compare the Greek texts <b>ου μοιχευσεις ου κλεψεις</b> "
+               "and <b>κλεπτεις ο λεγων μη μοιχευειν μοιχευεις</b>. These should copied and "
+               "pasted in Edit&gt;Text 1... and Edit&gt;Text 2... After then, "
+               "the program informs the user that the two texts have a Jaccard distance "
+               "near 0.63 (which is a substantial distance).")
+          + "</li>" + "<li>"
+          + tr("The words κλεψεις and κλεπτεις are similar. In the a-y transcription "
+               "they are shown as <b>kleceis</b> and <b>klepteis</b>. "
+               "The user may want to enter these words with their a-y transcriptions "
+               "in Edit&gt;Latin Text 1... and Edit&gt;Latin Text 2... "
+               "Their Jaccard distance is near 0.42 (which is a bit closer).")
+          + "</li>" + "<li>"
+          + tr(
+              "Now, the user loads the indexed Bibles via File&gt;Add books... Several features "
+              "of the program can be used from now on. For example, the user can put "
+              "the a-y transcription of a part of Psalms 40:13-17 and 70:1-5 in the two "
+              "clipboards. "
+              "(Note that these texts are numbered as 40:14-18 and 70:1-6 in some Bible editions.) "
+              "This is achievable via Passage&gt;Lookup 1... and Passage&gt;Lookup 2... by typing "
+              "<b>LXX Psalms 40:13+23 40:17</b> and <b>LXX Psalms 70:1+37 70:5</b>, respectively. "
+              "This notation allows to cut the first 23 or 37 letters of the passages. "
+              "(Analogously, appending a number with a minus sign to the end of the passage "
+              "definition, "
+              "it is possible to cut some of the last letters of the passages.) "
+              "The Jaccard distance is near 0.19 (which means a close relationship).")
+          + "</li>" + "<li>"
+          + tr("The user wants to check if Exodus 20:13-17 is repeated in the Old Testament. "
+               "By putting this passage in Passage&gt;Lookup 1... by typing "
+               "<b>LXX Exodus 20:13 20:17</b> it is possible to start a search for an exact "
+               "match via Edit&gt;Search 1... By selecting <b>LXX</b>, the program finds another "
+               "match in Deuteronomy "
+               "5:17-21. Book position 19880-20171 means that the second match can be found in "
+               "Raw&gt;Raw... by entering <b>LXX Deuteronomy 19880 292</b> (here 292 is the "
+               "length), or stored in "
+               "clipboard 2 with the same input in Raw&gt;Raw 2... Here, the Jaccard distance of "
+               "the texts in the clipboards is 0 (because they are identical).")
+          + "</li>" + "<li>"
+          + tr("The user thinks that parts of Psalm 117 are quoted somewhere in the New Testament. "
+               "The command Quotation&gt;Get refs... with parameters <b>StatResGNT LXX Psalms "
+               "117</b> "
+               "starts a search for all possible matches where the Old Testament passage can be a "
+               "unique "
+               "text that is quoted in the New Testament. Among other candidates, Romans 15:11 "
+               "seems to be a plausible result.")
+          + "</li>" + "<li>"
+          + tr("The user would like to identify the quotation mentioned by Paul "
+               "in I Corinthians 1:31. This is a difficult task, so a tokenized "
+               "transcription of the verse is obtained via the command Passage&gt;Tokens... with "
+               "parameters <b>StatResGNT I_Corinthians 1:31</b> (note the underscore) and the "
+               "tokens 2443 2531 1125 3588 2744 1722 2962 2744 are shown. (Currently, "
+               "these are <a "
+               "href=\"https://en.wikipedia.org/wiki/"
+               "Strong%27s_Concordance#Strong's_numbers\">Strong's numbers</a>.) "
+               "After checking these numbers, 2744, 1722 and 2962 seem relevant. "
+               "A search via Edit&gt;Search... with parameters <b>LXX 2744 1722 2962 6</b> "
+               "shows that on a length of 6 tokens there is only one match in the Old Testament, "
+               "namely, in Jeremiah 9:23. Another search with parameters <b>StatResGNT 2744 1722 "
+               "2962 3</b> "
+               "informs the user on a second match in the New Testament, namely, in II Corinthians "
+               "10:17.")
+          + "</li>" + "</ol>"
+          + tr("For further examples we point the reader to <a "
+               "href=\"https://matek.hu/zoltan/blog-topics.php?t=b\">Zoltán Kovács's blog on "
+               "bibref</a>.");
+
+    tutorialText->setText(tutorialContent);
+    widget->setLayout(layout);
+    widget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    widget->setFixedSize(600, 400);
+    widget->setWindowTitle(tr("Quick tutorial"));
+    widget->show();
 }
+
+void MainWindow::aboutQt() {}
 
 void MainWindow::createActions()
 {
@@ -789,7 +959,8 @@ void MainWindow::createActions()
     exitAct->setStatusTip(tr("Exit the application"));
     connect(exitAct, &QAction::triggered, this, &QWidget::close);
 
-    string greekStatusTip = tr("Define a Greek text and put its Latin transcription in clipboard %1").toStdString();
+    string greekStatusTip
+        = tr("Define a Greek text and put its Latin transcription in clipboard %1").toStdString();
     greekText1Act = new QAction("&Text 1…", this);
     greekText1Act->setIcon(QIcon::fromTheme("flag-gr"));
     greekText1Act->setStatusTip(tr(greekStatusTip.c_str()).arg(1));
@@ -832,13 +1003,15 @@ void MainWindow::createActions()
 
     extendAct = new QAction("&Extend…", this);
     extendAct->setIcon(QIcon::fromTheme("go-next"));
-    extendAct->setStatusTip(tr("Extend a passage to the longest possible quotation from another Bible"));
+    extendAct->setStatusTip(
+        tr("Extend a passage to the longest possible quotation from another Bible"));
     connect(extendAct, &QAction::triggered, this, &MainWindow::extend);
     extendAct->setDisabled(true);
 
     getrefsAct = new QAction("&Get refs…", this);
     getrefsAct->setIcon(QIcon::fromTheme("scanner"));
-    getrefsAct->setStatusTip(tr("Search for references in a Bible on the passage in another Bible"));
+    getrefsAct->setStatusTip(
+        tr("Search for references in a Bible on the passage in another Bible"));
     connect(getrefsAct, &QAction::triggered, this, &MainWindow::getrefs);
     getrefsAct->setDisabled(true);
 
@@ -847,7 +1020,9 @@ void MainWindow::createActions()
     lookupAct->setStatusTip(tr("Search for a verse in a book in the given Bible"));
     connect(lookupAct, &QAction::triggered, this, &MainWindow::lookup);
 
-    string lookupStatusTip = tr("Search for a passage in a book in the given Bible and put it in clipboard %1").toStdString();
+    string lookupStatusTip
+        = tr("Search for a passage in a book in the given Bible and put it in clipboard %1")
+              .toStdString();
     lookup1Act = new QAction("Lookup &1…", this);
     lookup1Act->setStatusTip(tr(lookupStatusTip.c_str()).arg(1));
     connect(lookup1Act, &QAction::triggered, this, &MainWindow::lookup1);
@@ -876,7 +1051,9 @@ void MainWindow::createActions()
     connect(rawAct, &QAction::triggered, this, &MainWindow::raw);
     rawAct->setDisabled(true);
 
-    string rawStatusTip = tr("Put the a-y transcription of a positioned text in a given book in clipboard %1").toStdString();
+    string rawStatusTip
+        = tr("Put the a-y transcription of a positioned text in a given book in clipboard %1")
+              .toStdString();
     raw1Act = new QAction("Raw &1…", this);
     raw1Act->setStatusTip(tr(rawStatusTip.c_str()).arg(1));
     connect(raw1Act, &QAction::triggered, this, &MainWindow::raw1);
@@ -900,6 +1077,10 @@ void MainWindow::createActions()
     aboutQtAct->setStatusTip(tr("Show the Qt library's About box"));
     connect(aboutQtAct, &QAction::triggered, qApp, &QApplication::aboutQt);
     connect(aboutQtAct, &QAction::triggered, this, &MainWindow::aboutQt);
+
+    tutorialAct = new QAction(tr("Quick tutorial…"), this);
+    tutorialAct->setStatusTip(tr("Show a short introduction to the program"));
+    connect(tutorialAct, &QAction::triggered, this, &MainWindow::tutorial);
 }
 
 void MainWindow::createMenus()
@@ -940,6 +1121,8 @@ void MainWindow::createMenus()
 
     helpMenu = menuBar()->addMenu(tr("&Help"));
     helpMenu->addAction(aboutAct);
+    helpMenu->addAction(tutorialAct);
+    helpMenu->addSeparator();
     helpMenu->addAction(aboutSwordAct);
     helpMenu->addAction(aboutQtAct);
 }
