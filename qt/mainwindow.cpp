@@ -869,7 +869,7 @@ void MainWindow::tutorial()
                "to check the English version of the text, and similarly, "
                "<b>StatResGNT Romans 2:21</b> to get the Greek version. "
                "(Importantly, the modules KJV and StatResGNT need to be installed by the system "
-               "administrator in advance. See Help&gt;Show available Bibles for your options in "
+               "administrator in advance. See Help&gt;Show available Bibles… for your options in "
                "simple lookups.) "
                "By doing the same for Romans 2:22, Exodus 20:14 and 20:15, the "
                "user decides to compare the Greek texts <b>ου μοιχευσεις ου κλεψεις</b> "
@@ -1111,7 +1111,7 @@ void MainWindow::createActions()
     tutorialAct->setStatusTip(tr("Show a short introduction to the program"));
     connect(tutorialAct, &QAction::triggered, this, &MainWindow::tutorial);
 
-    showAvailableBiblesAct = new QAction(tr("Show available Bibles"), this);
+    showAvailableBiblesAct = new QAction(tr("Show available Bibles…"), this);
     showAvailableBiblesAct->setStatusTip(tr("Show available Bibles via SWORD"));
     connect(showAvailableBiblesAct, &QAction::triggered, this, &MainWindow::showSwordBibles);
 }
