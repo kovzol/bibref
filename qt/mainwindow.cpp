@@ -6,6 +6,7 @@
 #include "swmgr.h"
 #include "swversion.h"
 
+#include <boost/algorithm/string/find.hpp>
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/trim.hpp>
@@ -868,7 +869,8 @@ void MainWindow::tutorial()
                "to check the English version of the text, and similarly, "
                "<b>StatResGNT Romans 2:21</b> to get the Greek version. "
                "(Importantly, the modules KJV and StatResGNT need to be installed by the system "
-               "administrator in advance.) "
+               "administrator in advance. See Help&gt;Show available Bibles for your options in "
+               "simple lookups.) "
                "By doing the same for Romans 2:22, Exodus 20:14 and 20:15, the "
                "user decides to compare the Greek texts <b>ου μοιχευσεις ου κλεψεις</b> "
                "and <b>κλεπτεις ο λεγων μη μοιχευειν μοιχευεις</b>. These should copied and "
@@ -941,6 +943,33 @@ void MainWindow::tutorial()
     widget->setFixedSize(600, 400);
     widget->setWindowTitle(tr("Quick tutorial"));
     widget->show();
+}
+
+void MainWindow::showSwordBibles()
+{
+    collect_info = "";
+    showAvailableBibles();
+    // E.g.: "Available Bible versions: KJV, StatResGNT."
+    int start = collect_info.find(":");
+    vector<string> bibles;
+    boost::split(bibles,
+                 collect_info.substr(start + 2, collect_info.length() - start - 4),
+                 boost::is_any_of(","));
+    QStringList b;
+    for (string bible : bibles) {
+        b.append(QString(bible.c_str()).trimmed());
+    }
+
+    QInputDialog inputDialog;
+
+    inputDialog.setOptions(QInputDialog::UseListViewForComboBoxItems | QInputDialog::NoButtons);
+    inputDialog.setComboBoxItems(b);
+    inputDialog.setWindowTitle(tr("Show available Bibles"));
+    inputDialog.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    inputDialog.setLabelText(tr("Available Bible translations:"));
+    inputDialog.setFixedSize(200, 5);
+
+    inputDialog.exec();
 }
 
 void MainWindow::aboutQt() {}
@@ -1081,6 +1110,10 @@ void MainWindow::createActions()
     tutorialAct = new QAction(tr("Quick tutorial…"), this);
     tutorialAct->setStatusTip(tr("Show a short introduction to the program"));
     connect(tutorialAct, &QAction::triggered, this, &MainWindow::tutorial);
+
+    showAvailableBiblesAct = new QAction(tr("Show available Bibles"), this);
+    showAvailableBiblesAct->setStatusTip(tr("Show available Bibles via SWORD"));
+    connect(showAvailableBiblesAct, &QAction::triggered, this, &MainWindow::showSwordBibles);
 }
 
 void MainWindow::createMenus()
@@ -1122,6 +1155,7 @@ void MainWindow::createMenus()
     helpMenu = menuBar()->addMenu(tr("&Help"));
     helpMenu->addAction(aboutAct);
     helpMenu->addAction(tutorialAct);
+    helpMenu->addAction(showAvailableBiblesAct);
     helpMenu->addSeparator();
     helpMenu->addAction(aboutSwordAct);
     helpMenu->addAction(aboutQtAct);
