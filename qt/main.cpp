@@ -1,10 +1,8 @@
-#define BIBREF_VERSION "2024Mar03"
+#define BIBREF_VERSION "2024Mar04"
 
 #include <QApplication>
 
 #include "mainwindow.h"
-
-using namespace Qt::StringLiterals;
 
 int main(int argc, char *argv[])
 {

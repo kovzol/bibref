@@ -14,7 +14,12 @@ qt6_add_translation(QM_FILES ${TRANSLATION_FILES})
 
 include_directories(/usr/include/sword)
 
-qt_standard_project_setup()
+# This works when Qt >= 6.3:
+# qt_standard_project_setup()
+# Otherwise, with Qt <= 6.2 this is required:
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
 
 add_definitions(-DPROJECT_SOURCE_DIR="${PROJECT_SOURCE_DIR}")
 

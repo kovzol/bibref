@@ -805,6 +805,34 @@ void MainWindow::about()
 
 void MainWindow::aboutSword()
 {
+    // Avoid showing bibref's logo inside the window (which is the default for about boxes)...
+    QWidget *widget = new QWidget;
+    widget->setWindowIcon(QIcon(PROJECT_SOURCE_DIR "/logo-Psalm40-192.png"));
+    QTextBrowser *aboutText = new QTextBrowser;
+    QVBoxLayout *layout = new QVBoxLayout;
+    layout->setContentsMargins(5, 5, 5, 5);
+    aboutText->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    aboutText->setOpenExternalLinks(true);
+    layout->addWidget(aboutText);
+
+    QString aboutContent
+        = tr("<a href=\"https://www.crosswire.org/sword/index.jsp\">The SWORD Project</a> is an "
+             "effort to create an ever-expanding software package "
+             "for research and study of God and His Word. The SWORD Project framework "
+             "allows easy use and study of Bible texts, commentaries, lexicons, "
+             "dictionaries, and other books. Many frontends are built using this framework. "
+             "An installed set of books may be shared among all frontends using the framework.")
+          + "<br><br>"
+          + tr("This program uses version %1 of the SWORD library.")
+                .arg(QString(SWVersion().currentVersion));
+    aboutText->setText(aboutContent);
+    widget->setLayout(layout);
+    widget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    widget->setFixedSize(400, 200);
+    widget->setWindowTitle(tr("About SWORD"));
+    widget->show();
+
+    /*
     QMessageBox::about(
         this,
         tr("About SWORD"),
@@ -817,12 +845,13 @@ void MainWindow::aboutSword()
             + "<br><br>"
             + tr("This program uses version %1 of the SWORD library.")
                   .arg(QString(SWVersion().currentVersion)));
+    */
 }
 
 void MainWindow::tutorial()
 {
     QWidget *widget = new QWidget;
-    // setCentralWidget(widget);
+    widget->setWindowIcon(QIcon(PROJECT_SOURCE_DIR "/logo-Psalm40-192.png"));
 
     QVBoxLayout *layout = new QVBoxLayout;
     layout->setContentsMargins(5, 5, 5, 5);
