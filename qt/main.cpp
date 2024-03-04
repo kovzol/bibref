@@ -1,3 +1,5 @@
+#define BIBREF_VERSION "2024Mar03"
+
 #include <QApplication>
 
 #include "mainwindow.h"
@@ -6,6 +8,10 @@ using namespace Qt::StringLiterals;
 
 int main(int argc, char *argv[])
 {
+    QCoreApplication::setApplicationName("bibref");
+    QCoreApplication::setApplicationVersion(BIBREF_VERSION);
+    // QCoreApplication::setOrganizationName("Zoltán Kovács");
+    // QCoreApplication::setOrganizationDomain("kovzol.github.io");
     QApplication app(argc, argv);
 
     QString language = QLocale::system().name();
@@ -28,6 +34,7 @@ int main(int argc, char *argv[])
     // FIXME: the last item should be inserted in a simpler and more flexible way.
 
     MainWindow window;
+    window.setWindowIcon(QIcon(PROJECT_SOURCE_DIR "/logo-Psalm40-192.png"));
     window.show();
     return app.exec();
 }
