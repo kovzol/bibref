@@ -26,14 +26,14 @@ jobs:
         make
         make install || true
     - name: prerequisites-qt
-       run: |
-          sudo apt install qt6-base-dev qt6-tools-dev qt6-tools-dev-tools qt6-l10n-tools linguist-qt6 libgl1-mesa-dev freeglut3-dev
-     - name: make-qt
-       run: |
-         mkdir build-qt
-         cd build-qt
-         cmake ../qt
-         make
+      run: |
+        sudo apt install qt6-base-dev qt6-tools-dev qt6-tools-dev-tools qt6-l10n-tools linguist-qt6 libgl1-mesa-dev freeglut3-dev
+    - name: make-qt
+      run: |
+        mkdir build-qt
+        cd build-qt
+        cmake ../qt
+        make
     - name: install-emscripten
       run: |
         git clone https://github.com/emscripten-core/emsdk.git
