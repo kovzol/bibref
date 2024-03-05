@@ -54,8 +54,9 @@ target_link_libraries(bibref-qt PRIVATE
     Qt6::Concurrent
     ${sword_LIBRARIES} ${Boost_LIBRARIES} ${readline_LIBRARIES})
 
-install(TARGETS bibref-qt
-    RUNTIME DESTINATION "${INSTALL_EXAMPLEDIR}"
-    BUNDLE DESTINATION "${INSTALL_EXAMPLEDIR}"
-    LIBRARY DESTINATION "${INSTALL_EXAMPLEDIR}"
+install(
+ CODE " set(ENV{SWORD_PATH} \"$ENV{HOME}/.sword\") "
+ CODE " execute_process (COMMAND bash -c \"test -r \\\"$SWORD_PATH/mods.d/lxx.conf\\\" || unzip -d ~ ${CMAKE_SOURCE_DIR}/../sword-lxx-sblgnt-statresgnt-kjv-fallback.zip\") "
 )
+
+install(TARGETS bibref-qt DESTINATION bin)
