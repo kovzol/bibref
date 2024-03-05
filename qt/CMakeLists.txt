@@ -12,7 +12,14 @@ set_source_files_properties(${TRANSLATION_FILES}
     PROPERTIES OUTPUT_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}")
 qt6_add_translation(QM_FILES ${TRANSLATION_FILES})
 
-include_directories(/usr/include/sword)
+set(Boost_USE_STATIC_LIBS OFF)
+set(Boost_USE_MULTITHREADED ON)
+set(Boost_USE_STATIC_RUNTIME OFF)
+find_package(Boost 1.74.0 COMPONENTS system filesystem)
+
+pkg_check_modules (readline REQUIRED readline)
+
+include_directories(${sword_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} ${readline_INCLUDE_DIRS})
 
 # This works when Qt >= 6.3:
 # qt_standard_project_setup()
@@ -45,7 +52,7 @@ target_link_libraries(bibref-qt PRIVATE
     Qt6::Gui
     Qt6::Widgets
     Qt6::Concurrent
-    sword readline boost_system boost_filesystem)
+    ${sword_LIBRARIES} ${Boost_LIBRARIES} ${readline_LIBRARIES})
 
 install(TARGETS bibref-qt
     RUNTIME DESTINATION "${INSTALL_EXAMPLEDIR}"
