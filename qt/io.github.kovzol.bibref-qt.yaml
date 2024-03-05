@@ -29,13 +29,15 @@ modules:
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_SHARED_LIBS=ON
+      - -UPROJECT_SOURCE_DIR
+      - -DPROJECT_SOURCE_DIR=/app/share/bibref-qt
     build-options:
       env:
         XDG_DATA_HOME: /app/home
     sources:
       - type: archive
-        url: https://github.com/kovzol/bibref/archive/f781aa4e441d01836ffb14d2492bc75cf83e9266.zip
-        sha256: da9b31ed91524c31e67b01847d84a385da51a063ebc4218bcea8c02b5153bf61
+        url: https://github.com/kovzol/bibref/archive/97e2446f1fa3dad21c38eaf9b5a2ad0f35b7db72.zip
+        sha256: 0c7a1a0b601695338688706b9cecc8c59a66edae21f356428872c1d53f412019
   - name: finalize
     buildsystem: simple
     build-commands:
