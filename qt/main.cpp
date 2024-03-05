@@ -25,14 +25,21 @@ int main(int argc, char *argv[])
         app.installTranslator(&qtBaseTranslator);
     }
     QTranslator bibrefTranslator;
-    QString projectSourceDir = PROJECT_SOURCE_DIR; // This must be set externally, currently done via cmake
-    if (bibrefTranslator.load(language, projectSourceDir)) {
+    QString qmDir;
+    if (std::filesystem::exists(PROJECT_SOURCE_DIR "/hu.qm"))
+        qmDir = PROJECT_SOURCE_DIR; // This must be set externally, currently done via cmake
+    else
+        qmDir = INSTALL_PREFIX "/share/bibref-qt/"; // This must be set externally, currently done via cmake
+    if (bibrefTranslator.load(language, qmDir)) {
         app.installTranslator(&bibrefTranslator);
     }
     // FIXME: the last item should be inserted in a simpler and more flexible way.
 
     MainWindow window;
-    window.setWindowIcon(QIcon(PROJECT_SOURCE_DIR "/logo-Psalm40-192.png"));
+    if (std::filesystem::exists(PROJECT_SOURCE_DIR "/logo-Psalm40-192.png"))
+        window.setWindowIcon(QIcon(PROJECT_SOURCE_DIR "/logo-Psalm40-192.png"));
+    else
+        window.setWindowIcon(QIcon(INSTALL_PREFIX "/share/bibref-qt/logo-Psalm40-192.png"));
     window.show();
     return app.exec();
 }

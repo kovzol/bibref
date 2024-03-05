@@ -28,7 +28,8 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-add_definitions(-DPROJECT_SOURCE_DIR="${PROJECT_SOURCE_DIR}")
+add_definitions(-DPROJECT_SOURCE_DIR="${PROJECT_SOURCE_DIR}"
+    -DINSTALL_PREFIX="${CMAKE_INSTALL_PREFIX}")
 
 qt_add_executable(bibref-qt
     main.cpp
@@ -60,3 +61,5 @@ install(
 )
 
 install(TARGETS bibref-qt DESTINATION bin)
+
+install(FILES ${QM_FILES} ../logo-Psalm40-192.png DESTINATION share/bibref-qt)

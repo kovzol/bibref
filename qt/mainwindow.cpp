@@ -807,7 +807,11 @@ void MainWindow::aboutSword()
 {
     // Avoid showing bibref's logo inside the window (which is the default for about boxes)...
     QWidget *widget = new QWidget;
-    widget->setWindowIcon(QIcon(PROJECT_SOURCE_DIR "/logo-Psalm40-192.png"));
+    if (std::filesystem::exists(PROJECT_SOURCE_DIR "/logo-Psalm40-192.png"))
+        widget->setWindowIcon(QIcon(PROJECT_SOURCE_DIR "/logo-Psalm40-192.png"));
+    else
+        widget->setWindowIcon(QIcon(INSTALL_PREFIX "/share/bibref-qt/logo-Psalm40-192.png"));
+
     QTextBrowser *aboutText = new QTextBrowser;
     QVBoxLayout *layout = new QVBoxLayout;
     layout->setContentsMargins(5, 5, 5, 5);
@@ -851,7 +855,10 @@ void MainWindow::aboutSword()
 void MainWindow::tutorial()
 {
     QWidget *widget = new QWidget;
-    widget->setWindowIcon(QIcon(PROJECT_SOURCE_DIR "/logo-Psalm40-192.png"));
+    if (std::filesystem::exists(PROJECT_SOURCE_DIR "/logo-Psalm40-192.png"))
+        widget->setWindowIcon(QIcon(PROJECT_SOURCE_DIR "/logo-Psalm40-192.png"));
+    else
+        widget->setWindowIcon(QIcon(INSTALL_PREFIX "/share/bibref-qt/logo-Psalm40-192.png"));
 
     QVBoxLayout *layout = new QVBoxLayout;
     layout->setContentsMargins(5, 5, 5, 5);
