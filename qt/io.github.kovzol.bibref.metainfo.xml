@@ -3,7 +3,11 @@
   <id>io.github.kovzol.bibref</id>
 
   <name>bibref</name>
-  <summary>A tool that helps discovering internal references in the Bible</summary>
+  <summary>Discover references in the Bible</summary>
+
+  <developer id="io.github.kovzol">
+    <name>Zoltán Kovács</name>
+  </developer>
 
   <metadata_license>FSFAP</metadata_license>
   <project_license>FSFAP</project_license>
@@ -42,6 +46,7 @@
     <screenshots>
       <screenshot type="default">
         <image>https://github.com/kovzol/bibref/blob/master/qt/bibref-qt.png?raw=true</image>
+        <caption>Some simple queries made with bibref</caption>
       </screenshot>
     </screenshots>
   </component>

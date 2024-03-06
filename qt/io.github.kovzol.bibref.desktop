@@ -6,6 +6,6 @@ Name=bibref
 Comment=A tool that helps discovering internal references in the Bible
 Categories=Science;Spirituality;
 
-Icon=bibref
+Icon=io.github.kovzol.bibref
 Exec=bibref-qt
 Terminal=false

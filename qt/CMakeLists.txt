@@ -73,9 +73,9 @@ install(TARGETS bibref-qt DESTINATION bin)
 install(FILES ${QM_FILES} ../logo-Psalm40-192.png DESTINATION share/bibref-qt)
 
 # Create desktop icon:
-install(FILES ../logo-Psalm40-128.png DESTINATION share/icons/hicolor/128x128/apps RENAME bibref.png)
-install(FILES ../logo-Psalm40-192.png DESTINATION share/icons/hicolor/192x192/apps RENAME bibref.png)
-install(FILES ../logo-Psalm40-256.png DESTINATION share/icons/hicolor/256x256/apps RENAME bibref.png)
+install(FILES ../logo-Psalm40-128.png DESTINATION share/icons/hicolor/128x128/apps RENAME io.github.kovzol.bibref.png)
+install(FILES ../logo-Psalm40-192.png DESTINATION share/icons/hicolor/192x192/apps RENAME io.github.kovzol.bibref.png)
+install(FILES ../logo-Psalm40-256.png DESTINATION share/icons/hicolor/256x256/apps RENAME io.github.kovzol.bibref.png)
 
 # Copy other freedesktop standard files:
 install(FILES io.github.kovzol.bibref.desktop DESTINATION share/applications)
