@@ -36,10 +36,16 @@ int main(int argc, char *argv[])
     // FIXME: the last item should be inserted in a simpler and more flexible way.
 
     MainWindow window;
+    // Put the application logo on the window:
     if (std::filesystem::exists(PROJECT_SOURCE_DIR "/logo-Psalm40-192.png"))
         window.setWindowIcon(QIcon(PROJECT_SOURCE_DIR "/logo-Psalm40-192.png"));
     else
         window.setWindowIcon(QIcon(INSTALL_PREFIX "/share/bibref-qt/logo-Psalm40-192.png"));
+
+    // Set working directory to home if XDG standards are used (e.g., for flatpak):
+    char *home = std::getenv("XDG_DATA_HOME");
+    if (home)
+       std::filesystem::current_path(std::getenv("XDG_DATA_HOME"));
     window.show();
     return app.exec();
 }
