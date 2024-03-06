@@ -56,9 +56,9 @@ target_link_libraries(bibref-qt PRIVATE
     ${sword_LIBRARIES} ${Boost_LIBRARIES} ${readline_LIBRARIES})
 
 # If not set, XDG_DATA_HOME is set to $HOME:
-if(NOT XDG_DATA_HOME)
+if(NOT DEFINED ENV{XDG_DATA_HOME})
     set(ENV{XDG_DATA_HOME} $ENV{HOME})
-endif(NOT XDG_DATA_HOME)
+endif(NOT DEFINED ENV{XDG_DATA_HOME})
 
 # Create Sword modules from the bundle:
 install(
