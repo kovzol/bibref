@@ -36,9 +36,14 @@ modules:
         XDG_DATA_HOME: /app/home
     sources:
       - type: archive
-        url: https://github.com/kovzol/bibref/archive/6da38ccdf1be1150ce030bbe40ba5b325e0a35d3.zip
-        sha256: bc190bd9871aca7d0e4a7b7b53320904e0e3b2dc452e0615f9f4f9aa9354136f
+        url: https://github.com/kovzol/bibref/archive/787948273e9dbc720c2ac0ec967658b579169a15.zip
+        sha256: cabee2a3a11ad8a7c6ef8586ab99a68def5dfb6d73a754ecf57f1713459a0a69
+    build-commands:
+      - cp bibref-qt.png /app/screenshots/x86_64
+
   - name: finalize
     buildsystem: simple
     build-commands:
       - mv /app/home/.sword/* /app/share/sword
+#      - mkdir -p /app/usr
+#      - cd /app/usr; ln -s ../share share

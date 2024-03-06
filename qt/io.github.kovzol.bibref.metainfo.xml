@@ -5,6 +5,8 @@
   <name>bibref</name>
   <summary>Discover references in the Bible</summary>
 
+  <url type="homepage">https://io.github.kovzol/bibref</url>
+
   <developer id="io.github.kovzol">
     <name>Zoltán Kovács</name>
   </developer>
@@ -49,4 +51,20 @@
         <caption>Some simple queries made with bibref</caption>
       </screenshot>
     </screenshots>
+
+  <content_rating type="oars-1.1" />
+
+  <releases>
+    <release version="2024Mar06" date="2023-03-06">
+    <url type="details">https://github.com/kovzol/bibref/commits/787948273e9dbc720c2ac0ec967658b579169a15/</url>
+      <description>
+        <p>Release description</p>
+          <ul>
+            <li>First flathub version</li>
+            <li>Qt interface</li>
+          </ul>
+      </description>
+    </release>
+  </releases>
+
   </component>

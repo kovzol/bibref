@@ -1,4 +1,4 @@
-#define BIBREF_VERSION "2024Mar04"
+#define BIBREF_VERSION "2024Mar06"
 
 #include <QApplication>
 
