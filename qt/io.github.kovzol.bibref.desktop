@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+
+Name=bibref
+Comment=A tool that helps discovering internal references in the Bible
+Categories=Science;Spirituality;
+
+Icon=bibref
+Exec=bibref-qt
+Terminal=false
