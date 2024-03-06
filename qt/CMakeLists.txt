@@ -55,11 +55,22 @@ target_link_libraries(bibref-qt PRIVATE
     Qt6::Concurrent
     ${sword_LIBRARIES} ${Boost_LIBRARIES} ${readline_LIBRARIES})
 
+# If not set, XDG_DATA_HOME is set to $HOME:
+if(NOT XDG_DATA_HOME)
+    set(ENV{XDG_DATA_HOME} $ENV{HOME})
+endif(NOT XDG_DATA_HOME)
+
+# Create Sword modules from the bundle:
 install(
  CODE " set(ENV{SWORD_PATH} \"$ENV{XDG_DATA_HOME}/.sword\") "
  CODE " execute_process (COMMAND bash -c \"test -r \\\"$SWORD_PATH/mods.d/lxx.conf\\\" || unzip -d $ENV{XDG_DATA_HOME} ${CMAKE_SOURCE_DIR}/../sword-lxx-sblgnt-statresgnt-kjv-fallback.zip\") "
 )
 
+# Copy executable:
 install(TARGETS bibref-qt DESTINATION bin)
 
+# Copy translations and logo:
 install(FILES ${QM_FILES} ../logo-Psalm40-192.png DESTINATION share/bibref-qt)
+
+# Create desktop icon:
+install(FILES ../logo-Psalm40-192.png DESTINATION share/icons/hicolor/192/apps RENAME bibref.png)
