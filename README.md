@@ -64,7 +64,7 @@ on many other systems.
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-white.svg)](https://snapcraft.io/bibref)
 
 After installation you need to use the command `bibref` via command line.
-In the snap version only the LXX, SBLGNT, StatResGNT and [KJV]((http://www.crosswire.org/sword/modules/ModInfo.jsp?modName=KJV) modules are present.
+In the snap version only the LXX, SBLGNT, StatResGNT and [KJV](http://www.crosswire.org/sword/modules/ModInfo.jsp?modName=KJV) modules are present.
 If you want to use additional modules, please try installing the tool from source code (see below).
 
 ### Web version (fallback)
