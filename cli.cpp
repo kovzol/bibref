@@ -19,7 +19,9 @@ using namespace std;
 
 #include <unistd.h>
 #include <sys/types.h>
+#ifndef __MINGW32__
 #include <pwd.h>
+#endif
 
 #include "books.h"
 #include "cli.h"
@@ -881,6 +883,7 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
   set_colors(colored); // Set default coloring.
 
 #ifndef __EMSCRIPTEN__
+#ifndef __MINGW32__
   // Load the readline history...
   char* buf;
   struct passwd *pw = getpwuid(getuid());
@@ -888,8 +891,9 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
   strcat(histfile, "/.bibref_history");
   read_history(histfile);
 #endif
+#endif
 
-#ifdef __EMSCRIPTEN__
+#if defined(__EMSCRIPTEN__) || defined(__MINGW32__)
 #define MAX_LINE_LENGTH 1024
   char buf[MAX_LINE_LENGTH + 1];
   string line;
@@ -897,13 +901,13 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
 
   // The main input/output loop...
   while (
-       #ifndef __EMSCRIPTEN__
+       #if !defined(__EMSCRIPTEN__) && !defined(__MINGW32__)
          (buf = readline(input_prepend)) != nullptr
        #else
          (getline(cin, line) && (strcpy(buf, line.c_str())))
        #endif
          ) {
-#ifndef __EMSCRIPTEN__
+#if !defined(__EMSCRIPTEN__) && !defined(__MINGW32__)
     if (strlen(buf) > 0) {
       add_history(buf);
       write_history(histfile);

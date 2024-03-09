@@ -17,6 +17,13 @@ set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_RUNTIME OFF)
 find_package(Boost 1.74.0 COMPONENTS system filesystem)
 
+if(MINGW)
+    find_package(ICU REQUIRED uc in)
+    find_package(LibLZMA REQUIRED)
+    find_package(ZLIB REQUIRED)
+    find_package(BZip2 REQUIRED)
+endif(MINGW)
+
 pkg_check_modules (readline REQUIRED readline)
 
 include_directories(${sword_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} ${readline_INCLUDE_DIRS})
@@ -53,7 +60,9 @@ target_link_libraries(bibref-qt PRIVATE
     Qt6::Gui
     Qt6::Widgets
     Qt6::Concurrent
-    ${sword_LIBRARIES} ${Boost_LIBRARIES} ${readline_LIBRARIES})
+    ${sword_LIBRARIES} ${Boost_LIBRARIES} ${readline_LIBRARIES}
+    ${ICU_LIBRARIES} ${LIBLZMA_LIBRARIES} ${ZLIB_LIBRARIES} ${BZIP2_LIBRARIES}
+)
 
 # If not set, XDG_DATA_HOME is set to $HOME:
 if(NOT DEFINED ENV{XDG_DATA_HOME})
