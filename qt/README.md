@@ -27,7 +27,7 @@ See the steps in the GitHub Actions (in `../.github`), or in the flatpak scripts
 
 The SWORD library must be compiled and installed first. Use clang++ (instead of g++) when
 starting cmake via setting the environment variables CC=clang and CXX=clang++.
-There may be issues with conversion errors. In such cases, instead of using `(unsigned int)`,
+There may be issues with conversion errors. In such cases, instead of using `(unsigned long)`,
 the cast `(size_t)` can fix the compilation errors.
 There are about 20 occurrences of this type of problem in SWORD version 1.9.0.
 
@@ -41,5 +41,5 @@ folder may be a workaround.
 ## Minor issues
 
 Currently, the path to translation files (*.qm) and the bibref logo are hardcoded
-in main.cpp and mainwindow.cpp. Therefore, these files should be present if
+in main.cpp and mainwindow.cpp. Therefore, these files should be present
 for the localization and to show the application icon properly.

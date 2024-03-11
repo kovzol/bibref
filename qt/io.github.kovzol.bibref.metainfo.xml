@@ -5,7 +5,7 @@
   <name>bibref</name>
   <summary>Discover references in the Bible</summary>
 
-  <url type="homepage">https://io.github.kovzol/bibref</url>
+  <url type="homepage">https://kovzol.github.io/bibref</url>
 
   <developer id="io.github.kovzol">
     <name>Zoltán Kovács</name>
@@ -15,15 +15,11 @@
   <project_license>FSFAP</project_license>
 
   <description>
-    <p>
-      # bibref
-    </p>
+    <h1>bibref</h1>
     <p>
       <em>bibref</em> is a tool that helps discovering internal references in the Bible. It aims at finding citations of the [Septuagint](https://en.wikipedia.org/wiki/Septuagint) in the [Greek New Testament](https://en.wikipedia.org/wiki/New_Testament) in a mechanical way.
       </p>
-      <p>
-        ## Background
-      </p>
+      <h2>Background</h2>
       <p>
         The [Bible](https://en.wikipedia.org/wiki/Bible), a book that has been translated into [many languages](https://en.wikipedia.org/wiki/Bible_translations), is maybe the most important book has ever existed. Believers have evidence that it is God&apos;s word, written by various people being inspired by God himself.
       </p>
@@ -33,9 +29,7 @@
       <p>
         There are several research projects on this, and today it seems to be clear that many authors of the New Testament cited a Greek translation of the Hebrew text, namely the Septuagint, that was widely popular in the first centuries, and still popular in some Christian churches. Many Bible translations, however, mostly use only the Hebrew text as a basis of the Old Testament, because the importance of the Septuagint is not yet widely identified.
       </p>
-      <p>
-        ## This project
-      </p>
+      <h2>This project</h2>
       <p>
         This software project attempts to support finding citations of the Septuagint in the New Testament automatically. The work is based on [The SWORD Project](https://www.crosswire.org/sword/index.jsp).
       </p>
