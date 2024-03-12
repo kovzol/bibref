@@ -1,0 +1,165 @@
+diff -ur orig/sword-1.9.0/CMakeLists.txt sword-1.9.0/CMakeLists.txt
+--- orig/sword-1.9.0/CMakeLists.txt	2020-11-05 01:00:51.000000000 +0100
++++ sword-1.9.0/CMakeLists.txt	2024-03-12 23:54:55.338703800 +0100
+@@ -50,7 +50,7 @@
+ FIND_PACKAGE(BZIP2 QUIET)
+ FIND_PACKAGE(XZ QUIET)
+ FIND_PACKAGE(ICU QUIET
+-                COMPONENTS data i18n io uc)
++                COMPONENTS data i18n io uc in)
+ FIND_PACKAGE(CURL QUIET)
+ FIND_PACKAGE(CLucene QUIET)
+ FIND_PACKAGE(ZLIB QUIET)
+diff -ur orig/sword-1.9.0/src/modules/common/rawstr4.cpp sword-1.9.0/src/modules/common/rawstr4.cpp
+--- orig/sword-1.9.0/src/modules/common/rawstr4.cpp	2020-11-05 01:00:51.000000000 +0100
++++ sword-1.9.0/src/modules/common/rawstr4.cpp	2024-03-07 15:09:42.872374600 +0100
+@@ -113,7 +113,7 @@
+ {
+ 	int size;
+ 	char ch;
+-	if ((unsigned long)datfd > 0) {
++	if ((size_t)datfd > 0) {
+ 		datfd->seek(ioffset, SEEK_SET);
+ 		for (size = 0; datfd->read(&ch, 1) == 1; size++) {
+ 			if ((ch == '\\') || (ch == 10) || (ch == 13))
+@@ -147,7 +147,7 @@
+ {
+ 	SW_u32 offset;
+ 	
+-	if ((unsigned long)idxfd > 0) {
++	if ((size_t)idxfd > 0) {
+ 		idxfd->seek(ioffset, SEEK_SET);
+ 
+ 		idxfd->read(&offset, 4);
+diff -ur orig/sword-1.9.0/src/modules/filters/cipherfil.cpp sword-1.9.0/src/modules/filters/cipherfil.cpp
+--- orig/sword-1.9.0/src/modules/filters/cipherfil.cpp	2020-11-05 01:00:51.000000000 +0100
++++ sword-1.9.0/src/modules/filters/cipherfil.cpp	2024-03-07 15:14:23.766209000 +0100
+@@ -56,7 +56,7 @@
+ 			text.setSize(len + 5);
+ 			memcpy(text.getRawData(), cipher->getUncipheredBuf(), len);
+ 		}
+-		else if ((unsigned long)key == 1) {
++		else if ((size_t)key == 1) {
+ 			cipher->setUncipheredBuf(text.getRawData(), len);
+ 			cipher->getCipheredBuf(&len);
+ 			text.setSize(len + 5);
+diff -ur orig/sword-1.9.0/src/modules/filters/latin1utf16.cpp sword-1.9.0/src/modules/filters/latin1utf16.cpp
+--- orig/sword-1.9.0/src/modules/filters/latin1utf16.cpp	2020-11-05 01:00:51.000000000 +0100
++++ sword-1.9.0/src/modules/filters/latin1utf16.cpp	2024-03-07 15:11:58.923215500 +0100
+@@ -34,7 +34,7 @@
+ 
+ char Latin1UTF16::processText(SWBuf &text, const SWKey *key, const SWModule *module) {
+     const unsigned char *from;
+-	 if ((unsigned long)key < 2)	// hack, we're en(1)/de(0)ciphering
++	 if ((size_t)key < 2)	// hack, we're en(1)/de(0)ciphering
+ 		return (char)-1;
+    
+     
+diff -ur orig/sword-1.9.0/src/modules/filters/latin1utf8.cpp sword-1.9.0/src/modules/filters/latin1utf8.cpp
+--- orig/sword-1.9.0/src/modules/filters/latin1utf8.cpp	2020-11-05 01:00:51.000000000 +0100
++++ sword-1.9.0/src/modules/filters/latin1utf8.cpp	2024-03-07 15:11:32.228011900 +0100
+@@ -38,7 +38,7 @@
+ {
+     const unsigned char *from;
+ 
+-	if ((unsigned long)key < 2)	// hack, we're en(1)/de(0)ciphering
++	if ((size_t)key < 2)	// hack, we're en(1)/de(0)ciphering
+ 		return (char)-1;
+ 
+ 	SWBuf orig = text;
+diff -ur orig/sword-1.9.0/src/modules/filters/scsuutf8.cpp sword-1.9.0/src/modules/filters/scsuutf8.cpp
+--- orig/sword-1.9.0/src/modules/filters/scsuutf8.cpp	2020-11-05 01:00:51.000000000 +0100
++++ sword-1.9.0/src/modules/filters/scsuutf8.cpp	2024-03-07 15:13:09.864633000 +0100
+@@ -139,7 +139,7 @@
+ #endif
+ 
+ char SCSUUTF8::processText(SWBuf &text, const SWKey *key, const SWModule *module) {
+-	if ((unsigned long)key < 2)	// hack, we're en(1)/de(0)ciphering
++	if ((size_t)key < 2)	// hack, we're en(1)/de(0)ciphering
+ 		return -1;
+ 	
+ #ifdef _ICU_
+diff -ur orig/sword-1.9.0/src/modules/filters/utf8arshaping.cpp sword-1.9.0/src/modules/filters/utf8arshaping.cpp
+--- orig/sword-1.9.0/src/modules/filters/utf8arshaping.cpp	2020-11-05 01:00:51.000000000 +0100
++++ sword-1.9.0/src/modules/filters/utf8arshaping.cpp	2024-03-07 15:57:33.225523500 +0100
+@@ -43,7 +43,7 @@
+ char UTF8arShaping::processText(SWBuf &text, const SWKey *key, const SWModule *module)
+ {
+         UChar *ustr, *ustr2;
+-	 if ((unsigned long)key < 2)	// hack, we're en(1)/de(0)ciphering
++	 if ((size_t)key < 2)	// hack, we're en(1)/de(0)ciphering
+ 		return -1;
+ 
+         int32_t len = text.length();
+diff -ur orig/sword-1.9.0/src/modules/filters/utf8bidireorder.cpp sword-1.9.0/src/modules/filters/utf8bidireorder.cpp
+--- orig/sword-1.9.0/src/modules/filters/utf8bidireorder.cpp	2020-11-05 01:00:51.000000000 +0100
++++ sword-1.9.0/src/modules/filters/utf8bidireorder.cpp	2024-03-07 15:58:04.154140800 +0100
+@@ -50,7 +50,7 @@
+ char UTF8BiDiReorder::processText(SWBuf &text, const SWKey *key, const SWModule *module)
+ {
+         UChar *ustr, *ustr2;
+-	if ((unsigned long)key < 2)	// hack, we're en(1)/de(0)ciphering
++	if ((size_t)key < 2)	// hack, we're en(1)/de(0)ciphering
+ 		return -1;
+         
+         int32_t len = text.length();
+diff -ur orig/sword-1.9.0/src/modules/filters/utf8html.cpp sword-1.9.0/src/modules/filters/utf8html.cpp
+--- orig/sword-1.9.0/src/modules/filters/utf8html.cpp	2020-11-05 01:00:51.000000000 +0100
++++ sword-1.9.0/src/modules/filters/utf8html.cpp	2024-03-07 15:12:26.113215700 +0100
+@@ -38,7 +38,7 @@
+ 	unsigned char *from;
+         char digit[10];
+         unsigned long ch;
+-	 if ((unsigned long)key < 2)	// hack, we're en(1)/de(0)ciphering
++	 if ((size_t)key < 2)	// hack, we're en(1)/de(0)ciphering
+ 		return (char)-1;
+ 
+ 	SWBuf orig = text;
+diff -ur orig/sword-1.9.0/src/modules/filters/utf8latin1.cpp sword-1.9.0/src/modules/filters/utf8latin1.cpp
+--- orig/sword-1.9.0/src/modules/filters/utf8latin1.cpp	2020-11-05 01:00:51.000000000 +0100
++++ sword-1.9.0/src/modules/filters/utf8latin1.cpp	2024-03-07 15:12:49.702549500 +0100
+@@ -38,7 +38,7 @@
+   unsigned long uchar;
+   unsigned char significantFirstBits, subsequent;
+   
+-  if ((unsigned long)key < 2) {// hack, we're en(1)/de(0)ciphering
++  if ((size_t)key < 2) {// hack, we're en(1)/de(0)ciphering
+ 	return (char)-1;
+   }
+ 
+diff -ur orig/sword-1.9.0/src/modules/filters/utf8nfc.cpp sword-1.9.0/src/modules/filters/utf8nfc.cpp
+--- orig/sword-1.9.0/src/modules/filters/utf8nfc.cpp	2020-11-05 01:00:51.000000000 +0100
++++ sword-1.9.0/src/modules/filters/utf8nfc.cpp	2024-03-07 15:56:53.106935500 +0100
+@@ -42,7 +42,7 @@
+ 
+ char UTF8NFC::processText(SWBuf &text, const SWKey *key, const SWModule *module)
+ {
+-	if ((unsigned long)key < 2)	// hack, we're en(1)/de(0)ciphering
++	if ((size_t)key < 2)	// hack, we're en(1)/de(0)ciphering
+ 		return -1;
+         
+ 	err = U_ZERO_ERROR;
+diff -ur orig/sword-1.9.0/src/modules/filters/utf8nfkd.cpp sword-1.9.0/src/modules/filters/utf8nfkd.cpp
+--- orig/sword-1.9.0/src/modules/filters/utf8nfkd.cpp	2020-11-05 01:00:51.000000000 +0100
++++ sword-1.9.0/src/modules/filters/utf8nfkd.cpp	2024-03-07 15:57:12.657769400 +0100
+@@ -56,7 +56,7 @@
+ 	UErrorCode err = U_ZERO_ERROR;
+ 	UChar *source, *target;
+ 
+-	if ((unsigned long)key < 2)	// hack, we're en(1)/de(0)ciphering
++	if ((size_t)key < 2)	// hack, we're en(1)/de(0)ciphering
+ 		return -1;
+         
+ 	int32_t len =  5 + text.length() * 5;
+diff -ur orig/sword-1.9.0/src/modules/filters/utf8scsu.cpp sword-1.9.0/src/modules/filters/utf8scsu.cpp
+--- orig/sword-1.9.0/src/modules/filters/utf8scsu.cpp	2020-11-05 01:00:51.000000000 +0100
++++ sword-1.9.0/src/modules/filters/utf8scsu.cpp	2024-03-07 15:56:01.729907300 +0100
+@@ -42,7 +42,7 @@
+ }
+ 
+ char UTF8SCSU::processText(SWBuf &text, const SWKey *key, const SWModule *module) {
+-	if ((unsigned long)key < 2)	// hack, we're en(1)/de(0)ciphering
++	if ((size_t)key < 2)	// hack, we're en(1)/de(0)ciphering
+ 		return -1;
+ 
+ 	err = U_ZERO_ERROR;

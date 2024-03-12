@@ -3,7 +3,7 @@ name: build
 on: [push]
 
 jobs:
-  build:
+  build-linux:
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v1
@@ -57,3 +57,50 @@ jobs:
       run: cd docs/common && make && make svgs
     - name: doc-hu
       run: cd docs/hu && make || true # LaTeX seems to be broken...
+
+  build-windows:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install Prerequisites
+      uses: msys2/setup-msys2@v2
+      with:
+        msystem: MINGW64
+        update: true
+        install: >-
+          base-devel
+          mingw-w64-x86_64-gcc
+          mingw-w64-x86_64-make
+          mingw-w64-x86_64-cmake
+          mingw-w64-x86_64-pkgconf
+          mingw-w64-x86_64-boost
+          mingw-w64-x86_64-clang
+          mingw-w64-x86_64-qt6-base
+          mingw-w64-x86_64-qt6-translations
+          mingw-w64-x86_64-readline
+          mingw-w64-x86_64-zlib
+
+    - name: Build SWORD
+      run: |
+        wget https://www.crosswire.org/ftpmirror/pub/sword/source/v1.9/sword-1.9.0.tar.gz
+        mkdir orig
+        cd orig
+        tar xzf sword-1.9.0.tar.gz
+        patch -i ../sword-patch-mingw64.diff -p1
+        cd sword-1.9.0
+        mkdir build
+        cd build
+        CC=clang CXX=clang++ cmake -G "MinGW Makefiles" ..
+        mingw32-make install
+
+    - name: Build bibref-qt
+      run: |
+        cd qt
+        mkdir build
+        cd build
+        CC=clang CXX=clang++ cmake -G "MinGW Makefiles" ..
+        mingw32-make
