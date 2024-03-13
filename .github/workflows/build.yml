@@ -68,8 +68,9 @@ jobs:
     - uses: actions/checkout@v4
       # do not checkout files containing ":"
       with:
+        sparse-checkout-cone-mode: false
         sparse-checkout: |
-          .
+          /*
           !docs
           !examples
 
