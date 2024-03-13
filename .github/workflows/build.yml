@@ -69,8 +69,10 @@ jobs:
       # do not checkout files containing ":"
       with:
         sparse-checkout: |
-          .
-          qt
+          "*.h"
+          "*.cpp"
+          "*.diff"
+          "qt"
 
     - name: Install Prerequisites
       uses: msys2/setup-msys2@v2
