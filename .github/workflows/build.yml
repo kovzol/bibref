@@ -65,7 +65,10 @@ jobs:
         shell: msys2 {0}
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
+      # allow checkout files containing ":"
+      run: |
+        git config --global core.protectNTFS false
     - name: Install Prerequisites
       uses: msys2/setup-msys2@v2
       with:
