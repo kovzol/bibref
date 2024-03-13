@@ -65,13 +65,28 @@ jobs:
         shell: msys2 {0}
 
     steps:
-    - uses: actions/checkout@v4
-      # do not checkout files containing ":"
-      with:
-        sparse-checkout-cone-mode: false
-        sparse-checkout: |
-          qt
-          *.diff
+#    - uses: actions/checkout@v4
+#      # do not checkout files containing ":"
+#      with:
+#        sparse-checkout-cone-mode: false
+#        sparse-checkout: |
+#          qt
+#          *.diff
+
+    - name: Sparse checkout
+      shell: bash
+      run: |
+        REPO="https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+        BRANCH="${GITHUB_REF/#refs\/heads\//}"
+        echo "Syncing repository: $GITHUB_REPOSITORY"
+        echo "Working directory is '$(pwd)' GITHUB_WORKSPACE=$GITHUB_WORKSPACE BRANCH=$BRANCH"
+        git version
+        git init $GITHUB_WORKSPACE
+        git remote add origin https://github.com/$GITHUB_REPOSITORY
+        git config --local gc.auto 0
+        git config core.protectNTFS false
+        git -c protocol.version=2 fetch --no-tags --prune --progress --depth=10 origin +${GITHUB_SHA}:refs/remotes/origin/${BRANCH}
+        git checkout --progress --force -B $BRANCH refs/remotes/origin/$BRANCH
 
     - name: Install Prerequisites
       uses: msys2/setup-msys2@v2
