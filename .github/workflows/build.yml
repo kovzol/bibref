@@ -56,7 +56,7 @@ jobs:
     - name: db-full
       run: cd docs/common && make && make svgs
     - name: doc-hu
-      run: cd docs/hu && make || true # LaTeX seems to be broken...
+      run: cd docs/hu && make || true # LaTeX seems to be broken on Ubuntu 22.04...
 
   build-windows:
     runs-on: windows-latest
@@ -66,9 +66,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-      # allow checkout files containing ":"
-      run: |
-        git config --global core.protectNTFS false
+      # do not checkout files containing ":"
+      with:
+        sparse-checkout: |
+          *.cpp
+          *.h
+          *.diff
+          qt
+
     - name: Install Prerequisites
       uses: msys2/setup-msys2@v2
       with:
