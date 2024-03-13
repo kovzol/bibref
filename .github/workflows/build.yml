@@ -86,6 +86,7 @@ jobs:
         git config --local gc.auto 0
         git config core.protectNTFS false
         git -c protocol.version=2 fetch --no-tags --prune --progress --depth=10 origin +${GITHUB_SHA}:refs/remotes/origin/${BRANCH}
+        git sparse-checkout set --no-cone '/*' '!examples' '!docs'
         git checkout --progress --force -B $BRANCH refs/remotes/origin/$BRANCH
 
     - name: Install Prerequisites
