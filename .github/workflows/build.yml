@@ -69,9 +69,7 @@ jobs:
       # do not checkout files containing ":"
       with:
         sparse-checkout: |
-          *.cpp
-          *.h
-          *.diff
+          .
           qt
 
     - name: Install Prerequisites
