@@ -65,13 +65,6 @@ jobs:
         shell: msys2 {0}
 
     steps:
-#    - uses: actions/checkout@v4
-#      # do not checkout files containing ":"
-#      with:
-#        sparse-checkout-cone-mode: false
-#        sparse-checkout: |
-#          qt
-#          *.diff
 
     - name: Sparse checkout
       shell: bash
@@ -117,7 +110,8 @@ jobs:
         cd sword-1.9.0
         mkdir build
         cd build
-        CC=clang CXX=clang++ cmake -G "MinGW Makefiles" ..
+        # Install SWORD in /mingw64 (which is usually C:/msys64/mingw64 on normal installations):
+        CC=clang CXX=clang++ cmake -DCMAKE_INSTALL_PREFIX=/mingw64 -G "MinGW Makefiles" ..
         mingw32-make install
 
     - name: Build bibref-qt
