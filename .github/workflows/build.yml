@@ -70,9 +70,8 @@ jobs:
       with:
         sparse-checkout-cone-mode: false
         sparse-checkout: |
-          /*
-          !docs
-          !examples
+          qt
+          *.diff
 
     - name: Install Prerequisites
       uses: msys2/setup-msys2@v2
