@@ -112,7 +112,7 @@ jobs:
         wget https://www.crosswire.org/ftpmirror/pub/sword/source/v1.9/sword-1.9.0.tar.gz
         mkdir orig
         cd orig
-        tar xzf sword-1.9.0.tar.gz
+        tar xzf ../sword-1.9.0.tar.gz
         patch -i ../sword-patch-mingw64.diff -p1
         cd sword-1.9.0
         mkdir build
