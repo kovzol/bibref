@@ -1,5 +1,3 @@
-#define BIBREF_VERSION "2024Mar06"
-
 #include <QApplication>
 
 #include "main.h"

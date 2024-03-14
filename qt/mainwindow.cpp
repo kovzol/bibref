@@ -29,6 +29,7 @@ extern bool booksAdded;
 extern string text[2];
 extern vector<bool> textset;
 extern string collect_info;
+extern string ot_color, nt_color, reset_color, error_color;
 
 string lookupText = "LXX Genesis 1:1";              // example
 string extendText = "LXX StatResGNT Romans 3:13";   // example
@@ -109,6 +110,11 @@ MainWindow::MainWindow()
     setWindowTitle("bibref");
     setMinimumSize(160, 160);
     resize(480, 320);
+
+    ot_color = "<span style=\"color: #626600\">";
+    nt_color = "<span style=\"color: #006662\">";
+    reset_color = "</span>";
+    error_color = "<span style=\"color: red\">";
 }
 
 void addBiblesThread(MainWindow *window)
@@ -795,7 +801,7 @@ void MainWindow::about()
 {
     QMessageBox::about(
         this,
-        tr("About bibref"),
+        tr("About bibref") + " (" + BIBREF_VERSION + ")",
         tr("<a href=\"https://github.com/kovzol/bibref\">bibref</a> is a tool that helps "
            "discovering internal references in the Bible."
            "<br>It aims at finding quotations of the <a "
