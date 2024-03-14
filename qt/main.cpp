@@ -2,6 +2,7 @@
 
 #include <QApplication>
 
+#include "main.h"
 #include "mainwindow.h"
 
 int main(int argc, char *argv[])
@@ -28,8 +29,11 @@ int main(int argc, char *argv[])
     QString qmDir;
     if (std::filesystem::exists(PROJECT_SOURCE_DIR "/hu.qm"))
         qmDir = PROJECT_SOURCE_DIR; // This must be set externally, currently done via cmake
+    else if (std::filesystem::exists(INSTALL_PREFIX "/" SHARE_FOLDER "/hu.qm"))
+        qmDir = INSTALL_PREFIX // This must be set externally, currently done via cmake
+            "/" SHARE_FOLDER;
     else
-        qmDir = INSTALL_PREFIX "/share/bibref-qt/"; // This must be set externally, currently done via cmake
+        qmDir = SHARE_FOLDER; // for relative path (when extracted from a .zip)
     if (bibrefTranslator.load(language, qmDir)) {
         app.installTranslator(&bibrefTranslator);
     }
@@ -39,8 +43,10 @@ int main(int argc, char *argv[])
     // Put the application logo on the window:
     if (std::filesystem::exists(PROJECT_SOURCE_DIR "/logo-Psalm40-192.png"))
         window.setWindowIcon(QIcon(PROJECT_SOURCE_DIR "/logo-Psalm40-192.png"));
+    else if (std::filesystem::exists(INSTALL_PREFIX "/" SHARE_FOLDER "/" LOGO_FILE))
+        window.setWindowIcon(QIcon(INSTALL_PREFIX "/" SHARE_FOLDER "/" LOGO_FILE));
     else
-        window.setWindowIcon(QIcon(INSTALL_PREFIX "/share/bibref-qt/logo-Psalm40-192.png"));
+        window.setWindowIcon(QIcon(SHARE_FOLDER "/" LOGO_FILE));
 
     // Set working directory to home if XDG standards are used (e.g., for flatpak):
     char *home = std::getenv("XDG_DATA_HOME");

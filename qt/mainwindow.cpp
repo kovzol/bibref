@@ -2,6 +2,7 @@
 
 #include "books.h"
 #include "cli.h"
+#include "main.h"
 
 #include "swmgr.h"
 #include "swversion.h"
@@ -803,14 +804,21 @@ void MainWindow::about()
            " in a mechanical way."));
 }
 
+void setWindowLogo(QWidget *widget)
+{
+    if (std::filesystem::exists(PROJECT_SOURCE_DIR "/" LOGO_FILE))
+        widget->setWindowIcon(QIcon(PROJECT_SOURCE_DIR "/" LOGO_FILE));
+    else if (std::filesystem::exists(INSTALL_PREFIX "/" SHARE_FOLDER "/" LOGO_FILE))
+        widget->setWindowIcon(QIcon(INSTALL_PREFIX "/" SHARE_FOLDER "/" LOGO_FILE));
+    else
+        widget->setWindowIcon(QIcon(SHARE_FOLDER "/" LOGO_FILE));
+}
+
 void MainWindow::aboutSword()
 {
     // Avoid showing bibref's logo inside the window (which is the default for about boxes)...
     QWidget *widget = new QWidget;
-    if (std::filesystem::exists(PROJECT_SOURCE_DIR "/logo-Psalm40-192.png"))
-        widget->setWindowIcon(QIcon(PROJECT_SOURCE_DIR "/logo-Psalm40-192.png"));
-    else
-        widget->setWindowIcon(QIcon(INSTALL_PREFIX "/share/bibref-qt/logo-Psalm40-192.png"));
+    setWindowLogo(widget);
 
     QTextBrowser *aboutText = new QTextBrowser;
     QVBoxLayout *layout = new QVBoxLayout;
@@ -835,30 +843,12 @@ void MainWindow::aboutSword()
     widget->setFixedSize(400, 200);
     widget->setWindowTitle(tr("About SWORD"));
     widget->show();
-
-    /*
-    QMessageBox::about(
-        this,
-        tr("About SWORD"),
-        tr("<a href=\"https://www.crosswire.org/sword/index.jsp\">The SWORD Project</a> is an "
-           "effort to create an ever-expanding software package "
-           "for research and study of God and His Word. The SWORD Project framework "
-           "allows easy use and study of Bible texts, commentaries, lexicons, "
-           "dictionaries, and other books. Many frontends are built using this framework. "
-           "An installed set of books may be shared among all frontends using the framework.")
-            + "<br><br>"
-            + tr("This program uses version %1 of the SWORD library.")
-                  .arg(QString(SWVersion().currentVersion)));
-    */
 }
 
 void MainWindow::tutorial()
 {
     QWidget *widget = new QWidget;
-    if (std::filesystem::exists(PROJECT_SOURCE_DIR "/logo-Psalm40-192.png"))
-        widget->setWindowIcon(QIcon(PROJECT_SOURCE_DIR "/logo-Psalm40-192.png"));
-    else
-        widget->setWindowIcon(QIcon(INSTALL_PREFIX "/share/bibref-qt/logo-Psalm40-192.png"));
+    setWindowLogo(widget);
 
     QVBoxLayout *layout = new QVBoxLayout;
     layout->setContentsMargins(5, 5, 5, 5);
