@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# This script creates a Windows ZIP bundle.
+# Usage: ./create-windows-zip
+
+# Mandatory checks...
+
+BIBREF_VERSION=`cat main.h | grep BIBREF_VERSION | awk '{print $3}' | tr -d \"`
+FOLDER=bibref-qt-$BIBREF_VERSION
+test -d $FOLDER || {
+ echo "Folder $FOLDER does not exist. Create it first by running ./create-windows-folder."
+ exit 1
+ }
+
+zip -9r $FOLDER.zip $FOLDER
