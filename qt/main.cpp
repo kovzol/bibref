@@ -39,8 +39,8 @@ int main(int argc, char *argv[])
 
     MainWindow window;
     // Put the application logo on the window:
-    if (std::filesystem::exists(PROJECT_SOURCE_DIR "/logo-Psalm40-192.png"))
-        window.setWindowIcon(QIcon(PROJECT_SOURCE_DIR "/logo-Psalm40-192.png"));
+    if (std::filesystem::exists(PROJECT_SOURCE_DIR "/" LOGO_FILE))
+        window.setWindowIcon(QIcon(PROJECT_SOURCE_DIR "/" LOGO_FILE));
     else if (std::filesystem::exists(INSTALL_PREFIX "/" SHARE_FOLDER "/" LOGO_FILE))
         window.setWindowIcon(QIcon(INSTALL_PREFIX "/" SHARE_FOLDER "/" LOGO_FILE));
     else
