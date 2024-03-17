@@ -86,13 +86,13 @@ in a web browser (you may need to wait a couple of seconds before the start). In
 
 ### Installation from source code (for developers)
 
+![build](https://github.com/kovzol/bibref/workflows/build/badge.svg)
+
 #### Qt version
 
 We provide some [hints](qt/README.md) to help you build the graphical user interface.
 
 #### Terminal based versions
-
-![build](https://github.com/kovzol/bibref/workflows/build/badge.svg)
 
 The following commands
 should be entered on command line:
