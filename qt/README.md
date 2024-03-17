@@ -39,8 +39,7 @@ folder may be a workaround.
 
 See also the steps in the GitHub Actions for more details.
 
-## Minor issues
+### Packaging
 
-Currently, the path to translation files (*.qm) and the bibref logo are hardcoded
-in main.cpp and mainwindow.cpp. Therefore, these files should be present
-for the localization and to show the application icon properly.
+See the scripts `create-windows-folder`, `create-windows-zip` and `bibref.iss`
+(this is an [Inno Setup](https://jrsoftware.org/isinfo.php) script) in the current folder.

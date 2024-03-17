@@ -1,4 +1,4 @@
-![A bibref version based on jquery.terminal](jt-demo.png)
+![A bibref version based on the Qt graphical framework](qt/bibref-qt.png)
 
 # bibref
 
@@ -53,13 +53,24 @@ This project is a work in progress.
 
 ## Using the software tool
 
-You need a Linux system (preferred) or a web browser (fallback) to use this tool.
+### Qt version
 
-At the moment the project was tested on
+Since March 2024 *bibref* comes with a graphical user interface that is based on [Qt](https://qt.io).
+You can find information on how to install the program on your machine
+on the [Releases](https://github.com/kovzol/bibref/releases) page.
+
+### Terminal based versions
+
+![A bibref version based on jquery.terminal](jt-demo.png)
+
+You need a Linux system (preferred) or a web browser (fallback) to use the terminal
+based interface.
+
+At the moment this interface was tested on
 Ubuntu Linux 18.04, 19.10, 20.04 and 22.04 but it should work
 on many other systems.
 
-### Snap store installation (preferred)
+#### Snap store installation (preferred)
 
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-white.svg)](https://snapcraft.io/bibref)
 
@@ -67,13 +78,19 @@ After installation you need to use the command `bibref` via command line.
 In the snap version only the LXX, SBLGNT, StatResGNT and [KJV](http://www.crosswire.org/sword/modules/ModInfo.jsp?modName=KJV) modules are present.
 If you want to use additional modules, please try installing the tool from source code (see below).
 
-### Web version (fallback)
+#### Web version (fallback)
 
 Currently there is an online web version of *bibref* available: [a simple version](https://matek.hu/zoltan/bibref/)
 that is based on [jquery.terminal](https://terminal.jcubic.pl/). It is somewhat slower than the installable version, but works immediately
 in a web browser (you may need to wait a couple of seconds before the start). In the web versions the modules LXX, SBLGNT, StatResGNT and KJV are available.
 
 ### Installation from source code (for developers)
+
+#### Qt version
+
+We provide some [hints](qt/README.md) to help you build the graphical user interface.
+
+#### Terminal based versions
 
 ![build](https://github.com/kovzol/bibref/workflows/build/badge.svg)
 
@@ -101,6 +118,8 @@ the corresponding [GitHub action](https://github.com/kovzol/bibref/blob/master/.
 
 ### Example use case
 
+We follow the syntax of the terminal based version, but the similar steps can be used
+on the graphical interface as well.
 The following session finds the corresponding citation of the LXX text of Psalm 2:1 in the SBLGNT:
 ```commandline
 This is bibref 2022Feb24, nice to meet you.
@@ -177,6 +196,6 @@ Also, a work-in-progress database can be found in [docs/common](/docs/common) wh
 
 You may be interested in some [blog entries](https://matek.hu/zoltan/blog-topics.php?t=b) that extensively use the web version of *bibref*.
 
-### Command line options
+### Command line options in the terminal based version on Linux
 
 Issue `bibref -h` to learn about the available command line options.
