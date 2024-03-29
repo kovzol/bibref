@@ -331,5 +331,13 @@
         <source>Show available Bibles…</source>
         <translation>Rendelkezésre álló Bibliák…</translation>
     </message>
+    <message>
+        <source>Start bibref in a web terminal</source>
+        <translation>A bibref indítása webes terminálban</translation>
+    </message>
+    <message>
+        <source>Start a web version of bibref in a web based terminal</source>
+        <translation>A bibref program webes verziójának indítása böngészőben</translation>
+    </message>
 </context>
 </TS>

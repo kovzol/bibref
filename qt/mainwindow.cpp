@@ -1004,6 +1004,12 @@ void MainWindow::showSwordBibles()
     inputDialog.exec();
 }
 
+void MainWindow::webTerminal()
+{
+    QString link = "https://matek.hu/kovzol/bibref";
+    QDesktopServices::openUrl(QUrl(link));
+}
+
 void MainWindow::aboutQt() {}
 
 void MainWindow::createActions()
@@ -1146,6 +1152,11 @@ void MainWindow::createActions()
     showAvailableBiblesAct = new QAction(tr("Show available Bibles…"), this);
     showAvailableBiblesAct->setStatusTip(tr("Show available Bibles via SWORD"));
     connect(showAvailableBiblesAct, &QAction::triggered, this, &MainWindow::showSwordBibles);
+
+    webTerminalAct = new QAction(tr("Start bibref in a web terminal"), this);
+    webTerminalAct->setIcon(QIcon::fromTheme("help-browser"));
+    webTerminalAct->setStatusTip(tr("Start a web version of bibref in a web based terminal"));
+    connect(webTerminalAct, &QAction::triggered, this, &MainWindow::webTerminal);
 }
 
 void MainWindow::createMenus()
@@ -1188,6 +1199,7 @@ void MainWindow::createMenus()
     helpMenu->addAction(aboutAct);
     helpMenu->addAction(tutorialAct);
     helpMenu->addAction(showAvailableBiblesAct);
+    helpMenu->addAction(webTerminalAct);
     helpMenu->addSeparator();
     helpMenu->addAction(aboutSwordAct);
     helpMenu->addAction(aboutQtAct);
