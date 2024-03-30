@@ -196,57 +196,91 @@ void processQuitCmd() {
   exit(0);
 }
 
-void processHelpCmd(string input) {
-    int commandLength = helpCmd.length();
-    if (input.length() != commandLength) {
-        string rest = input.substr(input.find(" ") + 1);
-        if ((boost::ends_with(rest, "1") || boost::ends_with(rest, "2")) && !boost::ends_with(rest, "12"))
-        rest = rest.substr(0, rest.length()-1) + "N";
-        vector<string> helpStr = {"* `addbooks`: Load the books of LXX, SBLGNT and StatResGNT (if any of these are available). Most commands require that these books are already loaded. After using this command for the first time (it takes a couple of seconds), a folder named `bibref-addbooks-cache` will be created in the current working directory to speed up the next startup of this command.",
-            "* `textN` *text*: Define a Greek *text* and put its Latin transcription in clipboard N.",
-            "* `latintextN` *text*: Put the Latin transcription *text* in clipboard N.",
-            "* `findN` *Bible*: Search for the text of clipboard N in the given *Bible*.",
-            "* `lengthN`: Compute the length of the text in clipboard N.",
-            "* `printN`: Show the Greek text in clipboard N (without punctuation and spaces).",
-            "* `lookup` *Bible* *book* *verse*: Search for the given *verse* in the given *book* in the given *Bible*. Here *Bible* can be any translation that is already [installed as a module](https://www.crosswire.org/sword/modules/ModDisp.jsp?modType=Bibles) on the computer.",
-            "* `lookupN` *Bible* *book* *passage*: Search for the given *passage* in the given *book* in the given *Bible* and put its Latin transcription in clipboard N.",
-            "* `search` *Bible* *token1* *token2* ... *tokenN* *maxlength*: Search for the given set of tokens on a maximal length of *maxlength* in the given *Bible*.",
-            "* `raw` *Bible* *book* *start* *length*: Show the raw Latin transcription of a passage in the given *book* in the given *Bible*, beginning with the *start* position on *length* characters.",
-            "* `rawN` *Bible* *book* *start* *length*: Put a passage in the given *book* in the given *Bible*, beginning with the *start* position on *length* characters, in clipboard N.",
-            "* `minunique1` *Bible*: Search for minimal unique passages in clipboard 1 in the given *Bible*.",
-            "* `extend` *Bible1* *Bible2* *book2* *passage2*: Extend the given passage in *Bible2* according to the longest possible citation from *Bible1*, based on the text of *book2* in *passage2*. In most cases `LXX` is used for *Bible1* and `SBLGNT` for *Bible2*.",
-            "* `psalminfo` *Bible* *number*: Show the number of verses in Psalm *number* in the given *Bible*.",
-            "* `getrefs` *Bible2* *Bible1* *book1* *passage1*: Search for references in *Bible2* on the passage in *Bible1* in book *book1* in *passage1*. Usually `SBLGNT` stands for *Bible2* and `LXX` for *Bible1*. If *book1* is `Psalms`, the passage can also be its number only.",
-            "* `maxresults` *number*: Set the maximal amount of results to be shown to *number*.",
-            "* `compare12`: Compare the two clipboards with a 2-long substring-fingerprint (2-shingles) check, best match is reached at 1/(length1+length2).",
-            "* `jaccard12`: Compare the two clipboards the same way how `compare12` does but use the \"Jaccard similarity for bags\" algorithm, best match is reached at 0.",
-            "* `sql` *switch*: Set some outputs to be shown also as an SQL query if *switch* is `on`.",
-            "* `colors` *switch*: Show some outputs colored if *switch* is `on`.",
-            "* `tokens` *Bible* *book* *verse*: Search for the given *verse* in the given *book* in the given *Bible* (see command `lookup`), but the output is shown in a tokenized form. Tokenization is done via Strong's numbers.",
-            "* `help` *command*: Show some hints on usage of *command*, or get general help if no parameter is given.",
-            "* `quit`: Exit program."};
-        bool found = false;
-        for (int i = 0; i < helpStr.size(); i++) {
-            string helpText = helpStr[i];
-            if (helpText.length() >= 4 + commandLength && helpText.substr(3, rest.length()) == rest) {
-                info(helpText.substr(2)); // remove trailing "* "
-                found = true;
-                }
-            }
-        if (!found) {
-            error("Command `" + rest + "` is not supported.");
-            string commands_flattened = commands[0];
-            for (int i = 1; i < commands.size(); i++) {
-                commands_flattened += ", " + commands[i];
-                }
-            error("Available commands are: " + commands_flattened + ".");
-            }
-        return;
-        }
+string getHelp(string key)
+{
+  vector<string> helpStr = {
+      "* `addbooks`: Load the books of LXX, SBLGNT and StatResGNT (if any of these are available). "
+      "Most commands require that these books are already loaded. After using this command for the "
+      "first time (it takes a couple of seconds), a folder named `bibref-addbooks-cache` will be "
+      "created in the current working directory to speed up the next startup of this command.",
+      "* `textN` *text*: Define a Greek *text* and put its Latin transcription in clipboard N.",
+      "* `latintextN` *text*: Put the Latin transcription *text* in clipboard N.",
+      "* `findN` *Bible*: Search for the text of clipboard N in the given *Bible*.",
+      "* `lengthN`: Compute the length of the text in clipboard N.",
+      "* `printN`: Show the Greek text in clipboard N (without punctuation and spaces).",
+      "* `lookup` *Bible* *book* *verse*: Search for the given *verse* in the given *book* in the "
+      "given *Bible*. Here *Bible* can be any translation that is already [installed as a "
+      "module](https://www.crosswire.org/sword/modules/ModDisp.jsp?modType=Bibles) on the "
+      "computer.",
+      "* `lookupN` *Bible* *book* *passage*: Search for the given *passage* in the given *book* in "
+      "the given *Bible* and put its Latin transcription in clipboard N.",
+      "* `search` *Bible* *token1* *token2* ... *tokenN* *maxlength*: Search for the given set of "
+      "tokens on a maximal length of *maxlength* in the given *Bible*.",
+      "* `raw` *Bible* *book* *start* *length*: Show the raw Latin transcription of a passage in "
+      "the given *book* in the given *Bible*, beginning with the *start* position on *length* "
+      "characters.",
+      "* `rawN` *Bible* *book* *start* *length*: Put a passage in the given *book* in the given "
+      "*Bible*, beginning with the *start* position on *length* characters, in clipboard N.",
+      "* `minunique1` *Bible*: Search for minimal unique passages in clipboard 1 in the given "
+      "*Bible*.",
+      "* `extend` *Bible1* *Bible2* *book2* *passage2*: Extend the given passage in *Bible2* "
+      "according to the longest possible citation from *Bible1*, based on the text of *book2* in "
+      "*passage2*. In most cases `LXX` is used for *Bible1* and `SBLGNT` for *Bible2*.",
+      "* `psalminfo` *Bible* *number*: Show the number of verses in Psalm *number* in the given "
+      "*Bible*.",
+      "* `getrefs` *Bible2* *Bible1* *book1* *passage1*: Search for references in *Bible2* on the "
+      "passage in *Bible1* in book *book1* in *passage1*. Usually `SBLGNT` stands for *Bible2* and "
+      "`LXX` for *Bible1*. If *book1* is `Psalms`, the passage can also be its number only.",
+      "* `maxresults` *number*: Set the maximal amount of results to be shown to *number*.",
+      "* `compare12`: Compare the two clipboards with a 2-long substring-fingerprint (2-shingles) "
+      "check, best match is reached at 1/(length1+length2).",
+      "* `jaccard12`: Compare the two clipboards the same way how `compare12` does but use the "
+      "\"Jaccard similarity for bags\" algorithm, best match is reached at 0.",
+      "* `sql` *switch*: Set some outputs to be shown also as an SQL query if *switch* is `on`.",
+      "* `colors` *switch*: Show some outputs colored if *switch* is `on`.",
+      "* `tokens` *Bible* *book* *verse*: Search for the given *verse* in the given *book* in the "
+      "given *Bible* (see command `lookup`), but the output is shown in a tokenized form. "
+      "Tokenization is done via Strong's numbers.",
+      "* `help` *command*: Show some hints on usage of *command*, or get general help if no "
+      "parameter is given.",
+      "* `quit`: Exit program."};
+  string retval;
+  for (int i = 0; i < helpStr.size(); i++) {
+    string helpText = helpStr[i];
+    if (helpText.length() >= 4 && helpText.substr(3, key.length()) == key) {
+      if (retval.length() > 0)
+        retval += "\n";
+      retval += helpText.substr(2); // remove trailing "* "
+    }
+  }
+  return retval;
+}
+
+void processHelpCmd(string input)
+{
+  int commandLength = helpCmd.length();
+  if (input.length() != commandLength) {
+    string rest = input.substr(input.find(" ") + 1);
+    if ((boost::ends_with(rest, "1") || boost::ends_with(rest, "2"))
+        && !boost::ends_with(rest, "12"))
+      rest = rest.substr(0, rest.length() - 1) + "N";
+    string helpText = getHelp(rest);
+    if (helpText.length() == 0) {
+      error("Command `" + rest + "` is not supported.");
+      string commands_flattened = commands[0];
+      for (int i = 1; i < commands.size(); i++) {
+        commands_flattened += ", " + commands[i];
+      }
+      error("Available commands are: " + commands_flattened + ".");
+      return;
+    }
+    info(helpText);
+    return;
+  }
 #ifdef __EMSCRIPTEN__
-    showAvailableBibles();
+  showAvailableBibles();
 #endif
-    info("Please visit https://github.com/kovzol/bibref#bibref to get online help.");
+  info("Please visit https://github.com/kovzol/bibref#bibref to get online help.");
 }
 
 void processTextCmd(string input) {
