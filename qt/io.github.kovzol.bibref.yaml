@@ -41,7 +41,7 @@ modules:
         XDG_DATA_HOME: /app/tmp
     sources:
       - type: archive
-        url: https://github.com/kovzol/bibref/archive/7ed9004ded510a7664ad841426343ae9f6ca7968.zip
-        sha256: b4bc74e8271bcd9a63da540d56d0eceeb567e1aedc16daebffdd858e63ed9d3c
+        url: https://github.com/kovzol/bibref/archive/6b30f39dec4dbd8a483f230f0f514996072f674c.zip
+        sha256: 1a3553f61c02bab4897958fd4a77a46b9a786c3172d85925d406ab029fd37391
     post-install:
       - mv /app/tmp/.sword/* /app/share/sword
