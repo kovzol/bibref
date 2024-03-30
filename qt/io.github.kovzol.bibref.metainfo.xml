@@ -38,7 +38,7 @@
     <launchable type="desktop-id">io.github.kovzol.bibref.desktop</launchable>
     <screenshots>
       <screenshot type="default">
-        <image>https://github.com/kovzol/bibref/blob/master/qt/bibref-qt.png?raw=true</image>
+        <image>https://github.com/kovzol/bibref/blob/master/bibref-qt.png?raw=true</image>
         <caption>Some simple queries made with bibref</caption>
       </screenshot>
     </screenshots>
