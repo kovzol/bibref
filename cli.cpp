@@ -196,7 +196,7 @@ void processQuitCmd() {
   exit(0);
 }
 
-string getHelp(string key)
+string getHelp(const string &key)
 {
   vector<string> helpStr = {
       "* `addbooks`: Load the books of LXX, SBLGNT and StatResGNT (if any of these are available). "

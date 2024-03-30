@@ -69,6 +69,8 @@ private:
     void findN(int n);
     void rawN(int n);
 
+    void setToolTipHelp(QInputDialog *dialog, std::string command);
+
     QMenu *fileMenu;
     QMenu *editMenu;
     QMenu *passageMenu;

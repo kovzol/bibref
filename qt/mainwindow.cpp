@@ -179,6 +179,7 @@ void MainWindow::greekTextN(int index)
     QInputDialog inputDialog(this);
     inputDialog.setWindowTitle("Text " + QString::number(index + 1));
     inputDialog.setLabelText(tr("Greek text:"));
+    setToolTipHelp(&inputDialog, "textN");
     if (textset[index]) {
         inputDialog.setTextValue(latinToGreek(text[index]).c_str());
     }
@@ -221,6 +222,7 @@ void MainWindow::latinTextN(int index)
     QInputDialog inputDialog(this);
     inputDialog.setWindowTitle("Latin text " + QString::number(index + 1));
     inputDialog.setLabelText(tr("Latin text:"));
+    setToolTipHelp(&inputDialog, "latintextN");
     if (textset[index]) {
         inputDialog.setTextValue(text[index].c_str());
     }
@@ -247,12 +249,25 @@ void MainWindow::latinText2()
     this->latinTextN(1);
 }
 
+void MainWindow::setToolTipHelp(QInputDialog *dialog, std::string command)
+{
+    // Retrieve help syntax for the current command:
+    string helpLines = getHelp(command);
+    vector<string> help;
+    boost::split(help, helpLines, boost::is_any_of("\n"));
+    QTextDocument d;
+    d.setMarkdown(tr("Syntax:") + " " + help.at(0).c_str());
+    dialog->setToolTip(d.toHtml());
+}
+
 void MainWindow::lookup()
 {
     QInputDialog inputDialog(this);
     inputDialog.setWindowTitle("Lookup");
     inputDialog.setLabelText(tr("Verse:"));
     inputDialog.setTextValue(lookupText.c_str());
+    setToolTipHelp(&inputDialog, "lookup");
+
     if (inputDialog.exec() != QDialog::Accepted)
         return;
     const QString value = inputDialog.textValue().trimmed();
@@ -283,6 +298,7 @@ void MainWindow::tokens()
     inputDialog.setWindowTitle("Tokens");
     inputDialog.setLabelText(tr("Verse:"));
     inputDialog.setTextValue(lookupText.c_str());
+    setToolTipHelp(&inputDialog, "tokens");
     if (inputDialog.exec() != QDialog::Accepted)
         return;
     const QString value = inputDialog.textValue().trimmed();
@@ -319,6 +335,7 @@ void MainWindow::search()
     inputDialog.setWindowTitle("Search");
     inputDialog.setLabelText(tr("Parameters:"));
     inputDialog.setTextValue(searchText.c_str());
+    setToolTipHelp(&inputDialog, "search");
     if (inputDialog.exec() != QDialog::Accepted)
         return;
     const QString value = inputDialog.textValue().trimmed();
@@ -371,6 +388,7 @@ void MainWindow::lookupN(int index)
     inputDialog.setWindowTitle("Lookup " + QString::number(index + 1));
     inputDialog.setLabelText(tr("Verse:"));
     inputDialog.setTextValue(lookupText.c_str());
+    setToolTipHelp(&inputDialog, "lookupN");
     if (inputDialog.exec() != QDialog::Accepted)
         return;
     const QString value = inputDialog.textValue().trimmed();
@@ -439,6 +457,7 @@ void MainWindow::raw()
     inputDialog.setWindowTitle("Raw");
     inputDialog.setLabelText(tr("Parameters:"));
     inputDialog.setTextValue(rawText.c_str());
+    setToolTipHelp(&inputDialog, "raw");
     if (inputDialog.exec() != QDialog::Accepted)
         return;
     const QString value = inputDialog.textValue().trimmed();
@@ -470,6 +489,7 @@ void MainWindow::rawN(int index)
     inputDialog.setWindowTitle("Raw " + QString::number(index + 1));
     inputDialog.setLabelText(tr("Parameters:"));
     inputDialog.setTextValue(rawText.c_str());
+    setToolTipHelp(&inputDialog, "rawN");
     if (inputDialog.exec() != QDialog::Accepted)
         return;
     const QString value = inputDialog.textValue().trimmed();
@@ -621,6 +641,7 @@ void MainWindow::extend()
     inputDialog.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     inputDialog.setFixedSize(300, 3);
     inputDialog.setWindowTitle("Extend");
+    setToolTipHelp(&inputDialog, "extend");
     inputDialog.setLabelText(tr("Parameters:"));
     inputDialog.setTextValue(extendText.c_str());
     if (inputDialog.exec() != QDialog::Accepted)
@@ -684,6 +705,7 @@ void MainWindow::getrefs()
     inputDialog.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     inputDialog.setFixedSize(300, 3);
     inputDialog.setWindowTitle("Get refs");
+    setToolTipHelp(&inputDialog, "getrefs");
     inputDialog.setLabelText(tr("Parameters:"));
     inputDialog.setTextValue(getrefsText.c_str());
     if (inputDialog.exec() != QDialog::Accepted)

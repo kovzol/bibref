@@ -343,5 +343,9 @@
         <source>Start bibref in a web &amp;terminal</source>
         <translation>A bibref indítása webes &amp;terminálban</translation>
     </message>
+    <message>
+        <source>Syntax:</source>
+        <translation>Szintaxis:</translation>
+    </message>
 </context>
 </TS>
