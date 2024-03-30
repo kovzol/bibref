@@ -333,11 +333,15 @@
     </message>
     <message>
         <source>Start bibref in a web terminal</source>
-        <translation>A bibref indítása webes terminálban</translation>
+        <translation type="vanished">A bibref indítása webes terminálban</translation>
     </message>
     <message>
         <source>Start a web version of bibref in a web based terminal</source>
         <translation>A bibref program webes verziójának indítása böngészőben</translation>
+    </message>
+    <message>
+        <source>Start bibref in a web &amp;terminal</source>
+        <translation>A bibref indítása webes &amp;terminálban</translation>
     </message>
 </context>
 </TS>

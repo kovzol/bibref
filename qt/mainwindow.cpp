@@ -1146,15 +1146,17 @@ void MainWindow::createActions()
     connect(aboutQtAct, &QAction::triggered, this, &MainWindow::aboutQt);
 
     tutorialAct = new QAction(tr("Quick tutorial…"), this);
+    tutorialAct->setIcon(QIcon::fromTheme("system-help"));
     tutorialAct->setStatusTip(tr("Show a short introduction to the program"));
     connect(tutorialAct, &QAction::triggered, this, &MainWindow::tutorial);
 
     showAvailableBiblesAct = new QAction(tr("Show available Bibles…"), this);
+    showAvailableBiblesAct->setIcon(QIcon::fromTheme("system-file-manager"));
     showAvailableBiblesAct->setStatusTip(tr("Show available Bibles via SWORD"));
     connect(showAvailableBiblesAct, &QAction::triggered, this, &MainWindow::showSwordBibles);
 
-    webTerminalAct = new QAction(tr("Start bibref in a web terminal"), this);
-    webTerminalAct->setIcon(QIcon::fromTheme("help-browser"));
+    webTerminalAct = new QAction(tr("Start bibref in a web &terminal"), this);
+    webTerminalAct->setIcon(QIcon::fromTheme("utilities-terminal"));
     webTerminalAct->setStatusTip(tr("Start a web version of bibref in a web based terminal"));
     connect(webTerminalAct, &QAction::triggered, this, &MainWindow::webTerminal);
 }
