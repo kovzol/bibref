@@ -31,9 +31,9 @@ public:
     QAction *tokensAct;
     QAction *searchAct;
     QTextEdit *passageInfos;
+    void moveCursorEnd(QTextEdit *b);
 
 protected:
-
 private slots:
     void addBibles();
     void greekText1();

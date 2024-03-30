@@ -161,6 +161,7 @@ void getrefsThread(MainWindow *window)
 
         window->passageInfos->append(
             ("<b>Get refs " + getrefsRest + "</b>" + "<br>" + collect_info).c_str());
+        window->moveCursorEnd(window->passageInfos);
     } catch (exception &e) {
         window->statusBar()->showMessage("Computation error.");
         return;
@@ -260,6 +261,13 @@ void MainWindow::setToolTipHelp(QInputDialog *dialog, std::string command)
     dialog->setToolTip(d.toHtml());
 }
 
+void MainWindow::moveCursorEnd(QTextEdit *b)
+{
+    QTextCursor tc = b->textCursor();
+    tc.setPosition(b->document()->characterCount() - 1);
+    b->setTextCursor(tc); // Move cursor to the end.
+}
+
 void MainWindow::lookup()
 {
     QInputDialog inputDialog(this);
@@ -284,6 +292,7 @@ void MainWindow::lookup()
         collect_info = "";                                  // reset communication buffer
         lookupTranslation(tokens[0], tokens[1], tokens[2]); // simple lookup via Sword
         passageInfos->append(("<b>" + rest + "</b>" + "<br>" + collect_info).c_str());
+        moveCursorEnd(passageInfos);
     } else {
         QString message = tr(
             "Invalid input (3 words are needed: Bible edition, book, chapter:verse).");
@@ -318,6 +327,7 @@ void MainWindow::tokens()
             passageInfos->append(
                 ("<b>" + rest + ", " + tr("tokens").toStdString() + "</b>" + "<br>" + collect_info)
                     .c_str());
+            moveCursorEnd(passageInfos);
         } catch (exception &e) {
             QString message = tr("Computation error.");
             statusBar()->showMessage(message);
@@ -379,6 +389,7 @@ void MainWindow::search()
         searchTokenset(moduleName, pattern, length, true); // Start search...
         passageInfos->append(
             ("<b>Search " + moduleName + " " + rest + "</b>" + "<br>" + collect_info).c_str());
+        moveCursorEnd(passageInfos);
     }
 }
 
@@ -477,6 +488,7 @@ void MainWindow::raw()
         int length = stoi(tokens[3]);   // 10
         string text = getRaw(module, book, startPos - 1, length);
         passageInfos->append(("<b>Raw " + rest + "</b>" + "<br>" + text).c_str());
+        moveCursorEnd(passageInfos);
     } else {
         QString message = tr("Wrong amount of parameters.");
         statusBar()->showMessage(message);
@@ -586,6 +598,7 @@ void MainWindow::minunique1()
                              .arg(QString(text[0].c_str()))
                              .arg(QString(rest.c_str()));
     passageInfos->append(("<b>" + translated.toStdString() + "</b><br>" + collect_info).c_str());
+    moveCursorEnd(passageInfos);
 }
 
 void MainWindow::findN(int index)
@@ -623,6 +636,7 @@ void MainWindow::findN(int index)
     QString translated
         = tr("Searching for %1 in %2").arg(QString(text[index].c_str())).arg(QString(rest.c_str()));
     passageInfos->append(("<b>" + translated.toStdString() + "</b><br>" + collect_info).c_str());
+    moveCursorEnd(passageInfos);
 }
 
 void MainWindow::find1()
@@ -692,6 +706,7 @@ void MainWindow::extend()
                            int end);
         extend(moduleName1, moduleName2, book2, verse2ST[0], start, verse2ET[0], end);
         passageInfos->append(("<b>Extend " + rest + "</b>" + "<br>" + collect_info).c_str());
+        moveCursorEnd(passageInfos);
     } catch (exception &e) {
         statusBar()->showMessage(tr("Computation error."));
         return;
