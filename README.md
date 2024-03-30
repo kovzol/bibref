@@ -1,4 +1,4 @@
-![A bibref version based on the Qt graphical framework](qt/bibref-qt.png)
+![A bibref version based on the Qt graphical framework](bibref-qt.png)
 
 # bibref
 
