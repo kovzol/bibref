@@ -48,35 +48,35 @@ def latin_to_greek(latin):
     greek = greek.replace("w", "ς"); # unused
     greek = greek.replace("x", "χ");
     greek = greek.replace("y", "υ");
-    return "\selectlanguage{greek}" + greek + "\selectlanguage{english}"
+    return "\\selectlanguage{greek}" + greek + "\\selectlanguage{english}"
 
     # This part is not used, because the Greek letters in math mode
     # will be italicized automatically and that's too wide.
     # ...Then, each utf-8 character will be converted into plain latex:
     greek = greek.replace("α", "\\alpha ")
     greek = greek.replace("β", "\\beta ")
-    greek = greek.replace("ψ", "\psi ")
-    greek = greek.replace("δ", "\delta ")
+    greek = greek.replace("ψ", "\\psi ")
+    greek = greek.replace("δ", "\\delta ")
     greek = greek.replace("ε", "\\varepsilon ")
-    greek = greek.replace("φ", "\phi ")
-    greek = greek.replace("γ", "\gamma ")
-    greek = greek.replace("η", "\eta ")
-    greek = greek.replace("ι", "\iota ")
+    greek = greek.replace("φ", "\\phi ")
+    greek = greek.replace("γ", "\\gamma ")
+    greek = greek.replace("η", "\\eta ")
+    greek = greek.replace("ι", "\\iota ")
     greek = greek.replace("ξ", "\\xi ")
-    greek = greek.replace("κ", "\kappa ")
-    greek = greek.replace("λ", "\lambda ")
-    greek = greek.replace("μ", "\mu ")
+    greek = greek.replace("κ", "\\kappa ")
+    greek = greek.replace("λ", "\\lambda ")
+    greek = greek.replace("μ", "\\mu ")
     greek = greek.replace("ν", "\\nu ")
     greek = greek.replace("ο", "o")
-    greek = greek.replace("π", "\pi ")
-    greek = greek.replace("ζ", "\zeta ")
+    greek = greek.replace("π", "\\pi ")
+    greek = greek.replace("ζ", "\\zeta ")
     greek = greek.replace("ρ", "\\rho ")
-    greek = greek.replace("σ", "\sigma ")
+    greek = greek.replace("σ", "\\sigma ")
     greek = greek.replace("τ", "\\tau ")
     greek = greek.replace("θ", "\\theta ")
     greek = greek.replace("ω", "\\omega ")
     greek = greek.replace("ς", "c") # unused
-    greek = greek.replace("χ", "\chi ")
+    greek = greek.replace("χ", "\\chi ")
     greek = greek.replace("υ", "\\upsilon ")
     return "$" + greek + "$"
 
@@ -93,13 +93,13 @@ def psalms_report_latex(conn, method, data):
     if method == "traditional" and data == "authors":
         print ("\\usepackage{mathtools}")
         print ("\\usepackage[dvipsnames]{xcolor}")
-        print ("\\newcommand\\Luke{{\color{Lavender}\\bullet}\mathllap{\color{Lavender}\circ}}")
-        print ("\\newcommand\\Paul{{\color{YellowGreen}\\bullet}\mathllap{\color{YellowGreen}\circ}}")
-        print ("\\newcommand\\Unknown{{\color{Orchid}\\bullet}\mathllap{\color{Orchid}\circ}}")
-        print ("\\newcommand\\Matthew{{\color{Red}\\bullet}\mathllap{\color{Red}\circ}}")
-        print ("\\newcommand\\Mark{{\color{Cyan}\\bullet}\mathllap{\color{Cyan}\circ}}")
-        print ("\\newcommand\\John{{\color{GreenYellow}\\bullet}\mathllap{\color{GreenYellow}\circ}}")
-        print ("\\newcommand\\Peter{{\color{NavyBlue}\\bullet}\mathllap{\color{NavyBlue}\circ}}")
+        print ("\\newcommand\\Luke{{\\color{Lavender}\\bullet}\\mathllap{\\color{Lavender}\\circ}}")
+        print ("\\newcommand\\Paul{{\\color{YellowGreen}\\bullet}\\mathllap{\\color{YellowGreen}\\circ}}")
+        print ("\\newcommand\\Unknown{{\\color{Orchid}\\bullet}\\mathllap{\\color{Orchid}\\circ}}")
+        print ("\\newcommand\\Matthew{{\\color{Red}\\bullet}\\mathllap{\\color{Red}\\circ}}")
+        print ("\\newcommand\\Mark{{\\color{Cyan}\\bullet}\\mathllap{\\color{Cyan}\\circ}}")
+        print ("\\newcommand\\John{{\\color{GreenYellow}\\bullet}\\mathllap{\\color{GreenYellow}\\circ}}")
+        print ("\\newcommand\\Peter{{\\color{NavyBlue}\\bullet}\\mathllap{\\color{NavyBlue}\\circ}}")
     if method == "traditional" and data == "manual_nt_length":
         print ("\\usepackage{graphicx}")
         f = open("manual_nt_length.csv", "w")
@@ -172,13 +172,13 @@ def psalms_report_latex(conn, method, data):
                         info = cur.fetchall()
                         number_str = str(info[0][0])
                         f.write(number_str + "\n")
-                        info = "\scalebox{.6}[1.0]{" + number_str + "}"
+                        info = "\\scalebox{.6}[1.0]{" + number_str + "}"
                     if old_ot_id > 0 and ot_id != old_ot_id:
                         print(",", sep = '', end = '')
                     else:
                         if method == "traditional" and data == "manual_nt_length":
                             if old_ot_id != 0:
-                                info = "\," + info
+                                info = "\\," + info
                     if data != 'authors':
                         print (info, sep='', end='')
                     else:
@@ -606,15 +606,15 @@ def nt_jaccard_csv(conn, nt_book):
         nt_passage = row[1]
         command1 = "lookup1 " + ot_passage
         bibref.sendline(command1)
-        bibref.expect("Stored internally as \w.")
+        bibref.expect("Stored internally as \\w.")
         command2 = "lookup2 " + nt_passage
         bibref.sendline(command2)
-        bibref.expect("Stored internally as \w.")
+        bibref.expect("Stored internally as \\w.")
         # command3 = "compare12"
         command3 = "jaccard12"
         bibref.sendline(command3)
         # bibref.expect("difference = ([0-9]+\.[0-9]+).")
-        bibref.expect("Jaccard distance is ([0-9]+\.[0-9]+).")
+        bibref.expect("Jaccard distance is ([0-9]+\\.[0-9]+).")
         jaccard12 = bibref.match.groups()
         jaccard = float(jaccard12[0])
         percent = int(r/len(rows)*100)
@@ -655,15 +655,15 @@ def ot_jaccard_csv(conn, ot_book):
         nt_passage = row[1]
         command1 = "lookup1 " + ot_passage
         bibref.sendline(command1)
-        bibref.expect("Stored internally as \w.")
+        bibref.expect("Stored internally as \\w.")
         command2 = "lookup2 " + nt_passage
         bibref.sendline(command2)
-        bibref.expect("Stored internally as \w.")
+        bibref.expect("Stored internally as \\w.")
         # command3 = "compare12"
         command3 = "jaccard12"
         bibref.sendline(command3)
-        # bibref.expect("difference = ([0-9]+\.[0-9]+).")
-        bibref.expect("Jaccard distance is ([0-9]+\.[0-9]+).")
+        # bibref.expect("difference = ([0-9]+\\.[0-9]+).")
+        bibref.expect("Jaccard distance is ([0-9]+\\.[0-9]+).")
         jaccard12 = bibref.match.groups()
         jaccard = float(jaccard12[0])
         percent = int(r/len(rows)*100)
@@ -843,13 +843,13 @@ def nt_passage_info(conn, nt_quotation_id, format, texts=0):
         # Read off difference:
         command1 = "lookup1 " + ot_passage
         bibref.sendline(command1)
-        bibref.expect("Stored internally as \w.")
+        bibref.expect("Stored internally as \\w.")
         command2 = "lookup2 " + nt_passage
         bibref.sendline(command2)
-        bibref.expect("Stored internally as \w.")
+        bibref.expect("Stored internally as \\w.")
         command3 = "jaccard12"
         bibref.sendline(command3)
-        bibref.expect("Jaccard distance is ([0-9]+\.[0-9]+).")
+        bibref.expect("Jaccard distance is ([0-9]+\\.[0-9]+).")
         jaccard12 = bibref.match.groups()
         jaccard = float(jaccard12[0])
         command4 = "compare12"
@@ -870,7 +870,7 @@ def nt_passage_info(conn, nt_quotation_id, format, texts=0):
         if jaccard == "0":
             jaccard = ""
         else:
-            jaccard += "\%"
+            jaccard += "\\%"
         found = False
         y = 1
         for m in ot_passages.keys():

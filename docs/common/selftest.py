@@ -91,10 +91,10 @@ def quotation_entries_lengths(conn):
         nt_length = row[5]
         command1 = "lookup1 " + ot_passage
         bibref.sendline(command1)
-        bibref.expect("Stored internally as \w.")
+        bibref.expect("Stored internally as \\w.")
         command2 = "lookup2 " + nt_passage
         bibref.sendline(command2)
-        bibref.expect("Stored internally as \w.")
+        bibref.expect("Stored internally as \\w.")
         command3 = "length1"
         bibref.sendline(command3)
         bibref.expect("Length of text 1 is ([0-9]+).")
@@ -146,10 +146,10 @@ def quotation_entries(conn):
         found_method = row[8]
         command1 = "lookup1 " + ot_passage
         bibref.sendline(command1)
-        bibref.expect("Stored internally as \w.")
+        bibref.expect("Stored internally as \\w.")
         command2 = "lookup2 " + nt_passage
         bibref.sendline(command2)
-        bibref.expect("Stored internally as \w.")
+        bibref.expect("Stored internally as \\w.")
         command3 = "find1 LXX"
         bibref.sendline(command3)
         bibref.expect("[0-9]+ occurrences.")
@@ -214,7 +214,7 @@ def nt_quotation_introduction_entries_lengths(conn):
         nt_length = nt_endpos - nt_startpos + 1
         command2 = "lookup2 " + nt_passage
         bibref.sendline(command2)
-        bibref.expect("Stored internally as \w.")
+        bibref.expect("Stored internally as \\w.")
         command4 = "length2"
         bibref.sendline(command4)
         bibref.expect("Length of text 2 is ([0-9]+).")
@@ -255,10 +255,10 @@ def clasp_entries_lengths(conn):
         nt_length = row[5]
         command1 = "lookup1 " + ot_passage
         bibref.sendline(command1)
-        bibref.expect("Stored internally as \w.")
+        bibref.expect("Stored internally as \\w.")
         command2 = "lookup2 " + nt_passage
         bibref.sendline(command2)
-        bibref.expect("Stored internally as \w.")
+        bibref.expect("Stored internally as \\w.")
         command3 = "length1"
         bibref.sendline(command3)
         bibref.expect("Length of text 1 is ([0-9]+).")
@@ -352,13 +352,13 @@ def clasp_entries(conn): # TODO: This is almost exactly the same as quotation_en
         nt_length = row[7]
         command0 = "maxresults 1000000" # ~infinity
         bibref.sendline(command0)
-        bibref.expect("Set to \w.")
+        bibref.expect("Set to \\w.")
         command1 = "lookup1 " + ot_passage
         bibref.sendline(command1)
-        bibref.expect("Stored internally as \w.")
+        bibref.expect("Stored internally as \\w.")
         command2 = "lookup2 " + nt_passage
         bibref.sendline(command2)
-        bibref.expect("Stored internally as \w.")
+        bibref.expect("Stored internally as \\w.")
         command3 = "find1 LXX"
         bibref.sendline(command3)
         bibref.expect("[0-9]+ occurrences.")

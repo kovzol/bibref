@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.5)
 project(bibref)
 
 set(CMAKE_CXX_STANDARD 11)
@@ -6,8 +6,14 @@ set(CMAKE_CXX_STANDARD 11)
 
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(sword REQUIRED sword)
+
+set(Boost_USE_STATIC_LIBS OFF)
+set(Boost_USE_MULTITHREADED ON)
+set(Boost_USE_STATIC_RUNTIME OFF)
+find_package(Boost 1.74.0 COMPONENTS system filesystem)
+
 # One needs readline >= 8.0 to make this work:
-# pkg_check_modules (readline REQUIRED readline)
+pkg_check_modules (readline REQUIRED readline)
 
 include_directories(/usr/include/sword)
 
