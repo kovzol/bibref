@@ -295,6 +295,130 @@ def nt_report_ppm(conn, book, book_length, ppm_rows, ppm_columns, mode):
     print(r, "characters of", q, "manually verified quotations out of", book_length, f"({100*r/book_length:.3g}%)")
     f.close()
 
+def statements(conn):
+    """
+    Query all entries and print them as statements on stdout
+    :param conn: the Connection object
+    """
+
+    global bibref
+    spawn_bibref()
+    cur = conn.cursor()
+
+    cur.execute("SELECT q.nt_quotation_id, q.nt_startpos, q.nt_length, q.ot_book, q.ot_passage, q.nt_passage," +
+        " q.ot_id, q.nt_id, q.nt_book, q.ot_startpos, q.ot_length" +
+        " FROM quotations_with_introduction q, books b" +
+        " WHERE q.found_method = 'manual'" +
+        " AND q.ot_startpos IS NOT NULL" +
+        " AND q.nt_startpos IS NOT NULL" +
+        " AND q.nt_book = b.name" +
+        " ORDER BY b.number, q.nt_startpos")
+    rows = cur.fetchall()
+    q = 1
+
+    for row in rows:
+        nt_quotation_id, start, length, ot_book, ot_passage, nt_passage, ot_id, nt_id, nt_book, ot_startpos, ot_length = row
+        if start == None:
+            print(f"Statement q{q}_{nt_quotation_id} connects {nt_passage}... # error") # maybe not needed
+        statement = f"Statement q{q}_{nt_quotation_id} connects {nt_passage} ({start}-{start+length-1}) with"
+        statement += f" {ot_passage} ({ot_startpos}-{ot_startpos+ot_length-1})"
+        statement += " based on"
+        cur.execute("SELECT nt_passage, nt_startpos, nt_endpos" +
+            " FROM nt_quotation_introductions" +
+            " WHERE nt_quotation_id = " + str(nt_quotation_id) +
+            " ORDER BY nt_startpos")
+        rows2 = cur.fetchall()
+        intro_no = 0
+        if len(rows2) > 0:
+            for row2 in rows2:
+                intro_no += 1
+                if intro_no > 1:
+                    statement += " and"
+                intro_passage, intro_startpos, intro_endpos = row2
+                intro_passage1 = intro_passage.split(" ")
+                statement += f" introduction {intro_passage1[2]} {intro_passage1[3]} ({intro_startpos}-{intro_endpos})"
+                command = "lookup1 " + intro_passage
+                bibref.sendline(command)
+                bibref.expect("Stored internally as (\\w+).")
+                form = bibref.match.groups()
+                statement += f" form {form[0].decode('utf-8')}"
+
+        # Find a bound for all clasps...
+        cur.execute("SELECT min(nt_startpos), max(nt_startpos+nt_length)" +
+            " FROM clasps" +
+            " WHERE nt_quotation_id = " + str(nt_quotation_id))
+        rows2 = cur.fetchall()
+        if len(rows2) > 0 and rows2[0][0] != None: # and rows2[0][1] != None (automatic)
+            nt_startpos_min, nt_startpos_max = rows2[0]
+            clasps_length = nt_startpos_max - nt_startpos_min + 1
+            letters = [0] * clasps_length
+
+            # Process each clasp...
+            cur.execute("SELECT ot_passage, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length" +
+                " FROM clasps" +
+                " WHERE nt_quotation_id = " + str(nt_quotation_id) +
+                " ORDER BY nt_startpos")
+            rows3 = cur.fetchall()
+            if len(rows3) > 0:
+                clasp_no = 0
+                for row3 in rows3:
+                    clasp_no += 1
+                    if intro_no > 0 or clasp_no > 1:
+                        statement += " and"
+                    clasp_ot_passage, clasp_nt_passage, clasp_ot_startpos, clasp_ot_length, clasp_nt_startpos, clasp_nt_length = row3
+                    clasp_nt_passage1 = clasp_nt_passage.split(" ")
+                    statement += " clasp"
+                    if len(clasp_nt_passage1) >= 4:
+                        statement += f" {clasp_nt_passage1[2]} {clasp_nt_passage1[3]}"
+                    else:
+                        statement += f" {clasp_nt_passage1[2]}"
+                    statement += f" ({clasp_nt_startpos}-{clasp_nt_startpos+clasp_nt_length-1}, length {clasp_nt_length})"
+
+                    for i in range(clasp_nt_length):
+                        letters[clasp_nt_startpos - nt_startpos_min + i] += 1
+                    command = "lookup1 " + clasp_nt_passage
+                    bibref.sendline(command)
+                    bibref.expect("Stored internally as (\\w+).")
+                    form = bibref.match.groups()
+                    statement += f" form {form[0].decode('utf-8')}"
+
+                    statement += f" matches {ot_passage}"
+                    statement += f" ({clasp_ot_startpos}-{clasp_ot_startpos+clasp_ot_length-1}, length {clasp_ot_length})"
+                    command = "lookup2 " + clasp_ot_passage
+                    bibref.sendline(command)
+                    bibref.expect("Stored internally as (\\w+).")
+                    form = bibref.match.groups()
+                    statement += f" form {form[0].decode('utf-8')}"
+
+                    command = "jaccard12"
+                    bibref.sendline(command)
+                    bibref.expect("Jaccard distance is ([0-9]+\\.[0-9]+).")
+                    jaccard12 = bibref.match.groups()
+                    jaccard = float(jaccard12[0]) * 100
+                    if jaccard == 0:
+                        statement += " verbatim"
+                    else:
+                        statement += f" differing {jaccard:4.2f}%"
+
+        # Report covering...
+        covering = 0
+        for i in range(clasps_length):
+            if letters[i] > 0:
+                covering += 1
+        covering *= 100
+        covering /= clasps_length
+        statement += f" providing cover {covering:4.2f}%"
+
+        # TODO: Indicate method...
+        cur.execute("SELECT * from quotations q" +
+            " WHERE q.ot_id = " + str(ot_id) +
+            " AND q.nt_id = " + str(nt_id) +
+            " AND q.found_method = 'getrefs'")
+        rows2 = cur.fetchall()
+        # chunks = rows2[0][0]
+        print(statement + ".")
+        q = q + 1
+
 def nt_report_latex(conn, book):
     """
     Query all entries from a New Testament book and show them as a LaTeX table on stdout
@@ -1320,6 +1444,8 @@ def main():
             nt_passage_info_all(conn, "latex", "ot", int(data2))
         elif result_type == "ot_nt_graphviz":
             ot_nt_graphviz(conn, data)
+        elif result_type == "statements":
+            statements(conn)
         else:
             psalms_report_latex(conn, result_type, data)
 
