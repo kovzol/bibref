@@ -1,0 +1,91 @@
+# This is a Midnight Commander Editor (mcedit) syntax highlighting file for bibref's *.brst databases.
+caseinsensitive
+
+context default
+    keyword whole statement brightmagenta
+    keyword whole connects brightred
+    keyword whole with brightred
+    keyword whole based\son brightred
+    keyword whole introduction brightgreen
+    keyword whole form white
+    keyword whole clasp brightgreen
+    keyword whole verbatim green
+    keyword whole differing green
+    keyword whole matches green
+    keyword whole providing\scover brightgreen
+    keyword whole and red
+    keyword whole no\sevidence gray black
+    keyword wholeright . brightmagenta
+
+    keyword whole LXX yellow
+    keyword whole SBLGNT brightcyan
+    keyword whole StatResGNT brightcyan
+
+    keyword whole Genesis yellow
+    keyword whole Exodus yellow
+    keyword whole Leviticus yellow
+    keyword whole Numbers yellow
+    keyword whole Deuteronomy yellow
+    keyword whole Joshua yellow
+    keyword whole Judges yellow
+    keyword whole Ruth yellow
+    keyword whole I_Samuel yellow
+    keyword whole II_Samuel yellow
+    keyword whole I_Kings yellow
+    keyword whole II_Kings yellow
+    keyword whole I_Chronicles yellow
+    keyword whole II_Chronicles yellow
+    keyword whole Ezra yellow
+    keyword whole Nehemiah yellow
+    keyword whole Esther yellow
+    keyword whole Job yellow
+    keyword whole Psalms yellow
+    keyword whole Proverbs yellow
+    keyword whole Ecclesiastes yellow
+    keyword whole Song_of_Solomon yellow
+    keyword whole Isaiah yellow
+    keyword whole Jeremiah yellow
+    keyword whole Lamentations yellow
+    keyword whole Ezekiel yellow
+    keyword whole Daniel yellow
+    keyword whole Hosea yellow
+    keyword whole Joel yellow
+    keyword whole Amos yellow
+    keyword whole Obadiah yellow
+    keyword whole Jonah yellow
+    keyword whole Micah yellow
+    keyword whole Nahum yellow
+    keyword whole Habakkuk yellow
+    keyword whole Zephaniah yellow
+    keyword whole Haggai yellow
+    keyword whole Zechariah yellow
+    keyword whole Malachi yellow
+    keyword whole Matthew brightcyan
+    keyword whole Mark brightcyan
+    keyword whole Luke brightcyan
+    keyword whole John brightcyan
+    keyword whole Acts brightcyan
+    keyword whole Romans brightcyan
+    keyword whole I_Corinthians brightcyan
+    keyword whole II_Corinthians brightcyan
+    keyword whole Galatians brightcyan
+    keyword whole Ephesians brightcyan
+    keyword whole Philippians brightcyan
+    keyword whole Colossians brightcyan
+    keyword whole I_Thessalonians brightcyan
+    keyword whole II_Thessalonians brightcyan
+    keyword whole I_Timothy brightcyan
+    keyword whole II_Timothy brightcyan
+    keyword whole Titus brightcyan
+    keyword whole Philemon brightcyan
+    keyword whole Hebrews brightcyan
+    keyword whole James brightcyan
+    keyword whole I_Peter brightcyan
+    keyword whole II_Peter brightcyan
+    keyword whole I_John brightcyan
+    keyword whole II_John brightcyan
+    keyword whole III_John brightcyan
+    keyword whole Jude brightcyan
+    keyword whole Revelation_of_John brightcyan
+
+context ( ) gray

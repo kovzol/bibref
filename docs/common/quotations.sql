@@ -2277,10 +2277,11 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
  (1451, 145, 1, 'Isaiah', 'LXX Isaiah 49:6+104 49:6-62', 'Acts', 'SBLGNT Acts 13:47+29 13:47-45', 99422, 12, 45085, 12); -- Τεθεικα σε εις
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1451, 145, 1, 'Isaiah', 'LXX Isaiah 49:6+130 49:6', 'Acts', 'SBLGNT Acts 13:47+38 13:47', 99448, 48, 45094, 48); -- εις φως εθνων του ειναι σε εις σωτηριαν εως εσχατου της γης, the leading "εις" overlaps the end of the first clasp
-insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (1461, 146, 1, 'Isaiah', null, 'LXX Isaiah 58:6+108 58:6-29', 'Luke', 'SBLGNT Luke 4:18+111 4:18', 116010, 30, 14471, 31, 'manual');
-insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (1461, 146, 1, 'Isaiah', null, 'LXX Isaiah 58:6+117 58:6-28', 'Luke', 'SBLGNT Luke 4:18+121 4:19-26', 116019, 22, 14481, 22, 'getrefs');
+-- This is covered with 1401 (so no mentioned in the clasps, therefore obsolete):
+-- insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+--  (1461, 146, 1, 'Isaiah', null, 'LXX Isaiah 58:6+108 58:6-29', 'Luke', 'SBLGNT Luke 4:18+111 4:18', 116010, 30, 14471, 31, 'manual');
+-- insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
+--  (1461, 146, 1, 'Isaiah', null, 'LXX Isaiah 58:6+117 58:6-28', 'Luke', 'SBLGNT Luke 4:18+121 4:19-26', 116019, 22, 14481, 22, 'getrefs');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (146, 1, 'του προφητου Ησαΐου', 'ην γεγραμμενον'); -- ην γεγραμμενον = it was written
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
