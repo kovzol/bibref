@@ -350,7 +350,7 @@ def statements(conn, linebreaks=True):
                 statement += f" form {form[0].decode('utf-8')}"
 
         # Find a bound for all clasps...
-        cur.execute("SELECT min(nt_startpos), max(nt_startpos+nt_length)" +
+        cur.execute("SELECT min(nt_startpos), max(nt_startpos+nt_length-1)" +
             " FROM clasps" +
             " WHERE nt_quotation_id = " + str(nt_quotation_id))
         rows2 = cur.fetchall()
