@@ -305,7 +305,6 @@ def statements(conn, linebreaks=True):
     spawn_bibref()
     cur = conn.cursor()
 
-    # TODO: Find the limits of mosaic quotations (by using min/maxm, and a second query at "connects")...
     cur.execute("SELECT q.nt_quotation_id, q.nt_book" +
         " FROM quotations_with_introduction q, books b" +
         " WHERE q.found_method = 'manual'" +
@@ -320,17 +319,37 @@ def statements(conn, linebreaks=True):
     for row in rows:
         nt_quotation_id, nt_book = row
 
-        cur.execute("SELECT min(q.nt_startpos), q.nt_passage " +
+        cur.execute("SELECT min(q.nt_startpos), q.nt_passage, q.nt_length " +
             " FROM quotations_with_introduction q" +
             " WHERE q.found_method = 'manual'" +
             " AND q.nt_quotation_id = " + str(nt_quotation_id))
+        rows10 = cur.fetchall()
+        start, nt_passage_start, length = rows10[0]
+
+        cur.execute("SELECT max(nt_startpos+nt_length-1), nt_passage " +
+            " FROM clasps" +
+            " WHERE nt_quotation_id = " + str(nt_quotation_id))
         rows11 = cur.fetchall()
-        start, nt_passage = rows11[0]
+        end, nt_passage_end = rows11[0]
+
+        # Use some tricks to build nt_passage...
+        if nt_passage_end != None:
+            nt_passage_start_words = nt_passage_start.split(" ")
+            nt_passage_end_words = nt_passage_end.split(" ")
+            nt_passage = nt_passage_start_words[0] + " " + \
+                nt_passage_start_words[1] + " " + nt_passage_start_words[2]
+            nt_passage_end_words_last = nt_passage_end_words[len(nt_passage_end_words) - 1]
+            if nt_passage_start_words[2] != nt_passage_end_words_last:
+                nt_passage += " " + nt_passage_end_words_last
+            nt_passage += f" ({start}-{end})"
+        else:
+            end = start + length - 1
+            nt_passage = nt_passage_start + f" ({start}-{end})"
 
         statement = f"Statement q{q}_{nt_quotation_id} connects";
         if linebreaks:
             statement += "\n"
-        statement += f" {nt_passage}... ({start}-...) with"
+        statement += f" {nt_passage} with"
         if linebreaks:
             statement += "\n"
         cur.execute("SELECT q.ot_passage, ot_startpos, ot_length" +
