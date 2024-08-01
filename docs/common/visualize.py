@@ -306,26 +306,52 @@ def statements(conn, linebreaks=True):
     cur = conn.cursor()
 
     # TODO: Find the limits of mosaic quotations (by using min/maxm, and a second query at "connects")...
-    cur.execute("SELECT q.nt_quotation_id, q.nt_startpos, q.nt_length, q.ot_book, q.ot_passage, q.nt_passage," +
-        " q.ot_id, q.nt_id, q.nt_book, q.ot_startpos, q.ot_length" +
+    cur.execute("SELECT q.nt_quotation_id, q.nt_book" +
         " FROM quotations_with_introduction q, books b" +
         " WHERE q.found_method = 'manual'" +
         " AND q.ot_startpos IS NOT NULL" +
         " AND q.nt_startpos IS NOT NULL" +
         " AND q.nt_book = b.name" +
+        " GROUP BY q.nt_quotation_id" +
         " ORDER BY b.number, q.nt_startpos")
     rows = cur.fetchall()
     q = 1
 
     for row in rows:
-        nt_quotation_id, start, length, ot_book, ot_passage, nt_passage, ot_id, nt_id, nt_book, ot_startpos, ot_length = row
+        nt_quotation_id, nt_book = row
+
+        cur.execute("SELECT min(q.nt_startpos), q.nt_passage " +
+            " FROM quotations_with_introduction q" +
+            " WHERE q.found_method = 'manual'" +
+            " AND q.nt_quotation_id = " + str(nt_quotation_id))
+        rows11 = cur.fetchall()
+        start, nt_passage = rows11[0]
+
         statement = f"Statement q{q}_{nt_quotation_id} connects";
         if linebreaks:
             statement += "\n"
-        statement += f" {nt_passage} ({start}-{start+length-1}) with"
+        statement += f" {nt_passage}... ({start}-...) with"
         if linebreaks:
             statement += "\n"
-        statement += f" {ot_passage} ({ot_startpos}-{ot_startpos+ot_length-1})"
+        cur.execute("SELECT q.ot_passage, ot_startpos, ot_length" +
+            " FROM quotations_with_introduction q, books b" +
+            " WHERE q.nt_quotation_id = " + str(nt_quotation_id) +
+            " AND q.found_method = 'manual'" +
+            " AND q.ot_book = b.name" +
+            " ORDER BY b.number, q.ot_startpos")
+        rows12 = cur.fetchall()
+        ot_no = 0
+        for row12 in rows12:
+            ot_passage, ot_startpos, ot_length = row12
+            if ot_no > 0:
+                statement += " and"
+                if linebreaks:
+                   statement += "\n"
+            statement += f" {ot_passage}"
+            if ot_startpos != None:
+                ot_end = int(ot_startpos)+int(ot_length)-1
+                statement += f" ({ot_startpos}-{ot_end})"
+            ot_no += 1
         statement += " based on"
         cur.execute("SELECT nt_passage, nt_startpos, nt_endpos" +
             " FROM nt_quotation_introductions" +
@@ -430,12 +456,6 @@ def statements(conn, linebreaks=True):
             statement += " no evidence"
 
         # TODO: Indicate method...
-        cur.execute("SELECT * from quotations q" +
-            " WHERE q.ot_id = " + str(ot_id) +
-            " AND q.nt_id = " + str(nt_id) +
-            " AND q.found_method = 'getrefs'")
-        rows2 = cur.fetchall()
-        # chunks = rows2[0][0]
         statement += "."
         if linebreaks:
             statement += "\n"
