@@ -1,0 +1,75 @@
+-- This is a highlight language syntax file.
+-- See http://andre-simon.de/doku/highlight/en/highlight.php for more information.
+
+Description="bibref statement"
+
+Categories = {"scientific"}
+
+Keywords={
+
+-- Keywords that are on line start...
+  { Id=1,
+    List={"Statement", "statement", "introduction", "clasp",
+      "verbatim", "differing", "matches", "and", "no", "evidence"}
+  },
+
+-- Keywords that are on line end...
+  { Id=1,
+    List={"connects", "with", "based", "on", "."}
+  },
+
+-- Old Testament related...
+  { Id=2,
+    List={"LXX", "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy",
+      "Joshua", "Judges", "Ruth", "I_Samuel", "II_Samuel", "I_Kings", "II_Kings",
+      "I_Chronicles", "II_Chronicles", "Ezra", "Nehemiah", "Esther", "Job",
+      "Psalms", "Proverbs", "Ecclesiastes", "Song_of_Solomon",
+      "Isaiah", "Jeremiah", "Lamentations", "Ezekiel", "Daniel",
+      "Hosea", "Joel", "Amos", "Obadiah", "Jonah", "Micah",
+      "Nahum", "Habakkuk", "Zephaniah", "Haggai", "Zechariah", "Malachi"}
+  },
+
+-- New Testament related...
+  { Id=2,
+    List={"SBLGNT", "StatResGNT", "Matthew", "Mark", "Luke", "John", 
+      "Acts", "Romans", "I_Corinthians", "II_Corinthians", "Galatians", "Ephesians", "Philippians",
+      "Colossians", "I_Thessalonians", "II_Thessalonians", "I_Timothy", "II_Timothy", "Titus", "Philemon", 
+      "Hebrews", "James", "I_Peter", "II_Peter", "I_John", "II_John", "III_John", "Jude", "Revelation_of_John"},
+  },
+
+-- Forms in a-y notation...
+  { Id=3,
+    Regex=[[form\s*['a-y']+]]
+  },
+
+-- Lengths and positions...
+  { Id=4,
+    Regex=[[length\s*['0-9']+]]
+  },
+  { Id=4,
+    Regex=[[(['0-9']+\-['0-9']+)]]
+  },
+
+-- Traditional Bible verse definitions...
+  { Id=5,
+    Regex=[[(['0-9']+:['0-9']+)]]
+  },
+
+-- Percentual reports...
+  { Id=6,
+    Regex=[[differing\s*['0-9']+.['0-9']+%]]
+  },
+  { Id=6,
+    Regex=[[providing\scover\s*['0-9']+.['0-9']+%]]
+  },
+
+}
+
+IgnoreCase=false
+
+Comments={
+  { Block=false,
+    Delimiter= { [[#]] }
+  }
+}
+
