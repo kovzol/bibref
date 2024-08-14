@@ -98,6 +98,8 @@ verified-quotations += 1011 1231 1092 1261 1362 1363 1365 1181 1371 1372 1242 12
 1441 1313 1401
 # Acts 7
 verified-quotations += 20171 20191 920181 20211 21181 21191 21201 21134 24201 16011 1421
+# Matthew
+verified-quotations += 15011
 
 svgs: $(verified-quotations:%=svg/%.svg)
 svg/%.svg: svg/%.tex
@@ -108,7 +110,10 @@ svg/%.tex: visualize.py quotations.sqlite3
 
 verified-quotations-content = 1121 1364 1361 91361 1061 1041 91041 1201 1073 1351 21111 13062 1363 311 \
  1081 1033 1392 1411 1441 1313 1401 \
- 20171 20191 920181 20211 21181 21191 21201 21134 24201 16011 1421
+ 20171 20191 920181 20211 21181 21191 21201 21134 24201 16011 1421 \
+ 1181
+verified-quotations-content += 15011
+
 
 cl-svgs: $(verified-quotations-content:%=cl-svg/%.svg)
 cl-svg/%.svg: cl-svg/%.tex
