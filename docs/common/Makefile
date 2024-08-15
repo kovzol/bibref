@@ -247,6 +247,12 @@ nojaccard: getrefs.pdf authors.pdf manual_nt_length.pdf Rplots.pdf \
  multi-Rplots.pdf \
  nt_frequencies.csv ot_frequencies.csv
 
+statements.brst: visualize.py quotations.sqlite3
+	python3 visualize.py statements > statements.brst
+
+statements.brst.html: statements.brst
+	highlight --config-file=brst.lang statements.brst -u utf8 -o statements.brst.html
+
 clean:
 	rm -f quotations.sqlite3  authors.aux manual_nt_length.aux getrefs.aux \
          authors.log manual_nt_length.log getrefs.log .RData 
