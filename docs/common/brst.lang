@@ -9,8 +9,8 @@ Keywords={
 
 -- Keywords that are on line start...
   { Id=1,
-    List={"Statement", "statement", "introduction", "clasp",
-      "verbatim", "differing", "matches", "and", "no", "evidence"}
+    List={"Statement", "statement", "introduction", "fragment",
+      "verbatim", "differing", "matches", "and", "that", "moreover", "no", "evidence"}
   },
 
 -- Keywords that are on line end...
@@ -39,8 +39,13 @@ Keywords={
 
 -- Forms in a-y notation...
   { Id=3,
-    Regex=[[form\s*['a-y']+]]
+    Regex=[[a\-y\s*form\s*['a-y']+]]
   },
+-- ...or in Greek...
+  { Id=3,
+    Regex=[[with\s*\'\.+\']]
+  },
+
 
 -- Lengths and positions...
   { Id=4,
@@ -57,10 +62,18 @@ Keywords={
 
 -- Percentual reports...
   { Id=6,
-    Regex=[[differing\s*['0-9']+.['0-9']+%]]
+    Regex=[[differing\s*by\s*['0-9']+.['0-9']+%]]
   },
   { Id=6,
-    Regex=[[providing\scover\s*['0-9']+.['0-9']+%]]
+    Regex=[[providing\s*an\s*overall\s*cover\s*of\s*['0-9']+.['0-9']+%]]
+  },
+
+-- Introductory comments...
+  { Id=6,
+    Regex=[[declares\s*a\s*quotation]]
+  },
+  { Id=6,
+    Regex=[[identifies\s*the\s*source]]
   },
 
 }

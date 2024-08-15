@@ -319,12 +319,12 @@ def statements(conn, linebreaks=True):
     for row in rows:
         nt_quotation_id, nt_book = row
 
-        cur.execute("SELECT min(q.nt_startpos), q.nt_passage, q.nt_length " +
+        cur.execute("SELECT min(q.nt_startpos), q.nt_passage, q.nt_length, q.ot_id, q.nt_id " +
             " FROM quotations_with_introduction q" +
             " WHERE q.found_method = 'manual'" +
             " AND q.nt_quotation_id = " + str(nt_quotation_id))
         rows10 = cur.fetchall()
-        start, nt_passage_start, length = rows10[0]
+        start, nt_passage_start, length, ot_id, nt_id = rows10[0]
 
         cur.execute("SELECT max(nt_startpos+nt_length-1), nt_passage " +
             " FROM clasps" +
@@ -392,7 +392,60 @@ def statements(conn, linebreaks=True):
                 bibref.sendline(command)
                 bibref.expect("Stored internally as (\\w+).")
                 form = bibref.match.groups()
-                statement += f" form {form[0].decode('utf-8')}"
+                statement += f" a-y form {form[0].decode('utf-8')}"
+                cur.execute("SELECT source_given, as_it_is_written" +
+                    " FROM quotations_properties qp" +
+                    f" WHERE qp.quotation_ot_id = {ot_id}" +
+                    f" AND qp.quotation_nt_id = {nt_id}")
+                rows21 = cur.fetchall()
+                if len(rows21) > 0:
+                    source_given, as_it_is_written = rows21[0]
+                    # Work around an issue in the database: If there are multiple introductions,
+                    # it is usually the first one which contains the source_given and as_it_is_written information,
+                    # except for certain items.
+                    if intro_no > 1:
+                        as_it_is_written = False
+                    if intro_no > 1 and not nt_quotation_id == 21134:
+                        source_given = False
+                    if nt_quotation_id == 1033:
+                        if intro_no == 1:
+                            as_it_is_written = "γαρ"
+                        if intro_no == 2:
+                            as_it_is_written = "καθως γεγραπται"
+                    if nt_quotation_id == 1251:
+                        if intro_no == 1:
+                            as_it_is_written = "διο"
+                            source_given = False
+                        if intro_no == 2:
+                            as_it_is_written = "λεγει"
+                            source_given = "κυριος"
+                    if nt_quotation_id == 1281:
+                        as_it_is_written = "και παλιν"
+                        source_given = False
+                    if nt_quotation_id == 24042:
+                        if intro_no == 1:
+                            as_it_is_written = "ειποντα"
+                        if intro_no == 2:
+                            as_it_is_written = "και παλιν"
+                    if nt_quotation_id == 21036:
+                        if intro_no == 1:
+                            as_it_is_written = "ο γαρ ειπων"
+                        if intro_no == 2:
+                            as_it_is_written = "ειπεν και"
+                    # End of workaround.
+
+                    if as_it_is_written or source_given:
+                        statement += " that"
+                    if as_it_is_written:
+                        if linebreaks:
+                            statement += "\n  "
+                        statement += f" declares a quotation with '{as_it_is_written}'"
+                    if source_given:
+                        if as_it_is_written:
+                            statement += " and"
+                        if linebreaks:
+                            statement += "\n  "
+                        statement += f" identifies the source with '{source_given}'"
 
         # Find a bound for all clasps...
         cur.execute("SELECT min(nt_startpos), max(nt_startpos+nt_length-1)" +
@@ -415,12 +468,15 @@ def statements(conn, linebreaks=True):
                 for row3 in rows3:
                     clasp_no += 1
                     if intro_no > 0 or clasp_no > 1:
-                        statement += " and"
+                        if clasp_no == 1:
+                            statement += " moreover"
+                        else:
+                            statement += " and"
                     clasp_ot_passage, clasp_nt_passage, clasp_ot_startpos, clasp_ot_length, clasp_nt_startpos, clasp_nt_length = row3
                     clasp_nt_passage1 = clasp_nt_passage.split(" ")
                     if linebreaks:
                         statement += "\n "
-                    statement += " clasp"
+                    statement += " fragment"
                     if len(clasp_nt_passage1) >= 4:
                         statement += f" {clasp_nt_passage1[2]} {clasp_nt_passage1[3]}"
                     else:
@@ -433,7 +489,7 @@ def statements(conn, linebreaks=True):
                     bibref.sendline(command)
                     bibref.expect("Stored internally as (\\w+).")
                     form = bibref.match.groups()
-                    statement += f" form {form[0].decode('utf-8')}"
+                    statement += f" a-y form {form[0].decode('utf-8')}"
 
                     if linebreaks:
                         statement += "\n  "
@@ -443,7 +499,7 @@ def statements(conn, linebreaks=True):
                     bibref.sendline(command)
                     bibref.expect("Stored internally as (\\w+).")
                     form = bibref.match.groups()
-                    statement += f" form {form[0].decode('utf-8')}"
+                    statement += f" a-y form {form[0].decode('utf-8')}"
 
                     command = "jaccard12"
                     bibref.sendline(command)
@@ -455,7 +511,7 @@ def statements(conn, linebreaks=True):
                     if jaccard == 0:
                         statement += " verbatim"
                     else:
-                        statement += f" differing {jaccard:4.2f}%"
+                        statement += f" differing by {jaccard:4.2f}%"
 
         if clasp_no > 0:
             # Report covering...
@@ -467,7 +523,7 @@ def statements(conn, linebreaks=True):
             covering /= clasps_length
             if linebreaks:
                 statement += "\n "
-            statement += f" providing cover {covering:4.2f}%"
+            statement += f" providing an overall cover of {covering:4.2f}%"
 
         if intro_no + clasp_no == 0:
             if linebreaks:

@@ -7,13 +7,17 @@ context default
     keyword whole with brightred
     keyword whole based\son brightred
     keyword whole introduction brightgreen
-    keyword whole form white
-    keyword whole clasp brightgreen
+    keyword whole a-y\sform white
+    keyword whole fragment brightgreen
+    keyword whole declares\sa\squotation green
+    keyword whole identifies\sthe\ssource green
     keyword whole verbatim green
-    keyword whole differing green
+    keyword whole differing\sby green
     keyword whole matches green
-    keyword whole providing\scover brightgreen
+    keyword whole providing\san\soverall\scover\sof brightgreen
     keyword whole and red
+    keyword whole that red
+    keyword whole moreover red
     keyword whole no\sevidence gray black
     keyword wholeright . brightmagenta
 
@@ -89,3 +93,4 @@ context default
     keyword whole Revelation_of_John brightcyan
 
 context ( ) cyan
+context ' ' brightblue
