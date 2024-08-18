@@ -112,7 +112,7 @@ jobs:
         mkdir build
         cd build
         # Install SWORD in /mingw64 (which is usually C:/msys64/mingw64 on normal installations):
-        CC=clang CXX=clang++ cmake -DCMAKE_INSTALL_PREFIX=/mingw64 -G "MinGW Makefiles" ..
+        CC=clang CXX=clang++ cmake -DCMAKE_INSTALL_PREFIX=/mingw64 -DSWORD_LINK_LIBRARIES="-lcurl" -G "MinGW Makefiles" ..
         mingw32-make install
 
     - name: Build bibref-qt
