@@ -109,7 +109,7 @@ jobs:
         tar xzf ../sword-1.9.0.tar.gz || true
         patch -i ../sword-patch-mingw64.diff -p1
         cp ../FindRegex.cmake sword-1.9.0/cmake # avoid use /usr/include on Wine/MSYS2
-        sed -i 's/2.6.0/3.5.0/' CMakeLists.txt # eliminate some warnings and force newer cmake settings
+        sed -i 's/2.6.0/3.5.0/' sword-1.9.0/CMakeLists.txt # eliminate some warnings and force newer cmake settings
         cd sword-1.9.0
         mkdir build
         cd build
