@@ -163,3 +163,15 @@ diff -ur orig/sword-1.9.0/src/modules/filters/utf8scsu.cpp sword-1.9.0/src/modul
  		return -1;
  
  	err = U_ZERO_ERROR;
+diff -ur orig/sword-1.9.0/src/utilfuns/regex.c sword-1.9.0/src/utilfuns/regex.c
+--- orig/sword-1.9.0/src/utilfuns/regex.c	2020-11-05 01:00:51.000000000 +0100
++++ sword-1.9.0/src/utilfuns/regex.c	2024-08-17 12:17:49.117610310 +0200
+@@ -122,7 +122,7 @@
+    even if config.h says that we can.  */
+ #  undef REL_ALLOC
+ 
+-#  if defined STDC_HEADERS || defined _LIBC
++#  if defined STDC_HEADERS || defined _LIBC || defined __MINGW32__
+ #   include <stdlib.h>
+ #  else
+ char *malloc ();
