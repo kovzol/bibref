@@ -1,13 +1,30 @@
 #!/bin/bash
 
 # This script creates a folder for the Windows version.
-# Usage: ./create-windows-folder <build-dir>
-# where build-dir is the executable that has already been built.
+# Usage: ./create-windows-folder <build-dir> [-f]
+# where build-dir is the executable that has already been built,
+# and the option -f can force operation even if no addbooks cache exists yet.
 
 # Mandatory checks...
 
+if [ "$MSYSTEM" != "MINGW64" ]; then
+ echo "Please run this script in a MSYS2/MINGW64 environment"
+ exit 5
+ fi
+
+which unzip >/dev/null || {
+ echo "Please install unzip first"
+ exit 6
+ }
+
+which ntldd >/dev/null || {
+ echo "Please install ntldd before running this tool"
+ exit 7
+ }
+
 if [ "$1" = "" ]; then
- echo "Usage: $0 <build-dir>"
+ echo "Usage: $0 <build-dir> [-f]"
+ echo "where -f can be used if the build system does not provide a fully working bibref yet"
  exit 1
  fi
 
@@ -24,8 +41,12 @@ test -d $FOLDER && {
  }
 
 test -d $1/bibref-addbooks-cache || {
- echo "Create the addbooks cache by running bibref-qt.exe and select File > Add books..."
- exit 4
+ if [ "$2" != "-f" ]; then
+  echo "Create the addbooks cache by running bibref-qt.exe and select File > Add books..."
+  exit 4
+ else
+  echo "There is no addbooks cache yet, will not be used in this run"
+  fi
  }
 
 # Create the output folder, put the .exe and .ico files there...
@@ -36,21 +57,15 @@ cp ../bibref.ico $FOLDER
 
 # Copy the pre-created cache...
 
-cp -a $1/bibref-addbooks-cache $FOLDER
+if [ "$2" != "-f" ]; then
+ cp -a $1/bibref-addbooks-cache $FOLDER
+ fi
 
 # Copy the DLLs...
 
-for f in Qt6Core.dll Qt6Gui.dll Qt6Widgets.dll libb2-1.dll libboost_filesystem-mt.dll \
- libbrotlicommon.dll libbrotlidec.dll libbz2-1.dll libdouble-conversion.dll \
- libfreetype-6.dll libgcc_s_seh-1.dll libglib-2.0-0.dll libgraphite2.dll \
- libharfbuzz-0.dll libiconv-2.dll libicudt72.dll libicuin72.dll libicuuc72.dll\
- libintl-8.dll liblzma-5.dll libmd4c.dll libpcre2-16-0.dll libpcre2-8-0.dll \
- libpng16-16.dll libreadline8.dll libstdc++-6.dll libtermcap-0.dll libwinpthread-1.dll zlib1.dll; do
- DLL_FULLPATH=`which $f`
- cp $DLL_FULLPATH $FOLDER
- done
+ntldd -R $FOLDER/bibref-qt.exe | grep mingw64 | awk '{print "/mingw64/bin/" $1}' | xargs cp -t $FOLDER
 
-# Put the application log and the translations there...
+# Put the application logo and the translations there...
 
 mkdir -p $FOLDER/share/bibref-qt
 cp ../logo-Psalm40-192.png $FOLDER/share/bibref-qt
