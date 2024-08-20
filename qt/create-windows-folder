@@ -79,7 +79,7 @@ mv $FOLDER/.sword $FOLDER/sword
 # Create the startup script...
 
 echo "set SWORD_PATH=%homedrive%%homepath%\.sword
-if not exist \"%SWORD_PATH%\" mkdir \"%SWORD_PATH%\" & xcopy /q /e sword\\*.\* \"%SWORD_PATH%\"
+if not exist \"%SWORD_PATH%\" mkdir \"%SWORD_PATH%\" & xcopy /q /e sword \"%SWORD_PATH%\"
 start \"\" bibref-qt.exe" > $FOLDER/start.bat
 
 # Create additional Qt related settings...
