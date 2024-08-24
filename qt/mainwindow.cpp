@@ -890,7 +890,7 @@ void MainWindow::tutorial()
           + tr("Research questions like <i>Is an Old Testament passage quoted properly?</i> "
                "can be studied with this program. Non-punctuated texts can be "
                "compared without loading Bible databases. Also, if the default databases "
-               "are loaded (via File&gt;Add books…), Greek Bible texts can also "
+               "are loaded (via File&gt;Add books), Greek Bible texts can also "
                "be compared directly.")
           + "<br>"
           + tr("The program is command-driven. Its graphical user interface follows "
@@ -919,7 +919,7 @@ void MainWindow::tutorial()
                "Their Jaccard distance is near 0.42 (which is a bit closer).")
           + "</li>" + "<li>"
           + tr(
-              "Now, the user loads the indexed Bibles via File&gt;Add books… Several features "
+              "Now, the user loads the indexed Bibles via File&gt;Add books. Several features "
               "of the program can be used from now on. For example, the user can put "
               "the a-y transcription of a part of Psalms 40:13-17 and 70:1-5 in the two "
               "clipboards. "

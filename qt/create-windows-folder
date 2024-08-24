@@ -42,7 +42,7 @@ test -d $FOLDER && {
 
 test -d $1/bibref-addbooks-cache || {
  if [ "$2" != "-f" ]; then
-  echo "Create the addbooks cache by running bibref-qt.exe and select File > Add books..."
+  echo "Create the addbooks cache by running bibref-qt.exe and select File > Add books"
   exit 4
  else
   echo "There is no addbooks cache yet, will not be used in this run"
