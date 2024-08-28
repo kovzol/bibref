@@ -30,8 +30,8 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v4
-      - name: Remove qt folder (because of presence of symlinks)
-        run: rm -fr qt
+      - name: Remove qt and statements folder (because of presence of symlinks)
+        run: rm -fr qt statements
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
