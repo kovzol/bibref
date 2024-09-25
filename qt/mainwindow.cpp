@@ -387,6 +387,10 @@ void MainWindow::search()
         statusBar()->showMessage(info.c_str());
         collect_info = "";                                 // reset communication buffer
         searchTokenset(moduleName, pattern, length, true); // Start search...
+
+        boost::trim(collect_info);
+        boost::replace_all(collect_info, "\n", "<br>");
+
         passageInfos->append(
             ("<b>Search " + moduleName + " " + rest + "</b>" + "<br>" + collect_info).c_str());
         moveCursorEnd(passageInfos);
