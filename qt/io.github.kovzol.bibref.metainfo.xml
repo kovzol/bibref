@@ -46,6 +46,15 @@
   <content_rating type="oars-1.1" />
 
   <releases>
+    <release version="2024Sep26" date="2024-09-26">
+    <url type="details">https://github.com/kovzol/bibref/commits/065710e4e8c03d35df4764713db3034616e867cd/</url>
+      <description>
+        <p>Release description</p>
+          <ul>
+            <li>Fix output formatting for the search command</li>
+          </ul>
+      </description>
+    </release>
     <release version="2024Mar30" date="2024-03-30">
     <url type="details">https://github.com/kovzol/bibref/commits/a3cc208db13bee3825a1fcf347bb30a10d97fc99/</url>
       <description>
