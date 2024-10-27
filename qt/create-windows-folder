@@ -2,7 +2,7 @@
 
 # This script creates a folder for the Windows version.
 # Usage: ./create-windows-folder <build-dir> [-f]
-# where build-dir is the executable that has already been built,
+# where build-dir is the folder where the executable has already been built,
 # and the option -f can force operation even if no addbooks cache exists yet.
 
 # Mandatory checks...

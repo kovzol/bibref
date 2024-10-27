@@ -33,7 +33,7 @@ The required MSYS2 packages are:
 
 If you want to create a package from **bibref-qt** (see below), you need additionally:
 
-* `ntldd`
+* `mingw-w64-x86_64-ntldd`
 * `unzip`
 * `zip`
 
