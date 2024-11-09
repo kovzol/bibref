@@ -17,7 +17,22 @@ pkg_check_modules (readline REQUIRED readline)
 
 include_directories(/usr/include/sword)
 
-add_executable(bibref main.cpp book.cpp book.h books.cpp books.h fingerprint.cpp fingerprint.h cli.cpp cli.h psalmsinfo.cpp psalmsinfo.h)
+# These should be compiled first in the folder "statements/" by issuing a "make" command.
+# TODO: Do it from the cmake machinery.
+SET(OBJS
+  ${CMAKE_CURRENT_SOURCE_DIR}/statements/pbrst.o
+  ${CMAKE_CURRENT_SOURCE_DIR}/statements/pbrst.tab.o
+)
+
+add_executable(bibref main.cpp book.cpp book.h books.cpp books.h fingerprint.cpp fingerprint.h cli.cpp cli.h psalmsinfo.cpp psalmsinfo.h
+ statements/pbrst.tab.h ${OBJS})
+
+SET_SOURCE_FILES_PROPERTIES(
+  ${OBJS}
+  PROPERTIES
+  EXTERNAL_OBJECT true
+  GENERATED true
+)
 
 target_link_libraries(bibref sword readline boost_system boost_filesystem)
 
