@@ -24,7 +24,7 @@ void emit(char *s, ...);
 %token <strval> VERSESTART
 %token <strval> VERSEEND
 %token <strval> RAWPOSITION
-%token <strval> PERIOD;
+%token <strval> PERIOD
 
 %token STATEMENT;
 %token CONNECTS;
@@ -131,7 +131,7 @@ void emit(char *s, ...);
 %%
 
 brst_stmt
-    : STATEMENT opt_identifier CONNECTS nt_passage WITH ot_passages BASED ON stmt_basis opt_period { emit("BRST_STMT"); };
+    : STATEMENT opt_identifier CONNECTS nt_passage WITH ot_passages BASED ON stmt_basis opt_period;
 
 stmt_basis
     : introductions | introductions MOREOVER fragments | fragments | NO EVIDENCE;
@@ -179,7 +179,7 @@ verse
         | VERSE VERSEEND
 
 opt_raw_position
-    : | RAWPOSITION;
+    : | RAWPOSITION { emit("RAW %s", $<strval>1); };
 
 introductions
     : introduction | introduction AND introductions;
