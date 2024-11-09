@@ -5,6 +5,7 @@
 
 void yyerror(char *s, ...);
 void emit(char *s, ...);
+void check_rawposition_length(char *s, ...);
 %}
 
 %union {
@@ -23,8 +24,10 @@ void emit(char *s, ...);
 %token <strval> VERSE
 %token <strval> VERSESTART
 %token <strval> VERSEEND
-%token <strval> RAWPOSITION
+%token RAWPOSITION
 %token <strval> PERIOD
+
+%type <strval> RAWPOSITION
 
 %token STATEMENT;
 %token CONNECTS;
@@ -179,7 +182,7 @@ verse
         | VERSE VERSEEND
 
 opt_raw_position
-    : | RAWPOSITION { emit("RAW %s", $<strval>1); };
+    : | RAWPOSITION { check_rawposition_length($1); };
 
 introductions
     : introduction | introduction AND introductions;
@@ -219,6 +222,23 @@ opt_period
     : | PERIOD;
 
 %%
+
+void
+check_rawposition_length(char *s, ...)
+{
+  extern yylineno;
+  if (strstr(s, "length") == NULL) {
+    fprintf(stdout, "%d: warning: no length is given, consider adding it\n", yylineno);
+    return;
+  }
+  int from, to, length;
+  sscanf(s, "(%d-%d, length %d)", &from, &to, &length);
+  if (to-from+1 != length) {
+    fprintf(stderr, "%d: error: inconsistent length: %d-%d+1!=%d\n", yylineno, to, from, length);
+  } else {
+    fprintf(stdout, "%d: info: consistent length: %d-%d+1==%d\n", yylineno, to, from, length);
+ }
+}
 
 void
 emit(char *s, ...)

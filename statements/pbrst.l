@@ -159,3 +159,4 @@ REVELATION_OF_JOHN { return REVELATION_OF_JOHN; }
 .               { yyerror("mystery character '%c'", *yytext); }
 
 %%
+ 
