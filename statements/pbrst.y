@@ -266,6 +266,7 @@ yyerror(char *s, ...)
   fprintf(stderr, "\n");
 }
 
+#ifdef BUILD_MAIN
 main(int ac, char **av)
 {
   extern FILE *yyin;
@@ -283,7 +284,8 @@ main(int ac, char **av)
     printf("brst parse worked\n");
   else
     printf("brst parse failed\n");
-} /* main */
+}
+#endif // BUILD_MAIN
 
 typedef struct yy_buffer_state * YY_BUFFER_STATE;
 extern int yyparse();
