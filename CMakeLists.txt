@@ -17,6 +17,7 @@ pkg_check_modules (readline REQUIRED readline)
 
 include_directories(/usr/include/sword)
 
+add_compile_definitions(WITH_PBRST)
 # These should be compiled first in the folder "statements/" by issuing a "make" command.
 # TODO: Do it from the cmake machinery.
 SET(OBJS
