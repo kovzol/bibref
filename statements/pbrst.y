@@ -14,8 +14,6 @@ void check_rawposition_length(char *s, ...);
 	char *strval;
 }
 
-/* names and literal values */
-
 %token <strval> NAME
 %token <strval> STRING
 %token <intval> INTNUM
@@ -237,7 +235,7 @@ check_rawposition_length(char *s, ...)
     fprintf(stderr, "%d: error: inconsistent length: %d-%d+1!=%d\n", yylineno, to, from, length);
   } else {
     fprintf(stdout, "%d: info: consistent length: %d-%d+1==%d\n", yylineno, to, from, length);
- }
+  }
 }
 
 void
@@ -265,27 +263,6 @@ yyerror(char *s, ...)
   vfprintf(stderr, s, ap);
   fprintf(stderr, "\n");
 }
-
-#ifdef BUILD_MAIN
-main(int ac, char **av)
-{
-  extern FILE *yyin;
-
-  if(ac > 1 && !strcmp(av[1], "-d")) {
-    yydebug = 1; ac--; av++;
-  }
-
-  if(ac > 1 && (yyin = fopen(av[1], "r")) == NULL) {
-    perror(av[1]);
-    exit(1);
-  }
-
-  if(!yyparse())
-    printf("brst parse worked\n");
-  else
-    printf("brst parse failed\n");
-}
-#endif // BUILD_MAIN
 
 typedef struct yy_buffer_state * YY_BUFFER_STATE;
 extern int yyparse();
