@@ -6,6 +6,7 @@
 void yyerror(char *s, ...);
 void emit(char *s, ...);
 void check_rawposition_length(char *s, ...);
+char *stmt_identifier;
 %}
 
 %union {
@@ -132,13 +133,15 @@ void check_rawposition_length(char *s, ...);
 %%
 
 brst_stmt
-    : STATEMENT opt_identifier CONNECTS nt_passage WITH ot_passages BASED ON stmt_basis opt_period;
+    : STATEMENT opt_identifier CONNECTS nt_passage WITH ot_passages BASED ON stmt_basis opt_period {
+      stmt_identifier = strdup($<strval>2);
+      };
 
 stmt_basis
     : introductions | introductions MOREOVER fragments | fragments | NO EVIDENCE;
 
 opt_identifier
-    : | NAME;
+    : | NAME | AYLITERAL /* ugly workaround, https://stackoverflow.com/a/71275846/1044586 */;
 
 nt_passage
     : nt_edition nt_book passage;

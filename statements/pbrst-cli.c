@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include "pbrst.tab.h"
 
+extern char *stmt_identifier;
+
 int main(int ac, char **av)
 {
   extern FILE *yyin;
@@ -17,8 +19,10 @@ int main(int ac, char **av)
     exit(1);
   }
 
-  if(!yyparse())
+  if(!yyparse()) {
     printf("brst parse worked\n");
+    printf("statement identifier: %s\n", stmt_identifier);
+    }
   else
     printf("brst parse failed\n");
 }

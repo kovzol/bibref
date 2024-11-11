@@ -136,7 +136,7 @@ REVELATION_OF_JOHN { return REVELATION_OF_JOHN; }
 \"(\\.|[^"\n])*$	{ yyerror("Unterminated string %s", yytext); }
 
   /* a-y literals */
-[a-z]*	{ yylval.strval = strdup(yytext); return AYLITERAL;}
+[a-y]+	{ yylval.strval = strdup(yytext); return AYLITERAL;}
 
   /* name */
 [A-Za-z][A-Za-z0-9_]*	{ yylval.strval = strdup(yytext);
