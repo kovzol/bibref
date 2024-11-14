@@ -46,7 +46,7 @@ OF { return OF; }
 NO { return NO; }
 EVIDENCE { return EVIDENCE; }
 
-SBLGNT { return SBLGNT; }
+SBLGNT { yylval.strval = strdup(yytext); return SBLGNT; }
 STATRESGNT { return STATRESGNT; }
 LXX { return LXX; }
 GENESIS { return GENESIS; }
@@ -88,7 +88,7 @@ ZEPHANIAH { return ZEPHANIAH; }
 HAGGAI { return HAGGAI; }
 ZECHARIAH { return ZECHARIAH; }
 MALACHI { return MALACHI; }
-MATTHEW { return MATTHEW; }
+MATTHEW { yylval.strval = strdup(yytext); return MATTHEW; }
 MARK { return MARK; }
 LUKE { return LUKE; }
 JOHN { return JOHN; }
@@ -108,7 +108,7 @@ TITUS { return TITUS; }
 PHILEMON { return PHILEMON; }
 HEBREWS { return HEBREWS; }
 JAMES { return JAMES; }
-I_PETER { return I_PETER; }
+I_PETER { yylval.strval = strdup(yytext); return I_PETER; }
 II_PETER { return II_PETER; }
 I_JOHN { return I_JOHN; }
 II_JOHN { return II_JOHN; }

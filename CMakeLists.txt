@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.5)
 project(bibref)
 
+option(PBRST "Include the precompiled brst parser" OFF)
+
 set(CMAKE_CXX_STANDARD 11)
 # set(CMAKE_CXX_FLAGS "-pedantic-errors")
 
@@ -17,6 +19,7 @@ pkg_check_modules (readline REQUIRED readline)
 
 include_directories(/usr/include/sword)
 
+if(PBRST)
 add_compile_definitions(WITH_PBRST)
 # These should be compiled first in the folder "statements/" by issuing a "make" command.
 # TODO: Do it from the cmake machinery.
@@ -24,9 +27,14 @@ SET(OBJS
   ${CMAKE_CURRENT_SOURCE_DIR}/statements/pbrst.o
   ${CMAKE_CURRENT_SOURCE_DIR}/statements/pbrst.tab.o
 )
+SET(PBRST_SRCS
+ books-wrapper.cpp books-wrapper.h
+ statements/pbrst.tab.h
+)
+endif(PBRST)
 
 add_executable(bibref main.cpp book.cpp book.h books.cpp books.h fingerprint.cpp fingerprint.h cli.cpp cli.h psalmsinfo.cpp psalmsinfo.h
- statements/pbrst.tab.h ${OBJS})
+ ${PBRST_SRCS} ${OBJS})
 
 SET_SOURCE_FILES_PROPERTIES(
   ${OBJS}

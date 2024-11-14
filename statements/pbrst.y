@@ -3,9 +3,15 @@
 #include <stdarg.h>
 #include <string.h>
 
+#ifdef IN_BIBREF
+#include "books-wrapper.h"
+extern const char* lookupVerse1(const char* book, const char* info, const char* verse);
+#endif // IN_BIBREF
+
 void yyerror(char *s, ...);
 void emit(char *s, ...);
 void check_rawposition_length(char *s, ...);
+void check_nt_passage(char *book, char *info, char *verse);
 char *stmt_identifier;
 %}
 
@@ -58,9 +64,11 @@ char *stmt_identifier;
 %token OF;
 %token NO;
 %token EVIDENCE;
+
 %token SBLGNT;
 %token STATRESGNT;
 %token LXX;
+
 %token GENESIS;
 %token EXODUS;
 %token LEVITICUS;
@@ -144,16 +152,17 @@ opt_identifier
     : | NAME | AYLITERAL /* ugly workaround, https://stackoverflow.com/a/71275846/1044586 */;
 
 nt_passage
-    : nt_edition nt_book passage;
+    : nt_edition nt_book passage {
+      check_nt_passage($<strval>1, $<strval>2, $<strval>3); };
 
 nt_edition
-    : SBLGNT | STATRESGNT;
+    : SBLGNT | STATRESGNT ;
 
 nt_book
     : MATTHEW | MARK | LUKE | JOHN | ACTS | ROMANS | I_CORINTHIANS | II_CORINTHIANS |
         GALATIANS | EPHESIANS | PHILIPPIANS | COLOSSIANS | I_THESSALONIANS | II_THESSALONIANS |
         I_TIMOTHY | II_TIMOTHY | TITUS | PHILEMON | HEBREWS | JAMES | I_PETER | II_PETER |
-        I_JOHN | II_JOHN | III_JOHN | JUDE | REVELATION_OF_JOHN;
+        I_JOHN | II_JOHN | III_JOHN | JUDE | REVELATION_OF_JOHN ;
 
 ot_passages
     : ot_passage | ot_passage AND ot_passages;
@@ -239,6 +248,20 @@ check_rawposition_length(char *s, ...)
   } else {
     fprintf(stdout, "%d: info: consistent length: %d-%d+1==%d\n", yylineno, to, from, length);
   }
+}
+
+void
+check_nt_passage(char *book, char *info, char *verse)
+{
+  extern yylineno;
+#ifdef IN_BIBREF
+  fprintf(stdout, "%d: info: lookup1 %s %s %s = ", yylineno, book, info, verse);
+  addBibles1();
+  char *l;
+  l = lookupVerse1(info, book, verse);
+  fprintf(stdout, "%s\n", l);
+  free(l);
+#endif // IN_BIBREF
 }
 
 void

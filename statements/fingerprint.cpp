@@ -1,0 +1,1 @@
+/home/kovzol/workspace/bibref/fingerprint.cpp

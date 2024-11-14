@@ -1,9 +1,16 @@
-Statement connects
- SBLGNT I_Peter 5:5+85 5:5 (8329-8378) with
- LXX Proverbs 3:34 (5750-5801) based on
-  introduction 5:5+35 5:5-50 (8279-8328) a-y form pantesdeallhloisthntapeinofrosynhnegkombvsasueotio that
-   declares a quotation with 'οτι' moreover
-  fragment 5:5+85 5:5 (8329-8378, length 50) a-y form ueosyperhfanoisantitassetaitapeinoisdedidvsinxarin
-   matches LXX Proverbs 3:34 (5750-5801, length 52) a-y form kyriosyperhfanoisantitassetaitapeinoisdedidvsinxarin
-    differing by 7.84%
-  providing an overall cover of 100.00%.
+Statement q4_2011 connects
+ SBLGNT Matthew 2:18 (3926-4025) with
+ LXX Jeremiah 31:15+16 31:15 (80231-80337) based on
+  introduction 2:17 2:17 (3877-3925) a-y form toteeplhrvuhtorhuendiaieremioytoyprofhtoylegontos that
+   declares a quotation with 'το ρηθεν ... λεγοντος' and
+   identifies the source with 'δια Ιερεμιου του προφητου' moreover
+  fragment 2:18 2:18-47 (3926-3978, length 53) a-y form fvnhenramahkoysuhklayumoskaiodyrmospolysraxhlklaioysa
+   matches LXX Jeremiah 31:15+16 31:15-46 (80231-80291, length 61) a-y form fvnhenramahkoysuhurhnoykaiklayumoykaiodyrmoyraxhlapoklaiomenh
+    differing by 33.33% and
+  fragment 2:18+68 2:18-23 (3994-4002, length 9) a-y form oykhuelen
+   matches LXX Jeremiah 31:15+77 31:15-37 (80292-80300, length 9) a-y form oykhuelen
+    verbatim and
+  fragment 2:18+89 2:18 (4015-4025, length 11) a-y form otioykeisin
+   matches LXX Jeremiah 31:15+112 31:15 (80327-80337, length 11) a-y form otioykeisin
+    verbatim
+  providing an overall cover of 73.00%.
