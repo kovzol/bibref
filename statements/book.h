@@ -1,1 +1,1 @@
-/home/kovzol/workspace/bibref/book.h
+../book.h

@@ -1,1 +1,1 @@
-/home/kovzol/workspace/bibref/cli.cpp
+../cli.cpp

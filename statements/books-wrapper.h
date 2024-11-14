@@ -1,1 +1,1 @@
-/home/kovzol/workspace/bibref/books-wrapper.h
+../books-wrapper.h

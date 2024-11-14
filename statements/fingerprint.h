@@ -1,1 +1,1 @@
-/home/kovzol/workspace/bibref/fingerprint.h
+../fingerprint.h

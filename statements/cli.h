@@ -1,1 +1,1 @@
-/home/kovzol/workspace/bibref/cli.h
+../cli.h

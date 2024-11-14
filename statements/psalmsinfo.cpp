@@ -1,1 +1,1 @@
-/home/kovzol/workspace/bibref/psalmsinfo.cpp
+../psalmsinfo.cpp

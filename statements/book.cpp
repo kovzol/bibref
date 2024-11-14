@@ -1,1 +1,1 @@
-/home/kovzol/workspace/bibref/book.cpp
+../book.cpp
