@@ -295,10 +295,12 @@ def nt_report_ppm(conn, book, book_length, ppm_rows, ppm_columns, mode):
     print(r, "characters of", q, "manually verified quotations out of", book_length, f"({100*r/book_length:.3g}%)")
     f.close()
 
-def statements(conn, linebreaks=True):
+def statements(conn, linebreaks=True, separatefiles=False):
     """
-    Query all entries and print them as statements on stdout
+    Query all entries and print them as statements on stdout or into files
     :param conn: the Connection object
+    :param lineBreaks: put linebreaks to sensible places
+    :param separatefiles: put statements into separate files (.brst)
     """
 
     global bibref
@@ -534,7 +536,13 @@ def statements(conn, linebreaks=True):
         statement += "."
         if linebreaks:
             statement += "\n"
-        print(statement)
+
+        if separatefiles:
+            f = open(f"q{q}_{nt_quotation_id}.brst", "w")
+            f.write(statement)
+            f.close()
+        else:
+            print(statement)
         q = q + 1
 
 def nt_report_latex(conn, book):
@@ -1564,6 +1572,8 @@ def main():
             ot_nt_graphviz(conn, data)
         elif result_type == "statements":
             statements(conn)
+        elif result_type == "statements-files":
+            statements(conn, True, True)
         else:
             psalms_report_latex(conn, result_type, data)
 
