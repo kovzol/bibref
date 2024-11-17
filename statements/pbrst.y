@@ -9,7 +9,6 @@ extern const char* lookupVerse1(const char* book, const char* info, const char* 
 #endif // IN_BIBREF
 
 void yyerror(char *s, ...);
-void emit(char *s, ...);
 void check_rawposition_length(char *s, ...);
 void check_nt_passage(char *book, char *info, char *verse);
 char *stmt_identifier;
@@ -55,6 +54,7 @@ char *stmt_identifier;
 %token A;
 %token QUOTATION;
 %token AND;
+%token ALSO;
 %token IDENTIFIES;
 %token THE;
 %token SOURCE;
@@ -216,7 +216,7 @@ opt_that
     : | THAT;
 
 introduction_explanations
-    : introduction_explanation | introduction_explanation AND introduction_explanations;
+    : introduction_explanation | introduction_explanation ALSO introduction_explanations;
 
 introduction_explanation
     : DECLARES A QUOTATION WITH STRING
@@ -253,7 +253,7 @@ check_rawposition_length(char *s, ...)
   int from, to, length;
   sscanf(s, "(%d-%d, length %d)", &from, &to, &length);
   if (to-from+1 != length) {
-    fprintf(stderr, "%d: error: inconsistent length: %d-%d+1!=%d\n", yylineno, to, from, length);
+    fprintf(stdout, "%d: error: inconsistent length: %d-%d+1!=%d\n", yylineno, to, from, length);
   } else {
     fprintf(stdout, "%d: info: consistent length: %d-%d+1==%d\n", yylineno, to, from, length);
   }
@@ -268,26 +268,13 @@ check_nt_passage(char *book, char *info, char *verse)
   char *l;
   l = lookupVerse1(info, book, verse);
   if (strstr(l, "error: ") != NULL) {
-    fprintf(stderr, "%d: %s\n", yylineno, l);
+    fprintf(stdout, "%d: %s\n", yylineno, l);
   } else {
     fprintf(stdout, "%d: info: lookup1 %s %s %s = ", yylineno, book, info, verse);
     fprintf(stdout, "%s\n", l);
   }
   free(l);
 #endif // IN_BIBREF
-}
-
-void
-emit(char *s, ...)
-{
-  extern yylineno;
-
-  va_list ap;
-  va_start(ap, s);
-
-  printf("rpn: ");
-  vfprintf(stdout, s, ap);
-  printf("\n");
 }
 
 void
@@ -298,9 +285,9 @@ yyerror(char *s, ...)
   va_list ap;
   va_start(ap, s);
 
-  fprintf(stderr, "%d: error: ", yylineno);
-  vfprintf(stderr, s, ap);
-  fprintf(stderr, "\n");
+  fprintf(stdout, "%d: error: ", yylineno);
+  vfprintf(stdout, s, ap);
+  fprintf(stdout, "\n");
 }
 
 typedef struct yy_buffer_state * YY_BUFFER_STATE;

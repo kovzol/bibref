@@ -444,7 +444,7 @@ def statements(conn, linebreaks=True, separatefiles=False):
                         statement += f" declares a quotation with '{as_it_is_written}'"
                     if source_given:
                         if as_it_is_written:
-                            statement += " and"
+                            statement += " also"
                         if linebreaks:
                             statement += "\n  "
                         statement += f" identifies the source with '{source_given}'"

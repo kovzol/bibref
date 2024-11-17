@@ -16,13 +16,16 @@ int main(int ac, char **av)
 
   if(ac > 1 && (yyin = fopen(av[1], "r")) == NULL) {
     perror(av[1]);
-    exit(1);
+    exit(2);
   }
 
   if(!yyparse()) {
     printf("brst parse worked\n");
     printf("statement identifier: %s\n", stmt_identifier);
     }
-  else
+  else {
     printf("brst parse failed\n");
+    return 1;
+    }
+  return 0;
 }

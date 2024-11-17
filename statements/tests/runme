@@ -1,0 +1,8 @@
+#!/bin/bash
+for i in *.brst; do
+ id=`basename $i .brst`
+ l=$id.log
+ pushd .. >/dev/null
+ ./pbrst-cli tests/$i 2>&1 > tests/$l || echo "error in $id"
+ popd >/dev/null
+ done

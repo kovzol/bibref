@@ -27,6 +27,7 @@ DECLARES { return DECLARES; }
 A { return A; }
 QUOTATION { return QUOTATION; }
 AND { return AND; }
+ALSO { return ALSO; }
 IDENTIFIES { return IDENTIFIES; }
 THE { return THE; }
 SOURCE { return SOURCE; }
@@ -48,6 +49,7 @@ EVIDENCE { return EVIDENCE; }
 SBLGNT { yylval.strval = strdup(yytext); return SBLGNT; }
 STATRESGNT { yylval.strval = strdup(yytext); return STATRESGNT; }
 LXX { yylval.strval = strdup(yytext); return LXX; }
+
 GENESIS { yylval.strval = strdup(yytext); return GENESIS; }
 EXODUS { yylval.strval = strdup(yytext); return EXODUS; }
 LEVITICUS { yylval.strval = strdup(yytext); return LEVITICUS; }

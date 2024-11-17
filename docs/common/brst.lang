@@ -10,7 +10,7 @@ Keywords={
 -- Keywords that are on line start...
   { Id=1,
     List={"Statement", "statement", "introduction", "fragment",
-      "verbatim", "differing", "matches", "and", "that", "moreover", "no", "evidence"}
+      "verbatim", "differing", "matches", "and", "that", "also", "moreover", "no", "evidence"}
   },
 
 -- Keywords that are on line end...
