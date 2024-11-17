@@ -186,10 +186,35 @@ passage
 
 verse
     : VERSE
-        | VERSE VERSE
-        | VERSESTART VERSE
-        | VERSESTART VERSEEND
-        | VERSE VERSEEND
+        | VERSE VERSE { /* This is ugly. Instead of doing this 4 times, do it only once. TODO. */
+          char* s=malloc(sizeof(char)*(strlen($1)+strlen($2)+2));
+          strcpy(s,$1);
+          strcat(s," ");
+          strcat(s,$2);
+          $<strval>$=s;
+          }
+        | VERSESTART VERSE {
+          char* s=malloc(sizeof(char)*(strlen($1)+strlen($2)+2));
+          strcpy(s,$1);
+          strcat(s," ");
+          strcat(s,$2);
+          $<strval>$=s;
+          }
+        | VERSESTART VERSEEND {
+          char* s=malloc(sizeof(char)*(strlen($1)+strlen($2)+2));
+          strcpy(s,$1);
+          strcat(s," ");
+          strcat(s,$2);
+          $<strval>$=s;
+          }
+        | VERSE VERSEEND {
+          char* s=malloc(sizeof(char)*(strlen($1)+strlen($2)+2));
+          strcpy(s,$1);
+          strcat(s," ");
+          strcat(s,$2);
+          $<strval>$=s;
+          }
+        ;
 
 opt_raw_position
     : | RAWPOSITION { check_rawposition_length($1); };
@@ -255,11 +280,15 @@ check_nt_passage(char *book, char *info, char *verse)
 {
   extern yylineno;
 #ifdef IN_BIBREF
-  fprintf(stdout, "%d: info: lookup1 %s %s %s = ", yylineno, book, info, verse);
   addBibles1();
   char *l;
   l = lookupVerse1(info, book, verse);
-  fprintf(stdout, "%s\n", l);
+  if (strstr(l, "error: ") != NULL) {
+    fprintf(stderr, "%d: %s\n", yylineno, l);
+  } else {
+    fprintf(stdout, "%d: info: lookup1 %s %s %s = ", yylineno, book, info, verse);
+    fprintf(stdout, "%s\n", l);
+  }
   free(l);
 #endif // IN_BIBREF
 }
