@@ -13,6 +13,14 @@ void emit(char *s, ...);
 void check_rawposition_length(char *s, ...);
 void check_nt_passage(char *book, char *info, char *verse);
 char *stmt_identifier;
+
+/* shortcut to concatenate a, " " and b, and put the result in c */
+#define _CONCAT(a,b,c) \
+          char* s=malloc(sizeof(char)*(strlen(a)+strlen(b)+2)); \
+          strcpy(s,a); \
+          strcat(s," "); \
+          strcat(s,b); \
+          c=s;
 %}
 
 %union {
@@ -186,34 +194,10 @@ passage
 
 verse
     : VERSE
-        | VERSE VERSE { /* This is ugly. Instead of doing this 4 times, do it only once. TODO. */
-          char* s=malloc(sizeof(char)*(strlen($1)+strlen($2)+2));
-          strcpy(s,$1);
-          strcat(s," ");
-          strcat(s,$2);
-          $<strval>$=s;
-          }
-        | VERSESTART VERSE {
-          char* s=malloc(sizeof(char)*(strlen($1)+strlen($2)+2));
-          strcpy(s,$1);
-          strcat(s," ");
-          strcat(s,$2);
-          $<strval>$=s;
-          }
-        | VERSESTART VERSEEND {
-          char* s=malloc(sizeof(char)*(strlen($1)+strlen($2)+2));
-          strcpy(s,$1);
-          strcat(s," ");
-          strcat(s,$2);
-          $<strval>$=s;
-          }
-        | VERSE VERSEEND {
-          char* s=malloc(sizeof(char)*(strlen($1)+strlen($2)+2));
-          strcpy(s,$1);
-          strcat(s," ");
-          strcat(s,$2);
-          $<strval>$=s;
-          }
+        | VERSE VERSE { _CONCAT($1,$2,$<strval>$) }
+        | VERSESTART VERSE { _CONCAT($1,$2,$<strval>$) }
+        | VERSESTART VERSEEND { _CONCAT($1,$2,$<strval>$) }
+        | VERSE VERSEEND { _CONCAT($1,$2,$<strval>$) }
         ;
 
 opt_raw_position
