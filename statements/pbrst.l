@@ -162,7 +162,7 @@ REVELATION_OF_JOHN { yylval.strval = strdup(yytext); return REVELATION_OF_JOHN; 
 "("[0-9]+"-"[0-9]+","[ ]length[ ][0-9]+")"  { yylval.strval = strdup(yytext); return RAWPOSITION; }
 
   /* everything else */
-[ \t\n]         /* white space */ { yycolumn = 1; }
+[ \t\n]         /* white space */ { /* yycolumn = 1; */ }
 .               { yyerror("mystery character '%c'", *yytext); }
 
 %%

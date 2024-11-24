@@ -8,12 +8,16 @@
 extern const char* lookupVerse1(const char* book, const char* info, const char* verse);
 #endif // IN_BIBREF
 
-void yyerror(char *s, ...);
-void check_rawposition_length(char *s, ...);
-void check_nt_passage(char *book, char *info, char *verse);
+// void yyerror(char *s, ...);
+// void check_rawposition_length(char *s, ...);
+// void check_nt_passage(char *book, char *info, char *verse);
 char *stmt_identifier;
 char *nt_book;
 char *nt_info;
+char *ot_book;
+char *ot_info;
+char *ot_verse;
+float difference = -1; // undefined
 
 /* shortcut to concatenate a, " " and b, and put the result in c */
 #define _CONCAT(a,b,c) \
@@ -180,7 +184,8 @@ ot_passages
     : ot_passage | ot_passage AND ot_passages;
 
 ot_passage
-    : ot_edition ot_book passage;
+    : ot_edition ot_book passage {
+      check_ot_passage($<strval>1, $<strval>2, $<strval>3); };
 
 ot_edition
     : LXX;
@@ -237,10 +242,12 @@ fragments_description
 fragment
     : FRAGMENT passage A_Y FORM AYLITERAL
         MATCHES ot_passage A_Y FORM AYLITERAL
-        difference_description;
+        difference_description {
+        check_fragment($<strval>2, $<strval>5, $<strval>7, $<strval>10);
+        };
 
 difference_description
-    : VERBATIM | DIFFERING BY APPROXNUM;
+    : VERBATIM { difference = 0.0; } | DIFFERING BY APPROXNUM { difference = $<floatval>3; } ;
 
 opt_period
     : | PERIOD;
@@ -259,9 +266,9 @@ check_rawposition_length(char *s, ...)
   int from, to, length;
   sscanf(s, "(%d-%d, length %d)", &from, &to, &length);
   if (to-from+1 != length) {
-    fprintf(stdout, "%d: error: inconsistent length: %d-%d+1!=%d\n", yylineno, to, from, length);
+    fprintf(stdout, "%d,%d: error: inconsistent length: %d-%d+1!=%d\n", yylineno, yycolumn, to, from, length);
   } else {
-    fprintf(stdout, "%d: info: consistent length: %d-%d+1==%d\n", yylineno, to, from, length);
+    fprintf(stdout, "%d,%d: info: consistent length: %d-%d+1==%d\n", yylineno, yycolumn, to, from, length);
   }
 }
 
@@ -269,14 +276,15 @@ void
 check_nt_passage(char *book, char *info, char *verse)
 {
   extern yylineno;
+  extern yycolumn;
 #ifdef IN_BIBREF
   addBibles1();
   char *l;
   l = lookupVerse1(info, book, verse);
   if (strstr(l, "error: ") != NULL) {
-    fprintf(stdout, "%d: %s\n", yylineno, l);
+    fprintf(stdout, "%d,%d: %s\n", yylineno, yycolumn, l);
   } else {
-    fprintf(stdout, "%d: info: lookup1 %s %s %s = ", yylineno, book, info, verse);
+    fprintf(stdout, "%d,%d: info: lookup1 %s %s %s = ", yylineno, yycolumn, book, info, verse);
     fprintf(stdout, "%s\n", l);
   }
   nt_info = strdup(info);
@@ -286,16 +294,54 @@ check_nt_passage(char *book, char *info, char *verse)
 }
 
 void
+check_ot_passage(char *book, char *info, char *verse)
+{
+  extern yylineno;
+  extern yycolumn;
+#ifdef IN_BIBREF
+  addBibles1();
+  char *l;
+  l = lookupVerse1(info, book, verse);
+  if (strstr(l, "error: ") != NULL) {
+    fprintf(stdout, "%d,%d: %s\n", yylineno, yycolumn, l);
+  } else {
+    fprintf(stdout, "%d,%d: info: lookup1 %s %s %s = ", yylineno, yycolumn, book, info, verse);
+    fprintf(stdout, "%s\n", l);
+  }
+  ot_info = strdup(info);
+  ot_book = strdup(book);
+  ot_verse = strdup(verse);
+  free(l);
+#endif // IN_BIBREF
+}
+
+void
 check_introduction_passage(char *passage, char *ay)
 {
   extern yylineno;
+  extern yycolumn;
 #ifdef IN_BIBREF
   char *l;
   l = lookupVerse1(nt_info, nt_book, passage);
   if (strcmp(l, ay) == 0)
-    fprintf(stdout, "%d: info: introduction %s matches to a-y form\n", yylineno, passage);
+    fprintf(stdout, "%d,%d: info: introduction %s matches to a-y form\n", yylineno, yycolumn, passage);
   else
-    fprintf(stdout, "%d: error: introduction %s does not match to a-y form %s, it should be %s\n", yylineno, passage, ay, l);
+    fprintf(stdout, "%d,%d: error: introduction %s does not match to a-y form %s, it should be %s\n", yylineno, yycolumn, passage, ay, l);
+#endif // IN_BIBREF
+}
+
+void
+check_fragment(char *passage, char *ay_nt, char *ot_passage, char *ay_ot) {
+  extern yylineno;
+  extern yycolumn;
+#ifdef IN_BIBREF
+  char *l;
+  l = lookupVerse1(nt_info, nt_book, passage);
+  if (strcmp(l, ay_nt) == 0)
+    fprintf(stdout, "%d,%d: info: fragment %s matches to a-y form\n", yylineno, yycolumn, passage);
+  else
+    fprintf(stdout, "%d,%d: error: fragment %s does not match to a-y form %s, it should be %s\n", yylineno, yycolumn, passage, ay_nt, l);
+  fprintf(stdout, "%d,%d: debug: parsed ot_passage=%s ot_info=%s ot_book=%s ot_verse=%s ot_ay_ot=%s diff=%f\n", yylineno, yycolumn, ot_passage, ot_info, ot_book, ot_verse, ay_ot, difference);
 #endif // IN_BIBREF
 }
 
@@ -303,11 +349,12 @@ void
 yyerror(char *s, ...)
 {
   extern yylineno;
+  extern yycolumn;
 
   va_list ap;
   va_start(ap, s);
 
-  fprintf(stdout, "%d: error: ", yylineno);
+  fprintf(stdout, "%d,%d: error: ", yylineno, yycolumn);
   vfprintf(stdout, s, ap);
   fprintf(stdout, "\n");
 }
