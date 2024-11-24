@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdarg.h>
 #include <string.h>
+#include <math.h>
 
 #ifdef IN_BIBREF
 #include "books-wrapper.h"
@@ -336,9 +337,14 @@ check_fragment(char *passage, char *ay_nt, char *ot_passage, char *ay_ot) {
   char *l;
   l = lookupVerse1(nt_info, nt_book, passage);
   if (strcmp(l, ay_nt) == 0)
-    fprintf(stdout, "%d,%d: info: fragment %s matches to a-y form\n", yylineno, yycolumn, passage);
+    fprintf(stdout, "%d,%d: info: NT fragment %s matches to a-y form\n", yylineno, yycolumn, passage);
   else
-    fprintf(stdout, "%d,%d: error: fragment %s does not match to a-y form %s, it should be %s\n", yylineno, yycolumn, passage, ay_nt, l);
+    fprintf(stdout, "%d,%d: error: NT fragment %s does not match to a-y form %s, it should be %s\n", yylineno, yycolumn, passage, ay_nt, l);
+  l = lookupVerse1(ot_info, ot_book, ot_verse);
+  if (strcmp(l, ay_ot) == 0)
+    fprintf(stdout, "%d,%d: info: OT fragment %s matches to a-y form\n", yylineno, yycolumn, ot_passage);
+  else
+    fprintf(stdout, "%d,%d: error: OT fragment %s does not match to a-y form %s, it should be %s\n", yylineno, yycolumn, ot_passage, ay_ot, l);
   // fprintf(stdout, "%d,%d: debug: parsed ot_passage=%s ot_info=%s ot_book=%s ot_verse=%s ay_ot=%s diff=%f\n", yylineno, yycolumn, ot_passage, ot_info, ot_book, ot_verse, ay_ot, difference);
   double jd = jaccard_dist1(ay_nt, ay_ot);
 #define EPS 0.0001
