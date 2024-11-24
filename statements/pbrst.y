@@ -12,6 +12,8 @@ void yyerror(char *s, ...);
 void check_rawposition_length(char *s, ...);
 void check_nt_passage(char *book, char *info, char *verse);
 char *stmt_identifier;
+char *nt_book;
+char *nt_info;
 
 /* shortcut to concatenate a, " " and b, and put the result in c */
 #define _CONCAT(a,b,c) \
@@ -21,6 +23,8 @@ char *stmt_identifier;
           strcat(s,b); \
           c=s;
 %}
+
+%locations
 
 %union {
 	int intval;
@@ -207,7 +211,8 @@ introductions
     : introduction | introduction AND introductions;
 
 introduction
-    : INTRODUCTION passage A_Y FORM AYLITERAL opt_introduction_explanations;
+    : INTRODUCTION passage A_Y FORM AYLITERAL opt_introduction_explanations {
+          check_introduction_passage($<strval>2, $<strval>5); };
 
 opt_introduction_explanations
     : | opt_that introduction_explanations;
@@ -246,8 +251,9 @@ void
 check_rawposition_length(char *s, ...)
 {
   extern yylineno;
+  extern yycolumn;
   if (strstr(s, "length") == NULL) {
-    fprintf(stdout, "%d: warning: no length is given, consider adding it\n", yylineno);
+    fprintf(stdout, "%d,%d: warning: no length is given, consider adding it\n", yylineno, yycolumn);
     return;
   }
   int from, to, length;
@@ -273,7 +279,23 @@ check_nt_passage(char *book, char *info, char *verse)
     fprintf(stdout, "%d: info: lookup1 %s %s %s = ", yylineno, book, info, verse);
     fprintf(stdout, "%s\n", l);
   }
+  nt_info = strdup(info);
+  nt_book = strdup(book);
   free(l);
+#endif // IN_BIBREF
+}
+
+void
+check_introduction_passage(char *passage, char *ay)
+{
+  extern yylineno;
+#ifdef IN_BIBREF
+  char *l;
+  l = lookupVerse1(nt_info, nt_book, passage);
+  if (strcmp(l, ay) == 0)
+    fprintf(stdout, "%d: info: introduction %s matches to a-y form\n", yylineno, passage);
+  else
+    fprintf(stdout, "%d: error: introduction %s does not match to a-y form %s, it should be %s\n", yylineno, passage, ay, l);
 #endif // IN_BIBREF
 }
 
