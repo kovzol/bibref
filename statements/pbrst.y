@@ -5,12 +5,10 @@
 
 #ifdef IN_BIBREF
 #include "books-wrapper.h"
+#include "fingerprint-wrapper.h"
 extern const char* lookupVerse1(const char* book, const char* info, const char* verse);
 #endif // IN_BIBREF
 
-// void yyerror(char *s, ...);
-// void check_rawposition_length(char *s, ...);
-// void check_nt_passage(char *book, char *info, char *verse);
 char *stmt_identifier;
 char *nt_book;
 char *nt_info;
@@ -247,7 +245,7 @@ fragment
         };
 
 difference_description
-    : VERBATIM { difference = 0.0; } | DIFFERING BY APPROXNUM { difference = $<floatval>3; } ;
+    : VERBATIM { difference = 0.0; } | DIFFERING BY APPROXNUM { difference = ($<floatval>3) / 100.0; } ;
 
 opt_period
     : | PERIOD;
@@ -341,7 +339,13 @@ check_fragment(char *passage, char *ay_nt, char *ot_passage, char *ay_ot) {
     fprintf(stdout, "%d,%d: info: fragment %s matches to a-y form\n", yylineno, yycolumn, passage);
   else
     fprintf(stdout, "%d,%d: error: fragment %s does not match to a-y form %s, it should be %s\n", yylineno, yycolumn, passage, ay_nt, l);
-  fprintf(stdout, "%d,%d: debug: parsed ot_passage=%s ot_info=%s ot_book=%s ot_verse=%s ot_ay_ot=%s diff=%f\n", yylineno, yycolumn, ot_passage, ot_info, ot_book, ot_verse, ay_ot, difference);
+  // fprintf(stdout, "%d,%d: debug: parsed ot_passage=%s ot_info=%s ot_book=%s ot_verse=%s ay_ot=%s diff=%f\n", yylineno, yycolumn, ot_passage, ot_info, ot_book, ot_verse, ay_ot, difference);
+  double jd = jaccard_dist1(ay_nt, ay_ot);
+#define EPS 0.0001
+  if (fabs(jd-difference) <= EPS)
+    fprintf(stdout, "%d,%d: info: fragments differ by %4.2f%%\n", yylineno, yycolumn, difference * 100.0);
+  else
+    fprintf(stdout, "%d,%d: error: fragments in reality differ by %4.2f%%\n", yylineno, yycolumn, jd * 100.0);
 #endif // IN_BIBREF
 }
 

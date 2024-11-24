@@ -9,8 +9,8 @@ CFLAGS = -DYYDEBUG=1 $(BIBREF)
 
 all:	pbrst-cli
 
-pbrst-cli:	pbrst.tab.o pbrst.o pbrst-cli.o books-wrapper.o books.o cli.o book.o psalmsinfo.o fingerprint.o
-	${CXX} $(BIBREF) -o $@ books-wrapper.o pbrst.tab.o pbrst.o pbrst-cli.o books.o cli.o book.o psalmsinfo.o fingerprint.o \
+pbrst-cli:	pbrst.tab.o pbrst.o pbrst-cli.o books-wrapper.o fingerprint-wrapper.o books.o cli.o book.o psalmsinfo.o fingerprint.o
+	${CXX} $(BIBREF) -o $@ books-wrapper.o fingerprint-wrapper.o pbrst.tab.o pbrst.o pbrst-cli.o books.o cli.o book.o psalmsinfo.o fingerprint.o \
          -lsword -lboost_system -lboost_filesystem -lreadline
 
 pbrst.tab.c pbrst.tab.h:	pbrst.y
@@ -24,6 +24,9 @@ pbrst.o:	pbrst.c pbrst.tab.h
 pbrst-cli.o:	pbrst-cli.c
 
 books-wrapper.o:	books-wrapper.cpp books-wrapper.h
+	${CXX} -o $@ -c $<
+
+fingerprint-wrapper.o:	fingerprint-wrapper.cpp fingerprint-wrapper.h
 	${CXX} -o $@ -c $<
 
 book.o:		book.cpp book.h
@@ -46,7 +49,7 @@ test: pbrst-cli
 
 clean:
 	rm -f pbrst-cli pbrst-cli.o pbrst.tab.c pbrst.tab.h pbrst.c pbrst.tab.o pbrst.o pbrst.output \
-         books-wrapper.o book.o fingerprint.o psalmsinfo.o books.o cli.o
+         books-wrapper.o fingerprint-wrapper.o book.o fingerprint.o psalmsinfo.o books.o cli.o
 
 .SUFFIXES:	.l .y .c
 
