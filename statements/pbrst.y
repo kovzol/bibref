@@ -345,13 +345,23 @@ check_introduction_passage(char *passage, char *ay)
   else
     fprintf(stdout, "%d,%d: error: introduction %s does not match to a-y form %s, it should be %s\n", yylineno, yycolumn, passage, ay, l);
   for (int i=0; i<substrings; i++) {
-    if (strstr(ay, introduction_substrings[i]) != NULL) {
-       fprintf(stdout, "%d,%d: info: substring %s found\n", yylineno, yycolumn, introduction_substrings[i]);
+    char *s = introduction_substrings[i]; // first word of substring
+    char *next;
+    do {
+      next = strchr(s, ',');
+      if (next != NULL) {
+        next[0] = '\0'; // split the comma separated string into C strings
+        }
+      if (strstr(ay, s) != NULL) {
+        fprintf(stdout, "%d,%d: info: substring %s found\n", yylineno, yycolumn, s);
+        }
+      else {
+       fprintf(stdout, "%d,%d: error: substring %s not found\n", yylineno, yycolumn, s);
        }
-    else {
-       fprintf(stdout, "%d,%d: error: substring %s not found\n", yylineno, yycolumn, introduction_substrings[i]);
-       }
-    }
+      s = next+1;
+    } while (next != NULL);
+  }
+  substrings = 0; // reset, maybe there is another introduction
 #endif // IN_BIBREF
 }
 

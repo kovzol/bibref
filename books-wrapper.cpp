@@ -71,8 +71,18 @@ EXTERNC const char* greekToLatin1(const char* greek) {
   SWBuf to_convert = input.data();
   manager.filterText("Greek Accents", to_convert);
 
-  // Convert Greek to Latin:
-  string processed = processVerse(to_convert.c_str());
+  vector<string> parts;
+  string to_convert_string = string(to_convert);
+  boost::replace_all(to_convert_string, "...", ".");
+  boost::split(parts, to_convert_string, boost::is_any_of("."));
+  string processed;
+  int parts_size = parts.size();
+  for (int i=0; i<parts_size; i++) {
+    // Convert Greek to Latin:
+    processed += processVerse(parts[i].c_str());
+    if (i<parts_size-1)
+      processed += ",";
+    }
   char *ret = (char*) malloc(processed.length()+1);
   strcpy(ret, processed.c_str());
   return ret;
