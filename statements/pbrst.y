@@ -7,7 +7,6 @@
 #ifdef IN_BIBREF
 #include "books-wrapper.h"
 #include "fingerprint-wrapper.h"
-extern const char* lookupVerse1(const char* book, const char* info, const char* verse);
 #endif // IN_BIBREF
 
 char *stmt_identifier;
@@ -16,6 +15,10 @@ char *nt_info;
 char *ot_book;
 char *ot_info;
 char *ot_verse;
+#define MAX_SUBSTR_LENGTH 500
+#define MAX_SUBSTRINGS 10
+char introduction_substrings[MAX_SUBSTRINGS][MAX_SUBSTR_LENGTH + 1];
+int substrings = 0;
 float difference = -1; // undefined
 
 /* shortcut to concatenate a, " " and b, and put the result in c */
@@ -228,8 +231,8 @@ introduction_explanations
     : introduction_explanation | introduction_explanation ALSO introduction_explanations;
 
 introduction_explanation
-    : DECLARES A QUOTATION WITH STRING
-        | IDENTIFIES THE SOURCE WITH STRING;
+    : DECLARES A QUOTATION WITH STRING { save_string_in_introduction($<strval>5); }
+        | IDENTIFIES THE SOURCE WITH STRING { save_string_in_introduction($<strval>5); };
 
 fragments
     : fragments_description
@@ -254,7 +257,7 @@ opt_period
 %%
 
 void
-check_rawposition_length(char *s, ...)
+check_rawposition_length(char *s)
 {
   extern yylineno;
   extern yycolumn;
@@ -270,6 +273,21 @@ check_rawposition_length(char *s, ...)
     fprintf(stdout, "%d,%d: info: consistent length: %d-%d+1==%d\n", yylineno, yycolumn, to, from, length);
   }
 }
+
+void
+save_string_in_introduction(char *s)
+{
+  extern yylineno;
+  extern yycolumn;
+#ifdef IN_BIBREF
+  char *l;
+  l = greekToLatin1(s);
+  strcpy(introduction_substrings[substrings++], l);
+  fprintf(stdout, "%d,%d: info: found %s in input\n", yylineno, yycolumn, l);
+  free(l);
+#endif // IN_BIBREF
+}
+
 
 void
 check_nt_passage(char *book, char *info, char *verse)

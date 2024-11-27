@@ -7,11 +7,15 @@
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/trim.hpp>
 
+#include "swmgr.h"
+
 #ifdef __cplusplus
 #define EXTERNC extern "C"
 #else
 #define EXTERNC
 #endif
+
+using namespace sword;
 
 EXTERNC const char* lookupVerse1(const char* book0, const char* info0, const char* verse0) {
   string book1 = string(book0);
@@ -57,4 +61,19 @@ EXTERNC const char* lookupVerse1(const char* book0, const char* info0, const cha
 
 EXTERNC int addBibles1() {
   return addBibles();
+}
+
+EXTERNC const char* greekToLatin1(const char* greek) {
+  SWMgr manager;
+  manager.setGlobalOption("Greek Accents", "Off"); // disable accents
+  string input = string(greek);
+  input = input.substr(1,input.length()-2); // remove first and last apostrophes
+  SWBuf to_convert = input.data();
+  manager.filterText("Greek Accents", to_convert);
+
+  // Convert Greek to Latin:
+  string processed = processVerse(to_convert.c_str());
+  char *ret = (char*) malloc(processed.length()+1);
+  strcpy(ret, processed.c_str());
+  return ret;
 }

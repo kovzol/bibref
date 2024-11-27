@@ -24,7 +24,7 @@ pbrst.o:	pbrst.c pbrst.tab.h
 pbrst-cli.o:	pbrst-cli.c
 
 books-wrapper.o:	books-wrapper.cpp books-wrapper.h
-	${CXX} -o $@ -c $<
+	${CXX} -o $@ -c $< -I/usr/include/sword
 
 fingerprint-wrapper.o:	fingerprint-wrapper.cpp fingerprint-wrapper.h
 	${CXX} -o $@ -c $<
