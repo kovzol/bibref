@@ -341,9 +341,17 @@ check_introduction_passage(char *passage, char *ay)
   char *l;
   l = lookupVerse1(nt_info, nt_book, passage);
   if (strcmp(l, ay) == 0)
-    fprintf(stdout, "%d,%d: info: introduction %s matches to a-y form\n", yylineno, yycolumn, passage);
+    fprintf(stdout, "%d,%d: info: introduction %s matches to a-y form %s\n", yylineno, yycolumn, passage, ay);
   else
     fprintf(stdout, "%d,%d: error: introduction %s does not match to a-y form %s, it should be %s\n", yylineno, yycolumn, passage, ay, l);
+  for (int i=0; i<substrings; i++) {
+    if (strstr(ay, introduction_substrings[i]) != NULL) {
+       fprintf(stdout, "%d,%d: info: substring %s found\n", yylineno, yycolumn, introduction_substrings[i]);
+       }
+    else {
+       fprintf(stdout, "%d,%d: error: substring %s not found\n", yylineno, yycolumn, introduction_substrings[i]);
+       }
+    }
 #endif // IN_BIBREF
 }
 
