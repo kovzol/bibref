@@ -29,6 +29,7 @@ SET(OBJS
 )
 SET(PBRST_SRCS
  books-wrapper.cpp books-wrapper.h
+ fingerprint-wrapper.cpp fingerprint-wrapper.h
  statements/pbrst.tab.h
 )
 endif(PBRST)

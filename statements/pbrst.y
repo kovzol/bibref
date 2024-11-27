@@ -7,6 +7,7 @@
 #ifdef IN_BIBREF
 #include "books-wrapper.h"
 #include "fingerprint-wrapper.h"
+#define YY_USER_INIT (addBibles1();)
 #endif // IN_BIBREF
 
 char *stmt_identifier;
@@ -316,7 +317,6 @@ check_ot_passage(char *book, char *info, char *verse)
   extern yylineno;
   extern yycolumn;
 #ifdef IN_BIBREF
-  addBibles1();
   char *l;
   l = lookupVerse1(info, book, verse);
   if (strstr(l, "error: ") != NULL) {
