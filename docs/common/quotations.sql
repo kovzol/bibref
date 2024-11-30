@@ -2642,11 +2642,11 @@ insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passag
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (14511, 1451, 1, 'Jonah', null, 'LXX Jonah 1:17+50 1:17', 'Matthew', 'SBLGNT Matthew 12:40+8 12:40-67', 1910, 51, 33085, 51, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
- (1451, 1, 'Ιωνας', 'ωσπερ γαρ'); -- ωσπερ γαρ = just as for
+ (1451, 1, 'Ιωνα του προφητου', 'ωσπερ γαρ'); -- Ιωνα του προφητου = Jonah the prophet, ωσπερ γαρ = just as for
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1451, 1, 'quotation', 'literal', 'Z.K.');
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
- (14511, 'Matthew', 'SBLGNT Matthew 12:40 12:40-118', 33077, 33084);
+ (14511, 'Matthew', 'SBLGNT Matthew 12:39+99 12:40-118', 33062, 33084);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (14511, 1451, 1, 'Jonah', 'LXX Jonah 1:17+50 1:17', 'Matthew', 'SBLGNT Matthew 12:40+8 12:40-67', 1910, 51, 33085, 51);
 
