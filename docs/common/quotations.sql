@@ -2800,7 +2800,8 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (18012, 1801, 2, 'Daniel', null, 'LXX Daniel 9:27+101 9:27-54', 'Mark', 'SBLGNT Mark 13:14+13 13:14-70', 36179, 20, 43429, 20, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
- (1801, 2, 'Δανιηλ του προφητου', 'ρηθεν'); -- ρηθεν = having been spoken (these are mentioned only in ABPGRK, in LXX and 01 it is only mentioned: "ο αναγινώσκων νοείτω", the one reading let him understand)
+-- (1801, 2, 'Δανιηλ του προφητου', 'ρηθεν'); -- ρηθεν = having been spoken (these are mentioned only in ABPGRK, in LXX and 01 it is only mentioned: "ο αναγινώσκων νοείτω", the one reading let him understand)
+ (1801, 2, null, 'ο αναγινώσκων νοείτω');
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1801, 2, 'quotation', 'literal, fuzzy', 'Z.K.');
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values

@@ -253,6 +253,9 @@ statements.brst: visualize.py quotations.sqlite3
 statements.brst.html: statements.brst
 	highlight --config-file=brst.lang statements.brst -u utf8 -o statements.brst.html
 
+statements-files: visualize.py quotations.sqlite3
+	python3 visualize.py statements-files
+
 clean:
 	rm -f quotations.sqlite3  authors.aux manual_nt_length.aux getrefs.aux \
          authors.log manual_nt_length.log getrefs.log .RData 
@@ -268,5 +271,5 @@ fullclean: clean
 	rm -f $(ot-table-texs) $(ot-Rplots-pdfs) $(ot-table-pdfs)
 	rm -f $(nt-manual_length-csvs) $(ot-manual-length-csvs) manual_nt_length.csv multi-Rplots.pdf nt_frequencies.csv ot_frequencies.csv
 
-.PHONY: clean fullclean all selftest
+.PHONY: clean fullclean all selftest statements-files
 .PRECIOUS: $(ot-table-texs) $(nt-table-texs)
