@@ -3539,11 +3539,13 @@ insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passag
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (21121, 2112, 1, 'Exodus', null, 'LXX Exodus 21:17', 'Matthew', 'SBLGNT Matthew 15:4+41 15:4', 59825, 49, 42552, 38, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
- (2112, 1, 'θεος', 'ειπεν'); -- ειπεν = commanded
+ (2112, 1, 'θεος', 'ειπεν'); -- ειπεν = commanded (this belongs to the first introduction, it cannot be handled with .brst export)
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2112, 1, 'quotation', 'literal, superset, fuzzy', 'Z.K.');
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
  (21121, 'Matthew', 'SBLGNT Matthew 15:4+38 15:4-38', 42549, 42551);
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (21121, 'Matthew', 'SBLGNT Matthew 15:4 15:4-66', 42511, 42523);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (21121, 2112, 1, 'Exodus', 'LXX Exodus 21:17 21:17', 'Matthew', 'SBLGNT Matthew 15:4+41 15:4', 59825, 49, 42552, 38);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
@@ -3819,7 +3821,9 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2202, 8, 'quotation', 'literal, exact', 'Z.K.');
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
- (22028, 'Matthew', 'SBLGNT Matthew 19:19+25 19:19-31', 55057, 55059);
+ (22028, 'Matthew', 'SBLGNT Matthew 19:19+25 19:19-31', 55057, 55059); -- kai
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (22028, 'Matthew', 'SBLGNT Matthew 19:17+50 19:18-50', 54906, 54981); -- tas entolas
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (22028, 2202, 8, 'Leviticus', 'LXX Leviticus 19:18+57 19:18-13', 'Matthew', 'SBLGNT Matthew 19:19+28 19:19', 60912, 31, 55060, 31);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
