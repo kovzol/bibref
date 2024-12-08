@@ -2247,6 +2247,10 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
  (143, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
  (1431, 'Acts', 'SBLGNT Acts 8:32 8:32-91', 26418, 26455);
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (1431, 'Acts', 'SBLGNT Acts 8:28+47 8:28', 26146, 26173);
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (1431, 'Acts', 'SBLGNT Acts 8:30+33 8:30-35', 26264, 26294);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1431, 143, 1, 'Isaiah', 'LXX Isaiah 53:7+40 53:8-37', 'Acts', 'SBLGNT Acts 8:32+38 8:33', 108067, 176, 26456, 176);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
