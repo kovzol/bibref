@@ -2630,6 +2630,8 @@ insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_give
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1401, 2, 'quotation', 'literal, fuzzy', 'Z.K.');
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (14012, 'Acts', 'SBLGNT Acts 2:16+4 2:16', 3930, 3968);
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
  (14012, 'Acts', 'SBLGNT Acts 2:17+29 2:17-158', 3998, 4007);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (14012, 1401, 2, 'Joel', 'LXX Joel 2:28 2:28-168', 'Acts', 'SBLGNT Acts 2:17 2:17-189', 5165, 8, 3969, 8); -- και εσται
