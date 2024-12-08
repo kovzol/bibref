@@ -2832,8 +2832,10 @@ insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passag
  (18022, 1802, 2, 'Daniel', null, 'LXX Daniel 12:1+98 12:1-113', 'Mark', 'SBLGNT Mark 13:19+25 13:19-58', 44466, 18, 43757, 18, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (18022, 1802, 2, 'Daniel', null, 'LXX Daniel 12:1+98 12:1-111', 'Mark', 'SBLGNT Mark 13:19+25 13:19-49', 44466, 20, 43757, 27, 'manual');
+-- insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
+--  (1802, 2, 'Δανιηλ του προφητου', 'γαρ'); -- γαρ = for (Daniel is mentioned formerly in Mark 13:14, ABPGRK)
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
- (1802, 2, 'Δανιηλ του προφητου', 'γαρ'); -- γαρ = for (Daniel is mentioned formerly in Mark 13:14, ABPGRK)
+ (1802, 2, null, 'γαρ'); -- γαρ = for
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (1802, 2, 'quotation', 'literal', 'Z.K.');
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
@@ -3747,11 +3749,13 @@ insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passag
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (22022, 2202, 2, 'Leviticus', null, 'LXX Leviticus 19:18+66 19:18-13', 'Luke', 'SBLGNT Luke 10:27+120 10:27', 60921, 22, 43145, 22, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
- (2202, 2, 'Εν τω νομω', 'και'); -- Εν τω νομω = in the law (written in 10:26), και = and
+ (2202, 2, 'Εν τω νομω', 'τι γεγραπται; πως αναγινωσκεις ... και'); -- Εν τω νομω = in the law, τι γεγραπται; πως αναγινωσκεις = what has been written; how read you (written in 10:26), και = and
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (2202, 2, 'quotation', 'literal, exact', 'Z.K.');
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
  (22022, 'Luke', 'SBLGNT Luke 10:27+117 10:27-22', 43142, 43144); -- και
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (22022, 'Luke', 'SBLGNT Luke 10:26 10:27-124', 42974, 43042);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (22022, 2202, 2, 'Leviticus', 'LXX Leviticus 19:18+66 19:18-13', 'Luke', 'SBLGNT Luke 10:27+120 10:27', 60921, 22, 43145, 22);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
