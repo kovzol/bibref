@@ -1328,11 +1328,12 @@ insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passag
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (511, 51, 1, 'Psalms', 89, 'LXX Psalms 89:20 89:20-34', 'Acts', 'SBLGNT Acts 13:22+68 13:22-58', 103496, 13, 42868, 13, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
- (51, 1, 'Δαυιδ', 'ω ... ειπεν'); -- ω ... ειπεν = to whom ... He said
+ (51, 1, null, 'ω ... ειπεν'); -- ω ... ειπεν = to whom ... He said
+-- In fact, David as source is not given here. Psalm 89 is authored by Ethan the Ezrahite.
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (51, 1, 'quotation', 'literal, exact', 'Z.K.');
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
- (511, 'Acts', 'SBLGNT Acts 13:22+53 13:22-71', 42853, 42867);
+ (511, 'Acts', 'SBLGNT Acts 13:22+49 13:22-71', 42849, 42867);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (511, 51, 1, 'Psalms', 'LXX Psalms 89:20 89:20-34', 'Acts', 'SBLGNT Acts 13:22+68 13:22-58', 103496, 13, 42868, 13);
 
