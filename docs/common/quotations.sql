@@ -403,11 +403,13 @@ insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passag
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (112, 11, 2, 'Psalms', 16, 'LXX Psalms 16:10+37 16:10', 'Acts', 'SBLGNT Acts 13:35+20 13:35', 12684, 35, 44013, 33, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
- (11, 2, 'εν ετερω ... Δαυιδ', 'λεγει'); -- λεγει = says
+ (11, 2, 'εν ετερω ... Δαυιδ', 'λεγει'); -- λεγει = says, David is mentioned in 13:34 (and also later in 13:36)
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
  (11, 2, 'quotation', 'literal', 'Z.K.');
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
  (112, 'Acts', 'SBLGNT Acts 13:35 13:35-33', 43993, 44012);
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (112, 'Acts', 'SBLGNT Acts 13:34+79 13:34', 43967, 43992);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (112, 11, 2, 'Psalms', 'LXX Psalms 16:10+37 16:10', 'Acts', 'SBLGNT Acts 13:35+20 13:35', 12684, 35, 44013, 33);
 
