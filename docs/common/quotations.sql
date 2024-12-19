@@ -2993,6 +2993,8 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
  (2006, 1, 'quotation', 'literal, exact', 'Z.K.');
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
  (20061, 'Romans', 'SBLGNT Romans 9:12 9:12-26', 18967, 19006);
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (20061, 'Romans', 'SBLGNT Romans 9:10+16 9:10-36', 18845, 18851); -- Rebecca is mentioned only here in NT
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (20061, 2006, 1, 'Genesis', 'LXX Genesis 25:23+104 25:23', 'Romans', 'SBLGNT Romans 9:12+40 9:12', 65836, 26, 19007, 26);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
