@@ -88,21 +88,32 @@ string latinToGreek(const string& latin) {
 
 /// Convert the input word to a-y encoding.
 string greekToLatin(string word) {
+  /*
+  int D=0;
+  if (word.find("ησαΰας") == 0) {
+    cout << "DEBUG1: " << word << "\n";
+    D=1;
+    }
+  */
   // This could be simplified, similarly to the latinToGreek conversion.
   string rewritten; // Here we store the output step by step, for each letter.
   for (int i = 0; i < word.length(); i += 2) { // jumping by 2 bytes in Unicode
     auto c1 = static_cast<unsigned char>(word[i]); // first Unicode byte
     auto c2 = static_cast<unsigned char>(word[i + 1]); // second Unicode byte
+    /* if (D==1) { printf("c1=%x c2=%x\n", c1, c2); } */
     // keep care of special characters
     if (c1 == 0x80) {
       i--; // jump 1 byte back
     }
     // keep only Greek characters
     if (c1 == 0xCE || c1 == 0xCF) { // Greek characters begin with one of these two bytes.
-      char c;
+      char c = '-'; // by default we don't have a candidate
       switch (c1) {
       case 0xCE: // Characters from alpha to omicron...
         switch (c2) {
+        case 0xB0:
+          c = 'i'; // this is actually ΰ (upsilon) in Unicode, but Sword internally identifies it as an iota (in e.g. Romans 9:29)
+          break;
         case 0xB1:
           c = 'a';
           break;
@@ -148,6 +159,9 @@ string greekToLatin(string word) {
         case 0xBF:
           c = 'o';
           break;
+        case 0xD0:
+          c = 'y'; // In πραΰς (Matthew 11:29)
+          break;
         }
         break;
       case 0xCF: // Characters from pi to omega...
@@ -188,9 +202,21 @@ string greekToLatin(string word) {
       default:
         break; // by default, no character will be stored
       }
+      if (c=='-') {
+        char s[5];
+        sprintf(s, "%2x%2x", c1, c2);
+        error("Unidentified Greek character in word " + word + " (" + string(s) + ")");
+        exit(1);
+      }
       rewritten.push_back(c); // store c in the output
     }
   }
+  /*
+  if (rewritten.find("hsa-a") == 0) {
+    cout << "DEBUG2: " << rewritten << "\n";
+    // exit(1);
+    }
+  */
   return rewritten;
 }
 
