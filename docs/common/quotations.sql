@@ -2529,6 +2529,8 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
  (1302, 1, 'quotation', 'literal, exact', 'Z.K.');
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
  (13011, 'Romans', 'SBLGNT Romans 9:25 9:25-54', 19842, 19859);
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (1041, 'Romans', 'SBLGNT Romans 9:25 9:25-54', 19842, 19859); -- This also introduces Romans 9:27 (Hosea, says).
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (13011, 1302, 1, 'Hosea', 'LXX Hosea 1:10+82 1:10', 'Romans', 'SBLGNT Romans 9:26', 1055, 73, 19914, 73);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
