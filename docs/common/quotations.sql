@@ -1580,6 +1580,8 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
  (110, 1, 'quotation', 'literal, fuzzy', 'Z.K.');
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
  (1101, 'Romans', 'SBLGNT Romans 10:20 10:20-60', 21980, 22003);
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (1111, 'Romans', 'SBLGNT Romans 10:20 10:20-60', 21980, 22003); -- it introduces also Romans 10:21
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (1101, 110, 1, 'Isaiah', 'LXX Isaiah 65:1 65:1-42', 'Romans', 'SBLGNT Romans 10:20+24 10:20', 127328, 58, 22004, 60);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
@@ -3733,6 +3735,8 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
  (2201, 1, 'quotation', 'literal, exact', 'Z.K.');
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
  (22011, 'Romans', 'SBLGNT Romans 10:5 10:5-56', 20800, 20817);
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (24011, 'Romans', 'SBLGNT Romans 10:5 10:5-56', 20800, 20817); -- this introduces also Romans 10:6
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (22011, 2201, 1, 'Leviticus', 'LXX Leviticus 18:5+69 18:5-18', 'Romans', 'SBLGNT Romans 10:5+46 10:5', 57053, 30, 20846, 28);
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
