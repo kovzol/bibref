@@ -34,6 +34,8 @@ Later, this feature is planned to be included in the Qt version as well.
 The **.brst** entries could then be visually graphed, similarly to the SVG outputs of the
 old database. Also, a user-maintained subset or extension of the **.brst** files could
 be analyzed as a whole, for example, to be informed if two quotations are mentioned
-consecutively. In addition, the user may want to do minor changes in the **.brst** files
+consecutively. In fact, introductions of different quotations may overlap, because
+the same introduction can indicate the author for different quotations, for example.
+In addition, the user may want to do minor changes in the **.brst** files
 to use StatResGNT instead of SBLGNT, for example. Also, a newer version of the LXX module
 can be interesting, since it contains deuterocanonical books.
