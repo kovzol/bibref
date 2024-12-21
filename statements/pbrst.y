@@ -4,6 +4,7 @@
 #include <string.h>
 #include <math.h>
 #include <limits.h>
+#include <stdbool.h>
 
 #ifdef IN_BIBREF
 #include "books-wrapper.h"
@@ -22,9 +23,11 @@ char *ot_verse;
 #define MAX_SUBSTRINGS 10
 #define MAX_FRAGMENTS 20
 char introduction_substrings[MAX_SUBSTRINGS][MAX_SUBSTR_LENGTH + 1];
-int fragment_intervals[MAX_FRAGMENTS][2];
+int intervals[MAX_FRAGMENTS][3]; // start, end, type
+// where type is 0: NT headline, 1: NT fragment, 2: OT fragment, 3: NT introduction
 int substrings = 0;
-int fragments = 0;
+int iv_counter = 0;
+int fragments_start = -1; // undefined
 float difference = -1; // undefined
 
 /* shortcut to concatenate a, " " and b, and put the result in c */
@@ -267,20 +270,23 @@ check_rawposition_length(char *s)
 {
   extern yylineno;
   extern yycolumn;
+  int from, to, length=-1;
   if (strstr(s, "length") == NULL) {
     fprintf(stdout, "%d,%d: warning: no length is given, consider adding it\n", yylineno, yycolumn);
-    return;
-  }
-  int from, to, length;
-  sscanf(s, "(%d-%d, length %d)", &from, &to, &length);
-  if (to-from+1 != length) {
-    fprintf(stdout, "%d,%d: error: inconsistent length: %d-%d+1!=%d\n", yylineno, yycolumn, to, from, length);
+    sscanf(s, "(%d-%d)", &from, &to);
   } else {
-    fprintf(stdout, "%d,%d: info: consistent length: %d-%d+1==%d\n", yylineno, yycolumn, to, from, length);
+    sscanf(s, "(%d-%d, length %d)", &from, &to, &length);
+    if (to-from+1 != length) {
+      fprintf(stdout, "%d,%d: error: inconsistent length: %d-%d+1!=%d\n", yylineno, yycolumn, to, from, length);
+    } else {
+      fprintf(stdout, "%d,%d: info: consistent length: %d-%d+1==%d\n", yylineno, yycolumn, to, from, length);
+    }
   }
-  fragment_intervals[fragments][0] = from;
-  fragment_intervals[fragments][1] = to;
-  fragments++;
+  intervals[iv_counter][0] = from;
+  intervals[iv_counter][1] = to;
+  intervals[iv_counter][2] = 0; // unclassified
+  fprintf(stdout, "%d,%d: info: interval %d [%d,%d] stored\n", yylineno, yycolumn, iv_counter, from, to);
+  iv_counter++;
 }
 
 void
@@ -317,6 +323,8 @@ check_nt_passage(char *book, char *info, char *verse)
   nt_book = strdup(book);
   free(l);
 #endif // IN_BIBREF
+  intervals[iv_counter-1][2]=0; // NT (headline)
+  fprintf(stdout, "%d,%d: info: interval %d is a headline NT passage\n", yylineno, yycolumn, iv_counter-1);
 }
 
 void
@@ -338,6 +346,8 @@ check_ot_passage(char *book, char *info, char *verse)
   ot_verse = strdup(verse);
   free(l);
 #endif // IN_BIBREF
+  intervals[iv_counter-1][2]=2; // OT
+  fprintf(stdout, "%d,%d: info: interval %d is an OT passage\n", yylineno, yycolumn, iv_counter-1);
 }
 
 void
@@ -371,6 +381,8 @@ check_introduction_passage(char *passage, char *ay)
   }
   substrings = 0; // reset, maybe there is another introduction
 #endif // IN_BIBREF
+  intervals[iv_counter-1][2]=3; // NT (introduction)
+  fprintf(stdout, "%d,%d: info: interval %d is an introductory NT passage\n", yylineno, yycolumn, iv_counter-1);
 }
 
 void
@@ -396,6 +408,9 @@ check_fragment(char *passage, char *ay_nt, char *ot_passage, char *ay_ot) {
   else
     fprintf(stdout, "%d,%d: error: fragments in reality differ by %4.2f%%\n", yylineno, yycolumn, jd * 100.0);
 #endif // IN_BIBREF
+  intervals[iv_counter-2][2] = 1; // this is an NT fragment
+  intervals[iv_counter-1][2] = 2; // this is an OT fragment
+  if (fragments_start == -1) fragments_start = iv_counter-2;
 }
 
 void check_cover(double cover) {
@@ -403,23 +418,29 @@ void check_cover(double cover) {
   extern yycolumn;
   // Detecting intervals and the union of them:
   fprintf(stdout, "%d,%d: info: fragment intervals:", yylineno, yycolumn);
-  int imin = INT_MAX, imax = 0;
-  for (int i=0; i<fragments; i+=2) { // we need only NT intervals, so we skip OT entries
-    int istart = fragment_intervals[i][0];
-    int iend = fragment_intervals[i][1];
-    fprintf(stdout, " [%d,%d]", istart, iend);
-    if (imin > istart) imin = istart;
-    if (imax < iend) imax = iend;
+  int imin = INT_MAX, imax = 0; // union interval of fragments intervals
+  for (int i=0; i<iv_counter; i++) {
+    int ftype = intervals[i][2];
+    if (ftype == 1) {
+      int istart = intervals[i][0];
+      int iend = intervals[i][1];
+      fprintf(stdout, " [%d,%d]", istart, iend);
+      if (imin > istart) imin = istart;
+      if (imax < iend) imax = iend;
+    }
   }
   fprintf(stdout, ", union: [%d,%d]\n", imin, imax);
   int union_length = imax-imin+1;
   char covering[union_length];
   for (int i=0; i<union_length; i++) covering[i] = 0; // resetting union
   // Cover check:
-  for (int i=0; i<fragments; i+=2) {
-    int istart = fragment_intervals[i][0];
-    int iend = fragment_intervals[i][1];
-    for (int j=istart; j<=iend; j++) covering[j-imin]++;
+  for (int i=0; i<iv_counter; i++) {
+    int ftype = intervals[i][2];
+    if (ftype == 1) {
+      int istart = intervals[i][0];
+      int iend = intervals[i][1];
+      for (int j=istart; j<=iend; j++) covering[j-imin]++;
+    }
   }
   int covered = 0;
   for (int j=0; j<union_length; j++)
@@ -431,8 +452,31 @@ void check_cover(double cover) {
     fprintf(stdout, "%d,%d: error: cover %4.2f%% is incorrect (union length: %d, covered: %d), in reality %4.2f%%\n",
       yylineno, yycolumn, cover, union_length, covered, real_cover);
   }
-
-  fragments = 0; // reset, maybe there are other fragments (there should not be)
+  // Check if any NT introductions overlap any fragments:
+  bool overlap_error = false;
+  for (int i=0; i<fragments_start; i++) {
+    int itype = intervals[i][2];
+    if (itype == 3) { // NT introduction
+       for (int j=fragments_start; j<iv_counter; j++) {
+         int ftype = intervals[j][2];
+         if (ftype == 1) {
+           int nt_intro_start = intervals[i][0];
+           int nt_intro_end = intervals[i][1];
+           int fstart = intervals[j][0];
+           int fend = intervals[j][1];
+           // Do they overlap?
+           if (!(nt_intro_start > fend || nt_intro_end < fstart)) {
+             fprintf(stdout, "%d,%d: error: NT introduction interval %d overlaps fragment interval %d\n",
+               yylineno, yycolumn, i, j);
+           overlap_error = true;
+           }
+         }
+       }
+    }
+  }
+  if (!overlap_error) {
+    fprintf(stdout, "%d,%d: info: overlap check done\n", yylineno, yycolumn);
+  }
 }
 
 void
