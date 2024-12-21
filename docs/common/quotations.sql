@@ -1281,6 +1281,8 @@ insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classi
  (46, 4, 'quotation', 'literal', 'Z.K.');
 insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
  (464, 'I_Peter', 'SBLGNT I_Peter 2:7+27 2:7-62', 2719, 2730);
+insert into nt_quotation_introductions (nt_quotation_id, nt_book, nt_passage, nt_startpos, nt_endpos) values
+ (464, 'I_Peter', 'SBLGNT I_Peter 2:6 2:6-81', 2591, 2610);
 insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length) values
  (464, 46, 4, 'Psalms', 'LXX Psalms 118:22', 'I_Peter', 'SBLGNT I_Peter 2:7+39 2:7', 138495, 62, 2731, 62);
 
