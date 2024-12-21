@@ -399,10 +399,12 @@ check_fragment(char *passage, char *ay_nt, char *ay_ot) {
   extern yylineno;
   extern yycolumn;
 #ifdef IN_BIBREF
-  char *ot_passage = strdup(books_s[iv_counter-1]);
+  char *ot_passage = malloc(strlen(ot_book) + 1 + strlen(ot_info) + 1 + strlen(ot_verse) + 1);
+  strcpy(ot_passage, ot_book);
   strcat(ot_passage, " ");
-  strcat(ot_passage, infos_s[iv_counter-1]);
-  strcat(ot_passage, " ..."); // TODO: store the whole verse and put it here
+  strcat(ot_passage, ot_info);
+  strcat(ot_passage, " ");
+  strcat(ot_passage, ot_verse);
   char *l;
   l = lookupVerse1(nt_info, nt_book, passage);
   if (strcmp(l, ay_nt) == 0)
@@ -420,6 +422,7 @@ check_fragment(char *passage, char *ay_nt, char *ay_ot) {
     fprintf(stdout, "%d,%d: info: fragments differ by %4.2f%%\n", yylineno, yycolumn, difference * 100.0);
   else
     fprintf(stdout, "%d,%d: error: fragments in reality differ by %4.2f%%\n", yylineno, yycolumn, jd * 100.0);
+  free(ot_passage);
 #endif // IN_BIBREF
   intervals[iv_counter-2][2] = 1; // this is an NT fragment
   intervals[iv_counter-1][2] = 2; // this is an OT fragment
