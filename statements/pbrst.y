@@ -565,6 +565,14 @@ extern YY_BUFFER_STATE yy_scan_string(char * str);
 extern void yy_delete_buffer(YY_BUFFER_STATE buffer);
 
 int brst_scan_string(char *string) {
+    // Reset data:
+    yylex_destroy();
+    substrings = 0;
+    iv_counter = 0;
+    fragments_start = -1;
+    nt_intros_start = -1;
+    difference = -1;
+
     YY_BUFFER_STATE buffer = yy_scan_string(string);
     yyparse();
     yy_delete_buffer(buffer);
