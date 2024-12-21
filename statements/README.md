@@ -20,10 +20,11 @@ The checks are described in the **.y** file. They are currently:
 * check fragment matches and Jaccard differences
 * overall cover check (percentual)
 * check if NT introductions overlap NT fragments (they should not)
+* check if NT headline interval is well-chosen
 
 To be written (that is, these checks are not yet implemented):
 
-* check if NT headline and OT headline(s) are well-chosen
+* check if OT headlines are well-chosen
 * check if OT parts of fragments are unique, if not, allow to mention that in the .brst language
 
 As a next step, these checks are planned to be integrated in the **bibref** program as well.

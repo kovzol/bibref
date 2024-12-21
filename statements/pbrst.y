@@ -477,6 +477,24 @@ void check_cover(double cover) {
   if (!overlap_error) {
     fprintf(stdout, "%d,%d: info: overlap check done\n", yylineno, yycolumn);
   }
+  // Check if NT headline matches union:
+  int nt_headline_start = intervals[0][0];
+  int nt_headline_end = intervals[0][1];
+  int matchlevel = 0;
+  if (!(nt_headline_start == imin && nt_headline_end == imax)) {
+    if (nt_headline_start <= imin || nt_headline_end >= imax) {
+    matchlevel = 1;
+    fprintf(stdout, "%d,%d: warning: NT headline interval [%d,%d] contains NT fragments union [%d,%d] but they do not match\n",
+      yylineno, yycolumn, nt_headline_start, nt_headline_end, imin, imax);
+    }
+    else {
+    matchlevel = 2;
+      fprintf(stdout, "%d,%d: warning: NT headline interval [%d,%d] does not contain NT fragments union [%d,%d]\n",
+        yylineno, yycolumn, nt_headline_start, nt_headline_end, imin, imax);
+    }
+  } else {
+    fprintf(stdout, "%d,%d: info: NT headline interval check done\n", yylineno, yycolumn);
+  }
 }
 
 void
