@@ -18,10 +18,10 @@ The checks are described in the **.y** file. They are currently:
 * check if the passages are mentioned with their correct raw positions (including length)
 * check if introductional passages indeed contain the declarations and sources mentioned
 * check fragment matches and Jaccard differences
+* overall cover check
 
 To be written (that is, these checks are not yet implemented):
 
-* overall cover check
 * check if NT introductions overlap NT fragments (they should not, e.g. q97 is erroneous)
 * check if OT parts of fragments are unique, if not, allow to mention that in the .brst language
 

@@ -3,6 +3,7 @@
 #include <stdarg.h>
 #include <string.h>
 #include <math.h>
+#include <limits.h>
 
 #ifdef IN_BIBREF
 #include "books-wrapper.h"
@@ -16,10 +17,14 @@ char *nt_info;
 char *ot_book;
 char *ot_info;
 char *ot_verse;
+#define EPS 0.0001
 #define MAX_SUBSTR_LENGTH 500
 #define MAX_SUBSTRINGS 10
+#define MAX_FRAGMENTS 20
 char introduction_substrings[MAX_SUBSTRINGS][MAX_SUBSTR_LENGTH + 1];
+int fragment_intervals[MAX_FRAGMENTS][2];
 int substrings = 0;
+int fragments = 0;
 float difference = -1; // undefined
 
 /* shortcut to concatenate a, " " and b, and put the result in c */
@@ -237,7 +242,7 @@ introduction_explanation
 
 fragments
     : fragments_description
-        PROVIDING AN OVERALL COVER OF APPROXNUM;
+        PROVIDING AN OVERALL COVER OF APPROXNUM { check_cover($<floatval>7); };
 
 fragments_description
     : fragment | fragment AND fragments_description;
@@ -273,6 +278,9 @@ check_rawposition_length(char *s)
   } else {
     fprintf(stdout, "%d,%d: info: consistent length: %d-%d+1==%d\n", yylineno, yycolumn, to, from, length);
   }
+  fragment_intervals[fragments][0] = from;
+  fragment_intervals[fragments][1] = to;
+  fragments++;
 }
 
 void
@@ -383,12 +391,48 @@ check_fragment(char *passage, char *ay_nt, char *ot_passage, char *ay_ot) {
     fprintf(stdout, "%d,%d: error: OT fragment %s does not match to a-y form %s, it should be %s\n", yylineno, yycolumn, ot_passage, ay_ot, l);
   // fprintf(stdout, "%d,%d: debug: parsed ot_passage=%s ot_info=%s ot_book=%s ot_verse=%s ay_ot=%s diff=%f\n", yylineno, yycolumn, ot_passage, ot_info, ot_book, ot_verse, ay_ot, difference);
   double jd = jaccard_dist1(ay_nt, ay_ot);
-#define EPS 0.0001
   if (fabs(jd-difference) <= EPS)
     fprintf(stdout, "%d,%d: info: fragments differ by %4.2f%%\n", yylineno, yycolumn, difference * 100.0);
   else
     fprintf(stdout, "%d,%d: error: fragments in reality differ by %4.2f%%\n", yylineno, yycolumn, jd * 100.0);
 #endif // IN_BIBREF
+}
+
+void check_cover(double cover) {
+  extern yylineno;
+  extern yycolumn;
+  // Detecting intervals and the union of them:
+  fprintf(stdout, "%d,%d: info: fragment intervals:", yylineno, yycolumn);
+  int imin = INT_MAX, imax = 0;
+  for (int i=0; i<fragments; i+=2) { // we need only NT intervals, so we skip OT entries
+    int istart = fragment_intervals[i][0];
+    int iend = fragment_intervals[i][1];
+    fprintf(stdout, " [%d,%d]", istart, iend);
+    if (imin > istart) imin = istart;
+    if (imax < iend) imax = iend;
+  }
+  fprintf(stdout, ", union: [%d,%d]\n", imin, imax);
+  int union_length = imax-imin+1;
+  char covering[union_length];
+  for (int i=0; i<union_length; i++) covering[i] = 0; // resetting union
+  // Cover check:
+  for (int i=0; i<fragments; i+=2) {
+    int istart = fragment_intervals[i][0];
+    int iend = fragment_intervals[i][1];
+    for (int j=istart; j<=iend; j++) covering[j-imin]++;
+  }
+  int covered = 0;
+  for (int j=0; j<union_length; j++)
+    if (covering[j]>0) covered++;
+  double real_cover = (double)covered/union_length * 100.0;
+  if (fabs(real_cover-cover) <= 100*EPS) {
+    fprintf(stdout, "%d,%d: info: cover %4.2f%% is correct\n", yylineno, yycolumn, cover);
+  } else {
+    fprintf(stdout, "%d,%d: error: cover %4.2f%% is incorrect (union length: %d, covered: %d), in reality %4.2f%%\n",
+      yylineno, yycolumn, cover, union_length, covered, real_cover);
+  }
+
+  fragments = 0; // reset, maybe there are other fragments (there should not be)
 }
 
 void
