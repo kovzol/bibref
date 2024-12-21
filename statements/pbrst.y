@@ -260,7 +260,7 @@ fragment
     : FRAGMENT passage A_Y FORM AYLITERAL
         MATCHES ot_passage A_Y FORM AYLITERAL
         difference_description {
-        check_fragment($<strval>2, $<strval>5, $<strval>7, $<strval>10);
+        check_fragment($<strval>2, $<strval>5, $<strval>10);
         };
 
 difference_description
@@ -395,10 +395,14 @@ check_introduction_passage(char *passage, char *ay)
 }
 
 void
-check_fragment(char *passage, char *ay_nt, char *ot_passage, char *ay_ot) {
+check_fragment(char *passage, char *ay_nt, char *ay_ot) {
   extern yylineno;
   extern yycolumn;
 #ifdef IN_BIBREF
+  char *ot_passage = strdup(books_s[iv_counter-1]);
+  strcat(ot_passage, " ");
+  strcat(ot_passage, infos_s[iv_counter-1]);
+  strcat(ot_passage, " ..."); // TODO: store the whole verse and put it here
   char *l;
   l = lookupVerse1(nt_info, nt_book, passage);
   if (strcmp(l, ay_nt) == 0)
@@ -407,7 +411,7 @@ check_fragment(char *passage, char *ay_nt, char *ot_passage, char *ay_ot) {
     fprintf(stdout, "%d,%d: error: NT fragment %s does not match to a-y form %s, it should be %s\n", yylineno, yycolumn, passage, ay_nt, l);
   l = lookupVerse1(ot_info, ot_book, ot_verse);
   if (strcmp(l, ay_ot) == 0)
-    fprintf(stdout, "%d,%d: info: OT fragment %s matches to a-y form\n", yylineno, yycolumn, ot_passage); // FIXME
+    fprintf(stdout, "%d,%d: info: OT fragment %s matches to a-y form\n", yylineno, yycolumn, ot_passage);
   else
     fprintf(stdout, "%d,%d: error: OT fragment %s does not match to a-y form %s, it should be %s\n", yylineno, yycolumn, ot_passage, ay_ot, l);
   // fprintf(stdout, "%d,%d: debug: parsed ot_passage=%s ot_info=%s ot_book=%s ot_verse=%s ay_ot=%s diff=%f\n", yylineno, yycolumn, ot_passage, ot_info, ot_book, ot_verse, ay_ot, difference);
