@@ -73,6 +73,7 @@ string quitCmd = "quit";
 string helpCmd = "help";
 #ifdef WITH_PBRST
 string statementCmd = "statement";
+string statementCmd2 = "Statement";
 #endif
 
 string errorNotRecognized = "Sorry, the command you entered was not recognized or its syntax is invalid.";
@@ -909,7 +910,7 @@ string cli_process(char *buf) {
   else if (boost::starts_with(input, getrefsCmd))
     processGetrefsCmd(input);
 #ifdef WITH_PBRST
-  else if (boost::starts_with(input, statementCmd))
+  else if (boost::starts_with(input, statementCmd) || boost::starts_with(input, statementCmd2))
     processStatementCmd(input);
 #endif
   // If the input is not recognized, we show an error...
