@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# This test assumes that bibref with pbrst support has already been compiled.
+BIBREF=../build/bibref # change this accordingly
+
+c=0
+g=0
+for i in *.brst; do
+ c=$((c+1))
+ id=`basename $i .brst`
+ l=$id.bibref.log
+ pushd .. >/dev/null
+ SE=1
+ cat tests/$i | tr -d '\n' | $BIBREF -a 2>&1 > tests/$l && SE=0
+ if [ $SE = 0 ]; then
+  grep error tests/$l && echo "(proof error in $id)" || g=$((g+1))
+ else
+  echo "syntax error in $id"
+  fi
+ popd >/dev/null
+ done
+echo "Total: $c cases, $g correct, $((c-g)) erroneous"
