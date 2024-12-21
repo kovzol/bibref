@@ -2839,7 +2839,7 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (18021, 1802, 1, 'Daniel', null, 'LXX Daniel 12:1+104 12:1-112', 'Matthew', 'SBLGNT Matthew 24:21+24 24:21-35', 44472, 13, 71031, 13, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (18021, 1802, 1, 'Daniel', null, 'LXX Daniel 12:1+98 12:1-111', 'Matthew', 'SBLGNT Matthew 24:21+24 24:21-34', 44466, 20, 71031, 14, 'manual');
+ (18021, 1802, 1, 'Daniel', null, 'LXX Daniel 12:1+80 12:1-111', 'Matthew', 'SBLGNT Matthew 24:21+24 24:21-34', 44448, 38, 71031, 14, 'manual');
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
  (1802, 1, 'Δανιηλ του προφητου', 'γαρ'); -- γαρ = for (Daniel is mentioned formerly in Matthew 24:15, see below, this cannot be handled with the .brst export)
 insert into quotations_classifications (quotation_ot_id, quotation_nt_id, classification, classification_subtype, classified_by) values
@@ -2858,7 +2858,7 @@ insert into clasps (nt_quotation_id, ot_id, nt_id, ot_book, ot_passage, nt_book,
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
  (18022, 1802, 2, 'Daniel', null, 'LXX Daniel 12:1+98 12:1-113', 'Mark', 'SBLGNT Mark 13:19+25 13:19-58', 44466, 18, 43757, 18, 'getrefs');
 insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, found_method) values
- (18022, 1802, 2, 'Daniel', null, 'LXX Daniel 12:1+98 12:1-111', 'Mark', 'SBLGNT Mark 13:19+25 13:19-49', 44466, 20, 43757, 27, 'manual');
+ (18022, 1802, 2, 'Daniel', null, 'LXX Daniel 12:1+80 12:1-111', 'Mark', 'SBLGNT Mark 13:19+25 13:19-49', 44448, 38, 43757, 27, 'manual');
 -- insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values
 --  (1802, 2, 'Δανιηλ του προφητου', 'γαρ'); -- γαρ = for (Daniel is mentioned formerly in Mark 13:14, ABPGRK)
 insert into quotations_properties (quotation_ot_id, quotation_nt_id, source_given, as_it_is_written) values

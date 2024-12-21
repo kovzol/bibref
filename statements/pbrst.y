@@ -21,14 +21,20 @@ char *ot_verse;
 #define EPS 0.0001
 #define MAX_SUBSTR_LENGTH 500
 #define MAX_SUBSTRINGS 10
-#define MAX_FRAGMENTS 20
+#define MAX_INTERVALS 20
+#define MAX_BOOKNAME_LENGTH 30
+#define MAX_INFONAME_LENGTH 30
+#define MAX_INFOS 5
 char introduction_substrings[MAX_SUBSTRINGS][MAX_SUBSTR_LENGTH + 1];
-int intervals[MAX_FRAGMENTS][3]; // start, end, type
+int intervals[MAX_INTERVALS][3]; // start, end, type
 // where type is 0: NT headline, 1: NT fragment, 2: OT fragment, 3: NT introduction
 int substrings = 0;
 int iv_counter = 0;
 int fragments_start = -1; // undefined
+int nt_intros_start = -1;
 float difference = -1; // undefined
+char books_s[MAX_INTERVALS][MAX_BOOKNAME_LENGTH]; // Bible editions
+char infos_s[MAX_INTERVALS][MAX_INFONAME_LENGTH]; // Bible books (in order of intervals)
 
 /* shortcut to concatenate a, " " and b, and put the result in c */
 #define _CONCAT(a,b,c) \
@@ -348,6 +354,8 @@ check_ot_passage(char *book, char *info, char *verse)
 #endif // IN_BIBREF
   intervals[iv_counter-1][2]=2; // OT
   fprintf(stdout, "%d,%d: info: interval %d is an OT passage\n", yylineno, yycolumn, iv_counter-1);
+  strcpy(infos_s[iv_counter-1], ot_info);
+  strcpy(books_s[iv_counter-1], ot_book);
 }
 
 void
@@ -383,6 +391,7 @@ check_introduction_passage(char *passage, char *ay)
 #endif // IN_BIBREF
   intervals[iv_counter-1][2]=3; // NT (introduction)
   fprintf(stdout, "%d,%d: info: interval %d is an introductory NT passage\n", yylineno, yycolumn, iv_counter-1);
+  if (nt_intros_start == -1) nt_intros_start = iv_counter-1;
 }
 
 void
@@ -398,7 +407,7 @@ check_fragment(char *passage, char *ay_nt, char *ot_passage, char *ay_ot) {
     fprintf(stdout, "%d,%d: error: NT fragment %s does not match to a-y form %s, it should be %s\n", yylineno, yycolumn, passage, ay_nt, l);
   l = lookupVerse1(ot_info, ot_book, ot_verse);
   if (strcmp(l, ay_ot) == 0)
-    fprintf(stdout, "%d,%d: info: OT fragment %s matches to a-y form\n", yylineno, yycolumn, ot_passage);
+    fprintf(stdout, "%d,%d: info: OT fragment %s matches to a-y form\n", yylineno, yycolumn, ot_passage); // FIXME
   else
     fprintf(stdout, "%d,%d: error: OT fragment %s does not match to a-y form %s, it should be %s\n", yylineno, yycolumn, ot_passage, ay_ot, l);
   // fprintf(stdout, "%d,%d: debug: parsed ot_passage=%s ot_info=%s ot_book=%s ot_verse=%s ay_ot=%s diff=%f\n", yylineno, yycolumn, ot_passage, ot_info, ot_book, ot_verse, ay_ot, difference);
@@ -480,21 +489,53 @@ void check_cover(double cover) {
   // Check if NT headline matches union:
   int nt_headline_start = intervals[0][0];
   int nt_headline_end = intervals[0][1];
-  int matchlevel = 0;
   if (!(nt_headline_start == imin && nt_headline_end == imax)) {
     if (nt_headline_start <= imin || nt_headline_end >= imax) {
-    matchlevel = 1;
     fprintf(stdout, "%d,%d: warning: NT headline interval [%d,%d] contains NT fragments union [%d,%d] but they do not match\n",
       yylineno, yycolumn, nt_headline_start, nt_headline_end, imin, imax);
     }
     else {
-    matchlevel = 2;
-      fprintf(stdout, "%d,%d: warning: NT headline interval [%d,%d] does not contain NT fragments union [%d,%d]\n",
+      fprintf(stdout, "%d,%d: error: NT headline interval [%d,%d] does not contain NT fragments union [%d,%d]\n",
         yylineno, yycolumn, nt_headline_start, nt_headline_end, imin, imax);
     }
   } else {
     fprintf(stdout, "%d,%d: info: NT headline interval check done\n", yylineno, yycolumn);
   }
+  // Check if OT headlines match OT unions:
+  for (int i=1; i<nt_intros_start; i++) {
+    fprintf(stdout, "%d,%d: info: OT headline %d %s %s interval check:",
+      yylineno, yycolumn, i, books_s[i], infos_s[i]);
+    int oimin=INT_MAX, oimax=0;
+    // Create union for this OT headline:
+    for (int j=fragments_start + 1; j<iv_counter; j++) {
+      int ftype = intervals[j][2];
+      if (ftype == 2) { // OT interval
+        if (strcmp(books_s[i], books_s[j])==0 && strcmp(infos_s[i], infos_s[j])==0) {
+          int oistart = intervals[j][0];
+          int oiend = intervals[j][1];
+          fprintf(stdout, " [%d,%d]", oistart, oiend);
+          if (oimin > oistart) oimin = oistart;
+          if (oimax < oiend) oimax = oiend;
+        }
+      }
+    }
+    fprintf(stdout, ", union: [%d,%d]\n", oimin, oimax);
+    // Compare headline interval with the union:
+    int ot_headline_start = intervals[i][0];
+    int ot_headline_end = intervals[i][1];
+    if (!(ot_headline_start == oimin && ot_headline_end == oimax)) {
+      if (ot_headline_start <= oimin || ot_headline_end >= oimax) {
+      fprintf(stdout, "%d,%d: warning: OT headline interval %d [%d,%d] contains OT fragments union [%d,%d] but they do not match\n",
+        yylineno, yycolumn, i, ot_headline_start, ot_headline_end, oimin, oimax);
+      }
+      else {
+        fprintf(stdout, "%d,%d: error: OT headline interval %d [%d,%d] does not contain OT fragments union [%d,%d]\n",
+          yylineno, yycolumn, i, ot_headline_start, ot_headline_end, oimin, oimax);
+      }
+    } else {
+      fprintf(stdout, "%d,%d: info: OT headline interval %d check done\n", yylineno, yycolumn, i);
+    }
+  } // end of for checking OT headlines
 }
 
 void
