@@ -1,0 +1,3 @@
+pragma journal_mode = WAL;
+pragma synchronous = normal;
+pragma journal_size_limit = 6144000;

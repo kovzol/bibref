@@ -1,2 +1,2 @@
 #!/bin/sh
-echo ".read quotations.sql" | sqlite3 quotations.sqlite3
+echo ".read quotations.sql" | sqlite3 -init sqlite3.init quotations.sqlite3
