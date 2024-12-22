@@ -276,6 +276,7 @@ check_rawposition_length(char *s)
 {
   extern yylineno;
   extern yycolumn;
+#ifdef IN_BIBREF
   int from, to, length=-1;
   if (strstr(s, "length") == NULL) {
     fprintf(stdout, "%d,%d: warning: no length is given, consider adding it\n", yylineno, yycolumn);
@@ -293,6 +294,7 @@ check_rawposition_length(char *s)
   intervals[iv_counter][2] = 0; // unclassified
   fprintf(stdout, "%d,%d: info: interval %d [%d,%d] stored\n", yylineno, yycolumn, iv_counter, from, to);
   iv_counter++;
+#endif // IN_BIBREF
 }
 
 void
@@ -328,9 +330,9 @@ check_nt_passage(char *book, char *info, char *verse)
   nt_info = strdup(info);
   nt_book = strdup(book);
   free(l);
-#endif // IN_BIBREF
   intervals[iv_counter-1][2]=0; // NT (headline)
   fprintf(stdout, "%d,%d: info: interval %d is a headline NT passage\n", yylineno, yycolumn, iv_counter-1);
+#endif // IN_BIBREF
 }
 
 void
@@ -351,11 +353,11 @@ check_ot_passage(char *book, char *info, char *verse)
   ot_book = strdup(book);
   ot_verse = strdup(verse);
   free(l);
-#endif // IN_BIBREF
   intervals[iv_counter-1][2]=2; // OT
   fprintf(stdout, "%d,%d: info: interval %d is an OT passage\n", yylineno, yycolumn, iv_counter-1);
   strcpy(infos_s[iv_counter-1], ot_info);
   strcpy(books_s[iv_counter-1], ot_book);
+#endif // IN_BIBREF
 }
 
 void
@@ -388,10 +390,10 @@ check_introduction_passage(char *passage, char *ay)
     } while (next != NULL);
   }
   substrings = 0; // reset, maybe there is another introduction
-#endif // IN_BIBREF
   intervals[iv_counter-1][2]=3; // NT (introduction)
   fprintf(stdout, "%d,%d: info: interval %d is an introductory NT passage\n", yylineno, yycolumn, iv_counter-1);
   if (nt_intros_start == -1) nt_intros_start = iv_counter-1;
+#endif // IN_BIBREF
 }
 
 void
@@ -422,16 +424,28 @@ check_fragment(char *passage, char *ay_nt, char *ay_ot) {
     fprintf(stdout, "%d,%d: info: fragments differ by %4.2f%%\n", yylineno, yycolumn, difference * 100.0);
   else
     fprintf(stdout, "%d,%d: error: fragments in reality differ by %4.2f%%\n", yylineno, yycolumn, jd * 100.0);
+  // Check uniqueness in OT if the quotation is verbatim:
+  if (fabs(difference) <= EPS) {
+    fprintf(stdout, "%d,%d: info: checking if verbatim quotation is unique in OT: ", yylineno, yycolumn);
+#define MAX_FOUND 10
+    int count = find1(l, ot_book, MAX_FOUND);
+    fprintf(stdout, "(at least) %d occurrences\n", count);
+    if (count>1) {
+      fprintf(stdout, "%d,%d: warning: OT book reference is not unique\n", yylineno, yycolumn);
+    }
+  }
+
   free(ot_passage);
-#endif // IN_BIBREF
   intervals[iv_counter-2][2] = 1; // this is an NT fragment
   intervals[iv_counter-1][2] = 2; // this is an OT fragment
   if (fragments_start == -1) fragments_start = iv_counter-2;
+#endif // IN_BIBREF
 }
 
 void check_cover(double cover) {
   extern yylineno;
   extern yycolumn;
+#ifdef IN_BIBREF
   // Detecting intervals and the union of them:
   fprintf(stdout, "%d,%d: info: fragment intervals:", yylineno, yycolumn);
   int imin = INT_MAX, imax = 0; // union interval of fragments intervals
@@ -543,6 +557,7 @@ void check_cover(double cover) {
       fprintf(stdout, "%d,%d: info: OT headline interval %d check done\n", yylineno, yycolumn, i);
     }
   } // end of for checking OT headlines
+#endif // IN_BIBREF
 }
 
 void

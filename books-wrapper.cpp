@@ -87,3 +87,9 @@ EXTERNC const char* greekToLatin1(const char* greek) {
   strcpy(ret, processed.c_str());
   return ret;
 }
+
+EXTERNC int find1(const char* text0, const char* moduleName0, int maxFound) {
+  string text1 = string(text0);
+  string moduleName1 = string(moduleName0);
+  return find(text1, moduleName1, maxFound, false);
+}
