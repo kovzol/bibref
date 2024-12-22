@@ -572,6 +572,7 @@ int brst_scan_string(char *string) {
     fragments_start = -1;
     nt_intros_start = -1;
     difference = -1;
+    // yydebug = 1;
 
     YY_BUFFER_STATE buffer = yy_scan_string(string);
     yyparse();

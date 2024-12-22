@@ -945,7 +945,7 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
 #ifndef __EMSCRIPTEN__
 #ifndef __MINGW32__
   // Load the readline history...
-  char* buf;
+  char* bufline;
   struct passwd *pw = getpwuid(getuid());
   char *histfile = pw->pw_dir;
   strcat(histfile, "/.bibref_history");
@@ -955,27 +955,45 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
 
 #if defined(__EMSCRIPTEN__) || defined(__MINGW32__)
 #define MAX_LINE_LENGTH 1024
-  char buf[MAX_LINE_LENGTH + 1];
-  string line;
+  char bufline[MAX_LINE_LENGTH + 1];
 #endif
 
+#define MAX_BUFFER_LENGTH 8192
+  char buf[MAX_BUFFER_LENGTH + 1] = "";
+  string line;
+  bool multiline = false;
   // The main input/output loop...
   while (
        #if !defined(__EMSCRIPTEN__) && !defined(__MINGW32__)
-         (buf = readline(input_prepend)) != nullptr
+         (bufline = readline(input_prepend)) != nullptr
        #else
-         (getline(cin, line) && (strcpy(buf, line.c_str())))
+         (getline(cin, line) && (strcpy(bufline, line.c_str())))
        #endif
          ) {
 #if !defined(__EMSCRIPTEN__) && !defined(__MINGW32__)
-    if (strlen(buf) > 0) {
-      add_history(buf);
+    if (strlen(bufline) > 0) {
+      add_history(bufline);
       write_history(histfile);
     }
 #endif
-    cli_process(buf); // Process the input.
+    line = string(bufline);
+    // Handle multiline inputs (for the statement command)...
+    boost::algorithm::trim(line); // Trim the input.
+#ifdef WITH_PBRST
+    if (!multiline && (boost::starts_with(line, statementCmd) || boost::starts_with(line, statementCmd2))) {
+      multiline = true;
+    }
+    if (multiline && boost::ends_with(line, ".")) {
+      multiline = false;
+    }
+#endif // WITH_PBRST
+    strcat(buf, bufline);
+    if (!multiline) {
+      cli_process(buf); // Process the input.
+      buf[0] = '\0';
+    } else strcat(buf, "\n");
     // readline malloc's a new buffer every time.
-    free(buf);
+    free(bufline);
   }
 }
 

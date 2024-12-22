@@ -11,7 +11,8 @@ for i in *.brst; do
  l=$id.bibref.log
  pushd .. >/dev/null
  SE=1
- cat tests/$i | tr -d '\n' | $BIBREF -a 2>&1 > tests/$l && SE=0
+ # cat tests/$i | tr -d '\n' | $BIBREF -a 2>&1 > tests/$l && SE=0
+ cat tests/$i | $BIBREF -a 2>&1 > tests/$l && SE=0
  if [ $SE = 0 ]; then
   grep error tests/$l && echo "(proof error in $id)" || g=$((g+1))
  else
