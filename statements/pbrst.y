@@ -300,7 +300,7 @@ check_rawposition_length(char *s)
   intervals[iv_counter][0] = from;
   intervals[iv_counter][1] = to;
   intervals[iv_counter][2] = 0; // unclassified
-  fprintf(stdout, "%d,%d: info: interval %d [%d,%d] stored\n", yylineno, yycolumn, iv_counter, from, to);
+  fprintf(stdout, "%d,%d: debug: interval %d [%d,%d] stored\n", yylineno, yycolumn, iv_counter, from, to);
   iv_counter++;
 #endif // IN_BIBREF
 }
@@ -314,7 +314,7 @@ save_string_in_introduction(char *s)
   char *l;
   l = greekToLatin1(s);
   strcpy(introduction_substrings[substrings++], l);
-  fprintf(stdout, "%d,%d: info: found %s in input\n", yylineno, yycolumn, l);
+  fprintf(stdout, "%d,%d: debug: found %s in input\n", yylineno, yycolumn, l);
   free(l);
 #endif // IN_BIBREF
 }
@@ -339,7 +339,7 @@ check_nt_passage(char *book, char *info, char *verse)
   nt_book = strdup(book);
   free(l);
   intervals[iv_counter-1][2]=0; // NT (headline)
-  fprintf(stdout, "%d,%d: info: interval %d is a headline NT passage\n", yylineno, yycolumn, iv_counter-1);
+  fprintf(stdout, "%d,%d: debug: interval %d is a headline NT passage\n", yylineno, yycolumn, iv_counter-1);
 #endif // IN_BIBREF
 }
 
@@ -362,7 +362,7 @@ check_ot_passage(char *book, char *info, char *verse)
   ot_verse = strdup(verse);
   free(l);
   intervals[iv_counter-1][2]=2; // OT
-  fprintf(stdout, "%d,%d: info: interval %d is an OT passage\n", yylineno, yycolumn, iv_counter-1);
+  fprintf(stdout, "%d,%d: debug: interval %d is an OT passage\n", yylineno, yycolumn, iv_counter-1);
   strcpy(infos_s[iv_counter-1], ot_info);
   strcpy(books_s[iv_counter-1], ot_book);
 #endif // IN_BIBREF
@@ -399,7 +399,7 @@ check_introduction_passage(char *passage, char *ay)
   }
   substrings = 0; // reset, maybe there is another introduction
   intervals[iv_counter-1][2]=3; // NT (introduction)
-  fprintf(stdout, "%d,%d: info: interval %d is an introductory NT passage\n", yylineno, yycolumn, iv_counter-1);
+  fprintf(stdout, "%d,%d: debug: interval %d is an introductory NT passage\n", yylineno, yycolumn, iv_counter-1);
   if (nt_intros_start == -1) nt_intros_start = iv_counter-1;
 #endif // IN_BIBREF
 }
@@ -470,7 +470,7 @@ void check_cover(double cover) {
   extern yycolumn;
 #ifdef IN_BIBREF
   // Detecting intervals and the union of them:
-  fprintf(stdout, "%d,%d: info: fragment intervals:", yylineno, yycolumn);
+  fprintf(stdout, "%d,%d: debug: fragment intervals:", yylineno, yycolumn);
   int imin = INT_MAX, imax = 0; // union interval of fragments intervals
   for (int i=0; i<iv_counter; i++) {
     int ftype = intervals[i][2];
@@ -547,7 +547,7 @@ void check_cover(double cover) {
   }
   // Check if OT headlines match OT unions:
   for (int i=1; i<nt_intros_start; i++) {
-    fprintf(stdout, "%d,%d: info: OT headline %d %s %s interval check:",
+    fprintf(stdout, "%d,%d: debug: OT headline %d %s %s interval check:",
       yylineno, yycolumn, i, books_s[i], infos_s[i]);
     int oimin=INT_MAX, oimax=0;
     // Create union for this OT headline:
