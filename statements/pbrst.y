@@ -263,13 +263,13 @@ fragments_description
 
 fragment
     : FRAGMENT passage A_Y FORM AYLITERAL
-        MATCHES ot_passage A_Y FORM AYLITERAL
+        MATCHES ot_passage A_Y FORM AYLITERAL opt_unique
         difference_description {
         check_fragment($<strval>2, $<strval>5, $<strval>10);
         };
 
 difference_description
-    : VERBATIM { difference = 0.0; } opt_unique | DIFFERING BY APPROXNUM { difference = ($<floatval>3) / 100.0; } ;
+    : VERBATIM { difference = 0.0; } | DIFFERING BY APPROXNUM { difference = ($<floatval>3) / 100.0; } ;
 
 opt_unique
     : | UNIQUE IN OLD TESTAMENT { check_unique_prepare(); };
@@ -432,25 +432,23 @@ check_fragment(char *passage, char *ay_nt, char *ay_ot) {
     fprintf(stdout, "%d,%d: info: fragments differ by %4.2f%%\n", yylineno, yycolumn, difference * 100.0);
   else
     fprintf(stdout, "%d,%d: error: fragments in reality differ by %4.2f%%\n", yylineno, yycolumn, jd * 100.0);
-  // Check uniqueness in OT if the quotation is verbatim:
-  if (fabs(difference) <= EPS) {
-    fprintf(stdout, "%d,%d: info: checking if verbatim quotation is unique in OT: ", yylineno, yycolumn);
+  // Check uniqueness in OT:
+  fprintf(stdout, "%d,%d: info: checking if OT passage is unique in OT: ", yylineno, yycolumn);
 #define MAX_FOUND 10
-    int count = find1(l, ot_book, MAX_FOUND);
-    if (count == MAX_FOUND)
-      fprintf(stdout, "no, at least %d occurrences\n", count);
-    else if (count>1)
-      fprintf(stdout, "no, %d occurrences\n", count);
-    else
-      fprintf(stdout, "yes\n");
-    if (count==1 && !unique_prep) {
-      fprintf(stdout, "%d,%d: warning: OT book reference is unique, consider mentioning it\n", yylineno, yycolumn);
-    }
-    if (count>1 && unique_prep) {
-      fprintf(stdout, "%d,%d: error: OT book reference is not unique\n", yylineno, yycolumn);
-    }
-    unique_prep = false;
+  int count = find1(l, ot_book, MAX_FOUND);
+  if (count == MAX_FOUND)
+    fprintf(stdout, "no, at least %d occurrences\n", count);
+  else if (count>1)
+    fprintf(stdout, "no, %d occurrences\n", count);
+  else
+    fprintf(stdout, "yes\n");
+  if (count==1 && !unique_prep) {
+    fprintf(stdout, "%d,%d: warning: OT passage is unique, consider mentioning it\n", yylineno, yycolumn);
   }
+  if (count>1 && unique_prep) {
+    fprintf(stdout, "%d,%d: error: OT passage is not unique\n", yylineno, yycolumn);
+  }
+  unique_prep = false;
 
   free(ot_passage);
   intervals[iv_counter-2][2] = 1; // this is an NT fragment

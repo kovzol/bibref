@@ -22,15 +22,11 @@ The checks are described in the **.y** file. They are currently:
 * check if NT introductions overlap NT fragments (they should not)
 * check if NT headline interval is well-chosen
 * check if OT headlines are well-chosen
-
-To be written (that is, these checks are not yet implemented):
-
-* check if OT parts of fragments are unique, if not, allow to mention that in the .brst language
+* check if OT parts of fragments are unique
 
 As a next step, these checks are planned to be integrated in the **bibref** program as well.
 Currently, **bibref** can be compiled to give it a try (see the **cmake** machinery
-for details). Any **.brst** example can entered in the command line interface (by using
-a lowercased `statement`). This is, however, in an experimental phase and not well-tested yet.
+for details). Any **.brst** example can be entered in the command line interface.
 Later, this feature is planned to be included in the Qt version as well.
 
 The **.brst** entries could then be visually graphed, similarly to the SVG outputs of the
