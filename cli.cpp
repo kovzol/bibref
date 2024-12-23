@@ -846,7 +846,22 @@ void processGetrefsCmd(string input) {
 
 #ifdef WITH_PBRST
 void processStatementCmd(string input) {
+#define MAX_OUTPUT 16384
+  char output[MAX_OUTPUT];
+  freopen("/dev/null", "a", stdout);
+  setbuf(stdout, output);
   brst_scan_string((char*)input.c_str());
+  freopen("/dev/tty", "a", stdout);
+
+  string output_s(output);
+  vector<string> statementAnalysis;
+  boost::split(statementAnalysis, output_s, boost::is_any_of("\n"));
+  for (auto l: statementAnalysis) {
+    if (l.find(": info: ")!=string::npos || l.find(": warning: ")!=string::npos)
+      info(l);
+    if (l.find(": error: ")!=string::npos)
+      error(l);
+    }
   info("Finished"); // Success!
 }
 #endif
