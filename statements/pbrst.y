@@ -9,7 +9,7 @@
 #ifdef IN_BIBREF
 #include "books-wrapper.h"
 #include "fingerprint-wrapper.h"
-#define YY_USER_INIT (addBibles1();)
+#define YY_USER_INIT ( init_addbooks(); )
 #endif // IN_BIBREF
 
 char *stmt_identifier;
@@ -36,6 +36,13 @@ float difference = -1; // undefined
 char books_s[MAX_INTERVALS][MAX_BOOKNAME_LENGTH]; // Bible editions
 char infos_s[MAX_INTERVALS][MAX_INFONAME_LENGTH]; // Bible books (in order of intervals)
 bool unique_prep = false; // don't check unique occurrence (only if asked)
+bool addbooks_done = false;
+
+void init_addbooks() {
+  if (!addbooks_done) {
+    addBibles1(); addbooks_done = true;
+  }
+}
 
 /* shortcut to concatenate a, " " and b, and put the result in c */
 #define _CONCAT(a,b,c) \
@@ -326,7 +333,7 @@ check_nt_passage(char *book, char *info, char *verse)
   extern yylineno;
   extern yycolumn;
 #ifdef IN_BIBREF
-  addBibles1();
+  init_addbooks();
   char *l;
   l = lookupVerse1(info, book, verse);
   if (strstr(l, "error: ") != NULL) {
@@ -603,7 +610,9 @@ extern YY_BUFFER_STATE yy_scan_string(char * str);
 extern void yy_delete_buffer(YY_BUFFER_STATE buffer);
 
 int brst_scan_string(char *string) {
+    extern yycolumn;
     // Reset data:
+    yycolumn = 0;
     yylex_destroy();
     substrings = 0;
     iv_counter = 0;

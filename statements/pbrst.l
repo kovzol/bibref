@@ -6,7 +6,7 @@
 
 void yyerror(char *s, ...);
 
-int yycolumn = 1;
+int yycolumn = 0;
 #define YY_USER_ACTION \
     yylloc.first_line = yylloc.last_line = yylineno; \
     yylloc.first_column = yylloc.last_column; \
