@@ -35,6 +35,7 @@ int nt_intros_start = -1;
 float difference = -1; // undefined
 char books_s[MAX_INTERVALS][MAX_BOOKNAME_LENGTH]; // Bible editions
 char infos_s[MAX_INTERVALS][MAX_INFONAME_LENGTH]; // Bible books (in order of intervals)
+bool unique_prep = false; // don't check unique occurrence (only if asked)
 
 /* shortcut to concatenate a, " " and b, and put the result in c */
 #define _CONCAT(a,b,c) \
@@ -97,6 +98,10 @@ char infos_s[MAX_INTERVALS][MAX_INFONAME_LENGTH]; // Bible books (in order of in
 %token OF;
 %token NO;
 %token EVIDENCE;
+%token UNIQUE;
+%token IN;
+%token OLD;
+%token TESTAMENT;
 
 %token SBLGNT;
 %token STATRESGNT;
@@ -264,7 +269,10 @@ fragment
         };
 
 difference_description
-    : VERBATIM { difference = 0.0; } | DIFFERING BY APPROXNUM { difference = ($<floatval>3) / 100.0; } ;
+    : VERBATIM { difference = 0.0; } opt_unique | DIFFERING BY APPROXNUM { difference = ($<floatval>3) / 100.0; } ;
+
+opt_unique
+    : | UNIQUE IN OLD TESTAMENT { check_unique_prepare(); };
 
 opt_period
     : | PERIOD;
@@ -429,16 +437,33 @@ check_fragment(char *passage, char *ay_nt, char *ay_ot) {
     fprintf(stdout, "%d,%d: info: checking if verbatim quotation is unique in OT: ", yylineno, yycolumn);
 #define MAX_FOUND 10
     int count = find1(l, ot_book, MAX_FOUND);
-    fprintf(stdout, "(at least) %d occurrences\n", count);
-    if (count>1) {
-      fprintf(stdout, "%d,%d: warning: OT book reference is not unique\n", yylineno, yycolumn);
+    if (count == MAX_FOUND)
+      fprintf(stdout, "no, at least %d occurrences\n", count);
+    else if (count>1)
+      fprintf(stdout, "no, %d occurrences\n", count);
+    else
+      fprintf(stdout, "yes\n");
+    if (count==1 && !unique_prep) {
+      fprintf(stdout, "%d,%d: warning: OT book reference is unique, consider mentioning it\n", yylineno, yycolumn);
     }
+    if (count>1 && unique_prep) {
+      fprintf(stdout, "%d,%d: error: OT book reference is not unique\n", yylineno, yycolumn);
+    }
+    unique_prep = false;
   }
 
   free(ot_passage);
   intervals[iv_counter-2][2] = 1; // this is an NT fragment
   intervals[iv_counter-1][2] = 2; // this is an OT fragment
   if (fragments_start == -1) fragments_start = iv_counter-2;
+#endif // IN_BIBREF
+}
+
+void check_unique_prepare() {
+  extern yylineno;
+  extern yycolumn;
+#ifdef IN_BIBREF
+  unique_prep = true;
 #endif // IN_BIBREF
 }
 

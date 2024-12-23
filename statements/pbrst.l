@@ -51,6 +51,10 @@ COVER { return COVER; }
 OF { return OF; }
 NO { return NO; }
 EVIDENCE { return EVIDENCE; }
+UNIQUE { return UNIQUE; }
+IN { return IN; }
+OLD { return OLD; }
+TESTAMENT { return TESTAMENT; }
 
 SBLGNT { yylval.strval = strdup(yytext); return SBLGNT; }
 STATRESGNT { yylval.strval = strdup(yytext); return STATRESGNT; }

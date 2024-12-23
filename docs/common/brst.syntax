@@ -20,6 +20,7 @@ context default
     keyword whole also red
     keyword whole moreover red
     keyword whole no\sevidence gray black
+    keyword whole unique\s\in\s\old\stestament brightgreen
     keyword wholeright . brightmagenta
 
     keyword whole LXX yellow
