@@ -5,6 +5,7 @@
 #include "pbrst.tab.h"
 
 extern char *stmt_identifier;
+extern yydebug;
 
 int main(int ac, char **av)
 {

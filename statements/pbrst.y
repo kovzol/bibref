@@ -5,6 +5,7 @@
 #include <math.h>
 #include <limits.h>
 #include <stdbool.h>
+#include <stdio.h>
 
 #ifdef IN_BIBREF
 #include "books-wrapper.h"
@@ -38,11 +39,13 @@ char infos_s[MAX_INTERVALS][MAX_INFONAME_LENGTH]; // Bible books (in order of in
 bool unique_prep = false; // don't check unique occurrence (only if asked)
 bool addbooks_done = false;
 
+#ifdef IN_BIBREF
 void init_addbooks() {
   if (!addbooks_done) {
     addBibles1(); addbooks_done = true;
   }
 }
+#endif
 
 /* shortcut to concatenate a, " " and b, and put the result in c */
 #define _CONCAT(a,b,c) \

@@ -12,7 +12,7 @@ pkg_check_modules(sword REQUIRED sword)
 set(Boost_USE_STATIC_LIBS OFF)
 set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_RUNTIME OFF)
-find_package(Boost 1.74.0 COMPONENTS system filesystem)
+find_package(Boost CONFIG COMPONENTS system filesystem)
 
 # One needs readline >= 8.0 to make this work:
 pkg_check_modules (readline REQUIRED readline)
@@ -21,24 +21,36 @@ include_directories(/usr/include/sword)
 
 if(PBRST)
 add_compile_definitions(WITH_PBRST)
-# These should be compiled first in the folder "statements/" by issuing a "make" command.
-# TODO: Do it from the cmake machinery.
-SET(OBJS
-  ${CMAKE_CURRENT_SOURCE_DIR}/statements/pbrst.o
-  ${CMAKE_CURRENT_SOURCE_DIR}/statements/pbrst.tab.o
-)
+
+set(PARSER_DIR "${CMAKE_CURRENT_BINARY_DIR}")
+find_package(FLEX 2.6 REQUIRED)
+find_package(BISON 3.0 REQUIRED)
+
+set(LEXER_OUT "${PARSER_DIR}/pbrst.c")
+set(PARSER_OUT "${PARSER_DIR}/pbrst.tab.c")
+
+flex_target(LEXER "${CMAKE_CURRENT_SOURCE_DIR}/statements/pbrst.l" "${LEXER_OUT}")
+bison_target(PARSER "${CMAKE_CURRENT_SOURCE_DIR}/statements/pbrst.y" "${PARSER_OUT}"
+  COMPILE_FLAGS -vd DEFINES_FILE "${PARSER_DIR}/pbrst.tab.h")
+add_flex_bison_dependency(LEXER PARSER)
+
+include_directories(${PARSER_DIR} ${CMAKE_CURRENT_SOURCE_DIR})
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DYYDEBUG=1 -DIN_BIBREF")
+
+#add_executable(pbrst-cli statements/pbrst-cli.c ${PARSER_DIR}/pbrst.tab.h "${LEXER_OUT}" "${PARSER_OUT}")
+
 SET(PBRST_SRCS
  books-wrapper.cpp books-wrapper.h
  fingerprint-wrapper.cpp fingerprint-wrapper.h
- statements/pbrst.tab.h
+ ${PARSER_DIR}/pbrst.tab.h "${LEXER_OUT}" "${PARSER_OUT}"
 )
 endif(PBRST)
 
 add_executable(bibref main.cpp book.cpp book.h books.cpp books.h fingerprint.cpp fingerprint.h cli.cpp cli.h psalmsinfo.cpp psalmsinfo.h
- ${PBRST_SRCS} ${OBJS})
+ ${PBRST_SRCS}
+)
 
 SET_SOURCE_FILES_PROPERTIES(
-  ${OBJS}
   PROPERTIES
   EXTERNAL_OBJECT true
   GENERATED true

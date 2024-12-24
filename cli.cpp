@@ -9,7 +9,8 @@
 
 #ifdef WITH_PBRST
 extern "C" int brst_scan_string(char *string);
-#include "statements/pbrst.tab.h" // use flex/bison parser for bibref statements (brst)
+// #include "statements/pbrst.tab.h" // use flex/bison parser for bibref statements (brst)
+#include "pbrst.tab.h" // the statements folder must be included among the folders
 #endif
 
 using namespace std;
