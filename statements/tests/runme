@@ -2,9 +2,14 @@
 
 # This test assumes that ../pbrst-cli has already been compiled (via "make").
 
+FOLDER=$1
+if [ $FOLDER = "" ]; then
+ FOLDER=.
+ fi
+
 c=0
 g=0
-for i in *.brst; do
+for i in $FOLDER/*.brst; do
  c=$((c+1))
  id=`basename $i .brst`
  l=$id.log

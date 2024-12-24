@@ -150,7 +150,7 @@ REVELATION_OF_JOHN { yylval.strval = strdup(yytext); return REVELATION_OF_JOHN; 
 [a-y]+	{ yylval.strval = strdup(yytext); return AYLITERAL;}
 
   /* name */
-[A-Za-z][A-Za-z0-9_]*	{ yylval.strval = strdup(yytext);
+[A-Za-z][A-Za-z0-9_,\-\+]*	{ yylval.strval = strdup(yytext);
                           return NAME; }
 
   /* comments */

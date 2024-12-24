@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# Organize q*.brst files into folders.
+
+for i in *.brst; do
+ id=`basename $i .brst`
+ line2=`cat $i | head -2 | tail -1`
+ word21=`echo $line2 | awk '{print $1}'`
+ word22=`echo $line2 | awk '{print $2}'`
+ word23=`echo $line2 | awk '{print $3}'`
+ mkdir -p ../$word21/$word22
+ versestart=`echo $word23 | tr : ,`
+ filename="../$word21/$word22/$word22-$versestart.brst"
+ sid="$word22-$versestart"
+ line1=`cat $i | head -1`
+ line1n="Statement $sid connects"
+ echo $line1n > $filename
+ tail -n +2 $i >> $filename
+ mkdir -p ../$word21/all
+ pushd ../$word21/all >/dev/null
+ ln -s ../$word22/$word22-$versestart.brst .
+ popd >/dev/null
+ done
