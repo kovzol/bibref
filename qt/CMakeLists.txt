@@ -41,6 +41,8 @@ add_definitions(-DPROJECT_SOURCE_DIR="${PROJECT_SOURCE_DIR}"
 qt_add_executable(bibref-qt
     main.cpp
     mainwindow.cpp mainwindow.h
+    statementwindow.cpp statementwindow.h
+    highlighter.cpp highlighter.h
     book.cpp book.h
     books.cpp books.h
     cli.cpp cli.h

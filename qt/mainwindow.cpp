@@ -20,6 +20,8 @@
 
 #include <cstdio>
 
+#include "statementwindow.h"
+
 using namespace std;
 
 using namespace sword;
@@ -718,6 +720,13 @@ void MainWindow::extend()
     return; // Success!
 }
 
+void MainWindow::statement() {
+    auto swindow = new StatementWindow();
+    swindow->resize(640, 512);
+    swindow->show();
+    swindow->setWindowIcon(QIcon::fromTheme("input-keyboard"));
+}
+
 void MainWindow::getrefs()
 {
     QInputDialog inputDialog(this);
@@ -1088,6 +1097,12 @@ void MainWindow::createActions()
     connect(getrefsAct, &QAction::triggered, this, &MainWindow::getrefs);
     getrefsAct->setDisabled(true);
 
+    statementAct = new QAction("&Statement…", this);
+    statementAct->setIcon(QIcon::fromTheme("input-keyboard"));
+    statementAct->setStatusTip(
+        tr("Open a text editor to edit a statement"));
+    connect(statementAct, &QAction::triggered, this, &MainWindow::statement);
+
     lookupAct = new QAction("&Lookup…", this);
     lookupAct->setIcon(QIcon::fromTheme("document-open"));
     lookupAct->setStatusTip(tr("Search for a verse in a book in the given Bible"));
@@ -1196,6 +1211,8 @@ void MainWindow::createMenus()
     quotationMenu->addAction(minunique1Act);
     quotationMenu->addAction(extendAct);
     quotationMenu->addAction(getrefsAct);
+    quotationMenu->addSeparator();
+    quotationMenu->addAction(statementAct);
 
     rawMenu = menuBar()->addMenu(tr("&Raw"));
     rawMenu->addAction(rawAct);

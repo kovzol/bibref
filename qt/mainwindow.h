@@ -28,6 +28,7 @@ public:
     QAction *minunique1Act;
     QAction *extendAct;
     QAction *getrefsAct;
+    QAction *statementAct;
     QAction *tokensAct;
     QAction *searchAct;
     QTextEdit *passageInfos;
@@ -53,6 +54,7 @@ private slots:
     void minunique1();
     void extend();
     void getrefs();
+    void statement();
     void about();
     void aboutSword();
     void aboutQt();
