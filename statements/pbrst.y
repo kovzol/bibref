@@ -186,6 +186,20 @@ void init_addbooks() {
 
 %start brst_stmt
 
+%code provides {
+int yylex (void);
+int yylex_destroy();
+void yyerror (char *s, ...);
+void check_rawposition_length(char *s);
+void save_string_in_introduction(char *s);
+void check_nt_passage(char *book, char *info, char *verse);
+void check_ot_passage(char *book, char *info, char *verse);
+void check_introduction_passage(char *passage, char *ay);
+void check_cover(double cover);
+void check_unique_prepare();
+void check_fragment(char *passage, char *ay_nt, char *ay_ot);
+}
+
 %%
 
 brst_stmt
@@ -292,8 +306,8 @@ opt_period
 void
 check_rawposition_length(char *s)
 {
-  extern yylineno;
-  extern yycolumn;
+  extern int yylineno;
+  extern int yycolumn;
 #ifdef IN_BIBREF
   int from, to, length=-1;
   if (strstr(s, "length") == NULL) {
@@ -318,8 +332,8 @@ check_rawposition_length(char *s)
 void
 save_string_in_introduction(char *s)
 {
-  extern yylineno;
-  extern yycolumn;
+  extern int yylineno;
+  extern int yycolumn;
 #ifdef IN_BIBREF
   char *l;
   l = greekToLatin1(s);
@@ -333,8 +347,8 @@ save_string_in_introduction(char *s)
 void
 check_nt_passage(char *book, char *info, char *verse)
 {
-  extern yylineno;
-  extern yycolumn;
+  extern int yylineno;
+  extern int yycolumn;
 #ifdef IN_BIBREF
   init_addbooks();
   char *l;
@@ -356,8 +370,8 @@ check_nt_passage(char *book, char *info, char *verse)
 void
 check_ot_passage(char *book, char *info, char *verse)
 {
-  extern yylineno;
-  extern yycolumn;
+  extern int yylineno;
+  extern int yycolumn;
 #ifdef IN_BIBREF
   char *l;
   l = lookupVerse1(info, book, verse);
@@ -381,8 +395,8 @@ check_ot_passage(char *book, char *info, char *verse)
 void
 check_introduction_passage(char *passage, char *ay)
 {
-  extern yylineno;
-  extern yycolumn;
+  extern int yylineno;
+  extern int yycolumn;
 #ifdef IN_BIBREF
   char *l;
   l = lookupVerse1(nt_info, nt_book, passage);
@@ -416,8 +430,8 @@ check_introduction_passage(char *passage, char *ay)
 
 void
 check_fragment(char *passage, char *ay_nt, char *ay_ot) {
-  extern yylineno;
-  extern yycolumn;
+  extern int yylineno;
+  extern int yycolumn;
 #ifdef IN_BIBREF
   char *ot_passage = malloc(strlen(ot_book) + 1 + strlen(ot_info) + 1 + strlen(ot_verse) + 1);
   strcpy(ot_passage, ot_book);
@@ -468,16 +482,16 @@ check_fragment(char *passage, char *ay_nt, char *ay_ot) {
 }
 
 void check_unique_prepare() {
-  extern yylineno;
-  extern yycolumn;
+  extern int yylineno;
+  extern int yycolumn;
 #ifdef IN_BIBREF
   unique_prep = true;
 #endif // IN_BIBREF
 }
 
 void check_cover(double cover) {
-  extern yylineno;
-  extern yycolumn;
+  extern int yylineno;
+  extern int yycolumn;
 #ifdef IN_BIBREF
   // Detecting intervals and the union of them:
   fprintf(stdout, "%d,%d: debug: fragment intervals:", yylineno, yycolumn);
@@ -596,8 +610,8 @@ void check_cover(double cover) {
 void
 yyerror(char *s, ...)
 {
-  extern yylineno;
-  extern yycolumn;
+  extern int yylineno;
+  extern int yycolumn;
 
   va_list ap;
   va_start(ap, s);
@@ -613,7 +627,7 @@ extern YY_BUFFER_STATE yy_scan_string(char * str);
 extern void yy_delete_buffer(YY_BUFFER_STATE buffer);
 
 int brst_scan_string(char *string) {
-    extern yycolumn;
+    extern int yycolumn;
     // Reset data:
     yycolumn = 0;
     yylex_destroy();
