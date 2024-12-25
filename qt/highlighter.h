@@ -37,8 +37,6 @@ private:
     QTextCharFormat greekFormat;
     QTextCharFormat positionFormat;
     QTextCharFormat singleLineCommentFormat;
-    // QTextCharFormat quotationFormat;
 };
-//! [0]
 
 #endif // HIGHLIGHTER_H

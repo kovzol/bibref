@@ -1,24 +1,9 @@
 #include "highlighter.h"
 
-//! [0]
 Highlighter::Highlighter(QTextDocument *parent)
     : QSyntaxHighlighter(parent)
 {
     HighlightingRule rule;
-
-/*
-Statement Acts-2,25+21 connects
- SBLGNT Acts 2:25+21 2:28 (4835-5120) with
- LXX Psalms 16:8 16:11-31 (12493-12778) based on
-  introduction 2:25 2:25-68 (4814-4834) a-y form dayidgarlegeieisayton that
-   declares a quotation with 'λεγει' also
-   identifies the source with 'Δαυιδ' moreover
-  fragment 2:25+21 2:28 (4835-5120, length 286) a-y form proorvmhntonkyrionenvpionmoydiapantosotiekdejivnmoyestininamhsaleyuvdiatoytohyfranuhhkardiamoykaihgalliasatohglvssamoyetidekaihsarjmoykataskhnvseiepelpidiotioykegkataleiceisthncyxhnmoyeisadhnoydedvseistonosionsoyideindiafuoranegnvrisasmoiodoysqvhsplhrvseismeeyfrosynhsmetatoyprosvpoysoy
-   matches LXX Psalms 16:8 16:11-31 (12493-12778, length 286) a-y form provrvmhntonkyrionenvpionmoydiapantosotiekdejivnmoyestininamhsaleyuvdiatoytohyfranuhhkardiamoykaihgalliasatohglvssamoyetidekaihsarjmoykataskhnvseiepelpidiotioykegkataleiceisthncyxhnmoyeisadhnoydedvseistonosionsoyideindiafuoranegnvrisasmoiodoysqvhsplhrvseismeeyfrosynhsmetatoyprosvpoysoy
-    unique in Old Testament
-    differing by 0.70%
-  providing an overall cover of 100.00%.
-*/
 
     keywordFormat.setForeground(QColorConstants::Svg::orange);
     keywordFormat.setFontWeight(QFont::Bold);
@@ -110,11 +95,8 @@ Statement Acts-2,25+21 connects
     rule.pattern = QRegularExpression(QStringLiteral("\\([\\d]+\\-[\\d]+,[\\s]+length[\\s]+[\\d]+\\)"));
     rule.format = positionFormat;
     highlightingRules.append(rule);
-
 }
-//! [6]
 
-//! [7]
 void Highlighter::highlightBlock(const QString &text)
 {
     for (const HighlightingRule &rule : std::as_const(highlightingRules)) {
@@ -126,85 +108,3 @@ void Highlighter::highlightBlock(const QString &text)
     }
     setCurrentBlockState(0);
 }
-
-/*
--- Keywords that are on line start...
-  { Id=1,
-    List={"Statement", "statement", "introduction", "fragment",
-      "verbatim", "differing", "matches", "and", "that", "also", "moreover", "no", "evidence",
-      "unique", "in", "old", "testament"}
-  },
-
--- Keywords that are on line end...
-  { Id=1,
-    List={"connects", "with", "based", "on", "."}
-  },
-
--- Old Testament related...
-  { Id=2,
-    List={"LXX", "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy",
-      "Joshua", "Judges", "Ruth", "I_Samuel", "II_Samuel", "I_Kings", "II_Kings",
-      "I_Chronicles", "II_Chronicles", "Ezra", "Nehemiah", "Esther", "Job",
-      "Psalms", "Proverbs", "Ecclesiastes", "Song_of_Solomon",
-      "Isaiah", "Jeremiah", "Lamentations", "Ezekiel", "Daniel",
-      "Hosea", "Joel", "Amos", "Obadiah", "Jonah", "Micah",
-      "Nahum", "Habakkuk", "Zephaniah", "Haggai", "Zechariah", "Malachi"}
-  },
-
--- New Testament related...
-  { Id=2,
-    List={"SBLGNT", "StatResGNT", "Matthew", "Mark", "Luke", "John",
-      "Acts", "Romans", "I_Corinthians", "II_Corinthians", "Galatians", "Ephesians", "Philippians",
-      "Colossians", "I_Thessalonians", "II_Thessalonians", "I_Timothy", "II_Timothy", "Titus", "Philemon",
-      "Hebrews", "James", "I_Peter", "II_Peter", "I_John", "II_John", "III_John", "Jude", "Revelation_of_John"},
-  },
-
--- Forms in a-y notation...
-  { Id=3,
-    Regex=[[a\-y\s*form\s*['a-y']+]]
-  },
--- ...or in Greek...
-  { Id=3,
-    Regex=[[with\s*\'\.+\']]
-  },
-
-
--- Lengths and positions...
-  { Id=4,
-    Regex=[[length\s*['0-9']+]]
-  },
-  { Id=4,
-    Regex=[[(['0-9']+\-['0-9']+)]]
-  },
-
--- Traditional Bible verse definitions...
-  { Id=5,
-    Regex=[[(['0-9']+:['0-9']+)]]
-  },
-
--- Percentual reports...
-  { Id=6,
-    Regex=[[differing\s*by\s*['0-9']+.['0-9']+%]]
-  },
-  { Id=6,
-    Regex=[[providing\s*an\s*overall\s*cover\s*of\s*['0-9']+.['0-9']+%]]
-  },
-
--- Introductory comments...
-  { Id=6,
-    Regex=[[declares\s*a\s*quotation]]
-  },
-  { Id=6,
-    Regex=[[identifies\s*the\s*source]]
-  },
-
-}
-
-IgnoreCase=false
-
-Comments={
-  { Block=false,
-    Delimiter= { [[#]] }
-  }
-}
-*/
