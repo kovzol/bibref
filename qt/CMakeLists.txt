@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(bibref-qt LANGUAGES CXX)
+project(bibref-qt LANGUAGES CXX C)
 
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Concurrent)
 
@@ -38,6 +38,32 @@ set(CMAKE_AUTOUIC ON)
 add_definitions(-DPROJECT_SOURCE_DIR="${PROJECT_SOURCE_DIR}"
     -DINSTALL_PREFIX="${CMAKE_INSTALL_PREFIX}")
 
+if(PBRST)
+add_compile_definitions(WITH_PBRST)
+
+set(PARSER_DIR "${CMAKE_CURRENT_BINARY_DIR}")
+find_package(FLEX 2.6 REQUIRED)
+find_package(BISON 3.0 REQUIRED)
+
+set(LEXER_OUT "${PARSER_DIR}/pbrst.c")
+set(PARSER_OUT "${PARSER_DIR}/pbrst.tab.c")
+
+flex_target(LEXER "${CMAKE_CURRENT_SOURCE_DIR}/../statements/pbrst.l" "${LEXER_OUT}")
+bison_target(PARSER "${CMAKE_CURRENT_SOURCE_DIR}/../statements/pbrst.y" "${PARSER_OUT}"
+  COMPILE_FLAGS -vd DEFINES_FILE "${PARSER_DIR}/pbrst.tab.h")
+add_flex_bison_dependency(LEXER PARSER)
+
+include_directories(${PARSER_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/..")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DYYDEBUG=1 -DIN_BIBREF")
+
+SET(PBRST_SRCS
+ books-wrapper.cpp books-wrapper.h
+ fingerprint-wrapper.cpp fingerprint-wrapper.h
+ "${LEXER_OUT}" "${PARSER_OUT}"
+)
+
+endif(PBRST)
+
 qt_add_executable(bibref-qt
     main.cpp
     mainwindow.cpp mainwindow.h
@@ -48,6 +74,7 @@ qt_add_executable(bibref-qt
     cli.cpp cli.h
     fingerprint.cpp fingerprint.h
     psalmsinfo.cpp psalmsinfo.h
+    ${PBRST_SRCS}
     ${QM_FILES}
     bibref.qrc
 )
