@@ -6,6 +6,7 @@
 
 extern char *stmt_identifier;
 extern yydebug;
+extern char *parseinfo;
 
 int main(int ac, char **av)
 {
@@ -21,6 +22,7 @@ int main(int ac, char **av)
   }
 
   if(!yyparse()) {
+    printf("%s", parseinfo);
     printf("brst parse worked\n");
     printf("statement identifier: %s\n", stmt_identifier);
     }

@@ -8,7 +8,7 @@
 #include <vector>
 
 #ifdef WITH_PBRST
-extern "C" int brst_scan_string(char *string);
+extern "C" char* brst_scan_string(char *string);
 // #include "statements/pbrst.tab.h" // use flex/bison parser for bibref statements (brst)
 #include "pbrst.tab.h" // the statements folder must be included among the folders
 #endif
@@ -847,13 +847,7 @@ void processGetrefsCmd(string input) {
 
 #ifdef WITH_PBRST
 void processStatementCmd(string input) {
-#define MAX_OUTPUT 16384
-  char output[MAX_OUTPUT];
-  freopen("/dev/null", "a", stdout);
-  setbuf(stdout, output);
-  brst_scan_string((char*)input.c_str());
-  freopen("/dev/tty", "a", stdout);
-
+  char *output = brst_scan_string((char*)input.c_str());
   string output_s(output);
   vector<string> statementAnalysis;
   boost::split(statementAnalysis, output_s, boost::is_any_of("\n"));
@@ -1008,8 +1002,10 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
       cli_process(buf); // Process the input.
       buf[0] = '\0';
     } else strcat(buf, "\n");
+#if !(defined(__EMSCRIPTEN__) || defined(__MINGW32__))
     // readline malloc's a new buffer every time.
     free(bufline);
+#endif
   }
 }
 

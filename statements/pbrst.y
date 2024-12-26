@@ -38,6 +38,7 @@ char books_s[MAX_INTERVALS][MAX_BOOKNAME_LENGTH]; // Bible editions
 char infos_s[MAX_INTERVALS][MAX_INFONAME_LENGTH]; // Bible books (in order of intervals)
 bool unique_prep = false; // don't check unique occurrence (only if asked)
 bool addbooks_done = false;
+char *parseinfo = "";
 
 #ifdef IN_BIBREF
 void init_addbooks() {
@@ -187,6 +188,8 @@ void init_addbooks() {
 %start brst_stmt
 
 %code provides {
+char *mystrcat(char *a, char *b);
+void add_parseinfo(char *s, ...);
 int yylex (void);
 int yylex_destroy();
 void yyerror (char *s, ...);
@@ -303,6 +306,26 @@ opt_period
 
 %%
 
+// https://stackoverflow.com/a/40188247/1044586
+char *mystrcat(char *a, char *b) {
+  char *p, *q, *rtn;
+  rtn = q = malloc(strlen(a) + strlen(b) + 1);
+  for (p = a; (*q = *p) != '\0'; ++p, ++q) {}
+  for (p = b; (*q = *p) != '\0'; ++p, ++q) {}
+  return rtn;
+}
+
+void add_parseinfo(char *s, ...) {
+  va_list ap;
+  va_start(ap, s);
+#define MAX_PARSEINFO_LINE_LENGTH 2048
+  char *line = malloc(MAX_PARSEINFO_LINE_LENGTH);
+  vsprintf(line, s, ap); // create line
+  // fprintf(stdout, line); // print line
+  parseinfo = mystrcat(parseinfo, line); // store line
+  va_end(ap);
+}
+
 void
 check_rawposition_length(char *s)
 {
@@ -311,20 +334,20 @@ check_rawposition_length(char *s)
 #ifdef IN_BIBREF
   int from, to, length=-1;
   if (strstr(s, "length") == NULL) {
-    fprintf(stdout, "%d,%d: warning: no length is given, consider adding it\n", yylineno, yycolumn);
+    add_parseinfo("%d,%d: warning: no length is given, consider adding it\n", yylineno, yycolumn);
     sscanf(s, "(%d-%d)", &from, &to);
   } else {
     sscanf(s, "(%d-%d, length %d)", &from, &to, &length);
     if (to-from+1 != length) {
-      fprintf(stdout, "%d,%d: error: inconsistent length: %d-%d+1!=%d\n", yylineno, yycolumn, to, from, length);
+      add_parseinfo("%d,%d: error: inconsistent length: %d-%d+1!=%d\n", yylineno, yycolumn, to, from, length);
     } else {
-      fprintf(stdout, "%d,%d: info: consistent length: %d-%d+1==%d\n", yylineno, yycolumn, to, from, length);
+      add_parseinfo("%d,%d: info: consistent length: %d-%d+1==%d\n", yylineno, yycolumn, to, from, length);
     }
   }
   intervals[iv_counter][0] = from;
   intervals[iv_counter][1] = to;
   intervals[iv_counter][2] = 0; // unclassified
-  fprintf(stdout, "%d,%d: debug: interval %d [%d,%d] stored\n", yylineno, yycolumn, iv_counter, from, to);
+  add_parseinfo("%d,%d: debug: interval %d [%d,%d] stored\n", yylineno, yycolumn, iv_counter, from, to);
   iv_counter++;
 #endif // IN_BIBREF
 }
@@ -338,7 +361,7 @@ save_string_in_introduction(char *s)
   char *l;
   l = greekToLatin1(s);
   strcpy(introduction_substrings[substrings++], l);
-  fprintf(stdout, "%d,%d: debug: found %s in input\n", yylineno, yycolumn, l);
+  add_parseinfo("%d,%d: debug: found %s in input\n", yylineno, yycolumn, l);
   free(l);
 #endif // IN_BIBREF
 }
@@ -354,16 +377,16 @@ check_nt_passage(char *book, char *info, char *verse)
   char *l;
   l = lookupVerse1(info, book, verse);
   if (strstr(l, "error: ") != NULL) {
-    fprintf(stdout, "%d,%d: %s\n", yylineno, yycolumn, l);
+    add_parseinfo("%d,%d: %s\n", yylineno, yycolumn, l);
   } else {
-    fprintf(stdout, "%d,%d: info: lookup1 %s %s %s = ", yylineno, yycolumn, book, info, verse);
-    fprintf(stdout, "%s\n", l);
+    add_parseinfo("%d,%d: info: lookup1 %s %s %s = ", yylineno, yycolumn, book, info, verse);
+    add_parseinfo("%s\n", l);
   }
   nt_info = strdup(info);
   nt_book = strdup(book);
   free(l);
   intervals[iv_counter-1][2]=0; // NT (headline)
-  fprintf(stdout, "%d,%d: debug: interval %d is a headline NT passage\n", yylineno, yycolumn, iv_counter-1);
+  add_parseinfo("%d,%d: debug: interval %d is a headline NT passage\n", yylineno, yycolumn, iv_counter-1);
 #endif // IN_BIBREF
 }
 
@@ -376,17 +399,16 @@ check_ot_passage(char *book, char *info, char *verse)
   char *l;
   l = lookupVerse1(info, book, verse);
   if (strstr(l, "error: ") != NULL) {
-    fprintf(stdout, "%d,%d: %s\n", yylineno, yycolumn, l);
+    add_parseinfo("%d,%d: %s\n", yylineno, yycolumn, l);
   } else {
-    fprintf(stdout, "%d,%d: info: lookup1 %s %s %s = ", yylineno, yycolumn, book, info, verse);
-    fprintf(stdout, "%s\n", l);
+    add_parseinfo("%d,%d: info: lookup1 %s %s %s = %s\n", yylineno, yycolumn, book, info, verse, l);
   }
   ot_info = strdup(info);
   ot_book = strdup(book);
   ot_verse = strdup(verse);
   free(l);
   intervals[iv_counter-1][2]=2; // OT
-  fprintf(stdout, "%d,%d: debug: interval %d is an OT passage\n", yylineno, yycolumn, iv_counter-1);
+  add_parseinfo("%d,%d: debug: interval %d is an OT passage\n", yylineno, yycolumn, iv_counter-1);
   strcpy(infos_s[iv_counter-1], ot_info);
   strcpy(books_s[iv_counter-1], ot_book);
 #endif // IN_BIBREF
@@ -401,9 +423,9 @@ check_introduction_passage(char *passage, char *ay)
   char *l;
   l = lookupVerse1(nt_info, nt_book, passage);
   if (strcmp(l, ay) == 0)
-    fprintf(stdout, "%d,%d: info: introduction %s matches to a-y form %s\n", yylineno, yycolumn, passage, ay);
+    add_parseinfo("%d,%d: info: introduction %s matches to a-y form %s\n", yylineno, yycolumn, passage, ay);
   else
-    fprintf(stdout, "%d,%d: error: introduction %s does not match to a-y form %s, it should be %s\n", yylineno, yycolumn, passage, ay, l);
+    add_parseinfo("%d,%d: error: introduction %s does not match to a-y form %s, it should be %s\n", yylineno, yycolumn, passage, ay, l);
   for (int i=0; i<substrings; i++) {
     char *s = introduction_substrings[i]; // first word of substring
     char *next;
@@ -413,17 +435,17 @@ check_introduction_passage(char *passage, char *ay)
         next[0] = '\0'; // split the comma separated string into C strings
         }
       if (strstr(ay, s) != NULL) {
-        fprintf(stdout, "%d,%d: info: substring %s found\n", yylineno, yycolumn, s);
+        add_parseinfo("%d,%d: info: substring %s found\n", yylineno, yycolumn, s);
         }
       else {
-       fprintf(stdout, "%d,%d: error: substring %s not found\n", yylineno, yycolumn, s);
+       add_parseinfo("%d,%d: error: substring %s not found\n", yylineno, yycolumn, s);
        }
       s = next+1;
     } while (next != NULL);
   }
   substrings = 0; // reset, maybe there is another introduction
   intervals[iv_counter-1][2]=3; // NT (introduction)
-  fprintf(stdout, "%d,%d: debug: interval %d is an introductory NT passage\n", yylineno, yycolumn, iv_counter-1);
+  add_parseinfo("%d,%d: debug: interval %d is an introductory NT passage\n", yylineno, yycolumn, iv_counter-1);
   if (nt_intros_start == -1) nt_intros_start = iv_counter-1;
 #endif // IN_BIBREF
 }
@@ -442,35 +464,35 @@ check_fragment(char *passage, char *ay_nt, char *ay_ot) {
   char *l;
   l = lookupVerse1(nt_info, nt_book, passage);
   if (strcmp(l, ay_nt) == 0)
-    fprintf(stdout, "%d,%d: info: NT fragment %s matches to a-y form\n", yylineno, yycolumn, passage);
+    add_parseinfo("%d,%d: info: NT fragment %s matches to a-y form\n", yylineno, yycolumn, passage);
   else
-    fprintf(stdout, "%d,%d: error: NT fragment %s does not match to a-y form %s, it should be %s\n", yylineno, yycolumn, passage, ay_nt, l);
+    add_parseinfo("%d,%d: error: NT fragment %s does not match to a-y form %s, it should be %s\n", yylineno, yycolumn, passage, ay_nt, l);
   l = lookupVerse1(ot_info, ot_book, ot_verse);
   if (strcmp(l, ay_ot) == 0)
-    fprintf(stdout, "%d,%d: info: OT fragment %s matches to a-y form\n", yylineno, yycolumn, ot_passage);
+    add_parseinfo("%d,%d: info: OT fragment %s matches to a-y form\n", yylineno, yycolumn, ot_passage);
   else
-    fprintf(stdout, "%d,%d: error: OT fragment %s does not match to a-y form %s, it should be %s\n", yylineno, yycolumn, ot_passage, ay_ot, l);
-  // fprintf(stdout, "%d,%d: debug: parsed ot_passage=%s ot_info=%s ot_book=%s ot_verse=%s ay_ot=%s diff=%f\n", yylineno, yycolumn, ot_passage, ot_info, ot_book, ot_verse, ay_ot, difference);
+    add_parseinfo("%d,%d: error: OT fragment %s does not match to a-y form %s, it should be %s\n", yylineno, yycolumn, ot_passage, ay_ot, l);
+  // add_parseinfo("%d,%d: debug: parsed ot_passage=%s ot_info=%s ot_book=%s ot_verse=%s ay_ot=%s diff=%f\n", yylineno, yycolumn, ot_passage, ot_info, ot_book, ot_verse, ay_ot, difference);
   double jd = jaccard_dist1(ay_nt, ay_ot);
   if (fabs(jd-difference) <= EPS)
-    fprintf(stdout, "%d,%d: info: fragments differ by %4.2f%%\n", yylineno, yycolumn, difference * 100.0);
+    add_parseinfo("%d,%d: info: fragments differ by %4.2f%%\n", yylineno, yycolumn, difference * 100.0);
   else
-    fprintf(stdout, "%d,%d: error: fragments in reality differ by %4.2f%%\n", yylineno, yycolumn, jd * 100.0);
+    add_parseinfo("%d,%d: error: fragments in reality differ by %4.2f%%\n", yylineno, yycolumn, jd * 100.0);
   // Check uniqueness in OT:
-  fprintf(stdout, "%d,%d: info: checking if OT passage is unique in OT: ", yylineno, yycolumn);
+  add_parseinfo("%d,%d: info: checking if OT passage is unique in OT: ", yylineno, yycolumn);
 #define MAX_FOUND 10
   int count = find1(l, ot_book, MAX_FOUND);
   if (count == MAX_FOUND)
-    fprintf(stdout, "no, at least %d occurrences\n", count);
+    add_parseinfo("no, at least %d occurrences\n", count);
   else if (count>1)
-    fprintf(stdout, "no, %d occurrences\n", count);
+    add_parseinfo("no, %d occurrences\n", count);
   else
-    fprintf(stdout, "yes\n");
+    add_parseinfo("yes\n");
   if (count==1 && !unique_prep) {
-    fprintf(stdout, "%d,%d: warning: OT passage is unique, consider mentioning it\n", yylineno, yycolumn);
+    add_parseinfo("%d,%d: warning: OT passage is unique, consider mentioning it\n", yylineno, yycolumn);
   }
   if (count>1 && unique_prep) {
-    fprintf(stdout, "%d,%d: error: OT passage is not unique\n", yylineno, yycolumn);
+    add_parseinfo("%d,%d: error: OT passage is not unique\n", yylineno, yycolumn);
   }
   unique_prep = false;
 
@@ -494,19 +516,19 @@ void check_cover(double cover) {
   extern int yycolumn;
 #ifdef IN_BIBREF
   // Detecting intervals and the union of them:
-  fprintf(stdout, "%d,%d: debug: fragment intervals:", yylineno, yycolumn);
+  add_parseinfo("%d,%d: debug: fragment intervals:", yylineno, yycolumn);
   int imin = INT_MAX, imax = 0; // union interval of fragments intervals
   for (int i=0; i<iv_counter; i++) {
     int ftype = intervals[i][2];
     if (ftype == 1) {
       int istart = intervals[i][0];
       int iend = intervals[i][1];
-      fprintf(stdout, " [%d,%d]", istart, iend);
+      add_parseinfo(" [%d,%d]", istart, iend);
       if (imin > istart) imin = istart;
       if (imax < iend) imax = iend;
     }
   }
-  fprintf(stdout, ", union: [%d,%d]\n", imin, imax);
+  add_parseinfo(", union: [%d,%d]\n", imin, imax);
   int union_length = imax-imin+1;
   char covering[union_length];
   for (int i=0; i<union_length; i++) covering[i] = 0; // resetting union
@@ -524,9 +546,9 @@ void check_cover(double cover) {
     if (covering[j]>0) covered++;
   double real_cover = (double)covered/union_length * 100.0;
   if (fabs(real_cover-cover) <= 100*EPS) {
-    fprintf(stdout, "%d,%d: info: cover %4.2f%% is correct\n", yylineno, yycolumn, cover);
+    add_parseinfo("%d,%d: info: cover %4.2f%% is correct\n", yylineno, yycolumn, cover);
   } else {
-    fprintf(stdout, "%d,%d: error: cover %4.2f%% is incorrect (union length: %d, covered: %d), in reality %4.2f%%\n",
+    add_parseinfo("%d,%d: error: cover %4.2f%% is incorrect (union length: %d, covered: %d), in reality %4.2f%%\n",
       yylineno, yycolumn, cover, union_length, covered, real_cover);
   }
   // Check if any NT introductions overlap any fragments:
@@ -543,7 +565,7 @@ void check_cover(double cover) {
            int fend = intervals[j][1];
            // Do they overlap?
            if (!(nt_intro_start > fend || nt_intro_end < fstart)) {
-             fprintf(stdout, "%d,%d: error: NT introduction interval %d overlaps fragment interval %d\n",
+             add_parseinfo("%d,%d: error: NT introduction interval %d overlaps fragment interval %d\n",
                yylineno, yycolumn, i, j);
            overlap_error = true;
            }
@@ -552,26 +574,26 @@ void check_cover(double cover) {
     }
   }
   if (!overlap_error) {
-    fprintf(stdout, "%d,%d: info: overlap check done\n", yylineno, yycolumn);
+    add_parseinfo("%d,%d: info: overlap check done\n", yylineno, yycolumn);
   }
   // Check if NT headline matches union:
   int nt_headline_start = intervals[0][0];
   int nt_headline_end = intervals[0][1];
   if (!(nt_headline_start == imin && nt_headline_end == imax)) {
     if (nt_headline_start <= imin || nt_headline_end >= imax) {
-    fprintf(stdout, "%d,%d: warning: NT headline interval [%d,%d] contains NT fragments union [%d,%d] but they do not match\n",
+    add_parseinfo("%d,%d: warning: NT headline interval [%d,%d] contains NT fragments union [%d,%d] but they do not match\n",
       yylineno, yycolumn, nt_headline_start, nt_headline_end, imin, imax);
     }
     else {
-      fprintf(stdout, "%d,%d: error: NT headline interval [%d,%d] does not contain NT fragments union [%d,%d]\n",
+      add_parseinfo("%d,%d: error: NT headline interval [%d,%d] does not contain NT fragments union [%d,%d]\n",
         yylineno, yycolumn, nt_headline_start, nt_headline_end, imin, imax);
     }
   } else {
-    fprintf(stdout, "%d,%d: info: NT headline interval check done\n", yylineno, yycolumn);
+    add_parseinfo("%d,%d: info: NT headline interval check done\n", yylineno, yycolumn);
   }
   // Check if OT headlines match OT unions:
   for (int i=1; i<nt_intros_start; i++) {
-    fprintf(stdout, "%d,%d: debug: OT headline %d %s %s interval check:",
+    add_parseinfo("%d,%d: debug: OT headline %d %s %s interval check:",
       yylineno, yycolumn, i, books_s[i], infos_s[i]);
     int oimin=INT_MAX, oimax=0;
     // Create union for this OT headline:
@@ -581,27 +603,27 @@ void check_cover(double cover) {
         if (strcmp(books_s[i], books_s[j])==0 && strcmp(infos_s[i], infos_s[j])==0) {
           int oistart = intervals[j][0];
           int oiend = intervals[j][1];
-          fprintf(stdout, " [%d,%d]", oistart, oiend);
+          add_parseinfo(" [%d,%d]", oistart, oiend);
           if (oimin > oistart) oimin = oistart;
           if (oimax < oiend) oimax = oiend;
         }
       }
     }
-    fprintf(stdout, ", union: [%d,%d]\n", oimin, oimax);
+    add_parseinfo(", union: [%d,%d]\n", oimin, oimax);
     // Compare headline interval with the union:
     int ot_headline_start = intervals[i][0];
     int ot_headline_end = intervals[i][1];
     if (!(ot_headline_start == oimin && ot_headline_end == oimax)) {
       if (ot_headline_start <= oimin || ot_headline_end >= oimax) {
-      fprintf(stdout, "%d,%d: warning: OT headline interval %d [%d,%d] contains OT fragments union [%d,%d] but they do not match\n",
+      add_parseinfo("%d,%d: warning: OT headline interval %d [%d,%d] contains OT fragments union [%d,%d] but they do not match\n",
         yylineno, yycolumn, i, ot_headline_start, ot_headline_end, oimin, oimax);
       }
       else {
-        fprintf(stdout, "%d,%d: error: OT headline interval %d [%d,%d] does not contain OT fragments union [%d,%d]\n",
+        add_parseinfo("%d,%d: error: OT headline interval %d [%d,%d] does not contain OT fragments union [%d,%d]\n",
           yylineno, yycolumn, i, ot_headline_start, ot_headline_end, oimin, oimax);
       }
     } else {
-      fprintf(stdout, "%d,%d: info: OT headline interval %d check done\n", yylineno, yycolumn, i);
+      add_parseinfo("%d,%d: info: OT headline interval %d check done\n", yylineno, yycolumn, i);
     }
   } // end of for checking OT headlines
 #endif // IN_BIBREF
@@ -616,9 +638,21 @@ yyerror(char *s, ...)
   va_list ap;
   va_start(ap, s);
 
-  fprintf(stdout, "%d,%d: error: ", yylineno, yycolumn);
-  vfprintf(stdout, s, ap);
-  fprintf(stdout, "\n");
+  // create and store line
+  char *line = malloc(MAX_PARSEINFO_LINE_LENGTH);
+  sprintf(line, "%d,%d: error: ", yylineno, yycolumn);
+  parseinfo = mystrcat(parseinfo, line);
+  vsprintf(line, s, ap);
+  parseinfo = mystrcat(parseinfo, line);
+  sprintf(line, "\n");
+  parseinfo = mystrcat(parseinfo, line);
+
+  // print line
+  // fprintf(stdout, "%d,%d: error: ", yylineno, yycolumn);
+  // vfprintf(stdout, s, ap);
+  // fprintf(stdout, "\n");
+
+  va_end(ap);
 }
 
 typedef struct yy_buffer_state * YY_BUFFER_STATE;
@@ -626,9 +660,9 @@ extern int yyparse();
 extern YY_BUFFER_STATE yy_scan_string(char * str);
 extern void yy_delete_buffer(YY_BUFFER_STATE buffer);
 
-int brst_scan_string(char *string) {
+char* brst_scan_string(char *string) {
     extern int yycolumn;
-    // Reset data:
+    // Reset data (also from a possible previous run):
     yycolumn = 0;
     yylex_destroy();
     substrings = 0;
@@ -636,10 +670,12 @@ int brst_scan_string(char *string) {
     fragments_start = -1;
     nt_intros_start = -1;
     difference = -1;
+    parseinfo = malloc(1);
+    strcpy(parseinfo, "");
     // yydebug = 1;
 
     YY_BUFFER_STATE buffer = yy_scan_string(string);
     yyparse();
     yy_delete_buffer(buffer);
-    return 0;
+    return parseinfo;
 }
