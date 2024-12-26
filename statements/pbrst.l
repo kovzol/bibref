@@ -5,6 +5,7 @@
 #include <string.h>
 
 void yyerror(char *s, ...);
+double myatof(char *arr);
 
 int yycolumn = 0;
 #define YY_USER_ACTION \
@@ -130,13 +131,13 @@ REVELATION_OF_JOHN { yylval.strval = strdup(yytext); return REVELATION_OF_JOHN; 
 "." { return PERIOD; }
 
   /* numbers */
-[0-9]+	{ yylval.intval = atoi(yytext); 
-                  return INTNUM; } 
+[0-9]+	{ yylval.intval = atoi(yytext);
+                  return INTNUM; }
 
 [0-9]+"."[0-9]*"%" |
 "."[0-9]+"%"	{ yylval.strval = strdup(yytext);
                   yylval.strval[yyleng-1] = 0;
-                  yylval.floatval = atof(yylval.strval) ;
+                  yylval.floatval = myatof(yylval.strval);
                   return APPROXNUM; }
 
   /* strings */

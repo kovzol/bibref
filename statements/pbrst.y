@@ -201,6 +201,7 @@ void check_introduction_passage(char *passage, char *ay);
 void check_cover(double cover);
 void check_unique_prepare();
 void check_fragment(char *passage, char *ay_nt, char *ay_ot);
+double myatof(char *arr);
 }
 
 %%
@@ -654,6 +655,36 @@ yyerror(char *s, ...)
 
   va_end(ap);
 }
+
+// Taken from https://stackoverflow.com/a/67521458/1044586
+double myatof(char *arr)
+{
+  double val = 0;
+  int afterdot=0;
+  double scale=1;
+  int neg = 0; 
+
+  if (*arr == '-') {
+    arr++;
+    neg = 1;
+  }
+  while (*arr) {
+    if (afterdot) {
+      scale = scale/10;
+      val = val + (*arr-'0')*scale;
+    } else {
+      if (*arr == '.') 
+    afterdot++;
+      else
+    val = val * 10.0 + (*arr - '0');
+    }
+    arr++;
+  }
+  if(neg) return -val;
+  else    return  val;
+}
+
+
 
 typedef struct yy_buffer_state * YY_BUFFER_STATE;
 extern int yyparse();
