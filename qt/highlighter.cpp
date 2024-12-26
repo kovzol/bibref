@@ -83,7 +83,7 @@ Highlighter::Highlighter(QTextDocument *parent)
     rule.format = singleLineCommentFormat;
     highlightingRules.append(rule);
 
-    greekFormat.setForeground(Qt::green);
+    greekFormat.setForeground(Qt::red);
     rule.pattern = QRegularExpression(QStringLiteral("'.*'"));
     rule.format = greekFormat;
     highlightingRules.append(rule);
