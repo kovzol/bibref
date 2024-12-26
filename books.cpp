@@ -240,8 +240,8 @@ string processWord(string word) {
     }
     if (c1 == 'c') { // Some systems do not support greek ϲ so we fall back sometimes to latin c in the input
       i--;
-      rewritten.push_back(0xCF);
-      rewritten.push_back(0x83);
+      rewritten.push_back((unsigned char)0xCF);
+      rewritten.push_back((unsigned char)0x83);
     }
     // keep only Greek characters
     if (c1 == 0xCE || c1 == 0xCF) {
