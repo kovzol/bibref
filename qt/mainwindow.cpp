@@ -131,6 +131,7 @@ void addBiblesThread(MainWindow *window)
     window->minunique1Act->setEnabled(true);
     window->extendAct->setEnabled(true);
     window->getrefsAct->setEnabled(true);
+    window->statementAct->setEnabled(true);
     window->rawAct->setEnabled(true);
     window->raw1Act->setEnabled(true);
     window->raw2Act->setEnabled(true);
@@ -1102,6 +1103,7 @@ void MainWindow::createActions()
     statementAct->setStatusTip(
         tr("Open a text editor to edit a statement"));
     connect(statementAct, &QAction::triggered, this, &MainWindow::statement);
+    statementAct->setDisabled(true);
 
     lookupAct = new QAction("&Lookup…", this);
     lookupAct->setIcon(QIcon::fromTheme("document-open"));
