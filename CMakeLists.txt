@@ -1,10 +1,10 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.16)
 project(bibref)
 
 option(PBRST "Include the precompiled brst parser" OFF)
 
 set(CMAKE_CXX_STANDARD 11)
-# set(CMAKE_CXX_FLAGS "-pedantic-errors")
+set(CMAKE_CXX_FLAGS "-pedantic-errors")
 
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(sword REQUIRED sword)
@@ -17,7 +17,7 @@ find_package(Boost CONFIG COMPONENTS system filesystem)
 # One needs readline >= 8.0 to make this work:
 pkg_check_modules (readline REQUIRED readline)
 
-include_directories(/usr/include/sword)
+include_directories(${sword_INCLUDE_DIRS})
 
 if(PBRST)
 add_compile_definitions(WITH_PBRST)
@@ -56,7 +56,9 @@ SET_SOURCE_FILES_PROPERTIES(
   GENERATED true
 )
 
-target_link_libraries(bibref sword readline boost_system boost_filesystem)
+target_link_libraries(bibref
+    ${sword_LIBRARIES} ${Boost_LIBRARIES} ${readline_LIBRARIES}
+)
 
 install(
  CODE " set(ENV{SWORD_PATH} \"$ENV{HOME}/.sword\") "
