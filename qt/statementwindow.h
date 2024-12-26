@@ -19,14 +19,18 @@ public:
 public slots:
     void newFile();
     void openFile(const QString &path = QString());
+    void parse();
+    void showSvg();
 
 private:
     void setupEditor();
     void setupFileMenu();
+    void setupProveMenu();
     void setupHelpMenu();
 
     QTextEdit *editor;
     Highlighter *highlighter;
 };
+
 
 #endif

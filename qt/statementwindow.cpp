@@ -3,11 +3,24 @@
 #include <QtWidgets>
 #include <iostream>
 
+#ifdef WITH_PBRST
+#include <string>
+#include <boost/algorithm/string/trim.hpp>
+#include <boost/algorithm/string/predicate.hpp>
+#include <boost/algorithm/string/split.hpp>
+
+extern "C" char* brst_scan_string(char *string);
+#include "pbrst.tab.h" // the statements folder must be included among the folders
+
+using namespace std;
+#endif
+
 StatementWindow::StatementWindow(QWidget *parent)
     : QMainWindow(parent)
 {
     this->setAttribute(::Qt::WA_DeleteOnClose);
     setupFileMenu();
+    setupProveMenu();
     setupHelpMenu();
     setupEditor();
 
@@ -72,8 +85,68 @@ void StatementWindow::setupFileMenu()
 
     fileMenu->addAction(QIcon::fromTheme("document-new"), tr("&New"), QKeySequence::New,
                         this, &StatementWindow::newFile);
-    fileMenu->addAction(QIcon::fromTheme("document-open"), tr("&Open..."), QKeySequence::Open,
+    fileMenu->addAction(QIcon::fromTheme("document-open"), tr("&Open…"), QKeySequence::Open,
                         this, [this](){ openFile(); });
+}
+
+void StatementWindow::parse()
+{
+#ifdef WITH_PBRST
+    char* output = brst_scan_string((char*)editor->toPlainText().toStdString().c_str());
+    string output_s(output);
+    vector<string> statementAnalysis;
+    boost::split(statementAnalysis, output_s, boost::is_any_of("\n"));
+
+    int infos = 0, warnings = 0, errors = 0;
+    QString details;
+
+    for (auto l: statementAnalysis) {
+        if (l.find(": info: ")!=string::npos)
+            infos++;
+        if (l.find(": warning: ")!=string::npos)
+            warnings++;
+        if (l.find(": error: ")!=string::npos)
+            errors++;
+        if (l.find(": debug: ")==string::npos)
+            details += l + "\n";
+    }
+
+    QMessageBox msgBox;
+    msgBox.setWindowTitle(tr("Parse"));
+    msgBox.setText(tr("%1 successful tests, %2 warnings, %3 errors.").arg(infos).arg(warnings).arg(errors));
+    if (errors>0) {
+        msgBox.setIcon(QMessageBox::Critical);
+    } else if (warnings>0) {
+        msgBox.setIcon(QMessageBox::Warning);
+    } else {
+        msgBox.setIcon(QMessageBox::Information);
+    }
+
+    msgBox.setDetailedText(details);
+
+    QSpacerItem* horizontalSpacer = new QSpacerItem(500, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    QGridLayout* layout = (QGridLayout*)msgBox.layout();
+    layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
+
+    int ret = msgBox.exec();
+
+}
+#endif
+
+void StatementWindow::showSvg()
+{
+
+}
+
+void StatementWindow::setupProveMenu()
+{
+    QMenu *proveMenu = new QMenu(tr("&Prove"), this);
+    menuBar()->addMenu(proveMenu);
+
+    proveMenu->addAction(QIcon::fromTheme("tools-check-spelling"), tr("&Parse"), QKeySequence::Forward,
+                        this, &StatementWindow::parse);
+    // proveMenu->addAction(QIcon::fromTheme("emblem-photos"), tr("&Visualize"), QKeySequence::Print,
+    //                     this, &StatementWindow::showSvg);
 }
 
 void StatementWindow::setupHelpMenu()
