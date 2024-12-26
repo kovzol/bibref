@@ -17,7 +17,7 @@
 
 using namespace sword;
 
-EXTERNC const char* lookupVerse1(const char* book0, const char* info0, const char* verse0) {
+EXTERNC char* lookupVerse1(const char* book0, const char* info0, const char* verse0) {
   string book1 = string(book0);
   string info1 = string(info0);
   string verse1 = string(verse0);
@@ -63,7 +63,7 @@ EXTERNC int addBibles1() {
   return addBibles();
 }
 
-EXTERNC const char* greekToLatin1(const char* greek) {
+EXTERNC char* greekToLatin1(const char* greek) {
   SWMgr manager;
   manager.setGlobalOption("Greek Accents", "Off"); // disable accents
   string input = string(greek);
