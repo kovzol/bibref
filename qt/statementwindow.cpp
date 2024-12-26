@@ -107,8 +107,10 @@ void StatementWindow::parse()
             warnings++;
         if (l.find(": error: ")!=string::npos)
             errors++;
-        if (l.find(": debug: ")==string::npos)
-            details += l + "\n";
+        if (l.find(": debug: ")==string::npos) {
+            details += QString::fromStdString(l);
+            details += "\n";
+            }
     }
 
     QMessageBox msgBox;
@@ -130,8 +132,8 @@ void StatementWindow::parse()
 
     int ret = msgBox.exec();
 
-}
 #endif
+}
 
 void StatementWindow::showSvg()
 {
