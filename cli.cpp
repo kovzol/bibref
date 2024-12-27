@@ -847,6 +847,9 @@ void processGetrefsCmd(string input) {
 
 #ifdef WITH_PBRST
 void processStatementCmd(string input) {
+  if (!booksAdded) {
+    booksAdded = true;
+    }
   char *output = brst_scan_string((char*)input.c_str());
   string output_s(output);
   vector<string> statementAnalysis;

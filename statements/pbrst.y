@@ -694,6 +694,7 @@ extern void yy_delete_buffer(YY_BUFFER_STATE buffer);
 char* brst_scan_string(char *string) {
     extern int yycolumn;
     // Reset data (also from a possible previous run):
+    addbooks_done = true; // we assume it was already called
     yycolumn = 0;
     yylex_destroy();
     substrings = 0;
