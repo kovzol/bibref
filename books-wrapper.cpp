@@ -93,3 +93,12 @@ EXTERNC int find1(const char* text0, const char* moduleName0, int maxFound) {
   string moduleName1 = string(moduleName0);
   return find(text1, moduleName1, maxFound, false);
 }
+
+EXTERNC char* getRaw1(const char* bookName0, const char* moduleName0, int startPos, int length) {
+  string bookName1 = string(bookName0);
+  string moduleName1 = string(moduleName0);
+  string r = getRaw(moduleName1, bookName1, startPos, length);
+  char *ret = (char*) malloc(r.length()+1);
+  strcpy(ret, r.c_str());
+  return ret;
+}
