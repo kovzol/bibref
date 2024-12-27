@@ -421,7 +421,19 @@ check_ot_passage(char *book, char *info, char *verse)
   ot_info = strdup(info);
   ot_book = strdup(book);
   ot_verse = strdup(verse);
+  // Check if raw text matches with lookup:
+  char *r;
+  int length = intervals[iv_counter-1][1] - intervals[iv_counter-1][0] +1;
+  r = getRaw1(info, book, intervals[iv_counter-1][0] - 1, length);
+  if (strcmp(l, r)==0) {
+    add_parseinfo("%d,%d: info: raw %s %s %d %d = %s\n", yylineno, yycolumn,
+      book, info, intervals[iv_counter-1][0], length, r);
+    } else {
+    add_parseinfo("%d,%d: error: raw %s %s %d %d = %s, it differs from %s\n", yylineno, yycolumn,
+      book, info, intervals[iv_counter-1][0], length, r, l);
+    }
   free(l);
+  free(r);
   intervals[iv_counter-1][2]=2; // OT
   add_parseinfo("%d,%d: debug: interval %d is an OT passage\n", yylineno, yycolumn, iv_counter-1);
   strcpy(infos_s[iv_counter-1], ot_info);
