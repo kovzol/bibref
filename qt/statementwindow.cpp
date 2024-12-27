@@ -142,6 +142,7 @@ void StatementWindow::showSvg()
 
 void StatementWindow::setupProveMenu()
 {
+#ifdef WITH_PBRST
     QMenu *proveMenu = new QMenu(tr("&Prove"), this);
     menuBar()->addMenu(proveMenu);
 
@@ -149,6 +150,7 @@ void StatementWindow::setupProveMenu()
                         this, &StatementWindow::parse);
     // proveMenu->addAction(QIcon::fromTheme("emblem-photos"), tr("&Visualize"), QKeySequence::Print,
     //                     this, &StatementWindow::showSvg);
+#endif // WITH_PBRST
 }
 
 void StatementWindow::setupHelpMenu()
