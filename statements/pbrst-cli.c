@@ -22,6 +22,7 @@ int main(int ac, char **av)
   }
 
   if(!yyparse()) {
+    create_diagram();
     printf("%s", parseinfo);
     printf("brst parse worked\n");
     printf("statement identifier: %s\n", stmt_identifier);

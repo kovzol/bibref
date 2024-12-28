@@ -50,6 +50,9 @@ bool unique_prep = false; // don't check unique occurrence (only if asked)
 bool addbooks_done = false;
 char *parseinfo = "";
 
+int union_length;
+int imin = INT_MAX, imax = 0; // union interval of fragments intervals
+
 #ifdef IN_BIBREF
 void init_addbooks() {
   if (!addbooks_done) {
@@ -624,7 +627,6 @@ void check_cover(double cover) {
 #ifdef IN_BIBREF
   // Detecting intervals and the union of them:
   add_parseinfo("%d,%d: debug: fragment intervals:", yylineno, yycolumn);
-  int imin = INT_MAX, imax = 0; // union interval of fragments intervals
   for (int i=0; i<iv_counter; i++) {
     int ftype = intervals[i][2];
     if (ftype == 1) {
@@ -636,7 +638,7 @@ void check_cover(double cover) {
     }
   }
   add_parseinfo(", union: [%d,%d]\n", imin, imax);
-  int union_length = imax-imin+1;
+  union_length = imax-imin+1;
 
   for (int i=0; i<union_length; i++)
     for (int j=0; j<ot_books_n; j++)
@@ -651,7 +653,7 @@ void check_cover(double cover) {
       char *ot_book_w = books_s[i+1];
       char *ot_info_w = infos_s[i+1];
       int w = detect_ot_book(ot_book_w, ot_info_w);
-      for (int j=istart; j<=iend; j++) covering[w][j-imin]++;
+      for (int j=istart; j<=iend; j++) covering[w][j-imin] = i+1; // Store the OT fragment number.
     }
   }
   int covered = 0;
@@ -812,7 +814,38 @@ char *D; // diagram as text
 void create_diagram() {
   D = malloc(1);
   strcpy(D, "");
-
+#define MAX_BLOCKS 100
+  int nt_blocks[MAX_BLOCKS][2]; // copies from the coverings, positions and length are stored
+  int nt_blocks_n = 0;
+  int prev_pos = 0;
+  // Detect blocks (identical vertical columns in covering[]):
+  for (int i=1; i<union_length; i++) {
+    bool col_identical = true;
+    for (int j=0; j<ot_books_n && col_identical; j++) {
+      if (covering[j][i-1] != covering[j][i]) {
+        col_identical = false;
+        nt_blocks[nt_blocks_n][0] = prev_pos;
+        nt_blocks[nt_blocks_n][1] = i-prev_pos;
+        add_parseinfo("diagram debug: NT block %d begins at %d (in reality position %d), length %d, ",
+          nt_blocks_n, prev_pos, prev_pos + imin, i-prev_pos);
+        add_parseinfo("it refers to ");
+        int count_refs = 0;
+        for (int j=0; j<ot_books_n; j++) {
+          int fragment = covering[j][i-1];
+          if (fragment != 0) { // this NT block refers to somewhere in OT
+            count_refs++;
+            add_parseinfo("f%d (%s %s)", fragment, books_s[fragment], infos_s[fragment]);
+          }
+        }
+        if (count_refs == 0) { // this NT block is surely an uncovered part by OT
+          add_parseinfo("uncovered");
+        }
+        add_parseinfo("\n");
+        prev_pos = i;
+        nt_blocks_n++;
+      }
+    }
+  }
 }
 
 char* brst_scan_string(char *string) {
@@ -829,10 +862,13 @@ char* brst_scan_string(char *string) {
     parseinfo = malloc(1);
     strcpy(parseinfo, "");
     ot_books_n = 0;
+    union_length = 0;
+    imin = INT_MAX, imax = 0;
     // yydebug = 1;
 
     YY_BUFFER_STATE buffer = yy_scan_string(string);
     yyparse();
     yy_delete_buffer(buffer);
+    create_diagram();
     return parseinfo;
 }
