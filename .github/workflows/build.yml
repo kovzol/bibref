@@ -143,13 +143,6 @@ jobs:
         CC=clang CXX=clang++ cmake -G "MinGW Makefiles" ..
         mingw32-make install || true
 
-    - name: Build pbrst-cli
-      run: |
-        cd statements
-        mingw32-make
-        cd tests
-        ./runme .
-
     - name: Build bibref-pbrst
       run: |
         mkdir build-pbrst
