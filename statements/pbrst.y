@@ -472,11 +472,38 @@ check_introduction_passage(char *passage, char *ay)
   extern int yycolumn;
 #ifdef IN_BIBREF
   char *l;
+  bool err = false; // be optimistic
   l = lookupVerse1(nt_info, nt_book, passage);
   if (strcmp(l, ay) == 0)
     add_parseinfo("%d,%d: info: introduction %s matches to a-y form %s\n", yylineno, yycolumn, passage, ay);
-  else
+  else {
     add_parseinfo("%d,%d: error: introduction %s does not match to a-y form %s, it should be %s\n", yylineno, yycolumn, passage, ay, l);
+    free(l);
+    err = true;
+    }
+  // Get passage as raw text:
+  char *r;
+  int length = intervals[iv_counter-1][1] - intervals[iv_counter-1][0] +1;
+  r = getRaw1(nt_info, nt_book, intervals[iv_counter-1][0] - 1, length);
+  if (strstr(r, "error: ") != NULL) {
+    add_parseinfo("%d,%d: %s\n", yylineno, yycolumn, r);
+    err = true;
+    free(r);
+  } else {
+    add_parseinfo("%d,%d: info: `getraw %s %s %d %d` = %s\n", yylineno, yycolumn, nt_book, nt_info,
+      intervals[iv_counter-1][0], length, r);
+  }
+  if (err) return; // At least one of the checks was erroneous, so we return without comparison.
+
+  // Check if raw text matches with lookup's result:
+  if (strcmp(l, r)==0) {
+    add_parseinfo("%d,%d: info: results of lookup and getraw match\n", yylineno, yycolumn);
+    } else {
+    add_parseinfo("%d,%d: error: results of lookup and getraw do not match\n", yylineno, yycolumn);
+    }
+  free(l);
+  free(r);
+
   for (int i=0; i<substrings; i++) {
     char *s = introduction_substrings[i]; // first word of substring
     char *next;
