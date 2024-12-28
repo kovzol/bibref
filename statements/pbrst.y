@@ -37,7 +37,7 @@ int nt_intros_start = -1;
 float difference = -1; // undefined
 
 // TODO: Psalms could be considered as different books in the diagrams.
-char covering[MAX_OT_BOOKS][MAX_BOOK_LENGTH];
+char covering[MAX_INTERVALS][MAX_BOOK_LENGTH];
 int ot_books_n = 0;
 char ot_books[MAX_OT_BOOKS][MAX_BOOKNAME_LENGTH];
 char ot_infos[MAX_OT_BOOKS][MAX_BOOKNAME_LENGTH];
@@ -641,7 +641,7 @@ void check_cover(double cover) {
   union_length = imax-imin+1;
 
   for (int i=0; i<union_length; i++)
-    for (int j=0; j<ot_books_n; j++)
+    for (int j=0; j<iv_counter; j++)
       covering[j][i] = 0; // resetting union (for all OT books)
   // Cover check:
   for (int i=0; i<iv_counter; i++) {
@@ -649,17 +649,13 @@ void check_cover(double cover) {
     if (ftype == 1) {
       int istart = intervals[i][0];
       int iend = intervals[i][1];
-      // Detect which OT book contains the quoted passage (it's described in the next interval):
-      char *ot_book_w = books_s[i+1];
-      char *ot_info_w = infos_s[i+1];
-      int w = detect_ot_book(ot_book_w, ot_info_w);
-      for (int j=istart; j<=iend; j++) covering[w][j-imin] = i+1; // Store the OT fragment number.
+      for (int j=istart; j<=iend; j++) covering[i+1][j-imin] = 1; // Store the OT fragment number.
     }
   }
   int covered = 0;
   for (int i=0; i<union_length; i++) {
     bool letter_covered = false;
-    for (int j=0; j<ot_books_n && !letter_covered; j++) {
+    for (int j=0; j<iv_counter && !letter_covered; j++) {
       if (covering[j][i]>0) {
         covered++;
         letter_covered = true;
@@ -821,31 +817,38 @@ void create_diagram() {
   // Detect blocks (identical vertical columns in covering[]):
   for (int i=1; i<union_length; i++) {
     bool col_identical = true;
-    for (int j=0; j<ot_books_n && col_identical; j++) {
+    for (int j=0; j<iv_counter && col_identical; j++) {
       if (covering[j][i-1] != covering[j][i]) {
         col_identical = false;
         nt_blocks[nt_blocks_n][0] = prev_pos;
         nt_blocks[nt_blocks_n][1] = i-prev_pos;
-        add_parseinfo("diagram debug: NT block %d begins at %d (in reality position %d), length %d, ",
-          nt_blocks_n, prev_pos, prev_pos + imin, i-prev_pos);
-        add_parseinfo("it refers to ");
-        int count_refs = 0;
-        for (int j=0; j<ot_books_n; j++) {
-          int fragment = covering[j][i-1];
-          if (fragment != 0) { // this NT block refers to somewhere in OT
-            count_refs++;
-            add_parseinfo("f%d (%s %s)", fragment, books_s[fragment], infos_s[fragment]);
-          }
-        }
-        if (count_refs == 0) { // this NT block is surely an uncovered part by OT
-          add_parseinfo("uncovered");
-        }
-        add_parseinfo("\n");
         prev_pos = i;
         nt_blocks_n++;
       }
     }
   }
+  nt_blocks[nt_blocks_n][0] = prev_pos;
+  nt_blocks[nt_blocks_n][1] = union_length-prev_pos;
+  nt_blocks_n++;
+  // Collecting data from blocks:
+  for (int i=0; i<nt_blocks_n; ++i) {
+    add_parseinfo("diagram debug: NT block %d begins at %d (rawpos %d), length %d, refers to",
+      i, nt_blocks[i][0], nt_blocks[i][0] + imin, nt_blocks[i][1]);
+    int count_refs = 0;
+    int covering_col = nt_blocks[i][0];
+    for (int j=0; j<iv_counter; j++) {
+      int fragment = covering[j][covering_col];
+      if (fragment != 0) { // this NT block refers to somewhere in OT
+        count_refs++;
+        add_parseinfo(" f%d (%s %s)", j, books_s[j], infos_s[j]);
+      }
+    }
+    if (count_refs == 0) { // this NT block is surely an uncovered part by OT
+      add_parseinfo(" uncovered");
+    }
+    add_parseinfo("\n");
+  }
+
 }
 
 char* brst_scan_string(char *string) {
