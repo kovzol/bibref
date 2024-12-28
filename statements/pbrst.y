@@ -25,7 +25,8 @@ char *ot_verse;
 #define MAX_INTERVALS 20
 #define MAX_BOOKNAME_LENGTH 30
 #define MAX_INFONAME_LENGTH 30
-#define MAX_INFOS 5
+#define MAX_OT_BOOKS 5
+#define MAX_BOOK_LENGTH 175000
 char introduction_substrings[MAX_SUBSTRINGS][MAX_SUBSTR_LENGTH + 1];
 int intervals[MAX_INTERVALS][3]; // start, end, type
 // where type is 0: NT headline, 1: NT fragment, 2: OT fragment, 3: NT introduction
@@ -34,8 +35,17 @@ int iv_counter = 0;
 int fragments_start = -1; // undefined
 int nt_intros_start = -1;
 float difference = -1; // undefined
+
+// TODO: Psalms could be considered as different books in the diagrams.
+char covering[MAX_OT_BOOKS][MAX_BOOK_LENGTH];
+int ot_books_n = 0;
+char ot_books[MAX_OT_BOOKS][MAX_BOOKNAME_LENGTH];
+char ot_infos[MAX_OT_BOOKS][MAX_BOOKNAME_LENGTH];
+
+// TODO: Store the index only instead of the whole string:
 char books_s[MAX_INTERVALS][MAX_BOOKNAME_LENGTH]; // Bible editions
 char infos_s[MAX_INTERVALS][MAX_INFONAME_LENGTH]; // Bible books (in order of intervals)
+
 bool unique_prep = false; // don't check unique occurrence (only if asked)
 bool addbooks_done = false;
 char *parseinfo = "";
@@ -202,6 +212,7 @@ void check_cover(double cover);
 void check_unique_prepare();
 void check_fragment(char *passage, char *ay_nt, char *ay_ot);
 double myatof(char *arr);
+void create_diagram();
 }
 
 %%
@@ -417,6 +428,16 @@ check_nt_passage(char *book, char *info, char *verse)
 #endif // IN_BIBREF
 }
 
+int detect_ot_book(char *book, char *info) {
+  for (int i=0; i<ot_books_n; i++) {
+    if (strcmp(ot_books[i],ot_book)==0 && strcmp(ot_infos[i],ot_info)==0) { // This is not a new OT book.
+      return i;
+    }
+  }
+  return -1; // not found
+}
+
+
 void
 check_ot_passage(char *book, char *info, char *verse)
 {
@@ -460,6 +481,14 @@ check_ot_passage(char *book, char *info, char *verse)
 
   intervals[iv_counter-1][2]=2; // OT
   add_parseinfo("%d,%d: debug: interval %d is an OT passage\n", yylineno, yycolumn, iv_counter-1);
+
+  if (detect_ot_book(ot_book, ot_info) == -1) { // Register this OT book as another entry.
+    strcpy(ot_books[ot_books_n], ot_book);
+    strcpy(ot_infos[ot_books_n], ot_info);
+    ot_books_n++;
+    add_parseinfo("%d,%d: debug: OT book %s %s is registered as #%d\n", yylineno, yycolumn, ot_book, ot_info, ot_books_n-1);
+  }
+
   strcpy(infos_s[iv_counter-1], ot_info);
   strcpy(books_s[iv_counter-1], ot_book);
 #endif // IN_BIBREF
@@ -608,20 +637,33 @@ void check_cover(double cover) {
   }
   add_parseinfo(", union: [%d,%d]\n", imin, imax);
   int union_length = imax-imin+1;
-  char covering[union_length];
-  for (int i=0; i<union_length; i++) covering[i] = 0; // resetting union
+
+  for (int i=0; i<union_length; i++)
+    for (int j=0; j<ot_books_n; j++)
+      covering[j][i] = 0; // resetting union (for all OT books)
   // Cover check:
   for (int i=0; i<iv_counter; i++) {
     int ftype = intervals[i][2];
     if (ftype == 1) {
       int istart = intervals[i][0];
       int iend = intervals[i][1];
-      for (int j=istart; j<=iend; j++) covering[j-imin]++;
+      // Detect which OT book contains the quoted passage (it's described in the next interval):
+      char *ot_book_w = books_s[i+1];
+      char *ot_info_w = infos_s[i+1];
+      int w = detect_ot_book(ot_book_w, ot_info_w);
+      for (int j=istart; j<=iend; j++) covering[w][j-imin]++;
     }
   }
   int covered = 0;
-  for (int j=0; j<union_length; j++)
-    if (covering[j]>0) covered++;
+  for (int i=0; i<union_length; i++) {
+    bool letter_covered = false;
+    for (int j=0; j<ot_books_n && !letter_covered; j++) {
+      if (covering[j][i]>0) {
+        covered++;
+        letter_covered = true;
+      }
+    }
+  }
   double real_cover = (double)covered/union_length * 100.0;
   if (fabs(real_cover-cover) <= 100*EPS) {
     add_parseinfo("%d,%d: info: cover %4.2f%% is correct\n", yylineno, yycolumn, cover);
@@ -761,12 +803,17 @@ double myatof(char *arr)
   else    return  val;
 }
 
-
-
 typedef struct yy_buffer_state * YY_BUFFER_STATE;
 extern int yyparse();
 extern YY_BUFFER_STATE yy_scan_string(char * str);
 extern void yy_delete_buffer(YY_BUFFER_STATE buffer);
+
+char *D; // diagram as text
+void create_diagram() {
+  D = malloc(1);
+  strcpy(D, "");
+
+}
 
 char* brst_scan_string(char *string) {
     extern int yycolumn;
@@ -781,6 +828,7 @@ char* brst_scan_string(char *string) {
     difference = -1;
     parseinfo = malloc(1);
     strcpy(parseinfo, "");
+    ot_books_n = 0;
     // yydebug = 1;
 
     YY_BUFFER_STATE buffer = yy_scan_string(string);
