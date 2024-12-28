@@ -119,8 +119,6 @@ jobs:
           mingw-w64-x86_64-qt6-translations
           mingw-w64-x86_64-readline
           mingw-w64-x86_64-zlib
-          mingw-w64-x86_64-flex
-          mingw-w64-x86_64-bison
 
     - name: Build SWORD
       run: |
