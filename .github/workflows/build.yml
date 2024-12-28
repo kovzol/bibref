@@ -18,12 +18,6 @@ jobs:
       run: |
          wget http://http.us.debian.org/debian/pool/main/s/sm/r-cran-sm_2.2-5.6-1+b2_amd64.deb &&
          sudo dpkg -i r-cran-sm_2.2-5.6-1+b2_amd64.deb
-    - name: make-pbrst
-      run: |
-        cd statements
-        make
-        cd tests
-        ./runme .
     - name: make-native
       run: |
         mkdir build
@@ -31,6 +25,12 @@ jobs:
         cmake ..
         make
         make install || true
+    - name: make-pbrst
+      run: |
+        cd statements
+        make
+        cd tests
+        ./runme .
     - name: make-native-pbrst
       run: |
         mkdir build-pbrst
@@ -136,6 +136,13 @@ jobs:
         CC=clang CXX=clang++ cmake -DCMAKE_INSTALL_PREFIX=/mingw64 -DSWORD_LINK_LIBRARIES="-lcurl" -G "MinGW Makefiles" ..
         mingw32-make install
 
+    - name: Build bibref
+      run: |
+        mkdir build
+        cd build
+        CC=clang CXX=clang++ cmake -G "MinGW Makefiles" ..
+        mingw32-make install || true
+
     - name: Build pbrst-cli
       run: |
         cd statements
@@ -143,11 +150,11 @@ jobs:
         cd tests
         ./runme .
 
-    - name: Build bibref
+    - name: Build bibref-pbrst
       run: |
-        mkdir build
-        cd build
-        CC=clang CXX=clang++ cmake -G "MinGW Makefiles" ..
+        mkdir build-pbrst
+        cd build-pbrst
+        CC=clang CXX=clang++ cmake -DPBRST=ON -G "MinGW Makefiles" ..
         mingw32-make
 
     - name: Build bibref-qt
@@ -155,13 +162,6 @@ jobs:
         mkdir qt/build
         cd qt/build
         CC=clang CXX=clang++ cmake -G "MinGW Makefiles" ..
-        mingw32-make
-
-    - name: Build bibref-pbrst
-      run: |
-        mkdir build-pbrst
-        cd build-pbrst
-        CC=clang CXX=clang++ cmake -DPBRST=ON -G "MinGW Makefiles" ..
         mingw32-make
 
     - name: Build bibref-qt-pbrst
