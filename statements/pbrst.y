@@ -376,25 +376,37 @@ check_nt_passage(char *book, char *info, char *verse)
 #ifdef IN_BIBREF
   init_addbooks();
   char *l;
+  bool err = false; // be optimistic
+  // Get passage by lookup:
   l = lookupVerse1(info, book, verse);
-  if (strstr(l, "error: ") != NULL) {
-    add_parseinfo("%d,%d: %s\n", yylineno, yycolumn, l);
-  } else {
-    add_parseinfo("%d,%d: info: lookup1 %s %s %s = ", yylineno, yycolumn, book, info, verse);
-    add_parseinfo("%s\n", l);
-  }
   nt_info = strdup(info);
   nt_book = strdup(book);
-  // Check if raw text matches with lookup:
+  if (strstr(l, "error: ") != NULL) {
+    add_parseinfo("%d,%d: %s\n", yylineno, yycolumn, l);
+    err = true;
+    free(l);
+  } else {
+    add_parseinfo("%d,%d: info: `lookup1 %s %s %s` = %s\n", yylineno, yycolumn, book, info, verse, l);
+  }
+  // Get passage as raw text:
   char *r;
   int length = intervals[iv_counter-1][1] - intervals[iv_counter-1][0] +1;
   r = getRaw1(info, book, intervals[iv_counter-1][0] - 1, length);
+  if (strstr(r, "error: ") != NULL) {
+    add_parseinfo("%d,%d: %s\n", yylineno, yycolumn, r);
+    err = true;
+    free(r);
+  } else {
+    add_parseinfo("%d,%d: info: `getraw %s %s %d %d` = %s\n", yylineno, yycolumn, book, info,
+      intervals[iv_counter-1][0], length, r);
+  }
+  if (err) return; // At least one of the checks was erroneous, so we return without comparison.
+
+  // Check if raw text matches with lookup's result:
   if (strcmp(l, r)==0) {
-    add_parseinfo("%d,%d: info: raw %s %s %d %d = %s\n", yylineno, yycolumn,
-      book, info, intervals[iv_counter-1][0], length, r);
+    add_parseinfo("%d,%d: info: results of lookup and getraw match\n", yylineno, yycolumn);
     } else {
-    add_parseinfo("%d,%d: error: raw %s %s %d %d = %s, it differs from %s\n", yylineno, yycolumn,
-      book, info, intervals[iv_counter-1][0], length, r, l);
+    add_parseinfo("%d,%d: error: results of lookup and getraw do not match\n", yylineno, yycolumn);
     }
   free(l);
   free(r);
@@ -412,28 +424,40 @@ check_ot_passage(char *book, char *info, char *verse)
   extern int yycolumn;
 #ifdef IN_BIBREF
   char *l;
+  bool err = false; // be optimistic
   l = lookupVerse1(info, book, verse);
   if (strstr(l, "error: ") != NULL) {
     add_parseinfo("%d,%d: %s\n", yylineno, yycolumn, l);
+    err = true;
   } else {
-    add_parseinfo("%d,%d: info: lookup1 %s %s %s = %s\n", yylineno, yycolumn, book, info, verse, l);
+    add_parseinfo("%d,%d: info: `lookup1 %s %s %s` = %s\n", yylineno, yycolumn, book, info, verse, l);
   }
   ot_info = strdup(info);
   ot_book = strdup(book);
   ot_verse = strdup(verse);
-  // Check if raw text matches with lookup:
+  // Get passage as raw text:
   char *r;
   int length = intervals[iv_counter-1][1] - intervals[iv_counter-1][0] +1;
-  r = getRaw1(info, book, intervals[iv_counter-1][0] - 1, length);
+  r = getRaw1(ot_info, ot_book, intervals[iv_counter-1][0] - 1, length);
+  if (strstr(r, "error: ") != NULL) {
+    add_parseinfo("%d,%d: %s\n", yylineno, yycolumn, r);
+    err = true;
+    free(r);
+  } else {
+    add_parseinfo("%d,%d: info: `getraw %s %s %d %d` = %s\n", yylineno, yycolumn, ot_book, ot_info,
+      intervals[iv_counter-1][0], length, r);
+  }
+  if (err) return; // At least one of the checks was erroneous, so we return without comparison.
+
+  // Check if raw text matches with lookup's result:
   if (strcmp(l, r)==0) {
-    add_parseinfo("%d,%d: info: raw %s %s %d %d = %s\n", yylineno, yycolumn,
-      book, info, intervals[iv_counter-1][0], length, r);
+    add_parseinfo("%d,%d: info: results of lookup and getraw match\n", yylineno, yycolumn);
     } else {
-    add_parseinfo("%d,%d: error: raw %s %s %d %d = %s, it differs from %s\n", yylineno, yycolumn,
-      book, info, intervals[iv_counter-1][0], length, r, l);
+    add_parseinfo("%d,%d: error: results of lookup and getraw do not match\n", yylineno, yycolumn);
     }
   free(l);
   free(r);
+
   intervals[iv_counter-1][2]=2; // OT
   add_parseinfo("%d,%d: debug: interval %d is an OT passage\n", yylineno, yycolumn, iv_counter-1);
   strcpy(infos_s[iv_counter-1], ot_info);
@@ -462,10 +486,10 @@ check_introduction_passage(char *passage, char *ay)
         next[0] = '\0'; // split the comma separated string into C strings
         }
       if (strstr(ay, s) != NULL) {
-        add_parseinfo("%d,%d: info: substring %s found\n", yylineno, yycolumn, s);
+        add_parseinfo("%d,%d: info: substring %s found in introduction\n", yylineno, yycolumn, s);
         }
       else {
-       add_parseinfo("%d,%d: error: substring %s not found\n", yylineno, yycolumn, s);
+       add_parseinfo("%d,%d: error: substring %s not found in introduction\n", yylineno, yycolumn, s);
        }
       s = next+1;
     } while (next != NULL);
