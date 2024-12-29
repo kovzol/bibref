@@ -895,7 +895,7 @@ void create_diagram() {
   nt_blocks[nt_blocks_n][0] = prev_pos;
   nt_blocks[nt_blocks_n][1] = union_length_i-prev_pos;
   nt_blocks_n++;
-  // Collecting data from blocks:
+  // Collecting data from NT blocks:
   for (int i=0; i<nt_blocks_n; ++i) {
     add_parseinfo("diagram debug: NT block %d begins at %d (rawpos %d), length %d, refers to",
       i, nt_blocks[i][0], nt_blocks[i][0] + imin_i, nt_blocks[i][1]);
@@ -917,6 +917,43 @@ void create_diagram() {
     add_parseinfo("\n");
   }
 
+  // OT blocks:
+  int ot_blocks[ot_books_n][MAX_BLOCKS][2]; // copies from the coverings, positions and length are stored
+  int ot_blocks_ns[ot_books_n];
+  for (int ob=0; ob<ot_books_n; ob++) {
+    ot_blocks_ns[ob] = 0;
+    int prev_pos = 0;
+    // Detect blocks:
+    int ounion_length = oimaxs[ob]-oimins[ob]+1;
+    for (int i=1; i<ounion_length; i++) {
+      bool identical = true;
+      if (ot_coverings[ob][i-1] != ot_coverings[ob][i]) {
+        identical = false;
+        ot_blocks[ob][ot_blocks_ns[ob]][0] = prev_pos;
+        ot_blocks[ob][ot_blocks_ns[ob]][1] = i-prev_pos;
+        prev_pos = i;
+        ot_blocks_ns[ob]++;
+        }
+      }
+    ot_blocks[ob][ot_blocks_ns[ob]][0] = prev_pos;
+    ot_blocks[ob][ot_blocks_ns[ob]][1] = ounion_length-prev_pos;
+    ot_blocks_ns[ob]++;
+  }
+  // Collecting data from OT blocks:
+  for (int ob=0; ob<ot_books_n; ob++) {
+    for (int i=0; i<ot_blocks_ns[ob]; i++) {
+      add_parseinfo("diagram debug: OT headline %d block %d begins at %d (rawpos %d), length %d",
+        ob+1, i, ot_blocks[ob][i][0], ot_blocks[ob][i][0] + oimins[ob], ot_blocks[ob][i][1]);
+      int covering_col = ot_blocks[ob][i][0];
+      int fragment = ot_coverings[ob][covering_col];
+      if (fragment != 0) { // this OT block is used in the NT passage somewhere
+        add_parseinfo(" interval %d", fragment);
+      } else {
+        add_parseinfo(" unused");
+      }
+      add_parseinfo("\n");
+    }
+  }
 }
 
 char* brst_scan_string(char *string) {
