@@ -42,8 +42,11 @@ int nt_intros_start = -1;
 float difference = -1; // undefined
 
 // TODO: Psalms could be considered as different books in the diagrams.
-char covering[MAX_INTERVALS][MAX_BOOK_LENGTH];
+int covering[MAX_INTERVALS][MAX_BOOK_LENGTH];
 int ot_books_n = 0;
+int ot_coverings[MAX_OT_BOOKS][MAX_BOOK_LENGTH];
+int oimins[MAX_OT_BOOKS];
+int oimaxs[MAX_OT_BOOKS];
 char ot_books[MAX_OT_BOOKS][MAX_BOOKNAME_LENGTH];
 char ot_infos[MAX_OT_BOOKS][MAX_BOOKNAME_LENGTH];
 
@@ -683,7 +686,7 @@ void check_cover(double cover) {
   int covered = 0;
   for (int i=imin-imin_i; i<union_length_i; i++) {
     bool letter_covered = false;
-    for (int j=0; j<iv_counter && !letter_covered; j++) {
+    for (int j=fragments_start+1; j<iv_counter && !letter_covered; j++) { // do not count NT introduction coverings
       if (covering[j][i]>0) {
         covered++;
         letter_covered = true;
@@ -726,7 +729,6 @@ void check_cover(double cover) {
   if (!overlap_error) {
     add_parseinfo("%d,%d: info: NT overlap check done\n", yylineno, yycolumn);
   }
-  // TODO: OT overlap check
   // Check if NT headline matches union:
   int nt_headline_start = intervals[0][0];
   int nt_headline_end = intervals[0][1];
@@ -776,6 +778,36 @@ void check_cover(double cover) {
     } else {
       add_parseinfo("%d,%d: info: OT headline interval %d check done\n", yylineno, yycolumn, i);
     }
+    // Register fragments for the OT books:
+    oimins[i-1] = oimin, oimaxs[i-1] = oimax;
+    int ounion_length = oimax-oimin+1;
+    for (int j=0; j<ounion_length; j++)
+      ot_coverings[i-1][j] = 0; // reset all letters
+    bool ot_overlaps = false;
+    for (int j=fragments_start + 1; j<iv_counter; j++) { // register each fragment...
+      int ftype = intervals[j][2];
+      if (ftype == OT_PASSAGE) { // OT interval
+        bool ot_overlap = false;
+        int ot_overlap_i = 0;
+        for (int k=intervals[j][0]; k<=intervals[j][1]; k++) {
+          int pos = k-oimin;
+          ot_overlap_i = ot_coverings[i-1][pos];
+          if (ot_overlap_i != 0) {
+            ot_overlap = true;
+            ot_overlaps = true;
+          } else
+            ot_coverings[i-1][pos] = j;
+          }
+        if (ot_overlap) {
+          add_parseinfo("%d,%d: error: OT intervals %d and %d overlap\n",
+            yylineno, yycolumn, ot_overlap_i, j);
+        }
+      }
+    }
+    if (!ot_overlaps)
+      add_parseinfo("%d,%d: info: OT interval check for OT headline %d done\n",
+            yylineno, yycolumn, i);
+
   } // end of for checking OT headlines
 #endif // IN_BIBREF
 }
