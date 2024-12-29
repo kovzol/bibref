@@ -29,7 +29,12 @@ char *ot_verse;
 #define MAX_BOOK_LENGTH 175000
 char introduction_substrings[MAX_SUBSTRINGS][MAX_SUBSTR_LENGTH + 1];
 int intervals[MAX_INTERVALS][3]; // start, end, type
-// where type is 0: NT headline, 1: NT fragment, 2: OT fragment, 3: NT introduction
+#define NT_HEADLINE 0
+#define NT_FRAGMENT 1
+#define OT_PASSAGE 2
+#define NT_INTRODUCTION 3
+#define UNCLASSIFIED -1
+// where type is 0: NT headline, 1: NT fragment, 2: OT fragment, 3: NT introduction, -1: unclassified
 int substrings = 0;
 int iv_counter = 0;
 int fragments_start = -1; // undefined
@@ -361,7 +366,7 @@ check_rawposition_length(char *s)
   }
   intervals[iv_counter][0] = from;
   intervals[iv_counter][1] = to;
-  intervals[iv_counter][2] = 0; // unclassified
+  intervals[iv_counter][2] = UNCLASSIFIED; // unclassified
   add_parseinfo("%d,%d: debug: interval %d [%d,%d] stored\n", yylineno, yycolumn, iv_counter, from, to);
   iv_counter++;
 #endif // IN_BIBREF
@@ -424,7 +429,7 @@ check_nt_passage(char *book, char *info, char *verse)
     }
   free(l);
   free(r);
-  intervals[iv_counter-1][2]=0; // NT (headline)
+  intervals[iv_counter-1][2] = NT_HEADLINE; // NT (headline)
   // strcpy(infos_s[iv_counter-1], nt_info);
   // strcpy(books_s[iv_counter-1], nt_book);
   add_parseinfo("%d,%d: debug: interval %d is a headline NT passage\n", yylineno, yycolumn, iv_counter-1);
@@ -482,7 +487,7 @@ check_ot_passage(char *book, char *info, char *verse)
   free(l);
   free(r);
 
-  intervals[iv_counter-1][2]=2; // OT
+  intervals[iv_counter-1][2] = OT_PASSAGE;
   add_parseinfo("%d,%d: debug: interval %d is an OT passage\n", yylineno, yycolumn, iv_counter-1);
 
   if (detect_ot_book(ot_book, ot_info) == -1) { // Register this OT book as another entry.
@@ -554,7 +559,7 @@ check_introduction_passage(char *passage, char *ay)
     } while (next != NULL);
   }
   substrings = 0; // reset, maybe there is another introduction
-  intervals[iv_counter-1][2]=3; // NT (introduction)
+  intervals[iv_counter-1][2] = NT_INTRODUCTION; // NT (introduction)
   add_parseinfo("%d,%d: debug: interval %d is an introductory NT passage\n", yylineno, yycolumn, iv_counter-1);
   if (nt_intros_start == -1) nt_intros_start = iv_counter-1;
 #endif // IN_BIBREF
@@ -607,8 +612,8 @@ check_fragment(char *passage, char *ay_nt, char *ay_ot) {
   unique_prep = false;
 
   free(ot_passage);
-  intervals[iv_counter-2][2] = 1; // this is an NT fragment
-  intervals[iv_counter-1][2] = 2; // this is an OT fragment
+  intervals[iv_counter-2][2] = NT_FRAGMENT; // this is an NT fragment
+  intervals[iv_counter-1][2] = OT_PASSAGE; // this is an OT fragment
   if (fragments_start == -1) fragments_start = iv_counter-2;
 #endif // IN_BIBREF
 }
@@ -629,7 +634,7 @@ void check_cover(double cover) {
   add_parseinfo("%d,%d: debug: fragment intervals:", yylineno, yycolumn);
   for (int i=0; i<iv_counter; i++) {
     int ftype = intervals[i][2];
-    if (ftype == 1) {
+    if (ftype == NT_FRAGMENT) {
       int istart = intervals[i][0];
       int iend = intervals[i][1];
       add_parseinfo(" [%d,%d]", istart, iend);
@@ -646,7 +651,7 @@ void check_cover(double cover) {
   // Cover check:
   for (int i=0; i<iv_counter; i++) {
     int ftype = intervals[i][2];
-    if (ftype == 1) {
+    if (ftype == NT_FRAGMENT) {
       int istart = intervals[i][0];
       int iend = intervals[i][1];
       for (int j=istart; j<=iend; j++) covering[i+1][j-imin] = 1; // Store the OT fragment number.
@@ -673,10 +678,10 @@ void check_cover(double cover) {
   bool overlap_error = false;
   for (int i=0; i<fragments_start; i++) {
     int itype = intervals[i][2];
-    if (itype == 3) { // NT introduction
+    if (itype == NT_INTRODUCTION) { // NT introduction
        for (int j=fragments_start; j<iv_counter; j++) {
          int ftype = intervals[j][2];
-         if (ftype == 1) {
+         if (ftype == NT_FRAGMENT) {
            int nt_intro_start = intervals[i][0];
            int nt_intro_end = intervals[i][1];
            int fstart = intervals[j][0];
@@ -717,7 +722,7 @@ void check_cover(double cover) {
     // Create union for this OT headline:
     for (int j=fragments_start + 1; j<iv_counter; j++) {
       int ftype = intervals[j][2];
-      if (ftype == 2) { // OT interval
+      if (ftype == OT_PASSAGE) { // OT interval
         if (strcmp(books_s[i], books_s[j])==0 && strcmp(infos_s[i], infos_s[j])==0) {
           int oistart = intervals[j][0];
           int oiend = intervals[j][1];
