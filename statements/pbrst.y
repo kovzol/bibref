@@ -494,6 +494,8 @@ check_ot_passage(char *book, char *info, char *verse)
   add_parseinfo("%d,%d: debug: interval %d is an OT passage\n", yylineno, yycolumn, iv_counter-1);
 
   if (detect_ot_book(ot_book, ot_info) == -1) { // Register this OT book as another entry.
+    if (fragments_start>0)
+      add_parseinfo("%d,%d: error: OT book %s %s is not defined as a headline\n", yylineno, yycolumn, ot_book, ot_info);
     strcpy(ot_books[ot_books_n], ot_book);
     strcpy(ot_infos[ot_books_n], ot_info);
     ot_books_n++;
@@ -533,8 +535,8 @@ check_introduction_passage(char *passage, char *ay)
     add_parseinfo("%d,%d: info: `getraw %s %s %d %d` = %s\n", yylineno, yycolumn, nt_book, nt_info,
       intervals[iv_counter-1][0], length, r);
   }
-  // strcpy(infos_s[iv_counter-1], nt_info); // for the diagram debug
-  // strcpy(books_s[iv_counter-1], nt_book); // for the diagram debug
+  // strcpy(infos_s[iv_counter-1], nt_info);
+  // strcpy(books_s[iv_counter-1], nt_book);
 
   if (err) return; // At least one of the checks was erroneous, so we return without comparison.
 
@@ -897,7 +899,7 @@ void create_diagram() {
   nt_blocks_n++;
   // Collecting data from NT blocks:
   for (int i=0; i<nt_blocks_n; ++i) {
-    add_parseinfo("diagram debug: NT block %d begins at %d (rawpos %d), length %d, refers to",
+    add_parseinfo("diagram: debug: NT block %d begins at %d (rawpos %d), length %d, refers to",
       i, nt_blocks[i][0], nt_blocks[i][0] + imin_i, nt_blocks[i][1]);
     int count_refs = 0;
     int covering_col = nt_blocks[i][0];
@@ -942,7 +944,7 @@ void create_diagram() {
   // Collecting data from OT blocks:
   for (int ob=0; ob<ot_books_n; ob++) {
     for (int i=0; i<ot_blocks_ns[ob]; i++) {
-      add_parseinfo("diagram debug: OT headline %d block %d begins at %d (rawpos %d), length %d",
+      add_parseinfo("diagram: debug: OT headline %d block %d begins at %d (rawpos %d), length %d",
         ob+1, i, ot_blocks[ob][i][0], ot_blocks[ob][i][0] + oimins[ob], ot_blocks[ob][i][1]);
       int covering_col = ot_blocks[ob][i][0];
       int fragment = ot_coverings[ob][covering_col];
