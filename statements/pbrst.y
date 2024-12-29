@@ -674,22 +674,26 @@ void check_cover(double cover) {
     add_parseinfo("%d,%d: error: cover %4.2f%% is incorrect (union length: %d, covered: %d), in reality %4.2f%%\n",
       yylineno, yycolumn, cover, union_length, covered, real_cover);
   }
-  // Check if any NT introductions overlap any fragments:
+  // Check if any NT introductions overlap any other introductions or fragments:
   bool overlap_error = false;
   for (int i=0; i<fragments_start; i++) {
     int itype = intervals[i][2];
     if (itype == NT_INTRODUCTION) { // NT introduction
-       for (int j=fragments_start; j<iv_counter; j++) {
+       for (int j=i+1; j<iv_counter; j++) {
          int ftype = intervals[j][2];
-         if (ftype == NT_FRAGMENT) {
+         if (ftype == NT_FRAGMENT || ftype == NT_INTRODUCTION) {
            int nt_intro_start = intervals[i][0];
            int nt_intro_end = intervals[i][1];
            int fstart = intervals[j][0];
            int fend = intervals[j][1];
            // Do they overlap?
            if (!(nt_intro_start > fend || nt_intro_end < fstart)) {
-             add_parseinfo("%d,%d: error: NT introduction interval %d overlaps fragment interval %d\n",
-               yylineno, yycolumn, i, j);
+             if (ftype == NT_FRAGMENT)
+               add_parseinfo("%d,%d: error: NT introduction interval %d overlaps fragment interval %d\n",
+                 yylineno, yycolumn, i, j);
+             if (ftype == NT_INTRODUCTION)
+               add_parseinfo("%d,%d: error: NT introduction intervals %d and %d overlap each other\n",
+                 yylineno, yycolumn, i, j);
            overlap_error = true;
            }
          }
@@ -697,7 +701,7 @@ void check_cover(double cover) {
     }
   }
   if (!overlap_error) {
-    add_parseinfo("%d,%d: info: overlap check done\n", yylineno, yycolumn);
+    add_parseinfo("%d,%d: info: NT overlap check done\n", yylineno, yycolumn);
   }
   // Check if NT headline matches union:
   int nt_headline_start = intervals[0][0];
