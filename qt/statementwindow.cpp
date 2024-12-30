@@ -111,7 +111,8 @@ void StatementWindow::parse()
             warnings++;
         if (l.find(": error: ")!=string::npos)
             errors++;
-        if (l.find(": debug: ")==string::npos) {
+        if (l.find(": debug: ")==string::npos &&
+            l.find("diagram: graphviz: ")==string::npos && !dmode) {
             details += QString::fromStdString(l);
             details += "\n";
             }
@@ -130,12 +131,17 @@ void StatementWindow::parse()
     QMessageBox msgBox;
     msgBox.setWindowTitle(tr("Parse"));
     msgBox.setText(tr("%1 successful tests, %2 warnings, %3 errors.").arg(infos).arg(warnings).arg(errors));
+    QAbstractButton* visualizeButton;
     if (errors>0) {
         msgBox.setIcon(QMessageBox::Critical);
-    } else if (warnings>0) {
-        msgBox.setIcon(QMessageBox::Warning);
+        visualizeButton = msgBox.addButton(tr("Back to Editor"), QMessageBox::AcceptRole);
     } else {
+        if (warnings>0) {
+        msgBox.setIcon(QMessageBox::Warning);
+        } else {
         msgBox.setIcon(QMessageBox::Information);
+        }
+        visualizeButton = msgBox.addButton(tr("Visualize"), QMessageBox::AcceptRole);
     }
 
     msgBox.setDetailedText(details);
@@ -146,6 +152,9 @@ void StatementWindow::parse()
 
     int ret = msgBox.exec();
 
+    if (msgBox.clickedButton() == visualizeButton && errors == 0) {
+        showSvg();
+    }
 #endif
 }
 
@@ -168,9 +177,6 @@ void StatementWindow::setupProveMenu()
 
     proveMenu->addAction(QIcon::fromTheme("tools-check-spelling"), tr("&Parse"), QKeySequence::Forward,
                         this, &StatementWindow::parse);
-    proveMenu->addAction(QIcon::fromTheme("emblem-photos"), tr("&Visualize"), QKeySequence::Print,
-                         this, &StatementWindow::showSvg);
-
 #endif // WITH_PBRST
 }
 
