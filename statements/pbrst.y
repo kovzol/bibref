@@ -979,6 +979,7 @@ char* brst_scan_string(char *string) {
     YY_BUFFER_STATE buffer = yy_scan_string(string);
     yyparse();
     yy_delete_buffer(buffer);
-    create_diagram();
+    if (strstr(parseinfo, ": error: ") == NULL)
+      create_diagram();
     return parseinfo;
 }
