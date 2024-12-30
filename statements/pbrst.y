@@ -346,8 +346,10 @@ void add_parseinfo(char *s, ...) {
 #define MAX_PARSEINFO_LINE_LENGTH 16384
   char *line = malloc(MAX_PARSEINFO_LINE_LENGTH);
   vsprintf(line, s, ap); // create line
-  // fprintf(stdout, line); // print line
-  parseinfo = mystrcat(parseinfo, line); // store line
+  char *p1 = mystrcat(parseinfo, line); // store line
+  free(parseinfo);
+  parseinfo = p1;
+  free(line);
   va_end(ap);
 }
 
@@ -1080,7 +1082,7 @@ void create_diagram() {
 
   strcat(D, "}"); // Finish digraph.
   add_parseinfo("diagram: graphviz: start\n%s\n"
-    "diagram:grapvhiz: end\n", D);
+    "diagram: graphviz: end\n", D);
 }
 
 char* brst_scan_string(char *string) {

@@ -88,9 +88,13 @@ int main(int ac, char **av)
     exit(2);
   }
 
+  parseinfo = malloc(1);
+  strcpy(parseinfo, "");
+
   if(!yyparse()) {
-    if (strstr(parseinfo, ": error: ") == NULL)
+    if (strstr(parseinfo, ": error: ") == NULL) {
       create_diagram();
+    }
     if (colorize) {
 #define HRED "\e[0;91m"
 #define HYEL "\e[0;93m"
