@@ -2,7 +2,7 @@
 #define VISUALIZEWINDOW_H
 
 #include <QMainWindow>
-#include <QSVgWidget>
+#include <QSvgWidget>
 #include <string>
 
 using namespace std;
