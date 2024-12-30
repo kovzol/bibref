@@ -341,7 +341,7 @@ char *mystrcat(char *a, char *b) {
 void add_parseinfo(char *s, ...) {
   va_list ap;
   va_start(ap, s);
-#define MAX_PARSEINFO_LINE_LENGTH 2048
+#define MAX_PARSEINFO_LINE_LENGTH 16384
   char *line = malloc(MAX_PARSEINFO_LINE_LENGTH);
   vsprintf(line, s, ap); // create line
   // fprintf(stdout, line); // print line
@@ -873,10 +873,13 @@ extern int yyparse();
 extern YY_BUFFER_STATE yy_scan_string(char * str);
 extern void yy_delete_buffer(YY_BUFFER_STATE buffer);
 
-char *D; // diagram as text
+#define MAX_GRAPHVIZ_CODE_SIZE 16384
+char D[MAX_GRAPHVIZ_CODE_SIZE]; // diagram as text
 void create_diagram() {
-  D = malloc(1);
   strcpy(D, "");
+  strcat(D, "digraph {\n");
+  strcat(D, " rankdir=LR;\n");
+  strcat(D, " node [shape=rectangle,color=black,style=filled];\n");
 #define MAX_BLOCKS 100
   int nt_blocks[MAX_BLOCKS][2]; // copies from the coverings, positions and length are stored
   int nt_blocks_n = 0;
@@ -897,27 +900,66 @@ void create_diagram() {
   nt_blocks[nt_blocks_n][0] = prev_pos;
   nt_blocks[nt_blocks_n][1] = union_length_i-prev_pos;
   nt_blocks_n++;
+  strcat(D, " subgraph NT {\n");
+  strcat(D, "  edge [arrowhead=none];\n");;
   // Collecting data from NT blocks:
+#define MAX_INT_BUFSIZE 12
+  char intbuffer[MAX_INT_BUFSIZE];
   for (int i=0; i<nt_blocks_n; ++i) {
     add_parseinfo("diagram: debug: NT block %d begins at %d (rawpos %d), length %d, refers to",
       i, nt_blocks[i][0], nt_blocks[i][0] + imin_i, nt_blocks[i][1]);
+    // Create graphviz node:
+    strcat(D, "  nt");
+    sprintf(intbuffer, "%d", i); // NT block number
+    strcat(D, intbuffer);
+    strcat(D, " [label=");
+    sprintf(intbuffer, "%d", nt_blocks[i][1]); // length
+    strcat(D, intbuffer);
+
+    strcat(D, ",fillcolor=");
     int count_refs = 0;
     int covering_col = nt_blocks[i][0];
+#define UNCOVERED 0
+#define FRAGMENT 1
+#define INTRODUCTION 2
+    int nodetype = 0;
     for (int j=0; j<iv_counter; j++) {
       int fragment = covering[j][covering_col];
       if (fragment != 0) { // this NT block refers to somewhere in OT
         count_refs++;
-        if (j>=fragments_start)
+        if (j>=fragments_start) {
           add_parseinfo(" interval %d (%s %s)", j, books_s[j], infos_s[j]);
-        else
+          nodetype = FRAGMENT;
+        }
+        else {
           add_parseinfo(" interval %d (NT introduction)", j);
+          nodetype = INTRODUCTION;
+        }
       }
     }
-    if (count_refs == 0) { // this NT block is surely an uncovered part by OT
+    if (nodetype == UNCOVERED) { // this NT block is surely an uncovered part by OT
       add_parseinfo(" uncovered");
+      strcat(D, "white"); // TODO: specify color more detailed
     }
+    if (nodetype == FRAGMENT) {
+      strcat(D, "green"); // TODO: specify color more detailed
+    }
+    if (nodetype == INTRODUCTION) {
+      strcat(D, "lightblue"); // TODO: specify color more detailed
+    }
+    strcat(D, "];\n"); // Finish graphviz node.
     add_parseinfo("\n");
   }
+  // Connect the NT nodes in graphviz:
+  strcat(D, "  ");
+  for (int i=0; i<nt_blocks_n; ++i) {
+    if (i>0) strcat(D, "->");
+    strcat(D, "nt");
+    sprintf(intbuffer, "%d", i); // NT block number
+    strcat(D, intbuffer);
+  }
+  strcat(D, ";\n");
+  strcat(D, " }\n"); // Finish subgraph.
 
   // OT blocks:
   int ot_blocks[ot_books_n][MAX_BLOCKS][2]; // copies from the coverings, positions and length are stored
@@ -943,19 +985,71 @@ void create_diagram() {
   }
   // Collecting data from OT blocks:
   for (int ob=0; ob<ot_books_n; ob++) {
+    strcat(D, " subgraph OT");
+    sprintf(intbuffer, "%d", ob+1); // OT headline number
+    strcat(D, intbuffer);
+    strcat(D, " {\n");
+    strcat(D, "  edge [arrowhead=none];\n");
+    int uid=0; // this is a dummy unique number for unused blocks
     for (int i=0; i<ot_blocks_ns[ob]; i++) {
       add_parseinfo("diagram: debug: OT headline %d block %d begins at %d (rawpos %d), length %d",
         ob+1, i, ot_blocks[ob][i][0], ot_blocks[ob][i][0] + oimins[ob], ot_blocks[ob][i][1]);
+
       int covering_col = ot_blocks[ob][i][0];
       int fragment = ot_coverings[ob][covering_col];
+      // Create graphviz node:
+      if (fragment == 0) {
+        strcat(D, "  u");
+        sprintf(intbuffer, "%d", ob+1);
+        strcat(D, intbuffer);
+        strcat(D, "_"); // separator
+        sprintf(intbuffer, "%d", uid++);
+        strcat(D, intbuffer);
+      } else { // fragment != 0
+        strcat(D, "  i");
+        sprintf(intbuffer, "%d", fragment); // interval number
+        strcat(D, intbuffer);
+      }
+      strcat(D, " [label=");
+      sprintf(intbuffer, "%d", ot_blocks[ob][i][1]); // length
+      strcat(D, intbuffer);
+      strcat(D, ",fillcolor=");
       if (fragment != 0) { // this OT block is used in the NT passage somewhere
         add_parseinfo(" interval %d", fragment);
+        strcat(D, "green"); // TODO: specify color more detailed
       } else {
         add_parseinfo(" unused");
+        strcat(D, "white");
       }
+      strcat(D, "];\n"); // Finish graphviz node.
       add_parseinfo("\n");
     }
+    // Connect the OT nodes in graphviz:
+    strcat(D, "  ");
+    uid = 0; // restart numbering
+    for (int i=0; i<ot_blocks_ns[ob]; ++i) {
+      int covering_col = ot_blocks[ob][i][0];
+      int fragment = ot_coverings[ob][covering_col];
+      if (i>0) strcat(D, "->");
+      if (fragment == 0) {
+        strcat(D, "u");
+        sprintf(intbuffer, "%d", ob+1);
+        strcat(D, intbuffer);
+        strcat(D, "_"); // separator
+        sprintf(intbuffer, "%d", uid++);
+        strcat(D, intbuffer);
+      } else { // fragment != 0
+        strcat(D, "i");
+        sprintf(intbuffer, "%d", fragment); // interval number
+        strcat(D, intbuffer);
+      }
+    }
+    strcat(D, ";\n");
+    strcat(D, " }\n"); // Finish subgraph.
   }
+  strcat(D, "}"); // Finish digraph.
+  add_parseinfo("diagram: graphviz: start\n%s\n"
+    "diagram:grapvhiz: end\n", D);
 }
 
 char* brst_scan_string(char *string) {
