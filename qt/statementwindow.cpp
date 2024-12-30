@@ -1,4 +1,5 @@
 #include "statementwindow.h"
+#include "visualizewindow.h"
 
 #include <QtWidgets>
 #include <iostream>
@@ -99,6 +100,9 @@ void StatementWindow::parse()
 
     int infos = 0, warnings = 0, errors = 0;
     QString details;
+    bool dmode = false;
+    graphviz_input = "";
+    bool diagram_defined = false;
 
     for (auto l: statementAnalysis) {
         if (l.find(": info: ")!=string::npos)
@@ -111,6 +115,16 @@ void StatementWindow::parse()
             details += QString::fromStdString(l);
             details += "\n";
             }
+        if (dmode) {
+            graphviz_input += l + "\n";
+        }
+        if (l.find("diagram: graphviz: start")!=string::npos) {
+            dmode = true;
+            diagram_defined = true;
+        }
+        if (l.find("diagram: graphviz: end")!=string::npos) {
+            dmode = false;
+        }
     }
 
     QMessageBox msgBox;
@@ -137,7 +151,13 @@ void StatementWindow::parse()
 
 void StatementWindow::showSvg()
 {
-
+#ifdef WITH_PBRST
+    auto vwindow = new VisualizeWindow(this, graphviz_input);
+    // vwindow->resize(600, 400);
+    vwindow->show();
+    vwindow->setWindowIcon(QIcon::fromTheme("emblem-photos"));
+    vwindow->setWindowTitle(tr("Visualize"));
+#endif // WITH_PBRST
 }
 
 void StatementWindow::setupProveMenu()
@@ -148,8 +168,9 @@ void StatementWindow::setupProveMenu()
 
     proveMenu->addAction(QIcon::fromTheme("tools-check-spelling"), tr("&Parse"), QKeySequence::Forward,
                         this, &StatementWindow::parse);
-    // proveMenu->addAction(QIcon::fromTheme("emblem-photos"), tr("&Visualize"), QKeySequence::Print,
-    //                     this, &StatementWindow::showSvg);
+    proveMenu->addAction(QIcon::fromTheme("emblem-photos"), tr("&Visualize"), QKeySequence::Print,
+                         this, &StatementWindow::showSvg);
+
 #endif // WITH_PBRST
 }
 

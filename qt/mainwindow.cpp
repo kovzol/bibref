@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "statementwindow.h"
 
 #include "books.h"
 #include "cli.h"
@@ -19,8 +20,6 @@
 #include <qtconcurrentrun.h>
 
 #include <cstdio>
-
-#include "statementwindow.h"
 
 using namespace std;
 

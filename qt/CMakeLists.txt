@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 project(bibref-qt LANGUAGES CXX C)
 
-find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Concurrent)
+find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Concurrent SvgWidgets)
 
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(sword REQUIRED sword)
@@ -17,6 +17,8 @@ set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_RUNTIME OFF)
 find_package(Boost CONFIG COMPONENTS system filesystem)
 
+pkg_check_modules(gvc REQUIRED libgvc)
+
 if(MINGW)
     find_package(ICU REQUIRED uc in)
     find_package(LibLZMA REQUIRED)
@@ -26,7 +28,7 @@ endif(MINGW)
 
 pkg_check_modules (readline REQUIRED readline)
 
-include_directories(${sword_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} ${readline_INCLUDE_DIRS})
+include_directories(${sword_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} ${readline_INCLUDE_DIRS} ${gvc_INCLUDE_DIRS})
 
 # This works when Qt >= 6.3:
 # qt_standard_project_setup()
@@ -69,6 +71,7 @@ qt_add_executable(bibref-qt
     mainwindow.cpp mainwindow.h
     statementwindow.cpp statementwindow.h
     highlighter.cpp highlighter.h
+    visualizewindow.cpp visualizewindow.h
     book.cpp book.h
     books.cpp books.h
     cli.cpp cli.h
@@ -89,8 +92,10 @@ target_link_libraries(bibref-qt PRIVATE
     Qt6::Gui
     Qt6::Widgets
     Qt6::Concurrent
+    Qt6::SvgWidgets
     ${sword_LIBRARIES} ${Boost_LIBRARIES} ${readline_LIBRARIES}
     ${ICU_LIBRARIES} ${LIBLZMA_LIBRARIES} ${ZLIB_LIBRARIES} ${BZIP2_LIBRARIES}
+    ${gvc_LIBRARIES}
 )
 
 # If not set, XDG_DATA_HOME is set to $HOME:

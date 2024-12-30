@@ -5,6 +5,10 @@
 
 #include <QMainWindow>
 
+#include <string>
+
+using namespace std;
+
 QT_BEGIN_NAMESPACE
 class QTextEdit;
 QT_END_NAMESPACE
@@ -30,7 +34,8 @@ private:
 
     QTextEdit *editor;
     Highlighter *highlighter;
-};
 
+    string graphviz_input;
+};
 
 #endif
