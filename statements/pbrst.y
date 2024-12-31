@@ -884,10 +884,8 @@ char D[MAX_GRAPHVIZ_CODE_SIZE]; // diagram as text
 void create_diagram() {
   strcpy(D, "");
   strcat(D, "digraph {\n");
-  // Height, fontsize and minlen (below) are set carefully here!
-  // strcat(D, " node [shape=square,color=blue,style=filled,height=\"0.5pt\",fontsize=35];\n");
-  strcat(D, " node [shape=square,color=blue,style=filled,height=\"0.8pt\",fontsize=30];\n");
-  // In case of long labels: "node [shape=square,color=blue,style=filled,height="1.2pt",fontsize=25];" FIXME
+  // strcat(D, " nodesep=0.2;\n"); // a lower number can shorten the edges
+  strcat(D, " node [shape=rectangle,color=blue,style=filled,height=\"0.6pt\",fontsize=35];\n");
 #define MAX_BLOCKS 100
   int nt_blocks[MAX_BLOCKS][2]; // copies from the coverings, positions and length are stored
   int nt_blocks_n = 0;
