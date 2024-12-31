@@ -26,7 +26,7 @@ Highlighter::Highlighter(QTextDocument *parent)
 
     conjunctiveFormat.setForeground(QColorConstants::Svg::orange);
     const QString conjunctivePatterns[] = {
-        QStringLiteral("\\bconnects\\b"), QStringLiteral("\\with\\b"), QStringLiteral("\\bbased[\\s]+on\\b"),
+        QStringLiteral("\\bconnects\\b"), QStringLiteral("\\bwith\\b"), QStringLiteral("\\bbased[\\s]+on\\b"),
         QStringLiteral("\\bthat\\b"), QStringLiteral("\\balso\\b"), QStringLiteral("\\band\\b"),
         QStringLiteral("\\bmoreover\\b")};
     for (const QString &pattern : conjunctivePatterns) {
