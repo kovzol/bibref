@@ -28,8 +28,9 @@ VisualizeWindow::VisualizeWindow(QWidget *parent, string input)
     gvRenderData(gvc, g, "svg", &svg, &length);
     gvFreeLayout(gvc, g);
     agclose(g);
-    (gvFreeContext(gvc));
+    gvFreeContext(gvc);
     string svg_s = string(svg);
     tile->load(QByteArray::fromStdString(svg_s));
+    tile->renderer()->setAspectRatioMode(Qt::KeepAspectRatio);
 }
 
