@@ -884,8 +884,8 @@ char D[MAX_GRAPHVIZ_CODE_SIZE]; // diagram as text
 void create_diagram() {
   strcpy(D, "");
   strcat(D, "digraph {\n");
-  strcat(D, " rankdir=LR;\n");
-  strcat(D, " node [shape=rectangle,color=black,style=filled];\n");
+  // Height, fontsize and minlen (below) are set carefully here!
+  strcat(D, " node [shape=square,color=blue,style=filled,height=\"0.5pt\",fontsize=35];\n");
 #define MAX_BLOCKS 100
   int nt_blocks[MAX_BLOCKS][2]; // copies from the coverings, positions and length are stored
   int nt_blocks_n = 0;
@@ -940,16 +940,22 @@ void create_diagram() {
     sprintf(intbuffer, "%d", ob+1); // OT headline number
     strcat(D, intbuffer);
     strcat(D, " {\n");
-    strcat(D, "  style=filled; color=yellow4;\n");
-    strcat(D, "  edge [arrowhead=none];\n");
+    strcat(D, "  style=filled; color=transparent; fillcolor=\"#ffff80:white\";\n");
+    strcat(D, "  edge [arrowhead=none; minlen=0.5];\n");
     strcat(D, "  fontname=\"times-bold\";\n");
-    strcat(D, "  label=\"");
-    strcat(D, ot_books[ob]);
-    strcat(D, " ");
+    strcat(D, "  otlabel [label=\"");
+    // strcat(D, ot_books[ob]);
+    // strcat(D, " ");
     strcat(D, ot_infos[ob]);
     strcat(D, " ");
+    // Remove verse after first space:
+    char *v = strchr(ot_verses[ob], ' ');
+    if (v != NULL)
+      v[0] = '\0';
     strcat(D, ot_verses[ob]);
-    strcat(D, "\";\n");
+    if (v != NULL)
+      v[0] = ' '; // ...then put back!
+    strcat(D, "\"; shape=rectangle; fillcolor=transparent; color=transparent];\n");
     int uid=0; // this is a dummy unique number for unused blocks
     for (int i=0; i<ot_blocks_ns[ob]; i++) {
       add_parseinfo("diagram: debug: OT headline %d block %d begins at %d (rawpos %d), length %d",
@@ -973,7 +979,7 @@ void create_diagram() {
       strcat(D, " [label=");
       sprintf(intbuffer, "%d", ot_blocks[ob][i][1]); // length
       strcat(D, intbuffer);
-      strcat(D, ",fontsize=24,fillcolor=");
+      strcat(D, ",fillcolor=");
       if (fragment != 0) { // this OT block is used in the NT passage somewhere
         add_parseinfo(" interval %d", fragment);
         strcat(D, "green,fontcolor=white"); // TODO: specify color more detailed
@@ -1008,17 +1014,24 @@ void create_diagram() {
     strcat(D, " }\n"); // Finish subgraph.
   }
 
+#define MAX_GRAPHVIZ_REFERENCES_SIZE 8192
+  char refs[MAX_GRAPHVIZ_REFERENCES_SIZE]; // references
+  strcpy(refs, "");
   strcat(D, " subgraph cluster_NT {\n");
-  strcat(D, "  style=filled; color=darkcyan;\n");
-  strcat(D, "  edge [arrowhead=none];\n");
-  strcat(D, "  fontname=\"times-bold\";\n");
-  strcat(D, "  label=\"");
-  strcat(D, nt_book);
-  strcat(D, " ");
+  strcat(D, "  style=filled; color=transparent; fillcolor=\"#80ffff:white\";\n");
+  strcat(D, "  edge [arrowhead=none, minlen=0.5];\n");
+  strcat(D, "  ntlabel [label=\"");
+  // strcat(D, nt_book);
+  // strcat(D, " ");
   strcat(D, nt_info);
   strcat(D, " ");
+  char *v = strchr(nt_verse, ' ');
+  if (v != NULL)
+    v[0] = '\0';
   strcat(D, nt_verse);
-  strcat(D, "\";\n");
+  if (v != NULL)
+    v[0] = ' '; // ...then put back!
+  strcat(D, "\"; shape=rectangle; fillcolor=transparent; color=transparent];\n");
   // Collecting data from NT blocks:
   for (int i=0; i<nt_blocks_n; ++i) {
     add_parseinfo("diagram: debug: NT block %d begins at %d (rawpos %d), length %d, refers to",
@@ -1031,7 +1044,7 @@ void create_diagram() {
     sprintf(intbuffer, "%d", nt_blocks[i][1]); // length
     strcat(D, intbuffer);
 
-    strcat(D, ",fontsize=24,fillcolor=");
+    strcat(D, ",fillcolor=");
     int count_refs = 0;
     int covering_col = nt_blocks[i][0];
     int nodetype = 0;
@@ -1044,14 +1057,14 @@ void create_diagram() {
           if (count_refs==1)
             strcat(D, "green,fontcolor=white];\n"); // TODO: specify color more detailed
           // Create graphviz edge between NT and OT blocks:
-          strcat(D, "  nt");
+          strcat(refs, "  nt");
           sprintf(intbuffer, "%d", i); // NT block number
-          strcat(D, intbuffer);
-          strcat(D, "->");
-          strcat(D, "i");
+          strcat(refs, intbuffer);
+          strcat(refs, "->");
+          strcat(refs, "i");
           sprintf(intbuffer, "%d", j); // OT interval number (fragment)
-          strcat(D, intbuffer);
-          strcat(D, " [arrowhead=normal];\n");
+          strcat(refs, intbuffer);
+          strcat(refs, " [arrowhead=vee; color=green];\n");
           nodetype = FRAGMENT;
         }
         else {
@@ -1062,10 +1075,10 @@ void create_diagram() {
     }
     if (nodetype == UNCOVERED) { // this NT block is surely an uncovered part by OT
       add_parseinfo(" uncovered");
-      strcat(D, "white];\n"); // TODO: specify color more detailed
+      strcat(D, "white,shape=rectangle];\n"); // TODO: specify color more detailed
     }
     if (nodetype == INTRODUCTION) {
-      strcat(D, "deepskyblue];\n"); // TODO: specify color more detailed
+      strcat(D, "\"#ccccff\"];\n"); // TODO: specify color/content more detailed
     }
     add_parseinfo("\n");
   }
@@ -1079,7 +1092,7 @@ void create_diagram() {
   }
   strcat(D, ";\n");
   strcat(D, " }\n"); // Finish subgraph.
-
+  strcat(D, refs); // Add references (outside the subgraphs).
   strcat(D, "}"); // Finish digraph.
   add_parseinfo("diagram: graphviz: start\n%s\n"
     "diagram: graphviz: end\n", D);
