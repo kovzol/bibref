@@ -885,7 +885,9 @@ void create_diagram() {
   strcpy(D, "");
   strcat(D, "digraph {\n");
   // Height, fontsize and minlen (below) are set carefully here!
-  strcat(D, " node [shape=square,color=blue,style=filled,height=\"0.5pt\",fontsize=35];\n");
+  // strcat(D, " node [shape=square,color=blue,style=filled,height=\"0.5pt\",fontsize=35];\n");
+  strcat(D, " node [shape=square,color=blue,style=filled,height=\"0.8pt\",fontsize=30];\n");
+  // In case of long labels: "node [shape=square,color=blue,style=filled,height="1.2pt",fontsize=25];" FIXME
 #define MAX_BLOCKS 100
   int nt_blocks[MAX_BLOCKS][2]; // copies from the coverings, positions and length are stored
   int nt_blocks_n = 0;
@@ -943,7 +945,9 @@ void create_diagram() {
     strcat(D, "  style=filled; color=transparent; fillcolor=\"#ffff80:white\";\n");
     strcat(D, "  edge [arrowhead=none; minlen=0.5];\n");
     strcat(D, "  fontname=\"times-bold\";\n");
-    strcat(D, "  otlabel [label=\"");
+    strcat(D, "  otlabel");
+    strcat(D, intbuffer); // re-use OT headline number to make this node unique
+    strcat(D, " [label=\"");
     // strcat(D, ot_books[ob]);
     // strcat(D, " ");
     strcat(D, ot_infos[ob]);
@@ -1041,23 +1045,24 @@ void create_diagram() {
     sprintf(intbuffer, "%d", i); // NT block number
     strcat(D, intbuffer);
     strcat(D, " [label=");
-    sprintf(intbuffer, "%d", nt_blocks[i][1]); // length
-    strcat(D, intbuffer);
 
-    strcat(D, ",fillcolor=");
     int count_refs = 0;
     int covering_col = nt_blocks[i][0];
     int nodetype = 0;
+    bool show_length = false;
     for (int j=0; j<iv_counter; j++) {
       int fragment = covering[j][covering_col];
-      if (fragment != 0) { // this NT block refers to somewhere in OT
+      if (fragment != 0) { // this NT block refers to somewhere in OT (or it's an introduction)
         count_refs++;
-        if (j>=fragments_start) {
+        if (j>=fragments_start) { // it's a fragment
           add_parseinfo(" interval %d (%s %s)", j, books_s[j], infos_s[j]);
-          if (count_refs==1)
-            strcat(D, "green,fontcolor=white];\n"); // TODO: specify color more detailed
+          if (count_refs==1) { // put this block only once, even if there are references to multiple fragments in it
+            sprintf(intbuffer, "%d", nt_blocks[i][1]); // length
+            strcat(D, intbuffer);
+            strcat(D, ",fillcolor=green,fontcolor=white];\n"); // TODO: specify color more detailed
+          }
           // Create graphviz edge between NT and OT blocks:
-          strcat(refs, "  nt");
+          strcat(refs, " nt");
           sprintf(intbuffer, "%d", i); // NT block number
           strcat(refs, intbuffer);
           strcat(refs, "->");
@@ -1067,18 +1072,31 @@ void create_diagram() {
           strcat(refs, " [arrowhead=vee; color=green];\n");
           nodetype = FRAGMENT;
         }
-        else {
+        else { // it's an introduction
           add_parseinfo(" interval %d (NT introduction)", j);
           nodetype = INTRODUCTION;
+          int intro_start_raw = imin_i + nt_blocks[i][0]; // raw position of the beginning of this intro block
+          int nt_headline_start_raw = intervals[0][0]; // raw position of the beginning of NT headline
+          if (intro_start_raw >= nt_headline_start_raw) show_length = true;
         }
+      } else { // it's uncovered (similar situation to the introduction, consider unifying them, TODO)
+        int start_raw = imin_i + nt_blocks[i][0]; // raw position of the beginning of this block
+        int nt_headline_start_raw = intervals[0][0]; // raw position of the beginning of NT headline
+        if (start_raw >= nt_headline_start_raw) show_length = true;
       }
     }
     if (nodetype == UNCOVERED) { // this NT block is surely an uncovered part by OT
       add_parseinfo(" uncovered");
-      strcat(D, "white,shape=rectangle];\n"); // TODO: specify color more detailed
+      sprintf(intbuffer, "%d", nt_blocks[i][1]); // show block length
+      strcat(D, intbuffer);
+      if (!show_length) strcat(D, ",fontcolor=\"#dddddd\"");
+      strcat(D, ",fillcolor=white,shape=rectangle];\n");
     }
     if (nodetype == INTRODUCTION) {
-      strcat(D, "\"#ccccff\"];\n"); // TODO: specify color/content more detailed
+      sprintf(intbuffer, "%d", nt_blocks[i][1]); // show block length
+      strcat(D, intbuffer);
+      if (!show_length) strcat(D, ",fontcolor=\"#dddddd\"");
+      strcat(D, ",fillcolor=\"#ccccff\"];\n"); // TODO: specify color more detailed
     }
     add_parseinfo("\n");
   }
