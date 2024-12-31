@@ -30,6 +30,7 @@ char *ot_verse;
 #define MAX_BOOK_LENGTH 175000
 char introduction_substrings[MAX_SUBSTRINGS][MAX_SUBSTR_LENGTH + 1];
 int intervals[MAX_INTERVALS][3]; // start, end, type
+double intervals_data[MAX_INTERVALS]; // stored info (e.g., difference of fragments)
 #define NT_HEADLINE 0
 #define NT_FRAGMENT 1
 #define OT_PASSAGE 2
@@ -572,6 +573,7 @@ check_introduction_passage(char *passage, char *ay)
       s = next+1;
     } while (next != NULL);
   }
+  intervals_data[iv_counter-1] = substrings; // save data for the diagram
   substrings = 0; // reset, maybe there is another introduction
   intervals[iv_counter-1][2] = NT_INTRODUCTION; // NT (introduction)
   add_parseinfo("%d,%d: debug: interval %d is an introductory NT passage\n", yylineno, yycolumn, iv_counter-1);
@@ -628,6 +630,8 @@ check_fragment(char *passage, char *ay_nt, char *ay_ot) {
   free(ot_passage);
   intervals[iv_counter-2][2] = NT_FRAGMENT; // this is an NT fragment
   intervals[iv_counter-1][2] = OT_PASSAGE; // this is an OT fragment
+  intervals_data[iv_counter-2] = difference; // save data for the diagram
+  intervals_data[iv_counter-1] = difference; // save data for the diagram
   if (fragments_start == -1) fragments_start = iv_counter-2;
 #endif // IN_BIBREF
 }
@@ -1067,7 +1071,14 @@ void create_diagram() {
           strcat(refs, "i");
           sprintf(intbuffer, "%d", j); // OT interval number (fragment)
           strcat(refs, intbuffer);
-          strcat(refs, " [arrowhead=vee; color=green];\n");
+          strcat(refs, " [arrowhead=vee;");
+          if (fabs(intervals_data[j]>EPS)) { // non-verbatim match
+            strcat(refs, " headlabel=\"        "); // This is not elegant, FIXME.
+            sprintf(intbuffer, "%d", ((int)(intervals_data[j]*100)));
+            strcat(refs, intbuffer);
+            strcat(refs, "%\", fontcolor=red, labeldistance=1,");
+          }
+          strcat(refs, " color=green];\n");
           nodetype = FRAGMENT;
         }
         else { // it's an introduction
@@ -1094,7 +1105,7 @@ void create_diagram() {
       sprintf(intbuffer, "%d", nt_blocks[i][1]); // show block length
       strcat(D, intbuffer);
       if (!show_length) strcat(D, ",fontcolor=\"#dddddd\"");
-      strcat(D, ",fillcolor=\"#ccccff\"];\n"); // TODO: specify color more detailed
+      strcat(D, ",fillcolor=\"#ccccff\"];\n"); // TODO: specify color more detailed (#9999ff)
     }
     add_parseinfo("\n");
   }
