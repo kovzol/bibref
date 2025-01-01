@@ -350,6 +350,7 @@ void add_parseinfo(char *s, ...) {
 #define MAX_PARSEINFO_LINE_LENGTH 16384
   char *line = malloc(MAX_PARSEINFO_LINE_LENGTH);
   vsprintf(line, s, ap); // create line
+  // printf("%s", line); // print line
   char *p1 = mystrcat(parseinfo, line); // store line
   free(parseinfo);
   parseinfo = p1;
@@ -776,6 +777,12 @@ void check_cover(double cover) {
           if (oimax < oiend) oimax = oiend;
         }
       }
+    }
+    if (oimin == INT_MAX) {
+      add_parseinfo(" none\n");
+      add_parseinfo("%d,%d: error: OT headline %d %s %s has no corresponding fragments\n", yylineno, yycolumn,
+        i, books_s[i], infos_s[i]);
+      return; // avoid segfault later
     }
     add_parseinfo(", union: [%d,%d]\n", oimin, oimax);
     // Compare headline interval with the union:
