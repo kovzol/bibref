@@ -131,17 +131,18 @@ void StatementWindow::parse()
     QMessageBox msgBox;
     msgBox.setWindowTitle(tr("Parse"));
     msgBox.setText(tr("%1 successful tests, %2 warnings, %3 errors.").arg(infos).arg(warnings).arg(errors));
-    QAbstractButton* myButton;
+    QPushButton* visualizeButton;
+    QPushButton* backButton = msgBox.addButton(tr("Back to Editor"), QMessageBox::RejectRole);
     if (!diagram_defined) {
         msgBox.setIcon(QMessageBox::Critical);
-        myButton = msgBox.addButton(tr("Back to Editor"), QMessageBox::AcceptRole);
     } else {
         if (warnings>0) {
-        msgBox.setIcon(QMessageBox::Warning);
+            msgBox.setIcon(QMessageBox::Warning);
         } else {
-        msgBox.setIcon(QMessageBox::Information);
+            msgBox.setIcon(QMessageBox::Information);
         }
-        myButton = msgBox.addButton(tr("Visualize"), QMessageBox::AcceptRole);
+        if (diagram_defined)
+            visualizeButton = msgBox.addButton(tr("Visualize"), QMessageBox::ActionRole);
     }
 
     msgBox.setDetailedText(details);
@@ -152,7 +153,7 @@ void StatementWindow::parse()
 
     int ret = msgBox.exec();
 
-    if (msgBox.clickedButton() == myButton && diagram_defined) {
+    if (msgBox.clickedButton() == visualizeButton) {
         showSvg();
     }
 #endif
