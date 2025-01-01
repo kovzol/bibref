@@ -1087,9 +1087,9 @@ void create_diagram() {
             sprintf(intbuffer, "%d", ((int)(intervals_data[j-1]*100)));
             strcat(refs, intbuffer);
             // constraint=false: do not count this edge when computing the positions of the edges:
-            strcat(refs, "%\", fontcolor=red, labeldistance=1, constraint=false,");
+            strcat(refs, "%\", fontcolor=red, labeldistance=1,");
           }
-          strcat(refs, " color=green];\n");
+          strcat(refs, " constraint=false, color=green];\n");
           nodetype = FRAGMENT;
         }
         else { // it's an introduction
