@@ -87,3 +87,8 @@ start \"\" bibref-qt.exe" > $FOLDER/start.bat
 for d in styles platforms; do
  cp -a $MSYSTEM_PREFIX/share/qt6/plugins/$d $FOLDER
  done
+
+# Create statements folder...
+mkdir $FOLDER/statements
+cp -a ../statements/SBLGNT/* $FOLDER/statements
+rm -fr $FOLDER/statements/all # don't need to have the copies

@@ -95,7 +95,7 @@ target_link_libraries(bibref-qt PRIVATE
     Qt6::SvgWidgets
     ${sword_LIBRARIES} ${Boost_LIBRARIES} ${readline_LIBRARIES}
     ${ICU_LIBRARIES} ${LIBLZMA_LIBRARIES} ${ZLIB_LIBRARIES} ${BZIP2_LIBRARIES}
-    ${gvc_LIBRARIES}
+    ${gvc_LIBRARIES} -lgvplugin_dot_layout -lgvplugin_rsvg -lgvplugin_core -lgvplugin_pango
 )
 
 # If not set, XDG_DATA_HOME is set to $HOME:

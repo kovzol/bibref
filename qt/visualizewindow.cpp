@@ -19,7 +19,21 @@ VisualizeWindow::VisualizeWindow(QWidget *parent, string input)
     this->setAttribute(::Qt::WA_DeleteOnClose);
     tile = new QSvgWidget(this);
     setCentralWidget(tile);
+
     GVC_t *gvc= gvContext();
+    /* This seems to be required, at least on Windows.
+     * Also, in CMake's library settings these 4 dynamic libraries
+     * must be included.
+     */
+    extern gvplugin_library_t gvplugin_dot_layout_LTX_library;
+    extern gvplugin_library_t gvplugin_rsvg_LTX_library;
+    extern gvplugin_library_t gvplugin_core_LTX_library;
+    extern gvplugin_library_t gvplugin_pango_LTX_library;
+    gvAddLibrary(gvc, &gvplugin_dot_layout_LTX_library);
+    gvAddLibrary(gvc, &gvplugin_rsvg_LTX_library);
+    gvAddLibrary(gvc, &gvplugin_core_LTX_library);
+    gvAddLibrary(gvc, &gvplugin_pango_LTX_library);
+
     Agraph_t *g = agmemread((char*)input.c_str());
     gvLayout(gvc, g, "dot");
 #define MAX_SVG_LENGTH ((unsigned int) 200000)
