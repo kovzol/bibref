@@ -1189,14 +1189,14 @@ void reset_data() { // important if a previous run was already performed
       intervals[i][2] = 0;
       intervals_data[i] = 0;
     }
+    */
     for (int i=0; i<MAX_OT_BOOKS; i++) {
       for (int j=0; i<MAX_BOOK_LENGTH; i++) {
-        // ot_coverings[i][j] = 0;
+        ot_coverings[i][j] = 0;
       }
       // oimins[i] = 0;
       // oimaxs[i] = 0;
     }
-    */
 }
 
 char* brst_scan_string(char *string) {
