@@ -631,7 +631,7 @@ check_fragment(char *passage, char *ay_nt, char *ay_ot) {
   intervals[iv_counter-2][2] = NT_FRAGMENT; // this is an NT fragment
   intervals[iv_counter-1][2] = OT_PASSAGE; // this is an OT fragment
   intervals_data[iv_counter-2] = difference; // save data for the diagram
-  intervals_data[iv_counter-1] = difference; // save data for the diagram
+  intervals_data[iv_counter-1] = count; // save data for the diagram (TODO: consider showing this only if unique_prep)
   if (fragments_start == -1) fragments_start = iv_counter-2;
 #endif // IN_BIBREF
 }
@@ -988,7 +988,11 @@ void create_diagram() {
       strcat(D, ",fillcolor=");
       if (fragment != 0) { // this OT block is used in the NT passage somewhere
         add_parseinfo(" interval %d", fragment);
-        strcat(D, "green,fontcolor=white"); // TODO: specify color more detailed
+        strcat(D, "green,fontcolor=");
+        if (fabs(intervals_data[fragment]-1)<EPS) // this is a unique OT fragment
+          strcat(D, "gold");
+        else
+          strcat(D, "white");
       } else {
         add_parseinfo(" unused");
         strcat(D, "white");
@@ -1063,7 +1067,7 @@ void create_diagram() {
             sprintf(intbuffer, "%d", nt_blocks[i][1]); // length
             strcat(D, intbuffer);
             // Compute green lightness, based on difference 0..1 (127: darkest, 255: lightest)
-            int lightness = 127 + ((int)(intervals_data[j]*128));
+            int lightness = 127 + ((int)(intervals_data[j-1]*128));
             sprintf(intbuffer, "%2x", lightness); // "g" component from rgb
             strcat(D, ",fillcolor=\"#00");
             strcat(D, intbuffer);
@@ -1078,9 +1082,9 @@ void create_diagram() {
           sprintf(intbuffer, "%d", j); // OT interval number (fragment)
           strcat(refs, intbuffer);
           strcat(refs, " [arrowhead=vee;");
-          if (intervals_data[j]>EPS) { // non-verbatim match
+          if (intervals_data[j-1]>EPS) { // non-verbatim match
             strcat(refs, " headlabel=\"");
-            sprintf(intbuffer, "%d", ((int)(intervals_data[j]*100)));
+            sprintf(intbuffer, "%d", ((int)(intervals_data[j-1]*100)));
             strcat(refs, intbuffer);
             // constraint=false: do not count this edge when computing the positions of the edges:
             strcat(refs, "%\", fontcolor=red, labeldistance=1, constraint=false,");
