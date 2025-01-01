@@ -64,6 +64,8 @@ char *parseinfo = "";
 int union_length, union_length_i;
 int imin_i = INT_MAX, imax_i = 0; // union interval of fragments intervals, including introductions
 
+bool no_evidence = false;
+
 #ifdef IN_BIBREF
 void init_addbooks() {
   if (!addbooks_done) {
@@ -227,6 +229,7 @@ void check_unique_prepare();
 void check_fragment(char *passage, char *ay_nt, char *ay_ot);
 double myatof(char *arr);
 void create_diagram();
+void reset_data();
 }
 
 %%
@@ -237,7 +240,7 @@ brst_stmt
       };
 
 stmt_basis
-    : introductions | introductions MOREOVER fragments | fragments | NO EVIDENCE;
+    : introductions | introductions MOREOVER fragments | fragments | NO EVIDENCE { no_evidence = true; };
 
 opt_identifier
     : | NAME | AYLITERAL /* ugly workaround, https://stackoverflow.com/a/71275846/1044586 */;
@@ -886,6 +889,7 @@ extern void yy_delete_buffer(YY_BUFFER_STATE buffer);
 #define MAX_GRAPHVIZ_CODE_SIZE 16384
 char D[MAX_GRAPHVIZ_CODE_SIZE]; // diagram as text
 void create_diagram() {
+  if (no_evidence) return;
   strcpy(D, "");
   strcat(D, "digraph {\n");
   // strcat(D, " nodesep=0.2;\n"); // a lower number can shorten the edges
@@ -1177,6 +1181,7 @@ void reset_data() { // important if a previous run was already performed
     union_length_i = 0;
     imin_i = INT_MAX, imax_i = 0;
     unique_prep = false;
+    no_evidence = false;
     // yydebug = 1;
 
     for (int i=0; i<MAX_INTERVALS; i++) {
