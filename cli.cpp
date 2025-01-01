@@ -257,7 +257,8 @@ string getHelp(const string &key)
       "* `help` *command*: Show some hints on usage of *command*, or get general help if no "
       "parameter is given.",
 #ifdef WITH_PBRST
-      "* `statement` ...: Analyze the given statement, see https://matek.hu/zoltan/blog-20240805.php (yet unstable).",
+      "* `statement` ...: Analyze the given statement, see https://matek.hu/zoltan/blog-20240805.php "
+      "for some explanations.",
 #endif
       "* `quit`: Exit program."};
   string retval;

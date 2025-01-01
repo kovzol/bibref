@@ -1,7 +1,7 @@
 # Qt interface
 
-This folder contains files to provide *bibref* with a [Qt](https://qt.io) interface. It is known to work with Qt 6.2 and above
-(at the time of writing this, also with Qt 6.7.2).
+This folder contains files to provide *bibref* with a [Qt](https://qt.io) interface. It is known to work with Qt 6.4 and above
+(at the time of writing this, also with Qt 6.8).
 
 ## Translation steps
 
@@ -30,6 +30,12 @@ The required MSYS2 packages are:
 * `mingw-w64-x86_64-qt6-translations`
 * `mingw-w64-x86_64-readline`
 * `mingw-w64-x86_64-zlib`
+* `mingw-w64-x86_64-qt6-svg`
+* `mingw-w64-x86_64-graphviz`
+
+The last two ones are only required if you want to have statement analysis support in
+the **Statement Editor** (which can be started from the **Quotation** menu), in its **Prove** menu,
+after a successful run of **Parse**.
 
 If you want to create a package from **bibref-qt** (see below), you need additionally:
 
@@ -51,6 +57,7 @@ folder may be a workaround. See also the steps in the GitHub Actions for more de
 
 When compiled on Wine (that is, not on native Windows), it is mandatory to use a proper version
 of `FindRegex.cmake` during compiling SWORD. See the attached version in the `..` folder.
+See also [a blog entry](https://matek.hu/zoltan/blog-20240822.php) for a step-by-step howto on this.
 
 ### Packaging
 
@@ -74,4 +81,4 @@ portable `.zip` file.
 
 Once you created the folder `bibref-qt-2024Mar30` properly, just run the program by starting `start.bat`.
 It is assumed that the SWORD modules are installed in the current user's home directory in the folder `.sword`.
-To learn more about **bibref-qt**, you will find further information in the Help menu.
+To learn more about **bibref-qt**, you will find further information in the **Help** menu.

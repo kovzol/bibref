@@ -186,13 +186,17 @@ The available commands are:
 * `sql` *switch*: Set some outputs to be shown also as an SQL query if *switch* is `on`.
 * `colors` *switch*: Show some outputs colored if *switch* is `on`.
 * `tokens` *Bible* *book* *verse*: Search for the given *verse* in the given *book* in the given *Bible* (see command `lookup`), but the output is shown in a tokenized form. Tokenization is done via Strong's numbers.
+* `statement` ...: Analyze the given statement, see [a blog entry](https://matek.hu/zoltan/blog-20240805.php) for some explanations.
 * `help` *command*: Show some hints on usage of *command*, or get general help if no parameter is given.
 * `quit`: Exit program.
 
-There may be other commands available that are not documented yet.
+There may be other commands available that are not documented yet. Some commands, including `statement`, may be
+unavailable in some builds (e.g., in the web version).
 
-Some [examples](/examples) are also available. See also [an incomplete draft (in Hungarian)](docs/hu/bibref.pdf) on the purpose of the commands.
+Some [examples](/examples) are provided. See also [an incomplete draft (in Hungarian)](docs/hu/bibref.pdf) on the purpose of the commands.
 Also, a work-in-progress database can be found in [docs/common](/docs/common) which aims at collecting all quotations.
+As of January 2025, this database has been obsoleted and the statements in the [statements/SBLGNT](/statements/SBLGNT) folder
+are considered official.
 
 You may be interested in some [blog entries](https://matek.hu/zoltan/blog-topics.php?t=b) that extensively use the web version of *bibref*.
 
