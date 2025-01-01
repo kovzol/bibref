@@ -1173,10 +1173,13 @@ void reset_data() { // important if a previous run was already performed
     parseinfo = malloc(1);
     strcpy(parseinfo, "");
     ot_books_n = 0;
+    union_length = 0;
     union_length_i = 0;
     imin_i = INT_MAX, imax_i = 0;
+    unique_prep = false;
     // yydebug = 1;
 
+    /*
     for (int i=0; i<MAX_INTERVALS; i++) {
       for (int j=0; i<MAX_BOOK_LENGTH; i++) {
         // covering[i][j] = 0;
@@ -1193,6 +1196,7 @@ void reset_data() { // important if a previous run was already performed
       // oimins[i] = 0;
       // oimaxs[i] = 0;
     }
+    */
 }
 
 char* brst_scan_string(char *string) {
