@@ -945,7 +945,7 @@ void create_diagram() {
     strcat(D, intbuffer);
     strcat(D, " {\n");
     strcat(D, "  style=filled; color=transparent; fillcolor=\"#ffff80:white\";\n");
-    strcat(D, "  edge [arrowhead=none; minlen=0.5];\n");
+    strcat(D, "  edge [arrowhead=none; minlen=0];\n");
     strcat(D, "  fontname=\"times-bold\";\n");
     strcat(D, "  otlabel");
     strcat(D, intbuffer); // re-use OT headline number to make this node unique
@@ -1025,7 +1025,7 @@ void create_diagram() {
   strcpy(refs, "");
   strcat(D, " subgraph cluster_NT {\n");
   strcat(D, "  style=filled; color=transparent; fillcolor=\"#80ffff:white\";\n");
-  strcat(D, "  edge [arrowhead=none, minlen=0.5];\n");
+  strcat(D, "  edge [arrowhead=none, minlen=0];\n");
   strcat(D, "  ntlabel [label=\"");
   // strcat(D, nt_book);
   // strcat(D, " ");
@@ -1052,6 +1052,7 @@ void create_diagram() {
     int covering_col = nt_blocks[i][0];
     int nodetype = 0;
     bool show_length = false;
+    int intro_declarations = 0;
     for (int j=0; j<iv_counter; j++) {
       int fragment = covering[j][covering_col];
       if (fragment != 0) { // this NT block refers to somewhere in OT (or it's an introduction)
@@ -1072,11 +1073,12 @@ void create_diagram() {
           sprintf(intbuffer, "%d", j); // OT interval number (fragment)
           strcat(refs, intbuffer);
           strcat(refs, " [arrowhead=vee;");
-          if (fabs(intervals_data[j]>EPS)) { // non-verbatim match
-            strcat(refs, " headlabel=\"        "); // This is not elegant, FIXME.
+          if (intervals_data[j]>EPS) { // non-verbatim match
+            strcat(refs, " headlabel=\"");
             sprintf(intbuffer, "%d", ((int)(intervals_data[j]*100)));
             strcat(refs, intbuffer);
-            strcat(refs, "%\", fontcolor=red, labeldistance=1,");
+            // constraint=false: do not count this edge when computing the positions of the edges:
+            strcat(refs, "%\", fontcolor=red, labeldistance=1, constraint=false,");
           }
           strcat(refs, " color=green];\n");
           nodetype = FRAGMENT;
@@ -1087,6 +1089,7 @@ void create_diagram() {
           int intro_start_raw = imin_i + nt_blocks[i][0]; // raw position of the beginning of this intro block
           int nt_headline_start_raw = intervals[0][0]; // raw position of the beginning of NT headline
           if (intro_start_raw >= nt_headline_start_raw) show_length = true;
+          intro_declarations += intervals_data[j]; // compute the number of substrings given for this introduction
         }
       } else { // it's uncovered (similar situation to the introduction, consider unifying them, TODO)
         int start_raw = imin_i + nt_blocks[i][0]; // raw position of the beginning of this block
@@ -1105,7 +1108,12 @@ void create_diagram() {
       sprintf(intbuffer, "%d", nt_blocks[i][1]); // show block length
       strcat(D, intbuffer);
       if (!show_length) strcat(D, ",fontcolor=\"#dddddd\"");
-      strcat(D, ",fillcolor=\"#ccccff\"];\n"); // TODO: specify color more detailed (#9999ff)
+      strcat(D, ",fillcolor=\"#");
+      if (intro_declarations>EPS)
+        strcat(D, "9999ff");
+      else
+        strcat(D, "ccccff");
+      strcat(D, "\"];\n");
     }
     add_parseinfo("\n");
   }
@@ -1120,6 +1128,24 @@ void create_diagram() {
   strcat(D, ";\n");
   strcat(D, " }\n"); // Finish subgraph.
   strcat(D, refs); // Add references (outside the subgraphs).
+  // Set up hierarchy between NT headline and OT headlines with invisible edges:
+  for (int i=0; i<ot_books_n; i++) {
+    strcat(D, " ntlabel->otlabel");
+    sprintf(intbuffer, "%d", i+1);
+    strcat(D, intbuffer);
+    strcat(D, " [style=invisible, arrowhead=none];\n");
+    for (int j=i+1; j<ot_books_n; j++) {
+    // Set up hierarchy between OT headlines, too:
+      strcat(D, " otlabel");
+      sprintf(intbuffer, "%d", j+1);
+      strcat(D, intbuffer);
+      strcat(D, "->otlabel");
+      sprintf(intbuffer, "%d", i+1);
+      strcat(D, intbuffer);
+      strcat(D, " [style=invisible, arrowhead=none];\n");
+    }
+  }
+
   strcat(D, "}"); // Finish digraph.
   add_parseinfo("diagram: graphviz: start\n%s\n"
     "diagram: graphviz: end\n", D);
