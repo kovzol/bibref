@@ -1191,7 +1191,7 @@ void reset_data() { // important if a previous run was already performed
     }
     */
     for (int i=0; i<MAX_OT_BOOKS; i++) {
-      for (int j=0; i<MAX_BOOK_LENGTH; i++) {
+      for (int j=0; j<MAX_BOOK_LENGTH; j++) {
         ot_coverings[i][j] = 0;
       }
       // oimins[i] = 0;
