@@ -785,6 +785,8 @@ void check_cover(double cover) {
       return; // avoid segfault later
     }
     add_parseinfo(", union: [%d,%d]\n", oimin, oimax);
+    add_parseinfo("%d,%d: info: OT headline %d %s %s has at least corresponding fragment\n", yylineno, yycolumn,
+        i, books_s[i], infos_s[i]);
     // Compare headline interval with the union:
     int ot_headline_start = intervals[i][0];
     int ot_headline_end = intervals[i][1];
@@ -803,17 +805,21 @@ void check_cover(double cover) {
     // Register fragments for the OT books:
     oimins[i-1] = oimin, oimaxs[i-1] = oimax;
     int ounion_length = oimax-oimin+1;
-    for (int j=0; j<ounion_length; j++)
+    for (int j=0; j<ounion_length; j++) {
       ot_coverings[i-1][j] = 0; // reset all letters
+      }
     bool ot_overlaps = false;
     for (int j=fragments_start + 1; j<iv_counter; j++) { // register each fragment...
       int ftype = intervals[j][2];
-      if (ftype == OT_PASSAGE) { // OT interval
+      // If this is an OT interval and it belongs to the current OT headline...
+      if (ftype == OT_PASSAGE && strcmp(books_s[i], books_s[j])==0 && strcmp(infos_s[i], infos_s[j])==0) {
         bool ot_overlap = false;
         int ot_overlap_i = 0;
         for (int k=intervals[j][0]; k<=intervals[j][1]; k++) {
           int pos = k-oimin;
           ot_overlap_i = ot_coverings[i-1][pos];
+          // add_parseinfo("%d,%d: debug: check OT interval %d, pos=%d, k=%d, oimin=%d, ot_overlap_i=%d, j=%d\n",
+          //   yylineno, yycolumn, i, pos, k, oimin, ot_overlap_i, j);
           if (ot_overlap_i != 0 && ot_overlap_i != j) {
             ot_overlap = true;
             ot_overlaps = true;
