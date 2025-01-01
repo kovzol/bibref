@@ -1179,7 +1179,6 @@ void reset_data() { // important if a previous run was already performed
     unique_prep = false;
     // yydebug = 1;
 
-    /*
     for (int i=0; i<MAX_INTERVALS; i++) {
       for (int j=0; i<MAX_BOOK_LENGTH; i++) {
         // covering[i][j] = 0;
@@ -1189,7 +1188,6 @@ void reset_data() { // important if a previous run was already performed
       intervals[i][2] = 0;
       intervals_data[i] = 0;
     }
-    */
     for (int i=0; i<MAX_OT_BOOKS; i++) {
       for (int j=0; j<MAX_BOOK_LENGTH; j++) {
         ot_coverings[i][j] = 0;
