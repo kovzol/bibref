@@ -1062,7 +1062,12 @@ void create_diagram() {
           if (count_refs==1) { // put this block only once, even if there are references to multiple fragments in it
             sprintf(intbuffer, "%d", nt_blocks[i][1]); // length
             strcat(D, intbuffer);
-            strcat(D, ",fillcolor=green,fontcolor=white];\n"); // TODO: specify color more detailed
+            // Compute green lightness, based on difference 0..1 (127: darkest, 255: lightest)
+            int lightness = 127 + ((int)(intervals_data[j]*128));
+            sprintf(intbuffer, "%2x", lightness); // "g" component from rgb
+            strcat(D, ",fillcolor=\"#00");
+            strcat(D, intbuffer);
+            strcat(D, "00\",fontcolor=white];\n");
           }
           // Create graphviz edge between NT and OT blocks:
           strcat(refs, " nt");
