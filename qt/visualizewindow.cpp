@@ -21,9 +21,13 @@ VisualizeWindow::VisualizeWindow(QWidget *parent, string input)
     setCentralWidget(tile);
 
     GVC_t *gvc= gvContext();
-    /* This seems to be required, at least on Windows.
+#ifdef __MINGW32__
+    /* This seems to be required on Windows, otherwise the
+     * executable will not know anything about the dot format,
+     * the svg export, and so on.
      * Also, in CMake's library settings these 4 dynamic libraries
-     * must be included.
+     * must be included. There seems to be no official way to
+     * do this elegantly.
      */
     extern gvplugin_library_t gvplugin_dot_layout_LTX_library;
     extern gvplugin_library_t gvplugin_rsvg_LTX_library;
@@ -33,6 +37,7 @@ VisualizeWindow::VisualizeWindow(QWidget *parent, string input)
     gvAddLibrary(gvc, &gvplugin_rsvg_LTX_library);
     gvAddLibrary(gvc, &gvplugin_core_LTX_library);
     gvAddLibrary(gvc, &gvplugin_pango_LTX_library);
+#endif
 
     Agraph_t *g = agmemread((char*)input.c_str());
     gvLayout(gvc, g, "dot");

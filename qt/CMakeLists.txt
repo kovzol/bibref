@@ -87,6 +87,10 @@ set_target_properties(bibref-qt PROPERTIES
     MACOSX_BUNDLE TRUE
 )
 
+if(MINGW)
+SET(EXTRA_LIBS -lgvplugin_dot_layout -lgvplugin_rsvg -lgvplugin_core -lgvplugin_pango)
+endif(MINGW)
+
 target_link_libraries(bibref-qt PRIVATE
     Qt6::Core
     Qt6::Gui
@@ -95,7 +99,7 @@ target_link_libraries(bibref-qt PRIVATE
     Qt6::SvgWidgets
     ${sword_LIBRARIES} ${Boost_LIBRARIES} ${readline_LIBRARIES}
     ${ICU_LIBRARIES} ${LIBLZMA_LIBRARIES} ${ZLIB_LIBRARIES} ${BZIP2_LIBRARIES}
-    ${gvc_LIBRARIES} -lgvplugin_dot_layout -lgvplugin_rsvg -lgvplugin_core -lgvplugin_pango
+    ${gvc_LIBRARIES} ${EXTRA_LIBS}
 )
 
 # If not set, XDG_DATA_HOME is set to $HOME:
