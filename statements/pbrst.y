@@ -804,7 +804,7 @@ void check_cover(double cover) {
         for (int k=intervals[j][0]; k<=intervals[j][1]; k++) {
           int pos = k-oimin;
           ot_overlap_i = ot_coverings[i-1][pos];
-          if (ot_overlap_i != 0) {
+          if (ot_overlap_i != 0 && ot_overlap_i != j) {
             ot_overlap = true;
             ot_overlaps = true;
           } else
