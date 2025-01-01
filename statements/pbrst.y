@@ -1160,9 +1160,8 @@ void create_diagram() {
     "diagram: graphviz: end\n", D);
 }
 
-char* brst_scan_string(char *string) {
+void reset_data() { // important if a previous run was already performed
     extern int yycolumn;
-    // Reset data (also from a possible previous run):
     addbooks_done = true; // we assume it was already called
     yycolumn = 0;
     yylex_destroy();
@@ -1178,6 +1177,26 @@ char* brst_scan_string(char *string) {
     imin_i = INT_MAX, imax_i = 0;
     // yydebug = 1;
 
+    for (int i=0; i<MAX_INTERVALS; i++) {
+      for (int j=0; i<MAX_BOOK_LENGTH; i++) {
+        // covering[i][j] = 0;
+      }
+      intervals[i][0] = 0;
+      intervals[i][1] = 0;
+      intervals[i][2] = 0;
+      intervals_data[i] = 0;
+    }
+    for (int i=0; i<MAX_OT_BOOKS; i++) {
+      for (int j=0; i<MAX_BOOK_LENGTH; i++) {
+        // ot_coverings[i][j] = 0;
+      }
+      // oimins[i] = 0;
+      // oimaxs[i] = 0;
+    }
+}
+
+char* brst_scan_string(char *string) {
+    reset_data();
     YY_BUFFER_STATE buffer = yy_scan_string(string);
     yyparse();
     yy_delete_buffer(buffer);
