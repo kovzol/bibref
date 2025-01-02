@@ -144,7 +144,7 @@ void StatementWindow::parse()
         }
         if (diagram_defined) {
             visualizeButton = msgBox.addButton(tr("&Visualize"), QMessageBox::ActionRole);
-            visualizeXButton = msgBox.addButton(tr("E&xport"), QMessageBox::ActionRole);
+            visualizeXButton = msgBox.addButton(tr("E&xport graph"), QMessageBox::ActionRole);
         }
     }
 
@@ -161,7 +161,7 @@ void StatementWindow::parse()
     }
     if (msgBox.clickedButton() == visualizeXButton) {
         QString link = "https://dreampuf.github.io/GraphvizOnline/?engine=dot#";
-        link += graphviz_input;
+        link += QString::fromStdString(graphviz_input);
         QDesktopServices::openUrl(QUrl(link));
     }
 
