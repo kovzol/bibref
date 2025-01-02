@@ -906,7 +906,7 @@ void create_diagram() {
   strcpy(D, "");
   strcat(D, "digraph {\n");
   strcat(D, " nodesep=0.1;\n"); // a lower number can shorten the edges
-  strcat(D, " node [shape=rectangle,color=blue,style=filled,height=0.4,width=0.4,fontsize=14];\n");
+  strcat(D, " node [shape=rectangle,color=\"#8080ff\",style=filled,height=0.4,width=0.4,fontsize=14];\n");
 #define MAX_BLOCKS 100
   int nt_blocks[MAX_BLOCKS][2]; // copies from the coverings, positions and length are stored
   int nt_blocks_n = 0;
@@ -1130,7 +1130,7 @@ void create_diagram() {
       sprintf(intbuffer, "%d", nt_blocks[i][1]); // show block length
       strcat(D, intbuffer);
       if (!show_length) strcat(D, ",fontcolor=\"#dddddd\"");
-      strcat(D, ",fillcolor=white,shape=rectangle];\n");
+      strcat(D, ",fillcolor=white,color=\"#ccccff\"];\n");
     }
     if (nodetype == INTRODUCTION) {
       sprintf(intbuffer, "%d", nt_blocks[i][1]); // show block length
