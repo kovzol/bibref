@@ -116,6 +116,9 @@ void StatementWindow::parse()
             details += QString::fromStdString(l);
             details += "\n";
             }
+        if (l.find("diagram: graphviz: end")!=string::npos) {
+            dmode = false;
+        }
         if (dmode) {
             graphviz_input += l + "\n";
         }
@@ -123,16 +126,14 @@ void StatementWindow::parse()
             dmode = true;
             diagram_defined = true;
         }
-        if (l.find("diagram: graphviz: end")!=string::npos) {
-            dmode = false;
-        }
     }
 
     QMessageBox msgBox;
     msgBox.setWindowTitle(tr("Parse"));
     msgBox.setText(tr("%1 successful tests, %2 warnings, %3 errors.").arg(infos).arg(warnings).arg(errors));
     QPushButton* visualizeButton;
-    QPushButton* backButton = msgBox.addButton(tr("Back to Editor"), QMessageBox::RejectRole);
+    QPushButton* visualizeXButton;
+    QPushButton* backButton = msgBox.addButton(tr("Back to &Editor"), QMessageBox::RejectRole);
     if (!diagram_defined) {
         msgBox.setIcon(QMessageBox::Critical);
     } else {
@@ -141,8 +142,10 @@ void StatementWindow::parse()
         } else {
             msgBox.setIcon(QMessageBox::Information);
         }
-        if (diagram_defined)
-            visualizeButton = msgBox.addButton(tr("Visualize"), QMessageBox::ActionRole);
+        if (diagram_defined) {
+            visualizeButton = msgBox.addButton(tr("&Visualize"), QMessageBox::ActionRole);
+            visualizeXButton = msgBox.addButton(tr("E&xport"), QMessageBox::ActionRole);
+        }
     }
 
     msgBox.setDetailedText(details);
@@ -156,6 +159,12 @@ void StatementWindow::parse()
     if (msgBox.clickedButton() == visualizeButton) {
         showSvg();
     }
+    if (msgBox.clickedButton() == visualizeXButton) {
+        QString link = "https://dreampuf.github.io/GraphvizOnline/?engine=dot#";
+        link += graphviz_input;
+        QDesktopServices::openUrl(QUrl(link));
+    }
+
 #endif
 }
 
@@ -188,6 +197,6 @@ void StatementWindow::setupHelpMenu()
 
     helpMenu->addAction(QIcon::fromTheme("system-help"), tr("&Blog entry"), this,
                         [this]() {
-                            QString link = "https://matek.hu/zoltan/blog-20240805.php";
+                            QString link = "https://matek.hu/zoltan/blog-20250102.php";
                             QDesktopServices::openUrl(QUrl(link)); });
 }

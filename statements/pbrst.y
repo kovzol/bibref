@@ -905,8 +905,8 @@ void create_diagram() {
   if (no_evidence) return;
   strcpy(D, "");
   strcat(D, "digraph {\n");
-  // strcat(D, " nodesep=0.2;\n"); // a lower number can shorten the edges
-  strcat(D, " node [shape=rectangle,color=blue,style=filled,height=\"0.6pt\",fontsize=35];\n");
+  strcat(D, " nodesep=0.1;\n"); // a lower number can shorten the edges
+  strcat(D, " node [shape=rectangle,color=blue,style=filled,height=0.4,width=0.4,fontsize=14];\n");
 #define MAX_BLOCKS 100
   int nt_blocks[MAX_BLOCKS][2]; // copies from the coverings, positions and length are stored
   int nt_blocks_n = 0;
@@ -962,8 +962,7 @@ void create_diagram() {
     strcat(D, intbuffer);
     strcat(D, " {\n");
     strcat(D, "  style=filled; color=transparent; fillcolor=\"#ffff80:white\";\n");
-    strcat(D, "  edge [arrowhead=none; minlen=0];\n");
-    strcat(D, "  fontname=\"times-bold\";\n");
+    strcat(D, "  edge [arrowhead=none, minlen=0];\n");
     strcat(D, "  otlabel");
     strcat(D, intbuffer); // re-use OT headline number to make this node unique
     strcat(D, " [label=\"");
@@ -978,7 +977,7 @@ void create_diagram() {
     strcat(D, ot_verses[ob]);
     if (v != NULL)
       v[0] = ' '; // ...then put back!
-    strcat(D, "\"; shape=rectangle; fillcolor=transparent; color=transparent];\n");
+    strcat(D, "\",color=transparent];\n");
     int uid=0; // this is a dummy unique number for unused blocks
     for (int i=0; i<ot_blocks_ns[ob]; i++) {
       add_parseinfo("diagram: debug: OT headline %d block %d begins at %d (rawpos %d), length %d",
@@ -1043,6 +1042,8 @@ void create_diagram() {
 
 #define MAX_GRAPHVIZ_REFERENCES_SIZE 8192
   char refs[MAX_GRAPHVIZ_REFERENCES_SIZE]; // references
+  bool pd_printed[MAX_INTERVALS-1]; // only entries over fragments_start will be used, TODO
+  for (int i=1; i<iv_counter; i++) pd_printed[i-1] = false;
   strcpy(refs, "");
   strcat(D, " subgraph cluster_NT {\n");
   strcat(D, "  style=filled; color=transparent; fillcolor=\"#80ffff:white\";\n");
@@ -1058,7 +1059,7 @@ void create_diagram() {
   strcat(D, nt_verse);
   if (v != NULL)
     v[0] = ' '; // ...then put back!
-  strcat(D, "\"; shape=rectangle; fillcolor=transparent; color=transparent];\n");
+  strcat(D, "\",color=transparent];\n");
   // Collecting data from NT blocks:
   for (int i=0; i<nt_blocks_n; ++i) {
     add_parseinfo("diagram: debug: NT block %d begins at %d (rawpos %d), length %d, refers to",
@@ -1084,7 +1085,7 @@ void create_diagram() {
             sprintf(intbuffer, "%d", nt_blocks[i][1]); // length
             strcat(D, intbuffer);
             // Compute green lightness, based on difference 0..1 (127: darkest, 255: lightest)
-            int lightness = 127 + ((int)(intervals_data[j-1]*128));
+            int lightness = 127 + ((int)(round(intervals_data[j-1]*128)));
             sprintf(intbuffer, "%2x", lightness); // "g" component from rgb
             strcat(D, ",fillcolor=\"#00");
             strcat(D, intbuffer);
@@ -1098,15 +1099,16 @@ void create_diagram() {
           strcat(refs, "i");
           sprintf(intbuffer, "%d", j); // OT interval number (fragment)
           strcat(refs, intbuffer);
-          strcat(refs, " [arrowhead=vee;");
-          if (intervals_data[j-1]>EPS) { // non-verbatim match
-            strcat(refs, " headlabel=\"");
-            sprintf(intbuffer, "%d", ((int)(intervals_data[j-1]*100)));
+          strcat(refs, " [arrowhead=vee,");
+          if (intervals_data[j-1]>EPS && !pd_printed[j-1]) { // non-verbatim match; percentual data is printed only once
+            strcat(refs, "headlabel=\"");
+            sprintf(intbuffer, "%d", ((int)(round(intervals_data[j-1]*100))));
             strcat(refs, intbuffer);
             // constraint=false: do not count this edge when computing the positions of the edges:
-            strcat(refs, "%\", fontcolor=red, labeldistance=1,");
+            strcat(refs, "%\",fontcolor=red,labeldistance=3,fontsize=12,");
+            pd_printed[j-1]=true;
           }
-          strcat(refs, " constraint=false, color=green];\n");
+          strcat(refs, "constraint=false,color=green];\n");
           nodetype = FRAGMENT;
         }
         else { // it's an introduction
@@ -1159,7 +1161,7 @@ void create_diagram() {
     strcat(D, " ntlabel->otlabel");
     sprintf(intbuffer, "%d", i+1);
     strcat(D, intbuffer);
-    strcat(D, " [style=invisible, arrowhead=none];\n");
+    strcat(D, " [style=invisible,arrowhead=none];\n");
     for (int j=i+1; j<ot_books_n; j++) {
     // Set up hierarchy between OT headlines, too:
       strcat(D, " otlabel");
@@ -1168,7 +1170,7 @@ void create_diagram() {
       strcat(D, "->otlabel");
       sprintf(intbuffer, "%d", i+1);
       strcat(D, intbuffer);
-      strcat(D, " [style=invisible, arrowhead=none];\n");
+      strcat(D, " [style=invisible,arrowhead=none];\n");
     }
   }
 

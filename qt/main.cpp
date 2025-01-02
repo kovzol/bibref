@@ -10,6 +10,7 @@ int main(int argc, char *argv[])
     // QCoreApplication::setOrganizationName("Zoltán Kovács");
     // QCoreApplication::setOrganizationDomain("kovzol.github.io");
     QApplication app(argc, argv);
+    app.setStyle("fusion");
 
     QString language = QLocale::system().name();
     // language = "hu_HU";
