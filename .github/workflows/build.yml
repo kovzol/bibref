@@ -187,3 +187,31 @@ jobs:
         cd build
         cmake ..
         sudo make install
+    - name: prerequisites-pbrst
+      run: |
+        brew install bison m4
+        echo "export PATH=\"/usr/local/opt/bison/bin:\$PATH\"" >> ~/.zshrc
+        echo "export PATH=\"/usr/local/opt/m4/bin:\$PATH\"" >> ~/.zshrc
+    - name: Build bibref-pbrst
+      run: |
+        mkdir build-pbrst
+        cd build-pbrst
+        cmake -DPBRST=ON ..
+        make
+    - name: prerequisites-qt
+      run: |
+        brew install qt
+    - name: Build bibref-qt
+      run: |
+        cd qt
+        mkdir build
+        cd build
+        cmake ..
+        make
+    - name: Build bibref-qt-pbrst
+      run: |
+        cd qt
+        mkdir build-pbrst
+        cd build-pbrst
+        cmake -DPBRST=ON ..
+        make
