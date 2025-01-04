@@ -14,7 +14,12 @@ set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_RUNTIME OFF)
 find_package(Boost CONFIG COMPONENTS system filesystem)
 
-if(!APPLE) # readline seems to have trouble on MacOS
+if(APPLE) # sword may be difficult to locate and readline seems to have trouble on MacOS
+find_library(sword NAMES sword
+ HINTS "/usr/local/lib" "${CMAKE_SOURCE_DIR}/sword-1.9.0/lib/.libs"
+ "${CMAKE_SOURCE_DIR}/../sword-1.9.0/lib/.libs"
+)
+else()
 # One needs readline >= 8.0 to make this work:
 pkg_check_modules (readline REQUIRED readline)
 endif()
