@@ -210,7 +210,7 @@ jobs:
         . /Users/runner/.bash_profile
         pkg-config libgvc --libs # Temporary info on GitHub's graphviz installation
         cmake ..
-        make || true # Currently, this fails because -lgvc is not found, FIXME
+        make
     - name: Build bibref-qt-pbrst
       run: |
         cd qt
@@ -218,4 +218,4 @@ jobs:
         cd build-pbrst
         . /Users/runner/.bash_profile
         cmake -DPBRST=ON ..
-        make || true
+        make

@@ -8,10 +8,6 @@ This folder contains files to provide *bibref* with a [Qt](https://qt.io) interf
 `lupdate -tr-function-alias QT_TRANSLATE_NOOP=TR mainwindow.cpp statementwindow.cpp -ts hu.ts` creates or updates the skeleton for the Hungarian translation.
 Similarly to this way, it is possible to add translations for other languages.
 
-## Building on Linux
-
-See the steps in the GitHub Actions (in `../.github/workflow/build.yml`), or in the flatpak scripts in this folder.
-
 ## Building on Windows
 
 For reference, you should have a look at the steps in the GitHub Actions (in `../.github/workflow/build.yml`).
@@ -84,3 +80,13 @@ It is assumed that the SWORD modules are installed in the current user's home di
 To learn more about **bibref-qt**, you will find further information in the **Help** menu.
 
 Testing the translated texts is possible if you set the **LANG** environment variable before running the executable.
+
+## Building on Linux
+
+See the steps in the GitHub Actions (in `../.github/workflow/build.yml`), or in the flatpak scripts in this folder.
+
+## Building on MacOS
+
+See the steps in the GitHub Actions (in `../.github/workflow/build.yml`). You may also need
+to change some hardwired settings in `CMakeLists.txt` if your Homebrew installation
+has some special configuration.
