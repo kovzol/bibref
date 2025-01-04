@@ -82,3 +82,5 @@ portable `.zip` file.
 Once you created the folder `bibref-qt-2024Mar30` properly, just run the program by starting `start.bat`.
 It is assumed that the SWORD modules are installed in the current user's home directory in the folder `.sword`.
 To learn more about **bibref-qt**, you will find further information in the **Help** menu.
+
+Testing the translated texts is possible if you set the **LANG** environment variable before running the executable.
