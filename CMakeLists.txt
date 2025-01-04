@@ -14,8 +14,10 @@ set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_RUNTIME OFF)
 find_package(Boost CONFIG COMPONENTS system filesystem)
 
+if(!APPLE) # readline seems to have trouble on MacOS
 # One needs readline >= 8.0 to make this work:
 pkg_check_modules (readline REQUIRED readline)
+endif()
 
 include_directories(${sword_INCLUDE_DIRS})
 
@@ -59,6 +61,12 @@ SET_SOURCE_FILES_PROPERTIES(
 target_link_libraries(bibref
     ${sword_LIBRARIES} ${Boost_LIBRARIES} ${readline_LIBRARIES}
 )
+
+if(APPLE)
+target_link_libraries(bibref
+    -L/usr/local/lib # for sword, it is assumed to be here (via configure/make install)
+)
+endif()
 
 install(
  CODE " set(ENV{SWORD_PATH} \"$ENV{HOME}/.sword\") "
