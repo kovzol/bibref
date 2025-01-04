@@ -194,6 +194,7 @@ jobs:
         echo 'export PATH="/opt/homebrew/opt/m4/bin:$PATH"' >> /Users/runner/.bash_profile
     - name: Build bibref-pbrst
       run: |
+        . /Users/runner/.bash_profile
         mkdir build-pbrst
         cd build-pbrst
         cmake -DPBRST=ON ..
@@ -206,6 +207,7 @@ jobs:
         cd qt
         mkdir build
         cd build
+        . /Users/runner/.bash_profile
         cmake ..
         make
     - name: Build bibref-qt-pbrst
@@ -213,5 +215,6 @@ jobs:
         cd qt
         mkdir build-pbrst
         cd build-pbrst
+        . /Users/runner/.bash_profile
         cmake -DPBRST=ON ..
         make
