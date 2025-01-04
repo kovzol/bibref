@@ -347,5 +347,76 @@
         <source>Syntax:</source>
         <translation>Szintaxis:</translation>
     </message>
+    <message>
+        <source>Open a text editor to edit a statement</source>
+        <translation>Szövegszerkesztő megnyitása kijelentések szerkesztéséhez</translation>
+    </message>
+</context>
+<context>
+    <name>StatementWindow</name>
+    <message>
+        <source>Statement Editor</source>
+        <translation>Kijelentésszerkesztő</translation>
+    </message>
+    <message>
+        <source>Open File</source>
+        <translation>Fájl megnyitása</translation>
+    </message>
+    <message>
+        <source>bibref statement files (*.brst)</source>
+        <translation>bibref kijelentésfájlok (*.brst)</translation>
+    </message>
+    <message>
+        <source>&amp;File</source>
+        <translation>&amp;File</translation>
+    </message>
+    <message>
+        <source>&amp;New</source>
+        <translation>&amp;Új</translation>
+    </message>
+    <message>
+        <source>&amp;Open…</source>
+        <translation>&amp;Megnyitás...</translation>
+    </message>
+    <message>
+        <source>Parse</source>
+        <translation>Nyelvi ellenőrzés</translation>
+    </message>
+    <message>
+        <source>%1 successful tests, %2 warnings, %3 errors.</source>
+        <translation>%1 sikeres teszt, %2 figyelmeztetés, %3 hiba.</translation>
+    </message>
+    <message>
+        <source>Back to &amp;Editor</source>
+        <translation>&amp;Vissza a szerkesztőhöz</translation>
+    </message>
+    <message>
+        <source>&amp;Visualize</source>
+        <translation>&amp;Diagramm</translation>
+    </message>
+    <message>
+        <source>E&amp;xport graph</source>
+        <translation>A diagramm e&amp;xportálása</translation>
+    </message>
+    <message>
+        <source>Visualize</source>
+        <translation>Diagramm</translation>
+    </message>
+    <message>
+        <source>&amp;Prove</source>
+        <translation>&amp;Bizonyít</translation>
+    </message>
+    <message>
+        <source>&amp;Parse</source>
+        <translation>&amp;Nyelvi ellenőrzés</translation>
+    </message>
+    <message>
+        <source>&amp;Help</source>
+        <translation>Se&amp;gítség</translation>
+    </message>
+    <message>
+        <source>&amp;Blog entry</source>
+        <translation>&amp;Blogbejegyzés</translation>
+    </message>
 </context>
 </TS>
