@@ -180,7 +180,7 @@ jobs:
         cd sword-1.9.0
         ./configure
         make
-        make install || true
+        sudo make install || true
     - name: Build bibref
       run: |
         mkdir build
