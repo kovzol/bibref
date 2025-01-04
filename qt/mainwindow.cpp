@@ -31,6 +31,7 @@ extern string text[2];
 extern vector<bool> textset;
 extern string collect_info;
 extern string ot_color, nt_color, reset_color, error_color;
+extern char* output_prepend_set;
 
 string lookupText = "LXX Genesis 1:1";              // example
 string extendText = "LXX StatResGNT Romans 3:13";   // example
@@ -113,6 +114,8 @@ MainWindow::MainWindow()
     nt_color = "<span style=\"color: #006662\">";
     reset_color = "</span>";
     error_color = "<span style=\"color: red\">";
+    output_prepend_set = (char *)malloc(1);
+    output_prepend_set[0] = '\0';
 }
 
 void addBiblesThread(MainWindow *window)
