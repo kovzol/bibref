@@ -26,7 +26,15 @@ if(MINGW)
     find_package(BZip2 REQUIRED)
 endif(MINGW)
 
+if(APPLE) # sword may be difficult to locate and readline seems to have trouble on MacOS
+find_library(sword NAMES sword
+ HINTS "/usr/local/lib" "${CMAKE_SOURCE_DIR}/sword-1.9.0/lib/.libs"
+ "${CMAKE_SOURCE_DIR}/../sword-1.9.0/lib/.libs"
+)
+else()
+# One needs readline >= 8.0 to make this work:
 pkg_check_modules (readline REQUIRED readline)
+endif()
 
 include_directories(${sword_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} ${readline_INCLUDE_DIRS} ${gvc_INCLUDE_DIRS})
 
@@ -91,6 +99,10 @@ if(MINGW)
 SET(EXTRA_LIBS -lgvplugin_dot_layout -lgvplugin_rsvg -lgvplugin_core -lgvplugin_pango)
 endif(MINGW)
 
+if(APPLE)
+set(sword_LIBRARIES_folder "-L/usr/local/lib") # this is hardcoded (via configure/make install), FIXME
+endif()
+
 target_link_libraries(bibref-qt PRIVATE
     Qt6::Core
     Qt6::Gui
@@ -99,7 +111,7 @@ target_link_libraries(bibref-qt PRIVATE
     Qt6::SvgWidgets
     ${sword_LIBRARIES} ${Boost_LIBRARIES} ${readline_LIBRARIES}
     ${ICU_LIBRARIES} ${LIBLZMA_LIBRARIES} ${ZLIB_LIBRARIES} ${BZIP2_LIBRARIES}
-    ${gvc_LIBRARIES} ${EXTRA_LIBS}
+    ${gvc_LIBRARIES} ${EXTRA_LIBS} ${sword_LIBRARIES_folder}
 )
 
 # If not set, XDG_DATA_HOME is set to $HOME:
