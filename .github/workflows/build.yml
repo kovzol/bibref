@@ -190,8 +190,8 @@ jobs:
     - name: prerequisites-pbrst
       run: |
         brew install bison m4
-        echo "export PATH=\"/usr/local/opt/bison/bin:\$PATH\"" >> ~/.zshrc
-        echo "export PATH=\"/usr/local/opt/m4/bin:\$PATH\"" >> ~/.zshrc
+        echo 'export PATH="/opt/homebrew/opt/bison/bin:$PATH"' >> /Users/runner/.bash_profile
+        echo 'export PATH="/opt/homebrew/opt/m4/bin:$PATH"' >> /Users/runner/.bash_profile
     - name: Build bibref-pbrst
       run: |
         mkdir build-pbrst
