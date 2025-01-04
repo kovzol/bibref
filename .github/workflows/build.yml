@@ -201,7 +201,7 @@ jobs:
         make
     - name: prerequisites-qt
       run: |
-        brew install qt
+        brew install qt graphviz
     - name: Build bibref-qt
       run: |
         cd qt
