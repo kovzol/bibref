@@ -161,7 +161,7 @@ void StatementWindow::parse()
     }
     if (msgBox.clickedButton() == visualizeXButton) {
         QString link = "https://dreampuf.github.io/GraphvizOnline/?engine=dot#";
-        link += QString::fromStdString(graphviz_input);
+        link += QUrl::toPercentEncoding(QString::fromStdString(graphviz_input));
         QDesktopServices::openUrl(QUrl(link));
     }
 
