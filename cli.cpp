@@ -1,4 +1,4 @@
-#define BIBREF_VERSION "2025Jan01"
+#define BIBREF_VERSION "2025Jan04"
 
 #include <iostream>
 #include <sstream>
@@ -261,7 +261,7 @@ string getHelp(const string &key)
       "* `help` *command*: Show some hints on usage of *command*, or get general help if no "
       "parameter is given.",
 #ifdef WITH_PBRST
-      "* `statement` ...: Analyze the given statement, see https://matek.hu/zoltan/blog-20240805.php "
+      "* `statement` ...: Analyze the given statement, see https://matek.hu/zoltan/blog-20250102.php "
       "for some explanations.",
 #endif
       "* `quit`: Exit program."};
