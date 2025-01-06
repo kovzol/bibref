@@ -1011,7 +1011,7 @@ void create_diagram() {
           strcat(D, "white");
       } else {
         add_parseinfo(" unused");
-        strcat(D, "white");
+        strcat(D, "white,color=\"#ccccff\"");
       }
       strcat(D, "];\n"); // Finish graphviz node.
       add_parseinfo("\n");
