@@ -1037,6 +1037,26 @@ void create_diagram() {
       }
     }
     strcat(D, ";\n");
+    // Ensure that the otlabel precedes the first OT node:
+    if (ot_blocks_ns[ob]>0) {
+      int covering_col = ot_blocks[ob][0][0]; // TODO: not elegant, merge with previous section
+      int fragment = ot_coverings[ob][covering_col];
+      strcat(D, "  otlabel");
+      sprintf(intbuffer, "%d", ob+1); // OT headline number
+      strcat(D, intbuffer);
+      strcat(D, "->");
+      if (fragment == 0) {
+        strcat(D, "u");
+        sprintf(intbuffer, "%d", ob+1);
+        strcat(D, intbuffer);
+        strcat(D, "_0");
+      } else { // fragment != 0
+        strcat(D, "i");
+        sprintf(intbuffer, "%d", fragment); // interval number
+        strcat(D, intbuffer);
+      }
+      strcat(D, " [style=invisible];\n");
+    }
     strcat(D, " }\n"); // Finish subgraph.
   }
 
@@ -1154,6 +1174,11 @@ void create_diagram() {
     strcat(D, intbuffer);
   }
   strcat(D, ";\n");
+  // Ensure that the ntlabel precedes the first NT node:
+  if (nt_blocks_n>0) {
+    strcat(D, "  ntlabel->nt0 [style=invisible];\n");
+  }
+
   strcat(D, " }\n"); // Finish subgraph.
   strcat(D, refs); // Add references (outside the subgraphs).
   // Set up hierarchy between NT headline and OT headlines with invisible edges:
