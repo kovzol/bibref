@@ -13,9 +13,11 @@ for i in $FILES; do
  n=$((n+1))
  echo -n -e "\r$i ($n/$F_NO)\033[0K"
  ../pbrst-cli -g $i > $i.dot
- dot -Tsvg $i.dot > $i.svg
- echo "<img src=$i.svg><br>" >> $HTML
+ test -s $i.dot && {
+  dot -Tsvg $i.dot > $i.svg
+  echo "<img src=$i.svg><br>" >> $HTML
+ }
  done
-echo
+echo -e "\rDone.\033[0K"
 
 echo "</center></body></html>" >> $HTML
