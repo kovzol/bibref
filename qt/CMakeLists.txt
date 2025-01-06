@@ -74,7 +74,12 @@ SET(PBRST_SRCS
 
 endif(PBRST)
 
-qt_add_executable(bibref-qt
+# set the Application icon, the first line is the property added to Info.plist
+set(MACOSX_BUNDLE_ICON_FILE bibref-qt.icns)
+set(bibref_qt_ICON ${CMAKE_CURRENT_SOURCE_DIR}/logo-Psalm40-256.icns)
+set_source_files_properties(${bibref_qt_ICON} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
+
+qt_add_executable(bibref-qt MACOSX_BUNDLE
     main.cpp
     mainwindow.cpp mainwindow.h
     statementwindow.cpp statementwindow.h
@@ -88,6 +93,7 @@ qt_add_executable(bibref-qt
     ${PBRST_SRCS}
     ${QM_FILES}
     bibref.qrc
+    ${bibref_qt_ICON}
 )
 
 set_target_properties(bibref-qt PROPERTIES
@@ -95,13 +101,15 @@ set_target_properties(bibref-qt PROPERTIES
     MACOSX_BUNDLE TRUE
 )
 
-if(MINGW)
+if(MINGW OR APPLE)
 SET(EXTRA_LIBS -lgvplugin_dot_layout -lgvplugin_rsvg -lgvplugin_core -lgvplugin_pango)
-endif(MINGW)
+endif(MINGW OR APPLE)
 
 if(APPLE)
 set(sword_LIBRARIES_folder "-L/usr/local/lib") # this is hardcoded (via configure/make install), FIXME
-set(graphviz_LIBRARIES_folder "-L/opt/homebrew/Cellar/graphviz/12.2.1/lib") # temporarily for GitHub, FIXME
+set(graphviz_LIBRARIES_folder "-L/opt/homebrew/Cellar/graphviz/12.2.1/lib -L/usr/local/lib/graphviz") # temporarily for GitHub, FIXME
+# On macOS, the QT libraries are usually not installed into the system library folders...
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 endif()
 
 target_link_libraries(bibref-qt PRIVATE

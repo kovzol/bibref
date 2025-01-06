@@ -21,8 +21,8 @@ VisualizeWindow::VisualizeWindow(QWidget *parent, string input)
     setCentralWidget(tile);
 
     GVC_t *gvc= gvContext();
-#ifdef __MINGW32__
-    /* This seems to be required on Windows, otherwise the
+#if defined(__MINGW32__) || defined(__APPLE__)
+    /* This seems to be required on Windows and MacOS, otherwise the
      * executable will not know anything about the dot format,
      * the svg export, and so on.
      * Also, in CMake's library settings these 4 dynamic libraries
