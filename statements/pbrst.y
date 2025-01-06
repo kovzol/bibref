@@ -1104,6 +1104,7 @@ void create_diagram() {
     int nodetype = 0;
     bool show_length = false;
     int intro_declarations = 0;
+    char *intro_tooltip = NULL; // this will be defined later by pointing to an introductory text
     for (int j=0; j<iv_counter; j++) {
       int fragment = covering[j][covering_col];
       if (fragment != 0) { // this NT block refers to somewhere in OT (or it's an introduction)
@@ -1150,6 +1151,7 @@ void create_diagram() {
           int nt_headline_start_raw = intervals[0][0]; // raw position of the beginning of NT headline
           if (intro_start_raw >= nt_headline_start_raw) show_length = true;
           intro_declarations += intervals_data[j]; // compute the number of substrings given for this introduction
+          intro_tooltip = fragments[j];
         }
       } else { // it's uncovered (similar situation to the introduction, consider unifying them, TODO)
         int start_raw = imin_i + nt_blocks[i][0]; // raw position of the beginning of this block
@@ -1173,7 +1175,14 @@ void create_diagram() {
         strcat(D, "9999ff");
       else
         strcat(D, "ccccff");
-      strcat(D, "\",tooltip=\" \"];\n");
+      strcat(D, "\",tooltip=\"");
+      if (intro_tooltip != NULL)
+        strcat(D, intro_tooltip);
+      else
+        strcat(D, " "); // empty (this should not happen)
+      strcat(D, "\"];\n");
+
+
     }
     add_parseinfo("\n");
   }
