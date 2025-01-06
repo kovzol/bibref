@@ -5,9 +5,13 @@
 
 HTML=graphviz.html
 HTML_SVG=graphviz-svg.html
+HTML_BRST_SVG=graphviz-brst-svg.html
 
 echo "<html><body><center>" > $HTML
 echo "<html><body><center>" > $HTML_SVG
+echo "<html>
+<link rel=\"stylesheet\" type=\"text/css\" href=\"highlight.css\">
+<body>" > $HTML_BRST_SVG
 
 FILES=`ls -1 *.brst`
 F_NO=`ls -1 *.brst | wc -l`
@@ -19,11 +23,19 @@ for i in $FILES; do
  test -s $i.dot && {
   dot -Tsvg $i.dot > $i.svg
   echo "<img src=$i.svg><br>" >> $HTML
+
   tail -n +7 $i.svg >> $HTML_SVG # remove head
   echo "<br>" >> $HTML_SVG
+
+  highlight --config-file=../../docs/common/brst.lang $i -u utf8 -o $i.html
+  cat $i.html | tail -n +9 | head -n -3 >> $HTML_BRST_SVG
+  echo "<center>" >> $HTML_BRST_SVG
+  tail -n +7 $i.svg >> $HTML_BRST_SVG
+  echo "</center><hr>" >> $HTML_BRST_SVG
  }
  done
 echo -e "\rDone.\033[0K"
 
 echo "</center></body></html>" >> $HTML
 echo "</center></body></html>" >> $HTML_SVG
+echo "</body></html>" >> $HTML_BRST_SVG
