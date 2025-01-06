@@ -62,8 +62,10 @@ int main(int ac, char **av)
   extern FILE *yyin;
 
   bool colorize = false;
+  bool graphviz = false;
 
-  while (ac>1 && (!strcmp(av[1], "-d") || !strcmp(av[1], "-c") || !strcmp(av[1], "-h"))) {
+  while (ac>1 && (!strcmp(av[1], "-d") || !strcmp(av[1], "-c")
+    || !strcmp(av[1], "-g") || !strcmp(av[1], "-h"))) {
 
     if(!strcmp(av[1], "-h")) {
       printf("pbrst-cli [options] [input.brst], a command line brst parser\n");
@@ -71,6 +73,7 @@ int main(int ac, char **av)
       printf(" -h\tthis help\n");
       printf(" -d\tswitch debug mode on\n");
       printf(" -c\tcolorize output\n");
+      printf(" -g\tshow only graphviz output\n");
       exit(0);
     }
 
@@ -81,6 +84,11 @@ int main(int ac, char **av)
     if(!strcmp(av[1], "-c")) {
       colorize = true; ac--; av++;
     }
+
+    if(!strcmp(av[1], "-g")) {
+      graphviz = true; ac--; av++;
+    }
+
   }
 
   if(ac > 1 && (yyin = fopen(av[1], "r")) == NULL) {
@@ -94,6 +102,17 @@ int main(int ac, char **av)
   if(!yyparse()) {
     if (strstr(parseinfo, ": error: ") == NULL) {
       create_diagram();
+    }
+    if (graphviz) {
+      char *g_start = strstr(parseinfo, "diagram: graphviz: start\n");
+      g_start = strstr(g_start, "\n");
+      g_start++;
+      char *g_end = strstr(parseinfo, "diagram: graphviz: end");
+      g_end[0] = '\0';
+      // Now g_start points to the beginning of the first line after "diagram: graphviz: start"
+      // and the C string ends before the line "diagram: graphviz: end"
+      printf("%s", g_start);
+      exit(0);
     }
     if (colorize) {
 #define HRED "\e[0;91m"
