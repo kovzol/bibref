@@ -1200,7 +1200,7 @@ void reset_data() { // important if a previous run was already performed
     // yydebug = 1;
 
     for (int i=0; i<MAX_INTERVALS; i++) {
-      for (int j=0; i<MAX_BOOK_LENGTH; i++) {
+      for (int j=0; j<MAX_BOOK_LENGTH; j++) {
         // covering[i][j] = 0;
       }
       intervals[i][0] = 0;
