@@ -52,6 +52,7 @@ int oimaxs[MAX_OT_BOOKS];
 char ot_books[MAX_OT_BOOKS][MAX_BOOKNAME_LENGTH];
 char ot_infos[MAX_OT_BOOKS][MAX_BOOKNAME_LENGTH];
 char ot_verses[MAX_OT_BOOKS][MAX_BOOKNAME_LENGTH];
+char fragments[MAX_INTERVALS][MAX_SUBSTR_LENGTH];
 
 // TODO: Store the index only instead of the whole string:
 char books_s[MAX_INTERVALS][MAX_BOOKNAME_LENGTH]; // Bible editions
@@ -440,6 +441,7 @@ check_nt_passage(char *book, char *info, char *verse)
     } else {
     add_parseinfo("%d,%d: error: results of lookup and getraw do not match\n", yylineno, yycolumn);
     }
+  strcpy(fragments[iv_counter-1],l); // saved for the diagram (tooltip)
   free(l);
   free(r);
   intervals[iv_counter-1][2] = NT_HEADLINE; // NT (headline)
@@ -497,6 +499,7 @@ check_ot_passage(char *book, char *info, char *verse)
     } else {
     add_parseinfo("%d,%d: error: results of lookup and getraw do not match\n", yylineno, yycolumn);
     }
+  strcpy(fragments[iv_counter-1],l); // saved for the diagram (tooltip)
   free(l);
   free(r);
 
@@ -557,6 +560,7 @@ check_introduction_passage(char *passage, char *ay)
     } else {
     add_parseinfo("%d,%d: error: results of lookup and getraw do not match\n", yylineno, yycolumn);
     }
+  strcpy(fragments[iv_counter-1],l); // saved for the diagram (tooltip)
   free(l);
   free(r);
 
@@ -602,6 +606,8 @@ check_fragment(char *passage, char *ay_nt, char *ay_ot) {
     add_parseinfo("%d,%d: info: NT fragment %s matches to a-y form\n", yylineno, yycolumn, passage);
   else
     add_parseinfo("%d,%d: error: NT fragment %s does not match to a-y form %s, it should be %s\n", yylineno, yycolumn, passage, ay_nt, l);
+  strcpy(fragments[iv_counter-2], l); // for the diagram
+  free(l);
   l = lookupVerse1(ot_info, ot_book, ot_verse);
   if (strcmp(l, ay_ot) == 0)
     add_parseinfo("%d,%d: info: OT fragment %s matches to a-y form\n", yylineno, yycolumn, ot_passage);
@@ -630,7 +636,7 @@ check_fragment(char *passage, char *ay_nt, char *ay_ot) {
     add_parseinfo("%d,%d: error: OT passage is not unique\n", yylineno, yycolumn);
   }
   unique_prep = false;
-
+  free(l);
   free(ot_passage);
   intervals[iv_counter-2][2] = NT_FRAGMENT; // this is an NT fragment
   intervals[iv_counter-1][2] = OT_PASSAGE; // this is an OT fragment
@@ -961,8 +967,8 @@ void create_diagram() {
     sprintf(intbuffer, "%d", ob+1); // OT headline number
     strcat(D, intbuffer);
     strcat(D, " {\n");
-    strcat(D, "  style=filled; color=transparent; fillcolor=\"#ffff80:white\";\n");
-    strcat(D, "  edge [arrowhead=none,minlen=0];\n");
+    strcat(D, "  tooltip=\" \"; style=filled; color=transparent; fillcolor=\"#ffff80:white\";\n");
+    strcat(D, "  edge [arrowhead=none,minlen=0,tooltip=\" \"];\n");
     strcat(D, "  otlabel");
     strcat(D, intbuffer); // re-use OT headline number to make this node unique
     strcat(D, " [label=\"");
@@ -977,7 +983,7 @@ void create_diagram() {
     strcat(D, ot_verses[ob]);
     if (v != NULL)
       v[0] = ' '; // ...then put back!
-    strcat(D, "\",color=transparent];\n");
+    strcat(D, "\",color=transparent,tooltip=\" \"];\n");
     int uid=0; // this is a dummy unique number for unused blocks
     for (int i=0; i<ot_blocks_ns[ob]; i++) {
       add_parseinfo("diagram: debug: OT headline %d block %d begins at %d (rawpos %d), length %d",
@@ -1009,9 +1015,12 @@ void create_diagram() {
           strcat(D, "gold");
         else
           strcat(D, "white");
+        strcat(D, ",tooltip=\"");
+        strcat(D, fragments[fragment]);
+        strcat(D, "\"");
       } else {
         add_parseinfo(" unused");
-        strcat(D, "white,color=\"#ccccff\"");
+        strcat(D, "white,color=\"#ccccff\",tooltip=\" \"");
       }
       strcat(D, "];\n"); // Finish graphviz node.
       add_parseinfo("\n");
@@ -1066,8 +1075,8 @@ void create_diagram() {
   for (int i=1; i<iv_counter; i++) pd_printed[i-1] = false;
   strcpy(refs, "");
   strcat(D, " subgraph cluster_NT {\n");
-  strcat(D, "  style=filled; color=transparent; fillcolor=\"#80ffff:white\";\n");
-  strcat(D, "  edge [arrowhead=none, minlen=0];\n");
+  strcat(D, "  tooltip=\" \"; style=filled; color=transparent; fillcolor=\"#80ffff:white\";\n");
+  strcat(D, "  edge [arrowhead=none,minlen=0,tooltip=\" \"];\n");
   strcat(D, "  ntlabel [label=\"");
   // strcat(D, nt_book);
   // strcat(D, " ");
@@ -1079,7 +1088,7 @@ void create_diagram() {
   strcat(D, nt_verse);
   if (v != NULL)
     v[0] = ' '; // ...then put back!
-  strcat(D, "\",color=transparent];\n");
+  strcat(D, "\",color=transparent,tooltip=\" \"];\n");
   // Collecting data from NT blocks:
   for (int i=0; i<nt_blocks_n; ++i) {
     add_parseinfo("diagram: debug: NT block %d begins at %d (rawpos %d), length %d, refers to",
@@ -1104,6 +1113,9 @@ void create_diagram() {
           if (count_refs==1) { // put this block only once, even if there are references to multiple fragments in it
             sprintf(intbuffer, "%d", nt_blocks[i][1]); // length
             strcat(D, intbuffer);
+            strcat(D, ",tooltip=\"");
+            strcat(D, fragments[j-1]);
+            strcat(D, "\"");
             // Compute green lightness, based on difference 0..1 (127: darkest, 255: lightest)
             int lightness = 127 + ((int)(round(intervals_data[j-1]*128)));
             sprintf(intbuffer, "%2x", lightness); // "g" component from rgb
@@ -1119,12 +1131,12 @@ void create_diagram() {
           strcat(refs, "i");
           sprintf(intbuffer, "%d", j); // OT interval number (fragment)
           strcat(refs, intbuffer);
-          strcat(refs, " [arrowhead=vee,");
+          strcat(refs, " [arrowhead=vee,tooltip=\" \",");
           if (intervals_data[j-1]>EPS && !pd_printed[j-1]) { // non-verbatim match; percentual data is printed only once
             strcat(refs, "headlabel=\"");
             sprintf(intbuffer, "%d", ((int)(round(intervals_data[j-1]*100))));
             strcat(refs, intbuffer);
-            strcat(refs, "%\",fontcolor=red,labeldistance=3,fontsize=12,");
+            strcat(refs, "%\",fontcolor=red,labeldistance=3,fontsize=12,headtooltip=\" \",");
             pd_printed[j-1]=true;
           }
           // constraint=false: do not count this edge when computing the positions of the edges:
@@ -1150,7 +1162,7 @@ void create_diagram() {
       sprintf(intbuffer, "%d", nt_blocks[i][1]); // show block length
       strcat(D, intbuffer);
       if (!show_length) strcat(D, ",fontcolor=\"#dddddd\"");
-      strcat(D, ",fillcolor=white,color=\"#ccccff\"];\n");
+      strcat(D, ",fillcolor=white,color=\"#ccccff\",tooltip=\" \"];\n");
     }
     if (nodetype == INTRODUCTION) {
       sprintf(intbuffer, "%d", nt_blocks[i][1]); // show block length
@@ -1161,7 +1173,7 @@ void create_diagram() {
         strcat(D, "9999ff");
       else
         strcat(D, "ccccff");
-      strcat(D, "\"];\n");
+      strcat(D, "\",tooltip=\" \"];\n");
     }
     add_parseinfo("\n");
   }
@@ -1225,9 +1237,6 @@ void reset_data() { // important if a previous run was already performed
     // yydebug = 1;
 
     for (int i=0; i<MAX_INTERVALS; i++) {
-      for (int j=0; j<MAX_BOOK_LENGTH; j++) {
-        // covering[i][j] = 0;
-      }
       intervals[i][0] = 0;
       intervals[i][1] = 0;
       intervals[i][2] = 0;
@@ -1237,8 +1246,6 @@ void reset_data() { // important if a previous run was already performed
       for (int j=0; j<MAX_BOOK_LENGTH; j++) {
         ot_coverings[i][j] = 0;
       }
-      // oimins[i] = 0;
-      // oimaxs[i] = 0;
     }
 }
 
