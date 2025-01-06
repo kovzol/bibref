@@ -105,6 +105,7 @@ int main(int ac, char **av)
     }
     if (graphviz) {
       char *g_start = strstr(parseinfo, "diagram: graphviz: start\n");
+      if (g_start == NULL) exit(0); // empty output
       g_start = strstr(g_start, "\n");
       g_start++;
       char *g_end = strstr(parseinfo, "diagram: graphviz: end");
