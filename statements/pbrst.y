@@ -906,7 +906,7 @@ void create_diagram() {
   strcpy(D, "");
   strcat(D, "digraph {\n");
   strcat(D, " nodesep=0.1;\n"); // a lower number can shorten the edges
-  strcat(D, " node [shape=rectangle,color=\"#8080ff\",style=filled,height=0.4,width=0.4,fontsize=14];\n");
+  strcat(D, " node [shape=box,color=\"#8080ff\",style=filled,height=0.4,width=0.4,fontsize=14];\n");
 #define MAX_BLOCKS 100
   int nt_blocks[MAX_BLOCKS][2]; // copies from the coverings, positions and length are stored
   int nt_blocks_n = 0;
@@ -962,7 +962,7 @@ void create_diagram() {
     strcat(D, intbuffer);
     strcat(D, " {\n");
     strcat(D, "  style=filled; color=transparent; fillcolor=\"#ffff80:white\";\n");
-    strcat(D, "  edge [arrowhead=none, minlen=0];\n");
+    strcat(D, "  edge [arrowhead=none,minlen=0];\n");
     strcat(D, "  otlabel");
     strcat(D, intbuffer); // re-use OT headline number to make this node unique
     strcat(D, " [label=\"");
@@ -1055,7 +1055,7 @@ void create_diagram() {
         sprintf(intbuffer, "%d", fragment); // interval number
         strcat(D, intbuffer);
       }
-      strcat(D, " [style=invisible];\n");
+      strcat(D, " [style=invis];\n");
     }
     strcat(D, " }\n"); // Finish subgraph.
   }
@@ -1124,11 +1124,11 @@ void create_diagram() {
             strcat(refs, "headlabel=\"");
             sprintf(intbuffer, "%d", ((int)(round(intervals_data[j-1]*100))));
             strcat(refs, intbuffer);
-            // constraint=false: do not count this edge when computing the positions of the edges:
             strcat(refs, "%\",fontcolor=red,labeldistance=3,fontsize=12,");
             pd_printed[j-1]=true;
           }
-          strcat(refs, "constraint=false,color=green];\n");
+          // constraint=false: do not count this edge when computing the positions of the edges:
+          strcat(refs, "constraint=0,color=green];\n");
           nodetype = FRAGMENT;
         }
         else { // it's an introduction
@@ -1176,7 +1176,7 @@ void create_diagram() {
   strcat(D, ";\n");
   // Ensure that the ntlabel precedes the first NT node:
   if (nt_blocks_n>0) {
-    strcat(D, "  ntlabel->nt0 [style=invisible];\n");
+    strcat(D, "  ntlabel->nt0 [style=invis];\n");
   }
 
   strcat(D, " }\n"); // Finish subgraph.
@@ -1186,7 +1186,7 @@ void create_diagram() {
     strcat(D, " ntlabel->otlabel");
     sprintf(intbuffer, "%d", i+1);
     strcat(D, intbuffer);
-    strcat(D, " [style=invisible,arrowhead=none];\n");
+    strcat(D, " [style=invis];\n");
     for (int j=i+1; j<ot_books_n; j++) {
     // Set up hierarchy between OT headlines, too:
       strcat(D, " otlabel");
@@ -1195,7 +1195,7 @@ void create_diagram() {
       strcat(D, "->otlabel");
       sprintf(intbuffer, "%d", i+1);
       strcat(D, intbuffer);
-      strcat(D, " [style=invisible,arrowhead=none];\n");
+      strcat(D, " [style=invis];\n");
     }
   }
 
