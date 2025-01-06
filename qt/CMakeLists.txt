@@ -101,6 +101,7 @@ endif(MINGW)
 
 if(APPLE)
 set(sword_LIBRARIES_folder "-L/usr/local/lib") # this is hardcoded (via configure/make install), FIXME
+set(graphviz_LIBRARIES_folder "-L/opt/homebrew/Cellar/graphviz/12.2.1/lib") # temporarily for GitHub, FIXME
 endif()
 
 target_link_libraries(bibref-qt PRIVATE
@@ -111,7 +112,7 @@ target_link_libraries(bibref-qt PRIVATE
     Qt6::SvgWidgets
     ${sword_LIBRARIES} ${Boost_LIBRARIES} ${readline_LIBRARIES}
     ${ICU_LIBRARIES} ${LIBLZMA_LIBRARIES} ${ZLIB_LIBRARIES} ${BZIP2_LIBRARIES}
-    ${gvc_LIBRARIES} ${EXTRA_LIBS} ${sword_LIBRARIES_folder}
+    ${gvc_LIBRARIES} ${EXTRA_LIBS} ${sword_LIBRARIES_folder} ${graphviz_LIBRARIES_folder}
 )
 
 # If not set, XDG_DATA_HOME is set to $HOME:

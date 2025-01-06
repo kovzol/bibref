@@ -1,6 +1,6 @@
 name: bibref
 base: core20
-version: '2025Jan01'
+version: '2025Jan04'
 summary: A tool that helps discovering internal references in the Bible
 icon: logo-Psalm40-192.png
 description: |
@@ -25,7 +25,7 @@ parts:
     source: https://github.com/kovzol/bibref.git
     plugin: cmake
     cmake-parameters:
-      - -DPBRST=ON
+      - -DPBRST=ON -DCMAKE_BUILD_TYPE=Debug
     stage-packages: [libsword-1.8.1, libboost-filesystem1.71.0]
   sword-modules:
     plugin: nil

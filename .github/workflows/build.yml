@@ -208,6 +208,7 @@ jobs:
         mkdir build
         cd build
         . /Users/runner/.bash_profile
+        pkg-config libgvc --libs # Temporary info on GitHub's graphviz installation
         cmake ..
         make
     - name: Build bibref-qt-pbrst
