@@ -107,7 +107,9 @@ endif(MINGW OR APPLE)
 
 if(APPLE)
 set(sword_LIBRARIES_folder "-L/usr/local/lib") # this is hardcoded (via configure/make install), FIXME
-set(graphviz_LIBRARIES_folder "-L/opt/homebrew/Cellar/graphviz/12.2.1/lib -L/usr/local/lib/graphviz") # temporarily for GitHub, FIXME
+# GraphViz's plugins are located in a subfolder:
+set(graphviz_LIBRARIES_folder "-L/opt/homebrew/lib -L/opt/homebrew/lib/graphviz -L/usr/local/lib -L/usr/local/lib/graphviz")
+# On GitHub Actions, this folder is located elsewhere than on usual installations of homebrew. FIXME
 # On macOS, the QT libraries are usually not installed into the system library folders...
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 endif()
