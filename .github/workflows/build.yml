@@ -187,3 +187,35 @@ jobs:
         cd build
         cmake ..
         sudo make install
+    - name: prerequisites-pbrst
+      run: |
+        brew install bison m4
+        echo 'export PATH="/opt/homebrew/opt/bison/bin:$PATH"' >> /Users/runner/.bash_profile
+        echo 'export PATH="/opt/homebrew/opt/m4/bin:$PATH"' >> /Users/runner/.bash_profile
+    - name: Build bibref-pbrst
+      run: |
+        . /Users/runner/.bash_profile
+        mkdir build-pbrst
+        cd build-pbrst
+        cmake -DPBRST=ON ..
+        make
+    - name: prerequisites-qt
+      run: |
+        brew install qt graphviz
+    - name: Build bibref-qt
+      run: |
+        cd qt
+        mkdir build
+        cd build
+        . /Users/runner/.bash_profile
+        pkg-config libgvc --libs # Temporary info on GitHub's graphviz installation
+        cmake ..
+        make
+    - name: Build bibref-qt-pbrst
+      run: |
+        cd qt
+        mkdir build-pbrst
+        cd build-pbrst
+        . /Users/runner/.bash_profile
+        cmake -DPBRST=ON ..
+        make
