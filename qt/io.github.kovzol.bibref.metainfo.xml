@@ -46,6 +46,16 @@
   <content_rating type="oars-1.1" />
 
   <releases>
+    <release version="2025Jan09" date="2025-01-09">
+    <url type="details">https://github.com/kovzol/bibref/commits/a1ccc8a9da542c915d917db28b9c642c926d6fbf/</url>
+      <description>
+        <p>Release description</p>
+          <ul>
+            <li>Support for statements, see https://matek.hu/zoltan/blog-20250102.php</li>
+            <li>Several bugfixes
+          </ul>
+      </description>
+    </release>
     <release version="2024Sep26" date="2024-09-26">
     <url type="details">https://github.com/kovzol/bibref/commits/065710e4e8c03d35df4764713db3034616e867cd/</url>
       <description>

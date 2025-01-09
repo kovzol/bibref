@@ -1,5 +1,6 @@
 id: io.github.kovzol.bibref
 runtime: org.kde.Platform
+# TODO: Qt could be updated to 6.8 (or newer)
 runtime-version: '6.7'
 sdk: org.kde.Sdk
 command: bibref-qt
@@ -23,8 +24,24 @@ modules:
       - ./b2 -j $FLATPAK_BUILDER_N_JOBS install
     sources:
       - type: archive
-        url: https://boostorg.jfrog.io/artifactory/main/release/1.85.0/source/boost_1_85_0.tar.bz2
-        sha256: 7009fe1faa1697476bdc7027703a2badb84e849b7b0baad5086b087b971f8617
+        url: https://archives.boost.io/release/1.87.0/source/boost_1_87_0.tar.bz2
+        sha256: af57be25cb4c4f4b413ed692fe378affb4352ea50fbe294a11ef548f4d527d89
+
+  # TODO: graphviz could be updated to 12.2.1 (or newer)
+  - name: graphviz
+    buildsystem: simple
+    build-commands:
+      - tar xzf graphviz-11.0.0.tar.gz
+      - cd graphviz-11.0.0 && ./configure --prefix=${FLATPAK_DEST}  --without-x --with-qt=no --with-gtk=no --enable-swig=no --with-webp=no --with-rsvg=yes --with-visio=no --with-gdk-pixbuf=no --with-pangocairo=yes
+      - cd graphviz-11.0.0 && make install
+    cleanup:
+      - /share/man
+      - /share/graphviz
+    sources:
+      - type: file
+        url: https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/11.0.0/graphviz-11.0.0.tar.gz
+        sha256: 83eae0455463a0027de7e90b2af0671d0d78025a5645d832587c0a6602cd7cec
+
   - name: bibref-qt
     buildsystem: cmake-ninja
     subdir: qt
@@ -33,6 +50,7 @@ modules:
       - -DBUILD_SHARED_LIBS=ON
       - -UPROJECT_SOURCE_DIR
       - -DPROJECT_SOURCE_DIR=/app/share/bibref-qt
+      - -DPBRST=ON
     # The cmake machinery will put the required databases in $XDG_DATA_HOME (if it is set).
     # By setting that value we put the database to /app/tmp/.sword temporarily
     # and later we copy it to /app/share/sword in the post-install step:
@@ -40,8 +58,11 @@ modules:
       env:
         XDG_DATA_HOME: /app/tmp
     sources:
-      - type: git
-        url: https://github.com/kovzol/bibref
-        tag: 2024Sep26
+      # - type: git
+      # url: https://github.com/kovzol/bibref
+      # tag: 2025Jan09 # does not yet exist
+      - type: archive
+        url: https://github.com/kovzol/bibref/archive/a1ccc8a9da542c915d917db28b9c642c926d6fbf.zip
+        sha256: 3b989877637a2daa8eb348c0aaa498cfd149e529f3af65ca1ad77c3e120b5050
     post-install:
       - mv /app/tmp/.sword/* /app/share/sword
