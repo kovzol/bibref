@@ -150,3 +150,6 @@ install(FILES ../logo-Psalm40-256.png DESTINATION share/icons/hicolor/256x256/ap
 # Copy other freedesktop standard files:
 install(FILES io.github.kovzol.bibref.desktop DESTINATION share/applications)
 install(FILES io.github.kovzol.bibref.metainfo.xml DESTINATION share/metainfo)
+
+# Copy statements:
+install(DIRECTORY ../statements/SBLGNT/ DESTINATION share/bibref-qt PATTERN "all" EXCLUDE)
