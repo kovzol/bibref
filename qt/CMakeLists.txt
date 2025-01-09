@@ -152,4 +152,4 @@ install(FILES io.github.kovzol.bibref.desktop DESTINATION share/applications)
 install(FILES io.github.kovzol.bibref.metainfo.xml DESTINATION share/metainfo)
 
 # Copy statements:
-install(DIRECTORY ../statements/SBLGNT/ DESTINATION share/bibref-qt PATTERN "all" EXCLUDE)
+install(DIRECTORY ../statements/SBLGNT/ DESTINATION share/bibref-qt/statements PATTERN "all" EXCLUDE)
