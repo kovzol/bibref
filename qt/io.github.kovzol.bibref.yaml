@@ -12,10 +12,16 @@ modules:
   - name: sword
     buildsystem: cmake-ninja
     builddir: true
+    config-opts:
+      - -DSWORD_BUILD_UTILS=No
+      - -DSWORD_BUILD_EXAMPLES=No
+    cleanup:
+      - /bin/*
     sources:
       - type: archive
         url: https://www.crosswire.org/ftpmirror/pub/sword/source/v1.9/sword-1.9.0.tar.gz
         sha256: 42409cf3de2faf1108523e2c5ac0745d21f9ed2a5c78ed878ee9dcc303426b8a
+
   - name: boost
     buildsystem: simple
     build-commands:
@@ -26,20 +32,27 @@ modules:
         url: https://archives.boost.io/release/1.87.0/source/boost_1_87_0.tar.bz2
         sha256: af57be25cb4c4f4b413ed692fe378affb4352ea50fbe294a11ef548f4d527d89
 
-  # TODO: graphviz could be updated to 12.2.1 (or newer)
   - name: graphviz
     buildsystem: simple
     build-commands:
-      - tar xzf graphviz-11.0.0.tar.gz
-      - cd graphviz-11.0.0 && ./configure --prefix=${FLATPAK_DEST}  --without-x --with-qt=no --with-gtk=no --enable-swig=no --with-webp=no --with-rsvg=yes --with-visio=no --with-gdk-pixbuf=no --with-pangocairo=yes
-      - cd graphviz-11.0.0 && make install
+      - tar xzf graphviz-12.2.1.tar.gz
+      - |
+        cd graphviz-12.2.1 && ./configure --prefix=${FLATPAK_DEST} \
+          --without-x --with-qt=no --with-gtk=no --enable-swig=no --with-webp=no --with-rsvg=yes --with-visio=no \
+          --with-gdk-pixbuf=no --with-pangocairo=yes --enable-sharp=no --enable-go=no --enable-guile=no \
+          --enable-java=no --enable-lua=no --enable-perl=no --enable-lua=no --enable-python=no \
+          --enable-python3=no --enable-r=no --enable-ruby=no --enable-tcl=no --with-lasi=no \
+          --with-gtk=no --with-gtkgl=no --with-gtkglext=no --with-ann=no --with-glade=no --with-libgd=no \
+          --with-glut=no --with-sldp=no --with-smyrna=no --with-ortho=no --with-digcola=no --with-ipsepcola=no
+      - cd graphviz-12.2.1 && make install
     cleanup:
       - /share/man
       - /share/graphviz
+      - /bin/*
     sources:
       - type: file
-        url: https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/11.0.0/graphviz-11.0.0.tar.gz
-        sha256: 83eae0455463a0027de7e90b2af0671d0d78025a5645d832587c0a6602cd7cec
+        url: https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/12.2.1/graphviz-12.2.1.tar.gz
+        sha256: 242bc18942eebda6db4039f108f387ec97856fc91ba47f21e89341c34b554df8
 
   - name: bibref-qt
     buildsystem: cmake-ninja
@@ -61,7 +74,12 @@ modules:
       # url: https://github.com/kovzol/bibref
       # tag: 2025Jan09 # does not yet exist
       - type: archive
-        url: https://github.com/kovzol/bibref/archive/a1ccc8a9da542c915d917db28b9c642c926d6fbf.zip
-        sha256: 3b989877637a2daa8eb348c0aaa498cfd149e529f3af65ca1ad77c3e120b5050
+        url: https://github.com/kovzol/bibref/archive/609a3a296a1b3c124bf91e19ef2b28ab72702d18.zip
+        sha256: 74cc9549437e8c80973b823297cdbc68d80852906b5af9e0d77281dbd4696f86
     post-install:
       - mv /app/tmp/.sword/* /app/share/sword
+
+cleanup:
+  - /include
+  - /lib/cmake
+  - /lib/pkgconfig

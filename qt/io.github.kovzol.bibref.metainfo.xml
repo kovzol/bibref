@@ -52,7 +52,7 @@
         <p>Release description</p>
           <ul>
             <li>Support for statements, see https://matek.hu/zoltan/blog-20250102.php</li>
-            <li>Several bugfixes
+            <li>Several bugfixes</li>
           </ul>
       </description>
     </release>
