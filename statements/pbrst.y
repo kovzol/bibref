@@ -1326,6 +1326,8 @@ void create_dump() {
   strcat_interval(D, intervals[0][0], intervals[0][1]);
   strcat(D, " with\n");
   int iv=1;
+  if (no_evidence)
+    nt_intros_start = iv_counter; // maybe put this to an earlier point
   for (; iv<nt_intros_start; iv++) {
     strcat(D, " ");
     strcat_passage(D, books_s[iv], infos_s[iv], verses_s[iv]);
