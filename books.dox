@@ -15,6 +15,14 @@ string lookupVerse(const string& book, const string& info, const string& verse) 
  /// @param verse The traditionally numbered verse, e.g. "1:1".
 };
 ///
+/// Lookup a verse in a Bible edition, in a given book, a given passage.
+int lookupVerseStart(const string& book, const string& info, const string& verse) {
+ /// @param book The book, e.g. "Genesis".
+ /// @param info The Bible edition, e.g. "LXX".
+ /// @param verse The traditionally numbered verse, e.g. "1:1".
+ /// @return The start raw position.
+};
+///
 /// Get the fingerprint of a passage, given with starting position and length.
 Fingerprint getTextFingerprint(const string& book, const string& info, int start, int length);
 ///
@@ -133,7 +141,8 @@ string getRaw(const string& modulename, const string& book, int startPos, int le
  /// @param moduleName A Bible edition, e.g. "LXX".
  /// @param book A book in the give Bible, e.g. "Psalms".
  /// @param startPos First position in the a-y encoded text, in characters.
- /// @param length Length of the a-y encoded text.
+ /// @param length Length of the a-y encoded text. If length is -1 and startpos is 0,
+ /// the whole text is returned.
 };
 ///
 /// Convert Latin text to Greek.

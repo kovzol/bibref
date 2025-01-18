@@ -675,6 +675,17 @@ string lookupVerse(const string& book, const string& info, const string& verse) 
   }
 }
 
+int lookupVerseStart(const string& book, const string& info, const string& verse) {
+  try {
+    Book b = getBook(book, info);
+    int ret = b.getVerseStart(verse);
+    return ret;
+  } catch (exception &e) {
+    error(e.what());
+    throw InvalidVerseException;
+  }
+}
+
 Fingerprint getTextFingerprint(const string& book, const string& info, int start, int length) {
   return getFingerprint(getBook(book, info), start, length);
 }
@@ -1184,6 +1195,9 @@ int getPsalmLastVerse(const string& moduleName, int psalm) {
 string getRaw(const string& moduleName, const string& bookName, int startPos, int length) {
   Book b = getBook(bookName, moduleName);
   string text = b.getText();
+  // handle special request: if startPos == 0 and length == -1, we assume that the whole text is requested:
+  if (startPos == 0 && length == -1)
+    return text;
   if (startPos >= text.length() || startPos < 0 || length < 1 || startPos + length > text.length())
     throw InvalidPassageException;
   return text.substr(startPos, length);

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # This test assumes that ../pbrst-cli has already been compiled (via "make").
+# It detects fixable errors in raw positions.
 
 FOLDER=$1
 if [ "$FOLDER" = "" ]; then
@@ -9,18 +10,24 @@ if [ "$FOLDER" = "" ]; then
 
 c=0
 g=0
+r=0
 for i in $FOLDER/*.brst; do
  c=$((c+1))
  id=`basename $i .brst`
  l=$id.log
  pushd .. >/dev/null
  SE=1
- ./pbrst-cli tests/$i 2>&1 > tests/$l && SE=0
+ ./pbrst-cli -r tests/$i 2>&1 > tests/$l && SE=0
  if [ $SE = 0 ]; then
-  grep error tests/$l && echo "(proof error in $id)" || g=$((g+1))
+  E=1
+  grep error: tests/$l && echo "(proof error in $id)" || E=0
+  if [ $E = 0 ]; then
+   g=$((g+1))
+   grep --silent corrected: tests/$l && r=$((r+1))
+   fi
  else
   echo "syntax error in $id"
   fi
  popd >/dev/null
  done
-echo "Total: $c cases, $g correct, $((c-g)) erroneous"
+echo "Total: $c cases, $g valid, $((c-g)) erroneous, $r corrected"

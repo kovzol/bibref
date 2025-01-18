@@ -5,6 +5,7 @@
 
 int addBibles();
 string lookupVerse(const string& book, const string& info, const string& verse);
+int lookupVerseStart(const string& book, const string& info, const string& verse);
 Fingerprint getTextFingerprint(const string& book, const string& info, int start, int length);
 Fingerprint getTextFingerprint(const string& book, const string& info, const string& start, const string& end);
 Fingerprint getTextFingerprint(const string& book, const string& info, const string& start, const string& end, int startOffset, int endOffset);

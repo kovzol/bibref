@@ -108,3 +108,36 @@ EXTERNC char* getRaw1(const char* bookName0, const char* moduleName0, int startP
   strcpy(ret, gr.c_str());
   return ret;
 }
+
+EXTERNC int lookupVerseStart1(const char* book0, const char* info0, const char* verse0) {
+  string book1 = string(book0);
+  string info1 = string(info0);
+  string verse1 = string(verse0);
+
+  // Mostly taken from cli:
+  vector<string> tokens;
+  boost::split(tokens, verse1, boost::is_any_of(" "));
+  int restSize = tokens.size();
+  if (restSize == 1) {
+    try { // e.g. lookup1 LXX Genesis 1:1
+      return lookupVerseStart(book1, info1, verse1); // lookup in the a-y database
+    } catch (exception &e) {
+      return -1;
+    }
+  }
+  if (restSize == 2) { // e.g. lookup1 LXX Genesis 1:1+3 1:2-4
+    try {
+      vector<string> tokens2, tokens3;
+      int start = 0, end = 0;
+      boost::split(tokens2, tokens[0], boost::is_any_of("+"));
+      if (tokens2.size() > 1) {
+        start = stoi(tokens2[1]); // read off the plus shift
+      }
+      // Shift-allowed lookup in the a-y database...
+      return lookupVerseStart(book1, info1, tokens2.at(0)) + start;
+    } catch (exception &e) {
+      return -1;
+      }
+    }
+  return -1; // this should not happen
+}

@@ -60,12 +60,14 @@ char *str_replace(char *orig, char *rep, char *with) {
 int main(int ac, char **av)
 {
   extern FILE *yyin;
+  extern int correct_raw;
 
   bool colorize = false;
   bool graphviz = false;
+  correct_raw = 0;
 
   while (ac>1 && (!strcmp(av[1], "-d") || !strcmp(av[1], "-c")
-    || !strcmp(av[1], "-g") || !strcmp(av[1], "-h"))) {
+    || !strcmp(av[1], "-g") || !strcmp(av[1], "-r") || !strcmp(av[1], "-h"))) {
 
     if(!strcmp(av[1], "-h")) {
       printf("pbrst-cli [options] [input.brst], a command line brst parser\n");
@@ -74,6 +76,7 @@ int main(int ac, char **av)
       printf(" -d\tswitch debug mode on\n");
       printf(" -c\tcolorize output\n");
       printf(" -g\tshow only graphviz output\n");
+      printf(" -r\tcorrect raw positions\n");
       exit(0);
     }
 
@@ -87,6 +90,10 @@ int main(int ac, char **av)
 
     if(!strcmp(av[1], "-g")) {
       graphviz = true; ac--; av++;
+    }
+
+    if(!strcmp(av[1], "-r")) {
+      correct_raw = 1; ac--; av++;
     }
 
   }
@@ -117,16 +124,19 @@ int main(int ac, char **av)
     }
     if (colorize) {
 #define HRED "\e[0;91m"
+#define HMAG "\e[0;95m"
 #define HYEL "\e[0;93m"
 #define CYN "\e[0;36m"
 #define COLOR_RESET "\e[0m"
       char *pi2 = str_replace(parseinfo, ": error:", ": " HRED "error" COLOR_RESET ":");
       char *pi3 = str_replace(pi2, ": warning:", ": " HYEL "warning" COLOR_RESET ":");
       char *pi4 = str_replace(pi3, ": debug:", ": " CYN "debug" COLOR_RESET ":");
-      printf("%s", pi4);
+      char *pi5 = str_replace(pi4, ": corrected:", ": " HMAG "corrected" COLOR_RESET ":");
+      printf("%s", pi5);
       free(pi2);
       free(pi3);
       free(pi4);
+      free(pi5);
     } else printf("%s", parseinfo);
     printf("brst parse worked\n");
     printf("statement identifier: %s\n", stmt_identifier);

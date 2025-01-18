@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Change SBLGNT to StatResGNT in all files in the input folder $1.
+
+if [ "$1" = "" ]; then
+ echo "Usage: $0 <input folder>"
+ exit 1
+ fi
+
+find $1 -name '*.brst' | while read i; do
+ sed -i s/SBLGNT/StatResGNT/g $i
+ done
