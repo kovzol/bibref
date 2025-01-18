@@ -8,5 +8,7 @@ if [ "$1" = "" ]; then
  fi
 
 find $1 -name '*.brst' | while read i; do
+ echo $i
  sed -i s/SBLGNT/StatResGNT/g $i
+ ../pbrst-cli -r -U $i > $i.tmp && mv $i.tmp $i
  done

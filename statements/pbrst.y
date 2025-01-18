@@ -460,7 +460,7 @@ check_nt_passage(char *book, char *info, char *verse)
     } else {
     // TODO: This is fixable, the position should be corrected by getting the passage position:
     if (correct_raw == 1) {
-      int start = lookupVerseStart1(info, book, verse);
+      int start = lookupVerseStart1(info, book, verse) + 1;
       intervals[iv_counter-1][0] = start;
       intervals[iv_counter-1][1] = start + strlen(l) - 1;
       add_parseinfo("%d,%d: corrected: results of lookup and getraw did not match\n", yylineno, yycolumn);
@@ -473,7 +473,7 @@ check_nt_passage(char *book, char *info, char *verse)
   intervals[iv_counter-1][2] = NT_HEADLINE; // NT (headline)
   // strcpy(infos_s[iv_counter-1], nt_info);
   // strcpy(books_s[iv_counter-1], nt_book);
-  add_parseinfo("%d,%d: debug: interval %d %s is the headline NT passage\n", yylineno, yycolumn, iv_counter-1);
+  add_parseinfo("%d,%d: debug: interval %d %s %s is the headline NT passage\n", yylineno, yycolumn, iv_counter-1, nt_book, nt_info);
 #endif // IN_BIBREF
 }
 
@@ -524,7 +524,7 @@ check_ot_passage(char *book, char *info, char *verse)
     add_parseinfo("%d,%d: info: results of lookup and getraw match\n", yylineno, yycolumn);
     } else {
     if (correct_raw == 1) {
-      int start = lookupVerseStart1(ot_info, ot_book, ot_verse);
+      int start = lookupVerseStart1(ot_info, ot_book, ot_verse) + 1;
       intervals[iv_counter-1][0] = start;
       intervals[iv_counter-1][1] = start + strlen(l) - 1;
       add_parseinfo("%d,%d: corrected: results of lookup and getraw did not match\n", yylineno, yycolumn);
@@ -591,7 +591,7 @@ check_introduction_passage(char *passage, char *ay)
     add_parseinfo("%d,%d: info: results of lookup and getraw match\n", yylineno, yycolumn);
     } else { // try to fix the incorrect raw position:
     if (correct_raw == 1) {
-      int start = lookupVerseStart1(nt_info, nt_book, passage);
+      int start = lookupVerseStart1(nt_info, nt_book, passage) + 1;
       intervals[iv_counter-1][0] = start;
       intervals[iv_counter-1][1] = start + strlen(l) - 1;
       add_parseinfo("%d,%d: corrected: results of lookup and getraw did not match\n", yylineno, yycolumn);
@@ -633,6 +633,8 @@ check_fragment(char *passage, char *ay_nt, char *ay_ot) {
   extern int yylineno;
   extern int yycolumn;
 #ifdef IN_BIBREF
+  // At this point, we have not yet checked if the raw position of the NT part matches the verse.
+  // This is a technical issue, so we need to handle the situation here.
   char *ot_passage = malloc(strlen(ot_book) + 1 + strlen(ot_info) + 1 + strlen(ot_verse) + 1);
   strcpy(ot_passage, ot_book);
   strcat(ot_passage, " ");
@@ -646,6 +648,35 @@ check_fragment(char *passage, char *ay_nt, char *ay_ot) {
   else
     add_parseinfo("%d,%d: error: NT fragment %s does not match to a-y form %s, it should be %s\n", yylineno, yycolumn, passage, ay_nt, l);
   strcpy(fragments[iv_counter-2], l); // for the diagram
+
+  // Check the raw position.
+  char *r;
+  int length = intervals[iv_counter-2][1] - intervals[iv_counter-2][0] +1;
+  r = getRaw1(nt_info, nt_book, intervals[iv_counter-2][0] - 1, length);
+  if (strstr(r, "error: ") != NULL) {
+    add_parseinfo("%d,%d: %s\n", yylineno, yycolumn, r);
+    free(r);
+    return;
+  } else {
+    add_parseinfo("%d,%d: info: `getraw %s %s %d %d` = %s\n", yylineno, yycolumn, nt_book, nt_info,
+      intervals[iv_counter-2][0], length, r);
+  }
+  // Check if raw text matches with lookup's result:
+  if (strcmp(l, r)==0) {
+    add_parseinfo("%d,%d: info: results of lookup and getraw match\n", yylineno, yycolumn);
+    } else { // try to fix the incorrect raw position:
+    if (correct_raw == 1) {
+      int start = lookupVerseStart1(nt_info, nt_book, passage) + 1;
+      intervals[iv_counter-2][0] = start;
+      intervals[iv_counter-2][1] = start + strlen(l) - 1;
+      add_parseinfo("%d,%d: corrected: results of lookup and getraw did not match\n", yylineno, yycolumn);
+    } else {
+      add_parseinfo("%d,%d: error: results of lookup and getraw do not match\n", yylineno, yycolumn);
+    }
+  }
+  free(r);
+  // End of checking/fixing raw position.
+
   free(l);
   l = lookupVerse1(ot_info, ot_book, ot_verse);
   if (strcmp(l, ay_ot) == 0)
@@ -1295,11 +1326,11 @@ void create_dump() {
   strcat_interval(D, intervals[0][0], intervals[0][1]);
   strcat(D, " with\n");
   int iv=1;
-  for (int i=0; i<ot_books_n; i++, iv++) {
+  for (; iv<nt_intros_start; iv++) {
     strcat(D, " ");
-    strcat_passage(D, ot_books[i], ot_infos[i], ot_verses[i]);
+    strcat_passage(D, books_s[iv], infos_s[iv], verses_s[iv]);
     strcat_interval(D, intervals[iv][0], intervals[iv][1]);
-    if (i<ot_books_n-1)
+    if (iv<nt_intros_start-1)
       strcat(D, " and");
     else
       strcat(D, " based on");

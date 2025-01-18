@@ -2,7 +2,7 @@ BIBREF = -DIN_BIBREF
 # Disable this to not use bibref during parsing.
 
 CC = cc -g
-CXX = g++
+CXX = g++ -g
 LEX = flex
 YACC = bison
 CFLAGS = -DYYDEBUG=1 $(BIBREF)
@@ -24,10 +24,10 @@ pbrst.o:	pbrst.c pbrst.tab.h
 pbrst-cli.o:	pbrst-cli.c
 
 books-wrapper.o:	books-wrapper.cpp books-wrapper.h
-	${CXX} -o $@ -c $< -I/usr/include/sword
+	${CC} -o $@ -c $< -I/usr/include/sword
 
 fingerprint-wrapper.o:	fingerprint-wrapper.cpp fingerprint-wrapper.h
-	${CXX} -o $@ -c $<
+	${CC} -o $@ -c $<
 
 book.o:		book.cpp book.h
 	${CXX} -o $@ -c $<
