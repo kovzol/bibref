@@ -14,6 +14,7 @@
 #endif // IN_BIBREF
 
 char *stmt_identifier;
+double real_cover = 0.0;
 char *nt_book;
 char *nt_info;
 char *nt_verse;
@@ -30,7 +31,7 @@ char *ot_verse;
 #define MAX_BOOK_LENGTH 175000
 char introduction_substrings[MAX_SUBSTRINGS][MAX_SUBSTR_LENGTH + 1];
 int intervals[MAX_INTERVALS][3]; // start, end, type
-double intervals_data[MAX_INTERVALS]; // stored info (e.g., difference of fragments)
+double intervals_data[MAX_INTERVALS]; // stored info (e.g., difference of fragments, number of substrings)
 #define NT_HEADLINE 0
 #define NT_FRAGMENT 1
 #define OT_PASSAGE 2
@@ -58,6 +59,12 @@ char fragments[MAX_INTERVALS][MAX_SUBSTR_LENGTH];
 char books_s[MAX_INTERVALS][MAX_BOOKNAME_LENGTH]; // Bible editions
 char infos_s[MAX_INTERVALS][MAX_INFONAME_LENGTH]; // Bible books (in order of intervals)
 
+// These must be stored fully (for the dump):
+#define MAX_VERSE_LENGTH 30
+char verses_s[MAX_INTERVALS][MAX_VERSE_LENGTH];
+char declares[MAX_INTERVALS][MAX_SUBSTR_LENGTH];
+char identifies[MAX_INTERVALS][MAX_SUBSTR_LENGTH];
+
 bool unique_prep = false; // don't check unique occurrence (only if asked)
 bool addbooks_done = false;
 char *parseinfo = "";
@@ -70,6 +77,7 @@ bool no_evidence = false;
 // corrector options
 
 int correct_raw = 0; // fix raw positions if possible
+int show_dump = 0; // if requested, print internal dump in BRST format
 
 #ifdef IN_BIBREF
 void init_addbooks() {
@@ -225,7 +233,7 @@ int yylex (void);
 int yylex_destroy();
 void yyerror (char *s, ...);
 void check_rawposition_length(char *s);
-void save_string_in_introduction(char *s);
+void save_string_in_introduction(char *s, int t);
 void check_nt_passage(char *book, char *info, char *verse);
 void check_ot_passage(char *book, char *info, char *verse);
 void check_introduction_passage(char *passage, char *ay);
@@ -234,7 +242,8 @@ void check_unique_prepare();
 void check_fragment(char *passage, char *ay_nt, char *ay_ot);
 double myatof(char *arr);
 void create_diagram();
-void reset_data(int correct_raw);
+void create_dump();
+void reset_data(int cr, int sd);
 }
 
 %%
@@ -312,8 +321,8 @@ introduction_explanations
     : introduction_explanation | introduction_explanation ALSO introduction_explanations;
 
 introduction_explanation
-    : DECLARES A QUOTATION WITH STRING { save_string_in_introduction($<strval>5); }
-        | IDENTIFIES THE SOURCE WITH STRING { save_string_in_introduction($<strval>5); };
+    : DECLARES A QUOTATION WITH STRING { save_string_in_introduction($<strval>5, 0); }
+        | IDENTIFIES THE SOURCE WITH STRING { save_string_in_introduction($<strval>5, 1); };
 
 fragments
     : fragments_description
@@ -394,7 +403,7 @@ check_rawposition_length(char *s)
 }
 
 void
-save_string_in_introduction(char *s)
+save_string_in_introduction(char *s, int t) // t == 0: declares, t == 1: identifies
 {
   extern int yylineno;
   extern int yycolumn;
@@ -402,6 +411,8 @@ save_string_in_introduction(char *s)
   char *l;
   l = greekToLatin1(s);
   strcpy(introduction_substrings[substrings++], l);
+  if (t==0) strcpy(declares[iv_counter-1], s);
+  if (t==1) strcpy(identifies[iv_counter-1], s);
   add_parseinfo("%d,%d: debug: found %s in input\n", yylineno, yycolumn, l);
   free(l);
 #endif // IN_BIBREF
@@ -449,9 +460,10 @@ check_nt_passage(char *book, char *info, char *verse)
     } else {
     // TODO: This is fixable, the position should be corrected by getting the passage position:
     if (correct_raw == 1) {
+      int start = lookupVerseStart1(info, book, verse);
+      intervals[iv_counter-1][0] = start;
+      intervals[iv_counter-1][1] = start + strlen(l) - 1;
       add_parseinfo("%d,%d: corrected: results of lookup and getraw did not match\n", yylineno, yycolumn);
-      intervals[iv_counter-1][0] = lookupVerseStart1(info, book, verse);
-      intervals[iv_counter-1][1] = strlen(l);
     } else
       add_parseinfo("%d,%d: error: results of lookup and getraw do not match\n", yylineno, yycolumn);
     }
@@ -461,7 +473,7 @@ check_nt_passage(char *book, char *info, char *verse)
   intervals[iv_counter-1][2] = NT_HEADLINE; // NT (headline)
   // strcpy(infos_s[iv_counter-1], nt_info);
   // strcpy(books_s[iv_counter-1], nt_book);
-  add_parseinfo("%d,%d: debug: interval %d is a headline NT passage\n", yylineno, yycolumn, iv_counter-1);
+  add_parseinfo("%d,%d: debug: interval %d %s is the headline NT passage\n", yylineno, yycolumn, iv_counter-1);
 #endif // IN_BIBREF
 }
 
@@ -512,8 +524,9 @@ check_ot_passage(char *book, char *info, char *verse)
     add_parseinfo("%d,%d: info: results of lookup and getraw match\n", yylineno, yycolumn);
     } else {
     if (correct_raw == 1) {
-      intervals[iv_counter-1][0] = lookupVerseStart1(ot_info, ot_book, ot_verse);
-      intervals[iv_counter-1][1] = strlen(l);
+      int start = lookupVerseStart1(ot_info, ot_book, ot_verse);
+      intervals[iv_counter-1][0] = start;
+      intervals[iv_counter-1][1] = start + strlen(l) - 1;
       add_parseinfo("%d,%d: corrected: results of lookup and getraw did not match\n", yylineno, yycolumn);
       } else
         add_parseinfo("%d,%d: error: results of lookup and getraw do not match\n", yylineno, yycolumn);
@@ -537,6 +550,7 @@ check_ot_passage(char *book, char *info, char *verse)
 
   strcpy(infos_s[iv_counter-1], ot_info);
   strcpy(books_s[iv_counter-1], ot_book);
+  strcpy(verses_s[iv_counter-1], ot_verse); // for the dump
 #endif // IN_BIBREF
 }
 
@@ -568,6 +582,7 @@ check_introduction_passage(char *passage, char *ay)
   }
   // strcpy(infos_s[iv_counter-1], nt_info);
   // strcpy(books_s[iv_counter-1], nt_book);
+  strcpy(verses_s[iv_counter-1], passage); // for the dump
 
   if (err) return; // At least one of the checks was erroneous, so we return without comparison.
 
@@ -576,9 +591,10 @@ check_introduction_passage(char *passage, char *ay)
     add_parseinfo("%d,%d: info: results of lookup and getraw match\n", yylineno, yycolumn);
     } else { // try to fix the incorrect raw position:
     if (correct_raw == 1) {
+      int start = lookupVerseStart1(nt_info, nt_book, passage);
+      intervals[iv_counter-1][0] = start;
+      intervals[iv_counter-1][1] = start + strlen(l) - 1;
       add_parseinfo("%d,%d: corrected: results of lookup and getraw did not match\n", yylineno, yycolumn);
-      intervals[iv_counter-1][0] = lookupVerseStart1(nt_info, nt_book, passage);
-      intervals[iv_counter-1][1] = strlen(l);
     } else {
       add_parseinfo("%d,%d: error: results of lookup and getraw do not match\n", yylineno, yycolumn);
     }
@@ -663,6 +679,8 @@ check_fragment(char *passage, char *ay_nt, char *ay_ot) {
   free(ot_passage);
   intervals[iv_counter-2][2] = NT_FRAGMENT; // this is an NT fragment
   intervals[iv_counter-1][2] = OT_PASSAGE; // this is an OT fragment
+  strcpy(verses_s[iv_counter-2],passage); // for the dump
+
   intervals_data[iv_counter-2] = difference; // save data for the diagram
   intervals_data[iv_counter-1] = count; // save data for the diagram (TODO: consider showing this only if unique_prep)
   if (fragments_start == -1) fragments_start = iv_counter-2;
@@ -738,10 +756,10 @@ void check_cover(double cover) {
       }
     }
   }
-  double real_cover = (double)covered/union_length * 100.0;
+  real_cover = (double)covered/union_length * 100.0;
   if (fabs(real_cover-cover) <= 100*EPS) {
     add_parseinfo("%d,%d: info: cover %4.2f%% is correct\n", yylineno, yycolumn, cover);
-  } else {
+  } else { // TODO, fixable:
     add_parseinfo("%d,%d: error: cover %4.2f%% is incorrect (union length: %d, covered: %d), in reality %4.2f%%\n",
       yylineno, yycolumn, cover, union_length, covered, real_cover);
   }
@@ -923,13 +941,8 @@ double myatof(char *arr)
   else    return  val;
 }
 
-typedef struct yy_buffer_state * YY_BUFFER_STATE;
-extern int yyparse();
-extern YY_BUFFER_STATE yy_scan_string(char * str);
-extern void yy_delete_buffer(YY_BUFFER_STATE buffer);
-
-#define MAX_GRAPHVIZ_CODE_SIZE 16384
-char D[MAX_GRAPHVIZ_CODE_SIZE]; // diagram as text
+#define MAX_CODE_SIZE 16384
+char D[MAX_CODE_SIZE]; // diagram or dump as text
 void create_diagram() {
   if (no_evidence) return;
   strcpy(D, "");
@@ -1248,7 +1261,116 @@ void create_diagram() {
     "diagram: graphviz: end\n", D);
 }
 
-void reset_data(int correct_raw) { // important if a previous run was already performed
+void strcat_interval(char *str, int a, int b) {
+#define MAX_INTERVAL_STRING 50
+  char interval[MAX_INTERVAL_STRING];
+  sprintf(interval, " (%d-%d, length %d)", a, b, b-a+1);
+  strcat(str, interval);
+}
+
+void strcat_percent(char *str, double p) {
+#define MAX_PERCENT_STRING 15
+  char percent[MAX_PERCENT_STRING];
+  sprintf(percent, " %4.2f%%", p*100.0);
+  strcat(str, percent);
+}
+
+void strcat_passage(char *str, char *book, char *info, char *verse) {
+  strcat(str, book);
+  strcat(str, " ");
+  strcat(str, info);
+  strcat(str, " ");
+  strcat(str, verse);
+}
+
+void create_dump() {
+  strcpy(D, "");
+  strcat(D, "Statement ");
+  if (stmt_identifier != NULL) {
+    strcat(D, stmt_identifier);
+    strcat(D, " ");
+    }
+  strcat(D, "connects\n ");
+  strcat_passage(D, nt_book, nt_info, nt_verse);
+  strcat_interval(D, intervals[0][0], intervals[0][1]);
+  strcat(D, " with\n");
+  int iv=1;
+  for (int i=0; i<ot_books_n; i++, iv++) {
+    strcat(D, " ");
+    strcat_passage(D, ot_books[i], ot_infos[i], ot_verses[i]);
+    strcat_interval(D, intervals[iv][0], intervals[iv][1]);
+    if (i<ot_books_n-1)
+      strcat(D, " and");
+    else
+      strcat(D, " based on");
+    strcat(D, "\n");
+  }
+  if (no_evidence) {
+    strcat(D, "  no evidence.");
+  } else {
+  for (; iv<fragments_start; iv++) {
+    strcat(D, "  introduction ");
+    strcat(D, verses_s[iv]);
+    strcat_interval(D, intervals[iv][0], intervals[iv][1]);
+    strcat(D, " a-y form ");
+    strcat(D, fragments[iv]);
+    int infos = 0;
+    if (strlen(declares[iv])>0) {
+      strcat(D, " that\n   declares a quotation with ");
+      strcat(D, declares[iv]);
+      infos++;
+      }
+    if (strlen(identifies[iv])>0) {
+      if (infos>0)
+        strcat(D, " also\n");
+      else
+        strcat(D, " that\n");
+      strcat(D, "   identifies the source with ");
+      strcat(D, identifies[iv]);
+      infos++;
+      }
+    if (iv<fragments_start-1)
+      strcat(D, " and"); // there will be another introduction
+    else
+      strcat(D, " moreover"); // there will be no further introductions, fragments will come now
+    strcat(D, "\n");
+    }
+  for (; iv<iv_counter; iv++) {
+    strcat(D, "  fragment ");
+    strcat(D, verses_s[iv]);
+    strcat_interval(D, intervals[iv][0], intervals[iv][1]);
+    strcat(D, " a-y form ");
+    strcat(D, fragments[iv]);
+    strcat(D, "\n");
+    iv++;
+    strcat(D, "   matches ");
+    strcat_passage(D, books_s[iv], infos_s[iv], verses_s[iv]);
+    strcat_interval(D, intervals[iv][0], intervals[iv][1]);
+    strcat(D, " a-y form ");
+    strcat(D, fragments[iv]);
+    strcat(D, "\n");
+    if (intervals_data[iv] == 1) // count
+      strcat(D, "    unique in Old Testament\n");
+    double difference = intervals_data[iv-1];
+    if (fabs(difference) <= EPS)
+      strcat(D, "    verbatim");
+    else {
+      strcat(D, "    differing by");
+      strcat_percent(D, difference);
+    }
+    if (iv<iv_counter-1)
+      strcat(D, " and"); // there will be another fragment
+    strcat(D, "\n");
+    }
+  strcat(D, "  providing an overall cover of");
+  strcat_percent(D, real_cover/100);
+  strcat(D, ".");
+  } // else (there is evidence)
+  add_parseinfo("dump: brst: start\n%s\n"
+    "dump: brst: end\n", D);
+}
+
+void reset_data(int cr, int sd) { // important if a previous run was already performed
     extern int yycolumn;
     addbooks_done = true; // we assume it was already called
     yycolumn = 0;
@@ -1266,7 +1388,8 @@ void reset_data(int correct_raw) { // important if a previous run was already pe
     imin_i = INT_MAX, imax_i = 0;
     unique_prep = false;
     no_evidence = false;
-    correct_raw = 0;
+    correct_raw = cr;
+    show_dump = sd;
     // yydebug = 1;
 
     for (int i=0; i<MAX_INTERVALS; i++) {
@@ -1282,12 +1405,19 @@ void reset_data(int correct_raw) { // important if a previous run was already pe
     }
 }
 
-char* brst_scan_string(char *string, int correct_raw) {
-    reset_data(correct_raw);
+typedef struct yy_buffer_state * YY_BUFFER_STATE;
+extern int yyparse();
+extern YY_BUFFER_STATE yy_scan_string(char * str);
+extern void yy_delete_buffer(YY_BUFFER_STATE buffer);
+
+char* brst_scan_string(char *string, int cr, int sd) {
+    reset_data(cr, sd);
     YY_BUFFER_STATE buffer = yy_scan_string(string);
     yyparse();
     yy_delete_buffer(buffer);
     if (strstr(parseinfo, ": error: ") == NULL)
       create_diagram();
+    if (sd == 1)
+      create_dump();
     return parseinfo;
 }

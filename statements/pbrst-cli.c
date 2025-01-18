@@ -61,13 +61,16 @@ int main(int ac, char **av)
 {
   extern FILE *yyin;
   extern int correct_raw;
+  extern int show_dump;
 
   bool colorize = false;
   bool graphviz = false;
   correct_raw = 0;
+  show_dump = 0;
 
   while (ac>1 && (!strcmp(av[1], "-d") || !strcmp(av[1], "-c")
-    || !strcmp(av[1], "-g") || !strcmp(av[1], "-r") || !strcmp(av[1], "-h"))) {
+    || !strcmp(av[1], "-g") || !strcmp(av[1], "-r") || !strcmp(av[1], "-h")
+    || !strcmp(av[1], "-u"))) {
 
     if(!strcmp(av[1], "-h")) {
       printf("pbrst-cli [options] [input.brst], a command line brst parser\n");
@@ -77,6 +80,7 @@ int main(int ac, char **av)
       printf(" -c\tcolorize output\n");
       printf(" -g\tshow only graphviz output\n");
       printf(" -r\tcorrect raw positions\n");
+      printf(" -u\tshow BRST dump\n");
       exit(0);
     }
 
@@ -96,6 +100,10 @@ int main(int ac, char **av)
       correct_raw = 1; ac--; av++;
     }
 
+    if(!strcmp(av[1], "-u")) {
+      show_dump = 1; ac--; av++;
+    }
+
   }
 
   if(ac > 1 && (yyin = fopen(av[1], "r")) == NULL) {
@@ -110,6 +118,9 @@ int main(int ac, char **av)
     if (strstr(parseinfo, ": error: ") == NULL) {
       create_diagram();
     }
+    if (show_dump == 1) {
+      create_dump();
+      }
     if (graphviz) {
       char *g_start = strstr(parseinfo, "diagram: graphviz: start\n");
       if (g_start == NULL) exit(0); // empty output
