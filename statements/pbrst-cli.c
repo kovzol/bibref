@@ -67,10 +67,11 @@ int main(int ac, char **av)
   bool graphviz = false;
   correct_raw = 0;
   show_dump = 0;
+  bool show_only_dump = false;
 
   while (ac>1 && (!strcmp(av[1], "-d") || !strcmp(av[1], "-c")
     || !strcmp(av[1], "-g") || !strcmp(av[1], "-r") || !strcmp(av[1], "-h")
-    || !strcmp(av[1], "-u"))) {
+    || !strcmp(av[1], "-u") || !strcmp(av[1], "-U"))) {
 
     if(!strcmp(av[1], "-h")) {
       printf("pbrst-cli [options] [input.brst], a command line brst parser\n");
@@ -81,6 +82,7 @@ int main(int ac, char **av)
       printf(" -g\tshow only graphviz output\n");
       printf(" -r\tcorrect raw positions\n");
       printf(" -u\tshow BRST dump\n");
+      printf(" -U\tshow only BRST dump\n");
       exit(0);
     }
 
@@ -104,6 +106,10 @@ int main(int ac, char **av)
       show_dump = 1; ac--; av++;
     }
 
+    if(!strcmp(av[1], "-U")) {
+      show_dump = 1; show_only_dump = true; ac--; av++;
+    }
+
   }
 
   if(ac > 1 && (yyin = fopen(av[1], "r")) == NULL) {
@@ -120,6 +126,18 @@ int main(int ac, char **av)
     }
     if (show_dump == 1) {
       create_dump();
+      }
+    if (show_only_dump) {
+      char *d_start = strstr(parseinfo, "dump: brst: start\n");
+      if (d_start == NULL) exit(0); // empty output
+      d_start = strstr(d_start, "\n");
+      d_start++;
+      char *d_end = strstr(parseinfo, "dump: brst: end");
+      d_end[0] = '\0';
+      // Now d_start points to the beginning of the first line after "dump: brst: start"
+      // and the C string ends before the line "dump: brst: end"
+      printf("%s", d_start);
+      exit(0);
       }
     if (graphviz) {
       char *g_start = strstr(parseinfo, "diagram: graphviz: start\n");

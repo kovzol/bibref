@@ -796,7 +796,7 @@ void check_cover(double cover) {
   int nt_headline_start = intervals[0][0];
   int nt_headline_end = intervals[0][1];
   if (!(nt_headline_start == imin && nt_headline_end == imax)) {
-    if (nt_headline_start <= imin || nt_headline_end >= imax) {
+    if (nt_headline_start <= imin && nt_headline_end >= imax) {
     add_parseinfo("%d,%d: warning: NT headline interval [%d,%d] contains NT fragments union [%d,%d] but they do not match\n",
       yylineno, yycolumn, nt_headline_start, nt_headline_end, imin, imax);
     }
