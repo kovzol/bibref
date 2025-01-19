@@ -14,7 +14,7 @@
 #endif // IN_BIBREF
 
 char *stmt_identifier;
-double real_cover = 0.0;
+double stored_cover = 0.0;
 char *nt_book;
 char *nt_info;
 char *nt_verse;
@@ -73,10 +73,13 @@ int union_length, union_length_i;
 int imin_i = INT_MAX, imax_i = 0; // union interval of fragments intervals, including introductions
 
 bool no_evidence = false;
+bool fatal = false;
 
 // corrector options
 
 int correct_raw = 0; // fix raw positions if possible
+int correct_differ = 0; // fix differing percents if possible
+int correct_cover = 0; // fix covering percents if possible
 int show_dump = 0; // if requested, print internal dump in BRST format
 
 #ifdef IN_BIBREF
@@ -243,7 +246,7 @@ void check_fragment(char *passage, char *ay_nt, char *ay_ot);
 double myatof(char *arr);
 void create_diagram();
 void create_dump();
-void reset_data(int cr, int sd);
+void reset_data(int cr, int cd, int cc, int sd);
 }
 
 %%
@@ -388,7 +391,7 @@ check_rawposition_length(char *s)
       if (correct_raw == 1) {
         add_parseinfo("%d,%d: corrected: inconsistent length: %d-%d+1!=%d\n", yylineno, yycolumn, to, from, length);
       } else {
-        add_parseinfo("%d,%d: error: inconsistent length: %d-%d+1!=%d\n", yylineno, yycolumn, to, from, length);
+        add_parseinfo("%d,%d: error: correctable, inconsistent length: %d-%d+1!=%d\n", yylineno, yycolumn, to, from, length);
       }
     } else {
       add_parseinfo("%d,%d: info: consistent length: %d-%d+1==%d\n", yylineno, yycolumn, to, from, length);
@@ -437,6 +440,8 @@ check_nt_passage(char *book, char *info, char *verse)
     add_parseinfo("%d,%d: %s\n", yylineno, yycolumn, l);
     err = true;
     free(l);
+    fatal = true;
+    return; // this is fatal, because the other pieces of information won't override the badly formed passage
   } else {
     add_parseinfo("%d,%d: info: `lookup1 %s %s %s` = %s\n", yylineno, yycolumn, book, info, verse, l);
   }
@@ -447,15 +452,13 @@ check_nt_passage(char *book, char *info, char *verse)
   if (strstr(r, "error: ") != NULL) {
     add_parseinfo("%d,%d: %s\n", yylineno, yycolumn, r);
     err = true;
-    free(r);
   } else {
     add_parseinfo("%d,%d: info: `getraw %s %s %d %d` = %s\n", yylineno, yycolumn, book, info,
       intervals[iv_counter-1][0], length, r);
   }
-  if (err) return; // At least one of the checks was erroneous, so we return without comparison.
 
   // Check if raw text matches with lookup's result:
-  if (strcmp(l, r)==0) {
+  if (!err && strcmp(l, r)==0) {
     add_parseinfo("%d,%d: info: results of lookup and getraw match\n", yylineno, yycolumn);
     } else {
     // TODO: This is fixable, the position should be corrected by getting the passage position:
@@ -464,8 +467,12 @@ check_nt_passage(char *book, char *info, char *verse)
       intervals[iv_counter-1][0] = start;
       intervals[iv_counter-1][1] = start + strlen(l) - 1;
       add_parseinfo("%d,%d: corrected: results of lookup and getraw did not match\n", yylineno, yycolumn);
-    } else
-      add_parseinfo("%d,%d: error: results of lookup and getraw do not match\n", yylineno, yycolumn);
+    } else {
+        if (!err)
+          add_parseinfo("%d,%d: error: correctable, results of lookup and getraw do not match\n", yylineno, yycolumn);
+        else
+          add_parseinfo("%d,%d: error: results of lookup and getraw do not match\n", yylineno, yycolumn);
+      }
     }
   strcpy(fragments[iv_counter-1],l); // saved for the diagram (tooltip)
   free(l);
@@ -498,7 +505,9 @@ check_ot_passage(char *book, char *info, char *verse)
   l = lookupVerse1(info, book, verse);
   if (strstr(l, "error: ") != NULL) {
     add_parseinfo("%d,%d: %s\n", yylineno, yycolumn, l);
-    err = true;
+    free(l);
+    fatal = true;
+    return; // this is fatal
   } else {
     add_parseinfo("%d,%d: info: `lookup1 %s %s %s` = %s\n", yylineno, yycolumn, book, info, verse, l);
   }
@@ -512,15 +521,13 @@ check_ot_passage(char *book, char *info, char *verse)
   if (strstr(r, "error: ") != NULL) {
     add_parseinfo("%d,%d: %s\n", yylineno, yycolumn, r);
     err = true;
-    free(r);
   } else {
     add_parseinfo("%d,%d: info: `getraw %s %s %d %d` = %s\n", yylineno, yycolumn, ot_book, ot_info,
       intervals[iv_counter-1][0], length, r);
   }
-  if (err) return; // At least one of the checks was erroneous, so we return without comparison.
 
   // Check if raw text matches with lookup's result:
-  if (strcmp(l, r)==0) {
+  if (!err && strcmp(l, r)==0) {
     add_parseinfo("%d,%d: info: results of lookup and getraw match\n", yylineno, yycolumn);
     } else {
     if (correct_raw == 1) {
@@ -528,8 +535,12 @@ check_ot_passage(char *book, char *info, char *verse)
       intervals[iv_counter-1][0] = start;
       intervals[iv_counter-1][1] = start + strlen(l) - 1;
       add_parseinfo("%d,%d: corrected: results of lookup and getraw did not match\n", yylineno, yycolumn);
-      } else
-        add_parseinfo("%d,%d: error: results of lookup and getraw do not match\n", yylineno, yycolumn);
+      } else {
+        if (!err)
+          add_parseinfo("%d,%d: error: correctable, results of lookup and getraw do not match\n", yylineno, yycolumn);
+        else
+          add_parseinfo("%d,%d: error: results of lookup and getraw do not match\n", yylineno, yycolumn);
+        }
     }
   strcpy(fragments[iv_counter-1],l); // saved for the diagram (tooltip)
   free(l);
@@ -563,6 +574,14 @@ check_introduction_passage(char *passage, char *ay)
   char *l;
   bool err = false; // be optimistic
   l = lookupVerse1(nt_info, nt_book, passage);
+  if (strstr(l, "error: ") != NULL) {
+    add_parseinfo("%d,%d: %s\n", yylineno, yycolumn, l);
+    err = true;
+    strcpy(l, ay); // workaround, maybe the ay information is correct
+  } else {
+    add_parseinfo("%d,%d: info: `lookup1 %s %s %s` = %s\n", yylineno, yycolumn, nt_book, nt_info, passage, l);
+  }
+
   if (strcmp(l, ay) == 0)
     add_parseinfo("%d,%d: info: introduction %s matches to a-y form %s\n", yylineno, yycolumn, passage, ay);
   else {
@@ -575,7 +594,6 @@ check_introduction_passage(char *passage, char *ay)
   if (strstr(r, "error: ") != NULL) {
     add_parseinfo("%d,%d: %s\n", yylineno, yycolumn, r);
     err = true;
-    free(r);
   } else {
     add_parseinfo("%d,%d: info: `getraw %s %s %d %d` = %s\n", yylineno, yycolumn, nt_book, nt_info,
       intervals[iv_counter-1][0], length, r);
@@ -584,10 +602,8 @@ check_introduction_passage(char *passage, char *ay)
   // strcpy(books_s[iv_counter-1], nt_book);
   strcpy(verses_s[iv_counter-1], passage); // for the dump
 
-  if (err) return; // At least one of the checks was erroneous, so we return without comparison.
-
   // Check if raw text matches with lookup's result:
-  if (strcmp(l, r)==0) {
+  if (!err && strcmp(l, r)==0) {
     add_parseinfo("%d,%d: info: results of lookup and getraw match\n", yylineno, yycolumn);
     } else { // try to fix the incorrect raw position:
     if (correct_raw == 1) {
@@ -596,9 +612,12 @@ check_introduction_passage(char *passage, char *ay)
       intervals[iv_counter-1][1] = start + strlen(l) - 1;
       add_parseinfo("%d,%d: corrected: results of lookup and getraw did not match\n", yylineno, yycolumn);
     } else {
-      add_parseinfo("%d,%d: error: results of lookup and getraw do not match\n", yylineno, yycolumn);
+      if (!err)
+        add_parseinfo("%d,%d: error: correctable, results of lookup and getraw do not match\n", yylineno, yycolumn);
+      else
+        add_parseinfo("%d,%d: error: results of lookup and getraw do not match\n", yylineno, yycolumn);
+      }
     }
-  }
   strcpy(fragments[iv_counter-1],l); // saved for the diagram (tooltip)
   free(l);
   free(r);
@@ -641,13 +660,21 @@ check_fragment(char *passage, char *ay_nt, char *ay_ot) {
   strcat(ot_passage, ot_info);
   strcat(ot_passage, " ");
   strcat(ot_passage, ot_verse);
-  char *l;
-  l = lookupVerse1(nt_info, nt_book, passage);
-  if (strcmp(l, ay_nt) == 0)
+  char *ln;
+  bool err = false; // be optimistic
+  ln = lookupVerse1(nt_info, nt_book, passage);
+  if (strstr(ln, "error: ") != NULL) {
+    add_parseinfo("%d,%d: %s\n", yylineno, yycolumn, ln);
+    err = true;
+    strcpy(ln, ay_nt); // workaround, maybe the ay information is correct
+  } else {
+    add_parseinfo("%d,%d: info: `lookup1 %s %s %s` = %s\n", yylineno, yycolumn, ot_book, ot_info, ot_verse, ln);
+  }
+  if (strcmp(ln, ay_nt) == 0)
     add_parseinfo("%d,%d: info: NT fragment %s matches to a-y form\n", yylineno, yycolumn, passage);
   else
-    add_parseinfo("%d,%d: error: NT fragment %s does not match to a-y form %s, it should be %s\n", yylineno, yycolumn, passage, ay_nt, l);
-  strcpy(fragments[iv_counter-2], l); // for the diagram
+    add_parseinfo("%d,%d: error: NT fragment %s does not match to a-y form %s, it should be %s\n", yylineno, yycolumn, passage, ay_nt, ln);
+  strcpy(fragments[iv_counter-2], ln); // for the diagram
 
   // Check the raw position.
   char *r;
@@ -655,44 +682,57 @@ check_fragment(char *passage, char *ay_nt, char *ay_ot) {
   r = getRaw1(nt_info, nt_book, intervals[iv_counter-2][0] - 1, length);
   if (strstr(r, "error: ") != NULL) {
     add_parseinfo("%d,%d: %s\n", yylineno, yycolumn, r);
-    free(r);
-    return;
+    err = true;
   } else {
     add_parseinfo("%d,%d: info: `getraw %s %s %d %d` = %s\n", yylineno, yycolumn, nt_book, nt_info,
       intervals[iv_counter-2][0], length, r);
   }
   // Check if raw text matches with lookup's result:
-  if (strcmp(l, r)==0) {
+  if (!err && strcmp(ln, r)==0) {
     add_parseinfo("%d,%d: info: results of lookup and getraw match\n", yylineno, yycolumn);
     } else { // try to fix the incorrect raw position:
     if (correct_raw == 1) {
       int start = lookupVerseStart1(nt_info, nt_book, passage) + 1;
       intervals[iv_counter-2][0] = start;
-      intervals[iv_counter-2][1] = start + strlen(l) - 1;
+      intervals[iv_counter-2][1] = start + strlen(ln) - 1;
       add_parseinfo("%d,%d: corrected: results of lookup and getraw did not match\n", yylineno, yycolumn);
     } else {
-      add_parseinfo("%d,%d: error: results of lookup and getraw do not match\n", yylineno, yycolumn);
+      if (!err)
+        add_parseinfo("%d,%d: error: correctable, results of lookup and getraw do not match\n", yylineno, yycolumn);
+      else
+        add_parseinfo("%d,%d: error: results of lookup and getraw do not match\n", yylineno, yycolumn);
     }
   }
   free(r);
   // End of checking/fixing raw position.
 
-  free(l);
-  l = lookupVerse1(ot_info, ot_book, ot_verse);
-  if (strcmp(l, ay_ot) == 0)
+  char *lo;
+  lo = lookupVerse1(ot_info, ot_book, ot_verse);
+  if (strstr(lo, "error: ") != NULL) {
+    add_parseinfo("%d,%d: %s\n", yylineno, yycolumn, lo);
+    strcpy(lo, ay_ot); // workaround, maybe the ay information is correct
+  } else {
+    add_parseinfo("%d,%d: info: `lookup1 %s %s %s` = %s\n", yylineno, yycolumn, ot_book, ot_info, ot_verse, lo);
+  }
+  if (strcmp(lo, ay_ot) == 0)
     add_parseinfo("%d,%d: info: OT fragment %s matches to a-y form\n", yylineno, yycolumn, ot_passage);
   else
-    add_parseinfo("%d,%d: error: OT fragment %s does not match to a-y form %s, it should be %s\n", yylineno, yycolumn, ot_passage, ay_ot, l);
+    add_parseinfo("%d,%d: error: OT fragment %s does not match to a-y form %s, it should be %s\n", yylineno, yycolumn, ot_passage, ay_ot, lo);
   // add_parseinfo("%d,%d: debug: parsed ot_passage=%s ot_info=%s ot_book=%s ot_verse=%s ay_ot=%s diff=%f\n", yylineno, yycolumn, ot_passage, ot_info, ot_book, ot_verse, ay_ot, difference);
-  double jd = jaccard_dist1(ay_nt, ay_ot);
+  double jd = jaccard_dist1(ln, lo);
   if (fabs(jd-difference) <= EPS)
     add_parseinfo("%d,%d: info: fragments differ by %4.2f%%\n", yylineno, yycolumn, difference * 100.0);
-  else
-    add_parseinfo("%d,%d: error: fragments in reality differ by %4.2f%%\n", yylineno, yycolumn, jd * 100.0);
+  else {
+    if (correct_differ == 1) {
+      add_parseinfo("%d,%d: corrected: fragments in reality differed by %4.2f%%\n", yylineno, yycolumn, jd * 100.0);
+      difference = jd; // correction
+    } else
+      add_parseinfo("%d,%d: error: correctable, fragments in reality differ by %4.2f%%\n", yylineno, yycolumn, jd * 100.0);
+    }
   // Check uniqueness in OT:
   add_parseinfo("%d,%d: info: checking if OT passage is unique in OT: ", yylineno, yycolumn);
 #define MAX_FOUND 10
-  int count = find1(l, ot_book, MAX_FOUND);
+  int count = find1(lo, ot_book, MAX_FOUND);
   if (count == MAX_FOUND)
     add_parseinfo("no, at least %d occurrences\n", count);
   else if (count>1)
@@ -706,7 +746,8 @@ check_fragment(char *passage, char *ay_nt, char *ay_ot) {
     add_parseinfo("%d,%d: error: OT passage is not unique\n", yylineno, yycolumn);
   }
   unique_prep = false;
-  free(l);
+  free(ln);
+  free(lo);
   free(ot_passage);
   intervals[iv_counter-2][2] = NT_FRAGMENT; // this is an NT fragment
   intervals[iv_counter-1][2] = OT_PASSAGE; // this is an OT fragment
@@ -787,12 +828,18 @@ void check_cover(double cover) {
       }
     }
   }
-  real_cover = (double)covered/union_length * 100.0;
+  double real_cover = (double)covered/union_length * 100.0;
+  stored_cover = cover;
   if (fabs(real_cover-cover) <= 100*EPS) {
     add_parseinfo("%d,%d: info: cover %4.2f%% is correct\n", yylineno, yycolumn, cover);
-  } else { // TODO, fixable:
-    add_parseinfo("%d,%d: error: cover %4.2f%% is incorrect (union length: %d, covered: %d), in reality %4.2f%%\n",
-      yylineno, yycolumn, cover, union_length, covered, real_cover);
+  } else {
+    if (correct_cover == 1) {
+      add_parseinfo("%d,%d: corrected: cover %4.2f%% was incorrect (union length: %d, covered: %d), in reality %4.2f%%\n",
+        yylineno, yycolumn, cover, union_length, covered, real_cover);
+      stored_cover = real_cover;
+    } else
+      add_parseinfo("%d,%d: error: correctable, cover %4.2f%% is incorrect (union length: %d, covered: %d), in reality %4.2f%%\n",
+        yylineno, yycolumn, cover, union_length, covered, real_cover);
   }
   // Check if any NT introductions overlap any other introductions or fragments:
   bool overlap_error = false;
@@ -1315,6 +1362,7 @@ void strcat_passage(char *str, char *book, char *info, char *verse) {
 }
 
 void create_dump() {
+  if (fatal) return; // on a fatal error, we avoid dumping since the data structure may be inconsistent
   strcpy(D, "");
   strcat(D, "Statement ");
   if (stmt_identifier != NULL) {
@@ -1396,14 +1444,14 @@ void create_dump() {
     strcat(D, "\n");
     }
   strcat(D, "  providing an overall cover of");
-  strcat_percent(D, real_cover/100);
+  strcat_percent(D, stored_cover/100);
   strcat(D, ".");
   } // else (there is evidence)
   add_parseinfo("dump: brst: start\n%s\n"
     "dump: brst: end\n", D);
 }
 
-void reset_data(int cr, int sd) { // important if a previous run was already performed
+void reset_data(int cr, int cd, int cc, int sd) { // important if a previous run was already performed
     extern int yycolumn;
     addbooks_done = true; // we assume it was already called
     yycolumn = 0;
@@ -1421,7 +1469,10 @@ void reset_data(int cr, int sd) { // important if a previous run was already per
     imin_i = INT_MAX, imax_i = 0;
     unique_prep = false;
     no_evidence = false;
+    fatal = false;
     correct_raw = cr;
+    correct_differ = cd;
+    correct_cover = cc;
     show_dump = sd;
     // yydebug = 1;
 
@@ -1443,8 +1494,8 @@ extern int yyparse();
 extern YY_BUFFER_STATE yy_scan_string(char * str);
 extern void yy_delete_buffer(YY_BUFFER_STATE buffer);
 
-char* brst_scan_string(char *string, int cr, int sd) {
-    reset_data(cr, sd);
+char* brst_scan_string(char *string, int cr, int cd, int cc, int sd) {
+    reset_data(cr, cd, cc, sd);
     YY_BUFFER_STATE buffer = yy_scan_string(string);
     yyparse();
     yy_delete_buffer(buffer);

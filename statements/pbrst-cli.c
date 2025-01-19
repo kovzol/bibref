@@ -61,19 +61,25 @@ int main(int ac, char **av)
 {
   extern FILE *yyin;
   extern int correct_raw;
+  extern int correct_differ;
+  extern int correct_cover;
   extern int show_dump;
 
   bool colorize = false;
   bool graphviz = false;
   correct_raw = 0;
+  correct_differ = 0;
+  correct_cover = 0;
   show_dump = 0;
   bool show_only_dump = false;
 
   while (ac>1 && (!strcmp(av[1], "-d") || !strcmp(av[1], "-c")
-    || !strcmp(av[1], "-g") || !strcmp(av[1], "-r") || !strcmp(av[1], "-h")
+    || !strcmp(av[1], "-g") || !strcmp(av[1], "-r")
+    || !strcmp(av[1], "-D") || !strcmp(av[1], "-C")
+    || !strcmp(av[1], "-h")
     || !strcmp(av[1], "-u") || !strcmp(av[1], "-U"))) {
 
-    if(!strcmp(av[1], "-h")) {
+    if (!strcmp(av[1], "-h")) {
       printf("pbrst-cli [options] [input.brst], a command line brst parser\n");
       printf("Options:\n");
       printf(" -h\tthis help\n");
@@ -81,32 +87,42 @@ int main(int ac, char **av)
       printf(" -c\tcolorize output\n");
       printf(" -g\tshow only graphviz output\n");
       printf(" -r\tcorrect raw positions\n");
+      printf(" -D\tcorrect differings\n");
+      printf(" -C\tcorrect coverings\n");
       printf(" -u\tshow BRST dump\n");
       printf(" -U\tshow only BRST dump\n");
       exit(0);
     }
 
-    if(!strcmp(av[1], "-d")) {
+    if (!strcmp(av[1], "-d")) {
       yydebug = 1; ac--; av++;
     }
 
-    if(!strcmp(av[1], "-c")) {
+    if (!strcmp(av[1], "-c")) {
       colorize = true; ac--; av++;
     }
 
-    if(!strcmp(av[1], "-g")) {
+    if (!strcmp(av[1], "-g")) {
       graphviz = true; ac--; av++;
     }
 
-    if(!strcmp(av[1], "-r")) {
+    if (!strcmp(av[1], "-r")) {
       correct_raw = 1; ac--; av++;
     }
 
-    if(!strcmp(av[1], "-u")) {
+    if (!strcmp(av[1], "-D")) {
+      correct_differ = 1; ac--; av++;
+    }
+
+    if (!strcmp(av[1], "-C")) {
+      correct_cover = 1; ac--; av++;
+    }
+
+    if (!strcmp(av[1], "-u")) {
       show_dump = 1; ac--; av++;
     }
 
-    if(!strcmp(av[1], "-U")) {
+    if (!strcmp(av[1], "-U")) {
       show_dump = 1; show_only_dump = true; ac--; av++;
     }
 

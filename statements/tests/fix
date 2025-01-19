@@ -9,6 +9,9 @@ if [ "$1" = "" ]; then
 
 find $1 -name '*.brst' | while read i; do
  echo $i
- sed -i s/SBLGNT/StatResGNT/g $i
- ../pbrst-cli -r -U $i > $i.tmp && mv $i.tmp $i
+ cat $i | sed s/SBLGNT/StatResGNT/g > $i.tmp1
+ ../pbrst-cli -r -D -C -U $i.tmp1 > $i.tmp2
+ target=`readlink -f $i`
+ mv $i.tmp2 $target
+ rm $i.tmp1
  done
