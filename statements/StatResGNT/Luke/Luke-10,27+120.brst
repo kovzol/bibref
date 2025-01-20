@@ -1,0 +1,13 @@
+Statement Luke-10,27+120 connects # consider changing statement identifier
+ StatResGNT Luke 10:27+117 10:27 (43080-43101, length 22) with
+ LXX Leviticus 19:18+66 19:18-13 (60921-60942, length 22) based on
+  introduction 10:26 10:27-124 (42912-42977, length 66) a-y form odeeipenprosaytonentvnomvtigegraptaipvsanaginvskeisodeapokriueisei that
+   declares a quotation with 'τι γεγραπται; πως αναγινωσκεις' also
+   identifies the source with 'Εν τω νομω' and
+  introduction 10:27+114 10:27-22 (43077-43079, length 3) a-y form kai that
+   declares a quotation with 'και' moreover
+  fragment 10:27+117 10:27 (43080-43101, length 22) a-y form tonplhsionsoyvsseayton
+   matches LXX Leviticus 19:18+66 19:18-13 (60921-60942, length 22) a-y form tonplhsionsoyvsseayton
+    unique in Old Testament
+    verbatim
+  providing an overall cover of 100.00%.
