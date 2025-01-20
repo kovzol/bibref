@@ -53,7 +53,8 @@ int oimaxs[MAX_OT_BOOKS];
 char ot_books[MAX_OT_BOOKS][MAX_BOOKNAME_LENGTH];
 char ot_infos[MAX_OT_BOOKS][MAX_BOOKNAME_LENGTH];
 char ot_verses[MAX_OT_BOOKS][MAX_BOOKNAME_LENGTH];
-char fragments[MAX_INTERVALS][MAX_SUBSTR_LENGTH];
+#define MAX_FRAGMENT_LENGTH 5000
+char fragments[MAX_INTERVALS][MAX_FRAGMENT_LENGTH];
 
 // TODO: Store the index only instead of the whole string:
 char books_s[MAX_INTERVALS][MAX_BOOKNAME_LENGTH]; // Bible editions
