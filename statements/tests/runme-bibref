@@ -3,9 +3,15 @@
 # This test assumes that bibref with pbrst support has already been compiled.
 BIBREF=../build/bibref # change this accordingly
 
+FOLDER=$1
+if [ "$FOLDER" = "" ]; then
+ FOLDER=.
+ fi
+
 c=0
 g=0
-for i in *.brst; do
+FILES=`ls -1 $FOLDER/*.brst`
+for i in $FILES; do
  c=$((c+1))
  id=`basename $i .brst`
  l=$id.bibref.log

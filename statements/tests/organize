@@ -1,6 +1,10 @@
 #!/bin/bash
 
 # Organize q*.brst files into folders.
+# Since there are no longer q*.brst files in this folder,
+# this script has been obsoleted.
+
+exit 1
 
 for i in *.brst; do
  id=`basename $i .brst`
