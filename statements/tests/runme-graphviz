@@ -3,6 +3,11 @@
 # This test assumes that pbrst-cli has already been compiled.
 # It creates an HTML file with embedded SVG images.
 
+FOLDER=$1
+if [ "$FOLDER" = "" ]; then
+ FOLDER=.
+ fi
+
 HTML=graphviz.html
 HTML_SVG=graphviz-svg.html
 HTML_BRST_SVG=graphviz-brst-svg.html
@@ -13,8 +18,8 @@ echo "<html>
 <link rel=\"stylesheet\" type=\"text/css\" href=\"highlight.css\">
 <body>" > $HTML_BRST_SVG
 
-FILES=`ls -1 *.brst`
-F_NO=`ls -1 *.brst | wc -l`
+FILES=`ls -1 $FOLDER/*.brst`
+F_NO=`ls -1 $FOLDER/*.brst | wc -l`
 n=0
 for i in $FILES; do
  n=$((n+1))
