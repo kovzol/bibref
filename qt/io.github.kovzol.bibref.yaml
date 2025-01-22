@@ -8,6 +8,7 @@ finish-args:
   - --socket=fallback-x11
   - --socket=wayland
   - --device=dri
+  - --system-talk-name=org.freedesktop.UDisks2
 modules:
   - name: sword
     buildsystem: cmake-ninja
@@ -36,18 +37,12 @@ modules:
     buildsystem: simple
     build-commands:
       - tar xzf graphviz-12.2.1.tar.gz
-      - |
-        cd graphviz-12.2.1 && ./configure --prefix=${FLATPAK_DEST} \
-          --without-x --with-qt=no --with-gtk=no --enable-swig=no --with-webp=no --with-rsvg=yes --with-visio=no \
-          --with-gdk-pixbuf=no --with-pangocairo=yes --enable-sharp=no --enable-go=no --enable-guile=no \
-          --enable-java=no --enable-lua=no --enable-perl=no --enable-lua=no --enable-python=no \
-          --enable-python3=no --enable-r=no --enable-ruby=no --enable-tcl=no --with-lasi=no \
-          --with-gtk=no --with-gtkgl=no --with-gtkglext=no --with-ann=no --with-glade=no --with-libgd=no \
-          --with-glut=no --with-sldp=no --with-smyrna=no --with-ortho=no --with-digcola=no --with-ipsepcola=no
+      - cd graphviz-12.2.1 && ./configure --prefix=${FLATPAK_DEST}
       - cd graphviz-12.2.1 && make install
     cleanup:
       - /share/man
       - /share/graphviz
+      - /share/doc/graphviz
       - /bin/*
     sources:
       - type: file
@@ -72,10 +67,10 @@ modules:
     sources:
       # - type: git
       # url: https://github.com/kovzol/bibref
-      # tag: 2025Jan09 # does not yet exist
+      # tag: 2025Jan22 # does not yet exist
       - type: archive
-        url: https://github.com/kovzol/bibref/archive/4b97022c8410e32c1a1d3eb705de6bb878867d0a.zip
-        sha256: 2b4b64fc475d7bbd5bead9756ff07d8d427d3be644e92c15fdf2c864a7e0f3b4
+        url: https://github.com/kovzol/bibref/archive/986b4fdde8d5829807a99d43a3cdc5339a0ecfa8.zip
+        sha256: cff464d7f3b28a3905b2e758cf4a28fa75efc3668efb35f9eec5ceaac8cab14a
     post-install:
       - mv /app/tmp/.sword/* /app/share/sword
 
