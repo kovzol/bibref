@@ -46,6 +46,16 @@
   <content_rating type="oars-1.1" />
 
   <releases>
+    <release version="2025Jan22" date="2025-01-22">
+    <url type="details">https://github.com/kovzol/bibref/commits/07cfbb5d7eb8f06048da35d7195af2adf1981e8f/</url>
+      <description>
+        <p>Release description</p>
+          <ul>
+            <li>Support for statements from StatResGNT</li>
+            <li>Several bugfixes</li>
+          </ul>
+      </description>
+    </release>
     <release version="2025Jan09" date="2025-01-09">
     <url type="details">https://github.com/kovzol/bibref/commits/a1ccc8a9da542c915d917db28b9c642c926d6fbf/</url>
       <description>

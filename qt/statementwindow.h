@@ -36,6 +36,8 @@ private:
     Highlighter *highlighter;
 
     string graphviz_input;
+    QString directory;
+
 };
 
 #endif

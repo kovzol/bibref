@@ -90,5 +90,7 @@ for d in styles platforms; do
 
 # Create statements folder...
 mkdir $FOLDER/statements
-cp -a ../statements/SBLGNT/* $FOLDER/statements
+cp -a ../statements/SBLGNT $FOLDER/statements
+rm -fr $FOLDER/statements/all # don't need to have the copies
+cp -a ../statements/StatResGNT $FOLDER/statements
 rm -fr $FOLDER/statements/all # don't need to have the copies

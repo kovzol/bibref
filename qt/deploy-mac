@@ -27,7 +27,9 @@ test -d bin || {
     }
 
 mkdir -p "bin/bibref-qt.app/Contents/Resources/statements/"
-cp ../statements/SBLGNT/*/* bin/bibref-qt.app/Contents/Resources/statements/
+cp ../statements/SBLGNT/*/* bin/bibref-qt.app/Contents/Resources/statements/SBLGNT
+rm -fr bin/bibref-qt.app/Contents/Resources/statements/all
+cp ../statements/StatResGNT/*/* bin/bibref-qt.app/Contents/Resources/statements/StatResGNT
 rm -fr bin/bibref-qt.app/Contents/Resources/statements/all
 if [ -z "$2" ]; then
     $MACDEPLOYQT bin/bibref-qt.app -dmg

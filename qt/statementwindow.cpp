@@ -37,9 +37,34 @@ void StatementWindow::newFile()
 void StatementWindow::openFile(const QString &path)
 {
     QString fileName = path;
+    if (directory.isEmpty()) {
+      directory = qApp -> applicationDirPath();
+      QString d1 = directory + QDir::separator() + "statements";
+      const QFileInfo f1(d1);
+      QString d2 = directory + QDir::separator() + ".." + QDir::separator() + "statements";
+      const QFileInfo f2(d2);
+      QString d3 = directory + QDir::separator() + ".." + QDir::separator()
+        + ".." + QDir::separator() + "statements";
+      const QFileInfo f3(d3);
+      QString d4 = directory + QDir::separator() + ".." + QDir::separator()
+        + "share" + QDir::separator() + "statements";
+      const QFileInfo f4(d4);
+      if (f1.exists() && f1.isDir())
+        directory = d1;
+      else if (f2.exists() && f2.isDir())
+        directory = d2;
+      else if (f3.exists() && f3.isDir())
+        directory = d3;
+      else if (f4.exists() && f4.isDir())
+        directory = d4;
+      }
 
-    if (fileName.isNull())
-        fileName = QFileDialog::getOpenFileName(this, tr("Open File"), "", tr("bibref statement files (*.brst)"));
+    if (fileName.isNull()) {
+        fileName = QFileDialog::getOpenFileName(this, tr("Open File"), directory, tr("bibref statement files (*.brst)"));
+        QString basename = QUrl(fileName).fileName();
+        directory = fileName;
+        directory.remove(basename);
+        }
 
     if (!fileName.isEmpty()) {
         QFile file(fileName);
