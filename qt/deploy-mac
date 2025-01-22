@@ -27,6 +27,8 @@ test -d bin || {
     }
 
 mkdir -p "bin/bibref-qt.app/Contents/Resources/statements/"
+mkdir -p "bin/bibref-qt.app/Contents/Resources/statements/SBLGNT"
+mkdir -p "bin/bibref-qt.app/Contents/Resources/statements/StatResGNT"
 cp ../statements/SBLGNT/*/* bin/bibref-qt.app/Contents/Resources/statements/SBLGNT
 rm -fr bin/bibref-qt.app/Contents/Resources/statements/all
 cp ../statements/StatResGNT/*/* bin/bibref-qt.app/Contents/Resources/statements/StatResGNT
