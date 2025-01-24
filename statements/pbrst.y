@@ -368,7 +368,8 @@ void add_parseinfo(char *s, ...) {
 #define MAX_PARSEINFO_LINE_LENGTH 16384
   char *line = malloc(MAX_PARSEINFO_LINE_LENGTH);
   vsprintf(line, s, ap); // create line
-  // printf("%s", line); // print line
+  if (yydebug == 1)
+    printf("%s", line); // print line
   char *p1 = mystrcat(parseinfo, line); // store line
   free(parseinfo);
   parseinfo = p1;
@@ -655,6 +656,11 @@ check_fragment(char *passage, char *ay_nt, char *ay_ot) {
 #ifdef IN_BIBREF
   // At this point, we have not yet checked if the raw position of the NT part matches the verse.
   // This is a technical issue, so we need to handle the situation here.
+  if (ot_book == NULL || ot_info == NULL || ot_verse == NULL) {
+    add_parseinfo("%d,%d: debug: cannot identify OT passage, skipping fragment check for %s\n", yylineno, yycolumn, passage);
+    fatal = true;
+    return;
+    }
   char *ot_passage = malloc(strlen(ot_book) + 1 + strlen(ot_info) + 1 + strlen(ot_verse) + 1);
   strcpy(ot_passage, ot_book);
   strcat(ot_passage, " ");
@@ -772,6 +778,11 @@ void check_cover(double cover) {
   extern int yylineno;
   extern int yycolumn;
 #ifdef IN_BIBREF
+  if (ot_book == NULL || ot_info == NULL || ot_verse == NULL) {
+    add_parseinfo("%d,%d: debug: cannot identify OT passage, skipping cover check %4.2f%%\n", yylineno, yycolumn, cover);
+    fatal = true;
+    return;
+    }
   // Detecting intervals and the union of them:
   int imin = INT_MAX, imax = 0; // union interval of fragments intervals
   add_parseinfo("%d,%d: debug: NT fragment intervals:", yylineno, yycolumn);
