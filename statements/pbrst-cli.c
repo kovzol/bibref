@@ -170,11 +170,11 @@ int main(int ac, char **av)
     if (colorize) {
 #define HRED "\e[0;91m"
 #define HMAG "\e[0;95m"
-#define HYEL "\e[0;93m"
+#define YEL "\e[0;33m"
 #define CYN "\e[0;36m"
 #define COLOR_RESET "\e[0m"
       char *pi2 = str_replace(parseinfo, ": error:", ": " HRED "error" COLOR_RESET ":");
-      char *pi3 = str_replace(pi2, ": warning:", ": " HYEL "warning" COLOR_RESET ":");
+      char *pi3 = str_replace(pi2, ": warning:", ": " YEL "warning" COLOR_RESET ":");
       char *pi4 = str_replace(pi3, ": debug:", ": " CYN "debug" COLOR_RESET ":");
       char *pi5 = str_replace(pi4, ": corrected:", ": " HMAG "corrected" COLOR_RESET ":");
       printf("%s", pi5);
