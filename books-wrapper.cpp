@@ -21,7 +21,7 @@ EXTERNC char* lookupVerse1(const char* book0, const char* info0, const char* ver
   string book1 = string(book0);
   string info1 = string(info0);
   string verse1 = string(verse0);
-  string lv = "error: `lookup1 " + book1 + " " + info1 + " " + verse1 + "`";
+  string lv = "error: `lookup1 " + info1 + " " + book1 + " " + verse1 + "`";
 
   // Mostly taken from cli:
   vector<string> tokens;
