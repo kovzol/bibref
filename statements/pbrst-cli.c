@@ -63,6 +63,7 @@ int main(int ac, char **av)
   extern int correct_raw;
   extern int correct_differ;
   extern int correct_cover;
+  extern int correct_versification;
   extern int show_dump;
 
   bool colorize = false;
@@ -70,13 +71,14 @@ int main(int ac, char **av)
   correct_raw = 0;
   correct_differ = 0;
   correct_cover = 0;
+  correct_versification = 0;
   show_dump = 0;
   bool show_only_dump = false;
 
   while (ac>1 && (!strcmp(av[1], "-d") || !strcmp(av[1], "-c")
     || !strcmp(av[1], "-g") || !strcmp(av[1], "-r")
     || !strcmp(av[1], "-D") || !strcmp(av[1], "-C")
-    || !strcmp(av[1], "-h")
+    || !strcmp(av[1], "-h") || !strcmp(av[1], "-v")
     || !strcmp(av[1], "-u") || !strcmp(av[1], "-U"))) {
 
     if (!strcmp(av[1], "-h")) {
@@ -89,6 +91,7 @@ int main(int ac, char **av)
       printf(" -r\tcorrect raw positions\n");
       printf(" -D\tcorrect differings\n");
       printf(" -C\tcorrect coverings\n");
+      printf(" -v\tcorrect versification from KJV to LXX\n");
       printf(" -u\tshow BRST dump\n");
       printf(" -U\tshow only BRST dump\n");
       exit(0);
@@ -116,6 +119,10 @@ int main(int ac, char **av)
 
     if (!strcmp(av[1], "-C")) {
       correct_cover = 1; ac--; av++;
+    }
+
+    if (!strcmp(av[1], "-v")) {
+      correct_versification = 1; ac--; av++;
     }
 
     if (!strcmp(av[1], "-u")) {

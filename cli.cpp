@@ -8,7 +8,8 @@
 #include <vector>
 
 #ifdef WITH_PBRST
-extern "C" char* brst_scan_string(char *string, int correct_raw, int correct_differ, int correct_cover, int show_dump);
+extern "C" char* brst_scan_string(char *string, int correct_raw, int correct_differ,
+  int correct_cover, int correct_versification, int show_dump);
 // #include "statements/pbrst.tab.h" // use flex/bison parser for bibref statements (brst)
 #include "pbrst.tab.h" // the statements folder must be included among the folders
 #endif
@@ -852,7 +853,7 @@ void processGetrefsCmd(string input) {
 
 #ifdef WITH_PBRST
 void processStatementCmd(string input) {
-  char *output = brst_scan_string((char*)input.c_str(), 0, 0, 0, 0);
+  char *output = brst_scan_string((char*)input.c_str(), 0, 0, 0, 0, 0);
   string output_s(output);
   vector<string> statementAnalysis;
   boost::split(statementAnalysis, output_s, boost::is_any_of("\n"));

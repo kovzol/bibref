@@ -81,6 +81,7 @@ bool fatal = false;
 int correct_raw = 0; // fix raw positions if possible
 int correct_differ = 0; // fix differing percents if possible
 int correct_cover = 0; // fix covering percents if possible
+int correct_versification = 0; // fix versification related issues if possible
 int show_dump = 0; // if requested, print internal dump in BRST format
 
 #ifdef IN_BIBREF
@@ -247,7 +248,7 @@ void check_fragment(char *passage, char *ay_nt, char *ay_ot);
 double myatof(char *arr);
 void create_diagram();
 void create_dump();
-void reset_data(int cr, int cd, int cc, int sd);
+void reset_data(int cr, int cd, int cc, int cv, int sd);
 }
 
 %%
@@ -495,6 +496,72 @@ int detect_ot_book(char *book, char *info) {
   return -1; // not found
 }
 
+char *versification_to_lxx(char *book, char *info, char *verse) {
+  if (strcmp(book, "LXX") != 0) return NULL;
+  int c, c0, v1, v2, o1, o2, n, f;
+  f = 1;
+  n = sscanf(verse, "%d:%d+%d %d:%d-%d", &c, &v1, &o1, &c0, &v2, &o2);
+  if (n<6) {
+    f = 2;
+    n = sscanf(verse, "%d:%d %d:%d-%d", &c, &v1, &c0, &v2, &o2);
+    if (n<5) {
+      f = 3;
+      n = sscanf(verse, "%d:%d+%d %d:%d", &c, &v1, &o1, &c0, &v2);
+      if (n<5) {
+        f = 4;
+        n = sscanf(verse, "%d:%d %d:%d", &c, &v1, &c0, &v2);
+        if (n<4) {
+          f = 5;
+          v2 = -1; // unused
+          n = sscanf(verse, "%d:%d", &c, &v1);
+          if (n<2) {
+            f = 0; // unsuccessful
+            }
+          }
+        }
+      }
+    }
+  if (f==0) return NULL;
+
+  if (strcmp(info, "Psalms") == 0) {
+    // Shifting the verse number by 1 (or 2):
+    if (c>2 && c<150 && c!=14 && c!=16 && c!=24 && c!=32
+      && c!=78 && c!=82 && c!=91 && c!=94 && c!=95 && c!=104
+      && c!=109 && c!=110 && c!=112 && c!=114 && c!=116 && c!=117 && c!=118 && c!=132) {
+      if (v1>=1) {
+        v1++;
+        if (c==51) v1++;
+        }
+      if (v2>=1) {
+        v2++;
+        if (c==51) v2++;
+        }
+      }
+    // Shifting the chapter number by 1 (or 2):
+    if (c>10) {
+      if (c!=115 && !(c==116 && v1<10)) c--;
+      else c-=2;
+      }
+    // Now c contains the new chapter.
+    // Some verse numbers need to have further adjustments:
+    if (c==115) {
+      if (v1>=1) v1-=9;
+      if (v2>=1) v2-=9;
+      }
+    if (c==113) {
+      if (v1>=1) v1+=8;
+      if (v2>=1) v2+=8;
+      }
+    } // Psalms
+
+  char *ret = malloc(MAX_VERSE_LENGTH + 1);
+  if (f==1) sprintf(ret, "%d:%d+%d %d:%d-%d", c, v1, o1, c, v2, o2);
+  if (f==2) sprintf(ret, "%d:%d %d:%d-%d", c, v1, c, v2, o2);
+  if (f==3) sprintf(ret, "%d:%d+%d %d:%d", c, v1, o1, c, v2);
+  if (f==4) sprintf(ret, "%d:%d %d:%d", c, v1, c, v2);
+  if (f==5) sprintf(ret, "%d:%d", c, v1);
+  return ret;
+}
 
 void
 check_ot_passage(char *book, char *info, char *verse)
@@ -504,18 +571,29 @@ check_ot_passage(char *book, char *info, char *verse)
 #ifdef IN_BIBREF
   char *l;
   bool err = false; // be optimistic
-  l = lookupVerse1(info, book, verse);
+  char *verse_fixed = NULL;
+  if (correct_versification == 1) {
+    add_parseinfo("%d,%d: debug: attempt to correct verse in %s %s %s\n", yylineno, yycolumn, book, info, verse);
+    verse_fixed = versification_to_lxx(book, info, verse);
+  }
+  if (verse_fixed == NULL) {
+    ot_verse = strdup(verse);
+    }
+  else {
+    ot_verse = strdup(verse_fixed);
+    add_parseinfo("%d,%d: corrected: verse in %s %s %s changed to %s\n", yylineno, yycolumn, book, info, verse, verse_fixed);
+    }
+  l = lookupVerse1(info, book, ot_verse);
   if (strstr(l, "error: ") != NULL) {
     add_parseinfo("%d,%d: %s\n", yylineno, yycolumn, l);
     free(l);
     fatal = true;
     return; // this is fatal
   } else {
-    add_parseinfo("%d,%d: info: `lookup1 %s %s %s` = %s\n", yylineno, yycolumn, book, info, verse, l);
+    add_parseinfo("%d,%d: info: `lookup1 %s %s %s` = %s\n", yylineno, yycolumn, book, info, ot_verse, l);
   }
   ot_info = strdup(info);
   ot_book = strdup(book);
-  ot_verse = strdup(verse);
   // Get passage as raw text:
   char *r;
   int length = intervals[iv_counter-1][1] - intervals[iv_counter-1][0] +1;
@@ -1463,7 +1541,7 @@ void create_dump() {
     "dump: brst: end\n", D);
 }
 
-void reset_data(int cr, int cd, int cc, int sd) { // important if a previous run was already performed
+void reset_data(int cr, int cd, int cc, int cv, int sd) { // important if a previous run was already performed
     extern int yycolumn;
     addbooks_done = true; // we assume it was already called
     yycolumn = 0;
@@ -1485,6 +1563,7 @@ void reset_data(int cr, int cd, int cc, int sd) { // important if a previous run
     correct_raw = cr;
     correct_differ = cd;
     correct_cover = cc;
+    correct_versification = cv;
     show_dump = sd;
     // yydebug = 1;
 
@@ -1506,8 +1585,8 @@ extern int yyparse();
 extern YY_BUFFER_STATE yy_scan_string(char * str);
 extern void yy_delete_buffer(YY_BUFFER_STATE buffer);
 
-char* brst_scan_string(char *string, int cr, int cd, int cc, int sd) {
-    reset_data(cr, cd, cc, sd);
+char* brst_scan_string(char *string, int cr, int cd, int cc, int cv, int sd) {
+    reset_data(cr, cd, cc, cv, sd);
     YY_BUFFER_STATE buffer = yy_scan_string(string);
     yyparse();
     yy_delete_buffer(buffer);

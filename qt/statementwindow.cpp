@@ -10,7 +10,8 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/algorithm/string/split.hpp>
 
-extern "C" char* brst_scan_string(char *string, int correct_raw, int correct_differ, int correct_cover, int show_dump);
+extern "C" char* brst_scan_string(char *string, int correct_raw, int correct_differ,
+  int correct_cover, int correct_versification, int show_dump);
 #include "pbrst.tab.h" // the statements folder must be included among the folders
 
 using namespace std;
@@ -118,7 +119,7 @@ void StatementWindow::setupFileMenu()
 void StatementWindow::parse()
 {
 #ifdef WITH_PBRST
-    char* output = brst_scan_string((char*)editor->toPlainText().toStdString().c_str(), 0, 0, 0, 0);
+    char* output = brst_scan_string((char*)editor->toPlainText().toStdString().c_str(), 0, 0, 0, 0, 0);
     string output_s(output);
     vector<string> statementAnalysis;
     boost::split(statementAnalysis, output_s, boost::is_any_of("\n"));
