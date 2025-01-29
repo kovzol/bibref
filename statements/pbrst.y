@@ -496,6 +496,44 @@ int detect_ot_book(char *book, char *info) {
   return -1; // not found
 }
 
+void fix_verse(char *info, int *c, int *v) {
+  if (strcmp(info, "Psalms") == 0) {
+    // Shifting the verse number by 1 (or 2):
+    if ((*c)>2 && (*c)<150 && (*c)!=14 && (*c)!=16 && (*c)!=24 && (*c)!=32
+      && (*c)!=78 && (*c)!=82 && (*c)!=91 && (*c)!=94 && (*c)!=95 && (*c)!=104
+      && (*c)!=109 && (*c)!=110 && (*c)!=112 && (*c)!=114 && (*c)!=116 && (*c)!=117 && (*c)!=118 && (*c)!=132) {
+      (*v)++;
+      if ((*c)==51) (*v)++;
+      }
+    // Shifting the chapter number by 1 (or 2):
+    if ((*c)>10) {
+      if ((*c)!=115 && !((*c)==116 && (*v)<10)) (*c)--;
+      else (*c)-=2;
+      }
+    // Now (*c) contains the new chapter.
+    // Some verse numbers need to have further adjustments:
+    if ((*c)==115) (*v)-=9;
+    if ((*c)==113) (*v)+=8;
+    } // Psalms
+
+  if (strcmp(info, "Exodus") == 0) {
+    if ((*c)==20) {
+      if ((*v)==13) (*v)=15;
+      else if ((*v)==14) (*v)=13;
+      else if ((*v)==15) (*v)=14;
+      }
+    if ((*c)==21) {
+      if ((*v)==38) {
+        (*c)++;
+        (*v)=1;
+        }
+      else if ((*v)==16) (*v)=17;
+      else if ((*v)==17) (*v)=16;
+      }
+    if ((*c)==22) (*v)--;
+    } // Exodus
+  }
+
 char *versification_to_lxx(char *book, char *info, char *verse) {
   if (strcmp(book, "LXX") != 0) return NULL;
   int c, c2, v1, v2, o1, o2, n, f;
@@ -523,52 +561,8 @@ char *versification_to_lxx(char *book, char *info, char *verse) {
     }
   if (f==0) return NULL;
 
-  if (strcmp(info, "Psalms") == 0) {
-    // Shifting the verse number by 1 (or 2):
-    if (c>2 && c<150 && c!=14 && c!=16 && c!=24 && c!=32
-      && c!=78 && c!=82 && c!=91 && c!=94 && c!=95 && c!=104
-      && c!=109 && c!=110 && c!=112 && c!=114 && c!=116 && c!=117 && c!=118 && c!=132) {
-      v1++;
-      if (c==51) v1++;
-      if (v2>=1) {
-        v2++;
-        if (c==51) v2++;
-        }
-      }
-    // Shifting the chapter number by 1 (or 2):
-    if (c>10) {
-      if (c!=115 && !(c==116 && v1<10)) c--;
-      else c-=2;
-      }
-    // Now c contains the new chapter.
-    // Some verse numbers need to have further adjustments:
-    if (c==115) {
-      v1-=9;
-      if (v2>=1) v2-=9;
-      }
-    if (c==113) {
-      v1+=8;
-      if (v2>=1) v2+=8;
-      }
-    } // Psalms
-
-  if (strcmp(info, "Exodus") == 0) {
-    if (c==22) {
-      v1--;
-      if (v2>=1) v2--;
-      }
-    if (c==21 && v1==38) {
-      c++;
-      v1=1;
-      }
-    if (c==20) {
-      if (v1==13) v1=15;
-      else if (v1==14) v1=13;
-      else if (v1==15) v1=14;
-      }
-    } // Exodus
-  // FIXME: c2 is not checked at all! We silently assume that c==c2.
-  c2=c;
+  fix_verse(info, &c, &v1);
+  if (v2>=1) fix_verse(info, &c2, &v2);
 
   char *ret = malloc(MAX_VERSE_LENGTH + 1);
   if (f==1) sprintf(ret, "%d:%d+%d %d:%d-%d", c, v1, o1, c2, v2, o2);

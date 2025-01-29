@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # This test assumes that ../pbrst-cli has already been compiled (via "make").
-# It detects fixable errors in raw positions.
+# It detects fixable errors in raw positions (but it doesn't correct them in-place).
 
 FOLDER=$1
 if [ "$FOLDER" = "" ]; then
@@ -17,7 +17,8 @@ for i in $FOLDER/*.brst; do
  l=$id.log
  pushd .. >/dev/null
  SE=1
- ./pbrst-cli -r tests/$i 2>&1 > tests/$l && SE=0
+ echo $i...
+ ./pbrst-cli -r -v tests/$i 2>&1 > tests/$l && SE=0
  if [ $SE = 0 ]; then
   E=1
   grep error: tests/$l && echo "(proof error in $id)" || E=0
