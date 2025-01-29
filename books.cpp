@@ -23,6 +23,7 @@ using namespace std;
 #include "swtext.h"
 #include "markupfiltmgr.h"
 #include "utf8greekaccents.h"
+#include "versekey.h"
 
 #include "book.h"
 #include "fingerprint.h"
@@ -383,6 +384,15 @@ int lookupTranslation(string moduleName, string book, const string& verse) {
   boost::replace_all(book, "_", " ");
   string lookupString = book + " " + verse;
   module->setKey(lookupString.c_str());
+  // This seems to be required for some strange reason, see
+  // SWORD's example "simplechapter". We create the key from
+  // the lookup string (e.g. "Psalms 114:9") and then
+  // re-read it:
+  VerseKey *key = (VerseKey*) module->getKey();
+  int verseN = key->getVerse();
+  key->setVerse(verseN);
+  // Maybe, in some cases, this is required because of
+  // the internal structure of the module.
   string text;
   if (isOTBook(moduleName))
     text += ot_color;
