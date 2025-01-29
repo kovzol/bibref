@@ -532,6 +532,15 @@ void fix_verse(char *info, int *c, int *v) {
       }
     if ((*c)==22) (*v)--;
     } // Exodus
+  if (strcmp(info, "Jeremiah") == 0) {
+    if ((*c)==31) (*c)=38;
+    } // Jeremiah
+  if (strcmp(info, "Isaiah") == 0) {
+    if ((*c)==9) (*v)-=1;
+    } // Isaiah
+  if (strcmp(info, "Deuteronomy") == 0) {
+    if ((*c)==29) (*v)-=1;
+    } // Deuteronomy
   }
 
 char *versification_to_lxx(char *book, char *info, char *verse) {
