@@ -496,6 +496,7 @@ int detect_ot_book(char *book, char *info) {
   return -1; // not found
 }
 
+// This is incomplete. Mostly those verses will be fixes that are present in the statement database. FIXME.
 void fix_verse(char *info, int *c, int *v) {
   if (strcmp(info, "Psalms") == 0) {
     // Shifting the verse number by 1 (or 2):
@@ -536,8 +537,35 @@ void fix_verse(char *info, int *c, int *v) {
     if ((*c)==31) (*c)=38;
     } // Jeremiah
   if (strcmp(info, "Isaiah") == 0) {
-    if ((*c)==9) (*v)-=1;
+    if ((*c)==9 && (*v)==1) {
+      (*c)--;
+      (*v)=23;
+      }
+    if ((*c)==9 && (*v)>=2) (*v)--;
     } // Isaiah
+  if (strcmp(info, "Hosea") == 0) {
+    if ((*c)==1 && (*v)==10) {
+      (*c)++;
+      (*v)=1;
+      }
+    } // Hosea
+  if (strcmp(info, "Jonah") == 0) {
+    if ((*c)==1 && (*v)==17) {
+      (*c)++;
+      (*v)=1;
+      }
+    } // Jonah
+  if (strcmp(info, "Joel") == 0) {
+    if ((*c)==2 && (*v)>=28) {
+      (*c)++;
+      (*v)-=27;
+      }
+    } // Joel
+  if (strcmp(info, "Micah") == 0) {
+    if ((*c)==5 && (*v)>=2) {
+      (*v)--;
+      }
+    } // Micah
   if (strcmp(info, "Deuteronomy") == 0) {
     if ((*c)==29) (*v)-=1;
     } // Deuteronomy
