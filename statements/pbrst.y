@@ -498,18 +498,18 @@ int detect_ot_book(char *book, char *info) {
 
 char *versification_to_lxx(char *book, char *info, char *verse) {
   if (strcmp(book, "LXX") != 0) return NULL;
-  int c, c0, v1, v2, o1, o2, n, f;
+  int c, c2, v1, v2, o1, o2, n, f;
   f = 1;
-  n = sscanf(verse, "%d:%d+%d %d:%d-%d", &c, &v1, &o1, &c0, &v2, &o2);
+  n = sscanf(verse, "%d:%d+%d %d:%d-%d", &c, &v1, &o1, &c2, &v2, &o2);
   if (n<6) {
     f = 2;
-    n = sscanf(verse, "%d:%d %d:%d-%d", &c, &v1, &c0, &v2, &o2);
+    n = sscanf(verse, "%d:%d %d:%d-%d", &c, &v1, &c2, &v2, &o2);
     if (n<5) {
       f = 3;
-      n = sscanf(verse, "%d:%d+%d %d:%d", &c, &v1, &o1, &c0, &v2);
+      n = sscanf(verse, "%d:%d+%d %d:%d", &c, &v1, &o1, &c2, &v2);
       if (n<5) {
         f = 4;
-        n = sscanf(verse, "%d:%d %d:%d", &c, &v1, &c0, &v2);
+        n = sscanf(verse, "%d:%d %d:%d", &c, &v1, &c2, &v2);
         if (n<4) {
           f = 5;
           v2 = -1; // unused
@@ -528,10 +528,8 @@ char *versification_to_lxx(char *book, char *info, char *verse) {
     if (c>2 && c<150 && c!=14 && c!=16 && c!=24 && c!=32
       && c!=78 && c!=82 && c!=91 && c!=94 && c!=95 && c!=104
       && c!=109 && c!=110 && c!=112 && c!=114 && c!=116 && c!=117 && c!=118 && c!=132) {
-      if (v1>=1) {
-        v1++;
-        if (c==51) v1++;
-        }
+      v1++;
+      if (c==51) v1++;
       if (v2>=1) {
         v2++;
         if (c==51) v2++;
@@ -545,20 +543,38 @@ char *versification_to_lxx(char *book, char *info, char *verse) {
     // Now c contains the new chapter.
     // Some verse numbers need to have further adjustments:
     if (c==115) {
-      if (v1>=1) v1-=9;
+      v1-=9;
       if (v2>=1) v2-=9;
       }
     if (c==113) {
-      if (v1>=1) v1+=8;
+      v1+=8;
       if (v2>=1) v2+=8;
       }
     } // Psalms
 
+  if (strcmp(info, "Exodus") == 0) {
+    if (c==22) {
+      v1--;
+      if (v2>=1) v2--;
+      }
+    if (c==21 && v1==38) {
+      c++;
+      v1=1;
+      }
+    if (c==20) {
+      if (v1==13) v1=15;
+      else if (v1==14) v1=13;
+      else if (v1==15) v1=14;
+      }
+    } // Exodus
+  // FIXME: c2 is not checked at all! We silently assume that c==c2.
+  c2=c;
+
   char *ret = malloc(MAX_VERSE_LENGTH + 1);
-  if (f==1) sprintf(ret, "%d:%d+%d %d:%d-%d", c, v1, o1, c, v2, o2);
-  if (f==2) sprintf(ret, "%d:%d %d:%d-%d", c, v1, c, v2, o2);
-  if (f==3) sprintf(ret, "%d:%d+%d %d:%d", c, v1, o1, c, v2);
-  if (f==4) sprintf(ret, "%d:%d %d:%d", c, v1, c, v2);
+  if (f==1) sprintf(ret, "%d:%d+%d %d:%d-%d", c, v1, o1, c2, v2, o2);
+  if (f==2) sprintf(ret, "%d:%d %d:%d-%d", c, v1, c2, v2, o2);
+  if (f==3) sprintf(ret, "%d:%d+%d %d:%d", c, v1, o1, c2, v2);
+  if (f==4) sprintf(ret, "%d:%d %d:%d", c, v1, c2, v2);
   if (f==5) sprintf(ret, "%d:%d", c, v1);
   return ret;
 }
