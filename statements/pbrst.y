@@ -800,7 +800,7 @@ check_fragment(char *passage, char *ay_nt, char *ay_ot) {
     err = true;
     strcpy(ln, ay_nt); // workaround, maybe the ay information is correct
   } else {
-    add_parseinfo("%d,%d: info: `lookup1 %s %s %s` = %s\n", yylineno, yycolumn, ot_book, ot_info, ot_verse, ln);
+    add_parseinfo("%d,%d: info: `lookup1 %s %s %s` = %s\n", yylineno, yycolumn, nt_book, nt_info, passage, ln);
   }
   if (strcmp(ln, ay_nt) == 0)
     add_parseinfo("%d,%d: info: NT fragment %s matches to a-y form\n", yylineno, yycolumn, passage);
