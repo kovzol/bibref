@@ -413,10 +413,27 @@ int addBooks_cached(string moduleName) {
     bookNames={"Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy",
                "Joshua", "Judges", "Ruth",
                "I_Samuel", "II_Samuel", "I_Kings", "II_Kings", "I_Chronicles", "II_Chronicles",
-               "Ezra", "Nehemiah", "Esther", "Job", "Psalms", "Proverbs", "Ecclesiastes", "Song_of_Solomon",
-               "Isaiah", "Jeremiah", "Lamentations", "Ezekiel", "Daniel",
-               "Hosea", "Joel", "Amos", "Obadiah", "Jonah", "Micah",
-               "Nahum", "Habakkuk", "Zephaniah", "Haggai", "Zechariah", "Malachi"};
+               "I_Esdras",
+               "Ezra", "Nehemiah", "Esther",
+               "Judith", "Tobit", "I_Maccabees", "II_Maccabees", "III_Maccabees", "IV_Maccabees",
+               "Psalms",
+               "Prayer_of_Manasses", // missing from LXX 3.0
+               "Proverbs", "Ecclesiastes", "Song_of_Solomon",
+               "Job",
+               "Wisdom", "Sirach", "Psalms_of_Solomon",
+               "Hosea", "Amos", "Micah", "Joel", "Obadiah", "Jonah",
+               "Nahum", "Habakkuk", "Zephaniah", "Haggai", "Zechariah", "Malachi",
+               "Isaiah", "Jeremiah",
+               "Baruch",
+               "Lamentations", "Epistle_of_Jeremiah",
+               "Ezekiel",
+               "Prayer_of_Azariah", // missing from LXX 3.0
+               "Susanna",
+               "Daniel",
+               "Bel_and_the_Dragon",
+               "I_Enoch", // missing from LXX 3.0
+               "Odes"
+               };
   }
   if (isNTBook(moduleName)) { // These books should be loaded from the New Testament...
     bookNames={"Matthew", "Mark", "Luke", "John", "Acts",
@@ -439,6 +456,8 @@ int addBooks_cached(string moduleName) {
   for (vector<string>::iterator i=bookNames.begin(); i!=bookNames.end(); ++i) {
     string bookName = *i;
     std::ifstream bookFile(path + "/" + bookName + ".book"); // open a-y encoded raw book
+    if (!bookFile.good()) continue; // do not continue for this book, because it does not exist in the module
+    // TODO: This check should be done for the other file types to handle non-existence properly
     std::stringstream buffer;
     buffer << bookFile.rdbuf();
     Book book = Book(bookName);
@@ -459,6 +478,7 @@ int addBooks_cached(string moduleName) {
     int start, end, tokensStart, tokensEnd;
     try {
       char reference[8]; // Psalms 119:176 needs 7 characters + "\n"
+      // cout << bookName << endl;
       while (fscanf(verseFile, "%7s %d %d %d %d", reference, &start, &end, &tokensStart, &tokensEnd) != EOF) {
         if (bookName == "Psalms") {
           vector<string> r;
@@ -504,7 +524,8 @@ int addBooks(string moduleName, string firstVerse, string lastVerse, bool remove
   // It's better to avoid LXX 3.0, it is a completely different edition!
   if (moduleName == "LXX" && version == "3.0") {
     removeAccents = true; // force removing accents
-    lastVerse = "Daniel 12:13"; // order of books is different
+    // lastVerse = "Daniel 12:13"; // order of books is different
+    lastVerse = "Odes 1:19"; // order of books is different
   }
 
   // Set first and last verses of the book.
