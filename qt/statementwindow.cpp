@@ -50,6 +50,9 @@ void StatementWindow::openFile(const QString &path)
       QString d4 = directory + QDir::separator() + ".." + QDir::separator()
         + "share" + QDir::separator() + "statements";
       const QFileInfo f4(d4);
+      QString d5 = directory + QDir::separator() + ".." + QDir::separator()
+        + "Resources" + QDir::separator() + "statements";
+      const QFileInfo f5(d5);
       if (f1.exists() && f1.isDir())
         directory = d1;
       else if (f2.exists() && f2.isDir())
@@ -58,6 +61,8 @@ void StatementWindow::openFile(const QString &path)
         directory = d3;
       else if (f4.exists() && f4.isDir())
         directory = d4;
+      else if (f5.exists() && f5.isDir())
+        directory = d5;
       }
 
     if (fileName.isNull()) {

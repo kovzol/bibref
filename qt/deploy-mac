@@ -1,13 +1,19 @@
 #!/bin/sh
 
-# Usage: ./deploy-mac [build-dir] [codesign]
-# where build-dir is the folder where the executable has already been built (by default, "build/")
+# Usage: ./deploy-mac [build-dir] [cache-dir] [codesign]
+# where build-dir is the folder where the executable has already been built (by default, "build/"),
+# cache-dir is the folder where the bibref-addbooks-cache indices are present,
 # and codesign is the input for performing an optional code signing.
 
 BUILD_DIR="$1"
 
 if [ "$BUILD_DIR" = "" ]; then
  BUILD_DIR="build/"
+ fi
+
+CACHE_DIR="$2"
+if [ "$CACHE_DIR" = "" ]; then
+ CACHE_DIR="../build/bibref-addbooks-cache"
  fi
 
 MACDEPLOYQT=$(command -v macdeployqt)
@@ -21,10 +27,18 @@ test -d "$BUILD_DIR/bibref-qt.app/" || {
     exit 2
     }
 
-test -d bin || {
-    mkdir bin
-    cp -R $BUILD_DIR/bibref-qt.app bin
+test -d bin && {
+    echo "The bin folder should be removed first."
+    exit 3
     }
+
+test -d "$CACHE_DIR" || {
+    echo "Build the cli version first and generate the cache via addbooks."
+    exit 4
+    }
+
+mkdir bin
+cp -R $BUILD_DIR/bibref-qt.app bin
 
 mkdir -p "bin/bibref-qt.app/Contents/Resources/statements/"
 mkdir -p "bin/bibref-qt.app/Contents/Resources/statements/SBLGNT"
@@ -38,8 +52,11 @@ rm -fr bin/bibref-qt.app/Contents/Resources/statements/all
 unzip ../sword-lxx-sblgnt-statresgnt-kjv-fallback.zip -d bin/bibref-qt.app/Contents/Resources
 mv bin/bibref-qt.app/Contents/Resources/.sword bin/bibref-qt.app/Contents/Resources/sword
 
-if [ -z "$2" ]; then
+# Put the cache in the bundle
+cp -R $CACHE_DIR bin/bibref-qt.app/Contents/Resources
+
+if [ -z "$3" ]; then
     $MACDEPLOYQT bin/bibref-qt.app -dmg
 else
-    $MACDEPLOYQT bin/bibref-qt.app -dmg -codesign="$2"
+    $MACDEPLOYQT bin/bibref-qt.app -dmg -codesign="$3"
 fi

@@ -6,34 +6,21 @@
 
 using namespace std;
 
-// Taken from https://forum.qt.io/topic/105993/copy-folder-qt-c/5
-void copyAndReplaceFolderContents(const QString &fromDir, const QString &toDir, bool copyAndRemove = false) {
-    QDirIterator it(fromDir, QDirIterator::Subdirectories);
-    QDir dir(fromDir);
-    const int absSourcePathLength = dir.absoluteFilePath(fromDir).length();
+void copyPath(QString src, QString dst)
+{
+    QDir dir(src);
+    if (! dir.exists())
+        return;
 
-    while (it.hasNext()){
-        it.next();
-        const auto fileInfo = it.fileInfo();
-        if(!fileInfo.isHidden()) { //filters dot and dotdot
-            const QString subPathStructure = fileInfo.absoluteFilePath().mid(absSourcePathLength);
-            const QString constructedAbsolutePath = toDir + subPathStructure;
-
-            if(fileInfo.isDir()){
-                //Create directory in target folder
-                dir.mkpath(constructedAbsolutePath);
-            } else if(fileInfo.isFile()) {
-                //Copy File to target directory
-
-                //Remove file at target location, if it exists, or QFile::copy will fail
-                QFile::remove(constructedAbsolutePath);
-                QFile::copy(fileInfo.absoluteFilePath(), constructedAbsolutePath);
-            }
-        }
+    foreach (QString d, dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot)) {
+        QString dst_path = dst + QDir::separator() + d;
+        dir.mkpath(dst_path);
+        copyPath(src+ QDir::separator() + d, dst_path);
     }
 
-    if(copyAndRemove)
-        dir.removeRecursively();
+    foreach (QString f, dir.entryList(QDir::Files)) {
+        QFile::copy(src + QDir::separator() + f, dst + QDir::separator() + f);
+    }
 }
 
 // This copies the SWORD modules bundle (assumed in Contents/Resources/sword) to ~/.sword.
@@ -49,11 +36,12 @@ void copy_sword_files() {
       return;
       }
     QString appDirectory = qApp -> applicationDirPath();
-    QString d2 = appDirectory + QDir::separator() + "Resources" + QDir::separator() + "sword";
+    QString d2 = appDirectory + QDir::separator() + ".." + QDir::separator() + "Resources" + QDir::separator() + "sword";
     const QFileInfo f2(d2);
     if (f2.exists() && f2.isDir()) {
       cout << d1.toStdString() << " does not exist, creating it from bundle" << endl;
-      copyAndReplaceFolderContents(d2, d1, false);
+      // copyAndReplaceFolderContents(d2, d1, false);
+      copyPath(d2,d1);
       }
     else {
       cout << d2.toStdString() << " does not exist, expect problems" << endl;
@@ -110,6 +98,12 @@ int main(int argc, char *argv[])
     if (home)
        std::filesystem::current_path(std::getenv("XDG_DATA_HOME"));
     copy_sword_files();
+#ifdef __APPLE__
+    // Set current working directory to Resources to have direct access to the cache:
+    QString workingDirectory = qApp -> applicationDirPath();
+    QString d1 = workingDirectory + QDir::separator() + ".." + QDir::separator() + "Resources";
+    QDir::setCurrent(d1);
+#endif // __APPLE__
     window.show();
     return app.exec();
 }
