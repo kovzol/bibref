@@ -98,6 +98,12 @@ int main(int argc, char *argv[])
     if (home)
        std::filesystem::current_path(std::getenv("XDG_DATA_HOME"));
     copy_sword_files();
+#ifdef __APPLE__
+    // Set current working directory to Resources to have direct access to the cache:
+    QString workingDirectory = qApp -> applicationDirPath();
+    QString d1 = workingDirectory + QDir::separator() + ".." + QDir::separator() + "Resources";
+    QDir::setCurrent(d1);
+#endif // __APPLE__
     window.show();
     return app.exec();
 }
