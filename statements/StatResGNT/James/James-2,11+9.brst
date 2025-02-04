@@ -1,14 +1,14 @@
 Statement James-2,11+9 connects
  StatResGNT James 2:11+9 2:11-46 (3009-3037, length 29) with
- LXX Exodus 20:13 20:14 (57313-57335, length 23) based on
+ LXX Exodus 20:13 20:15 (57313-57344, length 32) based on
   introduction 2:11 2:11-75 (3000-3008, length 9) a-y form ogareipvn that
    declares a quotation with 'ο γαρ ειπων' and
   introduction 2:11+20 2:11-56 (3020-3027, length 8) a-y form eipenkai that
    declares a quotation with 'ειπεν και' moreover
   fragment 2:11+9 2:11-64 (3009-3019, length 11) a-y form mhmoixeyshs
-   matches LXX Exodus 20:14 20:14 (57324-57335, length 12) a-y form oymoixeyseis
+   matches LXX Exodus 20:13 20:13 (57313-57324, length 12) a-y form oymoixeyseis
     differing by 45.45% and
   fragment 2:11+28 2:11-46 (3028-3037, length 10) a-y form mhfoneyshs
-   matches LXX Exodus 20:13 20:13 (57313-57323, length 11) a-y form oyfoneyseis
+   matches LXX Exodus 20:15 20:15 (57334-57344, length 11) a-y form oyfoneyseis
     differing by 50.00%
   providing an overall cover of 72.41%.

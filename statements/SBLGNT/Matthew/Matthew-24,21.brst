@@ -1,18 +1,11 @@
 Statement Matthew-24,21 connects
- SBLGNT Matthew 24:21 24:21 (71007-71078) with
- LXX Daniel 12:1+80 12:1-111 (44448-44485) based on
-  introduction 24:15+34 24:15-33 (70700-70726) a-y form torhuendiadanihltoyprofhtoy that
+ SBLGNT Matthew 24:21+12 24:21-54 (71019-71024, length 6) with
+ LXX Daniel 12:1+95 12:1-115 (51628-51634, length 7) based on
+  introduction 24:15+34 24:15-33 (70700-70726, length 27) a-y form torhuendiadanihltoyprofhtoy that
    identifies the source with 'Δανιηλ του προφητου' and
-  introduction 24:21+5 24:21-60 (71012-71018) a-y form gartote
+  introduction 24:21+5 24:21-60 (71012-71018, length 7) a-y form gartote
    declares a quotation with 'γαρ' moreover
-  fragment 24:21 24:21-67 (71007-71011, length 5) a-y form estai
-   matches LXX Daniel 12:1+80 12:1-144 (44448-44452, length 5) a-y form estai
-    verbatim and
-  fragment 24:21+12 24:21-34 (71019-71044, length 26) a-y form ulicismegalhoiaoygegonenap
-   matches LXX Daniel 12:1+98 12:1-111 (44466-44485, length 20) a-y form ulicisoiaoygegonenaf
-    unique in Old Testament
-    differing by 32.00% and
-  fragment 24:21+61 24:21 (71068-71078, length 11) a-y form oymhgenhtai
-   matches LXX Daniel 12:1+118 12:1-100 (44486-44496, length 11) a-y form oygegenhtai
-    differing by 30.00%
-  providing an overall cover of 58.33%.
+  fragment 24:21+12 24:21-54 (71019-71024, length 6) a-y form ulicis
+   matches LXX Daniel 12:1+95 12:1-115 (51628-51634, length 7) a-y form ulicevs
+    differing by 50.00%
+  providing an overall cover of 100.00%.

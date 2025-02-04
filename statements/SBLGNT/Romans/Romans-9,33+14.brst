@@ -1,8 +1,8 @@
 Statement Romans-9,33+14 connects
- SBLGNT Romans 9:33+14 9:33 (20445-20531) with # 10:11-5 (20445-21344) with
- LXX Isaiah 8:14+48 8:14-94 (16771-16786) and
- LXX Isaiah 28:16+24 28:16 (52716-52834) based on
-  introduction 9:33 9:33-87 (20431-20444) a-y form kauvsgegraptai that
+ SBLGNT Romans 9:33+14 9:33 (20445-20531, length 87) with
+ LXX Isaiah 8:14+48 8:14-94 (16771-16786, length 16) and
+ LXX Isaiah 28:16+24 28:16 (52716-52834, length 119) based on
+  introduction 9:33 9:33-87 (20431-20444, length 14) a-y form kauvsgegraptai that
    declares a quotation with 'καθως γεγραπται' moreover
   fragment 9:33+14 9:33-83 (20445-20448, length 4) a-y form idoy
    matches LXX Isaiah 28:16+24 28:16-115 (52716-52719, length 4) a-y form idoy
@@ -21,11 +21,5 @@ Statement Romans-9,33+14 connects
   fragment 9:33+65 9:33 (20496-20531, length 36) a-y form kaiopisteyvnepaytvoykataisxynuhsetai
    matches LXX Isaiah 28:16+110 28:16 (52802-52834, length 33) a-y form kaiopisteyvnepaytvoymhkataisxynuh
     unique in Old Testament
-    differing by 17.14% # and
-#  fragment 10:11+17 10:11-5 (21317-21344, length 28) a-y form opisteyvnepaytvoykataisxynuh
-#   matches LXX Isaiah 28:16+113 28:16 (52805-52834, length 30) a-y form opisteyvnepaytvoymhkataisxynuh
-#    unique in Old Testament
-#    differing by 10.34%
-## This clearly does not belong to Romans 9:33, but it is used for a second time in Romans 10:11.
-#  providing an overall cover of 10.56%.
+    differing by 17.14%
   providing an overall cover of 77.01%.
