@@ -46,7 +46,7 @@
   <content_rating type="oars-1.1" />
 
   <releases>
-    <release version="2025Feb04" date="2025-02-04">
+    <release version="2025-02-04" date="2025-02-04">
     <url type="details">https://github.com/kovzol/bibref/commits/bf1755970b07db4649ef2993a041556dd4943298/</url>
       <description>
         <p>Release description</p>
