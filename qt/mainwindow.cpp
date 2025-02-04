@@ -35,7 +35,7 @@ extern char* output_prepend_set;
 
 string lookupText = "LXX Genesis 1:1";              // example
 string extendText = "LXX StatResGNT Romans 3:13";   // example
-string getrefsText = "StatResGNT LXX Psalms 117:1"; // example
+string getrefsText = "StatResGNT LXX Psalms 116:1"; // example
 string rawText = "LXX Genesis 1 10";                // example
 string searchText = "LXX 2097 1515 189 3";          // example
 
@@ -921,9 +921,9 @@ void MainWindow::tutorial()
                "(Importantly, the modules KJV and StatResGNT need to be installed by the system "
                "administrator in advance. See Help&gt;Show available Bibles… for your options in "
                "simple lookups.) "
-               "By doing the same for Romans 2:22, Exodus 20:14 and 20:15, the "
+               "By doing the same for Romans 2:22, and for LXX Exodus 20:13 and 20:14, the "
                "user decides to compare the Greek texts <b>ου μοιχευσεις ου κλεψεις</b> "
-               "and <b>κλεπτεις ο λεγων μη μοιχευειν μοιχευεις</b>. These should copied and "
+               "and <b>κλεπτεις ο λεγων μη μοιχευειν μοιχευεις</b>. These should be copied and "
                "pasted in Edit&gt;Text 1… and Edit&gt;Text 2… After then, "
                "the program informs the user that the two texts have a Jaccard distance "
                "near 0.63 (which is a substantial distance).")
@@ -937,34 +937,34 @@ void MainWindow::tutorial()
           + tr(
               "Now, the user loads the indexed Bibles via File&gt;Add books. Several features "
               "of the program can be used from now on. For example, the user can put "
-              "the a-y transcription of a part of Psalms 40:13-17 and 70:1-5 in the two "
+              "the a-y transcription of a part of Psalms 39:14-18 and 69:1-6 in the two "
               "clipboards. "
               "(Note that these texts are numbered as 40:14-18 and 70:1-6 in some Bible editions.) "
               "This is achievable via Passage&gt;Lookup 1… and Passage&gt;Lookup 2… by typing "
-              "<b>LXX Psalms 40:13+23 40:17</b> and <b>LXX Psalms 70:1+37 70:5</b>, respectively. "
+              "<b>LXX Psalms 39:14+23 39:18</b> and <b>LXX Psalms 69:1+37 69:6</b>, respectively. "
               "This notation allows to cut the first 23 or 37 letters of the passages. "
               "(Analogously, appending a number with a minus sign to the end of the passage "
               "definition, "
               "it is possible to cut some of the last letters of the passages.) "
               "The Jaccard distance is near 0.19 (which means a close relationship).")
           + "</li>" + "<li>"
-          + tr("The user wants to check if Exodus 20:13-17 is repeated in the Old Testament. "
+          + tr("The user wants to check if Exodus 20:13 is repeated in the Old Testament. "
                "By putting this passage in Passage&gt;Lookup 1… by typing "
-               "<b>LXX Exodus 20:13 20:17</b> it is possible to start a search for an exact "
+               "<b>LXX Exodus 20:13</b> it is possible to start a search for an exact "
                "match via Edit&gt;Search 1… By selecting <b>LXX</b>, the program finds another "
                "match in Deuteronomy "
-               "5:17-21. Book position 19880-20171 means that the second match can be found in "
-               "Raw&gt;Raw… by entering <b>LXX Deuteronomy 19880 292</b> (here 292 is the "
+               "5:17. Book position 19880-19891 means that the second match can be found in "
+               "Raw&gt;Raw… by entering <b>LXX Deuteronomy 19880 12</b> (here 12 is the "
                "length), or stored in "
                "clipboard 2 with the same input in Raw&gt;Raw 2… Here, the Jaccard distance of "
                "the texts in the clipboards is 0 (because they are identical).")
           + "</li>" + "<li>"
-          + tr("The user thinks that parts of Psalm 117 are quoted somewhere in the New Testament. "
+          + tr("The user thinks that parts of Psalm 116 are quoted somewhere in the New Testament. "
                "The command Quotation&gt;Get refs… with parameters <b>StatResGNT LXX Psalms "
-               "117</b> "
+               "116</b> "
                "starts a search for all possible matches where the Old Testament passage can be a "
                "unique "
-               "text that is quoted in the New Testament. Among other candidates, Romans 15:11 "
+               "text that is quoted in the New Testament. Here, Romans 15:11 "
                "seems to be a plausible result.")
           + "</li>" + "<li>"
           + tr("The user would like to identify the quotation mentioned by Paul "
@@ -978,8 +978,8 @@ void MainWindow::tutorial()
                "After checking these numbers, 2744, 1722 and 2962 seem relevant. "
                "A search via Edit&gt;Search… with parameters <b>LXX 2744 1722 2962 6</b> "
                "shows that on a length of 6 tokens there is only one match in the Old Testament, "
-               "namely, in Jeremiah 9:23. Another search with parameters <b>StatResGNT 2744 1722 "
-               "2962 3</b> "
+               "namely, in Jeremiah 9:22, and, among the deuterocanonical books, in Sirach 39:8. "
+               "Another search with parameters <b>StatResGNT 2744 1722 2962 3</b> "
                "informs the user on a second match in the New Testament, namely, in II Corinthians "
                "10:17.")
           + "</li>" + "</ol>"

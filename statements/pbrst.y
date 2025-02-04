@@ -500,6 +500,7 @@ int detect_ot_book(char *book, char *info) {
 void fix_verse(char *info, int *c, int *v) {
   if (strcmp(info, "Psalms") == 0) {
     // Shifting the verse number by 1 (or 2):
+    // TODO: check Psalm 70, KJV-versification 70:1-5 needs to be LXX-versification 69:1-6
     if ((*c)>2 && (*c)<150 && (*c)!=14 && (*c)!=16 && (*c)!=24 && (*c)!=32
       && (*c)!=78 && (*c)!=82 && (*c)!=91 && (*c)!=94 && (*c)!=95 && (*c)!=104
       && (*c)!=109 && (*c)!=110 && (*c)!=112 && (*c)!=114 && (*c)!=116 && (*c)!=117 && (*c)!=118 && (*c)!=132) {

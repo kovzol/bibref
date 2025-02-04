@@ -73,8 +73,10 @@ jobs:
       run: |
         . emsdk/emsdk_env.sh
         yes | emmake make
-    - name: db-full
-      run: cd docs/common && make && make svgs && make statements.brst.html
+# FIXME: The SQL database has been obsoleted, instead of using it,
+# another set of visualization/checking tools should be utilized.
+#    - name: db-full
+#      run: cd docs/common && make && make svgs && make statements.brst.html
     - name: doc-hu
       run: cd docs/hu && make || true # LaTeX seems to be broken on Ubuntu 22.04...
 
