@@ -33,6 +33,11 @@ cp ../statements/SBLGNT/*/* bin/bibref-qt.app/Contents/Resources/statements/SBLG
 rm -fr bin/bibref-qt.app/Contents/Resources/statements/all
 cp ../statements/StatResGNT/*/* bin/bibref-qt.app/Contents/Resources/statements/StatResGNT
 rm -fr bin/bibref-qt.app/Contents/Resources/statements/all
+
+# Put SWORD modules in the bundle
+unzip ../sword-lxx-sblgnt-statresgnt-kjv-fallback.zip -d bin/bibref-qt.app/Contents/Resources
+mv bin/bibref-qt.app/Contents/Resources/.sword bin/bibref-qt.app/Contents/Resources/sword
+
 if [ -z "$2" ]; then
     $MACDEPLOYQT bin/bibref-qt.app -dmg
 else

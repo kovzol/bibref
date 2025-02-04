@@ -2,6 +2,64 @@
 
 #include "main.h"
 #include "mainwindow.h"
+#include <iostream>
+
+using namespace std;
+
+// Taken from https://forum.qt.io/topic/105993/copy-folder-qt-c/5
+void copyAndReplaceFolderContents(const QString &fromDir, const QString &toDir, bool copyAndRemove = false) {
+    QDirIterator it(fromDir, QDirIterator::Subdirectories);
+    QDir dir(fromDir);
+    const int absSourcePathLength = dir.absoluteFilePath(fromDir).length();
+
+    while (it.hasNext()){
+        it.next();
+        const auto fileInfo = it.fileInfo();
+        if(!fileInfo.isHidden()) { //filters dot and dotdot
+            const QString subPathStructure = fileInfo.absoluteFilePath().mid(absSourcePathLength);
+            const QString constructedAbsolutePath = toDir + subPathStructure;
+
+            if(fileInfo.isDir()){
+                //Create directory in target folder
+                dir.mkpath(constructedAbsolutePath);
+            } else if(fileInfo.isFile()) {
+                //Copy File to target directory
+
+                //Remove file at target location, if it exists, or QFile::copy will fail
+                QFile::remove(constructedAbsolutePath);
+                QFile::copy(fileInfo.absoluteFilePath(), constructedAbsolutePath);
+            }
+        }
+    }
+
+    if(copyAndRemove)
+        dir.removeRecursively();
+}
+
+// This copies the SWORD modules bundle (assumed in Contents/Resources/sword) to ~/.sword.
+// TODO: Do something similar on Windows, because it is currently done via start.bat,
+// and it opens a terminal window which would not be necessary then.
+void copy_sword_files() {
+#if defined(__APPLE__)
+    QString userHome = QDir::homePath();
+    QString d1 = userHome + QDir::separator() + ".sword";
+    const QFileInfo f1(d1);
+    if (f1.exists() && f1.isDir()) {
+      cout << d1.toStdString() << " exists, no changes will be made" << endl;
+      return;
+      }
+    QString appDirectory = qApp -> applicationDirPath();
+    QString d2 = appDirectory + QDir::separator() + "Resources" + QDir::separator() + "sword";
+    const QFileInfo f2(d2);
+    if (f2.exists() && f2.isDir()) {
+      cout << d1.toStdString() << " does not exist, creating it from bundle" << endl;
+      copyAndReplaceFolderContents(d2, d1, false);
+      }
+    else {
+      cout << d2.toStdString() << " does not exist, expect problems" << endl;
+      }
+#endif // __APPLE__
+}
 
 int main(int argc, char *argv[])
 {
@@ -51,6 +109,7 @@ int main(int argc, char *argv[])
     char *home = std::getenv("XDG_DATA_HOME");
     if (home)
        std::filesystem::current_path(std::getenv("XDG_DATA_HOME"));
+    copy_sword_files();
     window.show();
     return app.exec();
 }
