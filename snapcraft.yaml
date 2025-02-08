@@ -1,5 +1,5 @@
 name: bibref
-base: core22
+base: core24
 version: '2025Feb04'
 summary: A tool that helps discovering internal references in the Bible
 icon: logo-Psalm40-192.png
