@@ -26,7 +26,7 @@ parts:
     plugin: cmake
     cmake-parameters:
       - -DPBRST=ON -DCMAKE_BUILD_TYPE=Debug
-    stage-packages: [libsword-1.9.0, libboost-filesystem1.74.0]
+    stage-packages: [libsword-1.9.0t64, libboost-filesystem1.74.0]
   sword-modules:
     plugin: nil
     override-build: |
