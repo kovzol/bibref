@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 project(bibref)
 
-option(PBRST "Include the precompiled brst parser" OFF)
+option(PBRST "Include the brst parser" OFF)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS "-pedantic-errors")

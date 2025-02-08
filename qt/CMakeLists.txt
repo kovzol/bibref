@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.16)
 project(bibref-qt LANGUAGES CXX C)
 
+option(PBRST "Include the brst parser" OFF)
+
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Concurrent SvgWidgets)
 
 find_package(PkgConfig REQUIRED)
