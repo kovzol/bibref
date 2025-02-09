@@ -1,23 +1,38 @@
-# This Makefile builds bibref for the web platform.
+# This Makefile builds bibref for the web platform, and creates Doxygen documentation.
+# (For all other purposes with the bibref project, have a look at README.md first.)
 #
 # Steps to perform:
 #
 # 0. Install all prerequisites of the native version, and build it properly (via cmake).
+#    You can choose an arbitrary folder, this Makefile will find it later, assuming
+#    that there is only one folder which fits (see the BIBREF_NATIVE_BUILD variable below).
+#    You need to run "make install" as well to have a minimally working local SWORD
+#    installation. (This step may finally fail because of missing write privileges to
+#    /usr, but that's okay.) If you already have a ~/.sword folder with other modules
+#    than supported by bibref by default, then you should skip the step "make install".
 #
 # 1. Install Emscripten and enable that its utilities are available on your path.
+#    It is usually safe to install and activate the latest stable version.
 #
 # 2. Build libsword.a by using https://github.com/kovzol/crosswire-sword-mirror
-#    and the cmake toolchain from Emscripten (via "emcmake cmake").
+#    and the cmake toolchain from Emscripten (via
+#    "emcmake cmake -DSWORD_BUILD_UTILS=No -DSWORD_BUILD_EXAMPLES=No ..").
 #    You may need to have a recent cmake. Then run "make sword_static" to
-#    build libsword.a.
+#    build libsword.a and type "make install" to copy the library automatically
+#    to the folders .../emsdk/cache/sysroot/{lib,share,include}. The settings
+#    in the cmake configuration are important, otherwise the SWORD utilities
+#    and examples will also be built, but some of them will eventually fail
+#    and the library will not be copied to the official emsdk folder.
+#    (In that case you need to do that manually.)
 #
-# 3. Make sure that libsword.a is visible from the file system under the parent
-#    folder of the current directory (..).
+# 3. Step 2 will make sure that libsword.a is visible for the rest of the process,
+#    but the first LDFLAGS setting makes sure that one can extend the search path
+#    by the scope of the ".." folder.
 #
 # 4. Issue "emmake make" in the current directory.
 #
 # See also the GitHub actions in the .github/ folder for more information on the
-# steps above.
+# steps above. They may be somewhat different, but hopefully still working.
 #
 # 5. Copy the files wasm-build/bibref.html and wasm-build/bibref.data to a web server.
 #    Note that bibref.data contains the whole content of your ~/.sword folder.
@@ -80,6 +95,9 @@ $(BUILD_DIR)/$(TARGET_HTML): $(OBJS)
 $(BUILD_DIR)/%.cpp.o: %.cpp
 	$(MKDIR_P) $(dir $@)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
+
+#######################################################################################################
+# Documentation related code
 
 documentation: docs/latex/refman.pdf docs/html/index.html
 
