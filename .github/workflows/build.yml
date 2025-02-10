@@ -69,7 +69,7 @@ jobs:
         . emsdk/emsdk_env.sh
         mkdir build-wasm
         cd build-wasm
-        emcmake cmake .. -DBIBREF_ADDBOOKS_CACHE_FOLDER=../build/bibref-addbooks-cache
+        emcmake cmake .. -DBIBREF_ADDBOOKS_CACHE_FOLDER=../bibref-addbooks-cache
         emmake make
 # FIXME: The SQL database has been obsoleted, instead of using it,
 # another set of visualization/checking tools should be utilized.
