@@ -17,14 +17,14 @@
 # 2. Build libsword.a by using https://github.com/kovzol/crosswire-sword-mirror
 #    and the cmake toolchain from Emscripten (via
 #    "emcmake cmake -DSWORD_BUILD_UTILS=No -DSWORD_BUILD_EXAMPLES=No -DLIBSWORD_LIBRARY_TYPE=Static ..").
-#    You may need to have a recent cmake. Then run "make sword" to
+#    You may need to have a recent cmake. Then run "make sword_static" to
 #    build libsword.a and type "make install" to copy the library automatically
 #    to the folders .../emsdk/cache/sysroot/{lib,share,include}. The settings
 #    in the cmake configuration are important, otherwise the SWORD utilities
 #    and examples will also be built, but some of them will eventually fail
 #    and the library will not be copied to the official emsdk folder.
-#    (In that case you need to do that manually.) There cannot be no shared library created
-#    on this platform, only static.
+#    (In that case you need to do that manually.) There can be no shared library created
+#    on this platform, only static, but that's okay.
 #
 # 3. Step 2 will make sure that libsword.a is visible for the rest of the process.
 #    Unfortunately, since static libraries are not available published properly by
