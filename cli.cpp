@@ -7,12 +7,9 @@
 #include <algorithm>
 #include <vector>
 
-#ifdef WITH_PBRST
 extern "C" char* brst_scan_string(char *string, int correct_raw, int correct_differ,
   int correct_cover, int correct_versification, int show_dump);
-// #include "statements/pbrst.tab.h" // use flex/bison parser for bibref statements (brst)
 #include "pbrst.tab.h" // the statements folder must be included among the folders
-#endif
 
 using namespace std;
 
@@ -75,10 +72,8 @@ string tokensCmd = "tokens";
 string searchCmd = "search";
 string quitCmd = "quit";
 string helpCmd = "help";
-#ifdef WITH_PBRST
 string statementCmd = "statement";
 string statementCmd2 = "Statement";
-#endif
 
 string errorNotRecognized = "Sorry, the command you entered was not recognized or its syntax is invalid.";
 string errorTextIncomplete = "Either " + textCmd + "1 or " + textCmd + "2 must be used.";
@@ -111,11 +106,8 @@ vector<string> commands {addbooksCmd, compareCmd + "12", jaccardCmd + "12",
       minuniqueCmd + "1", latintextCmd + "1", latintextCmd + "2",
       extendCmd, getrefsCmd, lookupCmd, maxresultsCmd, sqlCmd, psalminfoCmd,
       rawCmd, rawCmd + "1", rawCmd + "2",
-      printCmd + "1", printCmd + "2", colorsCmd, tokensCmd, searchCmd
-#ifdef WITH_PBRST
-      , statementCmd
-#endif
-                          };
+      printCmd + "1", printCmd + "2", colorsCmd, tokensCmd, searchCmd, statementCmd
+};
 vector<string> vocabulary = commands;
 
 void add_vocabulary_item(string item) {
@@ -261,10 +253,8 @@ string getHelp(const string &key)
       "Tokenization is done via Strong's numbers.",
       "* `help` *command*: Show some hints on usage of *command*, or get general help if no "
       "parameter is given.",
-#ifdef WITH_PBRST
       "* `statement` ...: Analyze the given statement, see https://matek.hu/zoltan/blog-20250102.php "
       "for some explanations.",
-#endif
       "* `quit`: Exit program."};
   string retval;
   for (int i = 0; i < helpStr.size(); i++) {
@@ -851,7 +841,6 @@ void processGetrefsCmd(string input) {
   info("Finished"); // Success!
 }
 
-#ifdef WITH_PBRST
 void processStatementCmd(string input) {
   char *output = brst_scan_string((char*)input.c_str(), 0, 0, 0, 0, 0);
   string output_s(output);
@@ -865,7 +854,6 @@ void processStatementCmd(string input) {
     }
   info("Finished"); // Success!
 }
-#endif
 
 string cli_process(char *buf) {
   string rawinput(buf); // Convert the input to string.
@@ -925,10 +913,8 @@ string cli_process(char *buf) {
     processExtendCmd(input);
   else if (boost::starts_with(input, getrefsCmd))
     processGetrefsCmd(input);
-#ifdef WITH_PBRST
   else if (boost::starts_with(input, statementCmd) || boost::starts_with(input, statementCmd2))
     processStatementCmd(input);
-#endif
   // If the input is not recognized, we show an error...
   else if (input.length() != 0) // unless there was no input at all
     error(errorNotRecognized);
@@ -999,14 +985,12 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
     line = string(bufline);
     // Handle multiline inputs (for the statement command)...
     boost::algorithm::trim(line); // Trim the input.
-#ifdef WITH_PBRST
     if (!multiline && (boost::starts_with(line, statementCmd) || boost::starts_with(line, statementCmd2))) {
       multiline = true;
     }
     if (multiline && boost::ends_with(line, ".")) {
       multiline = false;
     }
-#endif // WITH_PBRST
     strcat(buf, bufline);
     if (!multiline) {
       cli_process(buf); // Process the input.

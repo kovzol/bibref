@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 project(bibref-qt LANGUAGES CXX C)
 
-option(PBRST "Include the brst parser" OFF)
-
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Concurrent SvgWidgets)
 
 find_package(PkgConfig REQUIRED)
@@ -50,9 +48,6 @@ set(CMAKE_AUTOUIC ON)
 add_definitions(-DPROJECT_SOURCE_DIR="${PROJECT_SOURCE_DIR}"
     -DINSTALL_PREFIX="${CMAKE_INSTALL_PREFIX}")
 
-if(PBRST)
-add_compile_definitions(WITH_PBRST)
-
 set(PARSER_DIR "${CMAKE_CURRENT_BINARY_DIR}")
 find_package(FLEX 2.6 REQUIRED)
 find_package(BISON 3.0 REQUIRED)
@@ -66,15 +61,13 @@ bison_target(PARSER "${CMAKE_CURRENT_SOURCE_DIR}/../statements/pbrst.y" "${PARSE
 add_flex_bison_dependency(LEXER PARSER)
 
 include_directories(${PARSER_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/..")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DYYDEBUG=1 -DIN_BIBREF")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DYYDEBUG=1")
 
 SET(PBRST_SRCS
  books-wrapper.cpp books-wrapper.h
  fingerprint-wrapper.cpp fingerprint-wrapper.h
  "${LEXER_OUT}" "${PARSER_OUT}"
 )
-
-endif(PBRST)
 
 # set the Application icon, the first line is the property added to Info.plist
 set(MACOSX_BUNDLE_ICON_FILE bibref-qt.icns)

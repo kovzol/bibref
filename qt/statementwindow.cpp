@@ -4,7 +4,6 @@
 #include <QtWidgets>
 #include <iostream>
 
-#ifdef WITH_PBRST
 #include <string>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/algorithm/string/predicate.hpp>
@@ -15,7 +14,6 @@ extern "C" char* brst_scan_string(char *string, int correct_raw, int correct_dif
 #include "pbrst.tab.h" // the statements folder must be included among the folders
 
 using namespace std;
-#endif
 
 StatementWindow::StatementWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -123,7 +121,6 @@ void StatementWindow::setupFileMenu()
 
 void StatementWindow::parse()
 {
-#ifdef WITH_PBRST
     char* output = brst_scan_string((char*)editor->toPlainText().toStdString().c_str(), 0, 0, 0, 0, 0);
     string output_s(output);
     vector<string> statementAnalysis;
@@ -195,30 +192,24 @@ void StatementWindow::parse()
         link += QUrl::toPercentEncoding(QString::fromStdString(graphviz_input));
         QDesktopServices::openUrl(QUrl(link));
     }
-
-#endif
 }
 
 void StatementWindow::showSvg()
 {
-#ifdef WITH_PBRST
     auto vwindow = new VisualizeWindow(this, graphviz_input);
     // vwindow->resize(600, 400);
     vwindow->show();
     vwindow->setWindowIcon(QIcon::fromTheme("emblem-photos"));
     vwindow->setWindowTitle(tr("Visualize"));
-#endif // WITH_PBRST
 }
 
 void StatementWindow::setupProveMenu()
 {
-#ifdef WITH_PBRST
     QMenu *proveMenu = new QMenu(tr("&Prove"), this);
     menuBar()->addMenu(proveMenu);
 
     proveMenu->addAction(QIcon::fromTheme("tools-check-spelling"), tr("&Parse"), QKeySequence::Forward,
                         this, &StatementWindow::parse);
-#endif // WITH_PBRST
 }
 
 void StatementWindow::setupHelpMenu()

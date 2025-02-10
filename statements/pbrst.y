@@ -7,11 +7,9 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-#ifdef IN_BIBREF
 #include "books-wrapper.h"
 #include "fingerprint-wrapper.h"
 #define YY_USER_INIT ( init_addbooks(); )
-#endif // IN_BIBREF
 
 char *stmt_identifier;
 double stored_cover = 0.0;
@@ -84,13 +82,11 @@ int correct_cover = 0; // fix covering percents if possible
 int correct_versification = 0; // fix versification related issues if possible
 int show_dump = 0; // if requested, print internal dump in BRST format
 
-#ifdef IN_BIBREF
 void init_addbooks() {
   if (!addbooks_done) {
     addBibles1(); addbooks_done = true;
   }
 }
-#endif
 
 /* shortcut to concatenate a, " " and b, and put the result in c */
 #define _CONCAT(a,b,c) \
@@ -383,7 +379,6 @@ check_rawposition_length(char *s)
 {
   extern int yylineno;
   extern int yycolumn;
-#ifdef IN_BIBREF
   int from, to, length=-1;
   if (strstr(s, "length") == NULL) {
     add_parseinfo("%d,%d: warning: no length is given, consider adding it\n", yylineno, yycolumn);
@@ -405,7 +400,6 @@ check_rawposition_length(char *s)
   intervals[iv_counter][2] = UNCLASSIFIED; // unclassified
   add_parseinfo("%d,%d: debug: interval %d [%d,%d] stored\n", yylineno, yycolumn, iv_counter, from, to);
   iv_counter++;
-#endif // IN_BIBREF
 }
 
 void
@@ -413,7 +407,6 @@ save_string_in_introduction(char *s, int t) // t == 0: declares, t == 1: identif
 {
   extern int yylineno;
   extern int yycolumn;
-#ifdef IN_BIBREF
   char *l;
   l = greekToLatin1(s);
   strcpy(introduction_substrings[substrings++], l);
@@ -421,7 +414,6 @@ save_string_in_introduction(char *s, int t) // t == 0: declares, t == 1: identif
   if (t==1) strcpy(identifies[iv_counter-1], s);
   add_parseinfo("%d,%d: debug: found %s in input\n", yylineno, yycolumn, l);
   free(l);
-#endif // IN_BIBREF
 }
 
 
@@ -430,7 +422,6 @@ check_nt_passage(char *book, char *info, char *verse)
 {
   extern int yylineno;
   extern int yycolumn;
-#ifdef IN_BIBREF
   init_addbooks();
   char *l;
   bool err = false; // be optimistic
@@ -484,7 +475,6 @@ check_nt_passage(char *book, char *info, char *verse)
   // strcpy(infos_s[iv_counter-1], nt_info);
   // strcpy(books_s[iv_counter-1], nt_book);
   add_parseinfo("%d,%d: debug: interval %d %s %s is the headline NT passage\n", yylineno, yycolumn, iv_counter-1, nt_book, nt_info);
-#endif // IN_BIBREF
 }
 
 int detect_ot_book(char *book, char *info) {
@@ -616,7 +606,6 @@ check_ot_passage(char *book, char *info, char *verse)
 {
   extern int yylineno;
   extern int yycolumn;
-#ifdef IN_BIBREF
   char *l;
   bool err = false; // be optimistic
   char *verse_fixed = NULL;
@@ -690,7 +679,6 @@ check_ot_passage(char *book, char *info, char *verse)
   strcpy(infos_s[iv_counter-1], ot_info);
   strcpy(books_s[iv_counter-1], ot_book);
   strcpy(verses_s[iv_counter-1], ot_verse); // for the dump
-#endif // IN_BIBREF
 }
 
 void
@@ -698,7 +686,6 @@ check_introduction_passage(char *passage, char *ay)
 {
   extern int yylineno;
   extern int yycolumn;
-#ifdef IN_BIBREF
   char *l;
   bool err = false; // be optimistic
   l = lookupVerse1(nt_info, nt_book, passage);
@@ -772,14 +759,12 @@ check_introduction_passage(char *passage, char *ay)
   intervals[iv_counter-1][2] = NT_INTRODUCTION; // NT (introduction)
   add_parseinfo("%d,%d: debug: interval %d is an introductory NT passage\n", yylineno, yycolumn, iv_counter-1);
   if (nt_intros_start == -1) nt_intros_start = iv_counter-1;
-#endif // IN_BIBREF
 }
 
 void
 check_fragment(char *passage, char *ay_nt, char *ay_ot) {
   extern int yylineno;
   extern int yycolumn;
-#ifdef IN_BIBREF
   // At this point, we have not yet checked if the raw position of the NT part matches the verse.
   // This is a technical issue, so we need to handle the situation here.
   if (ot_book == NULL || ot_info == NULL || ot_verse == NULL) {
@@ -889,21 +874,17 @@ check_fragment(char *passage, char *ay_nt, char *ay_ot) {
   intervals_data[iv_counter-2] = difference; // save data for the diagram
   intervals_data[iv_counter-1] = count; // save data for the diagram (TODO: consider showing this only if unique_prep)
   if (fragments_start == -1) fragments_start = iv_counter-2;
-#endif // IN_BIBREF
 }
 
 void check_unique_prepare() {
   extern int yylineno;
   extern int yycolumn;
-#ifdef IN_BIBREF
   unique_prep = true;
-#endif // IN_BIBREF
 }
 
 void check_cover(double cover) {
   extern int yylineno;
   extern int yycolumn;
-#ifdef IN_BIBREF
   if (ot_book == NULL || ot_info == NULL || ot_verse == NULL) {
     add_parseinfo("%d,%d: debug: cannot identify OT passage, skipping cover check %4.2f%%\n", yylineno, yycolumn, cover);
     fatal = true;
@@ -1100,7 +1081,6 @@ void check_cover(double cover) {
             yylineno, yycolumn, i);
 
   } // end of for checking OT headlines
-#endif // IN_BIBREF
 }
 
 void

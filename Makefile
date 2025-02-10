@@ -23,13 +23,16 @@
 #    in the cmake configuration are important, otherwise the SWORD utilities
 #    and examples will also be built, but some of them will eventually fail
 #    and the library will not be copied to the official emsdk folder.
-#    (In that case you need to do that manually.)
+#    (In that case you need to do that manually.) There will be no shared library created.
 #
-# 3. Step 2 will make sure that libsword.a is visible for the rest of the process,
-#    but the first LDFLAGS setting makes sure that one can extend the search path
-#    by the scope of the ".." folder.
+# 3. Step 2 will make sure that libsword.a is visible for the rest of the process.
+#    Unfortunately, since static libraries are not available published properly by
+#    the SWORD library setup, we still have to work around manually that
+#    the first LDFLAGS setting extends the scope to find the library also under the ".." folder.
 #
-# 4. Issue "emmake make" in the current directory.
+# 4. Create symlinks in this folder to the files statements/{pbrst.c,pbrst.tab.c,pbrst.tab.h}.
+#    These files will be present only if you successfully compile the native program above.
+#    Issue then "emmake make" in the current directory.
 #
 # See also the GitHub actions in the .github/ folder for more information on the
 # steps above. They may be somewhat different, but hopefully still working.
@@ -67,12 +70,16 @@ TARGET_HTML ?= bibref.html
 
 BUILD_DIR ?= ./wasm-build
 
-SRCS := book.cpp books.cpp cli.cpp fingerprint.cpp main.cpp psalmsinfo.cpp
-OBJS := $(SRCS:%=$(BUILD_DIR)/%.o)
+CXX_SRCS := book.cpp books.cpp cli.cpp fingerprint.cpp main.cpp psalmsinfo.cpp \
+	books-wrapper.cpp fingerprint-wrapper.cpp
+CXX_OBJS := $(CXX_SRCS:%=$(BUILD_DIR)/%.o)
+C_SRCS := pbrst.tab.c pbrst.c
+C_OBJS := $(C_SRCS:%=$(BUILD_DIR)/%.o)
 DOXS := book.dox books.dox cli.dox fingerprint.dox main.dox psalmsinfo.dox
 
-CPPFLAGS += -I/usr/include/sword -s USE_BOOST_HEADERS=1
+CPPFLAGS += -I/usr/include/sword -s USE_BOOST_HEADERS=1 -DYYDEBUG=1
 
+CFLAGS := -s EXPORTED_FUNCTIONS=[_bibref_wasm,_bibref_wasm_vocabulary] -s EXTRA_EXPORTED_RUNTIME_METHODS=['cwrap'] -fexceptions
 CXXFLAGS := -s EXPORTED_FUNCTIONS=[_bibref_wasm,_bibref_wasm_vocabulary] -s EXTRA_EXPORTED_RUNTIME_METHODS=['cwrap'] -fexceptions
 
 BIBREF_NATIVE_FOLDER := $(shell find . -name bibref -executable -printf "%h\n" | sort | head -1)
@@ -87,14 +94,18 @@ ifeq ($(TARGET_HTML),bibref.js)
 LDFLAGS += -s MODULARIZE=1 -s EXPORT_NAME=bibref
 endif
 
-$(BUILD_DIR)/$(TARGET_HTML): $(OBJS)
+$(BUILD_DIR)/$(TARGET_HTML): $(CXX_OBJS) $(C_OBJS)
 	$(MKDIR_P) $(dir $@)
 	echo addbooks | $(BIBREF_NATIVE_FOLDER)/bibref # Make sure bibref generates its cache.
-	$(CXX) $(OBJS) -o $@ $(LDFLAGS)
+	$(LD) $(CXX_OBJS) $(C_OBJS) -o $@ $(LDFLAGS)
 
 $(BUILD_DIR)/%.cpp.o: %.cpp
 	$(MKDIR_P) $(dir $@)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
+
+$(BUILD_DIR)/%.c.o: %.c
+	$(MKDIR_P) $(dir $@)
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 
 #######################################################################################################
 # Documentation related code
