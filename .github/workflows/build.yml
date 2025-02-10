@@ -64,6 +64,13 @@ jobs:
         ln -s statements/pbrst.tab.c
         ln -s statements/pbrst.tab.h
         yes | emmake make
+    - name: cmake-wasm
+      run: |
+        . emsdk/emsdk_env.sh
+        mkdir build-wasm
+        cd build-wasm
+        emcmake cmake .. -DBIBREF_ADDBOOKS_CACHE_FOLDER=../build/bibref-addbooks-cache
+        emmake make
 # FIXME: The SQL database has been obsoleted, instead of using it,
 # another set of visualization/checking tools should be utilized.
 #    - name: db-full
@@ -160,17 +167,18 @@ jobs:
         ./configure
         make
         sudo make install
-    - name: Build bibref
-      run: |
-        mkdir build
-        cd build
-        cmake ..
-        sudo make install
     - name: prerequisites-pbrst
       run: |
         brew install bison m4
         echo 'export PATH="$(brew --prefix bison)/bin:$PATH"' >> /Users/runner/.bash_profile
         echo 'export PATH="$(brew --prefix m4)/bin:$PATH"' >> /Users/runner/.bash_profile
+    - name: Build bibref
+      run: |
+        mkdir build
+        cd build
+        . /Users/runner/.bash_profile
+        cmake ..
+        sudo make install
     - name: prerequisites-qt
       run: |
         brew install qt graphviz
@@ -180,6 +188,5 @@ jobs:
         mkdir build
         cd build
         . /Users/runner/.bash_profile
-        pkg-config libgvc --libs # Temporary info on GitHub's graphviz installation
         cmake ..
         make
