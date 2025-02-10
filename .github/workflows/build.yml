@@ -30,14 +30,7 @@ jobs:
         cd statements
         make
         cd tests
-        ./runme .
-    - name: make-native-pbrst
-      run: |
-        mkdir build-pbrst
-        cd build-pbrst
-        cmake -DPBRST=ON ..
-        make
-        make install || true
+        ./runme ../StatResGNT/all
     - name: prerequisites-qt
       run: |
         sudo apt install qt6-base-dev qt6-tools-dev qt6-tools-dev-tools qt6-l10n-tools \
@@ -47,12 +40,6 @@ jobs:
         mkdir qt/build
         cd qt/build
         cmake ..
-        make
-    - name: make-qt-pbrst
-      run: |
-        mkdir qt/build-pbrst
-        cd qt/build-pbrst
-        cmake -DPBRST=ON ..
         make
     - name: install-emscripten
       run: |
@@ -67,11 +54,15 @@ jobs:
         cd crosswire-sword-mirror
         mkdir build
         cd build
-        emcmake cmake ..
+        emcmake cmake -DSWORD_BUILD_UTILS=No -DSWORD_BUILD_EXAMPLES=No ..
         emmake make sword_static
+        emmake make install
     - name: make-wasm
       run: |
         . emsdk/emsdk_env.sh
+        ln -s statements/pbrst.c
+        ln -s statements/pbrst.tab.c
+        ln -s statements/pbrst.tab.h
         yes | emmake make
 # FIXME: The SQL database has been obsoleted, instead of using it,
 # another set of visualization/checking tools should be utilized.
@@ -148,25 +139,11 @@ jobs:
         CC=clang CXX=clang++ cmake -G "MinGW Makefiles" ..
         mingw32-make install || true
 
-    - name: Build bibref-pbrst
-      run: |
-        mkdir build-pbrst
-        cd build-pbrst
-        CC=clang CXX=clang++ cmake -DPBRST=ON -G "MinGW Makefiles" ..
-        mingw32-make
-
     - name: Build bibref-qt
       run: |
         mkdir qt/build
         cd qt/build
         CC=clang CXX=clang++ cmake -G "MinGW Makefiles" ..
-        mingw32-make
-
-    - name: Build bibref-qt-pbrst
-      run: |
-        mkdir qt/build-pbrst
-        cd qt/build-pbrst
-        CC=clang CXX=clang++ cmake -DPBRST=ON -G "MinGW Makefiles" ..
         mingw32-make
 
   mac:
@@ -194,13 +171,6 @@ jobs:
         brew install bison m4
         echo 'export PATH="/opt/homebrew/opt/bison/bin:$PATH"' >> /Users/runner/.bash_profile
         echo 'export PATH="/opt/homebrew/opt/m4/bin:$PATH"' >> /Users/runner/.bash_profile
-    - name: Build bibref-pbrst
-      run: |
-        . /Users/runner/.bash_profile
-        mkdir build-pbrst
-        cd build-pbrst
-        cmake -DPBRST=ON ..
-        make
     - name: prerequisites-qt
       run: |
         brew install qt graphviz
@@ -212,12 +182,4 @@ jobs:
         . /Users/runner/.bash_profile
         pkg-config libgvc --libs # Temporary info on GitHub's graphviz installation
         cmake ..
-        make
-    - name: Build bibref-qt-pbrst
-      run: |
-        cd qt
-        mkdir build-pbrst
-        cd build-pbrst
-        . /Users/runner/.bash_profile
-        cmake -DPBRST=ON ..
         make
