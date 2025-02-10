@@ -45,8 +45,8 @@ jobs:
       run: |
         git clone https://github.com/emscripten-core/emsdk.git
         cd emsdk
-        ./emsdk install 2.0.22
-        ./emsdk activate 2.0.22
+        ./emsdk install 4.0.3
+        ./emsdk activate 4.0.3
     - name: make-sword-wasm
       run: |
         . emsdk/emsdk_env.sh
@@ -54,8 +54,8 @@ jobs:
         cd crosswire-sword-mirror
         mkdir build
         cd build
-        emcmake cmake -DSWORD_BUILD_UTILS=No -DSWORD_BUILD_EXAMPLES=No ..
-        emmake make sword_static
+        emcmake cmake -DSWORD_BUILD_UTILS=No -DSWORD_BUILD_EXAMPLES=No -DLIBSWORD_LIBRARY_TYPE=Static ..
+        emmake make sword
         emmake make install
     - name: make-wasm
       run: |

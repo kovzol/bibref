@@ -36,7 +36,11 @@ include_directories(${sword_INCLUDE_DIRS})
 
 set(PARSER_DIR "${CMAKE_CURRENT_BINARY_DIR}")
 find_package(FLEX 2.6 REQUIRED)
+if(APPLE) # sometimes macOS does not find the new bison package, installed via homebrew...
+find_package(BISON 2.3 REQUIRED)
+else()
 find_package(BISON 3.0 REQUIRED)
+endif(APPLE)
 
 set(LEXER_OUT "${PARSER_DIR}/pbrst.c")
 set(PARSER_OUT "${PARSER_DIR}/pbrst.tab.c")
