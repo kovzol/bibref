@@ -1,16 +1,13 @@
-BIBREF = -DIN_BIBREF
-# Disable this to not use bibref during parsing.
-
 CC = cc -g
 CXX = g++ -g
 LEX = flex
 YACC = bison
-CFLAGS = -DYYDEBUG=1 $(BIBREF)
+CFLAGS = -DYYDEBUG=1
 
 all:	pbrst-cli
 
 pbrst-cli:	pbrst.tab.o pbrst.o pbrst-cli.o books-wrapper.o fingerprint-wrapper.o books.o cli.o book.o psalmsinfo.o fingerprint.o
-	${CXX} $(BIBREF) -o $@ books-wrapper.o fingerprint-wrapper.o pbrst.tab.o pbrst.o pbrst-cli.o books.o cli.o book.o psalmsinfo.o fingerprint.o \
+	${CXX} -o $@ books-wrapper.o fingerprint-wrapper.o pbrst.tab.o pbrst.o pbrst-cli.o books.o cli.o book.o psalmsinfo.o fingerprint.o \
          -lsword -lboost_system -lboost_filesystem -lreadline
 
 pbrst.tab.c pbrst.tab.h:	pbrst.y
