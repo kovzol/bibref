@@ -4,12 +4,16 @@
 # When building for emscripten, build a native Linux version first, create the addbooks cache,
 # and just then start the build for emscripten, providing the bibref-addbooks-cache folder name
 # as an option when starting cmake. See the variable BIBREF_ADDBOOKS_CACHE_FOLDER below.
+# As an optional setting, HTML_BUILD_DIR can be given to have all required files in the same
+# folder (ready to deploy).
 
 cmake_minimum_required(VERSION 3.16)
 project(bibref)
 
 set(BIBREF_ADDBOOKS_CACHE_FOLDER ../bibref-addbooks-cache CACHE STRING
  "Set the previously created bibref-addbooks-cache folder for the Emscripten build")
+set(HTML_BUILD_DIR html-output CACHE STRING
+ "Set the output folder for the Emscripten build")
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_FLAGS "-pedantic-errors")
@@ -79,9 +83,12 @@ target_link_options(bibref PUBLIC "SHELL:
 target_link_options(bibref PUBLIC "SHELL:
   --preload-file '${BIBREF_ADDBOOKS_CACHE_FOLDER}@/bibref-addbooks-cache'")
 target_link_options(bibref PUBLIC -sEXTRA_EXPORTED_RUNTIME_METHODS=['cwrap'] -sMODULARIZE -sEXPORT_NAME=bibref)
+install(TARGETS bibref DESTINATION "${CMAKE_BINARY_DIR}/${HTML_BUILD_DIR}")
+file(GLOB HTML_FILES ${CMAKE_CURRENT_SOURCE_DIR}/html/*)
+install(FILES ${HTML_FILES} ${CMAKE_BINARY_DIR}/bibref.data DESTINATION "${CMAKE_BINARY_DIR}/${HTML_BUILD_DIR}")
+
 else()
 target_link_libraries(bibref ${sword_LIBRARIES} ${sword_LIBRARIES_folder} ${Boost_LIBRARIES} ${readline_LIBRARIES})
-endif(EMSCRIPTEN)
 
 install(
  CODE " set(ENV{SWORD_PATH} \"$ENV{HOME}/.sword\") "
@@ -102,3 +109,4 @@ install(
 )
 
 install(TARGETS bibref DESTINATION bin)
+endif(EMSCRIPTEN)
