@@ -1052,8 +1052,10 @@ string _extend(const string& moduleName1, const string& moduleName2, const strin
     pos2S--;
     citation = text1.at(pos1S) == text2.at(pos2S); // until there is no plausible verbatim citation anymore
   }
-  pos1S++; // fix start pointer for the other edition
-  pos2S++; // fix start pointer for the edition of the input passage
+  if (!citation) {
+    pos1S++; // fix start pointer for the other edition
+    pos2S++; // fix start pointer for the edition of the input passage
+    }
   citation = true;
   int pos1E = pos1S + pos2E - pos2S;
   while (citation && pos1E < text1.length() - 1 && pos2E < text2.length() - 1) { // shift right in both editions
@@ -1061,8 +1063,10 @@ string _extend(const string& moduleName1, const string& moduleName2, const strin
     pos2E++;
     citation = text1.at(pos1E) == text2.at(pos2E);
   }
-  pos1E--; // fix end pointer for the other edition
-  pos2E--; // fix end pointer for the edition of the input passage
+  if (!citation) {
+    pos1E--; // fix end pointer for the other edition
+    pos2E--; // fix end pointer for the edition of the input passage
+    }
   string verse1infoS = b1.getVerseInfoStart(pos1S);
   string verse1infoE = b1.getVerseInfoEnd(pos1E);
   string verse2infoS = b2.getVerseInfoStart(pos2S);
