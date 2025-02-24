@@ -579,7 +579,6 @@ int addBooks(string moduleName, string firstVerse, string lastVerse, bool remove
       string verseText = processVerse(verse.c_str());
       vector<int> tokens = processTokens(verse.c_str());
       // split book name and verse reference
-      bool found = false;
       string reference;
       string bookName;
       VerseInfo vi = splitVerseInfo(verseInfo);
@@ -587,78 +586,80 @@ int addBooks(string moduleName, string firstVerse, string lastVerse, bool remove
       // Use I_Peter instead of "I Peter" on all occurrences:
       boost::replace_all(bookName, " ", "_");
       reference = vi.m_reference;
-      if (lastBookName.compare(bookName) != 0) {
-        books.push_back(lastBook);
-        string lastBookText = lastBook.getText();
-        vector<int> lastBookTokens = lastBook.getTokens();
+      if (reference.rfind("0:", 0) != 0 && !boost::algorithm::ends_with(reference, ":0")) { // we don't want a 0th chapter or a 0th verse
+        if (lastBookName.compare(bookName) != 0) {
+          books.push_back(lastBook);
+          string lastBookText = lastBook.getText();
+          vector<int> lastBookTokens = lastBook.getTokens();
 #ifndef __EMSCRIPTEN__
-        if (create_cache) { // Create the cache if it is possible. Open the raw book and tokens.
-          FILE *lastBookFile = fopen((path + "/" + lastBookName + ".book").c_str(), "wa");
-          fprintf(lastBookFile, "%s", lastBookText.c_str());
-          fclose(lastBookFile);
-          FILE *lastTokensFile = fopen((path + "/" + lastBookName + ".tokens").c_str(), "wa");
-          for (auto t: lastBookTokens) {
-            fprintf(lastTokensFile, "%d ", t);
+          if (create_cache) { // Create the cache if it is possible. Open the raw book and tokens.
+            FILE *lastBookFile = fopen((path + "/" + lastBookName + ".book").c_str(), "wa");
+            fprintf(lastBookFile, "%s", lastBookText.c_str());
+            fclose(lastBookFile);
+            FILE *lastTokensFile = fopen((path + "/" + lastBookName + ".tokens").c_str(), "wa");
+            for (auto t: lastBookTokens) {
+              fprintf(lastTokensFile, "%d ", t);
+            }
+            fclose(lastTokensFile);
           }
-          fclose(lastTokensFile);
-        }
 #endif
-        info(lastBookName + " contains " + to_string(lastBookText.length()) + " characters,");
-        add_vocabulary_item(lastBookName); // Add the name of the current book to the readline vocabulary.
-        // new book
-        Book book = Book(bookName);
-        book.setModuleName(module->getBibliography().c_str());
-        book.setModuleName(moduleName);
-        lastBook = book;
-        lastBookName = bookName;
+          info(lastBookName + " contains " + to_string(lastBookText.length()) + " characters,");
+          add_vocabulary_item(lastBookName); // Add the name of the current book to the readline vocabulary.
+          // new book
+          Book book = Book(bookName);
+          book.setModuleName(module->getBibliography().c_str());
+          book.setModuleName(moduleName);
+          lastBook = book;
+          lastBookName = bookName;
 
-        if (create_cache) {
-          fclose(lastBookVersesFile);
-          lastBookVersesFile = fopen((path + "/" + lastBookName + ".verses").c_str(), "wa");
+          if (create_cache) {
+            fclose(lastBookVersesFile);
+            lastBookVersesFile = fopen((path + "/" + lastBookName + ".verses").c_str(), "wa");
+          }
+        } else {
+          if (lastBookVersesFile == NULL && create_cache)
+            lastBookVersesFile = fopen((path + "/" + lastBookName + ".verses").c_str(), "wa");
         }
-      } else {
-        if (lastBookVersesFile == NULL && create_cache)
-          lastBookVersesFile = fopen((path + "/" + lastBookName + ".verses").c_str(), "wa");
-      }
-      lastBook.addVerse(verseText, reference, tokens);
+        lastBook.addVerse(verseText, reference, tokens);
 
-      if (bookName == "Psalms") {
-        vector<string> r;
-        boost::split(r, reference, boost::is_any_of(":"));
-        pi.setLastVerse(stoi(r[0]), stoi(r[1])); // this overwrites the previous entry
-      }
+        if (bookName == "Psalms") {
+          vector<string> r;
+          boost::split(r, reference, boost::is_any_of(":"));
+          pi.setLastVerse(stoi(r[0]), stoi(r[1])); // this overwrites the previous entry
+        }
 
-#ifndef __EMSCRIPTEN__
-      if (create_cache) {
-        int start = lastBook.getVerseStart(reference);
-        int end = lastBook.getVerseEnd(reference);
-        int tokensStart = lastBook.getVerseTokensStart(reference);
-        int tokensEnd = lastBook.getVerseTokensEnd(reference);
-        // Save the character positions for the a-y raw text and for the tokens.
-        fprintf(lastBookVersesFile, "%s %d %d %d %d\n", reference.c_str(), start, end, tokensStart, tokensEnd);
-      }
-#endif
-      if (verseInfo.compare(lastVerse)==0) {
-        books.push_back(lastBook); // Add this book to the Bible edition.
-        string lastBookText = lastBook.getText();
-        vector<int> lastBookTokens = lastBook.getTokens();
 #ifndef __EMSCRIPTEN__
         if (create_cache) {
-          FILE *lastBookFile = fopen((path + "/" + lastBookName + ".book").c_str(), "wa");
-          fprintf(lastBookFile, "%s\n", lastBookText.c_str()); // Dump the a-y raw book as string.
-          fclose(lastBookFile);
-
-          FILE *lastTokensFile = fopen((path + "/" + lastBookName + ".tokens").c_str(), "wa");
-          for (auto t: lastBookTokens) {
-            fprintf(lastTokensFile, "%d ", t); // Save the tokens as numbers.
-          }
-          fclose(lastTokensFile);
-
-          fclose(lastBookVersesFile);
+          int start = lastBook.getVerseStart(reference);
+          int end = lastBook.getVerseEnd(reference);
+          int tokensStart = lastBook.getVerseTokensStart(reference);
+          int tokensEnd = lastBook.getVerseTokensEnd(reference);
+          // Save the character positions for the a-y raw text and for the tokens.
+          fprintf(lastBookVersesFile, "%s %d %d %d %d\n", reference.c_str(), start, end, tokensStart, tokensEnd);
         }
 #endif
-        info("and " + lastBookName + " contains " + to_string(lastBook.getText().length()) + " characters.");
-        add_vocabulary_item(lastBookName); // Add the name of the last book to the readline vocabulary.
+        if (verseInfo.compare(lastVerse)==0) {
+          books.push_back(lastBook); // Add this book to the Bible edition.
+          string lastBookText = lastBook.getText();
+          vector<int> lastBookTokens = lastBook.getTokens();
+#ifndef __EMSCRIPTEN__
+          if (create_cache) {
+            FILE *lastBookFile = fopen((path + "/" + lastBookName + ".book").c_str(), "wa");
+            fprintf(lastBookFile, "%s\n", lastBookText.c_str()); // Dump the a-y raw book as string.
+            fclose(lastBookFile);
+
+            FILE *lastTokensFile = fopen((path + "/" + lastBookName + ".tokens").c_str(), "wa");
+            for (auto t: lastBookTokens) {
+              fprintf(lastTokensFile, "%d ", t); // Save the tokens as numbers.
+            }
+            fclose(lastTokensFile);
+
+            fclose(lastBookVersesFile);
+          }
+#endif
+          info("and " + lastBookName + " contains " + to_string(lastBook.getText().length()) + " characters.");
+          add_vocabulary_item(lastBookName); // Add the name of the last book to the readline vocabulary.
+        }
       }
     }
   }
