@@ -89,7 +89,7 @@ for book in "${books[@]}"; do
  done
 
 # Process Psalms
-for p in `seq 1 150`; do
+for p in `seq 1 151`; do
  command="getrefs SBLGNT LXX Psalms $p"
  process "$command"
  done
