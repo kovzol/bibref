@@ -31,7 +31,7 @@ EXTERNC char* lookupVerse1(const char* book0, const char* info0, const char* ver
     try { // e.g. lookup1 LXX Genesis 1:1
       lv = lookupVerse(book1, info1, verse1); // lookup in the a-y database
     } catch (exception &e) {
-      lv += " - " + string(e.what());
+      lv += " - " + string(e.what()) + " E18";
     }
   }
   if (restSize == 2) { // e.g. lookup1 LXX Genesis 1:1+3 1:2-4
@@ -49,7 +49,7 @@ EXTERNC char* lookupVerse1(const char* book0, const char* info0, const char* ver
       // Shift-allowed lookup in the a-y database...
       lv = getText(book1, info1, tokens2.at(0), tokens3.at(0), start, end);
     } catch (exception &e) {
-      lv += " - " + string(e.what());
+      lv += " - " + string(e.what()) + " E18";
       }
     }
   // TODO: eventually handle other restSize values (as errors)
@@ -102,7 +102,7 @@ EXTERNC char* getRaw1(const char* bookName0, const char* moduleName0, int startP
   try {
       gr = getRaw(moduleName1, bookName1, startPos, length);
     } catch (exception &e) {
-      gr += " - " + string(e.what());
+      gr += " - " + string(e.what()) + " E19";
     }
   char *ret = (char*) malloc(gr.length()+1);
   strcpy(ret, gr.c_str());

@@ -381,7 +381,7 @@ check_rawposition_length(char *s)
   extern int yycolumn;
   int from, to, length=-1;
   if (strstr(s, "length") == NULL) {
-    add_parseinfo("%d,%d: warning: no length is given, consider adding it\n", yylineno, yycolumn);
+    add_parseinfo("%d,%d: warning: no length is given, consider adding it W1\n", yylineno, yycolumn);
     sscanf(s, "(%d-%d)", &from, &to);
   } else {
     sscanf(s, "(%d-%d, length %d)", &from, &to, &length);
@@ -389,7 +389,7 @@ check_rawposition_length(char *s)
       if (correct_raw == 1) {
         add_parseinfo("%d,%d: corrected: inconsistent length: %d-%d+1!=%d\n", yylineno, yycolumn, to, from, length);
       } else {
-        add_parseinfo("%d,%d: error: correctable, inconsistent length: %d-%d+1!=%d\n", yylineno, yycolumn, to, from, length);
+        add_parseinfo("%d,%d: error: correctable, inconsistent length: %d-%d+1!=%d E1\n", yylineno, yycolumn, to, from, length);
       }
     } else {
       add_parseinfo("%d,%d: info: consistent length: %d-%d+1==%d\n", yylineno, yycolumn, to, from, length);
@@ -463,9 +463,9 @@ check_nt_passage(char *book, char *info, char *verse)
       add_parseinfo("%d,%d: corrected: results of lookup and getraw did not match\n", yylineno, yycolumn);
     } else {
         if (!err)
-          add_parseinfo("%d,%d: error: correctable, results of lookup and getraw do not match\n", yylineno, yycolumn);
+          add_parseinfo("%d,%d: error: correctable, results of lookup and getraw do not match E2\n", yylineno, yycolumn);
         else
-          add_parseinfo("%d,%d: error: results of lookup and getraw do not match\n", yylineno, yycolumn);
+          add_parseinfo("%d,%d: error: results of lookup and getraw do not match E3\n", yylineno, yycolumn);
       }
     }
   strcpy(fragments[iv_counter-1],l); // saved for the diagram (tooltip)
@@ -654,9 +654,9 @@ check_ot_passage(char *book, char *info, char *verse)
       add_parseinfo("%d,%d: corrected: results of lookup and getraw did not match\n", yylineno, yycolumn);
       } else {
         if (!err)
-          add_parseinfo("%d,%d: error: correctable, results of lookup and getraw do not match\n", yylineno, yycolumn);
+          add_parseinfo("%d,%d: error: correctable, results of lookup and getraw do not match E2\n", yylineno, yycolumn);
         else
-          add_parseinfo("%d,%d: error: results of lookup and getraw do not match\n", yylineno, yycolumn);
+          add_parseinfo("%d,%d: error: results of lookup and getraw do not match E3\n", yylineno, yycolumn);
         }
     }
   strcpy(fragments[iv_counter-1],l); // saved for the diagram (tooltip)
@@ -668,7 +668,7 @@ check_ot_passage(char *book, char *info, char *verse)
 
   if (detect_ot_book(ot_book, ot_info) == -1) { // Register this OT book as another entry.
     if (fragments_start>0) // this should be fixable, TODO
-      add_parseinfo("%d,%d: error: OT book %s %s is not defined as a headline\n", yylineno, yycolumn, ot_book, ot_info);
+      add_parseinfo("%d,%d: error: OT book %s %s is not defined as a headline E4\n", yylineno, yycolumn, ot_book, ot_info);
     strcpy(ot_books[ot_books_n], ot_book);
     strcpy(ot_infos[ot_books_n], ot_info);
     strcpy(ot_verses[ot_books_n], ot_verse); // FIXME: For long books like Isaiah, this may be inconvenient.
@@ -700,7 +700,7 @@ check_introduction_passage(char *passage, char *ay)
   if (strcmp(l, ay) == 0)
     add_parseinfo("%d,%d: info: introduction %s matches to a-y form %s\n", yylineno, yycolumn, passage, ay);
   else {
-    add_parseinfo("%d,%d: error: introduction %s does not match to a-y form %s, it should be %s\n", yylineno, yycolumn, passage, ay, l);
+    add_parseinfo("%d,%d: error: introduction %s does not match to a-y form %s, it should be %s E5\n", yylineno, yycolumn, passage, ay, l);
     }
   // Get passage as raw text:
   char *r;
@@ -728,9 +728,9 @@ check_introduction_passage(char *passage, char *ay)
       add_parseinfo("%d,%d: corrected: results of lookup and getraw did not match\n", yylineno, yycolumn);
     } else {
       if (!err)
-        add_parseinfo("%d,%d: error: correctable, results of lookup and getraw do not match\n", yylineno, yycolumn);
+        add_parseinfo("%d,%d: error: correctable, results of lookup and getraw do not match E2\n", yylineno, yycolumn);
       else
-        add_parseinfo("%d,%d: error: results of lookup and getraw do not match\n", yylineno, yycolumn);
+        add_parseinfo("%d,%d: error: results of lookup and getraw do not match E3\n", yylineno, yycolumn);
       }
     }
   strcpy(fragments[iv_counter-1],l); // saved for the diagram (tooltip)
@@ -749,7 +749,7 @@ check_introduction_passage(char *passage, char *ay)
         add_parseinfo("%d,%d: info: substring %s found in introduction\n", yylineno, yycolumn, s);
         }
       else {
-       add_parseinfo("%d,%d: error: substring %s not found in introduction\n", yylineno, yycolumn, s);
+       add_parseinfo("%d,%d: error: substring %s not found in introduction E6\n", yylineno, yycolumn, s);
        }
       s = next+1;
     } while (next != NULL);
@@ -791,7 +791,7 @@ check_fragment(char *passage, char *ay_nt, char *ay_ot) {
   if (strcmp(ln, ay_nt) == 0)
     add_parseinfo("%d,%d: info: NT fragment %s matches to a-y form\n", yylineno, yycolumn, passage);
   else
-    add_parseinfo("%d,%d: error: NT fragment %s does not match to a-y form %s, it should be %s\n", yylineno, yycolumn, passage, ay_nt, ln);
+    add_parseinfo("%d,%d: error: NT fragment %s does not match to a-y form %s, it should be %s E7\n", yylineno, yycolumn, passage, ay_nt, ln);
   strcpy(fragments[iv_counter-2], ln); // for the diagram
 
   // Check the raw position.
@@ -816,9 +816,9 @@ check_fragment(char *passage, char *ay_nt, char *ay_ot) {
       add_parseinfo("%d,%d: corrected: results of lookup and getraw did not match\n", yylineno, yycolumn);
     } else {
       if (!err)
-        add_parseinfo("%d,%d: error: correctable, results of lookup and getraw do not match\n", yylineno, yycolumn);
+        add_parseinfo("%d,%d: error: correctable, results of lookup and getraw do not match E2\n", yylineno, yycolumn);
       else
-        add_parseinfo("%d,%d: error: results of lookup and getraw do not match\n", yylineno, yycolumn);
+        add_parseinfo("%d,%d: error: results of lookup and getraw do not match E3\n", yylineno, yycolumn);
     }
   }
   free(r);
@@ -835,7 +835,7 @@ check_fragment(char *passage, char *ay_nt, char *ay_ot) {
   if (strcmp(lo, ay_ot) == 0)
     add_parseinfo("%d,%d: info: OT fragment %s matches to a-y form\n", yylineno, yycolumn, ot_passage);
   else
-    add_parseinfo("%d,%d: error: OT fragment %s does not match to a-y form %s, it should be %s\n", yylineno, yycolumn, ot_passage, ay_ot, lo);
+    add_parseinfo("%d,%d: error: OT fragment %s does not match to a-y form %s, it should be %s E8\n", yylineno, yycolumn, ot_passage, ay_ot, lo);
   // add_parseinfo("%d,%d: debug: parsed ot_passage=%s ot_info=%s ot_book=%s ot_verse=%s ay_ot=%s diff=%f\n", yylineno, yycolumn, ot_passage, ot_info, ot_book, ot_verse, ay_ot, difference);
   double jd = jaccard_dist1(ln, lo);
   if (fabs(jd-difference) <= EPS)
@@ -845,7 +845,7 @@ check_fragment(char *passage, char *ay_nt, char *ay_ot) {
       add_parseinfo("%d,%d: corrected: fragments in reality differed by %4.2f%%\n", yylineno, yycolumn, jd * 100.0);
       difference = jd; // correction
     } else
-      add_parseinfo("%d,%d: error: correctable, fragments in reality differ by %4.2f%%\n", yylineno, yycolumn, jd * 100.0);
+      add_parseinfo("%d,%d: error: correctable, fragments in reality differ by %4.2f%% E9\n", yylineno, yycolumn, jd * 100.0);
     }
   // Check uniqueness in OT:
   add_parseinfo("%d,%d: info: checking if OT passage is unique in OT: ", yylineno, yycolumn);
@@ -858,10 +858,10 @@ check_fragment(char *passage, char *ay_nt, char *ay_ot) {
   else
     add_parseinfo("yes\n");
   if (count==1 && !unique_prep) {
-    add_parseinfo("%d,%d: warning: OT passage is unique, consider mentioning it\n", yylineno, yycolumn);
+    add_parseinfo("%d,%d: warning: OT passage is unique, consider mentioning it W2\n", yylineno, yycolumn);
   }
   if (count>1 && unique_prep) {
-    add_parseinfo("%d,%d: error: OT passage is not unique\n", yylineno, yycolumn);
+    add_parseinfo("%d,%d: error: OT passage is not unique E10\n", yylineno, yycolumn);
   }
   unique_prep = false;
   free(ln);
@@ -957,7 +957,7 @@ void check_cover(double cover) {
         yylineno, yycolumn, cover, union_length, covered, real_cover);
       stored_cover = real_cover;
     } else
-      add_parseinfo("%d,%d: error: correctable, cover %4.2f%% is incorrect (union length: %d, covered: %d), in reality %4.2f%%\n",
+      add_parseinfo("%d,%d: error: correctable, cover %4.2f%% is incorrect (union length: %d, covered: %d), in reality %4.2f%% E11\n",
         yylineno, yycolumn, cover, union_length, covered, real_cover);
   }
   // Check if any NT introductions overlap any other introductions or fragments:
@@ -975,10 +975,10 @@ void check_cover(double cover) {
            // Do they overlap?
            if (!(nt_intro_start > fend || nt_intro_end < fstart)) {
              if (ftype == NT_FRAGMENT)
-               add_parseinfo("%d,%d: error: NT introduction interval %d overlaps fragment interval %d\n",
+               add_parseinfo("%d,%d: error: NT introduction interval %d overlaps fragment interval %d E12\n",
                  yylineno, yycolumn, i, j);
              if (ftype == NT_INTRODUCTION)
-               add_parseinfo("%d,%d: error: NT introduction intervals %d and %d overlap each other\n",
+               add_parseinfo("%d,%d: error: NT introduction intervals %d and %d overlap each other E13\n",
                  yylineno, yycolumn, i, j);
            overlap_error = true;
            }
@@ -994,11 +994,11 @@ void check_cover(double cover) {
   int nt_headline_end = intervals[0][1];
   if (!(nt_headline_start == imin && nt_headline_end == imax)) {
     if (nt_headline_start <= imin && nt_headline_end >= imax) {
-    add_parseinfo("%d,%d: warning: NT headline interval [%d,%d] contains NT fragments union [%d,%d] but they do not match\n",
+    add_parseinfo("%d,%d: warning: NT headline interval [%d,%d] contains NT fragments union [%d,%d] but they do not match W3\n",
       yylineno, yycolumn, nt_headline_start, nt_headline_end, imin, imax);
     }
     else {
-      add_parseinfo("%d,%d: error: NT headline interval [%d,%d] does not contain NT fragments union [%d,%d]\n",
+      add_parseinfo("%d,%d: error: NT headline interval [%d,%d] does not contain NT fragments union [%d,%d] E14\n",
         yylineno, yycolumn, nt_headline_start, nt_headline_end, imin, imax);
     }
   } else {
@@ -1024,7 +1024,7 @@ void check_cover(double cover) {
     }
     if (oimin == INT_MAX) {
       add_parseinfo(" none\n");
-      add_parseinfo("%d,%d: error: OT headline %d %s %s has no corresponding fragments\n", yylineno, yycolumn,
+      add_parseinfo("%d,%d: error: OT headline %d %s %s has no corresponding fragments E15\n", yylineno, yycolumn,
         i, books_s[i], infos_s[i]);
       return; // avoid segfault later
     }
@@ -1036,11 +1036,11 @@ void check_cover(double cover) {
     int ot_headline_end = intervals[i][1];
     if (!(ot_headline_start == oimin && ot_headline_end == oimax)) {
       if (ot_headline_start <= oimin || ot_headline_end >= oimax) {
-      add_parseinfo("%d,%d: warning: OT headline interval %d [%d,%d] contains OT fragments union [%d,%d] but they do not match\n",
+      add_parseinfo("%d,%d: warning: OT headline interval %d [%d,%d] contains OT fragments union [%d,%d] but they do not match W4\n",
         yylineno, yycolumn, i, ot_headline_start, ot_headline_end, oimin, oimax);
       }
       else {
-        add_parseinfo("%d,%d: error: OT headline interval %d [%d,%d] does not contain OT fragments union [%d,%d]\n",
+        add_parseinfo("%d,%d: error: OT headline interval %d [%d,%d] does not contain OT fragments union [%d,%d] E16\n",
           yylineno, yycolumn, i, ot_headline_start, ot_headline_end, oimin, oimax);
       }
     } else {
@@ -1071,7 +1071,7 @@ void check_cover(double cover) {
             ot_coverings[i-1][pos] = j;
           }
         if (ot_overlap) {
-          add_parseinfo("%d,%d: error: OT intervals %d and %d overlap\n",
+          add_parseinfo("%d,%d: error: OT intervals %d and %d overlap E17\n",
             yylineno, yycolumn, ot_overlap_i, j);
         }
       }
