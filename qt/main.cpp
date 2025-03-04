@@ -4,6 +4,8 @@
 #include "mainwindow.h"
 #include "settings.h"
 
+#include <iostream>
+
 using namespace std;
 
 void copyPath(QString src, QString dst)
