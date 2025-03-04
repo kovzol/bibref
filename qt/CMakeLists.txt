@@ -75,7 +75,7 @@ set(bibref_qt_ICON ${CMAKE_CURRENT_SOURCE_DIR}/logo-Psalm40-256.icns)
 set_source_files_properties(${bibref_qt_ICON} PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
 
 qt_add_executable(bibref-qt MACOSX_BUNDLE
-    main.cpp
+    main.cpp main.h
     mainwindow.cpp mainwindow.h
     statementwindow.cpp statementwindow.h
     highlighter.cpp highlighter.h
@@ -83,6 +83,7 @@ qt_add_executable(bibref-qt MACOSX_BUNDLE
     book.cpp book.h
     books.cpp books.h
     cli.cpp cli.h
+    settings.h
     fingerprint.cpp fingerprint.h
     psalmsinfo.cpp psalmsinfo.h
     ${PBRST_SRCS}

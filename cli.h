@@ -5,10 +5,10 @@
 
 using namespace std;
 
-void cli(const char *input_prepend, const char* output_prepend, bool addbooks, bool colored);
+void cli(const char *input_prepend, const char *output_prepend, bool addbooks, bool colored);
 void add_vocabulary_item(string item);
-void error(const string& message);
-void info(const string& message);
+void error(const string &message);
+void info(const string &message);
 string getHelp(const string &key);
 extern int maxresults;
 extern bool sql;

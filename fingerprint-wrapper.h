@@ -7,6 +7,6 @@
 #define EXTERNC
 #endif
 
-double jaccard_dist1(const char* text1, const char* text2);
+double jaccard_dist1(const char *text1, const char *text2);
 
 #endif // FINGERPRINT_WRAPPER_H

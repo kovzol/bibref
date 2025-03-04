@@ -1,8 +1,10 @@
+#include <iostream>
+
 #include "statementwindow.h"
 #include "visualizewindow.h"
+#include "settings.h"
 
 #include <QtWidgets>
-#include <iostream>
 
 #include <string>
 #include <boost/algorithm/string/trim.hpp>
@@ -11,7 +13,6 @@
 
 extern "C" char* brst_scan_string(char *string, int correct_raw, int correct_differ,
   int correct_cover, int correct_versification, int show_dump);
-#include "pbrst.tab.h" // the statements folder must be included among the folders
 
 using namespace std;
 
@@ -26,6 +27,12 @@ StatementWindow::StatementWindow(QWidget *parent)
 
     setCentralWidget(editor);
     setWindowTitle(tr("Statement Editor"));
+}
+
+StatementWindow::~StatementWindow() {
+    QSettings settings;
+    settings.setValue("Statements/text", editor->toPlainText());
+    // std::cout << "destructor " << (editor->toPlainText()).toStdString() << endl;
 }
 
 void StatementWindow::newFile()
@@ -82,30 +89,29 @@ void StatementWindow::setupEditor()
     QFont font;
     font.setFamily("Courier");
     font.setFixedPitch(true);
-    font.setPointSize(10);
+    QSettings settings;
+    font.setPointSize(settings.value("Application/fontsize", defaultFontSize).toInt());
 
     editor = new QTextEdit;
     editor->setFont(font);
 
     highlighter = new Highlighter(editor->document());
 
-    QFile file(PROJECT_SOURCE_DIR "/statements/SBLGNT/Matthew/Matthew-1,23.brst");
-    if (file.open(QFile::ReadOnly | QFile::Text))
-        editor->setPlainText(file.readAll());
-    else {
-        QString statement = QString("") + "Statement Matthew-1,23 connects\n" +
-            " SBLGNT Matthew 1:23 1:23-34 (1922-1994) with\n" +
-            " LXX Isaiah 7:14+35 7:14 (14234-14304) based on\n" +
-            "  introduction 1:22 1:22 (1856-1921) a-y form toytodeolongegoneninaplhrvuhtorhuenypokyrioydiatoyprofhtoylegontos that\n" +
-            "   declares a quotation with 'το ρηθεν υπο κυριου ... λεγοντος' also\n" +
-            "   identifies the source with 'δια του προφητου' moreover\n" +
-            "  fragment 1:23 1:23-34 (1922-1994, length 73) a-y form idoyhparuenosengastriejeikaitejetaiyionkaikalesoysintoonomaaytoyemmanoyhl\n" +
-            "   matches LXX Isaiah 7:14+35 7:14 (14234-14304, length 71) a-y form idoyhparuenosengastriejeikaitejetaiyionkaikaleseistoonomaaytoyemmanoyhl\n" +
-            "    unique in Old Testament\n" +
-            "   differing by 8.33%\n" +
-            "  providing an overall cover of 100.00%.";
-        editor->setPlainText(statement);
-    }
+    // Set default value if unset:
+    if (settings.value("Statements/text").isNull())
+        settings.setValue("Statements/text", QString("") + "Statement Matthew-1,23 connects\n" +
+                                                 " SBLGNT Matthew 1:23 1:23-34 (1922-1994) with\n" +
+                                                 " LXX Isaiah 7:14+35 7:14 (14234-14304) based on\n" +
+                                                 "  introduction 1:22 1:22 (1856-1921) a-y form toytodeolongegoneninaplhrvuhtorhuenypokyrioydiatoyprofhtoylegontos that\n" +
+                                                 "   declares a quotation with 'το ρηθεν υπο κυριου ... λεγοντος' also\n" +
+                                                 "   identifies the source with 'δια του προφητου' moreover\n" +
+                                                 "  fragment 1:23 1:23-34 (1922-1994, length 73) a-y form idoyhparuenosengastriejeikaitejetaiyionkaikalesoysintoonomaaytoyemmanoyhl\n" +
+                                                 "   matches LXX Isaiah 7:14+35 7:14 (14234-14304, length 71) a-y form idoyhparuenosengastriejeikaitejetaiyionkaikaleseistoonomaaytoyemmanoyhl\n" +
+                                                 "    unique in Old Testament\n" +
+                                                 "   differing by 8.33%\n" +
+                                                 "  providing an overall cover of 100.00%.");
+    QString statement = settings.value("Statements/text").toString();
+    editor->setPlainText(statement);
 }
 
 void StatementWindow::setupFileMenu()

@@ -9,6 +9,7 @@ class QAction;
 class QActionGroup;
 class QLabel;
 class QMenu;
+class QDialogButtonBox;
 QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
@@ -31,8 +32,10 @@ public:
     QAction *statementAct;
     QAction *tokensAct;
     QAction *searchAct;
+    QAction *preferencesAct;
     QTextEdit *passageInfos;
     void moveCursorEnd(QTextEdit *b);
+    void preferences();
 
 protected:
 private slots:
@@ -92,6 +95,7 @@ private:
     QAction *showAvailableBiblesAct;
     QAction *webTerminalAct;
     QLabel *clipboardInfos;
+    QDialogButtonBox *buttonBox;
 };
 
 #endif

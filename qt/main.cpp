@@ -2,7 +2,7 @@
 
 #include "main.h"
 #include "mainwindow.h"
-#include <iostream>
+#include "settings.h"
 
 using namespace std;
 
@@ -49,14 +49,25 @@ void copy_sword_files() {
 #endif // __APPLE__
 }
 
+int defaultFontSize;
+
 int main(int argc, char *argv[])
 {
     QCoreApplication::setApplicationName("bibref");
     QCoreApplication::setApplicationVersion(BIBREF_VERSION);
-    // QCoreApplication::setOrganizationName("Zoltán Kovács");
-    // QCoreApplication::setOrganizationDomain("kovzol.github.io");
+    QCoreApplication::setOrganizationName("Zoltán Kovács");
+    QCoreApplication::setOrganizationDomain("kovzol.github.io");
     QApplication app(argc, argv);
     app.setStyle("fusion");
+
+    defaultFontSize = 9;
+    QFont f = app.font();
+    QSettings settings;
+    if (settings.contains("Application/fontsize")) {
+        int size = settings.value("Application/fontsize", defaultFontSize).toInt();
+        f.setPointSize(size);
+        app.setFont(f);
+    }
 
     QString language = QLocale::system().name();
     // language = "hu_HU";

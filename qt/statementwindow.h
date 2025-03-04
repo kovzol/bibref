@@ -19,6 +19,7 @@ class StatementWindow : public QMainWindow
 
 public:
     StatementWindow(QWidget *parent = nullptr);
+    ~StatementWindow();
 
 public slots:
     void newFile();

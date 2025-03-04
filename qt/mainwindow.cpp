@@ -1,5 +1,8 @@
+#include <iostream>
+
 #include "mainwindow.h"
 #include "statementwindow.h"
+#include "settings.h"
 
 #include "books.h"
 #include "cli.h"
@@ -14,12 +17,11 @@
 #include <boost/algorithm/string/trim.hpp>
 
 #include <QCoreApplication>
+#include <QLineEdit>
 #include <QThread>
 #include <QtConcurrent/qtconcurrentmap.h>
 #include <QtCore/qelapsedtimer.h>
 #include <qtconcurrentrun.h>
-
-#include <cstdio>
 
 using namespace std;
 
@@ -107,8 +109,10 @@ MainWindow::MainWindow()
     statusBar()->showMessage(message);
 
     setWindowTitle("bibref");
-    setMinimumSize(160, 160);
-    resize(480, 320);
+    QSettings settings;
+    int size = settings.value("Application/fontsize", defaultFontSize).toInt();
+    setMinimumSize(16 * size, 16 * size);
+    resize(48 * size, 32 * size);
 
     ot_color = "<span style=\"color: #626600\">";
     nt_color = "<span style=\"color: #006662\">";
@@ -402,6 +406,7 @@ void MainWindow::search()
     }
 }
 
+
 void MainWindow::lookupN(int index)
 {
     QInputDialog inputDialog(this);
@@ -580,13 +585,15 @@ void MainWindow::minunique1()
     }
 
     QInputDialog inputDialog;
+    QSettings settings;
+    int size = settings.value("Application/fontsize", defaultFontSize).toInt();
 
     inputDialog.setOptions(QInputDialog::UseListViewForComboBoxItems);
     inputDialog.setComboBoxItems(getModuleNames());
     inputDialog.setWindowTitle("Min. unique 1");
     inputDialog.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     inputDialog.setLabelText(tr("Select a Bible edition:"));
-    inputDialog.setFixedSize(200, 3);
+    inputDialog.setFixedSize(20 * size, 3);
 
     if (inputDialog.exec() != QDialog::Accepted)
         return;
@@ -619,13 +626,15 @@ void MainWindow::findN(int index)
     }
 
     QInputDialog inputDialog;
+    QSettings settings;
+    int size = settings.value("Application/fontsize", defaultFontSize).toInt();
 
     inputDialog.setOptions(QInputDialog::UseListViewForComboBoxItems);
     inputDialog.setComboBoxItems(getModuleNames());
     inputDialog.setWindowTitle("Find " + QString::number(index + 1));
     inputDialog.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     inputDialog.setLabelText(tr("Select a Bible edition:"));
-    inputDialog.setFixedSize(60, 3);
+    inputDialog.setFixedSize(6 * size, 3);
 
     if (inputDialog.exec() != QDialog::Accepted)
         return;
@@ -661,8 +670,11 @@ void MainWindow::find2()
 void MainWindow::extend()
 {
     QInputDialog inputDialog(this);
+    QSettings settings;
+    int size = settings.value("Application/fontsize", defaultFontSize).toInt();
+
     inputDialog.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    inputDialog.setFixedSize(300, 3);
+    inputDialog.setFixedSize(30 * size, 3);
     inputDialog.setWindowTitle("Extend");
     setToolTipHelp(&inputDialog, "extend");
     inputDialog.setLabelText(tr("Parameters:"));
@@ -725,7 +737,9 @@ void MainWindow::extend()
 
 void MainWindow::statement() {
     auto swindow = new StatementWindow();
-    swindow->resize(640, 512);
+    QSettings settings;
+    int size = settings.value("Application/fontsize", defaultFontSize).toInt();
+    swindow->resize(64 * size, 50 * size);
     swindow->show();
     swindow->setWindowIcon(QIcon::fromTheme("input-keyboard"));
 }
@@ -733,8 +747,10 @@ void MainWindow::statement() {
 void MainWindow::getrefs()
 {
     QInputDialog inputDialog(this);
+    QSettings settings;
+    int size = settings.value("Application/fontsize", defaultFontSize).toInt();
     inputDialog.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    inputDialog.setFixedSize(300, 3);
+    inputDialog.setFixedSize(30 * size, 3);
     inputDialog.setWindowTitle("Get refs");
     setToolTipHelp(&inputDialog, "getrefs");
     inputDialog.setLabelText(tr("Parameters:"));
@@ -846,7 +862,11 @@ void MainWindow::aboutSword()
 
     QTextBrowser *aboutText = new QTextBrowser;
     QVBoxLayout *layout = new QVBoxLayout;
-    layout->setContentsMargins(5, 5, 5, 5);
+
+    QSettings settings;
+    int size = settings.value("Application/fontsize", defaultFontSize).toInt();
+
+    layout->setContentsMargins(size / 2, size / 2, size / 2, size / 2);
     aboutText->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     aboutText->setOpenExternalLinks(true);
     layout->addWidget(aboutText);
@@ -864,7 +884,7 @@ void MainWindow::aboutSword()
     aboutText->setText(aboutContent);
     widget->setLayout(layout);
     widget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    widget->setFixedSize(400, 200);
+    widget->setFixedSize(40 * size, 20 * size);
     widget->setWindowTitle(tr("About SWORD"));
     widget->show();
 }
@@ -881,6 +901,9 @@ void MainWindow::tutorial()
     tutorialText->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     tutorialText->setOpenExternalLinks(true);
     layout->addWidget(tutorialText);
+
+    QSettings settings;
+    int size = settings.value("Application/fontsize", defaultFontSize).toInt();
 
     QString tutorialContent
         = "<h2>" + tr("Introduction") + "</h2>"
@@ -990,7 +1013,7 @@ void MainWindow::tutorial()
     tutorialText->setText(tutorialContent);
     widget->setLayout(layout);
     widget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    widget->setFixedSize(600, 400);
+    widget->setFixedSize(60 * size, 40 * size);
     widget->setWindowTitle(tr("Quick tutorial"));
     widget->show();
 }
@@ -1011,13 +1034,15 @@ void MainWindow::showSwordBibles()
     }
 
     QInputDialog inputDialog;
+    QSettings settings;
+    int size = settings.value("Application/fontsize", defaultFontSize).toInt();
 
     inputDialog.setOptions(QInputDialog::UseListViewForComboBoxItems | QInputDialog::NoButtons);
     inputDialog.setComboBoxItems(b);
     inputDialog.setWindowTitle(tr("Show available Bibles"));
     inputDialog.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     inputDialog.setLabelText(tr("Available Bible translations:"));
-    inputDialog.setFixedSize(200, 5);
+    inputDialog.setFixedSize(20 * size, size / 2);
 
     inputDialog.exec();
 }
@@ -1157,6 +1182,11 @@ void MainWindow::createActions()
     searchAct->setDisabled(true);
 #endif
 
+    preferencesAct = new QAction(tr("Pr&eferences…"), this);
+    preferencesAct->setIcon(QIcon::fromTheme("preferences-desktop-font"));
+    preferencesAct->setStatusTip(tr("Set preferences in the application"));
+    connect(preferencesAct, &QAction::triggered, this, &MainWindow::preferences);
+
     rawAct = new QAction("&Raw…", this);
     rawAct->setIcon(QIcon::fromTheme("media-flash"));
     rawAct->setStatusTip(tr("Show the a-y transcription of a positioned text in a given book"));
@@ -1228,6 +1258,8 @@ void MainWindow::createMenus()
     editMenu->addAction(find1Act);
     editMenu->addAction(find2Act);
     editMenu->addAction(searchAct);
+    editMenu->addSeparator();
+    editMenu->addAction(preferencesAct);
 
     passageMenu = menuBar()->addMenu(tr("&Passage"));
     passageMenu->addAction(lookupAct);
@@ -1258,4 +1290,57 @@ void MainWindow::createMenus()
     helpMenu->addSeparator();
     helpMenu->addAction(aboutSwordAct);
     helpMenu->addAction(aboutQtAct);
+}
+
+void MainWindow::preferences()
+{
+    QWidget *widget = new QWidget;
+    setWindowLogo(widget);
+
+    QSettings settings;
+    int size = settings.value("Application/fontsize", defaultFontSize).toInt();
+
+    QVBoxLayout *layout = new QVBoxLayout;
+    layout->setContentsMargins(size / 2, size / 2, size / 2,  size / 2);
+
+    QHBoxLayout *hlayout = new QHBoxLayout;
+
+    QLabel *fontSizeLabel = new QLabel(tr("Font size:"));
+    string fontSizeTip
+        = tr("Set general font size in the application (default: %1)")
+              .toStdString();
+    fontSizeLabel->setToolTip(tr(fontSizeTip.c_str()).arg(defaultFontSize));
+
+    QLineEdit *fontSizeEdit = new QLineEdit(this);
+    fontSizeEdit->setText(QString::number(size));
+    fontSizeEdit->setMaxLength(3);
+    // fontSizeEdit->setInputMask("000");
+
+    hlayout->addWidget(fontSizeLabel);
+    hlayout->addWidget(fontSizeEdit);
+    hlayout->addStretch(1);
+    layout->addLayout(hlayout, 1);
+
+    widget->setLayout(layout);
+    // widget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    // widget->setFixedSize(30 * size, 10 * size);
+    widget->setWindowTitle(tr("Preferences"));
+
+    buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok);
+
+    connect(buttonBox, &QDialogButtonBox::accepted, [=]() {
+        QSettings settings;
+        int size = fontSizeEdit->text().toInt();
+        settings.setValue("Application/fontsize", size);
+        QFont f = qApp->font();
+        f.setPointSize(size);
+        qApp->setFont(f);
+        widget->close();
+    });
+
+    layout->addWidget(buttonBox);
+    widget->show();
+
+
+
 }
