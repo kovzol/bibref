@@ -27,6 +27,15 @@ StatementWindow::StatementWindow(QWidget *parent)
 
     setCentralWidget(editor);
     setWindowTitle(tr("Statement Editor"));
+    setMessage();
+}
+
+void StatementWindow::setMessage()
+{
+    QTextCursor c = editor->textCursor();
+    int col = c.positionInBlock() + 1;
+    int row = c.blockNumber() + 1;
+    statusBar()->showMessage(tr("Line: %1, Col: %2").arg(row).arg(col), 0);
 }
 
 StatementWindow::~StatementWindow() {
@@ -112,6 +121,8 @@ void StatementWindow::setupEditor()
                                                  "  providing an overall cover of 100.00%.");
     QString statement = settings.value("Statements/text").toString();
     editor->setPlainText(statement);
+
+    connect(editor, SIGNAL(cursorPositionChanged()), this, SLOT(setMessage()));
 }
 
 void StatementWindow::setupFileMenu()

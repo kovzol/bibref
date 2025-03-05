@@ -26,6 +26,7 @@ public slots:
     void openFile(const QString &path = QString());
     void parse();
     void showSvg();
+    void setMessage();
 
 private:
     void setupEditor();
