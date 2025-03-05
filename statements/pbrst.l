@@ -7,7 +7,7 @@
 void yyerror(char *s, ...);
 double myatof(char *arr);
 
-int yycolumn = 0;
+int yycolumn = 1;
 #define YY_USER_ACTION \
     yylloc.first_line = yylloc.last_line = yylineno; \
     yylloc.first_column = yylloc.last_column; \
@@ -167,7 +167,8 @@ REVELATION_OF_JOHN { yylval.strval = strdup(yytext); return REVELATION_OF_JOHN; 
 "("[0-9]+"-"[0-9]+","[ ]length[ ][0-9]+")"  { yylval.strval = strdup(yytext); return RAWPOSITION; }
 
   /* everything else */
-[ \t\n]         /* white space */ { /* yycolumn = 1; */ }
+[ \t]         /* white space */ { }
+[\n]            { yycolumn = 1; }
 .               { yyerror("mystery character '%c'", *yytext); }
 
 %%
