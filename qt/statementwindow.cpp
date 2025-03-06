@@ -46,6 +46,16 @@ void StatementWindow::setPosition()
     int col = elements.at(2).toInt();
     c.movePosition(QTextCursor::Start, QTextCursor::MoveAnchor);
     c.movePosition(QTextCursor::NextBlock, QTextCursor::MoveAnchor, row - 1);
+    c.movePosition(QTextCursor::EndOfBlock, QTextCursor::MoveAnchor);
+    int rowEnd = c.positionInBlock() + 1;
+    if (col > rowEnd) { // this is a problem, the number of columns reported by flex/bison is
+        // higher than the actual number of columns reported by Qt, this is certainly
+        // because of Greek characters are counted twice in flex/bison but only once
+        // in Qt, FIXME.
+        col = rowEnd;
+    }
+    c.movePosition(QTextCursor::StartOfBlock, QTextCursor::MoveAnchor);
+    // select the line until the column appearing in the report
     c.movePosition(QTextCursor::Right, QTextCursor::KeepAnchor, col - 1);
     editor->setTextCursor(c);
     editor->setFocus(Qt::OtherFocusReason);
