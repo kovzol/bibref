@@ -83,7 +83,7 @@ qt_add_executable(bibref-qt MACOSX_BUNDLE
     book.cpp book.h
     books.cpp books.h
     cli.cpp cli.h
-    settings.h
+    settings.h descriptions.h
     fingerprint.cpp fingerprint.h
     psalmsinfo.cpp psalmsinfo.h
     ${PBRST_SRCS}

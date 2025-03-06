@@ -3,6 +3,7 @@
 #include "statementwindow.h"
 #include "visualizewindow.h"
 #include "settings.h"
+#include "descriptions.h"
 
 #include <QtWidgets>
 
@@ -309,6 +310,26 @@ void StatementWindow::analyze()
             }
             message = message.substr(1);
             QLabel *messageLabel = new QLabel(QString(message.c_str()));
+            // Check if there is additional key to some info at the end of the message
+            QRegularExpression pattern = QRegularExpression(" [WE][0-9]+");
+            QRegularExpressionMatch match = pattern.match(QString::fromStdString(message));
+            if (match.hasMatch()) {
+                string key = match.captured(0).toStdString().substr(1) + " ";
+                for (auto info : descriptions) {
+                    if (boost::starts_with(info, key)) {
+                        // Show the additional info as tooltip:
+                        messageLabel->setToolTip("<html><head/><body><p>" +
+                            QString::fromStdString(info) +
+                            "</p></body></html>"); // force HTML to have multiple lines
+                        QString color;
+                        if (key.at(0) == 'E') color = "pink";
+                        if (key.at(0) == 'W') color = "#FFD580";
+                        messageLabel->setStyleSheet("QToolTip {border-width:2px; border-style:solid;"
+                            "background-color:" + color + "; max-width:700px}");
+                    }
+                }
+            }
+
             QLabel *typeLabel = new QLabel(QString(type.c_str()));
             typeLabel->setAlignment(Qt::AlignCenter);
             typeLabel->setStyleSheet("QLabel { color : " + color + " ; }");
