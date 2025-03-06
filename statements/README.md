@@ -17,18 +17,15 @@ The checks are described in the **.y** file. They are currently:
 * check if OT headlines are well-chosen
 * check if OT parts of fragments are unique
 
-These checks are integrated in the **bibref** program as well if
-**bibref** is compiled with PBRST support (see the **cmake** machinery
-for details). Any **.brst** example can be entered in the command line interface.
-This feature is also included in the Qt version (if it is compiled with PBRST support).
+These checks are integrated in the **bibref** program as well.
+Any **.brst** example can be entered in the command line interface.
+This feature is also included in the Qt version.
 
 The **.brst** entries can be visually graphed in the Qt version, or a GraphViz file
-can be exported via the command line tool **pbrst-cli**.
+can be exported via the command line tool **pbrst-cli**. To compile it (on Linux),
+type `make`.
 
 It is planned that a user-maintained subset or extension of the **.brst** files could
 be analyzed as a whole, for example, to be informed if two quotations are mentioned
 consecutively. In fact, introductions of different quotations may overlap, because
 the same introduction can indicate the author for different quotations, for example.
-In addition, the user may want to do minor changes in the **.brst** files
-to use StatResGNT instead of SBLGNT, for example. Also, a newer version of the LXX module
-can be interesting, since it contains deuterocanonical books.
