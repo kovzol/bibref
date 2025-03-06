@@ -66,6 +66,7 @@ jobs:
 #        yes | emmake make
     - name: cmake-wasm
       run: |
+        build/bibref -a # generate cache (via native version)
         . emsdk/emsdk_env.sh
         mkdir build-wasm
         cd build-wasm
