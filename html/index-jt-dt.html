@@ -4,7 +4,6 @@
 <script src="bibref.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/2.44.1/js/jquery.terminal.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery.terminal/js/autocomplete_menu.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.terminal/2.44.1/css/jquery.terminal.min.css" rel="stylesheet"/>
 
 <script>
@@ -31,8 +30,13 @@ bibref().then(function(Module) {
             }
         }, {
             checkArity: false,
-            autocompleteMenu: true,
-            completion: keywords,
+            completion: function(string, callback) {
+                callback(keywords);
+                },
+            doubleTab(str, list, echo_command) {
+                this.echo("[[b;yellow;]Available commands and vocabulary:]");
+                this.echo(list.sort().join("\t"), { raw: true });
+                },
             name: "bibref",
             greetings: "Welcome to the web version of bibref!\nType 'help' to get help."
         });
