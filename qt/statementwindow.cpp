@@ -46,17 +46,19 @@ void StatementWindow::setPosition()
     int col = elements.at(2).toInt();
     c.movePosition(QTextCursor::Start, QTextCursor::MoveAnchor);
     c.movePosition(QTextCursor::NextBlock, QTextCursor::MoveAnchor, row - 1);
-    c.movePosition(QTextCursor::EndOfBlock, QTextCursor::MoveAnchor);
-    int rowEnd = c.positionInBlock() + 1;
-    if (col > rowEnd) { // this is a problem, the number of columns reported by flex/bison is
-        // higher than the actual number of columns reported by Qt, this is certainly
-        // because of Greek characters are counted twice in flex/bison but only once
-        // in Qt, FIXME.
-        col = rowEnd;
+    // Fix col:
+    int colFixed = col;
+    for (int i = 0; i < colFixed - 1; i++) {
+        c.movePosition(QTextCursor::Right, QTextCursor::MoveAnchor);
+        c.movePosition(QTextCursor::Left, QTextCursor::KeepAnchor); // select the ith character
+        QString character = c.selectedText();
+        bool containsNonASCII = character.contains(QRegularExpression(QStringLiteral("[^\\x{0000}-\\x{007F}]")));
+        if (containsNonASCII) colFixed--; // this is counted twice by flex/bison, but only once by Qt
+        c.movePosition(QTextCursor::Right, QTextCursor::MoveAnchor);
     }
     c.movePosition(QTextCursor::StartOfBlock, QTextCursor::MoveAnchor);
     // select the line until the column appearing in the report
-    c.movePosition(QTextCursor::Right, QTextCursor::KeepAnchor, col - 1);
+    c.movePosition(QTextCursor::Right, QTextCursor::KeepAnchor, colFixed - 1);
     editor->setTextCursor(c);
     editor->setFocus(Qt::OtherFocusReason);
     // std::cout << row << " " << col << endl;
@@ -336,7 +338,7 @@ void StatementWindow::analyze()
 
     layout->addWidget(t);
     widget->setLayout(layout);
-    widget->resize(690, 400);
+    widget->resize(693, 400);
     widget->show();
 }
 
