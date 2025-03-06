@@ -46,6 +46,22 @@
   <content_rating type="oars-1.1" />
 
   <releases>
+    <release version="2025-03-06" date="2025-03-06">
+    <url type="details">https://github.com/kovzol/bibref/commits/014702b11c6f4ae48268b16381caa0a6039be537</url>
+      <description>
+        <p>Release description</p>
+          <ul>
+            <li>Prove/Analyze menu in Statement Editor</li>
+            <li>Explanations for errors and warnings</li>
+            <li>Remove 0th chapters and 0th verses</li>
+            <li>Preferences (for setting font size)</li>
+            <li>Auto-saving configuration (via Qt)</li>
+            <li>Fix column information identified in flex/bison</li>
+            <li>Code cleanup</li>
+            <li>Several bugfixes</li>
+          </ul>
+      </description>
+    </release>
     <release version="2025-02-04" date="2025-02-04">
     <url type="details">https://github.com/kovzol/bibref/commits/bf1755970b07db4649ef2993a041556dd4943298/</url>
       <description>
