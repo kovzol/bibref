@@ -4,6 +4,7 @@
 #include "highlighter.h"
 
 #include <QMainWindow>
+#include <QtWidgets>
 
 #include <string>
 
@@ -25,8 +26,10 @@ public slots:
     void newFile();
     void openFile(const QString &path = QString());
     void parse();
+    void analyze();
     void showSvg();
     void setMessage();
+    void setPosition();
 
 private:
     void setupEditor();
@@ -35,6 +38,7 @@ private:
     void setupHelpMenu();
 
     QTextEdit *editor;
+    QTableWidget *t;
     Highlighter *highlighter;
 
     string graphviz_input;

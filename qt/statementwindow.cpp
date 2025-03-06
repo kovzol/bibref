@@ -3,6 +3,7 @@
 #include "statementwindow.h"
 #include "visualizewindow.h"
 #include "settings.h"
+#include "descriptions.h"
 
 #include <QtWidgets>
 
@@ -37,6 +38,34 @@ void StatementWindow::setMessage()
     int row = c.blockNumber() + 1;
     statusBar()->showMessage(tr("Line: %1, Col: %2").arg(row).arg(col), 0);
 }
+
+void StatementWindow::setPosition()
+{
+    QTextCursor c = editor->textCursor();
+    auto const elements = sender()->objectName().split('_');
+    int row = elements.at(1).toInt();
+    int col = elements.at(2).toInt();
+    c.movePosition(QTextCursor::Start, QTextCursor::MoveAnchor);
+    c.movePosition(QTextCursor::NextBlock, QTextCursor::MoveAnchor, row - 1);
+    // Fix col:
+    int colFixed = col;
+    for (int i = 0; i < colFixed - 1; i++) {
+        c.movePosition(QTextCursor::Right, QTextCursor::MoveAnchor);
+        c.movePosition(QTextCursor::Left, QTextCursor::KeepAnchor); // select the ith character
+        QString character = c.selectedText();
+        bool containsNonASCII = character.contains(QRegularExpression(QStringLiteral("[^\\x{0000}-\\x{007F}]")));
+        if (containsNonASCII) colFixed--; // this is counted twice by flex/bison, but only once by Qt
+        c.movePosition(QTextCursor::Right, QTextCursor::MoveAnchor);
+    }
+    c.movePosition(QTextCursor::StartOfBlock, QTextCursor::MoveAnchor);
+    // select the line until the column appearing in the report
+    c.movePosition(QTextCursor::Right, QTextCursor::KeepAnchor, colFixed - 1);
+    editor->setTextCursor(c);
+    editor->setFocus(Qt::OtherFocusReason);
+    // std::cout << row << " " << col << endl;
+    setMessage();
+}
+
 
 StatementWindow::~StatementWindow() {
     QSettings settings;
@@ -211,10 +240,138 @@ void StatementWindow::parse()
     }
 }
 
+void StatementWindow::analyze()
+{
+    char* output = brst_scan_string((char*)editor->toPlainText().toStdString().c_str(), 0, 0, 0, 0, 0);
+    string output_s(output);
+    vector<string> statementAnalysis;
+    boost::split(statementAnalysis, output_s, boost::is_any_of("\n"));
+
+    int lines = statementAnalysis.size(); // this is probably more what we need
+    // since diagram lines will be included in this way (and we don't want that, see below)
+
+    QWidget *widget = new QWidget;
+    widget->setWindowTitle(tr("Analyze"));
+    widget->setWindowIcon(QIcon::fromTheme("utilities-system-monitor"));
+
+    QSettings settings;
+    int size = settings.value("Application/fontsize", defaultFontSize).toInt();
+
+    QVBoxLayout *layout = new QVBoxLayout;
+    layout->setContentsMargins(size / 2, size / 2, size / 2,  size / 2);
+
+    t = new QTableWidget(lines, 5, this);
+    int infos = 0, warnings = 0, errors = 0, debugs = 0;
+    QString details;
+    bool dmode = false;
+
+    int i = 0;
+    int j = 0;
+    for (auto l: statementAnalysis) {
+        bool store = false;
+        QString color;
+        if (l.find(": info: ")!=string::npos) {
+            infos++;
+            store = true;
+        }
+        if (l.find(": warning: ")!=string::npos) {
+            warnings++;
+            store = true;
+            color = "orange";
+        }
+        if (l.find(": error: ")!=string::npos) {
+            errors++;
+            store = true;
+            color = "red";
+        }
+        if (l.find(": debug: ")!=string::npos &&
+            l.find("diagram: graphviz: ")==string::npos) {
+            debugs++;
+            store = true;
+            color = "darkcyan";
+        }
+        if (l.find("diagram: graphviz: end")!=string::npos) {
+            dmode = false;
+        }
+        if (l.find("diagram: graphviz: start")!=string::npos) {
+            dmode = true;
+        }
+        if (store) {
+            int row, col;
+            std::sscanf(l.c_str(), "%d,%d: ", &row, &col);
+            vector<string> line;
+            boost::split(line, l, boost::is_any_of(":"));
+            string type = line.at(1).substr(1);
+            string message;
+            for (int i = 2; i < line.size(); i++) {
+                message += line.at(i);
+                if (i < line.size() - 1)
+                    message += ":";
+            }
+            message = message.substr(1);
+            QLabel *messageLabel = new QLabel(QString(message.c_str()));
+            // Check if there is additional key to some info at the end of the message
+            QRegularExpression pattern = QRegularExpression(" [WE][0-9]+");
+            QRegularExpressionMatch match = pattern.match(QString::fromStdString(message));
+            if (match.hasMatch()) {
+                string key = match.captured(0).toStdString().substr(1) + " ";
+                for (auto info : descriptions) {
+                    if (boost::starts_with(info, key)) {
+                        // Show the additional info as tooltip:
+                        messageLabel->setToolTip("<html><head/><body><p>" +
+                            QString::fromStdString(info) +
+                            "</p></body></html>"); // force HTML to have multiple lines
+                        QString color;
+                        if (key.at(0) == 'E') color = "pink";
+                        if (key.at(0) == 'W') color = "#FFD580";
+                        messageLabel->setStyleSheet("QToolTip {border-width:2px; border-style:solid;"
+                            "background-color:" + color + "; max-width:700px}");
+                    }
+                }
+            }
+
+            QLabel *typeLabel = new QLabel(QString(type.c_str()));
+            typeLabel->setAlignment(Qt::AlignCenter);
+            typeLabel->setStyleSheet("QLabel { color : " + color + " ; }");
+            QLabel *rowLabel = new QLabel(QString::number(row));
+            rowLabel->setAlignment(Qt::AlignCenter);
+            QLabel *columnLabel = new QLabel(QString::number(col));
+            columnLabel->setAlignment(Qt::AlignCenter);
+            QCommonStyle style;
+            QPushButton *b = new QPushButton(style.standardIcon(QStyle::SP_ArrowRight), "");
+            b->setObjectName(QString{"rc_%1_%2"}.arg(row).arg(col));
+            connect(b, SIGNAL(clicked()), this, SLOT(setPosition()));
+
+            t->setCellWidget(i, 0, rowLabel);
+            t->setCellWidget(i, 1, columnLabel);
+            t->setCellWidget(i, 2, typeLabel);
+            t->setCellWidget(i, 3, messageLabel);
+            t->setCellWidget(i, 4, b);
+            t->setHorizontalHeaderLabels({tr("Row"), tr("Col"), tr("Type"), tr("Message"), tr("Source")});
+            t->setColumnWidth(0, 50);
+            t->setColumnWidth(1, 50);
+            t->setColumnWidth(2, 80);
+            t->setColumnWidth(3, 400);
+            t->setColumnWidth(4, 60);
+            j++; // count the wanted lines
+        }
+        i++;
+    }
+    t->setRowCount(j); // remove unnecessary lines
+
+    layout->addWidget(t);
+    widget->setLayout(layout);
+    widget->resize(692, 400);
+    widget->show();
+}
+
+
 void StatementWindow::showSvg()
 {
     auto vwindow = new VisualizeWindow(this, graphviz_input);
-    // vwindow->resize(600, 400);
+    QSettings settings;
+    int size = settings.value("Application/fontsize", defaultFontSize).toInt();
+    vwindow->resize(30 * size, 15 * size); // this should be refined
     vwindow->show();
     vwindow->setWindowIcon(QIcon::fromTheme("emblem-photos"));
     vwindow->setWindowTitle(tr("Visualize"));
@@ -227,6 +384,7 @@ void StatementWindow::setupProveMenu()
 
     proveMenu->addAction(QIcon::fromTheme("tools-check-spelling"), tr("&Parse"), QKeySequence::Forward,
                         this, &StatementWindow::parse);
+    proveMenu->addAction(QIcon::fromTheme("utilities-system-monitor"), tr("&Analyze"), this, &StatementWindow::analyze);
 }
 
 void StatementWindow::setupHelpMenu()
