@@ -250,6 +250,8 @@ void StatementWindow::analyze()
     // since diagram lines will be included in this way (and we don't want that, see below)
 
     QWidget *widget = new QWidget;
+    widget->setWindowTitle(tr("Analyze"));
+    widget->setWindowIcon(QIcon::fromTheme("utilities-system-monitor"));
 
     QSettings settings;
     int size = settings.value("Application/fontsize", defaultFontSize).toInt();
@@ -338,7 +340,7 @@ void StatementWindow::analyze()
 
     layout->addWidget(t);
     widget->setLayout(layout);
-    widget->resize(693, 400);
+    widget->resize(692, 400);
     widget->show();
 }
 
