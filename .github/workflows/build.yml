@@ -70,7 +70,7 @@ jobs:
         mkdir build-wasm
         cd build-wasm
         emcmake cmake .. -DBIBREF_ADDBOOKS_CACHE_FOLDER=../bibref-addbooks-cache
-        emmake make
+        yes | emmake make
 # FIXME: The SQL database has been obsoleted, instead of using it,
 # another set of visualization/checking tools should be utilized.
 #    - name: db-full
