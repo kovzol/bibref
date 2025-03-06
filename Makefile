@@ -1,6 +1,30 @@
-# This Makefile builds bibref for the web platform, and creates Doxygen documentation.
+# This Makefile creates Doxygen documentation.
+# In case you want to build bibref for the web platform, have a look at the
+# file .github/workflows/build.yml. Alternatively, you can use the old method,
+# described at the end of this file. It is obsoleted and will be removed in the future.
 # (For all other purposes with the bibref project, have a look at README.md first.)
 #
+#######################################################################################################
+# Documentation related code
+
+documentation: docs/latex/refman.pdf docs/html/index.html
+
+docs/latex/refman.pdf: docs/latex/refman.tex
+	$(MAKE) -C docs/latex
+
+docs/html/index.html docs/latex/refman.tex: Doxyfile $(SRCS) $(DOXS) README.md logo-Psalm40-doxygen.png
+	doxygen Doxyfile
+
+.PHONY: clean documentation
+
+clean:
+	$(RM) -r $(BUILD_DIR)
+
+MKDIR_P ?= mkdir -p
+
+#######################################################################################################
+# Obsoleted information on building the web version of bibref:
+
 # Steps to perform:
 #
 # 0. Install all prerequisites of the native version, and build it properly (via cmake).
@@ -33,7 +57,7 @@
 #
 # 4. Create symlinks in this folder to the files statements/{pbrst.c,pbrst.tab.c,pbrst.tab.h}.
 #    These files will be present only if you successfully compile the native program above.
-#    Issue then "emmake make" in the current directory.
+#    Issue then "emmake make wasm" in the current directory.
 #
 # See also the GitHub actions in the .github/ folder for more information on the
 # steps above. They may be somewhat different, but hopefully still working.
@@ -63,13 +87,16 @@
 #
 # 9. In case you want to create an embedded version of bibref in an HTML page, you may
 #    want to use the template in the html/ folder. You need to create a JavaScript
-#    version of the web build of bibref by using "TARGET_HTML=bibref.js emmake make".
+#    version of the web build of bibref by using "TARGET_HTML=bibref.js emmake make wasm".
 #    Then simply copy the files wasm-build/bibref.html and wasm-build/bibref.data
 #    to the html/ folder, and finally the whole folder to a web server.
+
 
 TARGET_HTML ?= bibref.html
 
 BUILD_DIR ?= ./wasm-build
+
+wasm: $(BUILD_DIR)/$(TARGET_HTML)
 
 CXX_SRCS := book.cpp books.cpp cli.cpp fingerprint.cpp main.cpp psalmsinfo.cpp \
 	books-wrapper.cpp fingerprint-wrapper.cpp
@@ -108,20 +135,3 @@ $(BUILD_DIR)/%.c.o: %.c
 	$(MKDIR_P) $(dir $@)
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
 
-#######################################################################################################
-# Documentation related code
-
-documentation: docs/latex/refman.pdf docs/html/index.html
-
-docs/latex/refman.pdf: docs/latex/refman.tex
-	$(MAKE) -C docs/latex
-
-docs/html/index.html docs/latex/refman.tex: Doxyfile $(SRCS) $(DOXS) README.md logo-Psalm40-doxygen.png
-	doxygen Doxyfile
-
-.PHONY: clean documentation
-
-clean:
-	$(RM) -r $(BUILD_DIR)
-
-MKDIR_P ?= mkdir -p

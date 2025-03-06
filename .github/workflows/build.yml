@@ -57,13 +57,13 @@ jobs:
         emcmake cmake -DSWORD_BUILD_UTILS=No -DSWORD_BUILD_EXAMPLES=No -DLIBSWORD_LIBRARY_TYPE=Static ..
         emmake make sword_static
         emmake make install
-    - name: make-wasm
-      run: |
-        . emsdk/emsdk_env.sh
-        ln -s statements/pbrst.c
-        ln -s statements/pbrst.tab.c
-        ln -s statements/pbrst.tab.h
-        yes | emmake make
+#    - name: make-wasm
+#      run: |
+#        . emsdk/emsdk_env.sh
+#        ln -s statements/pbrst.c
+#        ln -s statements/pbrst.tab.c
+#        ln -s statements/pbrst.tab.h
+#        yes | emmake make
     - name: cmake-wasm
       run: |
         . emsdk/emsdk_env.sh

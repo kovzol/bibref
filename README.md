@@ -122,12 +122,12 @@ We follow the syntax of the terminal based version, but the similar steps can be
 on the graphical interface as well.
 The following session finds the corresponding citation of the LXX text of Psalm 2:1 in the SBLGNT:
 ```commandline
-This is bibref 2022Feb24, nice to meet you.
+This is bibref 2025Feb04, nice to meet you.
 >> addbooks
 Loading LXX...
 Genesis contains 150801 characters,
 ...
-and Malachi contains 7250 characters.
+and Odes contains 1550 characters.
 Done loading books of LXX.
 Loading SBLGNT...
 Matthew contains 89148 characters,
