@@ -78,7 +78,7 @@ endif()
 
 if(EMSCRIPTEN)
 target_link_libraries(bibref ${SWORD_LIB} ${Boost_LIBRARIES})
-target_link_options(bibref PUBLIC -sSINGLE_FILE -sUSE_BOOST_HEADERS -sALLOW_MEMORY_GROWTH -O3 -fexceptions)
+target_link_options(bibref PUBLIC -sSINGLE_FILE -sALLOW_MEMORY_GROWTH -O3 -fexceptions)
 target_link_options(bibref PUBLIC "SHELL:
   --preload-file '$ENV{HOME}/.sword@/'")
 target_link_options(bibref PUBLIC "SHELL:
