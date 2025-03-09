@@ -346,26 +346,28 @@ void StatementWindow::analyze()
             b->setObjectName(QString{"rc_%1_%2"}.arg(row).arg(col));
             connect(b, SIGNAL(clicked()), this, SLOT(setPosition()));
 
-            t->setCellWidget(i, 0, rowLabel);
-            t->setCellWidget(i, 1, columnLabel);
-            t->setCellWidget(i, 2, typeLabel);
-            t->setCellWidget(i, 3, messageLabel);
-            t->setCellWidget(i, 4, b);
-            t->setHorizontalHeaderLabels({tr("Row"), tr("Col"), tr("Type"), tr("Message"), tr("Source")});
-            t->setColumnWidth(0, 4 * size);
+            t->setCellWidget(i, 0, typeLabel);
+            t->setCellWidget(i, 1, rowLabel);
+            t->setCellWidget(i, 2, columnLabel);
+            t->setCellWidget(i, 3, b);
+            t->setCellWidget(i, 4, messageLabel);
+            t->setHorizontalHeaderLabels({tr("Type"), tr("Row"), tr("Col"), tr("Source"), tr("Message") });
+            t->setColumnWidth(0, 7 * size);
             t->setColumnWidth(1, 4 * size);
-            t->setColumnWidth(2, 7 * size);
-            t->setColumnWidth(3, 32 * size);
-            t->setColumnWidth(4, 5 * size);
+            t->setColumnWidth(2, 4 * size);
+            t->setColumnWidth(4, 32 * size);
+            t->setColumnWidth(3, 5 * size);
             j++; // count the wanted lines
         }
         i++;
     }
     t->setRowCount(j); // remove unnecessary lines
+    t->horizontalHeader()->setStretchLastSection(true);
 
     layout->addWidget(t);
     widget->setLayout(layout);
     widget->resize(57 * size, 32 * size);
+
     widget->show();
 }
 
