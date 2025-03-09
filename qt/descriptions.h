@@ -20,6 +20,6 @@ std::vector<std::string> descriptions = {
 "E19 The raw position (given in parenthesis) is defined incorrectly.",
 "W1 You may want to add the length of the interval as a second parameter in the parenthesis to display a clear correspondence of the parts of the text.",
 "W2 The passage in the Old Testament is unique. You may want to mention this fact to highlight this property of the text.",
-"W3 The New Testament headline covers a wider text interval than the union of the fragments. If the content is longer than the fragements, then this is not a problem, but you may want to check if the headline should be shortened.",
-"W4 The Old Testament headline covers a wider text interval than the union of the fragments. If the content is longer than the fragements, then this is not a problem, but you may want to check if the headline should be shortened."
+"W3 The New Testament headline covers a wider text interval than the union of the fragments. If the content is longer than the fragments, then this is not a problem, but you may want to check if the headline should be shortened.",
+"W4 The Old Testament headline covers a wider text interval than the union of the fragments. If the content is longer than the fragments, then this is not a problem, but you may want to check if the headline should be shortened."
 };
