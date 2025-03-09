@@ -47,25 +47,13 @@ void StatementWindow::setPosition()
     int col = elements.at(2).toInt();
     c.movePosition(QTextCursor::Start, QTextCursor::MoveAnchor);
     c.movePosition(QTextCursor::NextBlock, QTextCursor::MoveAnchor, row - 1);
-    // Fix col:
-    int colFixed = col;
-    for (int i = 0; i < colFixed - 1; i++) {
-        c.movePosition(QTextCursor::Right, QTextCursor::MoveAnchor);
-        c.movePosition(QTextCursor::Left, QTextCursor::KeepAnchor); // select the ith character
-        QString character = c.selectedText();
-        bool containsNonASCII = character.contains(QRegularExpression(QStringLiteral("[^\\x{0000}-\\x{007F}]")));
-        if (containsNonASCII) colFixed--; // this is counted twice by flex/bison, but only once by Qt
-        c.movePosition(QTextCursor::Right, QTextCursor::MoveAnchor);
-    }
-    c.movePosition(QTextCursor::StartOfBlock, QTextCursor::MoveAnchor);
     // select the line until the column appearing in the report
-    c.movePosition(QTextCursor::Right, QTextCursor::KeepAnchor, colFixed - 1);
+    c.movePosition(QTextCursor::Right, QTextCursor::KeepAnchor, col - 1);
     editor->setTextCursor(c);
     editor->setFocus(Qt::OtherFocusReason);
     // std::cout << row << " " << col << endl;
     setMessage();
 }
-
 
 StatementWindow::~StatementWindow() {
     QSettings settings;
@@ -299,6 +287,21 @@ void StatementWindow::analyze()
         if (store) {
             int row, col;
             std::sscanf(l.c_str(), "%d,%d: ", &row, &col);
+
+            // Fix col:
+            QTextCursor c = editor->textCursor();
+            c.movePosition(QTextCursor::Start, QTextCursor::MoveAnchor);
+            c.movePosition(QTextCursor::NextBlock, QTextCursor::MoveAnchor, row - 1);
+            for (int i = 0; i < col - 1; i++) {
+                c.movePosition(QTextCursor::Right, QTextCursor::MoveAnchor);
+                c.movePosition(QTextCursor::Left, QTextCursor::KeepAnchor); // select the ith character
+                QString character = c.selectedText();
+                bool containsNonASCII = character.contains(QRegularExpression(QStringLiteral("[^\\x{0000}-\\x{007F}]")));
+                if (containsNonASCII) col--; // this is counted twice by flex/bison, but only once by Qt
+                c.movePosition(QTextCursor::Right, QTextCursor::MoveAnchor);
+            }
+            // Col is fixed now.
+
             vector<string> line;
             boost::split(line, l, boost::is_any_of(":"));
             string type = line.at(1).substr(1);
