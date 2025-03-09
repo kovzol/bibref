@@ -310,6 +310,7 @@ void StatementWindow::analyze()
             }
             message = message.substr(1);
             QLabel *messageLabel = new QLabel(QString(message.c_str()));
+            messageLabel->setMargin(2);
             // Check if there is additional key to some info at the end of the message
             QRegularExpression pattern = QRegularExpression(" [WE][0-9]+");
             QRegularExpressionMatch match = pattern.match(QString::fromStdString(message));
@@ -348,11 +349,11 @@ void StatementWindow::analyze()
             t->setCellWidget(i, 3, messageLabel);
             t->setCellWidget(i, 4, b);
             t->setHorizontalHeaderLabels({tr("Row"), tr("Col"), tr("Type"), tr("Message"), tr("Source")});
-            t->setColumnWidth(0, 50);
-            t->setColumnWidth(1, 50);
-            t->setColumnWidth(2, 80);
-            t->setColumnWidth(3, 400);
-            t->setColumnWidth(4, 60);
+            t->setColumnWidth(0, 4 * size);
+            t->setColumnWidth(1, 4 * size);
+            t->setColumnWidth(2, 7 * size);
+            t->setColumnWidth(3, 32 * size);
+            t->setColumnWidth(4, 5 * size);
             j++; // count the wanted lines
         }
         i++;
@@ -361,7 +362,7 @@ void StatementWindow::analyze()
 
     layout->addWidget(t);
     widget->setLayout(layout);
-    widget->resize(692, 400);
+    widget->resize(57 * size, 32 * size);
     widget->show();
 }
 
