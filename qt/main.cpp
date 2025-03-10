@@ -39,8 +39,9 @@ void copy_sword_files() {
     QString appDirectory = qApp -> applicationDirPath();
     QString d2 = appDirectory;
 #if defined(__APPLE__)
-    d2 += QDir::separator() + QString("..") + QDir::separator() + "Resources" + QDir::separator() + "sword";
+    d2 += QDir::separator() + QString("..") + QDir::separator() + "Resources";
 #endif // __APPLE__
+    d2 += QDir::separator() + QString("sword");
     const QFileInfo f2(d2);
     if (f2.exists() && f2.isDir()) {
       cout << d1.toStdString() << " does not exist, creating it from bundle" << endl;
