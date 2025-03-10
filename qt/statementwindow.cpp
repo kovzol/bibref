@@ -254,7 +254,6 @@ void StatementWindow::analyze()
     QString details;
     bool dmode = false;
 
-    int i = 0;
     int j = 0;
     for (auto l: statementAnalysis) {
         bool store = false;
@@ -363,7 +362,6 @@ void StatementWindow::analyze()
             t->setColumnWidth(3, 5 * size);
             j++; // count the wanted lines
         }
-        i++;
     }
     t->setRowCount(j); // remove unnecessary lines
     t->horizontalHeader()->setStretchLastSection(true);
