@@ -144,8 +144,8 @@ REVELATION_OF_JOHN { yylval.strval = strdup(yytext); return REVELATION_OF_JOHN; 
 '(\\.|''|[^'\n])*'	|
 \"(\\.|\"\"|[^"\n])*\"  { yylval.strval = strdup(yytext); return STRING; }
 
-'(\\.|[^'\n])*$	        { yyerror("Unterminated string %s", yytext); }
-\"(\\.|[^"\n])*$	{ yyerror("Unterminated string %s", yytext); }
+'(\\.|[^'\n])*$	        { yyerror("Unterminated string %s E21", yytext); }
+\"(\\.|[^"\n])*$	{ yyerror("Unterminated string %s E21", yytext); }
 
   /* a-y literals */
 [a-y]+	{ yylval.strval = strdup(yytext); return AYLITERAL;}
@@ -169,7 +169,7 @@ REVELATION_OF_JOHN { yylval.strval = strdup(yytext); return REVELATION_OF_JOHN; 
   /* everything else */
 [ \t]         /* white space */ { }
 [\n]            { yycolumn = 1; }
-.               { yyerror("mystery character '%c'", *yytext); }
+.               { yyerror("non-identifiable character '%c' E20", *yytext); }
 
 %%
  
