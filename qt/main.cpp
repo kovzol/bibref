@@ -29,7 +29,7 @@ void copyPath(QString src, QString dst)
 // TODO: Do something similar on Windows, because it is currently done via start.bat,
 // and it opens a terminal window which would not be necessary then.
 void copy_sword_files() {
-#if defined(__APPLE__)
+#if defined(__APPLE__) or defined(__MINGW32__)
     QString userHome = QDir::homePath();
     QString d1 = userHome + QDir::separator() + ".sword";
     const QFileInfo f1(d1);
@@ -38,7 +38,10 @@ void copy_sword_files() {
       return;
       }
     QString appDirectory = qApp -> applicationDirPath();
-    QString d2 = appDirectory + QDir::separator() + ".." + QDir::separator() + "Resources" + QDir::separator() + "sword";
+    QString d2 = appDirectory;
+#if defined(__APPLE__)
+    d2 += QDir::separator() + ".." + QDir::separator() + "Resources" + QDir::separator() + "sword";
+#endif // __APPLE__
     const QFileInfo f2(d2);
     if (f2.exists() && f2.isDir()) {
       cout << d1.toStdString() << " does not exist, creating it from bundle" << endl;
@@ -48,7 +51,7 @@ void copy_sword_files() {
     else {
       cout << d2.toStdString() << " does not exist, expect problems" << endl;
       }
-#endif // __APPLE__
+#endif // __APPLE__ || __MINGW32__
 }
 
 int defaultFontSize;
