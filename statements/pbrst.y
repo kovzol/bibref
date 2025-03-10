@@ -1572,7 +1572,7 @@ void create_dump() {
 void reset_data(int cr, int cd, int cc, int cv, int sd) { // important if a previous run was already performed
     extern int yycolumn;
     addbooks_done = true; // we assume it was already called
-    yycolumn = 0;
+    yycolumn = 1;
     yylex_destroy();
     substrings = 0;
     iv_counter = 0;
