@@ -1299,12 +1299,14 @@ void MainWindow::preferences()
 
     QSettings settings;
     int size = settings.value("Application/fontsize", defaultFontSize).toInt();
+    bool debug = settings.value("Application/debug", defaultDebug).toBool();
 
     QVBoxLayout *layout = new QVBoxLayout;
     layout->setContentsMargins(size / 2, size / 2, size / 2,  size / 2);
 
     QHBoxLayout *hlayout = new QHBoxLayout;
 
+    /* Font size: */
     QLabel *fontSizeLabel = new QLabel(tr("Font size:"));
     string fontSizeTip
         = tr("Set general font size in the application (default: %1)")
@@ -1326,12 +1328,35 @@ void MainWindow::preferences()
     // widget->setFixedSize(30 * size, 10 * size);
     widget->setWindowTitle(tr("Preferences"));
 
+    /* Show debug in Analyze: */
+    QLabel *debugLabel = new QLabel(tr("Debug mode:"));
+    string debugTip
+        = tr("Show debug messages in the Analyze window")
+              .toStdString();
+    debugLabel->setToolTip(tr(debugTip.c_str()));
+
+    QCheckBox *debugCheckbox = new QCheckBox(this);
+    debugCheckbox->setChecked(debug);
+
+    hlayout = new QHBoxLayout;
+    hlayout->addWidget(debugLabel);
+    hlayout->addWidget(debugCheckbox);
+    hlayout->addStretch(1);
+    layout->addLayout(hlayout, 1);
+
+    widget->setLayout(layout);
+    // widget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    // widget->setFixedSize(30 * size, 10 * size);
+    widget->setWindowTitle(tr("Preferences"));
+
     buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok);
 
     connect(buttonBox, &QDialogButtonBox::accepted, [=]() {
         QSettings settings;
         int size = fontSizeEdit->text().toInt();
         settings.setValue("Application/fontsize", size);
+        bool debug = debugCheckbox->isChecked();
+        settings.setValue("Application/debug", debug);
         QFont f = qApp->font();
         f.setPointSize(size);
         qApp->setFont(f);
@@ -1339,8 +1364,7 @@ void MainWindow::preferences()
     });
 
     layout->addWidget(buttonBox);
+
     widget->show();
-
-
 
 }

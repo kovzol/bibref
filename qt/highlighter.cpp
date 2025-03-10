@@ -87,6 +87,8 @@ Highlighter::Highlighter(QTextDocument *parent)
     rule.pattern = QRegularExpression(QStringLiteral("'.*'"));
     rule.format = greekFormat;
     highlightingRules.append(rule);
+    rule.pattern = QRegularExpression(QStringLiteral("\".*\""));
+    highlightingRules.append(rule);
 
     positionFormat.setForeground(Qt::magenta);
     rule.pattern = QRegularExpression(QStringLiteral("\\([\\d]+\\-[\\d]+\\)"));

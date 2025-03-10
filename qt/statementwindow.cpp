@@ -244,6 +244,7 @@ void StatementWindow::analyze()
 
     QSettings settings;
     int size = settings.value("Application/fontsize", defaultFontSize).toInt();
+    bool debug = settings.value("Application/debug", defaultDebug).toBool();
 
     QVBoxLayout *layout = new QVBoxLayout;
     layout->setContentsMargins(size / 2, size / 2, size / 2,  size / 2);
@@ -253,7 +254,6 @@ void StatementWindow::analyze()
     QString details;
     bool dmode = false;
 
-    int i = 0;
     int j = 0;
     for (auto l: statementAnalysis) {
         bool store = false;
@@ -272,7 +272,7 @@ void StatementWindow::analyze()
             store = true;
             color = "red";
         }
-        if (l.find(": debug: ")!=string::npos &&
+        if (debug && l.find(": debug: ")!=string::npos &&
             l.find("diagram: graphviz: ")==string::npos) {
             debugs++;
             store = true;
@@ -312,27 +312,32 @@ void StatementWindow::analyze()
                     message += ":";
             }
             message = message.substr(1);
-            QLabel *messageLabel = new QLabel(QString(message.c_str()));
-            messageLabel->setMargin(2);
+            if (boost::ends_with(message, "syntax error"))
+                message += " E22";
+            QLabel *messageLabel = new QLabel();
             // Check if there is additional key to some info at the end of the message
-            QRegularExpression pattern = QRegularExpression(" [WE][0-9]+");
+            QRegularExpression pattern = QRegularExpression(" [EWI][0-9]+");
             QRegularExpressionMatch match = pattern.match(QString::fromStdString(message));
             if (match.hasMatch()) {
                 string key = match.captured(0).toStdString().substr(1) + " ";
+                message = message.substr(0, message.length() - key.length()); // remove key from message
                 for (auto info : descriptions) {
                     if (boost::starts_with(info, key)) {
                         // Show the additional info as tooltip:
                         messageLabel->setToolTip("<html><head/><body><p>" +
-                            QString::fromStdString(info) +
+                            QString::fromStdString(info.substr(key.length())) +
                             "</p></body></html>"); // force HTML to have multiple lines
                         QString color;
                         if (key.at(0) == 'E') color = "pink";
                         if (key.at(0) == 'W') color = "#FFD580";
+                        if (key.at(0) == 'I') color = "lightgreen";
                         messageLabel->setStyleSheet("QToolTip {border-width:2px; border-style:solid;"
                             "background-color:" + color + "; max-width:700px}");
                     }
                 }
             }
+            messageLabel->setText(QString(message.c_str()));
+            messageLabel->setMargin(2);
 
             QLabel *typeLabel = new QLabel(QString(type.c_str()));
             typeLabel->setAlignment(Qt::AlignCenter);
@@ -346,11 +351,11 @@ void StatementWindow::analyze()
             b->setObjectName(QString{"rc_%1_%2"}.arg(row).arg(col));
             connect(b, SIGNAL(clicked()), this, SLOT(setPosition()));
 
-            t->setCellWidget(i, 0, typeLabel);
-            t->setCellWidget(i, 1, rowLabel);
-            t->setCellWidget(i, 2, columnLabel);
-            t->setCellWidget(i, 3, b);
-            t->setCellWidget(i, 4, messageLabel);
+            t->setCellWidget(j, 0, typeLabel);
+            t->setCellWidget(j, 1, rowLabel);
+            t->setCellWidget(j, 2, columnLabel);
+            t->setCellWidget(j, 3, b);
+            t->setCellWidget(j, 4, messageLabel);
             t->setHorizontalHeaderLabels({tr("Type"), tr("Row"), tr("Col"), tr("Source"), tr("Message") });
             t->setColumnWidth(0, 7 * size);
             t->setColumnWidth(1, 4 * size);
@@ -359,7 +364,6 @@ void StatementWindow::analyze()
             t->setColumnWidth(3, 5 * size);
             j++; // count the wanted lines
         }
-        i++;
     }
     t->setRowCount(j); // remove unnecessary lines
     t->horizontalHeader()->setStretchLastSection(true);
