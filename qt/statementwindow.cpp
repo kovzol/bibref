@@ -244,6 +244,7 @@ void StatementWindow::analyze()
 
     QSettings settings;
     int size = settings.value("Application/fontsize", defaultFontSize).toInt();
+    bool debug = settings.value("Application/debug", defaultDebug).toBool();
 
     QVBoxLayout *layout = new QVBoxLayout;
     layout->setContentsMargins(size / 2, size / 2, size / 2,  size / 2);
@@ -272,7 +273,7 @@ void StatementWindow::analyze()
             store = true;
             color = "red";
         }
-        if (l.find(": debug: ")!=string::npos &&
+        if (debug && l.find(": debug: ")!=string::npos &&
             l.find("diagram: graphviz: ")==string::npos) {
             debugs++;
             store = true;
@@ -349,11 +350,11 @@ void StatementWindow::analyze()
             b->setObjectName(QString{"rc_%1_%2"}.arg(row).arg(col));
             connect(b, SIGNAL(clicked()), this, SLOT(setPosition()));
 
-            t->setCellWidget(i, 0, typeLabel);
-            t->setCellWidget(i, 1, rowLabel);
-            t->setCellWidget(i, 2, columnLabel);
-            t->setCellWidget(i, 3, b);
-            t->setCellWidget(i, 4, messageLabel);
+            t->setCellWidget(j, 0, typeLabel);
+            t->setCellWidget(j, 1, rowLabel);
+            t->setCellWidget(j, 2, columnLabel);
+            t->setCellWidget(j, 3, b);
+            t->setCellWidget(j, 4, messageLabel);
             t->setHorizontalHeaderLabels({tr("Type"), tr("Row"), tr("Col"), tr("Source"), tr("Message") });
             t->setColumnWidth(0, 7 * size);
             t->setColumnWidth(1, 4 * size);

@@ -52,6 +52,7 @@ void copy_sword_files() {
 }
 
 int defaultFontSize;
+bool defaultDebug;
 
 int main(int argc, char *argv[])
 {
@@ -63,6 +64,7 @@ int main(int argc, char *argv[])
     app.setStyle("fusion");
 
     defaultFontSize = 9;
+    defaultDebug = false;
     QFont f = app.font();
     QSettings settings;
     if (settings.contains("Application/fontsize")) {
