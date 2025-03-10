@@ -25,9 +25,8 @@ void copyPath(QString src, QString dst)
     }
 }
 
-// This copies the SWORD modules bundle (assumed in Contents/Resources/sword) to ~/.sword.
-// TODO: Do something similar on Windows, because it is currently done via start.bat,
-// and it opens a terminal window which would not be necessary then.
+// This copies the SWORD modules bundle (assumed in Contents/Resources/sword/ on macOS
+// or in sword/) to ~/.sword.
 void copy_sword_files() {
 #if defined(__APPLE__) or defined(__MINGW32__)
     QString userHome = QDir::homePath();
@@ -40,7 +39,7 @@ void copy_sword_files() {
     QString appDirectory = qApp -> applicationDirPath();
     QString d2 = appDirectory;
 #if defined(__APPLE__)
-    d2 += QDir::separator() + ".." + QDir::separator() + "Resources" + QDir::separator() + "sword";
+    d2 += QDir::separator() + QString("..") + QDir::separator() + "Resources" + QDir::separator() + "sword";
 #endif // __APPLE__
     const QFileInfo f2(d2);
     if (f2.exists() && f2.isDir()) {
