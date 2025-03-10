@@ -312,6 +312,8 @@ void StatementWindow::analyze()
                     message += ":";
             }
             message = message.substr(1);
+            if (boost::ends_with(message, "syntax error"))
+                message += " E22";
             QLabel *messageLabel = new QLabel();
             // Check if there is additional key to some info at the end of the message
             QRegularExpression pattern = QRegularExpression(" [EWI][0-9]+");
