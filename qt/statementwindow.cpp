@@ -312,27 +312,30 @@ void StatementWindow::analyze()
                     message += ":";
             }
             message = message.substr(1);
-            QLabel *messageLabel = new QLabel(QString(message.c_str()));
-            messageLabel->setMargin(2);
+            QLabel *messageLabel = new QLabel();
             // Check if there is additional key to some info at the end of the message
-            QRegularExpression pattern = QRegularExpression(" [WE][0-9]+");
+            QRegularExpression pattern = QRegularExpression(" [EWI][0-9]+");
             QRegularExpressionMatch match = pattern.match(QString::fromStdString(message));
             if (match.hasMatch()) {
                 string key = match.captured(0).toStdString().substr(1) + " ";
+                message = message.substr(0, message.length() - key.length()); // remove key from message
                 for (auto info : descriptions) {
                     if (boost::starts_with(info, key)) {
                         // Show the additional info as tooltip:
                         messageLabel->setToolTip("<html><head/><body><p>" +
-                            QString::fromStdString(info) +
+                            QString::fromStdString(info.substr(key.length())) +
                             "</p></body></html>"); // force HTML to have multiple lines
                         QString color;
                         if (key.at(0) == 'E') color = "pink";
                         if (key.at(0) == 'W') color = "#FFD580";
+                        if (key.at(0) == 'I') color = "lightgreen";
                         messageLabel->setStyleSheet("QToolTip {border-width:2px; border-style:solid;"
                             "background-color:" + color + "; max-width:700px}");
                     }
                 }
             }
+            messageLabel->setText(QString(message.c_str()));
+            messageLabel->setMargin(2);
 
             QLabel *typeLabel = new QLabel(QString(type.c_str()));
             typeLabel->setAlignment(Qt::AlignCenter);
