@@ -41,11 +41,43 @@
         <image>https://github.com/kovzol/bibref/blob/master/bibref-qt.png?raw=true</image>
         <caption>Some simple queries made with bibref</caption>
       </screenshot>
+      <screenshot>
+        <image>https://matek.hu/zoltan/analyze-se.png</image>
+        <caption>Statement Editor</caption>
+      </screenshot>
+      <screenshot>
+        <image>https://matek.hu/zoltan/analyze-ordered.png</image>
+        <caption>The Analyze window</caption>
+      </screenshot>
+      <screenshot>
+        <image>https://matek.hu/zoltan/visualize3.png</image>
+        <caption>Example diagram of Matthew 2:6</caption>
+      </screenshot>
+      <screenshot>
+        <image>https://matek.hu/zoltan/visualize4.png</image>
+        <caption>Example diagram between I Timothy 5:18 and Deuteronomy 25:4</caption>
+      </screenshot>
     </screenshots>
 
   <content_rating type="oars-1.1" />
 
   <releases>
+    <release version="2025-03-10" date="2025-03-10">
+    <url type="details">https://github.com/kovzol/bibref/commits/014702b11c6f4ae48268b16381caa0a6039be537</url>
+      <description>
+        <p>Release description</p>
+          <ul>
+            <li>Descriptions for infos</li>
+            <li>Preferences: debug mode</li>
+            <li>Fix column information identified in flex/bison (fixed in Qt)</li>
+            <li>Improved syntax highlighting (for quoted texts)</li>
+            <li>Improved column order</li>
+            <li>Enhanced flexible look</li>
+            <li>Code cleanup</li>
+            <li>Several bugfixes</li>
+          </ul>
+      </description>
+    </release>
     <release version="2025-03-06" date="2025-03-06">
     <url type="details">https://github.com/kovzol/bibref/commits/014702b11c6f4ae48268b16381caa0a6039be537</url>
       <description>

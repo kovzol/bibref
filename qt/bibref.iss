@@ -1,4 +1,4 @@
-#define BIBREF_VERSION "2025Mar06"
+#define BIBREF_VERSION "2025Mar10"
 
 [Setup]
 AppName=bibref
@@ -15,10 +15,10 @@ OutputBaseFilename=bibref-setup
 Source: "bibref-qt-{#BIBREF_VERSION}\*.*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
 
 [Icons]
-Name: "{group}\bibref-qt"; Filename: "{app}\start.bat"; IconFilename: "{app}\bibref.ico"
+Name: "{group}\bibref-qt"; Filename: "{app}\bibref-qt.exe"; IconFilename: "{app}\bibref.ico"
 Name: "{group}\Uninstall bibref"; Filename: "{uninstallexe}"; IconFilename: "{app}\bibref.ico"
-Name: "{autoprograms}\bibref-qt"; Filename: "{app}\start.bat"; IconFilename: "{app}\bibref.ico"
-Name: "{autodesktop}\bibref-qt"; Filename: "{app}\start.bat"; IconFilename: "{app}\bibref.ico"
+Name: "{autoprograms}\bibref-qt"; Filename: "{app}\bibref-qt.exe"; IconFilename: "{app}\bibref.ico"
+Name: "{autodesktop}\bibref-qt"; Filename: "{app}\bibref-qt.exe"; IconFilename: "{app}\bibref.ico"
 
 [Run]
-Filename: {app}\start.bat; Description: Start bibref now; Flags: postinstall nowait skipifsilent
+Filename: {app}\bibref-qt.exe; Description: Start bibref now; Flags: postinstall nowait skipifsilent
