@@ -57,7 +57,6 @@ modules:
       - -DBUILD_SHARED_LIBS=ON
       - -UPROJECT_SOURCE_DIR
       - -DPROJECT_SOURCE_DIR=/app/share/bibref-qt
-      - -DPBRST=ON
     # The cmake machinery will put the required databases in $XDG_DATA_HOME (if it is set).
     # By setting that value we put the database to /app/tmp/.sword temporarily
     # and later we copy it to /app/share/sword in the post-install step:
