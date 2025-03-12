@@ -1,4 +1,4 @@
-/* BibRef, a project dedicated to find citations of the
+/* bibref, a project dedicated to find citations of the
  * Septuagint in the Greek New Testament.
  * This code is in the public domain
  * and contributed by Zoltán Kovács <zoltan@geogebra.org>.

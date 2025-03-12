@@ -63,9 +63,9 @@ vector<PsalmsInfo> psalmsInfos;
 string latinToGreek(const string &latin)
 {
     string greek = latin;
-    string to[25] = {"α", "β", "ψ", "δ", "ε", "φ", "γ", "η", "ι", "ξ", "κ", "λ", "μ",
-                     "ν", "ο", "π", "ζ", "ρ", "σ", "τ", "θ", "ω", "ς", "χ", "υ"};
-    for (char c = 'a'; c < 'z'; c++) {
+    string to[N_GREEK_LETTERS] = {"α", "β", "ψ", "δ", "ε", "φ", "γ", "η", "ι", "ξ", "κ", "λ", "μ",
+                     "ν", "ο", "π", "ζ", "ρ", "σ", "τ", "θ", "ω", "ς", "χ", "υ", "ζ"};
+    for (char c = 'a'; c <= 'z'; c++) {
         string from;
         from = c;
         boost::replace_all(greek, from, to[c - 'a']);
@@ -73,7 +73,7 @@ string latinToGreek(const string &latin)
     return greek;
 }
 
-/// Convert the input word to a-y encoding.
+/// Convert the input word to a-z encoding.
 string greekToLatin(string word)
 {
     /*
@@ -118,7 +118,8 @@ string greekToLatin(string word)
                     c = 'e';
                     break;
                 case 0xB6:
-                    c = 'q'; // it should be z (zeta) but we change it to free one letter at the end of alphabet
+                    // c = 'q'; // it should be z (zeta) but we change it to free one letter at the end of alphabet
+                    c = 'z'; // it is not worth winning one character at the price of confusion
                     break;
                 case 0xB7:
                     c = 'h'; // eta
@@ -404,7 +405,7 @@ int lookupTranslation(string moduleName, string book, const string &verse)
 }
 
 /// Loaded all books of a Bible edition.
-int addBooks_cached(string moduleName)
+int addBooks_cached(string moduleName, string installedModuleVersion)
 {
     vector<string> bookNames;
     // This is needed for correct alphabetical ordering:
@@ -499,13 +500,38 @@ int addBooks_cached(string moduleName)
 
     string path = BIBREF_ADDBOOKS_CACHE_DIR + moduleName;
 
+    // Check versions.
+    std::ifstream versionFile(path + "/version");
+    if (!versionFile.good()) {
+      error("Missing version information for cache for module " + moduleName + ".");
+      error("Cache must be recreated.");
+      return 1;
+      }
+    char bibrefVersion[10];
+    char moduleVersion[10];
+    FILE *versionFileC = fopen((path + "/version").c_str(), "r");
+    fscanf(versionFileC, "BibrefVersion=%9s\nModuleVersion=%9s", bibrefVersion, moduleVersion);
+    if (strcmp(bibrefVersion, BIBREF_VERSION) != 0) {
+      error("Different bibref version in cache for module version " + moduleName + ": " + bibrefVersion
+        + " (" + BIBREF_VERSION + " needed).");
+      error("Cache must be recreated.");
+      return 1;
+      }
+    if (strcmp(moduleVersion, installedModuleVersion.c_str()) != 0) {
+      error("Different module version in cache for module " + moduleName + ": " + moduleVersion
+        + " (" + installedModuleVersion + " needed).");
+      error("Cache must be recreated.");
+      return 1;
+      }
+    fclose(versionFileC);
+
     PsalmsInfo pi = PsalmsInfo(moduleName); // create database for Psalms
     for (int i = 1; i <= 151; i++)
         pi.setLastVerse(i, 0); // initialize
 
     for (vector<string>::iterator i = bookNames.begin(); i != bookNames.end(); ++i) {
         string bookName = *i;
-        std::ifstream bookFile(path + "/" + bookName + ".book"); // open a-y encoded raw book
+        std::ifstream bookFile(path + "/" + bookName + ".book"); // open a-z encoded raw book
         if (!bookFile.good())
             continue; // do not continue for this book, because it does not exist in the module
         // TODO: This check should be done for the other file types to handle non-existence properly
@@ -565,12 +591,6 @@ int addBooks_cached(string moduleName)
 /// Load a Bible edition, and save it on the disk for a future cache (if there is no cache saved yet).
 int addBooks(string moduleName, string firstVerse, string lastVerse, bool removeAccents)
 {
-    DIR *cache_dir = opendir((BIBREF_ADDBOOKS_CACHE_DIR + moduleName).c_str());
-    if (cache_dir) { // If there is a cache saved on the disk, we'll use it.
-        closedir(cache_dir);
-        addBooks_cached(moduleName); // Load the book from the cache.
-        return 0;                    // No further operation is required.
-    }
     SWMgr library(new MarkupFilterMgr(FMT_PLAIN));
     SWModule *module;
     module = library.getModule(moduleName.c_str()); // Trying to load the Sword module.
@@ -587,6 +607,12 @@ int addBooks(string moduleName, string firstVerse, string lastVerse, bool remove
         lastVerse = "Odes 1:19"; // order of books is different
     }
 
+    DIR *cache_dir = opendir((BIBREF_ADDBOOKS_CACHE_DIR + moduleName).c_str());
+    if (cache_dir) { // If there is a cache saved on the disk, we'll use it.
+        closedir(cache_dir);
+        if (addBooks_cached(moduleName, version) == 0) // Load the book from the cache.
+          return 0;                      // If successful, no further operation is required.
+    }
     // Set first and last verses of the book.
     module->setKey(firstVerse.c_str());
     int bookStart = module->getIndex();
@@ -605,6 +631,10 @@ int addBooks(string moduleName, string firstVerse, string lastVerse, bool remove
 #ifndef __EMSCRIPTEN__ // In the web version we don't save the cache, but assume that it exists.
     try {
         boost::filesystem::create_directories(path);
+        FILE *versionFile = fopen((path + "/version").c_str(), "wa");
+        fprintf(versionFile, "BibrefVersion=%s\n", BIBREF_VERSION);
+        fprintf(versionFile, "ModuleVersion=%s\n", version.c_str());
+        fclose(versionFile);
     } catch (exception &e) {
         error("The addbooks cache cannot be saved in this folder.");
         create_cache = false; // No, we cannot use a cache in this session.
@@ -703,7 +733,7 @@ int addBooks(string moduleName, string firstVerse, string lastVerse, bool remove
                     int end = lastBook.getVerseEnd(reference);
                     int tokensStart = lastBook.getVerseTokensStart(reference);
                     int tokensEnd = lastBook.getVerseTokensEnd(reference);
-                    // Save the character positions for the a-y raw text and for the tokens.
+                    // Save the character positions for the a-z raw text and for the tokens.
                     fprintf(lastBookVersesFile,
                             "%s %d %d %d %d\n",
                             reference.c_str(),
@@ -723,7 +753,7 @@ int addBooks(string moduleName, string firstVerse, string lastVerse, bool remove
                                                    "wa");
                         fprintf(lastBookFile,
                                 "%s\n",
-                                lastBookText.c_str()); // Dump the a-y raw book as string.
+                                lastBookText.c_str()); // Dump the a-z raw book as string.
                         fclose(lastBookFile);
 
                         FILE *lastTokensFile = fopen((path + "/" + lastBookName + ".tokens").c_str(),
@@ -1047,7 +1077,7 @@ int findBestFit(const string& book1, const string& info1, const string& verseInf
 
 /* End of experimental code. */
 
-/// Low level algorithm to find exact string match in the a-y encoded books.
+/// Low level algorithm to find exact string match in the a-z encoded books.
 /// @return "f,b,p" where f is the number of occurrences, b is the book name of the last occurrence and p is its position.
 string _find(string text, string moduleName, int maxFound, bool verbose)
 {
@@ -1083,7 +1113,7 @@ end:
     return to_string(found) + "," + book + "," + to_string(pos); // return concise data
 }
 
-/// Return the number of occurrences of an a-y encoded text in Bible edition moduleName.
+/// Return the number of occurrences of an a-z encoded text in Bible edition moduleName.
 int find(const string &text, const string &moduleName, int maxFound, bool verbose)
 {
     string f = _find(text, moduleName, maxFound, verbose);
@@ -1092,7 +1122,7 @@ int find(const string &text, const string &moduleName, int maxFound, bool verbos
     return stoi(info[0]);
 }
 
-/// Return the book name and position of the last occurrence of an a-y encoded text in Bible edition moduleName.
+/// Return the book name and position of the last occurrence of an a-z encoded text in Bible edition moduleName.
 /// @return "b,p" where b is the book name of the last occurrence and p is its position.
 string find(const string &text, const string &moduleName)
 {

@@ -1,5 +1,3 @@
-#define BIBREF_VERSION "2025Mar10"
-
 #include <algorithm>
 #include <iostream>
 #include <sstream>

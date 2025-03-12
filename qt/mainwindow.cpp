@@ -48,7 +48,7 @@ QString getClipboardInfos()
     string textShown[2];
     QString greekShown[2];
     QString intro = "<b>"
-                    + MainWindow::tr("Contents of the clipboards in Greek (and in a-y notation)")
+                    + MainWindow::tr("Contents of the clipboards in Greek (and in a-z notation)")
                     + "</b>";
     for (int i = 0; i < 2; ++i) {
         if (text[i].empty())
@@ -429,7 +429,7 @@ void MainWindow::lookupN(int index)
     if (restSize == 3) {
         string verse = "";
         try {                                                     // e.g. lookup1 LXX Genesis 1:1
-            verse = lookupVerse(tokens[1], tokens[0], tokens[2]); // lookup in the a-y database
+            verse = lookupVerse(tokens[1], tokens[0], tokens[2]); // lookup in the a-z database
             text[index] = verse;                                  // Store result.
             textset[index] = true;                                // activate clipboard
             statusBar()->showMessage(tr("Stored."));
@@ -452,7 +452,7 @@ void MainWindow::lookupN(int index)
             if (tokens3.size() > 1) {
                 end = stoi(tokens3[1]); // read off the minus shift
             }
-            // Shift-allowed lookup in the a-y database...
+            // Shift-allowed lookup in the a-z database...
             verse = getText(tokens[1], tokens[0], tokens2.at(0), tokens3.at(0), start, end);
             text[index] = verse;   // Store result.
             textset[index] = true; // activate clipboard
@@ -913,7 +913,7 @@ void MainWindow::tutorial()
                "verse numbering, we consider each book of a Bible edition "
                "as a continuous raw text of Greek characters from α to ω. "
                "(To simplify working with texts, Greek characters are transcribed to "
-               "latin characters a-y.)")
+               "latin characters a-z.)")
           + "<br>"
           + tr("A Bible edition is defined as an old compilation of books "
                "that are considered canonical. Definitely, we work "
@@ -951,16 +951,16 @@ void MainWindow::tutorial()
                "the program informs the user that the two texts have a Jaccard distance "
                "near 0.63 (which is a substantial distance).")
           + "</li>" + "<li>"
-          + tr("The words κλεψεις and κλεπτεις are similar. In the a-y transcription "
+          + tr("The words κλεψεις and κλεπτεις are similar. In the a-z transcription "
                "they are shown as <b>kleceis</b> and <b>klepteis</b>. "
-               "The user may want to enter these words with their a-y transcriptions "
+               "The user may want to enter these words with their a-z transcriptions "
                "in Edit&gt;Latin Text 1… and Edit&gt;Latin Text 2… "
                "Their Jaccard distance is near 0.42 (which is a bit closer).")
           + "</li>" + "<li>"
           + tr(
               "Now, the user loads the indexed Bibles via File&gt;Add books. Several features "
               "of the program can be used from now on. For example, the user can put "
-              "the a-y transcription of a part of Psalms 39:14-18 and 69:1-6 in the two "
+              "the a-z transcription of a part of Psalms 39:14-18 and 69:1-6 in the two "
               "clipboards. "
               "(Note that these texts are numbered as 40:14-18 and 70:1-6 in some Bible editions.) "
               "This is achievable via Passage&gt;Lookup 1… and Passage&gt;Lookup 2… by typing "
@@ -1081,7 +1081,7 @@ void MainWindow::createActions()
     greekText2Act->setStatusTip(tr(greekStatusTip.c_str()).arg(2));
     connect(greekText2Act, &QAction::triggered, this, &MainWindow::greekText2);
 
-    string latinStatusTip = tr("Put a Latin (a-y) transcription in clipboard %1").toStdString();
+    string latinStatusTip = tr("Put a Latin (a-z) transcription in clipboard %1").toStdString();
     latinText1Act = new QAction("&Latin text 1…", this);
     latinText1Act->setIcon(QIcon::fromTheme("insert-text"));
     latinText1Act->setStatusTip(tr(latinStatusTip.c_str()).arg(1));
@@ -1189,14 +1189,14 @@ void MainWindow::createActions()
 
     rawAct = new QAction("&Raw…", this);
     rawAct->setIcon(QIcon::fromTheme("media-flash"));
-    rawAct->setStatusTip(tr("Show the a-y transcription of a positioned text in a given book"));
+    rawAct->setStatusTip(tr("Show the a-z transcription of a positioned text in a given book"));
     connect(rawAct, &QAction::triggered, this, &MainWindow::raw);
 #ifndef __APPLE__
     rawAct->setDisabled(true);
 #endif
 
     string rawStatusTip
-        = tr("Put the a-y transcription of a positioned text in a given book in clipboard %1")
+        = tr("Put the a-z transcription of a positioned text in a given book in clipboard %1")
               .toStdString();
     raw1Act = new QAction("Raw &1…", this);
     raw1Act->setStatusTip(tr(rawStatusTip.c_str()).arg(1));

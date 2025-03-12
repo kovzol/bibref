@@ -1,7 +1,8 @@
 #ifndef FINGERPRINT_H
 #define FINGERPRINT_H
 
-#define N_GREEK_LETTERS 25
+#define N_GREEK_LETTERS 26
+// we don't use q and w
 
 #include "book.h"
 

@@ -38,9 +38,9 @@ Keywords={
       "Hebrews", "James", "I_Peter", "II_Peter", "I_John", "II_John", "III_John", "Jude", "Revelation_of_John"},
   },
 
--- Forms in a-y notation...
+-- Forms in a-z notation...
   { Id=3,
-    Regex=[[a\-y\s*form\s*['a-y']+]]
+    Regex=[[a\-y\s*form\s*['a-z']+]]
   },
 -- ...or in Greek...
   { Id=3,

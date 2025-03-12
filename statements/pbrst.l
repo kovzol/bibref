@@ -27,7 +27,7 @@ WITH { return WITH; }
 BASED { return BASED; }
 ON { return ON; }
 INTRODUCTION { return INTRODUCTION; }
-A-Y { return A_Y; }
+A-Z { return A_Z; }
 FORM { return FORM; }
 THAT { return THAT; }
 DECLARES { return DECLARES; }
@@ -147,8 +147,8 @@ REVELATION_OF_JOHN { yylval.strval = strdup(yytext); return REVELATION_OF_JOHN; 
 '(\\.|[^'\n])*$	        { yyerror("Unterminated string %s E21", yytext); }
 \"(\\.|[^"\n])*$	{ yyerror("Unterminated string %s E21", yytext); }
 
-  /* a-y literals */
-[a-y]+	{ yylval.strval = strdup(yytext); return AYLITERAL;}
+  /* a-z literals, change q to z */
+[a-z]+	{ yylval.strval = replace_char(strdup(yytext), 'q', 'z'); return AZLITERAL;}
 
   /* name */
 [A-Za-z][A-Za-z0-9_,\-\+]*	{ yylval.strval = strdup(yytext);

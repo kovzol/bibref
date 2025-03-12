@@ -1,6 +1,8 @@
 #ifndef CLI_H
 #define CLI_H
 
+#define BIBREF_VERSION "2025Mar10"
+
 #include <string>
 
 using namespace std;

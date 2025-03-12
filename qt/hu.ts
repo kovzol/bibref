@@ -5,8 +5,8 @@
     <name>MainWindow</name>
     <message>
         <location filename="mainwindow.cpp" line="51"/>
-        <source>Contents of the clipboards in Greek (and in a-y notation)</source>
-        <translation>A vágólapok tartalma görög betűkkel (ill. a-y jelöléssel)</translation>
+        <source>Contents of the clipboards in Greek (and in a-z notation)</source>
+        <translation>A vágólapok tartalma görög betűkkel (ill. a-z jelöléssel)</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="55"/>
@@ -241,7 +241,7 @@
     </message>
     <message>
         <location filename="mainwindow.cpp" line="960"/>
-        <source>Now, the user loads the indexed Bibles via File&amp;gt;Add books. Several features of the program can be used from now on. For example, the user can put the a-y transcription of a part of Psalms 39:14-18 and 69:1-6 in the two clipboards. (Note that these texts are numbered as 40:14-18 and 70:1-6 in some Bible editions.) This is achievable via Passage&amp;gt;Lookup 1… and Passage&amp;gt;Lookup 2… by typing &lt;b&gt;LXX Psalms 39:14+23 39:18&lt;/b&gt; and &lt;b&gt;LXX Psalms 69:1+37 69:6&lt;/b&gt;, respectively. This notation allows to cut the first 23 or 37 letters of the passages. (Analogously, appending a number with a minus sign to the end of the passage definition, it is possible to cut some of the last letters of the passages.) The Jaccard distance is near 0.19 (which means a close relationship).</source>
+        <source>Now, the user loads the indexed Bibles via File&amp;gt;Add books. Several features of the program can be used from now on. For example, the user can put the a-z transcription of a part of Psalms 39:14-18 and 69:1-6 in the two clipboards. (Note that these texts are numbered as 40:14-18 and 70:1-6 in some Bible editions.) This is achievable via Passage&amp;gt;Lookup 1… and Passage&amp;gt;Lookup 2… by typing &lt;b&gt;LXX Psalms 39:14+23 39:18&lt;/b&gt; and &lt;b&gt;LXX Psalms 69:1+37 69:6&lt;/b&gt;, respectively. This notation allows to cut the first 23 or 37 letters of the passages. (Analogously, appending a number with a minus sign to the end of the passage definition, it is possible to cut some of the last letters of the passages.) The Jaccard distance is near 0.19 (which means a close relationship).</source>
         <translation>Most ha a felhasználó a File&amp;gt;Add books funkciót indítja, sok új lehetőség áll rendelkezésre. Például a Zsoltárok 39:14-18 és 69:1-6 egy részét gyorsan felviheti a vágólapra. (Ezeket a szövegeket bizonyos bibliafordítások 40:14-18 és 70:1-6 versszámozással tartalmazzák.) Erre a Szakasz&amp;gt;Lookup 1… és Passage&amp;gt;Lookup 2… menükben van lehetőség a &lt;b&gt;LXX Psalms 39:14+23 39:18&lt;/b&gt; ill. &lt;b&gt;LXX Psalms 69:1+37 69:6&lt;/b&gt; paraméterek megadásával. Ezzel a jelöléssel rendre levágjuk az első 23 ill. 37 betűjét az egyes szakaszoknak. (Analóg módon, ha egy mínusz jel után adunk meg egy számot a szakasz végét jelző vershez írva, akkor a vers végének utolsó néhány betűjét vághatjuk le.) A Jaccard-távolság most 0.19 körüli (ami egy egészen közeli kapcsolatot jelent).</translation>
     </message>
     <message>
@@ -306,8 +306,8 @@
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1192"/>
-        <source>Show the a-y transcription of a positioned text in a given book</source>
-        <translation>Pozícióval megadott szöveg a-y átírásának megadása adott könyvben</translation>
+        <source>Show the a-z transcription of a positioned text in a given book</source>
+        <translation>Pozícióval megadott szöveg a-z átírásának megadása adott könyvben</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1215"/>
@@ -376,8 +376,8 @@
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1084"/>
-        <source>Put a Latin (a-y) transcription in clipboard %1</source>
-        <translation>Latin (a-y) kódolású szöveg feltöltése a(z) %1. vágólapra</translation>
+        <source>Put a Latin (a-z) transcription in clipboard %1</source>
+        <translation>Latin (a-z) kódolású szöveg feltöltése a(z) %1. vágólapra</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1095"/>
@@ -391,8 +391,8 @@
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1199"/>
-        <source>Put the a-y transcription of a positioned text in a given book in clipboard %1</source>
-        <translation>Pozícióval megadott a-y kódolású szöveg másolása a(z) %1. vágólapra</translation>
+        <source>Put the a-z transcription of a positioned text in a given book in clipboard %1</source>
+        <translation>Pozícióval megadott a-z kódolású szöveg másolása a(z) %1. vágólapra</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="909"/>
@@ -401,8 +401,8 @@
     </message>
     <message>
         <location filename="mainwindow.cpp" line="910"/>
-        <source>This Bible study tool offers work on texts that are close to the oldest manuscripts. Since there are no punctuation (spaces, commas, periods) in the old texts, and there is no verse numbering, we consider each book of a Bible edition as a continuous raw text of Greek characters from α to ω. (To simplify working with texts, Greek characters are transcribed to latin characters a-y.)</source>
-        <translation>Ez a bibliatanulmányozó program olyan szövegekkel dolgozik, amelyek a legrégebbi kéziratokhoz állnak közel. Mivel a régi szövegekben nincs központozás (szóközök, vesszők, pontok), sem versszámok, egy bibliakiadás könyvét görög betűkből álló nyers szövegnek tekintjük. (Az α és ω közötti görög betűket az egyszerűség kedvéért a-y latin átírással jelöljük.)</translation>
+        <source>This Bible study tool offers work on texts that are close to the oldest manuscripts. Since there are no punctuation (spaces, commas, periods) in the old texts, and there is no verse numbering, we consider each book of a Bible edition as a continuous raw text of Greek characters from α to ω. (To simplify working with texts, Greek characters are transcribed to latin characters a-z.)</source>
+        <translation>Ez a bibliatanulmányozó program olyan szövegekkel dolgozik, amelyek a legrégebbi kéziratokhoz állnak közel. Mivel a régi szövegekben nincs központozás (szóközök, vesszők, pontok), sem versszámok, egy bibliakiadás könyvét görög betűkből álló nyers szövegnek tekintjük. (Az α és ω közötti görög betűket az egyszerűség kedvéért a-z latin átírással jelöljük.)</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="918"/>
@@ -426,11 +426,11 @@
     </message>
     <message>
         <location filename="mainwindow.cpp" line="954"/>
-        <source>The words κλεψεις and κλεπτεις are similar. In the a-y transcription they are shown as &lt;b&gt;kleceis&lt;/b&gt; and &lt;b&gt;klepteis&lt;/b&gt;. The user may want to enter these words with their a-y transcriptions in Edit&amp;gt;Latin Text 1… and Edit&amp;gt;Latin Text 2… Their Jaccard distance is near 0.42 (which is a bit closer).</source>
-        <translation>A κλεψεις és κλεπτεις görög szavak hasonlóak. Az a-y átírásban ezek rendre &lt;b&gt;kleceis&lt;/b&gt; és &lt;b&gt;klepteis&lt;/b&gt; formában jelennek meg. A felhasználó beviheti ezeket a szavakat a-y átírásban is a Szerkesztés&amp;gt;Latin Text 1… és Szerkesztés&amp;gt;Latin Text 2… opciókkal. A szavak Jaccard távolsága kb. 0.42 (ami egy kicsit közelebbi).</translation>
+        <source>The words κλεψεις and κλεπτεις are similar. In the a-z transcription they are shown as &lt;b&gt;kleceis&lt;/b&gt; and &lt;b&gt;klepteis&lt;/b&gt;. The user may want to enter these words with their a-z transcriptions in Edit&amp;gt;Latin Text 1… and Edit&amp;gt;Latin Text 2… Their Jaccard distance is near 0.42 (which is a bit closer).</source>
+        <translation>A κλεψεις és κλεπτεις görög szavak hasonlóak. Az a-z átírásban ezek rendre &lt;b&gt;kleceis&lt;/b&gt; és &lt;b&gt;klepteis&lt;/b&gt; formában jelennek meg. A felhasználó beviheti ezeket a szavakat a-z átírásban is a Szerkesztés&amp;gt;Latin Text 1… és Szerkesztés&amp;gt;Latin Text 2… opciókkal. A szavak Jaccard távolsága kb. 0.42 (ami egy kicsit közelebbi).</translation>
     </message>
     <message>
-        <source>Now, the user loads the indexed Bibles via File&amp;gt;Add books. Several features of the program can be used from now on. For example, the user can put the a-y transcription of a part of Psalms 40:13-17 and 70:1-5 in the two clipboards. (Note that these texts are numbered as 40:14-18 and 70:1-6 in some Bible editions.) This is achievable via Passage&amp;gt;Lookup 1… and Passage&amp;gt;Lookup 2… by typing &lt;b&gt;LXX Psalms 40:13+23 40:17&lt;/b&gt; and &lt;b&gt;LXX Psalms 70:1+37 70:5&lt;/b&gt;, respectively. This notation allows to cut the first 23 or 37 letters of the passages. (Analogously, appending a number with a minus sign to the end of the passage definition, it is possible to cut some of the last letters of the passages.) The Jaccard distance is near 0.19 (which means a close relationship).</source>
+        <source>Now, the user loads the indexed Bibles via File&amp;gt;Add books. Several features of the program can be used from now on. For example, the user can put the a-z transcription of a part of Psalms 40:13-17 and 70:1-5 in the two clipboards. (Note that these texts are numbered as 40:14-18 and 70:1-6 in some Bible editions.) This is achievable via Passage&amp;gt;Lookup 1… and Passage&amp;gt;Lookup 2… by typing &lt;b&gt;LXX Psalms 40:13+23 40:17&lt;/b&gt; and &lt;b&gt;LXX Psalms 70:1+37 70:5&lt;/b&gt;, respectively. This notation allows to cut the first 23 or 37 letters of the passages. (Analogously, appending a number with a minus sign to the end of the passage definition, it is possible to cut some of the last letters of the passages.) The Jaccard distance is near 0.19 (which means a close relationship).</source>
         <translation type="vanished">Most ha a felhasználó a File&amp;gt;Add books funkciót indítja, sok új lehetőség áll rendelkezésre. Például a Zsoltárok 40:13-17 és 70:1-5 egy részét gyorsan felviheti a vágólapra. (Ezeket a szövegeket bizonyos bibliafordítások 40:14-18 és 70:1-6 versszámozással tartalmazzák.) Erre a Szakasz&amp;gt;Lookup 1… és Passage&amp;gt;Lookup 2… menükben van lehetőség a &lt;b&gt;LXX Psalms 40:13+23 40:17&lt;/b&gt; ill. &lt;b&gt;LXX Psalms 70:1+37 70:5&lt;/b&gt; paraméterek megadásával. Ezzel a jelöléssel rendre levágjuk az első 23 ill. 37 betűjét az egyes szakaszoknak. (Analóg módon, ha egy mínusz jel után adunk meg egy számot a szakasz végét jelző vershez írva, akkor a vers végének utolsó néhány betűjét vághatjuk le.) A Jaccard-távolság most 0.19 körüli (ami egy egészen közeli kapcsolatot jelent).</translation>
     </message>
     <message>

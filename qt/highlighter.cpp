@@ -10,7 +10,7 @@ Highlighter::Highlighter(QTextDocument *parent)
     // TODO: Allow newline. For some strange reason, Qt's regex flavor ignores newlines.
     const QString keywordPatterns[] = {
         QStringLiteral("\\b[Ss]tatement\\b"), QStringLiteral("\\bintroduction\\b"),
-        QStringLiteral("\\ba-y[\\s]+form\\b"),
+        QStringLiteral("\\ba-z[\\s]+form\\b"),
         QStringLiteral("\\bdeclares[\\s]+a[\\s]+quotation\\b"),
         QStringLiteral("\\bidentifies[\\s]+the[\\s]+source[\\s]with\\b"),
         QStringLiteral("\\bfragment\\b"),
