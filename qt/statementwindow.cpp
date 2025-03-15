@@ -63,7 +63,13 @@ StatementWindow::~StatementWindow() {
 
 void StatementWindow::newFile()
 {
-    editor->clear();
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, tr("Confirmation"), tr("Are you sure you want to clear the text in the editor?"),
+                                  QMessageBox::Yes|QMessageBox::No);
+    if (reply == QMessageBox::Yes) {
+        editor->clear();
+    }
+
 }
 
 void StatementWindow::openFile(const QString &path)
