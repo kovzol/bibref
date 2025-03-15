@@ -1408,7 +1408,7 @@ void showAvailableBibles()
     SWMgr manager(new MarkupFilterMgr(FMT_XHTML));
     ModMap::iterator it;
     int first = 1;
-    string translations = "Available Bible translations: ";
+    string translations = "Available Bible editions: ";
     for (it = manager.Modules.begin(); it != manager.Modules.end(); ++it) {
         if (strcmp((*it).second->getType(), "Biblical Texts") == 0) {
             if (first != 1) {

@@ -1019,7 +1019,7 @@ void MainWindow::showSwordBibles()
 {
     collect_info = "";
     showAvailableBibles();
-    // E.g.: "Available Bible versions: KJV, StatResGNT."
+    // E.g.: "Available Bible editions: KJV, StatResGNT."
     int start = collect_info.find(":");
     vector<string> bibles;
     boost::split(bibles,
@@ -1038,7 +1038,7 @@ void MainWindow::showSwordBibles()
     inputDialog.setComboBoxItems(b);
     inputDialog.setWindowTitle(tr("Show available Bibles"));
     inputDialog.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    inputDialog.setLabelText(tr("Available Bible translations:"));
+    inputDialog.setLabelText(tr("Available Bible editions:"));
     inputDialog.setFixedSize(20 * size, size / 2);
 
     inputDialog.exec();

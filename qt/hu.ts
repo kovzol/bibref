@@ -193,33 +193,48 @@
         <translation>A SWORD könyvtárról</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1185"/>
+        <location filename="mainwindow.cpp" line="1041"/>
+        <source>Available Bible editions:</source>
+        <translation>Rendelkezésre álló bibliakiadások:</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1188"/>
         <source>Pr&amp;eferences…</source>
         <translation>B&amp;eállítások…</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1310"/>
+        <location filename="mainwindow.cpp" line="1237"/>
+        <source>Wiki…</source>
+        <translation>Wiki...</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1239"/>
+        <source>Open documentation of the program in a web browser</source>
+        <translation>Dokumentáció megnyitása webböngészőben</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1319"/>
         <source>Font size:</source>
         <translation>Betűméret:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1312"/>
+        <location filename="mainwindow.cpp" line="1321"/>
         <source>Set general font size in the application (default: %1)</source>
         <translation>A programban használt általános betűméret (alapértelmezésben %1)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1329"/>
-        <location filename="mainwindow.cpp" line="1350"/>
+        <location filename="mainwindow.cpp" line="1338"/>
+        <location filename="mainwindow.cpp" line="1359"/>
         <source>Preferences</source>
         <translation>Beállítások</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1332"/>
+        <location filename="mainwindow.cpp" line="1341"/>
         <source>Debug mode:</source>
         <translation>Debug mód:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1334"/>
+        <location filename="mainwindow.cpp" line="1343"/>
         <source>Show debug messages in the Analyze window</source>
         <translation>Az Elemzés ablak mutasson debug üzeneteket is</translation>
     </message>
@@ -260,137 +275,137 @@
         <translation>Szeretnénk rájönni, honnan idéz Pál az 1Korinthus 1:31-ben. Ezt nem is olyan egyszerű megmondani, ezért egy kódolt átírással próbálkozunk, melyet a Szakasz&amp;gt;Tokens… parancs segítségével, a &lt;b&gt;StatResGNT I_Corinthians 1:31&lt;/b&gt; paraméterrel adunk meg (figyeljünk az aláhúzás karakterre!), mire a 2443 2531 1125 3588 2744 1722 2962 2744 kódokat látjuk. (Ezek a kódok az ún. &lt;a href=&quot;https://hu.wikipedia.org/wiki/Strong-konkordancia&quot;&gt;Strong-féle számok&lt;/a&gt;, legalábbis jelenleg.) Ezen számokat ellenőrizve a 2744, 1722 és 2962 tűnnek relevénsnak. Ha most a Szerkesztés&amp;gt;Search… menüben az &lt;b&gt;LXX 2744 1722 2962 6&lt;/b&gt; paramétereket adjuk meg, akkor láthatjuk, hogy az ezt a 3 kódot tartalmazó legfeljebb 6 hosszúságú kódot csak egyszer találjuk meg az Ószövetségben, nevezetesen a Jeremiás 9:22-ben, valamint a deuterokanonikus könyvek közül még a JSirák 39:8-ban. Egy újabb keresés a &lt;b&gt;StatResGNT 2744 1722 2962 3&lt;/b&gt; paraméterekkel arra utal, hogy az Újszövetségben még egyszer megjelenik ez a gondolat, mégpedig a 2Korinthus 10:17-ben.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1063"/>
+        <location filename="mainwindow.cpp" line="1066"/>
         <source>Load and index the default Bible editions</source>
         <translation>Alapértelmezett bibliák betöltése és indexelése</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1069"/>
+        <location filename="mainwindow.cpp" line="1072"/>
         <source>Exit the application</source>
         <translation>Kilépés a programból</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1114"/>
+        <location filename="mainwindow.cpp" line="1117"/>
         <source>Search for minimal unique passages in clipboard 1 in a Bible</source>
         <translation>Minimálisan egyedi szakaszok keresése az 1. vágólap szerint egy Bibliában</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1123"/>
+        <location filename="mainwindow.cpp" line="1126"/>
         <source>Extend a passage to the longest possible quotation from another Bible</source>
         <translation>Egy szakasz lehető leghosszabb bővítése egy másik Biblia alapján</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1132"/>
+        <location filename="mainwindow.cpp" line="1135"/>
         <source>Search for references in a Bible on the passage in another Bible</source>
         <translation>Referenciák keresése egy Bibliában egy másik bibliai szakasz alapján</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1149"/>
+        <location filename="mainwindow.cpp" line="1152"/>
         <source>Search for a verse in a book in the given Bible</source>
         <translation>Igevers keresése adott Bibliában</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1171"/>
+        <location filename="mainwindow.cpp" line="1174"/>
         <source>Search for a tokenized verse in a book in the given Bible</source>
         <translation>Kóddal megadott vers keresése egy bibliai könyvben</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1179"/>
+        <location filename="mainwindow.cpp" line="1182"/>
         <source>Search for a set of tokens on a maximal length in a Bible</source>
         <translation>Maximális hosszal korlátozott kódhalmaz keresése egy Bibliában</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1187"/>
+        <location filename="mainwindow.cpp" line="1190"/>
         <source>Set preferences in the application</source>
         <translation>A program beállításainak módosítása</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1192"/>
+        <location filename="mainwindow.cpp" line="1195"/>
         <source>Show the a-z transcription of a positioned text in a given book</source>
         <translation>Pozícióval megadott szöveg a-z átírásának megadása adott könyvben</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1215"/>
+        <location filename="mainwindow.cpp" line="1218"/>
         <source>About &amp;bibref…</source>
         <translation>A &amp;bibref programról...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1217"/>
+        <location filename="mainwindow.cpp" line="1220"/>
         <source>Show a short description of the program</source>
         <translation>A program rövid leírása</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1220"/>
+        <location filename="mainwindow.cpp" line="1223"/>
         <source>About &amp;SWORD…</source>
         <translation>A &amp;SWORD könyvtárról...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1221"/>
+        <location filename="mainwindow.cpp" line="1224"/>
         <source>Show information on the SWORD library</source>
         <translation>A SWORD könyvtár névjegye</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1224"/>
+        <location filename="mainwindow.cpp" line="1227"/>
         <source>About &amp;Qt…</source>
         <translation>A &amp;Qt könyvtárról...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1225"/>
+        <location filename="mainwindow.cpp" line="1228"/>
         <source>Show the Qt library&apos;s About box</source>
         <translation>A Qt könyvtár névjegye</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1247"/>
+        <location filename="mainwindow.cpp" line="1255"/>
         <source>&amp;File</source>
         <translation>&amp;File</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1252"/>
+        <location filename="mainwindow.cpp" line="1260"/>
         <source>&amp;Edit</source>
         <translation>Sz&amp;erkesztés</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1264"/>
+        <location filename="mainwindow.cpp" line="1272"/>
         <source>&amp;Passage</source>
         <translation>&amp;Szakasz</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1272"/>
+        <location filename="mainwindow.cpp" line="1280"/>
         <source>&amp;Quotation</source>
         <translation>&amp;Idézet</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1279"/>
+        <location filename="mainwindow.cpp" line="1287"/>
         <source>&amp;Raw</source>
         <translation>N&amp;yers szöveg</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1285"/>
+        <location filename="mainwindow.cpp" line="1293"/>
         <source>&amp;Help</source>
         <translation>Se&amp;gítség</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1073"/>
+        <location filename="mainwindow.cpp" line="1076"/>
         <source>Define a Greek text and put its Latin transcription in clipboard %1</source>
         <translation>Görög szöveg feltöltése a(z) %1. vágólapra</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1084"/>
+        <location filename="mainwindow.cpp" line="1087"/>
         <source>Put a Latin (a-z) transcription in clipboard %1</source>
         <translation>Latin (a-z) kódolású szöveg feltöltése a(z) %1. vágólapra</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1095"/>
+        <location filename="mainwindow.cpp" line="1098"/>
         <source>Search for the text of clipboard %1 in a Bible</source>
         <translation>Bibliai keresés a(z) %1. vágólap tartalmára</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1153"/>
+        <location filename="mainwindow.cpp" line="1156"/>
         <source>Search for a passage in a book in the given Bible and put it in clipboard %1</source>
         <translation>Bibliai szakasz keresése és a(z) %1. vágólapra másolása</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1199"/>
+        <location filename="mainwindow.cpp" line="1202"/>
         <source>Put the a-z transcription of a positioned text in a given book in clipboard %1</source>
         <translation>Pozícióval megadott a-z kódolású szöveg másolása a(z) %1. vágólapra</translation>
     </message>
@@ -446,37 +461,35 @@
         <translation type="vanished">Szeretnénk rájönni, honnan idéz Pál az 1Korinthus 1:31-ben. Ezt nem is olyan egyszerű megmondani, ezért egy kódolt átírással próbálkozunk, melyet a Szakasz&amp;gt;Tokens… parancs segítségével, a &lt;b&gt;StatResGNT I_Corinthians 1:31&lt;/b&gt; paraméterrel adunk meg (figyeljünk az aláhúzás karakterre!), mire a 2443 2531 1125 3588 2744 1722 2962 2744 kódokat látjuk. (Ezek a kódok az ún. &lt;a href=&quot;https://hu.wikipedia.org/wiki/Strong-konkordancia&quot;&gt;Strong-féle számok&lt;/a&gt;, legalábbis jelenleg.) Ezen számokat ellenőrizve a 2744, 1722 és 2962 tűnnek relevénsnak. Ha most a Szerkesztés&amp;gt;Search… menüben az &lt;b&gt;LXX 2744 1722 2962 6&lt;/b&gt; paramétereket adjuk meg, akkor láthatjuk, hogy az ezt a 3 kódot tartalmazó legfeljebb 6 hosszúságú kódot csak egyszer találjuk meg az Ószövetségben, nevezetesen a Jeremiás 9:23-ban. Egy újabb keresés a &lt;b&gt;StatResGNT 2744 1722 2962 3&lt;/b&gt; paraméterekkel arra utal, hogy az Újszövetségben még egyszer megjelenik ez a gondolat, mégpedig a 2Korinthus 10:17-ben.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1009"/>
         <source>For further examples we point the reader to &lt;a href=&quot;https://matek.hu/zoltan/blog-topics.php?t=b&quot;&gt;Zoltán Kovács&apos;s blog on bibref&lt;/a&gt;.</source>
-        <translation>További példákat találunk &lt;a href=&quot;https://matek.hu/zoltan/blog-topics.php?t=b&quot;&gt;Kovács Zoltán blogjában&lt;/a&gt;.</translation>
+        <translation type="vanished">További példákat találunk &lt;a href=&quot;https://matek.hu/zoltan/blog-topics.php?t=b&quot;&gt;Kovács Zoltán blogjában&lt;/a&gt;.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1017"/>
+        <location filename="mainwindow.cpp" line="1014"/>
         <source>Quick tutorial</source>
         <translation>Gyorstalpaló</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1229"/>
+        <location filename="mainwindow.cpp" line="1232"/>
         <source>Quick tutorial…</source>
         <translation>Gyorstalpaló...</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1231"/>
+        <location filename="mainwindow.cpp" line="1234"/>
         <source>Show a short introduction to the program</source>
         <translation>A program lehetőségeinek gyors ismertetése</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1042"/>
+        <location filename="mainwindow.cpp" line="1039"/>
         <source>Show available Bibles</source>
         <translation>Rendelkezésre álló Bibliák</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1044"/>
         <source>Available Bible translations:</source>
-        <translation>Rendelkezésre álló bibliafordítások:</translation>
+        <translation type="vanished">Rendelkezésre álló bibliafordítások:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1236"/>
+        <location filename="mainwindow.cpp" line="1244"/>
         <source>Show available Bibles via SWORD</source>
         <translation>A SWORD rendszeren keresztül elérhető Bibliák</translation>
     </message>
@@ -485,7 +498,7 @@
         <translation type="vanished">A Róma 2:21-ben úgy tűnik, Pál a Törvényt idézi. A program Szakasz&amp;gt;Lookup… menüjében beírhatjuk, hogy &lt;b&gt;KJV Romans 2:21&lt;/b&gt;, mellyel az angol King James fordítás jeleníthető meg. (Amennyiben rendelkezésünkre áll, úgy a KJV helyett magyar fordítást is megadhatunk, pl. a HunRUF jelenti a református fordítást.) Hasonlóan, a &lt;b&gt;StatResGNT Romans 2:21&lt;/b&gt; paraméterrel a görög fordításhoz jutunk. (Fontos, hogy a KJV, a HunRUF ill. a StatResGNT modulok előre telepítve kell legyenek. A Segítség&amp;gt;Elérhető bibliák listája… mutatja, hogy a Lookup parancs használatakor milyen lehetőségeink vannak.) Ugyanezt megismételve a Romans 2:22, Exodus 20:14 és 20:15 inputokkal, szeretnénk a &lt;b&gt;ου μοιχευσεις ου κλεψεις&lt;/b&gt; és &lt;b&gt;κλεπτεις ο λεγων μη μοιχευειν μοιχευεις&lt;/b&gt; görög szövegeket összehasonlítani. Ezeket kimásolva és beszúrva a Szerkesztés&amp;gt;Text 1… és Szerkesztés&amp;gt;Text 2… opciókhoz, az összehasonlítás automatikusan megtörténik és a program tájékoztat bennünket, hogy a szövegek Jaccard-eltérése kb. 0.63 (ami elég nagy eltérést jelent).</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1234"/>
+        <location filename="mainwindow.cpp" line="1242"/>
         <source>Show available Bibles…</source>
         <translation>Rendelkezésre álló Bibliák…</translation>
     </message>
@@ -494,12 +507,12 @@
         <translation type="vanished">A bibref indítása webes terminálban</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1241"/>
+        <location filename="mainwindow.cpp" line="1249"/>
         <source>Start a web version of bibref in a web based terminal</source>
         <translation>A bibref program webes verziójának indítása böngészőben</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1239"/>
+        <location filename="mainwindow.cpp" line="1247"/>
         <source>Start bibref in a web &amp;terminal</source>
         <translation>A bibref indítása webes &amp;terminálban</translation>
     </message>
@@ -509,7 +522,7 @@
         <translation>Szintaxis:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1141"/>
+        <location filename="mainwindow.cpp" line="1144"/>
         <source>Open a text editor to edit a statement</source>
         <translation>Szövegszerkesztő megnyitása kijelentések szerkesztéséhez</translation>
     </message>
