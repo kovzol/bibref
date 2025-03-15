@@ -60,6 +60,18 @@ using namespace sword;
 vector<Book> books;
 vector<PsalmsInfo> psalmsInfos;
 
+int removeBook(const string &moduleName, const string &bookName) {
+    int pos = 0;
+    for (auto book : books) {
+        if ((book.getName() == bookName) && (book.getModuleName() == moduleName)) {
+           books.erase(books.begin() + pos);
+           return 0;
+        }
+        pos++;
+    }
+    return 1; // not found
+}
+
 string latinToGreek(const string &latin)
 {
     string greek = latin;
@@ -581,6 +593,7 @@ int addBooks_cached(string moduleName, string installedModuleVersion)
         fclose(verseFile);
         add_vocabulary_item(bookName);  // add readline entry for this book
         book.setModuleName(moduleName); // put this book in the given Bible edition
+        removeBook(moduleName, bookName); // if it exists, remove the old version first
         books.push_back(book);
     }
     psalmsInfos.push_back(pi); // store Psalm database
