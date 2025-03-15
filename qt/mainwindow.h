@@ -62,6 +62,7 @@ private slots:
     void aboutSword();
     void aboutQt();
     void tutorial();
+    void wiki();
     void showSwordBibles();
     void webTerminal();
 
@@ -92,6 +93,7 @@ private:
     QAction *aboutSwordAct;
     QAction *aboutQtAct;
     QAction *tutorialAct;
+    QAction *wikiAct;
     QAction *showAvailableBiblesAct;
     QAction *webTerminalAct;
     QLabel *clipboardInfos;

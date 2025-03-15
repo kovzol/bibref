@@ -1005,10 +1005,7 @@ void MainWindow::tutorial()
                "Another search with parameters <b>StatResGNT 2744 1722 2962 3</b> "
                "informs the user on a second match in the New Testament, namely, in II Corinthians "
                "10:17.")
-          + "</li>" + "</ol>"
-          + tr("For further examples we point the reader to <a "
-               "href=\"https://matek.hu/zoltan/blog-topics.php?t=b\">Zoltán Kovács's blog on "
-               "bibref</a>.");
+          + "</li>" + "</ol>";
 
     tutorialText->setText(tutorialContent);
     widget->setLayout(layout);
@@ -1050,6 +1047,12 @@ void MainWindow::showSwordBibles()
 void MainWindow::webTerminal()
 {
     QString link = "https://matek.hu/kovzol/bibref";
+    QDesktopServices::openUrl(QUrl(link));
+}
+
+void MainWindow::wiki()
+{
+    QString link = "https://github.com/kovzol/bibref/wiki";
     QDesktopServices::openUrl(QUrl(link));
 }
 
@@ -1231,6 +1234,11 @@ void MainWindow::createActions()
     tutorialAct->setStatusTip(tr("Show a short introduction to the program"));
     connect(tutorialAct, &QAction::triggered, this, &MainWindow::tutorial);
 
+    wikiAct = new QAction(tr("Wiki…"), this);
+    wikiAct->setIcon(QIcon::fromTheme("help-contents"));
+    wikiAct->setStatusTip(tr("Open documentation of the program in a web browser"));
+    connect(wikiAct, &QAction::triggered, this, &MainWindow::wiki);
+
     showAvailableBiblesAct = new QAction(tr("Show available Bibles…"), this);
     showAvailableBiblesAct->setIcon(QIcon::fromTheme("system-file-manager"));
     showAvailableBiblesAct->setStatusTip(tr("Show available Bibles via SWORD"));
@@ -1285,6 +1293,7 @@ void MainWindow::createMenus()
     helpMenu = menuBar()->addMenu(tr("&Help"));
     helpMenu->addAction(aboutAct);
     helpMenu->addAction(tutorialAct);
+    helpMenu->addAction(wikiAct);
     helpMenu->addAction(showAvailableBiblesAct);
     helpMenu->addAction(webTerminalAct);
     helpMenu->addSeparator();
