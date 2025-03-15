@@ -459,8 +459,8 @@ void StatementWindow::setupHelpMenu()
     QMenu *helpMenu = new QMenu(tr("&Help"), this);
     menuBar()->addMenu(helpMenu);
 
-    helpMenu->addAction(QIcon::fromTheme("system-help"), tr("&Blog entry"), this,
+    helpMenu->addAction(QIcon::fromTheme("help-contents"), tr("Wiki…"), this,
                         [this]() {
-                            QString link = "https://matek.hu/zoltan/blog-20250102.php";
+                            QString link = "https://github.com/kovzol/bibref/wiki/Statements";
                             QDesktopServices::openUrl(QUrl(link)); });
 }
