@@ -25,6 +25,7 @@ public:
 public slots:
     void newFile();
     void openFile(const QString &path = QString());
+    void saveFileAs(const QString &path = QString());
     void parse();
     void analyze();
     void showSvg();

@@ -69,7 +69,6 @@ void StatementWindow::newFile()
     if (reply == QMessageBox::Yes) {
         editor->clear();
     }
-
 }
 
 void StatementWindow::openFile(const QString &path)
@@ -116,6 +115,56 @@ void StatementWindow::openFile(const QString &path)
     }
 }
 
+
+void StatementWindow::saveFileAs(const QString &path)
+{
+    QString fileName = path;
+    // TODO: Unify this openFile():
+    if (directory.isEmpty()) {
+        directory = qApp -> applicationDirPath();
+        QString d1 = directory + QDir::separator() + "statements";
+        const QFileInfo f1(d1);
+        QString d2 = directory + QDir::separator() + ".." + QDir::separator() + "statements";
+        const QFileInfo f2(d2);
+        QString d3 = directory + QDir::separator() + ".." + QDir::separator()
+                     + ".." + QDir::separator() + "statements";
+        const QFileInfo f3(d3);
+        QString d4 = directory + QDir::separator() + ".." + QDir::separator()
+                     + "share" + QDir::separator() + "statements";
+        const QFileInfo f4(d4);
+        QString d5 = directory + QDir::separator() + ".." + QDir::separator()
+                     + "Resources" + QDir::separator() + "statements";
+        const QFileInfo f5(d5);
+        if (f1.exists() && f1.isDir())
+            directory = d1;
+        else if (f2.exists() && f2.isDir())
+            directory = d2;
+        else if (f3.exists() && f3.isDir())
+            directory = d3;
+        else if (f4.exists() && f4.isDir())
+            directory = d4;
+        else if (f5.exists() && f5.isDir())
+            directory = d5;
+    }
+
+    // TODO: Maybe we want to create a unique filename here, by using the current date, for example?
+    QString defaultName = "statement.brst";
+
+    if (fileName.isNull()) {
+        fileName = QFileDialog::getSaveFileName(this, tr("Save File"), directory
+            + QDir::separator() + defaultName, tr("bibref statement files (*.brst)"));
+        QString basename = QUrl(fileName).fileName();
+        directory = fileName;
+        directory.remove(basename);
+    }
+
+    if (!fileName.isEmpty()) {
+        QFile file(fileName);
+        file.open(QFile::WriteOnly | QFile::Text);
+        file.write(editor->toPlainText().toUtf8());
+    }
+}
+
 void StatementWindow::setupEditor()
 {
     QFont font;
@@ -157,6 +206,8 @@ void StatementWindow::setupFileMenu()
                         this, &StatementWindow::newFile);
     fileMenu->addAction(QIcon::fromTheme("document-open"), tr("&Open…"), QKeySequence::Open,
                         this, [this](){ openFile(); });
+    fileMenu->addAction(QIcon::fromTheme("document-save"), tr("&Save As…"), QKeySequence::Save,
+                        this, [this](){ saveFileAs(); });
 }
 
 void StatementWindow::parse()
