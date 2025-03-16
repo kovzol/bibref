@@ -50,20 +50,13 @@ jobs:
     - name: make-sword-wasm
       run: |
         . emsdk/emsdk_env.sh
-        git clone https://github.com/kovzol/crosswire-sword-mirror
-        cd crosswire-sword-mirror
+        svn co https://crosswire.org/svn/sword/trunk/ sword
+        cd sword
         mkdir build
         cd build
-        emcmake cmake -DSWORD_BUILD_UTILS=No -DSWORD_BUILD_EXAMPLES=No -DLIBSWORD_LIBRARY_TYPE=Static ..
-        emmake make sword_static
-        emmake make install
-#    - name: make-wasm
-#      run: |
-#        . emsdk/emsdk_env.sh
-#        ln -s statements/pbrst.c
-#        ln -s statements/pbrst.tab.c
-#        ln -s statements/pbrst.tab.h
-#        yes | emmake make
+        emcmake cmake -DSWORD_BUILD_UTILS=No -DSWORD_BUILD_EXAMPLES=No -DLIBSWORD_LIBRARY_TYPE=Static -DCMAKE_CXX_FLAGS=-sUSE_ZLIB ..
+        yes | make sword_static
+        make install
     - name: cmake-wasm
       run: |
         build/bibref -a # generate cache (via native version)
@@ -71,7 +64,7 @@ jobs:
         mkdir build-wasm
         cd build-wasm
         emcmake cmake .. -DBIBREF_ADDBOOKS_CACHE_FOLDER=../bibref-addbooks-cache
-        yes | emmake make
+        yes | make
 # FIXME: The SQL database has been obsoleted, instead of using it,
 # another set of visualization/checking tools should be utilized.
 #    - name: db-full
