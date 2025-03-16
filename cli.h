@@ -1,7 +1,7 @@
 #ifndef CLI_H
 #define CLI_H
 
-#define BIBREF_VERSION "2025Mar10"
+#define BIBREF_VERSION "2025-03-16"
 
 #include <string>
 
