@@ -519,10 +519,10 @@ int addBooks_cached(string moduleName, string installedModuleVersion)
       error("Cache must be recreated.");
       return 1;
       }
-    char bibrefVersion[10];
-    char moduleVersion[10];
+    char bibrefVersion[21]; // hardcoded
+    char moduleVersion[21]; // hardcoded
     FILE *versionFileC = fopen((path + "/version").c_str(), "r");
-    fscanf(versionFileC, "BibrefVersion=%9s\nModuleVersion=%9s", bibrefVersion, moduleVersion);
+    fscanf(versionFileC, "BibrefVersion=%20s\nModuleVersion=%20s", bibrefVersion, moduleVersion);
     if (strcmp(bibrefVersion, BIBREF_VERSION) != 0) {
       error("Different bibref version in cache for module version " + moduleName + ": " + bibrefVersion
         + " (" + BIBREF_VERSION + " needed).");
