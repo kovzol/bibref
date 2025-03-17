@@ -26,11 +26,16 @@ void copyPath(QString src, QString dst)
 }
 
 // This copies the SWORD modules bundle (assumed in Contents/Resources/sword/ on macOS
-// or in sword/) to ~/.sword.
+// or in sword/ on Windows) to the user's ~/.sword folder
+// (or to the user's AppData/Roaming/.sword folder on Windows).
 void copy_sword_files() {
 #if defined(__APPLE__) or defined(__MINGW32__)
     QString userHome = QDir::homePath();
-    QString d1 = userHome + QDir::separator() + ".sword";
+    QString d1 = userHome + QDir::separator();
+#if defined(__MINGW32__)
+    d1 += QString("AppData") + QDir::separator() + QString("Roaming") + QDir::separator();
+#endif
+    d1 += QString(".sword");
     const QFileInfo f1(d1);
     if (f1.exists() && f1.isDir()) {
       cout << d1.toStdString() << " exists, no changes will be made" << endl;
