@@ -1,10 +1,8 @@
-Statement q225_24131 connects
- SBLGNT Hebrews 12:21+41 12:21-11 (23651-23661) with
- LXX Deuteronomy 9:19+3 9:19-102 (32201-32211) based on
-  introduction 12:21 12:21-22 (23610-23650) a-z form kaioytvfoberonhntofantaqomenonmvyshseipen that
-   declares a quotation with 'ειπεν' also
-   identifies the source with 'Μωυσης' moreover
-  fragment 12:21+41 12:21-11 (23651-23661, length 11) a-z form ekfoboseimi
-   matches LXX Deuteronomy 9:19+3 9:19-102 (32201-32211, length 11) a-z form ekfoboseimi unique in old testament verbatim
-#    differing by 10.00%
+Statement allusion_Matthew-21,9+75 connects
+ StatResGNT Matthew 21:9+75 21:9-20 (59444-59479, length 36) with
+ LXX Psalms 117:26 117:26-28 (138698-138733, length 36) based on
+  fragment 21:9+75 21:9-20 (59444-59479, length 36) a-z form eyloghmenosoerxomenosenonomatikyrioy
+   matches LXX Psalms 117:26 117:26-28 (138698-138733, length 36) a-z form eyloghmenosoerxomenosenonomatikyrioy
+    unique in Old Testament
+    verbatim
   providing an overall cover of 100.00%.
