@@ -198,6 +198,9 @@ string greekToLatin(string word)
                 case 0x89:
                     c = 'v'; // omega
                     break;
+                case 0x9c:
+                    c = 's'; // digamma -> sigma (from LXX 3.2)
+                    break;
                 }
                 break;
             default:
@@ -207,6 +210,7 @@ string greekToLatin(string word)
                 char s[5];
                 sprintf(s, "%2x%2x", c1, c2);
                 error("Unidentified Greek character in word " + word + " (" + string(s) + ")");
+                error("The cache cannot be created, please report this issue.");
                 exit(1);
             }
             rewritten.push_back(c); // store c in the output
@@ -613,8 +617,8 @@ int addBooks(string moduleName, string firstVerse, string lastVerse, bool remove
     }
 
     string version = module->getConfigEntry("Version");
-    // It's better to avoid LXX 3.0, it is a completely different edition!
-    if (moduleName == "LXX" && version == "3.0") {
+    // From LXX 3.0, we need to take care of a completely different version:
+    if (moduleName == "LXX" && (std::stof(version) >= 3.0)) {
         removeAccents = true; // force removing accents
         // lastVerse = "Daniel 12:13"; // order of books is different
         lastVerse = "Odes 1:19"; // order of books is different
@@ -644,10 +648,6 @@ int addBooks(string moduleName, string firstVerse, string lastVerse, bool remove
 #ifndef __EMSCRIPTEN__ // In the web version we don't save the cache, but assume that it exists.
     try {
         boost::filesystem::create_directories(path);
-        FILE *versionFile = fopen((path + "/version").c_str(), "wa");
-        fprintf(versionFile, "BibrefVersion=%s\n", BIBREF_VERSION);
-        fprintf(versionFile, "ModuleVersion=%s\n", version.c_str());
-        fclose(versionFile);
     } catch (exception &e) {
         error("The addbooks cache cannot be saved in this folder.");
         create_cache = false; // No, we cannot use a cache in this session.
@@ -788,6 +788,18 @@ int addBooks(string moduleName, string firstVerse, string lastVerse, bool remove
         }
     }
     psalmsInfos.push_back(pi); // Save the last verse numbers of the Psalms.
+
+#ifndef __EMSCRIPTEN__ // In the web version we don't save the version numbers, either.
+    try {
+        FILE *versionFile = fopen((path + "/version").c_str(), "wa");
+        fprintf(versionFile, "BibrefVersion=%s\n", BIBREF_VERSION);
+        fprintf(versionFile, "ModuleVersion=%s\n", version.c_str());
+        fclose(versionFile);
+    } catch (exception &e) {
+        error("Save error for the version number for the addbooks cache.");
+        create_cache = false; // No, we cannot use a cache in this session.
+    }
+#endif
 
     info("Done loading books of " + moduleName + ".");
     return 0; // Success!
