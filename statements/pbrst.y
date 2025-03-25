@@ -37,9 +37,9 @@ double intervals_data[MAX_INTERVALS]; // stored info (e.g., difference of fragme
 #define UNCLASSIFIED -1
 // where type is 0: NT headline, 1: NT fragment, 2: OT fragment, 3: NT introduction, -1: unclassified
 int substrings = 0;
-int iv_counter = 0;
-int fragments_start = -1; // undefined
-int nt_intros_start = -1;
+int iv_counter = 0; // number of intervals
+int fragments_start = -1; // undefined, it will contain the first fragment interval (NT)
+int nt_intros_start = -1; // undefined, it will contain the first NT introduction interval
 float difference = -1; // undefined
 
 // TODO: Psalms could be considered as different books in the diagrams.
@@ -759,7 +759,10 @@ check_introduction_passage(char *passage, char *az)
   substrings = 0; // reset, maybe there is another introduction
   intervals[iv_counter-1][2] = NT_INTRODUCTION; // NT (introduction)
   add_parseinfo("%d,%d: debug: interval %d is an introductory NT passage\n", yylineno, yycolumn, iv_counter-1);
-  if (nt_intros_start == -1) nt_intros_start = iv_counter-1;
+  if (nt_intros_start == -1){
+    nt_intros_start = iv_counter-1;
+    add_parseinfo("%d,%d: debug: NT introduction(s) start on interval\n", yylineno, yycolumn, nt_intros_start);
+    }
 }
 
 void
@@ -874,7 +877,10 @@ check_fragment(char *passage, char *az_nt, char *az_ot) {
 
   intervals_data[iv_counter-2] = difference; // save data for the diagram
   intervals_data[iv_counter-1] = count; // save data for the diagram (TODO: consider showing this only if unique_prep)
-  if (fragments_start == -1) fragments_start = iv_counter-2;
+  if (fragments_start == -1) {
+    fragments_start = iv_counter-2;
+    add_parseinfo("%d,%d: debug: fragments start at interval %d\n", yylineno, yycolumn, fragments_start);
+    }
 }
 
 void check_unique_prepare() {
@@ -909,6 +915,7 @@ void check_cover(double cover) {
   // Extend the union by considering the NT introductions as well (it's important for the diagram):
   imin_i = imin, imax_i = imax;
   add_parseinfo("%d,%d: debug: NT introduction intervals:", yylineno, yycolumn);
+  int intro_intervals = 0;
   for (int i=0; i<iv_counter; i++) {
     int ftype = intervals[i][2];
     if (ftype == NT_INTRODUCTION) {
@@ -917,8 +924,11 @@ void check_cover(double cover) {
       add_parseinfo(" [%d,%d]", istart, iend);
       if (imin_i > istart) imin_i = istart;
       if (imax_i < iend) imax_i = iend;
+      intro_intervals++;
     }
   }
+  if (intro_intervals == 0)
+    add_parseinfo(" none");
   union_length_i = imax_i-imin_i+1;
   add_parseinfo(", union: [%d,%d]\n", imin_i, imax_i);
 
@@ -941,7 +951,7 @@ void check_cover(double cover) {
   int covered = 0;
   for (int i=imin-imin_i; i<union_length_i; i++) {
     bool letter_covered = false;
-    for (int j=fragments_start+1; j<iv_counter && !letter_covered; j++) { // do not count NT introduction coverings
+    for (int j=fragments_start; j<iv_counter && !letter_covered; j++) { // do not count NT introduction coverings
       if (covering[j][i]>0) {
         covered++;
         letter_covered = true;
@@ -1006,7 +1016,10 @@ void check_cover(double cover) {
     add_parseinfo("%d,%d: info: NT headline interval check done I14\n", yylineno, yycolumn);
   }
   // Check if OT headlines match OT unions:
-  for (int i=1; i<nt_intros_start; i++) {
+  int max_ot_headline = nt_intros_start - 1;
+  if (max_ot_headline == -2)
+    max_ot_headline = fragments_start - 1;
+  for (int i=1; i<=max_ot_headline; i++) {
     add_parseinfo("%d,%d: debug: OT headline %d %s %s interval check:",
       yylineno, yycolumn, i, books_s[i], infos_s[i]);
     int oimin=INT_MAX, oimax=0;
@@ -1503,13 +1516,16 @@ void create_dump() {
   strcat_interval(D, intervals[0][0], intervals[0][1]);
   strcat(D, " with\n");
   int iv=1;
+  int max_ot_headline = nt_intros_start - 1;
+  if (max_ot_headline == -2)
+    max_ot_headline = fragments_start - 1;
   if (no_evidence)
-    nt_intros_start = iv_counter; // maybe put this to an earlier point
-  for (; iv<nt_intros_start; iv++) {
+    max_ot_headline = iv_counter; // maybe put this to an earlier point
+  for (; iv<=max_ot_headline; iv++) {
     strcat(D, " ");
     strcat_passage(D, books_s[iv], infos_s[iv], verses_s[iv]);
     strcat_interval(D, intervals[iv][0], intervals[iv][1]);
-    if (iv<nt_intros_start-1)
+    if (iv<=max_ot_headline-1)
       strcat(D, " and");
     else
       strcat(D, " based on");
