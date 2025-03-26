@@ -98,39 +98,39 @@ int main(int ac, char **av)
     }
 
     if (!strcmp(av[1], "-d")) {
-      yydebug = 1; ac--; av++;
+      yydebug = 1; ac--; av++; continue;
     }
 
     if (!strcmp(av[1], "-c")) {
-      colorize = true; ac--; av++;
+      colorize = true; ac--; av++; continue;
     }
 
     if (!strcmp(av[1], "-g")) {
-      graphviz = true; ac--; av++;
+      graphviz = true; ac--; av++; continue;
     }
 
     if (!strcmp(av[1], "-r")) {
-      correct_raw = 1; ac--; av++;
+      correct_raw = 1; ac--; av++; continue;
     }
 
     if (!strcmp(av[1], "-D")) {
-      correct_differ = 1; ac--; av++;
+      correct_differ = 1; ac--; av++; continue;
     }
 
     if (!strcmp(av[1], "-C")) {
-      correct_cover = 1; ac--; av++;
+      correct_cover = 1; ac--; av++; continue;
     }
 
     if (!strcmp(av[1], "-v")) {
-      correct_versification = 1; ac--; av++;
+      correct_versification = 1; ac--; av++; continue;
     }
 
     if (!strcmp(av[1], "-u")) {
-      show_dump = 1; ac--; av++;
+      show_dump = 1; ac--; av++; continue;
     }
 
     if (!strcmp(av[1], "-U")) {
-      show_dump = 1; show_only_dump = true; ac--; av++;
+      show_dump = 1; show_only_dump = true; ac--; av++; continue;
     }
 
   }
