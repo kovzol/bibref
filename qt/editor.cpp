@@ -1,7 +1,10 @@
-// Taken from https://stackoverflow.com/a/53688529/1044586
+// Taken partially from https://stackoverflow.com/a/53688529/1044586
 
 #include "editor.h"
+
 #include <QMimeData>
+#include <QKeyEvent>
+#include <QInputDialog>
 
 void Editor::insertFromMimeData(const QMimeData * source)
 {
@@ -24,5 +27,23 @@ void Editor::insertFromMimeData(const QMimeData * source)
             }
         }
         cursor.insertText(text);
+    }
+}
+
+void Editor::keyPressEvent(QKeyEvent *event)
+{
+    if (event->type() == QKeyEvent::KeyPress &&
+        event->matches(QKeySequence::Find)) {
+            QInputDialog inputDialog(this);
+            inputDialog.setWindowTitle(tr("Find text"));
+            inputDialog.setLabelText(tr("Text to find:"));
+            inputDialog.setTextValue(searchText);
+            if (inputDialog.exec() == QDialog::Accepted) {
+                searchText = inputDialog.textValue();
+                this->find(searchText);
+            }
+        }
+    else {
+        QTextEdit::keyPressEvent(event); // call "super"
     }
 }

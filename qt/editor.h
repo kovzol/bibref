@@ -11,7 +11,10 @@ public:
     Editor() : QTextEdit() {}
 
     void insertFromMimeData(const QMimeData * source) override;
+    void keyPressEvent(QKeyEvent *event) override;
 
 private:
     static const int TAB_SPACES = 4;
+
+    QString searchText;
 };
