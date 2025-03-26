@@ -43,6 +43,14 @@ void Editor::keyPressEvent(QKeyEvent *event)
                 this->find(searchText);
             }
         }
+    else if (event->type() == QKeyEvent::KeyPress &&
+            event->matches(QKeySequence::FindNext)) {
+                this->find(searchText);
+        }
+    else if (event->type() == QKeyEvent::KeyPress &&
+                 event->matches(QKeySequence::FindPrevious)) {
+            this->find(searchText, QTextDocument::FindBackward);
+        }
     else {
         QTextEdit::keyPressEvent(event); // call "super"
     }
