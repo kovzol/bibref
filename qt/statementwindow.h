@@ -2,6 +2,7 @@
 #define STATEMENTWINDOW_H
 
 #include "highlighter.h"
+#include "editor.h"
 
 #include <QMainWindow>
 #include <QtWidgets>
@@ -11,7 +12,7 @@
 using namespace std;
 
 QT_BEGIN_NAMESPACE
-class QTextEdit;
+class Editor;
 QT_END_NAMESPACE
 
 class StatementWindow : public QMainWindow
@@ -38,7 +39,7 @@ private:
     void setupProveMenu();
     void setupHelpMenu();
 
-    QTextEdit *editor;
+    Editor *editor;
     QTableWidget *t;
     Highlighter *highlighter;
 

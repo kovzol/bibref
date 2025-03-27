@@ -90,6 +90,7 @@ qt_add_executable(bibref-qt MACOSX_BUNDLE
     ${QM_FILES}
     bibref.qrc
     ${bibref_qt_ICON}
+    editor.h editor.cpp
 )
 
 set_target_properties(bibref-qt PROPERTIES

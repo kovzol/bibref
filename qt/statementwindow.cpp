@@ -4,6 +4,7 @@
 #include "visualizewindow.h"
 #include "settings.h"
 #include "descriptions.h"
+#include "editor.h"
 
 #include <QtWidgets>
 
@@ -173,7 +174,7 @@ void StatementWindow::setupEditor()
     QSettings settings;
     font.setPointSize(settings.value("Application/fontsize", defaultFontSize).toInt());
 
-    editor = new QTextEdit;
+    editor = new Editor;
     editor->setFont(font);
 
     highlighter = new Highlighter(editor->document());

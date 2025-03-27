@@ -62,6 +62,16 @@
   <content_rating type="oars-1.1" />
 
   <releases>
+    <release version="2025-03-27" date="2025-03-27">
+    <url type="details">https://github.com/kovzol/bibref/commits/78b9df9f091d2cedbf14f59ef99f99fcf8734445</url>
+      <description>
+        <p>Release description</p>
+          <ul>
+            <li>Add Find, Find Next, Find Previous keystrokes in the Statement Editor</li>
+            <li>Allow describing allusions properly</li>
+          </ul>
+      </description>
+    </release>
     <release version="2025-03-16" date="2025-03-16">
     <url type="details">https://github.com/kovzol/bibref/commits/ea21926c67d09639f039e1373cf120973a7b098b</url>
       <description>

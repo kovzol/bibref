@@ -2,6 +2,19 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="hu_HU" sourcelanguage="en_US">
 <context>
+    <name>Editor</name>
+    <message>
+        <location filename="editor.cpp" line="38"/>
+        <source>Find text</source>
+        <translation>Szöveg keresése</translation>
+    </message>
+    <message>
+        <location filename="editor.cpp" line="39"/>
+        <source>Text to find:</source>
+        <translation>Keresendő szöveg:</translation>
+    </message>
+</context>
+<context>
     <name>MainWindow</name>
     <message>
         <location filename="mainwindow.cpp" line="51"/>
@@ -530,143 +543,143 @@
 <context>
     <name>StatementWindow</name>
     <message>
-        <location filename="statementwindow.cpp" line="30"/>
+        <location filename="statementwindow.cpp" line="31"/>
         <source>Statement Editor</source>
         <translation>Kijelentésszerkesztő</translation>
     </message>
     <message>
-        <location filename="statementwindow.cpp" line="39"/>
+        <location filename="statementwindow.cpp" line="40"/>
         <source>Line: %1, Col: %2</source>
         <translation>%1. sor, %2. oszlop</translation>
     </message>
     <message>
-        <location filename="statementwindow.cpp" line="67"/>
+        <location filename="statementwindow.cpp" line="68"/>
         <source>Confirmation</source>
         <translation>Megerősítés</translation>
     </message>
     <message>
-        <location filename="statementwindow.cpp" line="67"/>
+        <location filename="statementwindow.cpp" line="68"/>
         <source>Are you sure you want to clear the text in the editor?</source>
         <translation>Biztosan törölni akarja a szerkesztőben lévő szöveget?</translation>
     </message>
     <message>
-        <location filename="statementwindow.cpp" line="105"/>
+        <location filename="statementwindow.cpp" line="106"/>
         <source>Open File</source>
         <translation>Fájl megnyitása</translation>
     </message>
     <message>
-        <location filename="statementwindow.cpp" line="105"/>
-        <location filename="statementwindow.cpp" line="155"/>
+        <location filename="statementwindow.cpp" line="106"/>
+        <location filename="statementwindow.cpp" line="156"/>
         <source>bibref statement files (*.brst)</source>
         <translation>bibref kijelentésfájlok (*.brst)</translation>
     </message>
     <message>
-        <location filename="statementwindow.cpp" line="154"/>
+        <location filename="statementwindow.cpp" line="155"/>
         <source>Save File</source>
         <translation>File mentése</translation>
     </message>
     <message>
-        <location filename="statementwindow.cpp" line="202"/>
+        <location filename="statementwindow.cpp" line="203"/>
         <source>&amp;File</source>
         <translation>&amp;File</translation>
     </message>
     <message>
-        <location filename="statementwindow.cpp" line="205"/>
+        <location filename="statementwindow.cpp" line="206"/>
         <source>&amp;New</source>
         <translation>&amp;Új</translation>
     </message>
     <message>
-        <location filename="statementwindow.cpp" line="207"/>
+        <location filename="statementwindow.cpp" line="208"/>
         <source>&amp;Open…</source>
         <translation>&amp;Megnyitás...</translation>
     </message>
     <message>
-        <location filename="statementwindow.cpp" line="209"/>
+        <location filename="statementwindow.cpp" line="210"/>
         <source>&amp;Save As…</source>
         <translation>&amp;Mentés másként…</translation>
     </message>
     <message>
-        <location filename="statementwindow.cpp" line="251"/>
+        <location filename="statementwindow.cpp" line="252"/>
         <source>Parse</source>
         <translation>Nyelvi ellenőrzés</translation>
     </message>
     <message>
-        <location filename="statementwindow.cpp" line="252"/>
+        <location filename="statementwindow.cpp" line="253"/>
         <source>%1 successful tests, %2 warnings, %3 errors.</source>
         <translation>%1 sikeres teszt, %2 figyelmeztetés, %3 hiba.</translation>
     </message>
     <message>
-        <location filename="statementwindow.cpp" line="255"/>
+        <location filename="statementwindow.cpp" line="256"/>
         <source>Back to &amp;Editor</source>
         <translation>&amp;Vissza a szerkesztőhöz</translation>
     </message>
     <message>
-        <location filename="statementwindow.cpp" line="265"/>
+        <location filename="statementwindow.cpp" line="266"/>
         <source>&amp;Visualize</source>
         <translation>&amp;Diagramm</translation>
     </message>
     <message>
-        <location filename="statementwindow.cpp" line="266"/>
+        <location filename="statementwindow.cpp" line="267"/>
         <source>E&amp;xport graph</source>
         <translation>A diagramm e&amp;xportálása</translation>
     </message>
     <message>
-        <location filename="statementwindow.cpp" line="299"/>
+        <location filename="statementwindow.cpp" line="300"/>
         <source>Analyze</source>
         <translation>Elemzés</translation>
     </message>
     <message>
-        <location filename="statementwindow.cpp" line="416"/>
+        <location filename="statementwindow.cpp" line="417"/>
         <source>Row</source>
         <translation>Sor</translation>
     </message>
     <message>
-        <location filename="statementwindow.cpp" line="416"/>
+        <location filename="statementwindow.cpp" line="417"/>
         <source>Col</source>
         <translation>Oszl</translation>
     </message>
     <message>
-        <location filename="statementwindow.cpp" line="416"/>
+        <location filename="statementwindow.cpp" line="417"/>
         <source>Type</source>
         <translation>Típus</translation>
     </message>
     <message>
-        <location filename="statementwindow.cpp" line="416"/>
+        <location filename="statementwindow.cpp" line="417"/>
         <source>Message</source>
         <translation>Üzenet</translation>
     </message>
     <message>
-        <location filename="statementwindow.cpp" line="416"/>
+        <location filename="statementwindow.cpp" line="417"/>
         <source>Source</source>
         <translation>Forrás</translation>
     </message>
     <message>
-        <location filename="statementwindow.cpp" line="444"/>
+        <location filename="statementwindow.cpp" line="445"/>
         <source>Visualize</source>
         <translation>Diagramm</translation>
     </message>
     <message>
-        <location filename="statementwindow.cpp" line="449"/>
+        <location filename="statementwindow.cpp" line="450"/>
         <source>&amp;Prove</source>
         <translation>&amp;Bizonyítás</translation>
     </message>
     <message>
-        <location filename="statementwindow.cpp" line="452"/>
+        <location filename="statementwindow.cpp" line="453"/>
         <source>&amp;Parse</source>
         <translation>&amp;Nyelvi ellenőrzés</translation>
     </message>
     <message>
-        <location filename="statementwindow.cpp" line="454"/>
+        <location filename="statementwindow.cpp" line="455"/>
         <source>&amp;Analyze</source>
         <translation>&amp;Elemzés</translation>
     </message>
     <message>
-        <location filename="statementwindow.cpp" line="459"/>
+        <location filename="statementwindow.cpp" line="460"/>
         <source>&amp;Help</source>
         <translation>Se&amp;gítség</translation>
     </message>
     <message>
-        <location filename="statementwindow.cpp" line="462"/>
+        <location filename="statementwindow.cpp" line="463"/>
         <source>Wiki…</source>
         <translation>Wiki...</translation>
     </message>
