@@ -5,7 +5,7 @@ This folder contains files to provide *bibref* with a [Qt](https://qt.io) interf
 
 ## Translation steps
 
-`lupdate -tr-function-alias QT_TRANSLATE_NOOP=TR mainwindow.cpp statementwindow.cpp -ts hu.ts` creates or updates the skeleton for the Hungarian translation.
+`lupdate -tr-function-alias QT_TRANSLATE_NOOP=TR mainwindow.cpp statementwindow.cpp editor.cpp -ts hu.ts` creates or updates the skeleton for the Hungarian translation.
 Similarly to this way, it is possible to add translations for other languages.
 
 ## Building on Windows
@@ -67,7 +67,7 @@ in case you decide to use Ninja instead of GNU Make), then run
 `./bibref-qt.exe` in the same environment to test if the executable starts properly, then quit.
 Then, issue `cd ..; ./create-windows-folder build -f` (this creates a minimal but incomplete portable version in a new folder
 called something like `bibref-qt-2024Mar30`),
-and then `cd bibref-qt-2024Mar30; ./start.bat` in the newly created folder (this starts the program, it should
+and then `cd bibref-qt-2024Mar30; ./bibref-qt.exe` in the newly created folder (this starts the program, it should
 work also in a non-MINGW64 environment), finally, save the addbooks cache by
 selecting **File > Add books** and run `mv bibref-addbooks-cache ../build; cd ..; rm -fr bibref-qt-2024Mar30; ./create-windows-folder build` to obtain all
 required files in the target folder. Finally, you can use `./create-windows-zip` to create a
@@ -75,7 +75,7 @@ portable `.zip` file.
 
 ### Running
 
-Once you created the folder `bibref-qt-2024Mar30` properly, just run the program by starting `start.bat`.
+Once you created the folder `bibref-qt-2024Mar30` properly, just run the program by starting `bibref-qt.exe`.
 It is assumed that the SWORD modules are installed in the current user's home directory in the folder `.sword`.
 To learn more about **bibref-qt**, you will find further information in the **Help** menu.
 
