@@ -65,6 +65,7 @@ int main(int ac, char **av)
   extern int correct_cover;
   extern int correct_versification;
   extern int show_dump;
+  extern int tooltips_greek;
 
   bool colorize = false;
   bool graphviz = false;
@@ -74,12 +75,14 @@ int main(int ac, char **av)
   correct_versification = 0;
   show_dump = 0;
   bool show_only_dump = false;
+  tooltips_greek = 0;
 
   while (ac>1 && (!strcmp(av[1], "-d") || !strcmp(av[1], "-c")
     || !strcmp(av[1], "-g") || !strcmp(av[1], "-r")
     || !strcmp(av[1], "-D") || !strcmp(av[1], "-C")
     || !strcmp(av[1], "-h") || !strcmp(av[1], "-v")
-    || !strcmp(av[1], "-u") || !strcmp(av[1], "-U"))) {
+    || !strcmp(av[1], "-u") || !strcmp(av[1], "-U")
+    || !strcmp(av[1], "-G"))) {
 
     if (!strcmp(av[1], "-h")) {
       printf("pbrst-cli [options] [input.brst], a command line brst parser\n");
@@ -94,6 +97,7 @@ int main(int ac, char **av)
       printf(" -v\tcorrect versification from KJV to LXX\n");
       printf(" -u\tshow BRST dump\n");
       printf(" -U\tshow only BRST dump\n");
+      printf(" -G\tshow tooltips in Greek\n");
       exit(0);
     }
 
@@ -131,6 +135,10 @@ int main(int ac, char **av)
 
     if (!strcmp(av[1], "-U")) {
       show_dump = 1; show_only_dump = true; ac--; av++; continue;
+    }
+
+    if (!strcmp(av[1], "-G")) {
+      tooltips_greek = 1; ac--; av++; continue;
     }
 
   }

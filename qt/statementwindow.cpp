@@ -14,7 +14,7 @@
 #include <boost/algorithm/string/split.hpp>
 
 extern "C" char* brst_scan_string(char *string, int correct_raw, int correct_differ,
-  int correct_cover, int correct_versification, int show_dump);
+  int correct_cover, int correct_versification, int show_dump, int tooltips_greek);
 
 using namespace std;
 
@@ -213,7 +213,7 @@ void StatementWindow::setupFileMenu()
 
 void StatementWindow::parse()
 {
-    char* output = brst_scan_string((char*)editor->toPlainText().toStdString().c_str(), 0, 0, 0, 0, 0);
+    char* output = brst_scan_string((char*)editor->toPlainText().toStdString().c_str(), 0, 0, 0, 0, 0, 0);
     string output_s(output);
     vector<string> statementAnalysis;
     boost::split(statementAnalysis, output_s, boost::is_any_of("\n"));
@@ -288,7 +288,7 @@ void StatementWindow::parse()
 
 void StatementWindow::analyze()
 {
-    char* output = brst_scan_string((char*)editor->toPlainText().toStdString().c_str(), 0, 0, 0, 0, 0);
+    char* output = brst_scan_string((char*)editor->toPlainText().toStdString().c_str(), 0, 0, 0, 0, 0, 0);
     string output_s(output);
     vector<string> statementAnalysis;
     boost::split(statementAnalysis, output_s, boost::is_any_of("\n"));

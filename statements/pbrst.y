@@ -80,7 +80,9 @@ int correct_raw = 0; // fix raw positions if possible
 int correct_differ = 0; // fix differing percents if possible
 int correct_cover = 0; // fix covering percents if possible
 int correct_versification = 0; // fix versification related issues if possible
+
 int show_dump = 0; // if requested, print internal dump in BRST format
+int tooltips_greek = 0; // print tooltips in Greek
 
 void init_addbooks() {
   if (!addbooks_done) {
@@ -245,7 +247,7 @@ void check_fragment(char *passage, char *az_nt, char *az_ot);
 double myatof(char *arr);
 void create_diagram();
 void create_dump();
-void reset_data(int cr, int cd, int cc, int cv, int sd);
+void reset_data(int cr, int cd, int cc, int cv, int sd, int tg);
 }
 
 %%
@@ -358,6 +360,13 @@ char *mystrcat(char *a, char *b) {
   for (p = a; (*q = *p) != '\0'; ++p, ++q) {}
   for (p = b; (*q = *p) != '\0'; ++p, ++q) {}
   return rtn;
+}
+
+/* Optional conversion, if greek_tooltip is set. */
+char *latinToGreek_o(char *latin) {
+  if (tooltips_greek == 1)
+    return latinToGreek1(latin);
+  return latin;
 }
 
 void add_parseinfo(char *s, ...) {
@@ -1272,7 +1281,7 @@ void create_diagram() {
         else
           strcat(D, "white");
         strcat(D, ",tooltip=\"");
-        strcat(D, fragments[fragment]);
+        strcat(D, latinToGreek_o(fragments[fragment]));
         strcat(D, "\"");
       } else {
         add_parseinfo(" unused");
@@ -1371,7 +1380,7 @@ void create_diagram() {
             sprintf(intbuffer, "%d", nt_blocks[i][1]); // length
             strcat(D, intbuffer);
             strcat(D, ",tooltip=\"");
-            strcat(D, fragments[j-1]);
+            strcat(D, latinToGreek_o(fragments[j-1]));
             strcat(D, "\"");
             // Compute green lightness, based on difference 0..1 (127: darkest, 255: lightest)
             int lightness = 127 + ((int)(round(intervals_data[j-1]*128)));
@@ -1433,7 +1442,7 @@ void create_diagram() {
         strcat(D, "ccccff");
       strcat(D, "\",tooltip=\"");
       if (intro_tooltip != NULL)
-        strcat(D, intro_tooltip);
+        strcat(D, latinToGreek_o(intro_tooltip));
       else
         strcat(D, " "); // empty (this should not happen)
       strcat(D, "\"];\n");
@@ -1596,7 +1605,7 @@ void create_dump() {
     "dump: brst: end\n", D);
 }
 
-void reset_data(int cr, int cd, int cc, int cv, int sd) { // important if a previous run was already performed
+void reset_data(int cr, int cd, int cc, int cv, int sd, int tg) { // important if a previous run was already performed
     extern int yycolumn;
     addbooks_done = true; // we assume it was already called
     yycolumn = 1;
@@ -1620,6 +1629,7 @@ void reset_data(int cr, int cd, int cc, int cv, int sd) { // important if a prev
     correct_cover = cc;
     correct_versification = cv;
     show_dump = sd;
+    tooltips_greek = tg;
     // yydebug = 1;
 
     for (int i=0; i<MAX_INTERVALS; i++) {
@@ -1640,8 +1650,8 @@ extern int yyparse();
 extern YY_BUFFER_STATE yy_scan_string(char * str);
 extern void yy_delete_buffer(YY_BUFFER_STATE buffer);
 
-char* brst_scan_string(char *string, int cr, int cd, int cc, int cv, int sd) {
-    reset_data(cr, cd, cc, cv, sd);
+char* brst_scan_string(char *string, int cr, int cd, int cc, int cv, int sd, int tg) {
+    reset_data(cr, cd, cc, cv, sd, tg);
     YY_BUFFER_STATE buffer = yy_scan_string(string);
     yyparse();
     yy_delete_buffer(buffer);

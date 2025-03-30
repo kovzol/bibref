@@ -114,6 +114,16 @@ EXTERNC char *getRaw1(const char *bookName0, const char *moduleName0, int startP
     return ret;
 }
 
+EXTERNC char *latinToGreek1(const char *latin)
+{
+    string latin1 = string(latin);
+    string ltg = latinToGreek(latin1);
+    char *ret = (char *) malloc(ltg.length() + 1);
+    strcpy(ret, ltg.c_str());
+    return ret;
+}
+
+
 EXTERNC int lookupVerseStart1(const char *book0, const char *info0, const char *verse0)
 {
     string book1 = string(book0);
