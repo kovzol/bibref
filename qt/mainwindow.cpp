@@ -45,6 +45,9 @@ int maxClipboardShow = 100;
 
 QString getClipboardInfos()
 {
+    QSettings settings;
+    bool useKoineGreekFont = settings.value("Application/useKoineGreekFont", defaultUseKoineGreekFont).toBool();
+
     string textShown[2];
     QString greekShown[2];
     QString intro = "<b>"
@@ -59,6 +62,10 @@ QString getClipboardInfos()
             if (text[i].length() > maxClipboardShow) {
                 textShown[i] = textShown[i].substr(0, maxClipboardShow) + "…";
                 greekShown[i] = greekShown[i].left(maxClipboardShow) + "…";
+            }
+            if (useKoineGreekFont) {
+                greekShown[i] = "<span style=\"font-family:'KoineGreek';\">"
+                                + greekShown[i] + "</span>";
             }
             intro += "<br>"
                      + MainWindow::tr("Clipboard %1 contains %2 (%3), length %4.")
@@ -193,6 +200,15 @@ void MainWindow::greekTextN(int index)
     if (textset[index]) {
         inputDialog.setTextValue(latinToGreek(text[index]).c_str());
     }
+    // inputDialog.setFont(QFont("KoineGreek")); // This would change all fonts in the whole dialog.
+
+    /*
+    // If the dialog is show()n, the QLineEdit field will be generated and it can be edited.
+    inputDialog.show();
+    QLineEdit *inputField = inputDialog.findChild<QLineEdit *>();
+    inputField->setFont(QFont("KoineGreek"));
+    */
+
     if (inputDialog.exec() != QDialog::Accepted)
         return;
     const QString value = inputDialog.textValue().trimmed();
@@ -300,7 +316,13 @@ void MainWindow::lookup()
     if (restSize == 3) {                                    // e.g. lookup LXX Genesis 1:1
         collect_info = "";                                  // reset communication buffer
         lookupTranslation(tokens[0], tokens[1], tokens[2]); // simple lookup via Sword
-        passageInfos->append(("<b>" + rest + "</b>" + "<br>" + collect_info).c_str());
+        passageInfos->append(("<b>" + rest + "</b>").c_str());
+        QSettings settings;
+        bool useKoineGreekFont = settings.value("Application/useKoineGreekFont", defaultUseKoineGreekFont).toBool();
+        if (useKoineGreekFont)
+            collect_info = "<span style=\"font-family:'KoineGreek';\">"
+                  + collect_info + "</span>";
+        passageInfos->append((collect_info + "<br>").c_str());
         moveCursorEnd(passageInfos);
     } else {
         QString message = tr(
@@ -1309,6 +1331,8 @@ void MainWindow::preferences()
     QSettings settings;
     int size = settings.value("Application/fontsize", defaultFontSize).toInt();
     bool debug = settings.value("Application/debug", defaultDebug).toBool();
+    bool useKoineGreekFont = settings.value("Application/useKoineGreekFont",
+        defaultUseKoineGreekFont).toBool();
 
     QVBoxLayout *layout = new QVBoxLayout;
     layout->setContentsMargins(size / 2, size / 2, size / 2,  size / 2);
@@ -1353,6 +1377,22 @@ void MainWindow::preferences()
     hlayout->addStretch(1);
     layout->addLayout(hlayout, 1);
 
+    /* Use Koine Greek font: */
+    QLabel *useKoineGreekFontLabel = new QLabel(tr("Use Koine Greek font:"));
+    string useKoineGreekFontTip
+        = tr("Show Greek text with Koine Greek font")
+              .toStdString();
+    useKoineGreekFontLabel->setToolTip(tr(useKoineGreekFontTip.c_str()));
+
+    QCheckBox *useKoineGreekFontCheckbox = new QCheckBox(this);
+    useKoineGreekFontCheckbox->setChecked(useKoineGreekFont);
+
+    hlayout = new QHBoxLayout;
+    hlayout->addWidget(useKoineGreekFontLabel);
+    hlayout->addWidget(useKoineGreekFontCheckbox);
+    hlayout->addStretch(1);
+    layout->addLayout(hlayout, 1);
+
     widget->setLayout(layout);
     // widget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     // widget->setFixedSize(30 * size, 10 * size);
@@ -1366,10 +1406,14 @@ void MainWindow::preferences()
         settings.setValue("Application/fontsize", size);
         bool debug = debugCheckbox->isChecked();
         settings.setValue("Application/debug", debug);
+        bool useKoineGreekFont = useKoineGreekFontCheckbox->isChecked();
+        settings.setValue("Application/useKoineGreekFont", useKoineGreekFont);
+
         QFont f = qApp->font();
         f.setPointSize(size);
         qApp->setFont(f);
         widget->close();
+        clipboardInfos->setText(getClipboardInfos()); // update
     });
 
     layout->addWidget(buttonBox);

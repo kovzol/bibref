@@ -61,6 +61,7 @@ void copy_sword_files() {
 
 int defaultFontSize;
 bool defaultDebug;
+bool defaultUseKoineGreekFont;
 
 int main(int argc, char *argv[])
 {
@@ -73,6 +74,7 @@ int main(int argc, char *argv[])
 
     defaultFontSize = 9;
     defaultDebug = false;
+    defaultUseKoineGreekFont = true;
     QFont f = app.font();
     QSettings settings;
     if (settings.contains("Application/fontsize")) {
@@ -127,6 +129,12 @@ int main(int argc, char *argv[])
     QString d1 = workingDirectory + QDir::separator() + ".." + QDir::separator() + "Resources";
     QDir::setCurrent(d1);
 #endif // __APPLE__
+
+    int koineGreekFont = QFontDatabase::addApplicationFont(":/KoineGreek.ttf");
+    if (koineGreekFont != -1) {
+        std::cout << "Koine Greek font loaded" << endl;
+    }
+
     window.show();
     return app.exec();
 }

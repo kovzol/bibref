@@ -3,5 +3,6 @@
 
 extern int defaultFontSize;
 extern bool defaultDebug;
+extern bool defaultUseKoineGreekFont;
 
 #endif // SETTINGS_H
