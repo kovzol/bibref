@@ -1380,7 +1380,7 @@ void MainWindow::preferences()
     /* Use Koine Greek font: */
     QLabel *useKoineGreekFontLabel = new QLabel(tr("Use Koine Greek font:"));
     string useKoineGreekFontTip
-        = tr("Show Greek text with Koine Greek font")
+        = tr("Show Greek text with Koine Greek font whenever possible")
               .toStdString();
     useKoineGreekFontLabel->setToolTip(tr(useKoineGreekFontTip.c_str()));
 
