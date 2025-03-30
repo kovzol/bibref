@@ -201,13 +201,17 @@ void MainWindow::greekTextN(int index)
         inputDialog.setTextValue(latinToGreek(text[index]).c_str());
     }
     // inputDialog.setFont(QFont("KoineGreek")); // This would change all fonts in the whole dialog.
+    // It's not what we want.
 
-    /*
-    // If the dialog is show()n, the QLineEdit field will be generated and it can be edited.
-    inputDialog.show();
-    QLineEdit *inputField = inputDialog.findChild<QLineEdit *>();
-    inputField->setFont(QFont("KoineGreek"));
-    */
+    // Only after the dialog is show()n, the QLineEdit field will be generated and it can be searched and edited.
+    // Otherwise, the QLineEdit field does not exist yet and cannot be found via findChild.
+    QSettings settings;
+    bool useKoineGreekFont = settings.value("Application/useKoineGreekFont", defaultUseKoineGreekFont).toBool();
+    if (useKoineGreekFont) {
+        inputDialog.show();
+        QLineEdit *inputField = inputDialog.findChild<QLineEdit *>();
+        inputField->setFont(QFont("KoineGreek"));
+    }
 
     if (inputDialog.exec() != QDialog::Accepted)
         return;
@@ -215,6 +219,26 @@ void MainWindow::greekTextN(int index)
     if (value.isEmpty())
         return;
     string rest = value.toStdString();
+
+    if (useKoineGreekFont) {
+        // Maybe the user typed the input with a-z notation, and they are displayed
+        // with the Koine font. In such cases we want to convert the user input
+        // (or parts of it) into Greek.
+        // The transcription uses the same order as given in Alan Bunning's
+        // KoineGreek.ttf font.
+
+        string greek = rest;
+        string to[N_GREEK_LETTERS] = {"α", "β", "χ", "δ", "ε", "φ", "γ", "η", "ι", "φ" /* maybe a Coptic "fei" or "fai"? */,
+                                      "κ", "λ", "μ", "ν", "ο", "π", "θ", "ρ", "ς", "τ", "υ",
+                                      "υ" /* this is originally rendered to v and would be removed, instead, we convert it to "upsilon" */,
+                                      "ω", "ξ", "ψ", "ζ"};
+        for (char c = 'a'; c <= 'z'; c++) {
+            string from;
+            from = c;
+            boost::replace_all(greek, from, to[c - 'a']);
+        }
+        rest = greek;
+    }
 
     // Taken from cli:
     SWMgr manager;
