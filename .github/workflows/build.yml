@@ -54,7 +54,7 @@ jobs:
         cd sword
         mkdir build
         cd build
-        emcmake cmake -DSWORD_BUILD_UTILS=No -DSWORD_BUILD_EXAMPLES=No -DLIBSWORD_LIBRARY_TYPE=Static -DCMAKE_CXX_FLAGS=-sUSE_ZLIB ..
+        emcmake cmake -DSWORD_BUILD_UTILS=No -DSWORD_BUILD_EXAMPLES=No -DLIBSWORD_LIBRARY_TYPE=Static -DCMAKE_CXX_FLAGS=-sUSE_ZLIB -DCMAKE_POLICY_VERSION_MINIMUM=3.5 ..
         yes | make sword_static
         make install
     - name: cmake-wasm
