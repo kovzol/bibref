@@ -228,9 +228,9 @@ void MainWindow::greekTextN(int index)
         // KoineGreek.ttf font.
 
         string greek = rest;
-        string to[N_GREEK_LETTERS] = {"α", "β", "χ", "δ", "ε", "φ", "γ", "η", "ι", "φ" /* maybe a Coptic "fei" or "fai"? */,
+        string to[N_GREEK_LETTERS] = {"α", "β", "χ", "δ", "ε", "φ", "γ", "η", "ι", "κ" /* this is a koppa */,
                                       "κ", "λ", "μ", "ν", "ο", "π", "θ", "ρ", "ς", "τ", "υ",
-                                      "υ" /* this is originally rendered to v and would be removed, instead, we convert it to "upsilon" */,
+                                      "υ" /* this is originally undefined, rendered to v and would be removed, instead, we convert it to "upsilon" */,
                                       "ω", "ξ", "ψ", "ζ"};
         for (char c = 'a'; c <= 'z'; c++) {
             string from;
