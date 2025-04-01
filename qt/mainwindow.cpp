@@ -1357,6 +1357,8 @@ void MainWindow::preferences()
     bool debug = settings.value("Application/debug", defaultDebug).toBool();
     bool useKoineGreekFont = settings.value("Application/useKoineGreekFont",
         defaultUseKoineGreekFont).toBool();
+    bool tooltipsGreek = settings.value("Application/tooltipsGreek",
+                                            defaultTooltipsGreek).toBool();
 
     QVBoxLayout *layout = new QVBoxLayout;
     layout->setContentsMargins(size / 2, size / 2, size / 2,  size / 2);
@@ -1417,6 +1419,23 @@ void MainWindow::preferences()
     hlayout->addStretch(1);
     layout->addLayout(hlayout, 1);
 
+    /* Show tooltips in Greek: */
+
+    QLabel *tooltipsGreekLabel = new QLabel(tr("Tooltips in Greek:"));
+    string tooltipsGreekTip
+        = tr("Show tooltips in Greek in the visualized outputs")
+              .toStdString();
+    tooltipsGreekLabel->setToolTip(tr(tooltipsGreekTip.c_str()));
+
+    QCheckBox *tooltipsGreekCheckbox = new QCheckBox(this);
+    tooltipsGreekCheckbox->setChecked(tooltipsGreek);
+
+    hlayout = new QHBoxLayout;
+    hlayout->addWidget(tooltipsGreekLabel);
+    hlayout->addWidget(tooltipsGreekCheckbox);
+    hlayout->addStretch(1);
+    layout->addLayout(hlayout, 1);
+
     widget->setLayout(layout);
     // widget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     // widget->setFixedSize(30 * size, 10 * size);
@@ -1432,6 +1451,8 @@ void MainWindow::preferences()
         settings.setValue("Application/debug", debug);
         bool useKoineGreekFont = useKoineGreekFontCheckbox->isChecked();
         settings.setValue("Application/useKoineGreekFont", useKoineGreekFont);
+        bool tooltipsGreek = tooltipsGreekCheckbox->isChecked();
+        settings.setValue("Application/tooltipsGreek", tooltipsGreek);
 
         QFont f = qApp->font();
         f.setPointSize(size);

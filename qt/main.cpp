@@ -62,6 +62,7 @@ void copy_sword_files() {
 int defaultFontSize;
 bool defaultDebug;
 bool defaultUseKoineGreekFont;
+bool defaultTooltipsGreek;
 
 int main(int argc, char *argv[])
 {

@@ -213,7 +213,10 @@ void StatementWindow::setupFileMenu()
 
 void StatementWindow::parse()
 {
-    char* output = brst_scan_string((char*)editor->toPlainText().toStdString().c_str(), 0, 0, 0, 0, 0, 0);
+    QSettings settings;
+    bool tooltipsGreek = settings.value("Application/tooltipsGreek",
+                   defaultTooltipsGreek).toBool();
+    char* output = brst_scan_string((char*)editor->toPlainText().toStdString().c_str(), 0, 0, 0, 0, 0, tooltipsGreek);
     string output_s(output);
     vector<string> statementAnalysis;
     boost::split(statementAnalysis, output_s, boost::is_any_of("\n"));
