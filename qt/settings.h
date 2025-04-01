@@ -5,5 +5,6 @@ extern int defaultFontSize;
 extern bool defaultDebug;
 extern bool defaultUseKoineGreekFont;
 extern bool defaultTooltipsGreek;
+extern int defaultMaxClipboardShow;
 
 #endif // SETTINGS_H

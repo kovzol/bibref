@@ -63,6 +63,7 @@ int defaultFontSize;
 bool defaultDebug;
 bool defaultUseKoineGreekFont;
 bool defaultTooltipsGreek;
+int defaultMaxClipboardShow;
 
 int main(int argc, char *argv[])
 {
@@ -76,6 +77,8 @@ int main(int argc, char *argv[])
     defaultFontSize = 9;
     defaultDebug = false;
     defaultUseKoineGreekFont = true;
+    defaultMaxClipboardShow = 100;
+
     QFont f = app.font();
     QSettings settings;
     if (settings.contains("Application/fontsize")) {

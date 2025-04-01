@@ -41,12 +41,11 @@ string getrefsText = "StatResGNT LXX Psalms 116:1"; // example
 string rawText = "LXX Genesis 1 10";                // example
 string searchText = "LXX 2097 1515 189 3";          // example
 
-int maxClipboardShow = 100;
-
 QString getClipboardInfos()
 {
     QSettings settings;
     bool useKoineGreekFont = settings.value("Application/useKoineGreekFont", defaultUseKoineGreekFont).toBool();
+    int maxClipboardShow = settings.value("Application/maxClipboardShow", defaultMaxClipboardShow).toInt();
 
     string textShown[2];
     QString greekShown[2];
@@ -1346,6 +1345,7 @@ void MainWindow::preferences()
         defaultUseKoineGreekFont).toBool();
     bool tooltipsGreek = settings.value("Application/tooltipsGreek",
                                             defaultTooltipsGreek).toBool();
+    int maxClipboardShow = settings.value("Application/maxClipboardShow", defaultMaxClipboardShow).toInt();
 
     QVBoxLayout *layout = new QVBoxLayout;
     layout->setContentsMargins(size / 2, size / 2, size / 2,  size / 2);
@@ -1358,21 +1358,16 @@ void MainWindow::preferences()
         = tr("Set general font size in the application (default: %1)")
               .toStdString();
     fontSizeLabel->setToolTip(tr(fontSizeTip.c_str()).arg(defaultFontSize));
-
     QLineEdit *fontSizeEdit = new QLineEdit(this);
     fontSizeEdit->setText(QString::number(size));
     fontSizeEdit->setMaxLength(3);
     // fontSizeEdit->setInputMask("000");
-
     hlayout->addWidget(fontSizeLabel);
     hlayout->addWidget(fontSizeEdit);
     hlayout->addStretch(1);
     layout->addLayout(hlayout, 1);
-
-    widget->setLayout(layout);
     // widget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     // widget->setFixedSize(30 * size, 10 * size);
-    widget->setWindowTitle(tr("Preferences"));
 
     /* Show debug in Analyze: */
     QLabel *debugLabel = new QLabel(tr("Debug mode:"));
@@ -1380,10 +1375,8 @@ void MainWindow::preferences()
         = tr("Show debug messages in the Analyze window")
               .toStdString();
     debugLabel->setToolTip(tr(debugTip.c_str()));
-
     QCheckBox *debugCheckbox = new QCheckBox(this);
     debugCheckbox->setChecked(debug);
-
     hlayout = new QHBoxLayout;
     hlayout->addWidget(debugLabel);
     hlayout->addWidget(debugCheckbox);
@@ -1396,10 +1389,8 @@ void MainWindow::preferences()
         = tr("Show Greek text with Koine Greek font whenever possible")
               .toStdString();
     useKoineGreekFontLabel->setToolTip(tr(useKoineGreekFontTip.c_str()));
-
     QCheckBox *useKoineGreekFontCheckbox = new QCheckBox(this);
     useKoineGreekFontCheckbox->setChecked(useKoineGreekFont);
-
     hlayout = new QHBoxLayout;
     hlayout->addWidget(useKoineGreekFontLabel);
     hlayout->addWidget(useKoineGreekFontCheckbox);
@@ -1407,22 +1398,35 @@ void MainWindow::preferences()
     layout->addLayout(hlayout, 1);
 
     /* Show tooltips in Greek: */
-
     QLabel *tooltipsGreekLabel = new QLabel(tr("Tooltips in Greek:"));
     string tooltipsGreekTip
         = tr("Show tooltips in Greek in the visualized outputs")
               .toStdString();
     tooltipsGreekLabel->setToolTip(tr(tooltipsGreekTip.c_str()));
-
     QCheckBox *tooltipsGreekCheckbox = new QCheckBox(this);
     tooltipsGreekCheckbox->setChecked(tooltipsGreek);
-
     hlayout = new QHBoxLayout;
     hlayout->addWidget(tooltipsGreekLabel);
     hlayout->addWidget(tooltipsGreekCheckbox);
     hlayout->addStretch(1);
     layout->addLayout(hlayout, 1);
 
+    /* Maximal size of clipboard to show: */
+    QLabel *clipboardSizeLabel = new QLabel(tr("Maximal shown size of clipboard:"));
+    string clipboardSizeTip
+        = tr("Set maximal shown size of the clipboard (default: %1)")
+              .toStdString();
+    clipboardSizeLabel->setToolTip(tr(clipboardSizeTip.c_str()).arg(defaultMaxClipboardShow));
+    QLineEdit *clipboardSizeEdit = new QLineEdit(this);
+    clipboardSizeEdit->setText(QString::number(maxClipboardShow));
+    clipboardSizeEdit->setMaxLength(6);
+    hlayout = new QHBoxLayout;
+    hlayout->addWidget(clipboardSizeLabel);
+    hlayout->addWidget(clipboardSizeEdit);
+    hlayout->addStretch(1);
+    layout->addLayout(hlayout, 1);
+
+    /* End of settings. */
     widget->setLayout(layout);
     // widget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     // widget->setFixedSize(30 * size, 10 * size);
@@ -1433,13 +1437,19 @@ void MainWindow::preferences()
     connect(buttonBox, &QDialogButtonBox::accepted, [=]() {
         QSettings settings;
         int size = fontSizeEdit->text().toInt();
-        settings.setValue("Application/fontsize", size);
+        if (size > 0) { // do not save any nonsense values
+            settings.setValue("Application/fontsize", size);
+        }
         bool debug = debugCheckbox->isChecked();
         settings.setValue("Application/debug", debug);
         bool useKoineGreekFont = useKoineGreekFontCheckbox->isChecked();
         settings.setValue("Application/useKoineGreekFont", useKoineGreekFont);
         bool tooltipsGreek = tooltipsGreekCheckbox->isChecked();
         settings.setValue("Application/tooltipsGreek", tooltipsGreek);
+        int maxClipboardSize = clipboardSizeEdit->text().toInt();
+        if (maxClipboardSize > 0) { // do not save any nonsense values
+            settings.setValue("Application/maxClipboardShow", maxClipboardSize);
+        }
 
         QFont f = qApp->font();
         f.setPointSize(size);
