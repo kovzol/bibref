@@ -82,6 +82,11 @@ string latinToGreek(const string &latin)
         from = c;
         boost::replace_all(greek, from, to[c - 'a']);
     }
+    for (char c = 'A'; c <= 'Z'; c++) {
+        string from;
+        from = c;
+        boost::replace_all(greek, from, to[c - 'A']);
+    }
     return greek;
 }
 

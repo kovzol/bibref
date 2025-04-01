@@ -64,7 +64,7 @@ QString getClipboardInfos()
                 greekShown[i] = greekShown[i].left(maxClipboardShow) + "…";
             }
             if (useKoineGreekFont) {
-                greekShown[i] = "<span style=\"font-family:'KoineGreek';\">"
+                greekShown[i] = "<span style=\"font-family:'KoineGreekBibref';\">"
                                 + greekShown[i] + "</span>";
             }
             intro += "<br>"
@@ -210,7 +210,7 @@ void MainWindow::greekTextN(int index)
     if (useKoineGreekFont) {
         inputDialog.show();
         QLineEdit *inputField = inputDialog.findChild<QLineEdit *>();
-        inputField->setFont(QFont("KoineGreek"));
+        inputField->setFont(QFont("KoineGreekBibref"));
     }
 
     if (inputDialog.exec() != QDialog::Accepted)
@@ -224,20 +224,7 @@ void MainWindow::greekTextN(int index)
         // Maybe the user typed the input with a-z notation, and they are displayed
         // with the Koine font. In such cases we want to convert the user input
         // (or parts of it) into Greek.
-        // The transcription uses the same order as given in Alan Bunning's
-        // KoineGreek.ttf font.
-
-        string greek = rest;
-        string to[N_GREEK_LETTERS] = {"α", "β", "χ", "δ", "ε", "φ", "γ", "η", "ι", "κ" /* this is a koppa */,
-                                      "κ", "λ", "μ", "ν", "ο", "π", "θ", "ρ", "ς", "τ", "υ",
-                                      "υ" /* this is originally undefined, rendered to v and would be removed, instead, we convert it to "upsilon" */,
-                                      "ω", "ξ", "ψ", "ζ"};
-        for (char c = 'a'; c <= 'z'; c++) {
-            string from;
-            from = c;
-            boost::replace_all(greek, from, to[c - 'a']);
-        }
-        rest = greek;
+        rest = latinToGreek(rest);
     }
 
     // Taken from cli:
@@ -344,7 +331,7 @@ void MainWindow::lookup()
         QSettings settings;
         bool useKoineGreekFont = settings.value("Application/useKoineGreekFont", defaultUseKoineGreekFont).toBool();
         if (useKoineGreekFont)
-            collect_info = "<span style=\"font-family:'KoineGreek';\">"
+            collect_info = "<span style=\"font-family:'KoineGreekBibref';\">"
                   + collect_info + "</span>";
         passageInfos->append((collect_info + "<br>").c_str());
         moveCursorEnd(passageInfos);

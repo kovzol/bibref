@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>hu.qm</file>
-        <file>KoineGreek.ttf</file>
+        <file>KoineGreekBibref.ttf</file>
     </qresource>
 </RCC>

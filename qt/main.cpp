@@ -131,7 +131,7 @@ int main(int argc, char *argv[])
     QDir::setCurrent(d1);
 #endif // __APPLE__
 
-    int koineGreekFont = QFontDatabase::addApplicationFont(":/KoineGreek.ttf");
+    int koineGreekFont = QFontDatabase::addApplicationFont(":/KoineGreekBibref.ttf");
     if (koineGreekFont != -1) {
         std::cout << "Koine Greek font loaded" << endl;
     }
