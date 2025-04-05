@@ -1380,7 +1380,11 @@ void create_diagram() {
             sprintf(intbuffer, "%d", nt_blocks[i][1]); // length
             strcat(D, intbuffer);
             strcat(D, ",tooltip=\"");
-            strcat(D, latinToGreek_o(fragments[j-1]));
+            char *tooltip = NULL;
+            // this is usually fragments[j-1], but not for blocks that contain just partial texts from a fragment:
+            tooltip = getRaw1(nt_info, nt_book, nt_blocks[i][0] + imin_i - 1, nt_blocks[i][1]);
+            strcat(D, latinToGreek_o(tooltip));
+            free(tooltip);
             strcat(D, "\"");
             // Compute green lightness, based on difference 0..1 (127: darkest, 255: lightest)
             int lightness = 127 + ((int)(round(intervals_data[j-1]*128)));
