@@ -462,12 +462,12 @@ check_nt_passage(char *book, char *info, char *verse)
   }
 
   // Check if raw text matches with lookup's result:
-  if (!err && strcmp(l, r)==0) {
+  int start = lookupVerseStart1(info, book, verse) + 1;
+  if (!err && strcmp(l, r)==0 && intervals[iv_counter-1][0] == start) {
     add_parseinfo("%d,%d: info: results of lookup and raw match I4\n", yylineno, yycolumn);
     } else {
     // TODO: This is fixable, the position should be corrected by getting the passage position:
     if (correct_raw == 1) {
-      int start = lookupVerseStart1(info, book, verse) + 1;
       intervals[iv_counter-1][0] = start;
       intervals[iv_counter-1][1] = start + strlen(l) - 1;
       add_parseinfo("%d,%d: corrected: results of lookup and raw did not match\n", yylineno, yycolumn);
@@ -654,11 +654,11 @@ check_ot_passage(char *book, char *info, char *verse)
   }
 
   // Check if raw text matches with lookup's result:
-  if (!err && strcmp(l, r)==0) {
+  int start = lookupVerseStart1(ot_info, ot_book, ot_verse) + 1;
+  if (!err && strcmp(l, r)==0 && intervals[iv_counter-1][0] == start) {
     add_parseinfo("%d,%d: info: results of lookup and raw match I4\n", yylineno, yycolumn);
     } else {
     if (correct_raw == 1) {
-      int start = lookupVerseStart1(ot_info, ot_book, ot_verse) + 1;
       intervals[iv_counter-1][0] = start;
       intervals[iv_counter-1][1] = start + strlen(l) - 1;
       add_parseinfo("%d,%d: corrected: results of lookup and raw did not match\n", yylineno, yycolumn);
@@ -728,11 +728,11 @@ check_introduction_passage(char *passage, char *az)
   strcpy(verses_s[iv_counter-1], passage); // for the dump
 
   // Check if raw text matches with lookup's result:
-  if (!err && strcmp(l, r)==0) {
+  int start = lookupVerseStart1(nt_info, nt_book, passage) + 1;
+  if (!err && strcmp(l, r)==0 && intervals[iv_counter-1][0] == start) {
     add_parseinfo("%d,%d: info: results of lookup and raw match I4\n", yylineno, yycolumn);
     } else { // try to fix the incorrect raw position:
     if (correct_raw == 1) {
-      int start = lookupVerseStart1(nt_info, nt_book, passage) + 1;
       intervals[iv_counter-1][0] = start;
       intervals[iv_counter-1][1] = start + strlen(l) - 1;
       add_parseinfo("%d,%d: corrected: results of lookup and raw did not match\n", yylineno, yycolumn);
@@ -819,11 +819,11 @@ check_fragment(char *passage, char *az_nt, char *az_ot) {
       intervals[iv_counter-2][0], length, r);
   }
   // Check if raw text matches with lookup's result:
-  if (!err && strcmp(ln, r)==0) {
+  int start = lookupVerseStart1(nt_info, nt_book, passage) + 1;
+  if (!err && strcmp(ln, r)==0 && intervals[iv_counter-2][0] == start) {
     add_parseinfo("%d,%d: info: results of lookup and raw match I4\n", yylineno, yycolumn);
     } else { // try to fix the incorrect raw position:
     if (correct_raw == 1) {
-      int start = lookupVerseStart1(nt_info, nt_book, passage) + 1;
       intervals[iv_counter-2][0] = start;
       intervals[iv_counter-2][1] = start + strlen(ln) - 1;
       add_parseinfo("%d,%d: corrected: results of lookup and raw did not match\n", yylineno, yycolumn);
