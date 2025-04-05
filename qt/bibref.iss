@@ -1,4 +1,4 @@
-#define BIBREF_VERSION "2025-03-27"
+#define BIBREF_VERSION "2025-04-05"
 
 [Setup]
 AppName=bibref

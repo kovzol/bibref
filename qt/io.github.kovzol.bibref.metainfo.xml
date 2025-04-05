@@ -62,6 +62,19 @@
   <content_rating type="oars-1.1" />
 
   <releases>
+    <release version="2025-04-05" date="2025-04-05">
+    <url type="details">https://github.com/kovzol/bibref/commits/7ff5bfd5cea18c687197d1573d2b2f7510bdb194</url>
+      <description>
+        <p>Release description</p>
+          <ul>
+            <li>Koine Greek font support for input/output, designed by Alan Bunning</li>
+            <li>Tooltips can be shown in Greek</li>
+            <li>Add option to set shown maximal length of texts from the clipboards</li>
+            <li>Fix a check in BRST statements (if the Bible passage and the raw position match)</li>
+            <li>Fix tooltip for a block if it contains just a part of the fragment</li>
+          </ul>
+      </description>
+    </release>
     <release version="2025-03-27" date="2025-03-27">
     <url type="details">https://github.com/kovzol/bibref/commits/78b9df9f091d2cedbf14f59ef99f99fcf8734445</url>
       <description>
