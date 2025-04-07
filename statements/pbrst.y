@@ -496,7 +496,7 @@ int detect_ot_book(char *book, char *info) {
   return -1; // not found
 }
 
-// This is incomplete. Mostly those verses will be fixes that are present in the statement database. FIXME.
+// This is incomplete. Mostly those verses will be fixed that are present in the statement database. FIXME.
 void fix_verse(char *info, int *c, int *v) {
   if (strcmp(info, "Psalms") == 0) {
     // Shifting the verse number by 1 (or 2):
@@ -1058,7 +1058,7 @@ void check_cover(double cover) {
     int ot_headline_start = intervals[i][0];
     int ot_headline_end = intervals[i][1];
     if (!(ot_headline_start == oimin && ot_headline_end == oimax)) {
-      if (ot_headline_start <= oimin || ot_headline_end >= oimax) {
+      if (ot_headline_start <= oimin && ot_headline_end >= oimax) {
       add_parseinfo("%d,%d: warning: OT headline interval %d [%d,%d] contains OT fragments union [%d,%d] but they do not match W4\n",
         yylineno, yycolumn, i, ot_headline_start, ot_headline_end, oimin, oimax);
       }
