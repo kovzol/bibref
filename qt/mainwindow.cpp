@@ -267,9 +267,23 @@ void MainWindow::latinTextN(int index)
     const QString value = inputDialog.textValue().trimmed();
     if (value.isEmpty())
         return;
-    string rest = value.toStdString();
 
-    text[index] = rest;
+    text[index] = "";
+    for (int i = 0; i < value.length(); i++) {
+        QChar c = value.at(i);
+        if (c >= 'a' && c <= 'z') {
+            text[index] += c.toLatin1();
+        }
+        if (c >= 'A' && c <= 'Z') {
+            text[index] += c.toLower().toLatin1();
+        }
+        if (text[index].back() == 'q') {
+            text[index].back() = 'z';
+        }
+        if (text[index].back() == 'w') {
+            text[index].back() = 's';
+        }
+    }
     textset[index] = true; // activate clipboard
 
     clipboardInfos->setText(getClipboardInfos());
