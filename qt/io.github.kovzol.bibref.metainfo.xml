@@ -75,6 +75,16 @@
           </ul>
       </description>
     </release>
+    <release version="2025-04-08" date="2025-04-08">
+    <url type="details">https://github.com/kovzol/bibref/commits/1e52d9d44386e90c55bcc9b6131f81a7f91c2a7e</url>
+      <description>
+        <p>Release description</p>
+          <ul>
+            <li>Improve Latin text input</li>
+            <li>Fix BRST entries and the tests accordingly, where references to the same OT book appeared</li>
+          </ul>
+      </description>
+    </release>
     <release version="2025-03-27" date="2025-03-27">
     <url type="details">https://github.com/kovzol/bibref/commits/78b9df9f091d2cedbf14f59ef99f99fcf8734445</url>
       <description>
