@@ -62,6 +62,16 @@
   <content_rating type="oars-1.1" />
 
   <releases>
+    <release version="2025-04-08" date="2025-04-08">
+    <url type="details">https://github.com/kovzol/bibref/commits/1e52d9d44386e90c55bcc9b6131f81a7f91c2a7e</url>
+      <description>
+        <p>Release description</p>
+          <ul>
+            <li>Improve Latin text input</li>
+            <li>Fix BRST entries and the tests accordingly, where references to the same OT book appeared</li>
+          </ul>
+      </description>
+    </release>
     <release version="2025-04-05" date="2025-04-05">
     <url type="details">https://github.com/kovzol/bibref/commits/7ff5bfd5cea18c687197d1573d2b2f7510bdb194</url>
       <description>
@@ -72,16 +82,6 @@
             <li>Add option to set shown maximal length of texts from the clipboards</li>
             <li>Fix a check in BRST statements (if the Bible passage and the raw position match)</li>
             <li>Fix tooltip for a block if it contains just a part of the fragment</li>
-          </ul>
-      </description>
-    </release>
-    <release version="2025-04-08" date="2025-04-08">
-    <url type="details">https://github.com/kovzol/bibref/commits/1e52d9d44386e90c55bcc9b6131f81a7f91c2a7e</url>
-      <description>
-        <p>Release description</p>
-          <ul>
-            <li>Improve Latin text input</li>
-            <li>Fix BRST entries and the tests accordingly, where references to the same OT book appeared</li>
           </ul>
       </description>
     </release>
