@@ -26,7 +26,7 @@ for i in $FILES; do
  echo -n -e "\r$i ($n/$F_NO)\033[0K"
  ../pbrst-cli -g $i > $i.dot
  test -s $i.dot && {
-  dot -Tsvg $i.dot > $i.svg
+  dot -Tsvg $i.dot | sed s/"l_"/"l$n"/g > $i.svg # make gradient colors unique for the global html
   echo "<img src=$i.svg><br>" >> $HTML
 
   tail -n +7 $i.svg >> $HTML_SVG # remove head
