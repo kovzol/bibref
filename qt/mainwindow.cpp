@@ -343,10 +343,10 @@ void MainWindow::lookup()
         passageInfos->append(("<b>" + rest + "</b>").c_str());
         QSettings settings;
         bool useKoineGreekFont = settings.value("Application/useKoineGreekFont", defaultUseKoineGreekFont).toBool();
-        if (useKoineGreekFont)
+        if (useKoineGreekFont && (tokens[0] == "LXX" || tokens[0] == "StatResGNT" || tokens[0] == "SBLGNT"))
             collect_info = "<span style=\"font-family:'KoineGreekBibref';\">"
-                  + collect_info + "</span>";
-        passageInfos->append((collect_info + "<br>").c_str());
+                  + collect_info + "</span><br>";
+        passageInfos->append(collect_info.c_str());
         moveCursorEnd(passageInfos);
     } else {
         QString message = tr(
