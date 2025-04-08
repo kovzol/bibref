@@ -51,6 +51,7 @@ int oimaxs[MAX_OT_BOOKS];
 char ot_books[MAX_OT_BOOKS][MAX_BOOKNAME_LENGTH];
 char ot_infos[MAX_OT_BOOKS][MAX_BOOKNAME_LENGTH];
 char ot_verses[MAX_OT_BOOKS][MAX_BOOKNAME_LENGTH];
+int ot_poss[MAX_OT_BOOKS][2]; // start, end
 #define MAX_FRAGMENT_LENGTH 5000
 char fragments[MAX_INTERVALS][MAX_FRAGMENT_LENGTH];
 
@@ -487,9 +488,10 @@ check_nt_passage(char *book, char *info, char *verse)
   add_parseinfo("%d,%d: debug: interval %d %s %s is the headline NT passage\n", yylineno, yycolumn, iv_counter-1, nt_book, nt_info);
 }
 
-int detect_ot_book(char *book, char *info) {
+int detect_ot_book(char *book, char *info, int start, int end) {
   for (int i=0; i<ot_books_n; i++) {
-    if (strcmp(ot_books[i],ot_book)==0 && strcmp(ot_infos[i],ot_info)==0) { // This is not a new OT book.
+    if (strcmp(ot_books[i],ot_book)==0 && strcmp(ot_infos[i],ot_info)==0
+      && ot_poss[i][0]<=start && ot_poss[i][1]>=end) { // This is not a new OT book.
       return i;
     }
   }
@@ -676,12 +678,14 @@ check_ot_passage(char *book, char *info, char *verse)
   intervals[iv_counter-1][2] = OT_PASSAGE;
   add_parseinfo("%d,%d: debug: interval %d is an OT passage\n", yylineno, yycolumn, iv_counter-1);
 
-  if (detect_ot_book(ot_book, ot_info) == -1) { // Register this OT book as another entry.
+  if (detect_ot_book(ot_book, ot_info, intervals[iv_counter-1][0], intervals[iv_counter-1][1]) == -1) { // Register this OT book as another entry.
     if (fragments_start>0) // this should be fixable, TODO
       add_parseinfo("%d,%d: error: OT book %s %s is not defined as a headline E4\n", yylineno, yycolumn, ot_book, ot_info);
     strcpy(ot_books[ot_books_n], ot_book);
     strcpy(ot_infos[ot_books_n], ot_info);
-    strcpy(ot_verses[ot_books_n], ot_verse); // FIXME: For long books like Isaiah, this may be inconvenient.
+    strcpy(ot_verses[ot_books_n], ot_verse);
+    ot_poss[ot_books_n][0] = intervals[iv_counter-1][0];
+    ot_poss[ot_books_n][1] = intervals[iv_counter-1][1];
     ot_books_n++;
     add_parseinfo("%d,%d: debug: OT book %s %s is registered as #%d\n", yylineno, yycolumn, ot_book, ot_info, ot_books_n-1);
   }
@@ -1039,9 +1043,15 @@ void check_cover(double cover) {
         if (strcmp(books_s[i], books_s[j])==0 && strcmp(infos_s[i], infos_s[j])==0) {
           int oistart = intervals[j][0];
           int oiend = intervals[j][1];
-          add_parseinfo(" [%d,%d]", oistart, oiend);
-          if (oimin > oistart) oimin = oistart;
-          if (oimax < oiend) oimax = oiend;
+          // It is possible that the OT headline belongs to a completely different part of the same book.
+          // E.g. for Psalms, or for long books like Isaiah.
+          int oistart_h = intervals[i][0];
+          int oiend_h = intervals[i][1];
+          if (oistart >= oistart_h && oiend <= oiend_h) {
+            add_parseinfo(" [%d,%d]", oistart, oiend);
+            if (oimin > oistart) oimin = oistart;
+            if (oimax < oiend) oimax = oiend;
+          } // do nothing if it belongs to a different part, this case will be checked conversely
         }
       }
     }
@@ -1078,11 +1088,18 @@ void check_cover(double cover) {
     bool ot_overlaps = false;
     for (int j=fragments_start + 1; j<iv_counter; j++) { // register each fragment...
       int ftype = intervals[j][2];
+      int oistart = intervals[j][0];
+      int oiend = intervals[j][1];
+      // It is possible that the OT headline belongs to a completely different part of the same book.
+      // E.g. for Psalms, or for long books like Isaiah.
+      int oistart_h = intervals[i][0];
+      int oiend_h = intervals[i][1];
       // If this is an OT interval and it belongs to the current OT headline...
-      if (ftype == OT_PASSAGE && strcmp(books_s[i], books_s[j])==0 && strcmp(infos_s[i], infos_s[j])==0) {
+      if (ftype == OT_PASSAGE && strcmp(books_s[i], books_s[j])==0 && strcmp(infos_s[i], infos_s[j])==0
+        && oistart >= oistart_h && oiend <= oiend_h) {
         bool ot_overlap = false;
         int ot_overlap_i = 0;
-        for (int k=intervals[j][0]; k<=intervals[j][1]; k++) {
+        for (int k=oistart; k<=oiend; k++) {
           int pos = k-oimin;
           ot_overlap_i = ot_coverings[i-1][pos];
           // add_parseinfo("%d,%d: debug: check OT interval %d, pos=%d, k=%d, oimin=%d, ot_overlap_i=%d, j=%d\n",
