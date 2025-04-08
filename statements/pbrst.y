@@ -680,7 +680,7 @@ check_ot_passage(char *book, char *info, char *verse)
 
   if (detect_ot_book(ot_book, ot_info, intervals[iv_counter-1][0], intervals[iv_counter-1][1]) == -1) { // Register this OT book as another entry.
     if (fragments_start>0) // this should be fixable, TODO
-      add_parseinfo("%d,%d: error: OT book %s %s is not defined as a headline E4\n", yylineno, yycolumn, ot_book, ot_info);
+      add_parseinfo("%d,%d: error: OT book %s %s is not defined as a headline or headline interval is too narrow E4\n", yylineno, yycolumn, ot_book, ot_info);
     strcpy(ot_books[ot_books_n], ot_book);
     strcpy(ot_infos[ot_books_n], ot_info);
     strcpy(ot_verses[ot_books_n], ot_verse);

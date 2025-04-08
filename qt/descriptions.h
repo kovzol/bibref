@@ -2,7 +2,7 @@ std::vector<std::string> descriptions = {
 "E1 The length, given as the second parameter in parenthesis, describes a different quantity than the first parameter (which is an interval). Auto-resolution will change the length according to the interval length.",
 "E2 The Bible passage and the raw position (given in parenthesis) are controversial, they do not define the same text. Auto-resolution will fix the raw position to match the passage.",
 "E3 The Bible passage and the raw position (given in parenthesis) do not define the same text, since the Bible passage is defined incorrectly.",
-"E4 There is an Old Testament book given among the fragments that was not introduced in the headline.",
+"E4 There is an Old Testament book given among the fragments that was not introduced in the headline, or the given headline interval is too narrow.",
 "E5 The Bible passage defined in the introduction does not match to the a-z form defined later, they differ.",
 "E6 A textual expression was mentioned in the explanation of an introductory text, but it cannot be found in the introduction.",
 "E7 The Bible passage defined in the New Testament fragment does not match to the a-z form defined later, they differ.",
