@@ -10,6 +10,7 @@
 * Change working directory to `qt/` and run `flatpak-builder --force-clean --user --install-deps-from=flathub --repo=repo --install builddir io.github.kovzol.bibref.yaml && flatpak build-bundle repo bibref.flatpak io.github.kovzol.bibref && flatpak install bibref.flatpak && flatpak run io.github.kovzol.bibref`
 * Get `bibref.flatpak` and share it on GitHub/Releases later
 * Create a new branch at https://github.com/flathub/io.github.kovzol.bibref, update io.github.kovzol.bibref.yaml, commit, make a pull request and finally, merge
+* Commit code and push to GitHub (optional)
 * Update Snapcraft: trigger a new build, release the new version
 
 ## macOS
