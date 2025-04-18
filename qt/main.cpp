@@ -139,6 +139,6 @@ int main(int argc, char *argv[])
         std::cout << "Koine Greek font loaded" << endl;
     }
 
-    window.show();
+    window.showNormal();
     return app.exec();
 }

@@ -101,7 +101,7 @@ qt_add_executable(bibref-qt MACOSX_BUNDLE
     fingerprint.cpp fingerprint.h
     psalmsinfo.cpp psalmsinfo.h
     ${PBRST_SRCS}
-    ${QM_FILES}
+    # ${QM_FILES} # this is handled via bibref.qrc
     bibref.qrc
     ${bibref_qt_ICON}
     editor.h editor.cpp
@@ -139,6 +139,11 @@ target_link_options(bibref-qt PUBLIC "SHELL:
   --preload-file '$ENV{HOME}/.sword@/'")
 target_link_options(bibref-qt PUBLIC "SHELL:
   --preload-file '${BIBREF_ADDBOOKS_CACHE_FOLDER}@/bibref-addbooks-cache'")
+target_link_options(bibref-qt PUBLIC "SHELL:
+  --preload-file '${CMAKE_SOURCE_DIR}/../statements/StatResGNT@statements/StatResGNT'")
+target_link_options(bibref-qt PUBLIC "SHELL:
+  --preload-file '${CMAKE_SOURCE_DIR}/../statements/SBLGNT@statements/SBLGNT'")
+
 install(TARGETS bibref-qt DESTINATION "${CMAKE_BINARY_DIR}/${HTML_BUILD_DIR}")
 file(GLOB HTML_FILES ${CMAKE_CURRENT_SOURCE_DIR}/html/*)
 install(FILES ${HTML_FILES} ${CMAKE_BINARY_DIR}/bibref-qt.data DESTINATION "${CMAKE_BINARY_DIR}/${HTML_BUILD_DIR}")
