@@ -207,7 +207,7 @@ void MainWindow::greekTextN(int index)
     QSettings settings;
     bool useKoineGreekFont = settings.value("Application/useKoineGreekFont", defaultUseKoineGreekFont).toBool();
     if (useKoineGreekFont) {
-        inputDialog.show();
+        inputDialog.showNormal();
         QLineEdit *inputField = inputDialog.findChild<QLineEdit *>();
         inputField->setFont(QFont("KoineGreekBibref"));
     }
@@ -786,7 +786,7 @@ void MainWindow::statement() {
     QSettings settings;
     int size = settings.value("Application/fontsize", defaultFontSize).toInt();
     swindow->resize(64 * size, 50 * size);
-    swindow->show();
+    swindow->showNormal();
     swindow->setWindowIcon(QIcon::fromTheme("input-keyboard"));
 }
 
@@ -932,7 +932,7 @@ void MainWindow::aboutSword()
     widget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     widget->setFixedSize(40 * size, 20 * size);
     widget->setWindowTitle(tr("About SWORD"));
-    widget->show();
+    widget->showNormal();
 }
 
 void MainWindow::tutorial()
@@ -1058,7 +1058,7 @@ void MainWindow::tutorial()
     widget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     widget->setFixedSize(60 * size, 40 * size);
     widget->setWindowTitle(tr("Quick tutorial"));
-    widget->show();
+    widget->showNormal();
 }
 
 void MainWindow::showSwordBibles()
@@ -1474,6 +1474,6 @@ void MainWindow::preferences()
 
     layout->addWidget(buttonBox);
 
-    widget->show();
+    widget->showNormal();
 
 }

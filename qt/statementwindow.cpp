@@ -433,7 +433,7 @@ void StatementWindow::analyze()
     widget->setLayout(layout);
     widget->resize(57 * size, 32 * size);
 
-    widget->show();
+    widget->showNormal();
 }
 
 
@@ -443,7 +443,7 @@ void StatementWindow::showSvg()
     QSettings settings;
     int size = settings.value("Application/fontsize", defaultFontSize).toInt();
     vwindow->resize(30 * size, 15 * size); // this should be refined
-    vwindow->show();
+    vwindow->showNormal();
     vwindow->setWindowIcon(QIcon::fromTheme("emblem-photos"));
     vwindow->setWindowTitle(tr("Visualize"));
 }
