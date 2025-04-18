@@ -1300,8 +1300,10 @@ void MainWindow::createMenus()
 {
     fileMenu = menuBar()->addMenu(tr("&File"));
     fileMenu->addAction(addBiblesAct);
+#ifndef __EMSCRIPTEN__ // Don't show exit action in the web version
     fileMenu->addSeparator();
     fileMenu->addAction(exitAct);
+#endif
 
     editMenu = menuBar()->addMenu(tr("&Edit"));
     editMenu->addAction(greekText1Act);

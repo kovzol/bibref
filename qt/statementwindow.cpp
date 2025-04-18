@@ -266,7 +266,9 @@ void StatementWindow::parse()
             msgBox.setIcon(QMessageBox::Information);
         }
         if (diagram_defined) {
+#ifndef __EMSCRIPTEN__ // Don't show Visualize button (since GraphViz is not available) in the web version.
             visualizeButton = msgBox.addButton(tr("&Visualize"), QMessageBox::ActionRole);
+#endif
             visualizeXButton = msgBox.addButton(tr("E&xport graph"), QMessageBox::ActionRole);
         }
     }
