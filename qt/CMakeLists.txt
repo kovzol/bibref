@@ -6,18 +6,29 @@ find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Concurrent SvgWidgets)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(sword REQUIRED sword)
 
+if(EMSCRIPTEN)
+find_library(SWORD_LIB NAMES libsword.a)
+set(CMAKE_CXX_FLAGS "-sUSE_BOOST_HEADERS -sUSE_ZLIB")
+endif(EMSCRIPTEN)
+
 find_package(Qt6LinguistTools)
 file(GLOB TRANSLATION_FILES ${CMAKE_CURRENT_SOURCE_DIR}/*.ts)
 set_source_files_properties(${TRANSLATION_FILES}
     PROPERTIES OUTPUT_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}")
-qt6_add_translation(QM_FILES ${TRANSLATION_FILES})
+if(EMSCRIPTEN)
+else()
+  qt6_add_translation(QM_FILES ${TRANSLATION_FILES})
+endif(EMSCRIPTEN)
 
 set(Boost_USE_STATIC_LIBS OFF)
 set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_RUNTIME OFF)
 find_package(Boost CONFIG COMPONENTS system filesystem)
 
-pkg_check_modules(gvc REQUIRED libgvc)
+if (EMSCRIPTEN)
+else()
+  pkg_check_modules(gvc REQUIRED libgvc)
+endif(EMSCRIPTEN)
 
 if(MINGW)
     find_package(ICU REQUIRED uc in)
@@ -33,7 +44,10 @@ find_library(sword NAMES sword
 )
 else()
 # One needs readline >= 8.0 to make this work:
-pkg_check_modules (readline REQUIRED readline)
+if (EMSCRIPTEN)
+else()
+  pkg_check_modules (readline REQUIRED readline)
+endif(EMSCRIPTEN)
 endif()
 
 include_directories(${sword_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} ${readline_INCLUDE_DIRS} ${gvc_INCLUDE_DIRS})
@@ -111,6 +125,25 @@ set(graphviz_LIBRARIES_folder "-L/opt/homebrew/lib -L/opt/homebrew/lib/graphviz 
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 endif()
 
+if(EMSCRIPTEN)
+target_link_libraries(bibref-qt PRIVATE
+  Qt6::Core
+  Qt6::Gui
+  Qt6::Widgets
+  Qt6::Concurrent
+  Qt6::SvgWidgets
+  ${SWORD_LIB} ${Boost_LIBRARIES}
+)
+target_link_options(bibref-qt PUBLIC -sSINGLE_FILE -sALLOW_MEMORY_GROWTH -O3 -fexceptions -sASYNCIFY -O3 -flto)
+target_link_options(bibref-qt PUBLIC "SHELL:
+  --preload-file '$ENV{HOME}/.sword@/'")
+target_link_options(bibref-qt PUBLIC "SHELL:
+  --preload-file '${BIBREF_ADDBOOKS_CACHE_FOLDER}@/bibref-addbooks-cache'")
+install(TARGETS bibref-qt DESTINATION "${CMAKE_BINARY_DIR}/${HTML_BUILD_DIR}")
+file(GLOB HTML_FILES ${CMAKE_CURRENT_SOURCE_DIR}/html/*)
+install(FILES ${HTML_FILES} ${CMAKE_BINARY_DIR}/bibref-qt.data DESTINATION "${CMAKE_BINARY_DIR}/${HTML_BUILD_DIR}")
+
+else()
 target_link_libraries(bibref-qt PRIVATE
     Qt6::Core
     Qt6::Gui
@@ -151,3 +184,5 @@ install(FILES io.github.kovzol.bibref.metainfo.xml DESTINATION share/metainfo)
 # Copy statements:
 install(DIRECTORY ../statements/SBLGNT/ DESTINATION share/bibref-qt/statements/SBLGNT PATTERN "all" EXCLUDE)
 install(DIRECTORY ../statements/StatResGNT/ DESTINATION share/bibref-qt/statements/StatResGNT PATTERN "all" EXCLUDE)
+
+endif(EMSCRIPTEN)

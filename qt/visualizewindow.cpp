@@ -6,10 +6,12 @@
 
 #include <cstdio>
 #include <string>
+#ifndef __EMSCRIPTEN__
 #include <graphviz/cdt.h>
 #include <graphviz/cgraph.h>
 #include <graphviz/gvc.h>
 #include <graphviz/gvplugin.h>
+#endif
 
 using namespace std;
 
@@ -20,6 +22,7 @@ VisualizeWindow::VisualizeWindow(QWidget *parent, string input)
     tile = new QSvgWidget(this);
     setCentralWidget(tile);
 
+#ifndef __EMSCRIPTEN__
     GVC_t *gvc= gvContext();
 #if defined(__MINGW32__) || defined(__APPLE__)
     /* This seems to be required on Windows and MacOS, otherwise the
@@ -51,5 +54,6 @@ VisualizeWindow::VisualizeWindow(QWidget *parent, string input)
     string svg_s = string(svg);
     tile->load(QByteArray::fromStdString(svg_s));
     tile->renderer()->setAspectRatioMode(Qt::KeepAspectRatio);
+#endif
 }
 
