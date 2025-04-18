@@ -491,7 +491,7 @@ void processLookupCmd(string input)
     if (restSize == 3) {
         string verse = "";
         try {                                                     // e.g. lookup1 LXX Genesis 1:1
-            verse = lookupVerse(tokens[1], tokens[0], tokens[2]); // lookup in the a-y database
+            verse = lookupVerse(tokens[1], tokens[0], tokens[2]); // lookup in the a-z database
             text[index] = verse;                                  // Store result.
             textset[index] = true;                                // activate clipboard
             info("Stored internally as " + verse + ".");
@@ -513,7 +513,7 @@ void processLookupCmd(string input)
             if (tokens3.size() > 1) {
                 end = stoi(tokens3[1]); // read off the minus shift
             }
-            // Shift-allowed lookup in the a-y database...
+            // Shift-allowed lookup in the a-z database...
             verse = getText(tokens[1], tokens[0], tokens2.at(0), tokens3.at(0), start, end);
             text[index] = verse;   // Store result.
             textset[index] = true; // activate clipboard

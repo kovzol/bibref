@@ -30,7 +30,7 @@ EXTERNC char *lookupVerse1(const char *book0, const char *info0, const char *ver
     int restSize = tokens.size();
     if (restSize == 1) {
         try {                                       // e.g. lookup1 LXX Genesis 1:1
-            lv = lookupVerse(book1, info1, verse1); // lookup in the a-y database
+            lv = lookupVerse(book1, info1, verse1); // lookup in the a-z database
         } catch (exception &e) {
             lv += " - " + string(e.what()) + " E18";
         }
@@ -47,7 +47,7 @@ EXTERNC char *lookupVerse1(const char *book0, const char *info0, const char *ver
             if (tokens3.size() > 1) {
                 end = stoi(tokens3[1]); // read off the minus shift
             }
-            // Shift-allowed lookup in the a-y database...
+            // Shift-allowed lookup in the a-z database...
             lv = getText(book1, info1, tokens2.at(0), tokens3.at(0), start, end);
         } catch (exception &e) {
             lv += " - " + string(e.what()) + " E18";
@@ -136,7 +136,7 @@ EXTERNC int lookupVerseStart1(const char *book0, const char *info0, const char *
     int restSize = tokens.size();
     if (restSize == 1) {
         try {                                              // e.g. lookup1 LXX Genesis 1:1
-            return lookupVerseStart(book1, info1, verse1); // lookup in the a-y database
+            return lookupVerseStart(book1, info1, verse1); // lookup in the a-z database
         } catch (exception &e) {
             return -1;
         }
@@ -149,7 +149,7 @@ EXTERNC int lookupVerseStart1(const char *book0, const char *info0, const char *
             if (tokens2.size() > 1) {
                 start = stoi(tokens2[1]); // read off the plus shift
             }
-            // Shift-allowed lookup in the a-y database...
+            // Shift-allowed lookup in the a-z database...
             return lookupVerseStart(book1, info1, tokens2.at(0)) + start;
         } catch (exception &e) {
             return -1;
