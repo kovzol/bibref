@@ -1,6 +1,6 @@
 id: io.github.kovzol.bibref
 runtime: org.kde.Platform
-runtime-version: '6.8'
+runtime-version: '6.9'
 sdk: org.kde.Sdk
 command: bibref-qt
 finish-args:
@@ -66,10 +66,10 @@ modules:
     sources:
       # - type: git
       # url: https://github.com/kovzol/bibref
-      # tag: 2025-04-08 # does not yet exist
+      # tag: 2025-04-19 # does not yet exist
       - type: archive
-        url: https://github.com/kovzol/bibref/archive/f40d33063490a3f2ba6e733cb0033c90d271916c.zip
-        sha256: bafddefec16e41cf721229088cc3528c9bcbfd8dc2d5deaceb14f80e465475e8
+        url: https://github.com/kovzol/bibref/archive/525660169f7ac39e295e03cfed601d72fe668f57.zip
+        sha256: 1672201858ad79bf386ed85276253f11227977095c9155a24246d238564db199
     post-install:
       - mv /app/tmp/.sword/* /app/share/sword
 
