@@ -62,6 +62,17 @@
   <content_rating type="oars-1.1" />
 
   <releases>
+    <release version="2025-04-19" date="2025-04-19">
+    <url type="details">https://github.com/kovzol/bibref/commits/e75b549e9f3afc5989577f40d8fa38ef7b176780</url>
+      <description>
+        <p>Release description</p>
+          <ul>
+            <li>Fix font for non-Greek lookups</li>
+            <li>Fix default BRST entry in the Statement Editor</li>
+            <li>Use Inconsolata font in the Statement Editor</li>
+          </ul>
+      </description>
+    </release>
     <release version="2025-04-08" date="2025-04-08">
     <url type="details">https://github.com/kovzol/bibref/commits/1e52d9d44386e90c55bcc9b6131f81a7f91c2a7e</url>
       <description>
