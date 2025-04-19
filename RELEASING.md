@@ -26,10 +26,9 @@
 ## Windows
 
 * Pull the newest version (via Windows Git)
-* Build both the cli and Qt versions (via MSYS2/MINGW64)
-* Run the cli version and recreate the `bibref-addbooks-cache` folder,
-  copy it in the Qt build folder; or run the Qt version and select File > Add books;
-  this ensures to have the cache up-to-date
+* Build the Qt version (via MSYS2/MINGW64)
+* Run the Qt version and recreate the `bibref-addbooks-cache` folder by selecting File > Add books,
+  check if it is indeed in the Qt build folder; this ensures to have the cache up-to-date
 * Change working directory to `qt/`.
 * Run the `./create-windows-folder` script and add the build folder as parameter
 * Run the `./create-windows-zip` script

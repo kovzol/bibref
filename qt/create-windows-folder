@@ -65,23 +65,10 @@ if [ "$2" != "-f" ]; then
 
 ntldd -R $FOLDER/bibref-qt.exe | grep mingw64 | awk '{print "/mingw64/bin/" $1}' | xargs cp -t $FOLDER
 
-# Put the application logo and the translations there...
-# TODO: Maybe this is no longer necessary since they are in the .qrc.
-
-mkdir -p $FOLDER/share/bibref-qt
-cp ../logo-Psalm40-192.png $FOLDER/share/bibref-qt
-cp *.qm $FOLDER/share/bibref-qt
-
 # Create the SWORD databases...
 
 unzip -d $FOLDER ../sword-lxx-sblgnt-statresgnt-kjv-fallback.zip
 mv $FOLDER/.sword $FOLDER/sword
-
-# Create the startup script...
-
-#echo "set SWORD_PATH=%homedrive%%homepath%\.sword
-#if not exist \"%SWORD_PATH%\" mkdir \"%SWORD_PATH%\" & xcopy /q /e sword \"%SWORD_PATH%\"
-#start \"\" bibref-qt.exe" > $FOLDER/start.bat
 
 # Create additional Qt related settings...
 
@@ -90,6 +77,7 @@ for d in styles platforms; do
  done
 
 # Create statements folder...
+
 mkdir $FOLDER/statements
 cp -a ../statements/SBLGNT $FOLDER/statements
 rm -fr $FOLDER/statements/SBLGNT/all # don't need to have the copies
