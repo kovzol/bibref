@@ -150,7 +150,7 @@ target_link_options(bibref-qt PUBLIC "SHELL:
 add_custom_command(TARGET bibref-qt POST_BUILD COMMAND cp "${CMAKE_SOURCE_DIR}/qtlogo.svg" ${CMAKE_BINARY_DIR})
 
 install(TARGETS bibref-qt DESTINATION "${CMAKE_BINARY_DIR}/${HTML_BUILD_DIR}")
-install(FILES ${CMAKE_BINARY_DIR}/bibref-qt.data ${CMAKE_BINARY_DIR}/bibref-qt.html ${CMAKE_BINARY_DIR}/qtlogo.svg
+install(FILES ${CMAKE_BINARY_DIR}/bibref-qt.data ${CMAKE_BINARY_DIR}/bibref-qt.html ${CMAKE_SOURCE_DIR}/qtlogo.svg
   ${CMAKE_BINARY_DIR}/qtloader.js DESTINATION "${CMAKE_BINARY_DIR}/${HTML_BUILD_DIR}")
 
 else()
