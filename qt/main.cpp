@@ -101,6 +101,9 @@ int main(int argc, char *argv[])
     }
     QTranslator bibrefTranslator;
     QString qmDir;
+#ifdef __EMSCRIPTEN__
+    qmDir = ":/";
+#else
     if (std::filesystem::exists(PROJECT_SOURCE_DIR "/hu.qm"))
         qmDir = PROJECT_SOURCE_DIR; // This must be set externally, currently done via cmake
     else if (std::filesystem::exists(INSTALL_PREFIX "/" SHARE_FOLDER "/hu.qm"))
@@ -108,6 +111,7 @@ int main(int argc, char *argv[])
             "/" SHARE_FOLDER;
     else
         qmDir = SHARE_FOLDER; // for relative path (when extracted from a .zip)
+#endif
     if (bibrefTranslator.load(language, qmDir)) {
         app.installTranslator(&bibrefTranslator);
     }
@@ -140,5 +144,6 @@ int main(int argc, char *argv[])
     }
 
     window.showNormal();
+    window.showMaximized();
     return app.exec();
 }

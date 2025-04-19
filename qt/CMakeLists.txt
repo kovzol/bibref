@@ -143,6 +143,7 @@ target_link_options(bibref-qt PUBLIC "SHELL:
   --preload-file '${CMAKE_SOURCE_DIR}/../statements/StatResGNT@statements/StatResGNT'")
 target_link_options(bibref-qt PUBLIC "SHELL:
   --preload-file '${CMAKE_SOURCE_DIR}/../statements/SBLGNT@statements/SBLGNT'")
+add_custom_command(TARGET bibref-qt POST_BUILD COMMAND cp "${CMAKE_SOURCE_DIR}/qtlogo.svg" ${CMAKE_BINARY_DIR})
 
 install(TARGETS bibref-qt DESTINATION "${CMAKE_BINARY_DIR}/${HTML_BUILD_DIR}")
 file(GLOB HTML_FILES ${CMAKE_CURRENT_SOURCE_DIR}/html/*)
