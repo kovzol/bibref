@@ -1,6 +1,11 @@
 cmake_minimum_required(VERSION 3.16)
 project(bibref-qt LANGUAGES CXX C)
 
+set(BIBREF_ADDBOOKS_CACHE_FOLDER ../bibref-addbooks-cache CACHE STRING
+ "Set the previously created bibref-addbooks-cache folder for the Emscripten build")
+set(HTML_BUILD_DIR html-output CACHE STRING
+ "Set the output folder for the Emscripten build")
+
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Concurrent SvgWidgets)
 
 find_package(PkgConfig REQUIRED)
@@ -145,8 +150,8 @@ target_link_options(bibref-qt PUBLIC "SHELL:
 add_custom_command(TARGET bibref-qt POST_BUILD COMMAND cp "${CMAKE_SOURCE_DIR}/qtlogo.svg" ${CMAKE_BINARY_DIR})
 
 install(TARGETS bibref-qt DESTINATION "${CMAKE_BINARY_DIR}/${HTML_BUILD_DIR}")
-file(GLOB HTML_FILES ${CMAKE_CURRENT_SOURCE_DIR}/html/*)
-install(FILES ${HTML_FILES} ${CMAKE_BINARY_DIR}/bibref-qt.data DESTINATION "${CMAKE_BINARY_DIR}/${HTML_BUILD_DIR}")
+install(FILES ${CMAKE_BINARY_DIR}/bibref-qt.data ${CMAKE_BINARY_DIR}/bibref-qt.html ${CMAKE_BINARY_DIR}/qtlogo.svg
+  ${CMAKE_BINARY_DIR}/qtloader.js DESTINATION "${CMAKE_BINARY_DIR}/${HTML_BUILD_DIR}")
 
 else()
 target_link_libraries(bibref-qt PRIVATE
