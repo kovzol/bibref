@@ -131,7 +131,6 @@ target_link_libraries(bibref-qt PRIVATE
   Qt6::Gui
   Qt6::Widgets
   Qt6::Concurrent
-  Qt6::SvgWidgets
   ${SWORD_LIB} ${Boost_LIBRARIES}
 )
 target_link_options(bibref-qt PUBLIC -sSINGLE_FILE -sALLOW_MEMORY_GROWTH -O3 -fexceptions -sASYNCIFY -O3 -flto)

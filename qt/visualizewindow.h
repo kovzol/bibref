@@ -1,3 +1,4 @@
+#ifndef __EMSCRIPTEN__
 #ifndef VISUALIZEWINDOW_H
 #define VISUALIZEWINDOW_H
 
@@ -19,3 +20,4 @@ private:
 };
 
 #endif
+#endif // __EMSCRIPTEN__

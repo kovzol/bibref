@@ -1,7 +1,9 @@
 #include <iostream>
 
 #include "statementwindow.h"
+#ifndef __EMSCRIPTEN__
 #include "visualizewindow.h"
+#endif // __EMSCRIPTEN__
 #include "settings.h"
 #include "descriptions.h"
 #include "editor.h"
@@ -441,6 +443,7 @@ void StatementWindow::analyze()
 
 void StatementWindow::showSvg()
 {
+#ifndef __EMSCRIPTEN__
     auto vwindow = new VisualizeWindow(this, graphviz_input);
     QSettings settings;
     int size = settings.value("Application/fontsize", defaultFontSize).toInt();
@@ -448,6 +451,7 @@ void StatementWindow::showSvg()
     vwindow->showNormal();
     vwindow->setWindowIcon(QIcon::fromTheme("emblem-photos"));
     vwindow->setWindowTitle(tr("Visualize"));
+#endif // __EMSCRIPTEN__
 }
 
 void StatementWindow::setupProveMenu()

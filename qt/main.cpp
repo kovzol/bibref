@@ -144,6 +144,8 @@ int main(int argc, char *argv[])
     }
 
     window.showNormal();
+#ifdef __EMSCRIPTEN__
     window.showMaximized();
+#endif
     return app.exec();
 }
