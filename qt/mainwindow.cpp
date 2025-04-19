@@ -892,12 +892,7 @@ void MainWindow::about()
 
 void setWindowLogo(QWidget *widget)
 {
-    if (std::filesystem::exists(PROJECT_SOURCE_DIR "/" LOGO_FILE))
-        widget->setWindowIcon(QIcon(PROJECT_SOURCE_DIR "/" LOGO_FILE));
-    else if (std::filesystem::exists(INSTALL_PREFIX "/" SHARE_FOLDER "/" LOGO_FILE))
-        widget->setWindowIcon(QIcon(INSTALL_PREFIX "/" SHARE_FOLDER "/" LOGO_FILE));
-    else
-        widget->setWindowIcon(QIcon(SHARE_FOLDER "/" LOGO_FILE));
+    widget->setWindowIcon(QIcon(":/" LOGO_FILE));
 }
 
 void MainWindow::aboutSword()

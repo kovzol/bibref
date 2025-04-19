@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 project(bibref-qt LANGUAGES CXX C)
 
-set(BIBREF_ADDBOOKS_CACHE_FOLDER ../bibref-addbooks-cache CACHE STRING
+set(BIBREF_ADDBOOKS_CACHE_FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/../bibref-addbooks-cache" CACHE STRING
  "Set the previously created bibref-addbooks-cache folder for the Emscripten build")
 set(HTML_BUILD_DIR html-output CACHE STRING
  "Set the output folder for the Emscripten build")

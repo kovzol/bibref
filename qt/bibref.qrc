@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>hu.qm</file>
         <file>KoineGreekBibref.ttf</file>
+        <file>logo-Psalm40-192.png</file>
     </qresource>
 </RCC>

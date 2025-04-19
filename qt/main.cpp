@@ -118,13 +118,7 @@ int main(int argc, char *argv[])
     // FIXME: the last item should be inserted in a simpler and more flexible way.
 
     MainWindow window;
-    // Put the application logo on the window:
-    if (std::filesystem::exists(PROJECT_SOURCE_DIR "/" LOGO_FILE))
-        window.setWindowIcon(QIcon(PROJECT_SOURCE_DIR "/" LOGO_FILE));
-    else if (std::filesystem::exists(INSTALL_PREFIX "/" SHARE_FOLDER "/" LOGO_FILE))
-        window.setWindowIcon(QIcon(INSTALL_PREFIX "/" SHARE_FOLDER "/" LOGO_FILE));
-    else
-        window.setWindowIcon(QIcon(SHARE_FOLDER "/" LOGO_FILE));
+    window.setWindowIcon(QIcon(":/" LOGO_FILE));
 
     // Set working directory to home if XDG standards are used (e.g., for flatpak):
     char *home = std::getenv("XDG_DATA_HOME");

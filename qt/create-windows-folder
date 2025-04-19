@@ -66,6 +66,7 @@ if [ "$2" != "-f" ]; then
 ntldd -R $FOLDER/bibref-qt.exe | grep mingw64 | awk '{print "/mingw64/bin/" $1}' | xargs cp -t $FOLDER
 
 # Put the application logo and the translations there...
+# TODO: Maybe this is no longer necessary since they are in the .qrc.
 
 mkdir -p $FOLDER/share/bibref-qt
 cp ../logo-Psalm40-192.png $FOLDER/share/bibref-qt
