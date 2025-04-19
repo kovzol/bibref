@@ -136,6 +136,11 @@ int main(int argc, char *argv[])
     if (koineGreekFont != -1) {
         std::cout << "Koine Greek font loaded" << endl;
     }
+    int typewriterFont = QFontDatabase::addApplicationFont(":/Inconsolata.ttf");
+    if (typewriterFont != -1) {
+        std::cout << "Inconsolata font loaded" << endl;
+    }
+
 
     window.showNormal();
 #ifdef __EMSCRIPTEN__

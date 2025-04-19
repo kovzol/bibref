@@ -171,7 +171,7 @@ void StatementWindow::saveFileAs(const QString &path)
 void StatementWindow::setupEditor()
 {
     QFont font;
-    font.setFamily("Courier");
+    font.setFamily("Inconsolata");
     font.setFixedPitch(true);
     QSettings settings;
     font.setPointSize(settings.value("Application/fontsize", defaultFontSize).toInt());
