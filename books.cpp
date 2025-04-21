@@ -626,7 +626,7 @@ int addBooks(string moduleName, string firstVerse, string lastVerse, bool remove
     if (moduleName == "LXX" && (std::stof(version) >= 3.0)) {
         removeAccents = true; // force removing accents
         // lastVerse = "Daniel 12:13"; // order of books is different
-        lastVerse = "Odes 1:19"; // order of books is different
+        lastVerse = "Odes 14:46"; // order of books is different
     }
 
     DIR *cache_dir = opendir((BIBREF_ADDBOOKS_CACHE_DIR + moduleName).c_str());
