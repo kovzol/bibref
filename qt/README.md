@@ -29,10 +29,6 @@ The required MSYS2 packages are:
 * `mingw-w64-x86_64-qt6-svg`
 * `mingw-w64-x86_64-graphviz`
 
-The last two ones are only required if you want to have statement analysis support in
-the **Statement Editor** (which can be started from the **Quotation** menu), in its **Prove** menu,
-after a successful run of **Parse**.
-
 If you want to create a package from **bibref-qt** (see below), you need additionally:
 
 * `mingw-w64-x86_64-ntldd`
