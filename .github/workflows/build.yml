@@ -73,7 +73,7 @@ jobs:
       run: cd docs/hu && make || true # LaTeX seems to be broken on Ubuntu 22.04...
 
   build-windows:
-    runs-on: windows-2019
+    runs-on: windows-2022
     defaults:
       run:
         shell: msys2 {0}
