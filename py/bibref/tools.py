@@ -116,3 +116,27 @@ def find_n(c, bible):
         if index == 1:
             finished = True
     return ret
+
+def jaccard12():
+    """
+    Computes the Jaccard distance between the two clipboard texts.
+    :return: the Jaccard distance as a number between 0 and 1
+    """
+    global bibref
+    spawn_bibref()
+    bibref.timeout = bibref_default_timeout
+    command = "jaccard12"
+    bibref.sendline(command)
+    bibref.expect("Jaccard distance is ([0-9]+\\.[0-9]+).")
+    jaccard12 = bibref.match.groups()
+    jaccard = float(jaccard12[0]) * 100
+    return jaccard
+
+def jaccard(t1, t2):
+    """
+    Puts the inputs in the clipboards and compute their Jaccard distance.
+    :return: the Jaccard distance as a number between 0 and 1
+    """
+    text_n(1, t1)
+    text_n(2, t2)
+    return jaccard12()
