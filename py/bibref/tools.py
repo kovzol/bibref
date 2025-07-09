@@ -2,14 +2,25 @@ import sys, pexpect, os, re
 
 bibref_default_timeout = 5
 bibref_default_timeout_max = 180
+bibref_fullpath = ""
 
 bibref = None
+
+def set_bibref_path(fullpath = ""):
+    global bibref_fullpath
+    bibref_fullpath = fullpath
 
 def spawn_bibref():
     global bibref
     if bibref is not None:
         return
     sys.stderr.write("Waiting for bibref's full startup...\n")
+
+    if bibref_fullpath != "":
+        bibref = pexpect.spawn(bibref_fullpath + " -a")
+        bibref.expect("Done loading books of SBLGNT.")
+        bibref.timeout = bibref_default_timeout
+        return
 
     for subdir, dirs, files in os.walk('../..'):
         for file in files:
@@ -56,8 +67,24 @@ def text_n(c, greektext):
     """
     global bibref
     spawn_bibref()
-    bibref.timeout = bibref_default_timeout_max
+    bibref.timeout = bibref_default_timeout
     command = "text" + str(c) + " " + greektext
+    bibref.sendline(command)
+    bibref.expect("Stored internally as (\\w+).")
+    form = bibref.match.groups()
+    return form[0].decode('utf-8')
+
+def lookup_n(c, passage):
+    """
+    Looks up the passage and stores it in the selected clipboard.
+    :param c: Clipboard number (1 or 2)
+    :param passage: The passage to look up
+    :return: the passage converted to Latin notation
+    """
+    global bibref
+    spawn_bibref()
+    bibref.timeout = bibref_default_timeout
+    command = "lookup" + str(c) + " " + passage
     bibref.sendline(command)
     bibref.expect("Stored internally as (\\w+).")
     form = bibref.match.groups()
