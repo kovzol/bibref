@@ -11,6 +11,12 @@
 #include <graphviz/cgraph.h>
 #include <graphviz/gvc.h>
 #include <graphviz/gvplugin.h>
+#include <graphviz/graphviz_version.h>
+#if GVPLUGIN_VERSION==8
+#define GVRENDERDATA_SIZE size_t
+#else
+#define GVRENDERDATA_SIZE unsigned int
+#endif
 
 using namespace std;
 
@@ -42,9 +48,10 @@ VisualizeWindow::VisualizeWindow(QWidget *parent, string input)
 
     Agraph_t *g = agmemread((char*)input.c_str());
     gvLayout(gvc, g, "dot");
-#define MAX_SVG_LENGTH ((unsigned int) 200000)
+
+#define MAX_SVG_LENGTH ((GVRENDERDATA_SIZE) 200000)
     char *svg = (char*) malloc(MAX_SVG_LENGTH);
-    unsigned int length;
+    GVRENDERDATA_SIZE length;
     gvRenderData(gvc, g, "svg", &svg, &length);
     gvFreeLayout(gvc, g);
     agclose(g);
