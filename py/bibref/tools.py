@@ -74,6 +74,19 @@ def text_n(c, greektext):
     form = bibref.match.groups()
     return form[0].decode('utf-8')
 
+def latintext_n(c, latintext):
+    """
+    Stores the Latin input in the selected clipboard.
+    :param c: Clipboard number (1 or 2)
+    :param greektext: Latin input as string
+    """
+    global bibref
+    spawn_bibref()
+    bibref.timeout = bibref_default_timeout
+    command = "latintext" + str(c) + " " + latintext
+    bibref.sendline(command)
+    bibref.expect("Stored.")
+
 def lookup_n(c, passage):
     """
     Looks up the passage and stores it in the selected clipboard.
@@ -134,9 +147,46 @@ def jaccard12():
 
 def jaccard(t1, t2):
     """
-    Puts the inputs in the clipboards and compute their Jaccard distance.
+    Puts the Greek inputs in the clipboards and compute their Jaccard distance.
+    :param t1: the first Greek text
+    :param t2: the second Greek text
     :return: the Jaccard distance as a number between 0 and 1
     """
     text_n(1, t1)
     text_n(2, t2)
     return jaccard12()
+
+def latin_to_greek(latin):
+    """
+    Converts the Latin input into Greek text.
+    :param latin: the input as Latin text
+    :return: the text in Greek letters
+    """
+    greek = latin
+    greek = greek.replace("a", "α") # Note that the implementation is not very elegant.
+    greek = greek.replace("b", "β")
+    greek = greek.replace("c", "ψ")
+    greek = greek.replace("d", "δ")
+    greek = greek.replace("e", "ε")
+    greek = greek.replace("f", "φ")
+    greek = greek.replace("g", "γ")
+    greek = greek.replace("h", "η")
+    greek = greek.replace("i", "ι")
+    greek = greek.replace("j", "ξ")
+    greek = greek.replace("k", "κ")
+    greek = greek.replace("l", "λ")
+    greek = greek.replace("m", "μ")
+    greek = greek.replace("n", "ν")
+    greek = greek.replace("o", "ο")
+    greek = greek.replace("p", "π")
+    greek = greek.replace("q", "ζ")
+    greek = greek.replace("r", "ρ")
+    greek = greek.replace("s", "σ")
+    greek = greek.replace("t", "τ")
+    greek = greek.replace("u", "θ")
+    greek = greek.replace("v", "ω")
+    greek = greek.replace("w", "ς") # unused
+    greek = greek.replace("x", "χ")
+    greek = greek.replace("y", "υ")
+    greek = greek.replace("z", "ζ") # maybe unused
+    return greek
