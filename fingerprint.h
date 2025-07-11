@@ -17,5 +17,6 @@ int dist(Fingerprint f1, Fingerprint f2);
 int dist(const string &text1, const string &text2);
 void printDist(Fingerprint f1, Fingerprint f2);
 double jaccard_dist(const string &text1, const string &text2);
+string best_jaccard_substr(const string &fixtext, const string &subtext);
 
 #endif // FINGERPRINT_H

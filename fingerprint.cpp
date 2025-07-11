@@ -13,6 +13,9 @@ Fingerprint getFingerprint(string text)
         for (int j = 0; j < N_GREEK_LETTERS; ++j) {
             f.m_data[i][j] = 0;
         }
+    if (text.empty()) {
+        return f; // return here, otherwise text.length() - 1 will be 2^64-1
+        }
     for (int i = 0; i < text.length() - 1; ++i) {
         char first = text.at(i) - 'a';
         char second = text.at(i + 1) - 'a';
@@ -94,3 +97,48 @@ double jaccard_dist(const string &text1, const string &text2)
      */
     return 1 - ((double) d) / max(d1, d2);
 }
+
+string best_jaccard_substr(const string &fixtext, const string &subtext)
+{
+    Fingerprint f1 = getFingerprint(fixtext);
+    int maxlen = subtext.length();
+    double best = 1.0;
+    int best_s1, best_s2;
+    int d1 = fixtext.length() - 1;
+    for (int s1 = 0; s1 < maxlen; s1++) {
+        Fingerprint f2 = getFingerprint(""); // empty
+
+        // When starting a new value of s1, these should be reset:
+        int d2 = 0;
+        int d = 0;
+
+        for (int s2 = s1 + 1; s2 + 1 < maxlen; s2++) { // update fingerprint for subtext
+            char first = subtext.at(s2) - 'a';
+            char second = subtext.at(s2 + 1) - 'a';
+            (f2.m_data[first][second])++;
+
+            d2++;
+            // If the fix text has more (or equally many) occurrences for this 2-shingle than the
+            // currently considered one from the subtext, then the minimum of
+            // them has just been increased by 1, so we increase d as well:
+            if (f1.m_data[first][second] >= f2.m_data[first][second]) d++;
+            // Otherwise, the currently considered 2-shingle of the subtext is already
+            // greater than the occurrences in the fix text, so the minimum of them
+            // remains the same number: no change should be done for d.
+
+            double dist = 1 - ((double) d) / max(d1, d2);
+            if (dist < best) {
+                // std::cout << "d1=" << d1 << " d2=" << d2 << " d=" << d << std::endl;
+                best = dist;
+                best_s1 = s1;
+                best_s2 = s2;
+                // printf("best=%4.2f best_s1=%d best_s2=%d\n", best, best_s1, best_s2);
+                }
+            }
+        }
+    return subtext.substr(best_s1, best_s2 - best_s1 + 2);
+}
+// Example call:
+// best_jaccard_substr("panarsendianoigonmhtranagiontvkyrivklhuhsetai",
+// "kaiafeleispandianoigonmhtrantaarsenikatvkyrivpandianoigonmhtranektvnboykolivnhentoiskthnesinsoyosaeangenhtaisoitaarsenikaagiaseistvkyriv")
+// should return "kaiafeleispandianoigonmhtrantaarsenikatvkyriv" (taken from Luke 2:23 and Exodus 13:12)
