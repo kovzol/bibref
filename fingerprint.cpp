@@ -136,7 +136,7 @@ string best_jaccard_substr(const string &fixtext, const string &subtext)
                 }
             }
         }
-    return subtext.substr(best_s1, best_s2 - best_s1 + 2);
+    return subtext.substr(best_s1, best_s2 - best_s1 + 2) + " " + to_string(best);
 }
 // Example call:
 // best_jaccard_substr("panarsendianoigonmhtranagiontvkyrivklhuhsetai",

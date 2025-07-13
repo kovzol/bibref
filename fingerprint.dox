@@ -38,4 +38,5 @@ double jaccard_dist(const string& text1, const string& text2);
 string best_jaccard_substr(const string &fixtext, const string &subtext) {
  /// @param fixtext The fixed text.
  /// @param subtext The text for which a substring must be found.
+ /// @return The nearest substring and the minimal Jaccard distance, separated by a space character.
 };

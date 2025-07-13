@@ -77,6 +77,7 @@ string quitCmd = "quit";
 string helpCmd = "help";
 string statementCmd = "statement";
 string statementCmd2 = "Statement";
+string nearestCmd = "nearest";
 
 string errorNotRecognized
     = "Sorry, the command you entered was not recognized or its syntax is invalid.";
@@ -108,6 +109,7 @@ string errorMisc = "Sorry, there were some problems with the command you entered
 vector<string> commands{addbooksCmd,
                         compareCmd + "12",
                         jaccardCmd + "12",
+                        nearestCmd + "12",
                         textCmd + "1",
                         textCmd + "2",
                         lookupCmd + "1",
@@ -287,6 +289,9 @@ string getHelp(const string &key)
         "(2-shingles) "
         "check, best match is reached at 1/(length1+length2).",
         "* `jaccard12`: Compare the two clipboards the same way how `compare12` does but use the "
+        "\"Jaccard similarity for bags\" algorithm, best match is reached at 0.",
+        "* `nearest12`: Find a substring of clipboard1 such that its Jaccard similarity for bags "
+        " to clipboard2 is minimal.",
         "\"Jaccard similarity for bags\" algorithm, best match is reached at 0.",
         "* `sql` *switch*: Set some outputs to be shown also as an SQL query if *switch* is `on`.",
         "* `colors` *switch*: Show some outputs colored if *switch* is `on`.",
@@ -678,6 +683,18 @@ void processJaccardCmd()
     }
 }
 
+void processNearestCmd()
+{
+    if (textset.at(0) && textset.at(1)) {
+        string best_c_d = best_jaccard_substr(text[1], text[0]);
+        vector<string> tokens;
+        boost::split(tokens, best_c_d, boost::is_any_of(" "));
+        info("Nearest Jaccard distance is " + tokens[1] + " with substring " + tokens[0] + ".");
+    } else {
+        error("Text 1 or 2 is not set.");
+    }
+}
+
 void processPsalminfoCmd(string input)
 {
     vector<string> tokens;
@@ -960,6 +977,8 @@ string cli_process(char *buf)
         processCompareCmd();
     else if (boost::starts_with(input, jaccardCmd + "12"))
         processJaccardCmd();
+    else if (boost::starts_with(input, nearestCmd + "12"))
+        processNearestCmd();
     else if (boost::starts_with(input, minuniqueCmd + "1"))
         processMinuniqueCmd(input);
     // TODO: Consider using this trick for the other commands:
