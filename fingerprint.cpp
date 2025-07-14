@@ -108,7 +108,8 @@ string best_jaccard_substr(const string &fixtext, const string &subtext)
     Fingerprint f1 = getFingerprint(fixtext);
     int maxlen = subtext.length();
     double best = 1.0;
-    int best_s1, best_s2;
+    int best_s1 = 0;
+    int best_s2 = maxlen - 1;
     int d1 = fixtext.length() - 1;
     for (int s1 = 0; s1 < maxlen; s1++) {
         Fingerprint f2 = getFingerprint(""); // empty
@@ -117,7 +118,7 @@ string best_jaccard_substr(const string &fixtext, const string &subtext)
         int d2 = 0;
         int d = 0;
 
-        for (int s2 = s1 + 1; s2 + 1 < maxlen; s2++) { // update fingerprint for subtext
+        for (int s2 = s1; s2 + 1 < maxlen; s2++) { // update fingerprint for subtext
             char first = subtext.at(s2) - 'a';
             char second = subtext.at(s2 + 1) - 'a';
             (f2.m_data[first][second])++;
