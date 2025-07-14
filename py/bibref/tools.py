@@ -206,3 +206,18 @@ def nearest12():
     nearest = float(nearest12[0]) * 100
     nearest_substring = nearest12[1].decode('utf-8')
     return nearest, nearest_substring
+
+def maxresults(m):
+    """
+    Sets the maximal amount of matches to be found, for the find command.
+    :return: the value being actually set
+    """
+    global bibref
+    spawn_bibref()
+    bibref.timeout = bibref_default_timeout
+    command = "maxresults " + str(m)
+    bibref.sendline(command)
+    bibref.expect("Set to ([0-9]+).")
+    maxresults = bibref.match.groups()
+    return int(maxresults[0])
+
