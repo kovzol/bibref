@@ -190,3 +190,19 @@ def latin_to_greek(latin):
     greek = greek.replace("y", "υ")
     greek = greek.replace("z", "ζ") # maybe unused
     return greek
+
+def nearest12():
+    """
+    Computes the nearest substring of clipboard 1 and the text in clipboard2.
+    :return: a 2-element list of the minimal Jaccard distance as a number between 0 and 1 and the nearest substring
+    """
+    global bibref
+    spawn_bibref()
+    bibref.timeout = bibref_default_timeout
+    command = "nearest12"
+    bibref.sendline(command)
+    bibref.expect("Nearest Jaccard distance is ([0-9]+\\.[0-9]+) with substring (\\w+).")
+    nearest12 = bibref.match.groups()
+    nearest = float(nearest12[0]) * 100
+    nearest_substring = nearest12[1].decode('utf-8')
+    return nearest, nearest_substring
