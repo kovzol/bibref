@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <limits>
 
 using namespace std;
 
@@ -78,6 +79,8 @@ int dist(const string &text1, const string &text2)
 
 double jaccard_dist(const string &text1, const string &text2)
 {
+    if (text1.length() < 2 || text2.length() < 2)
+        return std::numeric_limits<double>::quiet_NaN();
     int d1 = 0;
     int d2 = 0;
     int d = 0;

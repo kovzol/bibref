@@ -32,6 +32,7 @@ void printDist(Fingerprint f1, Fingerprint f2);
 
 /// Compute the Jaccard similirity for bags. See Leskovec-Rajamaran-Ullman: Mining of massive datasets,
 /// Cambridge University Press, 2014, p. 77-78 (see footnote 2 on page 77).
+/// Inputs must be in a-z format and at least 2 characters long.
 double jaccard_dist(const string& text1, const string& text2);
 
 // Find a substring of a text that has the minimal Jaccard similarity for bag for a fixed text.

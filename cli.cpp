@@ -448,9 +448,17 @@ void processLatintextCmd(string input)
         return;
     }
     string rest = input.substr(input.find(" ") + 1);
-    text[index] = rest;    // The remaining part of the input is stored as is.
+    int restlen = rest.size();
+    string stored = "";
+    // Remove non-a-z characters:
+    for (int i = 0; i < restlen; i++) {
+        if ((int)(rest[i]) >= 'a' && (int)(rest[i]) <= 'z') {
+            stored += rest[i];
+            }
+        }
+    text[index] = stored;  // The remaining part of the input is stored as is.
     textset[index] = true; // activate clipboard
-    info("Stored.");       // Success!
+    info("Stored.");       // Success! TODO: Maybe communicate the result as well.
 }
 
 void processLookupCmd(string input)
