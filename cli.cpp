@@ -697,6 +697,10 @@ void processNearestCmd()
         string best_c_d = best_jaccard_substr(text[1], text[0]);
         vector<string> tokens;
         boost::split(tokens, best_c_d, boost::is_any_of(" "));
+        if (tokens.size() < 2) {
+            error("Both clipboards must have at least 2 characters.");
+            return;
+            }
         info("Nearest Jaccard distance is " + tokens[1] + " with substring " + tokens[0] + ".");
     } else {
         error("Text 1 or 2 is not set.");
