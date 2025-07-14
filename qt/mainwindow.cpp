@@ -299,6 +299,24 @@ void MainWindow::latinText2()
     this->latinTextN(1);
 }
 
+void MainWindow::nearest12()
+{
+    string best_c_d = best_jaccard_substr(text[1], text[0]);
+    vector<string> tokens;
+    boost::split(tokens, best_c_d, boost::is_any_of(" "));
+    if (tokens.size() < 2) {
+        QMessageBox msgBox;
+        msgBox.setText(MainWindow::tr("Both clipboards must contain at least 2 characters."));
+        msgBox.setIcon(QMessageBox::Critical);
+        msgBox.exec();
+        return;
+    }
+    string message = "Nearest Jaccard distance is " + tokens[1] + " with substring " + tokens[0] + ".";
+    passageInfos->append(
+        ("<b>Nearest 12</b><br>" + message).c_str());
+    moveCursorEnd(passageInfos);
+}
+
 void MainWindow::setToolTipHelp(QInputDialog *dialog, std::string command)
 {
     // Retrieve help syntax for the current command:
@@ -1136,6 +1154,13 @@ void MainWindow::createActions()
     latinText2Act->setStatusTip(tr(latinStatusTip.c_str()).arg(2));
     connect(latinText2Act, &QAction::triggered, this, &MainWindow::latinText2);
 
+    string nearest12StatusTip
+        = tr("Find the nearest subtext of clipboard 1 to clipboard 2").toStdString();
+    nearest12Act = new QAction("Nearest 12", this);
+    nearest12Act->setIcon(QIcon::fromTheme("go-down"));
+    nearest12Act->setStatusTip(tr(nearest12StatusTip.c_str()));
+    connect(nearest12Act, &QAction::triggered, this, &MainWindow::nearest12);
+
     string findStatusTip = tr("Search for the text of clipboard %1 in a Bible").toStdString();
     find1Act = new QAction("&Find 1…", this);
     find1Act->setIcon(QIcon::fromTheme("edit-find"));
@@ -1305,6 +1330,7 @@ void MainWindow::createMenus()
     editMenu->addAction(greekText2Act);
     editMenu->addAction(latinText1Act);
     editMenu->addAction(latinText2Act);
+    editMenu->addAction(nearest12Act);
     editMenu->addSeparator();
     editMenu->addAction(find1Act);
     editMenu->addAction(find2Act);

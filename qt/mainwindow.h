@@ -44,6 +44,7 @@ private slots:
     void greekText2();
     void latinText1();
     void latinText2();
+    void nearest12();
     void lookup();
     void tokens();
     void search();
@@ -88,6 +89,7 @@ private:
     QAction *greekText2Act;
     QAction *latinText1Act;
     QAction *latinText2Act;
+    QAction *nearest12Act;
     QAction *lookupAct;
     QAction *aboutAct;
     QAction *aboutSwordAct;

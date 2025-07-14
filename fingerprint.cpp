@@ -103,6 +103,8 @@ double jaccard_dist(const string &text1, const string &text2)
 
 string best_jaccard_substr(const string &fixtext, const string &subtext)
 {
+    if (fixtext.length() < 2 || subtext.length() < 2)
+        return ""; // TODO: this should be an error (exception)
     Fingerprint f1 = getFingerprint(fixtext);
     int maxlen = subtext.length();
     double best = 1.0;
