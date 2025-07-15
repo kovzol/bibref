@@ -19,7 +19,7 @@
 * Build both the cli and Qt versions
 * Run the cli version and recreate the `bibref-addbooks-cache` folder to have it up-to-date
 * Remove `qt/bin/` if it exists
-* Change working directory to `qt/` 
+* Change working directory to `qt/`
 * Run `./deploy-mac` by adding the Qt build folder and the `bibref-addbooks-cache` folder locations as parameters
 * Get `bin/bibref-qt.dmg` and share it on GitHub/Releases later
 
@@ -28,7 +28,9 @@
 * Pull the newest version (via Windows Git)
 * Build the Qt version (via MSYS2/MINGW64)
 * Run the Qt version and recreate the `bibref-addbooks-cache` folder by selecting File > Add books,
-  check if it is indeed in the Qt build folder; this ensures to have the cache up-to-date
+  check if it is indeed in the Qt build folder; this ensures to have the cache up-to-date.
+  If the Qt version does not start (in some exotic cases it may not find some libraries), then
+  copy the `bibref-addbooks-cache` folder from a working platform in the build folder
 * Change working directory to `qt/`.
 * Run the `./create-windows-folder` script and add the build folder as parameter
 * Run the `./create-windows-zip` script
@@ -38,10 +40,10 @@
 
 ## Web
 
-* Pull the newest version (via Windows Git)
+* Pull the newest version
 * Build the native version
-* Run the cli version and recreate the `bibref-addbooks-cache` folder to have it up-to-date
-* Remove the file `bibref.data` from the build folder of the web version
+* Run the cli version (from the main folder) and recreate the `bibref-addbooks-cache` folder to have it up-to-date
+* Remove the file `bibref.data` from the build folder of the web version (if it already exists)
 * Build the web version and install it
 * Copy the folder `html-output` from the web build folder over the public web folder,
   rename `index.html` to `index-midi.html` and put a symlink `index.html` to `index-jt-dt.html`
