@@ -1032,6 +1032,8 @@ void check_cover(double cover) {
   int max_ot_headline = nt_intros_start - 1;
   if (max_ot_headline == -2)
     max_ot_headline = fragments_start - 1;
+  bool ot_fragment_detected[iv_counter]; // iv_counter - fragments_start would be enough for size
+  for (int j=fragments_start + 1; j<iv_counter; j++) ot_fragment_detected[j] = false; // be pessimistic
   for (int i=1; i<=max_ot_headline; i++) {
     add_parseinfo("%d,%d: debug: OT headline %d %s %s interval check:",
       yylineno, yycolumn, i, books_s[i], infos_s[i]);
@@ -1051,10 +1053,12 @@ void check_cover(double cover) {
             add_parseinfo(" [%d,%d]", oistart, oiend);
             if (oimin > oistart) oimin = oistart;
             if (oimax < oiend) oimax = oiend;
+            ot_fragment_detected[j] = true;
           } // do nothing if it belongs to a different part, this case will be checked conversely
         }
       }
     }
+
     if (oimin == INT_MAX) {
       add_parseinfo(" none\n");
       add_parseinfo("%d,%d: error: OT headline %d %s %s has no corresponding fragments E15\n", yylineno, yycolumn,
@@ -1121,6 +1125,15 @@ void check_cover(double cover) {
             yylineno, yycolumn, i);
 
   } // end of for checking OT headlines
+  bool headlines_found = true;
+  for (int j=fragments_start + 1; j<iv_counter; j++) {
+    int ftype = intervals[j][2];
+    if (ftype == OT_PASSAGE && !ot_fragment_detected[j]) {
+       add_parseinfo("%d,%d: error: no OT headline found for interval %d E23\n", yylineno, yycolumn, j);
+       headlines_found = false;
+    }
+  }
+  if (headlines_found) add_parseinfo("%d,%d: info: all OT intervals belong to an OT headline I18\n", yylineno, yycolumn);
 }
 
 void

@@ -21,6 +21,7 @@ std::vector<std::string> descriptions = {
 "E20 The statement contains a non-identifiable character.",
 "E21 The statement contains a string that is not closed with an apostrophe or a quotation mark.",
 "E22 The statement cannot be fully parsed because it is syntactically incorrect.",
+"E23 The Old Testament headlines must cover all fragments from the Old Testament.",
 "W1 You may want to add the length of the interval as a second parameter in the parenthesis to display a clear correspondence of the parts of the text.",
 "W2 The passage in the Old Testament is unique. You may want to mention this fact to highlight this property of the text.",
 "W3 The New Testament headline covers a wider text interval than the union of the fragments. If the content is longer than the fragments, then this is not a problem, but you may want to check if the headline should be shortened.",
@@ -41,5 +42,6 @@ std::vector<std::string> descriptions = {
 "I14 The New Testament headline covers all fragments that are defined later.",
 "I15 The Old Testament headline passage has least one fragment from the specified book.",
 "I16 The Old Testament headline covers all fragments that are defined later.",
-"I17 The Old Testament fragments do not overlap."
+"I17 The Old Testament fragments do not overlap.",
+"I18 The Old Testament headlines cover all fragments from the Old Testament.",
 };
