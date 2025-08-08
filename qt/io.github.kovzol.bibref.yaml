@@ -68,8 +68,8 @@ modules:
       # url: https://github.com/kovzol/bibref
       # tag: 2025-04-19 # does not yet exist
       - type: archive
-        url: https://github.com/kovzol/bibref/archive/b4b009809ac994522434bca14a7952f8a9e94087.zip
-        sha256: f26375569de5dc64464daaa9177d55b1ae3968b20b798f3d4f141e4a95298ace
+        url: https://github.com/kovzol/bibref/archive/c5c4687d18ffb4ddac8d67987e494314d87d97fe.zip
+        sha256: af79434c9386556d0791b6c7fb87ec57d75804eae96e5956567ba03621f50000
     post-install:
       - mv /app/tmp/.sword/* /app/share/sword
 
