@@ -62,6 +62,16 @@
   <content_rating type="oars-1.1" />
 
   <releases>
+    <release version="2025-08-08" date="2025-08-08">
+    <url type="details"></url>
+      <description>
+        <p>Release description</p>
+          <ul>
+            <li>Check if all OT fragments are covered by an OT headline</li>
+            <li>Database fixes (unique OT entries)</li>
+          </ul>
+      </description>
+    </release>
     <release version="2025-07-14" date="2025-07-14">
     <url type="details">https://github.com/kovzol/bibref/commits/cf69ca22abe222cf86fcfcbfebe4996e00fbf611</url>
       <description>
