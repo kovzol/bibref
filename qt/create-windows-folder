@@ -69,6 +69,8 @@ ntldd -R $FOLDER/bibref-qt.exe | grep mingw64 | awk '{print "/mingw64/bin/" $1}'
 
 unzip -d $FOLDER ../sword-lxx-sblgnt-statresgnt-kjv-fallback.zip
 mv $FOLDER/.sword $FOLDER/sword
+echo "[Install]
+DataPath=sword" > $FOLDER/sword.conf
 
 # Create additional Qt related settings...
 
