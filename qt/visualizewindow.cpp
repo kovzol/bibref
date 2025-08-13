@@ -1,4 +1,3 @@
-#ifndef __EMSCRIPTEN__
 #include "visualizewindow.h"
 
 #include <QtSvg>
@@ -28,8 +27,8 @@ VisualizeWindow::VisualizeWindow(QWidget *parent, string input)
     setCentralWidget(tile);
 
     GVC_t *gvc= gvContext();
-#if defined(__MINGW32__) || defined(__APPLE__)
-    /* This seems to be required on Windows and MacOS, otherwise the
+#if defined(__MINGW32__) || defined(__APPLE__) || defined(__EMSCRIPTEN__)
+    /* This seems to be required on Windows, MacOS and the WebAssembly platform, otherwise the
      * executable will not know anything about the dot format,
      * the svg export, and so on.
      * Also, in CMake's library settings these 4 dynamic libraries
@@ -37,14 +36,16 @@ VisualizeWindow::VisualizeWindow(QWidget *parent, string input)
      * do this elegantly.
      */
     extern gvplugin_library_t gvplugin_dot_layout_LTX_library;
-    extern gvplugin_library_t gvplugin_rsvg_LTX_library;
     extern gvplugin_library_t gvplugin_core_LTX_library;
-    extern gvplugin_library_t gvplugin_pango_LTX_library;
     gvAddLibrary(gvc, &gvplugin_dot_layout_LTX_library);
-    gvAddLibrary(gvc, &gvplugin_rsvg_LTX_library);
     gvAddLibrary(gvc, &gvplugin_core_LTX_library);
+#ifndef __EMSCRIPTEN__ // Interestingly, Emscripten does not compile these and they are not required, either:
+    extern gvplugin_library_t gvplugin_rsvg_LTX_library;
+    extern gvplugin_library_t gvplugin_pango_LTX_library;
+    gvAddLibrary(gvc, &gvplugin_rsvg_LTX_library);
     gvAddLibrary(gvc, &gvplugin_pango_LTX_library);
-#endif
+#endif // __EMSCRIPTEN__
+#endif // all platforms that require such definitions
 
     Agraph_t *g = agmemread((char*)input.c_str());
     gvLayout(gvc, g, "dot");
@@ -60,5 +61,3 @@ VisualizeWindow::VisualizeWindow(QWidget *parent, string input)
     tile->load(QByteArray::fromStdString(svg_s));
     tile->renderer()->setAspectRatioMode(Qt::KeepAspectRatio);
 }
-
-#endif // __EMSCRIPTEN__

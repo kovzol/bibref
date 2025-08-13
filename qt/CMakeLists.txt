@@ -13,6 +13,16 @@ pkg_check_modules(sword REQUIRED sword)
 
 if(EMSCRIPTEN)
 find_library(SWORD_LIB NAMES libsword.a)
+
+find_library(gvc_LIB NAMES libgvc.a)
+find_library(gvpr_LIB NAMES libgvpr.a)
+find_library(gvplugin_dot_layout_LIB NAMES libgvplugin_dot_layout.a PATHS "$ENV{EMSDK}/upstream/emscripten/cache/sysroot/lib/graphviz")
+find_library(gvplugin_core_LIB NAMES libgvplugin_core.a PATHS "$ENV{EMSDK}/upstream/emscripten/cache/sysroot/lib/graphviz")
+find_library(cdt_LIB NAMES libcdt.a)
+find_library(cgraph_LIB NAMES libcgraph.a)
+find_library(xdot_LIB NAMES libxdot.a)
+find_library(pathplan_LIB NAMES libpathplan.a)
+
 set(CMAKE_CXX_FLAGS "-sUSE_BOOST_HEADERS -sUSE_ZLIB")
 endif(EMSCRIPTEN)
 
@@ -136,7 +146,10 @@ target_link_libraries(bibref-qt PRIVATE
   Qt6::Gui
   Qt6::Widgets
   Qt6::Concurrent
+  Qt6::SvgWidgets
   ${SWORD_LIB} ${Boost_LIBRARIES}
+  ${gvc_LIB} ${gvpr_LIB} ${cdt_LIB} ${cgraph_LIB} ${xdot_LIB} ${pathplan_LIB}
+  ${gvplugin_dot_layout_LIB} ${gvplugin_core_LIB}
 )
 target_link_options(bibref-qt PUBLIC -sSINGLE_FILE -sALLOW_MEMORY_GROWTH -O3 -fexceptions -sASYNCIFY -O3 -flto)
 target_link_options(bibref-qt PUBLIC "SHELL:

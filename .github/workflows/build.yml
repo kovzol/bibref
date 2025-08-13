@@ -57,6 +57,16 @@ jobs:
         emcmake cmake -DSWORD_BUILD_UTILS=No -DSWORD_BUILD_EXAMPLES=No -DLIBSWORD_LIBRARY_TYPE=Static -DCMAKE_CXX_FLAGS=-sUSE_ZLIB -DCMAKE_POLICY_VERSION_MINIMUM=3.5 ..
         yes | make sword_static
         make install
+    - name: make-graphviz-wasm
+      run: |
+        . emsdk/emsdk_env.sh
+        wget https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/13.1.2/graphviz-13.1.2.tar.gz
+        tar xzf graphviz-13.1.2.tar.gz
+        cd graphviz-13.1.2
+        emconfigure ./configure CFLAGS="-sUSE_ZLIB -pthread" LDFLAGS="-sUSE_ZLIB -pthread" \
+                    --disable-shared --enable-static --with-qt=no --prefix=$EMSDK/upstream/emscripten/cache/sysroot
+        make -i
+        make -i install
     - name: cmake-wasm
       run: |
         build/bibref -a # generate cache (via native version)
@@ -65,6 +75,7 @@ jobs:
         cd build-wasm
         emcmake cmake .. -DBIBREF_ADDBOOKS_CACHE_FOLDER=../bibref-addbooks-cache
         yes | make
+# TODO: Install Qt + WebAssembly and build the Qt/WebAssembly application too.
 # FIXME: The SQL database has been obsoleted, instead of using it,
 # another set of visualization/checking tools should be utilized.
 #    - name: db-full
