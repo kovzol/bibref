@@ -1563,7 +1563,7 @@ void create_dump() {
   if (max_ot_headline == -2)
     max_ot_headline = fragments_start - 1;
   if (no_evidence)
-    max_ot_headline = iv_counter; // maybe put this to an earlier point
+    max_ot_headline = iv_counter - 1; // maybe put this to an earlier point
   for (; iv<=max_ot_headline; iv++) {
     strcat(D, " ");
     strcat_passage(D, books_s[iv], infos_s[iv], verses_s[iv]);
