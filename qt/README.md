@@ -6,7 +6,7 @@ This folder contains files to provide *bibref* with a [Qt](https://qt.io) interf
 ## Translation steps
 
 `lupdate -tr-function-alias QT_TRANSLATE_NOOP=TR mainwindow.cpp statementwindow.cpp editor.cpp -ts hu.ts` creates or updates the skeleton for the Hungarian translation.
-Similarly to this way, it is possible to add translations for other languages.
+Similarly to this way, it is possible to add translations for other languages. Do not forget to update **bibref.qrc** in case.
 
 ## Building on Windows
 

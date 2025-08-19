@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/">
         <file>hu.qm</file>
+        <file>de.qm</file>
         <file>KoineGreekBibref.ttf</file>
         <file>Inconsolata.ttf</file>
         <file>logo-Psalm40-192.png</file>
