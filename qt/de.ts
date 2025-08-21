@@ -288,262 +288,262 @@
     <message>
         <location filename="mainwindow.cpp" line="1073"/>
         <source>Quick tutorial</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurzanleitung</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1098"/>
         <source>Show available Bibles</source>
-        <translation type="unfinished"></translation>
+        <translation>Verfügbare Bibeln anzeigen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1100"/>
         <source>Available Bible editions:</source>
-        <translation type="unfinished"></translation>
+        <translation>Verfügbare Bibelausgaben:</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1125"/>
         <source>Load and index the default Bible editions</source>
-        <translation type="unfinished"></translation>
+        <translation>Standard-Bibelausgaben laden und indizieren</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1131"/>
         <source>Exit the application</source>
-        <translation type="unfinished"></translation>
+        <translation>Anwendung beenden</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1135"/>
         <source>Define a Greek text and put its Latin transcription in clipboard %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Griechischen Text definieren und dessen lateinische Transkription in die Zwischenablage %1 einfügen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1146"/>
         <source>Put a Latin (a-z) transcription in clipboard %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Lateinische (a-z) Transkription in die Zwischenablage %1 einfügen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1158"/>
         <source>Find the nearest subtext of clipboard 1 to clipboard 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Nächstgelegenen Untertext von Zwischenablage 1 zu Zwischenablage 2 suchen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1164"/>
         <source>Search for the text of clipboard %1 in a Bible</source>
-        <translation type="unfinished"></translation>
+        <translation>Nach dem Text der Zwischenablage %1 in einer Bibel suchen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1183"/>
         <source>Search for minimal unique passages in clipboard 1 in a Bible</source>
-        <translation type="unfinished"></translation>
+        <translation>Nach minimalen eindeutigen Passagen in der Zwischenablage 1 in einer Bibel suchen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1192"/>
         <source>Extend a passage to the longest possible quotation from another Bible</source>
-        <translation type="unfinished"></translation>
+        <translation>Eine Passage auf das längste mögliche Zitat aus einer anderen Bibel erweitern</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1201"/>
         <source>Search for references in a Bible on the passage in another Bible</source>
-        <translation type="unfinished"></translation>
+        <translation>In einer Bibel nach Verweisen auf die Passage in einer anderen Bibel suchen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1210"/>
         <source>Open a text editor to edit a statement</source>
-        <translation type="unfinished"></translation>
+        <translation>Einen Texteditor öffnen, um eine Aussage zu bearbeiten</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1218"/>
         <source>Search for a verse in a book in the given Bible</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche nach einem Vers in einem Buch in der angegebenen Bibel</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1222"/>
         <source>Search for a passage in a book in the given Bible and put it in clipboard %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche nach einer Passage in einem Buch in der angegebenen Bibel und füge sie in die Zwischenablage %1 ein</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1240"/>
         <source>Search for a tokenized verse in a book in the given Bible</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche nach einem tokenisierten Vers in einem Buch in der angegebenen Bibel</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1248"/>
         <source>Search for a set of tokens on a maximal length in a Bible</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche nach einer Menge von Tokens mit maximaler Länge in einer Bibel</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1254"/>
         <source>Pr&amp;eferences…</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Einstellungen…</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1256"/>
         <source>Set preferences in the application</source>
-        <translation type="unfinished"></translation>
+        <translation>Einstellungen in der Anwendung festlegen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1261"/>
         <source>Show the a-z transcription of a positioned text in a given book</source>
-        <translation type="unfinished"></translation>
+        <translation>Die a-z-Transkription eines positionierten Textes in einem bestimmten Buch anzeigen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1268"/>
         <source>Put the a-z transcription of a positioned text in a given book in clipboard %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Die a-z-Transkription eines positionierten Textes in einem bestimmten Buch in die Zwischenablage %1 einfügen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1284"/>
         <source>About &amp;bibref…</source>
-        <translation type="unfinished"></translation>
+        <translation>Über &amp;bibref…</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1286"/>
         <source>Show a short description of the program</source>
-        <translation type="unfinished"></translation>
+        <translation>Eine kurze Beschreibung des Programms anzeigen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1289"/>
         <source>About &amp;SWORD…</source>
-        <translation type="unfinished"></translation>
+        <translation>Über &amp;SWORD…</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1290"/>
         <source>Show information on the SWORD library</source>
-        <translation type="unfinished"></translation>
+        <translation>Informationen zur SWORD-Bibliothek anzeigen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1293"/>
         <source>About &amp;Qt…</source>
-        <translation type="unfinished"></translation>
+        <translation>Über &amp;Qt…</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1294"/>
         <source>Show the Qt library&apos;s About box</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Infofenster der Qt-Bibliothek anzeigen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1298"/>
         <source>Quick tutorial…</source>
-        <translation type="unfinished"></translation>
+        <translation>Kurzanleitung…</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1300"/>
         <source>Show a short introduction to the program</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige eine kurze Einführung zum Programm</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1303"/>
         <source>Wiki…</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiki…</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1305"/>
         <source>Open documentation of the program in a web browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Öffne die Dokumentation des Programms in einem Webbrowser</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1308"/>
         <source>Show available Bibles…</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige verfügbare Bibeln…</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1310"/>
         <source>Show available Bibles via SWORD</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeige verfügbare Bibeln über SWORD</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1313"/>
         <source>Start bibref in a web &amp;terminal</source>
-        <translation type="unfinished"></translation>
+        <translation>Starte bibref in einem Web-&amp;Terminal</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1315"/>
         <source>Start a web version of bibref in a web based terminal</source>
-        <translation type="unfinished"></translation>
+        <translation>Starte eine Webversion von bibref in einem webbasierten Terminal</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1321"/>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Datei</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1328"/>
         <source>&amp;Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Bearbeiten</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1341"/>
         <source>&amp;Passage</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Passage</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1349"/>
         <source>&amp;Quotation</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zitat</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1356"/>
         <source>&amp;Raw</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Rohdaten</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1362"/>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Hilfe</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1393"/>
         <source>Font size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Schriftgröße:</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1395"/>
         <source>Set general font size in the application (default: %1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Allgemeine Schriftgröße in der Anwendung festlegen (Standard: %1)</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1410"/>
         <source>Debug mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Debug-Modus:</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1412"/>
         <source>Show debug messages in the Analyze window</source>
-        <translation type="unfinished"></translation>
+        <translation>Debug-Meldungen im Analysefenster anzeigen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1424"/>
         <source>Use Koine Greek font:</source>
-        <translation type="unfinished"></translation>
+        <translation>Koine-Griechisch-Schriftart verwenden:</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1426"/>
         <source>Show Greek text with Koine Greek font whenever possible</source>
-        <translation type="unfinished"></translation>
+        <translation>Griechischen Text nach Möglichkeit mit Koine-Griechisch-Schriftart anzeigen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1438"/>
         <source>Tooltips in Greek:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tooltips auf Griechisch:</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1440"/>
         <source>Show tooltips in Greek in the visualized outputs</source>
-        <translation type="unfinished"></translation>
+        <translation>Tooltips in den visualisierten Ausgaben auf Griechisch anzeigen</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1452"/>
         <source>Maximal shown size of clipboard:</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximal angezeigte Größe der Zwischenablage:</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1454"/>
         <source>Set maximal shown size of the clipboard (default: %1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximal angezeigte Größe der Zwischenablage festlegen (Standard: %1)</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1470"/>
         <source>Preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Einstellungen</translation>
     </message>
 </context>
 <context>
@@ -551,143 +551,143 @@
     <message>
         <location filename="statementwindow.cpp" line="31"/>
         <source>Statement Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Aussageneditor</translation>
     </message>
     <message>
         <location filename="statementwindow.cpp" line="40"/>
         <source>Line: %1, Col: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeile: %1, Spalte: %2</translation>
     </message>
     <message>
         <location filename="statementwindow.cpp" line="68"/>
         <source>Confirmation</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestätigung</translation>
     </message>
     <message>
         <location filename="statementwindow.cpp" line="68"/>
         <source>Are you sure you want to clear the text in the editor?</source>
-        <translation type="unfinished"></translation>
+        <translation>Möchten Sie den Text im Editor wirklich löschen?</translation>
     </message>
     <message>
         <location filename="statementwindow.cpp" line="106"/>
         <source>Open File</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei öffnen</translation>
     </message>
     <message>
         <location filename="statementwindow.cpp" line="106"/>
         <location filename="statementwindow.cpp" line="156"/>
         <source>bibref statement files (*.brst)</source>
-        <translation type="unfinished"></translation>
+        <translation>bibref-Aussagendateien (*.brst)</translation>
     </message>
     <message>
         <location filename="statementwindow.cpp" line="155"/>
         <source>Save File</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei speichern</translation>
     </message>
     <message>
         <location filename="statementwindow.cpp" line="203"/>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Datei</translation>
     </message>
     <message>
         <location filename="statementwindow.cpp" line="206"/>
         <source>&amp;New</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Neu</translation>
     </message>
     <message>
         <location filename="statementwindow.cpp" line="208"/>
         <source>&amp;Open…</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Öffnen…</translation>
     </message>
     <message>
         <location filename="statementwindow.cpp" line="210"/>
         <source>&amp;Save As…</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Speichern unter…</translation>
     </message>
     <message>
         <location filename="statementwindow.cpp" line="255"/>
         <source>Parse</source>
-        <translation type="unfinished"></translation>
+        <translation>Parsen</translation>
     </message>
     <message>
         <location filename="statementwindow.cpp" line="256"/>
         <source>%1 successful tests, %2 warnings, %3 errors.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 erfolgreiche Tests, %2 Warnungen, %3 Fehler.</translation>
     </message>
     <message>
         <location filename="statementwindow.cpp" line="259"/>
         <source>Back to &amp;Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Zurück zum &amp;Editor</translation>
     </message>
     <message>
         <location filename="statementwindow.cpp" line="269"/>
         <source>&amp;Visualize</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Visualisieren</translation>
     </message>
     <message>
         <location filename="statementwindow.cpp" line="270"/>
         <source>E&amp;xport graph</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Diagramm exportieren</translation>
     </message>
     <message>
         <location filename="statementwindow.cpp" line="303"/>
         <source>Analyze</source>
-        <translation type="unfinished"></translation>
+        <translation>Analysieren</translation>
     </message>
     <message>
         <location filename="statementwindow.cpp" line="420"/>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <location filename="statementwindow.cpp" line="420"/>
         <source>Row</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeile</translation>
     </message>
     <message>
         <location filename="statementwindow.cpp" line="420"/>
         <source>Col</source>
-        <translation type="unfinished"></translation>
+        <translation>Spalte</translation>
     </message>
     <message>
         <location filename="statementwindow.cpp" line="420"/>
         <source>Source</source>
-        <translation type="unfinished"></translation>
+        <translation>Quelle</translation>
     </message>
     <message>
         <location filename="statementwindow.cpp" line="420"/>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Meldung</translation>
     </message>
     <message>
         <location filename="statementwindow.cpp" line="448"/>
         <source>Visualize</source>
-        <translation type="unfinished"></translation>
+        <translation>Visualisieren</translation>
     </message>
     <message>
         <location filename="statementwindow.cpp" line="453"/>
         <source>&amp;Prove</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Beweisen</translation>
     </message>
     <message>
         <location filename="statementwindow.cpp" line="456"/>
         <source>&amp;Parse</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Parsen</translation>
     </message>
     <message>
         <location filename="statementwindow.cpp" line="458"/>
         <source>&amp;Analyze</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Analysieren</translation>
     </message>
     <message>
         <location filename="statementwindow.cpp" line="463"/>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Hilfe</translation>
     </message>
     <message>
         <location filename="statementwindow.cpp" line="466"/>
         <source>Wiki…</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiki…</translation>
     </message>
 </context>
 </TS>
