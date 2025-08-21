@@ -19,7 +19,7 @@
     <message>
         <location filename="mainwindow.cpp" line="53"/>
         <source>Contents of the clipboards in Greek (and in a-z notation)</source>
-        <translation type="unfinished"></translation>
+        <translation>Inhalte der Zwischenablagen auf Griechisch (und in a-z-Notation)</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="57"/>
@@ -131,7 +131,7 @@
     <message>
         <location filename="mainwindow.cpp" line="452"/>
         <source>%1 tokens given, search for an extension of max. %2 tokens.</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Token angegeben, Suche nach einer Erweiterung von maximal %2 Token.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="457"/>
@@ -188,17 +188,17 @@
     <message>
         <location filename="mainwindow.cpp" line="677"/>
         <source>Minimal unique subtexts of %1 in %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Minimale eindeutige Untertexte von %1 in %2</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="719"/>
         <source>Searching for %1 in %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche nach %1 in %2</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="843"/>
         <source>Getting references from full books is not yet implemented, sorry.</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Abrufen von Referenzen aus vollständigen Büchern ist noch nicht implementiert, entschuldigen Sie bitte.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="902"/>
@@ -208,17 +208,17 @@
     <message>
         <location filename="mainwindow.cpp" line="903"/>
         <source>&lt;a href=&quot;https://github.com/kovzol/bibref&quot;&gt;bibref&lt;/a&gt; is a tool that helps discovering internal references in the Bible.&lt;br&gt;It aims at finding quotations of the &lt;a href=&quot;https://en.wikipedia.org/wiki/Septuagint&quot;&gt;Septuagint&lt;/a&gt; in the &lt;a href=&quot;https://en.wikipedia.org/wiki/New_Testament&quot;&gt;Greek New Testament&lt;/a&gt; in a mechanical way.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;https://github.com/kovzol/bibref&quot;&gt;bibref&lt;/a&gt; ist ein Werkzeug, das dabei hilft, interne Bezüge in der Bibel zu entdecken.&lt;br&gt;Es hat zum Ziel, Zitate der &lt;a href=&quot;https://de.wikipedia.org/wiki/Septuaginta&quot;&gt;Septuaginta&lt;/a&gt; im &lt;a href=&quot;https://de.wikipedia.org/wiki/Neues_Testament&quot;&gt;griechischen Neuen Testament&lt;/a&gt; auf mechanische Weise zu finden.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="934"/>
         <source>&lt;a href=&quot;https://www.crosswire.org/sword/index.jsp&quot;&gt;The SWORD Project&lt;/a&gt; is an effort to create an ever-expanding software package for research and study of God and His Word. The SWORD Project framework allows easy use and study of Bible texts, commentaries, lexicons, dictionaries, and other books. Many frontends are built using this framework. An installed set of books may be shared among all frontends using the framework.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;a href=&quot;https://www.crosswire.org/sword/index.jsp&quot;&gt;Das SWORD-Projekt&lt;/a&gt; ist ein Bemühen, ein ständig wachsendes Softwarepaket für die Erforschung und das Studium von Gottes Wort zu schaffen. Das SWORD-Framework ermöglicht eine einfache Nutzung und das Studium von Bibeltexten, Kommentaren, Lexika, Wörterbüchern und anderen Büchern. Viele Oberflächen basieren auf diesem Framework. Ein installiertes Set von Büchern kann von allen Oberflächen, die dieses Framework verwenden, gemeinsam genutzt werden.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="941"/>
         <source>This program uses version %1 of the SWORD library.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieses Programm verwendet Version %1 der SWORD-Bibliothek.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="947"/>
@@ -233,22 +233,22 @@
     <message>
         <location filename="mainwindow.cpp" line="969"/>
         <source>This Bible study tool offers work on texts that are close to the oldest manuscripts. Since there are no punctuation (spaces, commas, periods) in the old texts, and there is no verse numbering, we consider each book of a Bible edition as a continuous raw text of Greek characters from α to ω. (To simplify working with texts, Greek characters are transcribed to latin characters a-z.)</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieses Bibelstudienwerkzeug arbeitet mit Texten, die den ältesten Handschriften sehr nahekommen. Da die alten Texte keine Interpunktion (Leerzeichen, Kommas, Punkte) enthalten und keine Versnummerierung besitzen, wird jedes Buch einer Bibelausgabe als durchgehender Rohtext griechischer Zeichen von α bis ω betrachtet. (Um die Arbeit mit den Texten zu vereinfachen, werden die griechischen Buchstaben in die lateinischen Zeichen a–z transkribiert.)</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="977"/>
         <source>A Bible edition is defined as an old compilation of books that are considered canonical. Definitely, we work with a set of Old Testament books, translated into Greek and presented as the electronic version of the Septuagint, identified with the name &lt;a href=&quot;https://www.crosswire.org/sword/modules/ModInfo.jsp?modName=LXX&quot;&gt;LXX&lt;/a&gt;. Also, a set of Greek New Testament books are present, identified with the name &lt;a href=&quot;https://www.crosswire.org/sword/modules/ModInfo.jsp?modName=StatResGNT&quot;&gt;StatResGNT&lt;/a&gt;.</source>
-        <translation type="unfinished"></translation>
+        <translation>Eine Bibelausgabe ist eine alte Zusammenstellung von Büchern, die als kanonisch gelten. Konkret arbeiten wir mit einer Reihe von Büchern des Alten Testaments, die ins Griechische übersetzt wurden und als elektronische Version der Septuaginta vorliegen, mit dem Namen &lt;a href=&quot;https://www.crosswire.org/sword/modules/ModInfo.jsp?modName=LXX&quot;&gt;LXX&lt;/a&gt;. Ebenso sind eine Reihe von Büchern des griechischen Neuen Testaments enthalten, die unter dem Namen &lt;a href=&quot;https://www.crosswire.org/sword/modules/ModInfo.jsp?modName=StatResGNT&quot;&gt;StatResGNT&lt;/a&gt; verfügbar sind.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="988"/>
         <source>Research questions like &lt;i&gt;Is an Old Testament passage quoted properly?&lt;/i&gt; can be studied with this program. Non-punctuated texts can be compared without loading Bible databases. Also, if the default databases are loaded (via File&amp;gt;Add books), Greek Bible texts can also be compared directly.</source>
-        <translation type="unfinished"></translation>
+        <translation>Forschungsfragen wie &lt;i&gt;Wird eine Passage des Alten Testaments korrekt zitiert?&lt;/i&gt; können mit diesem Programm untersucht werden. Unpunktierte Texte lassen sich vergleichen, ohne Bibeldatenbanken zu laden. Wenn die Standarddatenbanken geladen sind (über Datei → Bücher hinzufügen), können griechische Bibeltexte auch direkt verglichen werden.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="994"/>
         <source>The program is command-driven. Its graphical user interface follows the conventions of the terminal based application. Therefore, the commands provided by the menus are literally the same as in the terminal based application and not translated into other languages, either.</source>
-        <translation type="unfinished"></translation>
+        <translation>Das Programm ist befehlsorientiert. Seine grafische Benutzeroberfläche folgt den Konventionen der terminalbasierten Anwendung. Daher sind die im Menü bereitgestellten Befehle buchstäblich dieselben wie in der terminalbasierten Anwendung und werden auch nicht in andere Sprachen übersetzt.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="998"/>
@@ -258,32 +258,32 @@
     <message>
         <location filename="mainwindow.cpp" line="999"/>
         <source>In Romans 2:21 Paul seems to quote the Law. In the program in menu Passage&amp;gt;Lookup… the user types &lt;b&gt;KJV Romans 2:21&lt;/b&gt; to check the English version of the text, and similarly, &lt;b&gt;StatResGNT Romans 2:21&lt;/b&gt; to get the Greek version. (Importantly, the modules KJV and StatResGNT need to be installed by the system administrator in advance. See Help&amp;gt;Show available Bibles… for your options in simple lookups.) By doing the same for Romans 2:22, and for LXX Exodus 20:13 and 20:14, the user decides to compare the Greek texts &lt;b&gt;ου μοιχευσεις ου κλεψεις&lt;/b&gt; and &lt;b&gt;κλεπτεις ο λεγων μη μοιχευειν μοιχευεις&lt;/b&gt;. These should be copied and pasted in Edit&amp;gt;Text 1… and Edit&amp;gt;Text 2… After then, the program informs the user that the two texts have a Jaccard distance near 0.63 (which is a substantial distance).</source>
-        <translation type="unfinished"></translation>
+        <translation>In Römer 2:21 scheint Paulus das Gesetz zu zitieren. Im Programm gibt der Benutzer im Menü Passage&amp;gt;Lookup… &lt;b&gt;KJV Romans 2:21&lt;/b&gt; ein, um die englische Version des Textes zu prüfen, und entsprechend &lt;b&gt;StatResGNT Romans 2:21&lt;/b&gt;, um die griechische Version zu erhalten. (Wichtig: Die Module KJV und StatResGNT müssen zuvor vom Systemadministrator installiert werden. Siehe Hilfe&amp;gt;Verfügbare Bibeln anzeigen… für Ihre Möglichkeiten bei einfachen Abfragen.) Durch denselben Vorgang für Römer 2:22 sowie für LXX Exodus 20:13 und 20:14 beschließt der Benutzer, die griechischen Texte &lt;b&gt;ου μοιχευσεις ου κλεψεις&lt;/b&gt; und &lt;b&gt;κλεπτεις ο λεγων μη μοιχευειν μοιχευεις&lt;/b&gt; zu vergleichen. Diese sollten in Bearbeiten&amp;gt;Text 1… und Bearbeiten&amp;gt;Text 2… kopiert und eingefügt werden. Anschließend informiert das Programm den Benutzer, dass die beiden Texte eine Jaccard-Distanz von etwa 0,63 haben (was eine beträchtliche Distanz ist).</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1013"/>
         <source>The words κλεψεις and κλεπτεις are similar. In the a-z transcription they are shown as &lt;b&gt;kleceis&lt;/b&gt; and &lt;b&gt;klepteis&lt;/b&gt;. The user may want to enter these words with their a-z transcriptions in Edit&amp;gt;Latin Text 1… and Edit&amp;gt;Latin Text 2… Their Jaccard distance is near 0.42 (which is a bit closer).</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Wörter κλεψεις und κλεπτεις sind ähnlich. In der a-z-Transkription erscheinen sie als &lt;b&gt;kleceis&lt;/b&gt; und &lt;b&gt;klepteis&lt;/b&gt;. Der Benutzer kann diese Wörter mitsamt ihren a-z-Transkriptionen in Bearbeiten&amp;gt;Latin Text 1… und Bearbeiten&amp;gt;Latin Text 2… eingeben. Ihre Jaccard-Distanz beträgt etwa 0,42 (was etwas näher ist).</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1019"/>
         <source>Now, the user loads the indexed Bibles via File&amp;gt;Add books. Several features of the program can be used from now on. For example, the user can put the a-z transcription of a part of Psalms 39:14-18 and 69:1-6 in the two clipboards. (Note that these texts are numbered as 40:14-18 and 70:1-6 in some Bible editions.) This is achievable via Passage&amp;gt;Lookup 1… and Passage&amp;gt;Lookup 2… by typing &lt;b&gt;LXX Psalms 39:14+23 39:18&lt;/b&gt; and &lt;b&gt;LXX Psalms 69:1+37 69:6&lt;/b&gt;, respectively. This notation allows to cut the first 23 or 37 letters of the passages. (Analogously, appending a number with a minus sign to the end of the passage definition, it is possible to cut some of the last letters of the passages.) The Jaccard distance is near 0.19 (which means a close relationship).</source>
-        <translation type="unfinished"></translation>
+        <translation>Nun lädt der Benutzer die indizierten Bibeln über Datei&amp;gt;Add books hinzufügen. Ab jetzt können mehrere Funktionen des Programms genutzt werden. Zum Beispiel kann der Benutzer die a-z-Transkription eines Teils von Psalm 39:14–18 und 69:1–6 in die beiden Zwischenablagen legen. (Beachten Sie, dass diese Texte in einigen Bibelausgaben als 40:14–18 und 70:1–6 nummeriert sind.) Dies ist über Passage&amp;gt;Lookup 1… und Passage&amp;gt;Lookup 2… möglich, indem man &lt;b&gt;LXX Psalms 39:14+23 39:18&lt;/b&gt; bzw. &lt;b&gt;LXX Psalms 69:1+37 69:6&lt;/b&gt; eingibt. Diese Notation ermöglicht es, die ersten 23 bzw. 37 Buchstaben der Stellen abzuschneiden. (Analog dazu kann durch Anhängen einer Zahl mit Minuszeichen am Ende der Passage einige der letzten Buchstaben abgeschnitten werden.) Die Jaccard-Distanz beträgt etwa 0,19 (was eine enge Beziehung bedeutet).</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1033"/>
         <source>The user wants to check if Exodus 20:13 is repeated in the Old Testament. By putting this passage in Passage&amp;gt;Lookup 1… by typing &lt;b&gt;LXX Exodus 20:13&lt;/b&gt; it is possible to start a search for an exact match via Edit&amp;gt;Search 1… By selecting &lt;b&gt;LXX&lt;/b&gt;, the program finds another match in Deuteronomy 5:17. Book position 19880-19891 means that the second match can be found in Raw&amp;gt;Raw… by entering &lt;b&gt;LXX Deuteronomy 19880 12&lt;/b&gt; (here 12 is the length), or stored in clipboard 2 with the same input in Raw&amp;gt;Raw 2… Here, the Jaccard distance of the texts in the clipboards is 0 (because they are identical).</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Benutzer möchte prüfen, ob Exodus 20:13 im Alten Testament wiederholt wird. Durch Eingabe dieser Stelle in Passage&amp;gt;Lookup 1… mit &lt;b&gt;LXX Exodus 20:13&lt;/b&gt; kann eine Suche nach einem exakten Treffer über Bearbeiten&amp;gt;Suche 1… gestartet werden. Bei Auswahl von &lt;b&gt;LXX&lt;/b&gt; findet das Programm einen weiteren Treffer in Deuteronomium 5:17. Die Buchposition 19880–19891 bedeutet, dass der zweite Treffer in Roh&amp;gt;Raw… gefunden werden kann, indem man &lt;b&gt;LXX Deuteronomy 19880 12&lt;/b&gt; eingibt (hier ist 12 die Länge), oder mit demselben Input in Roh&amp;gt;Raw 2… in Zwischenablage 2 gespeichert wird. Hier beträgt die Jaccard-Distanz der Texte in den Zwischenablagen 0 (weil sie identisch sind).</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1044"/>
         <source>The user thinks that parts of Psalm 116 are quoted somewhere in the New Testament. The command Quotation&amp;gt;Get refs… with parameters &lt;b&gt;StatResGNT LXX Psalms 116&lt;/b&gt; starts a search for all possible matches where the Old Testament passage can be a unique text that is quoted in the New Testament. Here, Romans 15:11 seems to be a plausible result.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Benutzer vermutet, dass Teile von Psalm 116 irgendwo im Neuen Testament zitiert werden. Der Befehl Zitat&amp;gt;Get refs… mit den Parametern &lt;b&gt;StatResGNT LXX Psalms 116&lt;/b&gt; startet eine Suche nach allen möglichen Übereinstimmungen, bei denen die alttestamentliche Stelle ein einzigartiger Text ist, der im Neuen Testament zitiert wird. Hier scheint Römer 15:11 ein plausibles Ergebnis zu sein.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1052"/>
         <source>The user would like to identify the quotation mentioned by Paul in I Corinthians 1:31. This is a difficult task, so a tokenized transcription of the verse is obtained via the command Passage&amp;gt;Tokens… with parameters &lt;b&gt;StatResGNT I_Corinthians 1:31&lt;/b&gt; (note the underscore) and the tokens 2443 2531 1125 3588 2744 1722 2962 2744 are shown. (Currently, these are &lt;a href=&quot;https://en.wikipedia.org/wiki/Strong%27s_Concordance#Strong&apos;s_numbers&quot;&gt;Strong&apos;s numbers&lt;/a&gt;.) After checking these numbers, 2744, 1722 and 2962 seem relevant. A search via Edit&amp;gt;Search… with parameters &lt;b&gt;LXX 2744 1722 2962 6&lt;/b&gt; shows that on a length of 6 tokens there is only one match in the Old Testament, namely, in Jeremiah 9:22, and, among the deuterocanonical books, in Sirach 39:8. Another search with parameters &lt;b&gt;StatResGNT 2744 1722 2962 3&lt;/b&gt; informs the user on a second match in the New Testament, namely, in II Corinthians 10:17.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Benutzer möchte das von Paulus in 1. Korinther 1:31 erwähnte Zitat identifizieren. Dies ist eine schwierige Aufgabe, daher wird eine tokenisierte Transkription des Verses über den Befehl Passage&amp;gt;Tokens… mit den Parametern &lt;b&gt;StatResGNT I_Corinthians 1:31&lt;/b&gt; (beachten Sie den Unterstrich) erzeugt, und die Token 2443 2531 1125 3588 2744 1722 2962 2744 werden angezeigt. (Derzeit handelt es sich um &lt;a href=&quot;https://en.wikipedia.org/wiki/Strong%27s_Concordance#Strong&apos;s_numbers&gt;Strong-Nummern&lt;/a&gt;.) Nach Prüfung dieser Nummern scheinen 2744, 1722 und 2962 relevant zu sein. Eine Suche über Bearbeiten&gt;Suche… mit den Parametern &lt;b&gt;LXX 2744 1722 2962 6&lt;/b&gt; zeigt, dass es mit einer Länge von 6 Token nur einen Treffer im Alten Testament gibt, nämlich in Jeremia 9:22 und unter den deuterokanonischen Büchern in Sirach 39:8. Eine weitere Suche mit den Parametern &lt;b&gt;StatResGNT 2744 1722 2962 3&lt;/b&gt; informiert den Benutzer über einen zweiten Treffer im Neuen Testament, nämlich in 2. Korinther 10:17.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1073"/>
