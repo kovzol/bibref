@@ -20,5 +20,10 @@ Name: "{group}\Uninstall bibref"; Filename: "{uninstallexe}"; IconFilename: "{ap
 Name: "{autoprograms}\bibref-qt"; Filename: "{app}\bibref-qt.exe"; IconFilename: "{app}\bibref.ico"
 Name: "{autodesktop}\bibref-qt"; Filename: "{app}\bibref-qt.exe"; IconFilename: "{app}\bibref.ico"
 
+[Languages]
+Name: "en"; MessagesFile: "compiler:Default.isl"
+Name: "de"; MessagesFile: "compiler:Languages\German.isl"
+Name: "hu"; MessagesFile: "compiler:Languages\Hungarian.isl"
+
 [Run]
 Filename: {app}\bibref-qt.exe; Description: Start bibref now; Flags: postinstall nowait skipifsilent
