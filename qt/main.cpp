@@ -87,35 +87,8 @@ int main(int argc, char *argv[])
         app.setFont(f);
     }
 
-    QString language = QLocale::system().name();
-    // language = "hu_HU";
-    QTranslator qtTranslator;
-    if (qtTranslator.load("qt_" + language,
-                          QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {
-        app.installTranslator(&qtTranslator);
-    }
-    QTranslator qtBaseTranslator;
-    if (qtBaseTranslator.load("qtbase_" + language,
-                              QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {
-        app.installTranslator(&qtBaseTranslator);
-    }
-    QTranslator bibrefTranslator;
-    QString qmDir;
-#ifdef __EMSCRIPTEN__
-    qmDir = ":/";
-#else
-    if (std::filesystem::exists(PROJECT_SOURCE_DIR "/hu.qm"))
-        qmDir = PROJECT_SOURCE_DIR; // This must be set externally, currently done via cmake
-    else if (std::filesystem::exists(INSTALL_PREFIX "/" SHARE_FOLDER "/hu.qm"))
-        qmDir = INSTALL_PREFIX // This must be set externally, currently done via cmake
-            "/" SHARE_FOLDER;
-    else
-        qmDir = SHARE_FOLDER; // for relative path (when extracted from a .zip)
-#endif
-    if (bibrefTranslator.load(language, qmDir)) {
-        app.installTranslator(&bibrefTranslator);
-    }
-    // FIXME: the last item should be inserted in a simpler and more flexible way.
+    QString lang = settings.value("Application/language", "").toString();
+    setLanguage(lang);
 
     MainWindow window;
     window.setWindowIcon(QIcon(":/" LOGO_FILE));
@@ -147,4 +120,50 @@ int main(int argc, char *argv[])
     window.showMaximized();
 #endif
     return app.exec();
+}
+
+QTranslator qtTranslator;
+QTranslator qtBaseTranslator;
+QTranslator bibrefTranslator;
+
+void setLanguage(QString language)
+// pass language code like "hu" or "en" to override system settings
+{
+
+    // Remove existing translators:
+    qApp->removeTranslator(&qtTranslator);
+    qApp->removeTranslator(&qtBaseTranslator);
+    qApp->removeTranslator(&bibrefTranslator);
+
+    if (language == "") {
+        language = QLocale::system().name();
+    }
+
+    if (qtTranslator.load("qt_" + language,
+                          QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {
+        qApp->installTranslator(&qtTranslator);
+    }
+
+    if (qtBaseTranslator.load("qtbase_" + language,
+                              QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {
+        qApp->installTranslator(&qtBaseTranslator);
+    }
+
+    QString qmDir;
+#ifdef __EMSCRIPTEN__
+    qmDir = ":/";
+#else
+    if (std::filesystem::exists(PROJECT_SOURCE_DIR "/hu.qm"))
+        qmDir = PROJECT_SOURCE_DIR; // This must be set externally, currently done via cmake
+    else if (std::filesystem::exists(INSTALL_PREFIX "/" SHARE_FOLDER "/hu.qm"))
+        qmDir = INSTALL_PREFIX // This must be set externally, currently done via cmake
+            "/" SHARE_FOLDER;
+    else
+        qmDir = SHARE_FOLDER; // for relative path (when extracted from a .zip)
+#endif
+    if (bibrefTranslator.load(language, qmDir)) {
+        qApp->installTranslator(&bibrefTranslator);
+    }
+    // FIXME: the last item should be inserted in a simpler and more flexible way.
+
 }

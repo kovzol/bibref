@@ -1376,6 +1376,7 @@ void MainWindow::preferences()
     setWindowLogo(widget);
 
     QSettings settings;
+    QString lang = settings.value("Application/language", "").toString();
     int size = settings.value("Application/fontsize", defaultFontSize).toInt();
     bool debug = settings.value("Application/debug", defaultDebug).toBool();
     bool useKoineGreekFont = settings.value("Application/useKoineGreekFont",
@@ -1389,6 +1390,30 @@ void MainWindow::preferences()
 
     QHBoxLayout *hlayout = new QHBoxLayout;
 
+    /* Language: */
+    QLabel *languageLabel = new QLabel(tr("Application language:"));
+    string languageTip
+        = tr("Set the language used in the application")
+              .toStdString();
+    languageLabel->setToolTip(languageTip.c_str());
+    QComboBox *languageCombo = new QComboBox(this);
+    languageCombo->addItem(tr("System default")); // 0
+    languageCombo->addItem("English"); // 1
+    languageCombo->addItem("German (deutsch)"); // 2
+    languageCombo->addItem("Hungarian (magyar)"); // 3
+    if (lang == "")
+        languageCombo->setCurrentIndex(0);
+    if (lang == "en")
+        languageCombo->setCurrentIndex(1);
+    if (lang == "de")
+        languageCombo->setCurrentIndex(2);
+    if (lang == "hu")
+        languageCombo->setCurrentIndex(3);
+    hlayout->addWidget(languageLabel);
+    hlayout->addWidget(languageCombo);
+    hlayout->addStretch(1);
+    layout->addLayout(hlayout, 1);
+
     /* Font size: */
     QLabel *fontSizeLabel = new QLabel(tr("Font size:"));
     string fontSizeTip
@@ -1399,6 +1424,7 @@ void MainWindow::preferences()
     fontSizeEdit->setText(QString::number(size));
     fontSizeEdit->setMaxLength(3);
     // fontSizeEdit->setInputMask("000");
+    hlayout = new QHBoxLayout;
     hlayout->addWidget(fontSizeLabel);
     hlayout->addWidget(fontSizeEdit);
     hlayout->addStretch(1);
@@ -1473,6 +1499,25 @@ void MainWindow::preferences()
 
     connect(buttonBox, &QDialogButtonBox::accepted, [=]() {
         QSettings settings;
+        int langIndex = languageCombo->currentIndex();
+        QString newlang;
+        switch (langIndex) {
+        case 0: newlang = "";
+            break;
+        case 1: newlang = "en";
+            break;
+        case 2: newlang = "de";
+            break;
+        case 3: newlang = "hu";
+            break;
+        }
+        setLanguage(newlang);
+        settings.setValue("Application/language", lang);
+        if (lang != newlang) {
+            QMessageBox::information(this, tr("Information"),
+                                     tr("Please restart the application to change the language in the whole program."));
+        }
+
         int size = fontSizeEdit->text().toInt();
         if (size > 0) { // do not save any nonsense values
             settings.setValue("Application/fontsize", size);
@@ -1498,5 +1543,4 @@ void MainWindow::preferences()
     layout->addWidget(buttonBox);
 
     widget->showNormal();
-
 }
