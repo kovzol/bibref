@@ -62,6 +62,15 @@
   <content_rating type="oars-1.1" />
 
   <releases>
+    <release version="2025-08-22" date="2025-08-22">
+    <url type="details">https://github.com/kovzol/bibref/commits/b6d0698d58599150b86851d682492947b9c75077</url>
+      <description>
+        <p>Release description</p>
+          <ul>
+            <li>German translation of the graphical user interface</li>
+          </ul>
+      </description>
+    </release>
     <release version="2025-08-08" date="2025-08-08">
     <url type="details">https://github.com/kovzol/bibref/commits/b4b009809ac994522434bca14a7952f8a9e94087</url>
       <description>
