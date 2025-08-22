@@ -27,13 +27,11 @@
 
 * Pull the newest version (via Windows Git)
 * Build the Qt version (via MSYS2/MINGW64)
-* Run the Qt version and recreate the `bibref-addbooks-cache` folder by selecting File > Add books,
-  check if it is indeed in the Qt build folder; this ensures to have the cache up-to-date.
-  If the Qt version does not start (in some exotic cases it may not find some libraries), then
-  copy the `bibref-addbooks-cache` folder from a working platform in the build folder
+* Copy the `bibref-addbooks-cache` folder from a working platform in the build folder
 * Change working directory to `qt/`.
 * Run the `./create-windows-folder` script and add the build folder as parameter
-* Run the `./create-windows-zip` script
+* Optionally, change the working folder temporarily to bibref-qt-YYYY-MM-DD/ and test the program by running the executable `bibref-qt.exe`
+* Run the `./create-windows-zip` script (in the `qt/` folder)
 * Get `bibref-qt-YYYY-MM-DD.zip` and share it on GitHub/Releases later
 * Start the Inno Setup Compiler with config file `bibref.iss` and create the installer
 * Get `bibref-setup.exe` and share it on GitHub/Releases later
@@ -43,11 +41,11 @@
 * Pull the newest version
 * Build the native version
 * Run the cli version (from the main folder) and recreate the `bibref-addbooks-cache` folder to have it up-to-date
-* Remove the file `bibref.data` from the build folder of the web version (if it already exists)
+* Remove the files `bibref.js` and `bibref.data` from the build folder of the web version (if they already exist)
 * Build the web version and install it
 * Copy the folder `html-output` from the web build folder over the public web folder,
   rename `index.html` to `index-midi.html` and put a symlink `index.html` to `index-jt-dt.html`
 * To create the Qt version (as WebAssembly build): build the Qt native version, remove
-  the file `bibref-qt.data` (and maybe others) from the build folder of the web version (if it already exists),
+  the files `bibref.js` and  `bibref-qt.data` from the build folder of the web version (if they already exist),
   build the Qt web version and install it, then copy the folder `html-output` from the web build
   folder over the public web folder, finally, put a symlink `index.html` to `bibref-qt.html`
