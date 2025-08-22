@@ -491,59 +491,84 @@
         <translation>&amp;Hilfe</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1393"/>
+        <location filename="mainwindow.cpp" line="1394"/>
+        <source>Application language:</source>
+        <translation>Sprache des Programms:</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1396"/>
+        <source>Set the language used in the application</source>
+        <translation>Einstellung der in der Anwendung verwendeten Sprache</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1400"/>
+        <source>System default</source>
+        <translation>Systemstandard</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1418"/>
         <source>Font size:</source>
         <translation>Schriftgröße:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1395"/>
+        <location filename="mainwindow.cpp" line="1420"/>
         <source>Set general font size in the application (default: %1)</source>
         <translation>Allgemeine Schriftgröße in der Anwendung festlegen (Standard: %1)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1410"/>
+        <location filename="mainwindow.cpp" line="1436"/>
         <source>Debug mode:</source>
         <translation>Debug-Modus:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1412"/>
+        <location filename="mainwindow.cpp" line="1438"/>
         <source>Show debug messages in the Analyze window</source>
         <translation>Debug-Meldungen im Analysefenster anzeigen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1424"/>
+        <location filename="mainwindow.cpp" line="1450"/>
         <source>Use Koine Greek font:</source>
         <translation>Koine-Griechisch-Schriftart verwenden:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1426"/>
+        <location filename="mainwindow.cpp" line="1452"/>
         <source>Show Greek text with Koine Greek font whenever possible</source>
         <translation>Griechischen Text nach Möglichkeit mit Koine-Griechisch-Schriftart anzeigen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1438"/>
+        <location filename="mainwindow.cpp" line="1464"/>
         <source>Tooltips in Greek:</source>
         <translation>Tooltips auf Griechisch:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1440"/>
+        <location filename="mainwindow.cpp" line="1466"/>
         <source>Show tooltips in Greek in the visualized outputs</source>
         <translation>Tooltips in den visualisierten Ausgaben auf Griechisch anzeigen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1452"/>
+        <location filename="mainwindow.cpp" line="1478"/>
         <source>Maximal shown size of clipboard:</source>
         <translation>Maximal angezeigte Größe der Zwischenablage:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1454"/>
+        <location filename="mainwindow.cpp" line="1480"/>
         <source>Set maximal shown size of the clipboard (default: %1)</source>
         <translation>Maximal angezeigte Größe der Zwischenablage festlegen (Standard: %1)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1470"/>
+        <location filename="mainwindow.cpp" line="1496"/>
         <source>Preferences</source>
         <translation>Einstellungen</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1517"/>
+        <source>Information</source>
+        <translation>Information</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1518"/>
+        <source>Please restart the application to change the language in the whole program.</source>
+        <translation>Bitte starten Sie die Anwendung neu, um die Sprache im gesamten Programm zu ändern.</translation>
     </message>
 </context>
 <context>

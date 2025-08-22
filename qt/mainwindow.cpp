@@ -1512,7 +1512,7 @@ void MainWindow::preferences()
             break;
         }
         setLanguage(newlang);
-        settings.setValue("Application/language", lang);
+        settings.setValue("Application/language", newlang);
         if (lang != newlang) {
             QMessageBox::information(this, tr("Information"),
                                      tr("Please restart the application to change the language in the whole program."));
