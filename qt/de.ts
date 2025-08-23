@@ -243,7 +243,7 @@
     <message>
         <location filename="mainwindow.cpp" line="988"/>
         <source>Research questions like &lt;i&gt;Is an Old Testament passage quoted properly?&lt;/i&gt; can be studied with this program. Non-punctuated texts can be compared without loading Bible databases. Also, if the default databases are loaded (via File&amp;gt;Add books), Greek Bible texts can also be compared directly.</source>
-        <translation>Forschungsfragen wie &lt;i&gt;Wird eine Passage des Alten Testaments korrekt zitiert?&lt;/i&gt; können mit diesem Programm untersucht werden. Unpunktierte Texte lassen sich vergleichen, ohne Bibeldatenbanken zu laden. Wenn die Standarddatenbanken geladen sind (über Datei → Bücher hinzufügen), können griechische Bibeltexte auch direkt verglichen werden.</translation>
+        <translation>Forschungsfragen wie &lt;i&gt;Wird eine Passage des Alten Testaments korrekt zitiert?&lt;/i&gt; können mit diesem Programm untersucht werden. Unpunktierte Texte lassen sich vergleichen, ohne Bibeldatenbanken zu laden. Wenn die Standarddatenbanken geladen sind (über Datei&amp;gt;Add books), können griechische Bibeltexte auch direkt verglichen werden.</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="994"/>
