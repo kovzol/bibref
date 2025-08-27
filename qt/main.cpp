@@ -3,6 +3,8 @@
 #include "main.h"
 #include "mainwindow.h"
 #include "settings.h"
+#include "graphviz_version.h"
+#include "boost/version.hpp"
 
 #include <iostream>
 
@@ -166,4 +168,7 @@ void setLanguage(QString language)
     }
     // FIXME: the last item should be inserted in a simpler and more flexible way.
 
+    cout << "Using Boost " << BOOST_VERSION % 100 << "."
+         << BOOST_VERSION / 100 % 1000 << "." << BOOST_VERSION / 100000 << endl;
+    cout << "Using GraphViz " << PACKAGE_VERSION << endl;
 }
