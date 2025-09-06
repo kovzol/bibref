@@ -8,11 +8,10 @@ lookup LXX Leviticus 18:5
 # και φυλαξεσθε παντα τα προσταγματα μου και παντα τα κριματα μου και ποιησετε αυτα α ποιησας ανθρωπος ζησεται εν αυτοις εγω κυριος ο θεος υμων
 
 getrefs SBLGNT LXX Leviticus 18:5
-# LXX Leviticus 18:5+63 18:5-46 = SBLGNT I_John 5:21+14 5:21-10 (length=8, pos1=57047, pos2=9436)
-# LXX Leviticus 18:5+69 18:5-39 = SBLGNT Mark 5:32+28 5:32 (length=9, pos1=57053, pos2=14719)
-# LXX Leviticus 18:5+69 18:5-21 = SBLGNT Romans 10:5+46 10:5-1 (length=27, pos1=57053, pos2=20844)
+# LXX Leviticus 18:5+63 18:5-46 = SBLGNT I_John 5:21+14 5:21-10 (length=8, pos1=57047, pos2=9428)
+# LXX Leviticus 18:5+69 18:5-21 = SBLGNT Romans 10:5+46 10:5-1 (length=27, pos1=57053, pos2=20834)
 
-## For the first look, however, there is a fuzzy match between Leviticus 18:5 and Galatians 3:12.
+## At first sight, however, there is a fuzzy match between Leviticus 18:5 and Galatians 3:12.
 ## In fact, all words (in some slightly different forms) are present in some other verses than Leviticus 18:5:
 ## In Nehemiah 9:29, Ezekiel 20:11, 20:13, 20:21. In all of these 5 verses we have the last three words
 ## of Galatians 3:12 literally:
