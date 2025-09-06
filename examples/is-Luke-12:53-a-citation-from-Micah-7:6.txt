@@ -1,3 +1,5 @@
+addbooks
+
 lookup KJV Micah 7:6
 # For the son dishonoureth the father, the daughter riseth up against her mother, the daughter in law against her mother in law; a man’s enemies are the men of his own house.
 
@@ -5,11 +7,9 @@ lookup KJV Luke 12:53
 # The father shall be divided against the son, and the son against the father; the mother against the daughter, and the daughter against the mother; the mother in law against her daughter in law, and the daughter in law against her mother in law.
 
 getrefs SBLGNT LXX Micah 7:6
-# LXX Micah 7:6+7 7:6-113 = SBLGNT Galatians 5:19+26 5:19-31 (length=5, pos1=10210, pos2=9255)
-# LXX Micah 7:6+63 7:6-56 = SBLGNT Acts 26:1+24 26:1-64 (length=6, pos1=10266, pos2=85430)
-# LXX Micah 7:6+7 7:6-111 = SBLGNT Acts 5:41+78 5:41-6 (length=7, pos1=10210, pos2=16611)
-# LXX Micah 7:6+23 7:6-93 = SBLGNT Luke 12:53+61 12:53-56 (length=9, pos1=10226, pos2=53707)
-# LXX Micah 7:6+60 7:6-46 = SBLGNT Luke 12:53+107 12:53 (length=19, pos1=10263, pos2=53753)
+# LXX Micah 7:6+7 7:6-111 = SBLGNT Acts 5:41+78 5:41-6 (length=7, pos1=10210, pos2=16595)
+# LXX Micah 7:6+23 7:6-93 = SBLGNT Luke 12:53+61 12:53-56 (length=9, pos1=10226, pos2=53697)
+# LXX Micah 7:6+60 7:6-46 = SBLGNT Luke 12:53+107 12:53 (length=19, pos1=10263, pos2=53743)
 
 lookup LXX Micah 7:6
 # διοτι υιος ατιμαζει πατερα θυγατηρ επαναστησεται επι την μητερα αυτης νυμφη επι την πενθεραν αυτης εχθροι ανδρος παντες οι ανδρες οι εν τω οικω αυτου

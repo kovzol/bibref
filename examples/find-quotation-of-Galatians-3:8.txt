@@ -3,7 +3,7 @@ addbooks
 lookup SBLGNT Galatians 3:8
 # προιδουσα δε η γραφη οτι εκ πιστεως δικαιοι τα εθνη ο θεος προευηγγελισατο τω Αβρααμ οτι Ενευλογηθησονται εν σοι παντα τα εθνη.
 
-## The word "ενευλογηθησονται" will be blessed is present 5 times in LXX and twice in SBLGNT:
+## The word "ενευλογηθησονται" ("will be blessed") is present 5 times in LXX and twice in SBLGNT:
 
 text1 ενευλογηθησονται
 # Stored internally as eneyloghuhsontai.
@@ -14,9 +14,9 @@ find1 LXX
 # Found in Genesis 26:4+84 26:4-32 (book position 67162-67177)
 # Found in Genesis 28:14+98 28:14-41 (book position 76468-76483)
 # 5 occurrences.
-find1 SBLGNT 
-# Found in Acts 3:25+106 3:25-20 (book position 9183-9198)
-# Found in Galatians 3:8+73 3:8-16 (book position 4262-4277)
+find1 SBLGNT
+# Found in Acts 3:25+106 3:25-20 (book position 9169-9184)
+# Found in Galatians 3:8+73 3:8-16 (book position 4251-4266)
 # 2 occurrences.
 
 ## The first two occurrences in LXX play an important role.
