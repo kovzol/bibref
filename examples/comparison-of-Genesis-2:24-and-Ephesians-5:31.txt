@@ -16,7 +16,7 @@ find1 LXX
 # Found in Genesis 2:24 2:24 (book position 5486-5611)
 # 1 occurrences.
 find2 SBLGNT
-# Found in Ephesians 5:31 5:31 (book position 9798-9906)
+# Found in Ephesians 5:31 5:31 (book position 9786-9894)
 # 1 occurrences.
 lookup1 LXX Genesis 2:24+6 2:24
 ## "eneken" and "anti" are synonyms of "because of". If we omit these words:

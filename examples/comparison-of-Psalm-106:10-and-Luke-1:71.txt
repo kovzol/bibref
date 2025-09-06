@@ -1,6 +1,7 @@
+addbooks
 ## This is just an allusion.
 
-lookup1 LXX Psalms 106:10+23 106:10
+lookup1 LXX Psalms 105:10+23 105:10
 # Stored internally as misoyntvnkaielytrvsatoaytoysekxeirosexuroy.
 lookup2 SBLGNT Luke 1:71+20 1:71-4
 # Stored internally as kaiekxeirospantvntvnmisoyntvn.
@@ -12,7 +13,7 @@ lookup2 SBLGNT Luke 1:71+10 1:71-4
 compare12
 # Comparing 'misoyntvnkaielytrvsatoaytoysekxeirosexuroy' ~ 'exurvnhmvnkaiekxeirospantvntvnmisoyntvn' = 33
 # difference = 0.419753
-lookup1 LXX Psalms 106:10+23 106:10-2
+lookup1 LXX Psalms 105:10+23 105:10-2
 # Stored internally as misoyntvnkaielytrvsatoaytoysekxeirosexur.
 compare12
 # Comparing 'misoyntvnkaielytrvsatoaytoysekxeirosexur' ~ 'exurvnhmvnkaiekxeirospantvntvnmisoyntvn' = 31

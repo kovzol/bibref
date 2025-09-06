@@ -2,7 +2,7 @@ addbooks
 
 getrefs SBLGNT LXX Leviticus 26:12
 # ... (lengths<=10)
-# LXX Leviticus 26:11+53 26:12-44 = SBLGNT II_Corinthians 6:16+95 6:16-40 (length=16, pos1=84290, pos2=9601)
+# LXX Leviticus 26:11+53 26:12-44 = SBLGNT II_Corinthians 6:16+95 6:16-40 (length=16, pos1=84290, pos2=9586)
 
 lookup SBLGNT II_Corinthians 6:16
 # τις δε συγκαταθεσις ναω θεου μετα ειδωλων; ⸂ημεις γαρ ναος θεου εσμεν⸃ ζωντος· καθως ειπεν ο θεος οτι Ενοικησω εν αυτοις και εμπεριπατησω, και εσομαι αυτων θεος, και αυτοι εσονται ⸀μου λαος.
