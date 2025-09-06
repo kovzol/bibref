@@ -3,12 +3,12 @@ addbooks
 text1 ων το στομα αρας και πικριας γεμει
 # Stored internally as vntostomaaraskaipikriasgemei.
 find1 LXX
-# Found in Psalms 14:3+145 14:3-130 (book position 11071-11098)
+# Found in Psalms 13:3+145 14:3-130 (book position 11071-11098)
 # 1 occurrences.
 text2 ου αρας το στομα αυτου γεμει και πικριας
 # Stored internally as oyarastostomaaytoygemeikaipikrias.
 find2 LXX
-# Found in Psalms 10:7 10:7-39 (book position 8068-8100)
+# Found in Psalms 9:28 9:28-39 (book position 8068-8100)
 # 1 occurrences.
 compare12
 # Comparing 'vntostomaaraskaipikriasgemei' ~ 'oyarastostomaaytoygemeikaipikrias' = 13

@@ -2,7 +2,7 @@ addbooks
 
 getrefs SBLGNT LXX Zechariah 8:16
 # ... (length<=11)
-# LXX Zechariah 8:16+23 8:16-59 = SBLGNT Ephesians 4:25+21 4:25-38 (length=22, pos1=12531, pos2=7263)
+# LXX Zechariah 8:16+23 8:16-59 = SBLGNT Ephesians 4:25+21 4:25-38 (length=22, pos1=12531, pos2=7251)
 
 lookup1 LXX Zechariah 8:16+23 8:16-40
 # Stored internally as laleitealhueianekastosprostonplhsionaytoy.
