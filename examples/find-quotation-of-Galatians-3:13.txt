@@ -2,7 +2,7 @@ addbooks
 
 getrefs SBLGNT LXX Deuteronomy 21:23
 # ... (length<=10)
-# LXX Deuteronomy 21:23+100 21:23-52 = SBLGNT Galatians 3:13+92 3:13 (length=18, pos1=66388, pos2=4685)
+# LXX Deuteronomy 21:23+100 21:23-52 = SBLGNT Galatians 3:13+92 3:13 (length=18, pos1=66388, pos2=4674)
 lookup LXX Deuteronomy 21:23
 # ουκ επικοιμηθησεται το σωμα αυτου επι του ξυλου αλλα ταφη θαψετε αυτον εν τη ημερα εκεινη οτι κεκατηραμενος υπο θεου πας κρεμαμενος επι ξυλου και ου μιανειτε την γην ην κυριος ο θεος σου διδωσιν σοι εν κληρω
 lookup SBLGNT Galatians 3:13
@@ -11,7 +11,11 @@ lookup2 SBLGNT Galatians 3:13+76 3:13-19
 # Stored internally as epikataratospas.
 find2 LXX
 # Found in Deuteronomy 27:26 27:26-92 (book position 81664-81678)
-# 1 occurrences.
+# Found in Judges 5:23+41 5:23-65 (book position 16426-16440)
+# 2 occurrences.
+
+## Judges 5:23 is irrelevant here.
+
 lookup LXX Deuteronomy 27:26
 # επικαταρατος πας ανθρωπος ος ουκ εμμενει εν πασιν τοις λογοις του νομου τουτου του ποιησαι αυτους και ερουσιν πας ο λαος γενοιτο
 
@@ -21,9 +25,9 @@ lookup LXX Deuteronomy 27:26
 ## when building a database, we should ignore this duplication (or, at least, not count it as a new quotation):
 
 getrefs SBLGNT LXX Deuteronomy 27:26
-# LXX Deuteronomy 27:26+22 27:26-72 = SBLGNT Galatians 3:10+68 3:10-53 (length=13, pos1=81686, pos2=4404)
-# LXX Deuteronomy 27:26+41 27:26-52 = SBLGNT I_Thessalonians 4:18+24 4:18-4 (length=14, pos1=81705, pos2=5736)
-# LXX Deuteronomy 27:26 27:26-92 = SBLGNT Galatians 3:10+54 3:10-65 (length=15, pos1=81664, pos2=4390)
-# LXX Deuteronomy 27:26 27:26-92 = SBLGNT Galatians 3:13+76 3:13-19 (length=15, pos1=81664, pos2=4669)
+# LXX Deuteronomy 27:26+22 27:26-72 = SBLGNT Galatians 3:10+68 3:10-53 (length=13, pos1=81686, pos2=4393)
+# LXX Deuteronomy 27:26+41 27:26-52 = SBLGNT I_Thessalonians 4:18+24 4:18-4 (length=14, pos1=81705, pos2=5718)
+
+## In this result, however, we cannot see the match between Galatians 3:13 and Deuteronomy 27:26.
 
 ## (I_Thessalonians 4:18 is a false positive.)

@@ -1,17 +1,17 @@
 addbooks
-lookup1 LXX Psalms 120:7+56 120:7
+lookup1 LXX Psalms 119:7+56 119:7
 # Stored internally as epolemoynmedvrean.
-lookup1 LXX Psalms 119:161+13 119:161-37
-Stored internally as katedivjanmedvrean.
-lookup1 LXX Psalms 109:3+29 109:3
+lookup1 LXX Psalms 118:161+13 118:161-37
+# Stored internally as katedivjanmedvrean.
+lookup1 LXX Psalms 108:3+29 108:3
 # Stored internally as epolemhsanmedvrean.
-lookup1 LXX Psalms 69:4+40 69:4-69
+lookup1 LXX Psalms 68:5+40 68:5-69
 # Stored internally as misoyntesmedvrean.
-lookup1 LXX Psalms 25:19+46 25:19
+lookup1 LXX Psalms 24:19+46 24:19
 # Stored internally as emishsanme.
-lookup1 LXX Psalms 35:19+42 35:19-23
+lookup1 LXX Psalms 34:19+42 34:19-23
 # Stored internally as misoyntesmedvrean.
-lookup2 SBLGNT John 15:25+45 15:25
+lookup2 SBLGNT John 15:25+47 15:25
 # Stored internally as emishsanmedvrean.
 compare12 
 # Comparing 'misoyntesmedvrean' ~ 'emishsanmedvrean' = 13
@@ -19,7 +19,7 @@ compare12
 minunique1 LXX
 #
 
-lookup1 SBLGNT John 15:25+45 15:25
+lookup1 SBLGNT John 15:25+47 15:25
 # Stored internally as emishsanmedvrean.
 minunique1 LXX
 # Text shsanm is minimal unique.
@@ -27,45 +27,43 @@ minunique1 LXX
 latintext1 shsanm
 # Stored.
 find1 LXX
-# Found in Psalms 25:19+49 25:19-1 (book position 24953-24958)
+# Found in Psalms 24:19+49 24:19-1 (book position 24953-24958)
 # 1 occurrences.
 latintext1 sanmed
 # Stored.
 find1 LXX
-# Found in Psalms 109:3+36 109:3-5 (book position 130562-130567)
+# Found in Psalms 108:3+36 108:3-5 (book position 130562-130567)
 # 1 occurrences.
-getrefs SBLGNT LXX Psalms 25:19
-# LXX Psalms 25:19+49 25:19-1 = SBLGNT Luke 9:30+36 9:30-13 (length=6, pos1=37337)
-# LXX Psalms 25:19+27 25:19-20 = SBLGNT Revelation of John 15:4+124 15:5-58 (length=9, pos1=28809)
-# LXX Psalms 25:19+46 25:19 = SBLGNT John 15:25+45 15:25-6 (length=10, pos1=52047)
-getrefs SBLGNT LXX Psalms 109:3
-# LXX Psalms 109:3+35 109:3 = SBLGNT John 15:25+49 15:25 (length=12, pos1=52049)
-lookup2 SBLGNT John 15:25+49 15:25
+getrefs SBLGNT LXX Psalms 24:19
+# LXX Psalms 24:19+49 24:19-1 = SBLGNT Luke 9:30+36 9:30-13 (length=6, pos1=24953, pos2=37763)
+# LXX Psalms 24:19+27 24:19-20 = SBLGNT Revelation_of_John 15:4+124 15:5-58 (length=9, pos1=24931, pos2=29045)
+# LXX Psalms 24:19+46 24:19 = SBLGNT John 15:25+47 15:25-6 (length=10, pos1=24950, pos2=52582)
+getrefs SBLGNT LXX Psalms 108:3
+# LXX Psalms 108:3+35 108:3 = SBLGNT John 15:25+51 15:25 (length=12, pos1=130561, pos2=52586)
+lookup2 SBLGNT John 15:25+51 15:25
 # Stored internally as hsanmedvrean.
-lookup1 LXX Psalms 109:3+35 109:3
+lookup1 LXX Psalms 108:3+35 108:3
 # Stored internally as hsanmedvrean.
-lookup1 LXX Psalms 25:19+46 25:19
+lookup1 LXX Psalms 24:19+46 24:19
 # Stored internally as emishsanme.
 latintext2 emishsanmedvrean
 # Stored.
-lookup1 LXX Psalms 109:3+33 109:3
-# Stored internally as emhsanmedvrean.
 compare12
 # Comparing 'emishsanme' ~ 'emishsanmedvrean' = 6
 # difference = 0.269231
-lookup1 LXX Psalms 109:3+33 109:3
+lookup1 LXX Psalms 108:3+33 108:3
 # Stored internally as emhsanmedvrean.
 compare12
 # Comparing 'emhsanmedvrean' ~ 'emishsanmedvrean' = 4
 # difference = 0.166667
-lookup1 LXX Psalms 109:3+35 109:3
+lookup1 LXX Psalms 108:3+35 108:3
 # Stored internally as hsanmedvrean.
 compare12
 # Comparing 'hsanmedvrean' ~ 'emishsanmedvrean' = 4
 # difference = 0.178571
 
 ## Conclusion. It seems the idea from John 15:25 is mentioned in 6 different psalms as well,
-## but the best match is in Psalm 109.
-## Alternatively, John 15:25 quotes the unique match in Psalm 25:19 ("emishsanme")
+## but the best match is in Psalm 108.
+## Alternatively, John 15:25 quotes the unique match in Psalm 24:19 ("emishsanme")
 ## and the 5 non-unique ones in the other psalms ("dvrean").
 ## Note that the word "dvrean" appears at many other places (not in Psalms), but usually with a different meaning.
