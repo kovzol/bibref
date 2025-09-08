@@ -12,20 +12,20 @@ lookup KJV Ephesians 4:8
 
 addbooks
 
-getrefs SBLGNT LXX Psalms 68:18
-# LXX Psalms 68:18+20 68:18-82 = SBLGNT Jude 1:7+62 1:7-72 (length=7, pos1=73416)
-# LXX Psalms 68:18+43 68:18-59 = SBLGNT Philippians 4:3+114 4:3-9 (length=7, pos1=73439)
-# LXX Psalms 68:18+43 68:18-59 = SBLGNT Revelation_of_John 3:4+11 3:4-79 (length=7, pos1=73439)
-# LXX Psalms 68:18+67 68:18-34 = SBLGNT Revelation_of_John 14:4+67 14:4-63 (length=8, pos1=73463)
-# LXX Psalms 68:18+96 68:19-72 = SBLGNT Romans 9:5+49 9:5-16 (length=14, pos1=73492)
-# LXX Psalms 68:18+5 68:18-86 = SBLGNT Ephesians 4:8+13 4:8-38 (length=18, pos1=73401)
+getrefs SBLGNT LXX Psalms 67:19
+# LXX Psalms 67:19+20 67:19-82 = SBLGNT Jude 1:7+66 1:7-72 (length=7, pos1=73417, pos2=749)
+# LXX Psalms 67:19+43 67:19-59 = SBLGNT Philippians 4:3+120 4:3-9 (length=7, pos1=73440, pos2=6523)
+# LXX Psalms 67:19+43 67:19-59 = SBLGNT Revelation_of_John 3:4+16 3:4-79 (length=7, pos1=73440, pos2=5271)
+# LXX Psalms 67:19+70 67:19-31 = SBLGNT Acts 21:14+33 21:14-20 (length=8, pos1=73467, pos2=70923)
+# LXX Psalms 67:19+96 67:20-72 = SBLGNT Romans 9:5+49 9:5-16 (length=14, pos1=73493, pos2=18500)
+# LXX Psalms 67:19+5 67:19-86 = SBLGNT Ephesians 4:8+13 4:8-38 (length=18, pos1=73402, pos2=5798)
 
-lookup LXX Psalms 68:18
+lookup LXX Psalms 67:19
 # ανεβης εις υψος ηχμαλωτευσας αιχμαλωσιαν ελαβες δοματα εν ανθρωπω και γαρ απειθουντες του κατασκηνωσαι κυριος ο θεος ευλογητος
 lookup SBLGNT Ephesians 4:8
 # διὸ λέγει· Ἀναβὰς εἰς ὕψος ᾐχμαλώτευσεν αἰχμαλωσίαν, ⸀ἔδωκεν δόματα τοῖς ἀνθρώποις.
 
-lookup1 LXX Psalms 68:18 68:18-52
+lookup1 LXX Psalms 67:19 67:19-52
 # Stored internally as anebhseisycoshxmalvteysasaixmalvsianelabesdomataenanurvpv.
 lookup2 SBLGNT Ephesians 4:8+8 4:8
 # Stored internally as anabaseisycoshxmalvteysenaixmalvsianedvkendomatatoisanurvpois.
@@ -33,7 +33,7 @@ compare12
 # Comparing 'anebhseisycoshxmalvteysasaixmalvsianelabesdomataenanurvpv' ~ 'anabaseisycoshxmalvteysenaixmalvsianedvkendomatatoisanurvpois' = 28
 # difference = 0.245763
 
-lookup1 LXX Psalms 68:18 68:18-53
+lookup1 LXX Psalms 67:19 67:19-53
 # Stored internally as anebhseisycoshxmalvteysasaixmalvsianelabesdomataenanurvp.
 lookup2 SBLGNT Ephesians 4:8+8 4:8-3
 # Stored internally as anabaseisycoshxmalvteysenaixmalvsianedvkendomatatoisanurvp.
@@ -41,7 +41,7 @@ compare12
 # Comparing 'anebhseisycoshxmalvteysasaixmalvsianelabesdomataenanurvp' ~ 'anabaseisycoshxmalvteysenaixmalvsianedvkendomatatoisanurvp' = 24
 # difference = 0.219298
 
-lookup1 LXX Psalms 68:18+5 68:18-53
+lookup1 LXX Psalms 67:19+5 67:19-53
 # Stored internally as seisycoshxmalvteysasaixmalvsianelabesdomataenanurvp.
 lookup2 SBLGNT Ephesians 4:8+13 4:8-3
 # Stored internally as seisycoshxmalvteysenaixmalvsianedvkendomatatoisanurvp.

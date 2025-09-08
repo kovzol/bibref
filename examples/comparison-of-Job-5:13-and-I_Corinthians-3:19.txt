@@ -9,11 +9,11 @@ addbooks
 
 getrefs SBLGNT LXX Job 5:12 5:13
 # LXX Job 5:12+61 5:13-52 = SBLGNT Matthew 27:40+9 27:40-85 (length=8, pos1=8384, pos2=86167)
-# LXX Job 5:12+8 5:12-47 = SBLGNT I_Timothy 5:13+100 5:14-94 (length=8, pos1=8331, pos2=5969)
-# LXX Job 5:13+16 5:13-34 = SBLGNT Acts 5:22+36 5:22-30 (length=8, pos1=8402, pos2=14715)
-# LXX Job 5:12+21 5:12-33 = SBLGNT Hebrews 10:11+35 10:11-71 (length=9, pos1=8344, pos2=16030)
-# LXX Job 5:12+49 5:12-4 = SBLGNT Luke 6:26+84 6:27-73 (length=10, pos1=8372, pos2=22893)
-# LXX Job 5:13+13 5:13-35 = SBLGNT I_Corinthians 3:19+71 3:19-14 (length=10, pos1=8399, pos2=5062)
+# LXX Job 5:12+8 5:12-47 = SBLGNT I_Timothy 5:13+100 5:14-94 (length=8, pos1=8331, pos2=5958)
+# LXX Job 5:13+16 5:13-34 = SBLGNT Acts 5:22+36 5:22-30 (length=8, pos1=8402, pos2=14704)
+# LXX Job 5:12+21 5:12-33 = SBLGNT Hebrews 10:11+35 10:11-71 (length=9, pos1=8344, pos2=16032)
+# LXX Job 5:12+49 5:12-4 = SBLGNT Luke 6:26+84 6:27-73 (length=10, pos1=8372, pos2=22887)
+# LXX Job 5:13+13 5:13-35 = SBLGNT I_Corinthians 3:19+71 3:19-14 (length=10, pos1=8399, pos2=5047)
 lookup1 LXX Job 5:13+13 5:13-35
 # Stored internally as sofoysenth.
 

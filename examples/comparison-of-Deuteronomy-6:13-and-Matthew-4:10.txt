@@ -19,7 +19,7 @@ lookup LXX Deuteronomy 4:19
 ## and finally, in Psalm 81:9 (MT 81:10) there is some combination of all of the words
 ## used by Jesus:
 
-lookup LXX Psalms 81:9
+lookup LXX Psalms 80:10
 # ουκ εσται εν σοι θεος προσφατος ουδε προσκυνησεις θεω αλλοτριω
 
 ## In fact, Deuteronomy 10:20 is the same as 6:13:
