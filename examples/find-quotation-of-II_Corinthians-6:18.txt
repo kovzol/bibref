@@ -40,7 +40,7 @@ lookup LXX Isaiah 43:6
 lookup KJV Isaiah 43:6
 # I will say to the north, Give up; and to the south, Keep not back: bring my sons from far, and my daughters from the ends of the earth;
 
-## Also, the end of Paul' text ("λεγει κυριος παντοκρατωρ") is present several (!) times in LXX
+## Also, the end of Paul's text ("λεγει κυριος παντοκρατωρ") is present several (!) times in LXX
 ## not just in II_Samuel 7:8 as it is mentioned in Elliott's.
 
 ## Conclusion. II_Corinthians 6:18 seems to be indeed a combination of more passages,
@@ -61,7 +61,7 @@ find1 LXX
 # Found in I_Chronicles 17:13 17:13-64 (book position 46456-46500)
 # 2 occurrences.
 find1 SBLGNT 
-# Found in Hebrews 1:5+66 1:5 (book position 472-516)
+# Found in Hebrews 1:5+66 1:5 (book position 460-504)
 # 1 occurrences.
 length1
 # Length of text 1 is 45.

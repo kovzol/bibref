@@ -2,8 +2,8 @@ addbooks
 
 getrefs SBLGNT LXX Micah 7:6
 # ... (length<=7)
-# LXX Micah 7:6+23 7:6-93 = SBLGNT Luke 12:53+61 12:53-56 (length=9, pos1=10226, pos2=53700)
-# LXX Micah 7:6+60 7:6-46 = SBLGNT Luke 12:53+107 12:53 (length=19, pos1=10263, pos2=53746)
+# LXX Micah 7:6+23 7:6-93 = SBLGNT Luke 12:53+61 12:53-56 (length=9, pos1=10226, pos2=53697)
+# LXX Micah 7:6+60 7:6-46 = SBLGNT Luke 12:53+107 12:53 (length=19, pos1=10263, pos2=53743)
 
 lookup LXX Micah 7:6
 # διοτι υιος ατιμαζει πατερα θυγατηρ επαναστησεται επι την μητερα αυτης νυμφη επι την πενθεραν αυτης εχθροι ανδρος παντες οι ανδρες οι εν τω οικω αυτου
@@ -65,10 +65,10 @@ find1 LXX
 find1 SBLGNT 
 # Found in Matthew 8:14+41 8:14-30 (book position 18837-18843)
 # Found in Matthew 10:35+86 10:35-6 (book position 26830-26836)
-# Found in Mark 1:30+3 1:30-55 (book position 2368-2374)
-# Found in Luke 4:38+51 4:38-61 (book position 16142-16148)
-# Found in Luke 12:53+80 12:53-39 (book position 53719-53725)
-# Found in Luke 12:53+118 12:53-1 (book position 53757-53763)
+# Found in Mark 1:30+3 1:30-55 (book position 2358-2364)
+# Found in Luke 4:38+51 4:38-61 (book position 16136-16142)
+# Found in Luke 12:53+80 12:53-39 (book position 53716-53722)
+# Found in Luke 12:53+118 12:53-1 (book position 53754-53760)
 # 6 occurrences.
 
 ## Conclusion. It seems that Jesus indeed refers to Micah 7:6 but without directly quoting it.
