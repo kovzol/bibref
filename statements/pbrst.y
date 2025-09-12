@@ -545,7 +545,7 @@ void fix_verse(char *info, int *c, int *v) {
       (*v)=23;
       }
     if ((*c)==9 && (*v)>=2) (*v)--;
-    } // Isaiah
+    } // Isaiah, TODO: 64:4 should be 64:3 now
   if (strcmp(info, "Hosea") == 0) {
     if ((*c)==1 && (*v)==10) {
       (*c)++;

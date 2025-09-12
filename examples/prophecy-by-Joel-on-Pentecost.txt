@@ -2,29 +2,32 @@
 
 addbooks
 
-getrefs SBLGNT LXX Joel 2:28 2:32
+getrefs SBLGNT LXX Joel 3:1 3:5
 # ... (lengths<=13)
-# LXX Joel 2:29+17 2:29-44 = SBLGNT Acts 2:18+22 2:18-64 (length=15, pos1=5357)
-# LXX Joel 2:32+115 2:32-21 = SBLGNT Acts 14:15+66 14:15-107 (length=16, pos1=5680)
-# LXX Joel 2:28+56 2:28-103 = SBLGNT Acts 2:18+84 2:18 (length=17, pos1=5220)
-# LXX Joel 2:28+56 2:28-103 = SBLGNT Revelation_of_John 11:3+27 11:3-50 (length=17, pos1=5220)
-# LXX Joel 2:32+113 2:32-22 = SBLGNT Luke 20:1+55 20:1-55 (length=17, pos1=5678)
-# LXX Joel 2:32+113 2:32-22 = SBLGNT Luke 8:1+62 8:1-38 (length=17, pos1=5678)
-# LXX Joel 2:28+128 2:28-29 = SBLGNT Acts 2:17+181 2:18-98 (length=19, pos1=5292)
-# LXX Joel 2:32+112 2:32-21 = SBLGNT Acts 15:35+49 15:35-36 (length=19, pos1=5677)
-# LXX Joel 2:32+112 2:32-21 = SBLGNT Acts 5:42+53 5:42-13 (length=19, pos1=5677)
-# LXX Joel 2:30 2:30-37 = SBLGNT Acts 2:19 2:19-50 (length=23, pos1=5416)
-# LXX Joel 2:29+52 2:29 = SBLGNT Acts 2:17+38 2:17-135 (length=24, pos1=5392)
-# LXX Joel 2:28+101 2:28-49 = SBLGNT Acts 2:17+152 2:17-19 (length=26, pos1=5265)
-# LXX Joel 2:28+144 2:29-73 = SBLGNT Acts 2:17+120 2:17-42 (length=35, pos1=5308)
-# LXX Joel 2:32+13 2:32-103 = SBLGNT Acts 2:21+14 2:21 (length=36, pos1=5578)
-# LXX Joel 2:32+11 2:32-103 = SBLGNT Romans 10:13+6 10:13 (length=38, pos1=5576)
-# LXX Joel 2:29+32 2:30-57 = SBLGNT Acts 2:18+40 2:18-14 (length=47, pos1=5372)
-# LXX Joel 2:31+51 2:32-139 = SBLGNT Acts 2:20+52 2:21-37 (length=51, pos1=5527)
-# LXX Joel 2:30+35 2:31-38 = SBLGNT Acts 2:19+48 2:20-39 (length=76, pos1=5451)
-# LXX Joel 2:28+20 2:28-70 = SBLGNT Acts 2:17+39 2:17-72 (length=86, pos1=5184)
+# LXX Joel 3:1+6 3:1-156 = SBLGNT Revelation_of_John 9:12+35 9:13-93 (length=14, pos1=5171, pos2=16925)
+# LXX Joel 3:2+17 3:2-44 = SBLGNT Acts 2:18+22 2:18-64 (length=15, pos1=5358, pos2=4172)
+# LXX Joel 3:5+115 3:5-21 = SBLGNT Acts 14:15+66 14:15-107 (length=16, pos1=5681, pos2=46777)
+# LXX Joel 3:5+115 3:5-21 = SBLGNT Acts 14:7+4 14:7-4 (length=16, pos1=5681, pos2=46087)
+# LXX Joel 3:1+56 3:1-103 = SBLGNT Acts 2:18+84 2:18 (length=17, pos1=5221, pos2=4234)
+# LXX Joel 3:1+56 3:1-103 = SBLGNT Revelation_of_John 11:3+27 11:3-50 (length=17, pos1=5221, pos2=19654)
+# LXX Joel 3:5+113 3:5-22 = SBLGNT Luke 20:1+55 20:1-55 (length=17, pos1=5679, pos2=75978)
+# LXX Joel 3:5+113 3:5-22 = SBLGNT Luke 8:1+62 8:1-38 (length=17, pos1=5679, pos2=29694)
+# LXX Joel 3:1+128 3:1-29 = SBLGNT Acts 2:17+181 2:18-98 (length=19, pos1=5293, pos2=4134)
+# LXX Joel 3:5+112 3:5-21 = SBLGNT Acts 15:35+49 15:35-36 (length=19, pos1=5678, pos2=51241)
+# LXX Joel 3:5+112 3:5-21 = SBLGNT Acts 5:42+53 5:42-16 (length=19, pos1=5678, pos2=16661)
+# LXX Joel 3:3 3:3-37 = SBLGNT Acts 2:19 2:19-50 (length=23, pos1=5417, pos2=4251)
+# LXX Joel 3:2+52 3:2 = SBLGNT Acts 2:17+38 2:17-135 (length=24, pos1=5393, pos2=3991)
+# LXX Joel 3:1+101 3:1-49 = SBLGNT Acts 2:17+152 2:17-19 (length=26, pos1=5266, pos2=4105)
+# LXX Joel 3:1+144 3:2-73 = SBLGNT Acts 2:17+120 2:17-42 (length=35, pos1=5309, pos2=4073)
+# LXX Joel 3:5+13 3:5-103 = SBLGNT Acts 2:21+14 2:21 (length=36, pos1=5579, pos2=4428)
+# LXX Joel 3:5+11 3:5-103 = SBLGNT Romans 10:13+6 10:13 (length=38, pos1=5577, pos2=21442)
+# LXX Joel 3:2+32 3:3-57 = SBLGNT Acts 2:18+40 2:18-14 (length=47, pos1=5373, pos2=4190)
+# LXX Joel 3:4+51 3:5-139 = SBLGNT Acts 2:20+52 2:21-37 (length=51, pos1=5528, pos2=4376)
+# LXX Joel 3:3+35 3:4-38 = SBLGNT Acts 2:19+48 2:20-39 (length=76, pos1=5452, pos2=4299)
+# LXX Joel 3:1+20 3:1-70 = SBLGNT Acts 2:17+39 2:17-72 (length=86, pos1=5185, pos2=3992)
+
 ## (The quotation in Romans is also correctly identified.)
-lookup1 LXX Joel 2:28 2:32
+lookup1 LXX Joel 3:1 3:5
 # Stored internally as kaiestaimetataytakaiekxevapotoypneymatosmoyepipasansarkakaiprofhteysoysinoiyioiymvnkaiaiuygateresymvnkaioipresbyteroiymvnenypniaenypniasuhsontaikaioineaniskoiymvnoraseisocontaikaiepitoysdoyloyskaiepitasdoylasentaishmeraisekeinaisekxevapotoypneymatosmoykaidvsvterataentvoyranvkaiepithsghsaimakaipyrkaiatmidakapnoyohliosmetastrafhsetaieisskotoskaihselhnheisaimaprinelueinhmerankyrioythnmegalhnkaiepifanhkaiestaipasosanepikaleshtaitoonomakyrioysvuhsetaiotientvoreisivnkaienieroysalhmestaianasvqomenoskauotieipenkyrioskaieyaggeliqomenoioyskyriosproskeklhtai.
 length1
 # Length of text 1 is 553.
@@ -35,7 +38,7 @@ length2
 compare12
 # Comparing 'kaiestaimetataytakaiekxevapotoypneymatosmoyepipasansarkakaiprofhteysoysinoiyioiymvnkaiaiuygateresymvnkaioipresbyteroiymvnenypniaenypniasuhsontaikaioineaniskoiymvnoraseisocontaikaiepitoysdoyloyskaiepitasdoylasentaishmeraisekeinaisekxevapotoypneymatosmoykaidvsvterataentvoyranvkaiepithsghsaimakaipyrkaiatmidakapnoyohliosmetastrafhsetaieisskotoskaihselhnheisaimaprinelueinhmerankyrioythnmegalhnkaiepifanhkaiestaipasosanepikaleshtaitoonomakyrioysvuhsetaiotientvoreisivnkaienieroysalhmestaianasvqomenoskauotieipenkyrioskaieyaggeliqomenoioyskyriosproskeklhtai' ~ 'kaiestaientaisesxataishmeraislegeioueosekxevapotoypneymatosmoyepipasansarkakaiprofhteysoysinoiyioiymvnkaiaiuygateresymvnkaioineaniskoiymvnoraseisocontaikaioipresbyteroiymvnenypnioisenypniasuhsontaikaigeepitoysdoyloysmoykaiepitasdoylasmoyentaishmeraisekeinaisekxevapotoypneymatosmoykaiprofhteysoysinkaidvsvterataentvoyranvanvkaishmeiaepithsghskatvaimakaipyrkaiatmidakapnoyohliosmetastrafhsetaieisskotoskaihselhnheisaimaprinhelueinhmerankyrioythnmegalhnkaiepifanhkaiestaipasoseanepikaleshtaitoonomakyrioysvuhsetai' = 124
 # difference = 0.117481
-lookup1 LXX Joel 2:28 2:32-103
+lookup1 LXX Joel 3:1 3:5-103
 # Stored internally as kaiestaimetataytakaiekxevapotoypneymatosmoyepipasansarkakaiprofhteysoysinoiyioiymvnkaiaiuygateresymvnkaioipresbyteroiymvnenypniaenypniasuhsontaikaioineaniskoiymvnoraseisocontaikaiepitoysdoyloyskaiepitasdoylasentaishmeraisekeinaisekxevapotoypneymatosmoykaidvsvterataentvoyranvkaiepithsghsaimakaipyrkaiatmidakapnoyohliosmetastrafhsetaieisskotoskaihselhnheisaimaprinelueinhmerankyrioythnmegalhnkaiepifanhkaiestaipasosanepikaleshtaitoonomakyrioysvuhsetai.
 length1
 # Length of text 1 is 450.

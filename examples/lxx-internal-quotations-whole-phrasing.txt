@@ -1,3 +1,5 @@
+addbooks
+
 ## The book "Textual History and the Reception of Scripture in Early Christianity" (eds. J. de Vries, M. Karrer)
 ## mentions II_Kings 14:6 and II_Chronicles 25:4 that quote former parts of LXX with the quotation marker
 ## "καθως γεγραπται".
@@ -7,40 +9,41 @@ text1 καθως γεγραπται
 # Stored internally as kauvsgegraptai.
 find1 SBLGNT
 # Found in Matthew 26:24+25 26:24-101 (book position 78725-78738)
-# Found in Mark 1:2 1:2-82 (book position 40-53)
-# Found in Mark 9:13+55 9:13-7 (book position 28184-28197)
-# Found in Mark 14:21+28 14:21-99 (book position 46869-46882)
-# Found in Luke 2:23 2:23-60 (book position 7724-7737)
-# Found in Acts 7:42+61 7:42-85 (book position 22075-22088)
-# Found in Acts 15:15+37 15:15 (book position 49584-49597)
-# Found in Romans 1:17+54 1:17-26 (book position 1316-1329)
-# Found in Romans 2:24+48 2:24 (book position 4630-4643)
-# Found in Romans 3:4+49 3:4-56 (book position 5277-5290)
-# Found in Romans 3:10 3:10-25 (book position 5753-5766)
-# Found in Romans 4:17 4:17-106 (book position 8395-8408)
-# Found in Romans 8:36 8:36-62 (book position 17842-17855)
-# Found in Romans 9:13 9:13-31 (book position 19033-19046)
-# Found in Romans 9:33 9:33-87 (book position 20431-20444)
-# Found in Romans 10:15+30 10:15-40 (book position 21617-21630)
-# Found in Romans 11:8 11:8-91 (book position 22703-22716)
-# Found in Romans 11:26+26 11:26-45 (book position 24235-24248)
-# Found in Romans 15:3+32 15:3-42 (book position 29632-29645)
-# Found in Romans 15:9+32 15:9-52 (book position 30148-30161)
-# Found in Romans 15:21+4 15:21-57 (book position 31204-31217)
-# Found in I_Corinthians 1:31+3 1:31-26 (book position 2331-2344)
-# Found in I_Corinthians 2:9+4 2:9-96 (book position 2981-2994)
-# Found in II_Corinthians 8:15 8:15-46 (book position 12683-12696)
-# Found in II_Corinthians 9:9 9:9-59 (book position 14347-14360)
+# Found in Mark 1:2 1:2-82 (book position 30-43)
+# Found in Mark 9:13+55 9:13-7 (book position 28174-28187)
+# Found in Mark 14:21+28 14:21-99 (book position 46859-46872)
+# Found in Luke 2:23 2:23-60 (book position 7714-7727)
+# Found in Acts 7:42+61 7:42-85 (book position 22059-22072)
+# Found in Acts 15:15+37 15:15 (book position 49568-49581)
+# Found in Romans 1:17+54 1:17-26 (book position 1304-1317)
+# Found in Romans 2:24+48 2:24 (book position 4618-4631)
+# Found in Romans 3:4+49 3:4-56 (book position 5265-5278)
+# Found in Romans 3:10 3:10-25 (book position 5741-5754)
+# Found in Romans 4:17 4:17-106 (book position 8383-8396)
+# Found in Romans 8:36 8:36-62 (book position 17830-17843)
+# Found in Romans 9:13 9:13-31 (book position 19021-19034)
+# Found in Romans 9:33 9:33-87 (book position 20419-20432)
+# Found in Romans 10:15+30 10:15-40 (book position 21605-21618)
+# Found in Romans 11:8 11:8-91 (book position 22691-22704)
+# Found in Romans 11:26+26 11:26-45 (book position 24223-24236)
+# Found in Romans 15:3+32 15:3-42 (book position 29620-29633)
+# Found in Romans 15:9+32 15:9-52 (book position 30136-30149)
+# Found in Romans 15:21+4 15:21-57 (book position 31192-31205)
+# Found in I_Corinthians 1:31+3 1:31-26 (book position 2316-2329)
+# Found in I_Corinthians 2:9+4 2:9-96 (book position 2966-2979)
+# Found in II_Corinthians 8:15 8:15-46 (book position 12668-12681)
+# Found in II_Corinthians 9:9 9:9-59 (book position 14332-14345)
 # 25 occurrences.
 find1 LXX
 # Found in II_Kings 14:6+38 14:6-149 (book position 47554-47567)
 # Found in II_Kings 23:21+66 23:21-27 (book position 83045-83058)
 # Found in II_Chronicles 23:18+177 23:18-46 (book position 58450-58463)
 # Found in II_Chronicles 25:4+59 25:4-126 (book position 62762-62775)
-# Found in Daniel 9:13 9:13-140 (book position 33835-33848)
-# 5 occurrences.
+# Found in I_Esdras 3:9+134 3:9 (book position 10910-10923)
+# Found in Tobit 1:6+54 1:6-89 (book position 757-770)
+# 6 occurrences.
 
-## Only two of these 5 are, however, followed by a phrase from another book,
+## Only two of the 5 canonical matches are, however, followed by a phrase from another book,
 ## and both are quotations of the same verse:
 text2 ουκ αποθανουνται πατερες υπερ υιων και υιοι ουκ αποθανουνται υπερ πατερων οτι αλλ η εκαστος εν ταις αμαρτιαις αυτου αποθανειται
 # Stored internally as oykapouanoyntaipateresyperyivnkaiyioioykapouanoyntaiyperpatervnotiallhekastosentaisamartiaisaytoyapouaneitai.
@@ -63,19 +66,21 @@ find2 LXX
 jaccard12 
 # Jaccard distance is 0.088235.
 
+## The deuterocanonical Tobit 1:6 refers to the Law, but seemingly without pointing to an explicit passage.
+
 ##
-## The word γεγραπται has some more occurrences in LXX. It seems to be interesting to check if there
+## The word γεγραπται has some additional occurrences in LXX. It seems to be interesting to check if there
 ## are more such quotations given like this:
 
 text1 γεγραπται
 # Stored internally as gegraptai.
 find1 LXX
-# Found in Joshua 8:31+55 8:31-113 (book position 21290-21298)
+# Found in Joshua 9:2+169 9:2-797 (book position 21583-21591)
 # Found in II_Samuel 1:18+36 1:18-19 (book position 1845-1853)
-# Found in I_Kings 8:53+335 8:53-15 (book position 35330-35338)
-# Found in I_Kings 11:41+82 11:41-22 (book position 48443-48451)
-# Found in I_Kings 21:11+123 21:11-37 (book position 84640-84648)
-# Found in I_Kings 22:39+110 22:39-39 (book position 91346-91354)
+# Found in I_Kings 8:53+335 8:53-15 (book position 38153-38161)
+# Found in I_Kings 11:41+82 11:41-22 (book position 51266-51274)
+# Found in I_Kings 20:11+123 20:11-37 (book position 82583-82591)
+# Found in I_Kings 22:39+110 22:39-39 (book position 95007-95015)
 # Found in II_Kings 8:23+54 8:23-42 (book position 27965-27973)
 # Found in II_Kings 14:6+43 14:6-149 (book position 47559-47567)
 # Found in II_Kings 23:21+71 23:21-27 (book position 83050-83058)
@@ -85,15 +90,20 @@ find1 LXX
 # Found in II_Chronicles 33:19+155 33:19-21 (book position 90995-91003)
 # Found in II_Chronicles 35:12+111 35:12-30 (book position 97896-97904)
 # Found in II_Chronicles 35:25+136 35:25-12 (book position 100423-100431)
+# Found in I_Esdras 1:22+18 1:22-153 (book position 2407-2415)
+# Found in I_Esdras 1:31+10 1:31-207 (book position 3568-3576)
+# Found in I_Esdras 1:40+61 1:40-29 (book position 4562-4570)
+# Found in I_Esdras 3:9+139 3:9 (book position 10915-10923)
 # Found in Ezra 5:7+31 5:7-31 (book position 10704-10712)
-# Found in Nehemiah 10:34+187 10:34-8 (book position 28262-28270)
-# Found in Nehemiah 10:36+37 10:36-111 (book position 28417-28425)
-# Found in Esther 10:2+68 10:2-43 (book position 20033-20041)
+# Found in Nehemiah 10:35+187 10:35-8 (book position 28262-28270)
+# Found in Nehemiah 10:37+37 10:37-111 (book position 28417-28425)
+# Found in Esther 10:2+68 10:2-43 (book position 28682-28690)
+# Found in Tobit 1:6+59 1:6-89 (book position 762-770)
+# Found in I_Maccabees 16:24+9 16:24-70 (book position 94010-94018)
+# Found in Psalms 39:8+33 39:8-8 (book position 44240-44248)
 # Found in Job 42:17+43 42:17-661 (book position 65574-65582)
-# Found in Psalms 40:7+33 40:7-8 (book position 44240-44248)
 # Found in Isaiah 65:6+4 65:6-46 (book position 127880-127888)
-# Found in Daniel 9:13+5 9:13-140 (book position 33840-33848)
-# 23 occurrences.
+# 28 occurrences.
 
 ## Some of these passages are just false positives (e.g. Joshua 8:31).
 ##
@@ -102,9 +112,9 @@ find1 LXX
 ##   (https://en.wikipedia.org/wiki/Book_of_Jasher_(biblical_references), βιβλιου του ευθους).
 ## * I_Kings 8:53 refers to the Book of Song (βιβλιω της ωδης), this is maybe the same book as the Book of Jasher.
 ##
-## Many passages refer to different books (mostly to books that are not considered to be parts of the Old Testament,
+## Many passages refer to different books (mostly to books that are not considered to be canonical parts of the Old Testament,
 ## e.g. Esther 10:2).
 ## Other passages refer to canonized books like Isaiah (e.g. II_Chronicles 32:32).
-## There are, however, no other whole phrases than Deuteronomy 24:16.
+## There seem to be, however, no other whole phrases than Deuteronomy 24:16. TODO: Check the non-canonical entries too.
 
-## Conclusion: The only precursor of "whole phrasing" is Deuteronomy 24:16.
+## Conclusion: The only precursor of "whole phrasing" is Deuteronomy 24:16. TODO: Re-check this.
