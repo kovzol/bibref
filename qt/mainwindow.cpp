@@ -1100,10 +1100,12 @@ void MainWindow::showSwordBibles()
     for (it = manager.Modules.begin(); it != manager.Modules.end(); ++it) {
         if (strcmp((*it).second->getType(), "Biblical Texts") == 0) {
             string moduleName = (*it).second->getName();
-            /*
-            if (moduleName == "LXX" || moduleName == "SBLGNT" || moduleName == "StatResGNT")
-                moduleName = "<b>" + moduleName + "</b>";
-            */ // It is not possible to highlight an item.
+            if (moduleName == "LXX")
+                moduleName= "𝗟𝗫𝗫";
+            if (moduleName == "SBLGNT")
+                moduleName= "𝗦𝗕𝗟𝗚𝗡𝗧";
+            if (moduleName == "StatResGNT")
+                moduleName= "𝗦𝘁𝗮𝘁𝗥𝗲𝘀𝗚𝗡𝗧";
             string moduleVersion = (*it).second->getConfigEntry("Version");
             string moduleDescription = (*it).second->getConfigEntry("Description");
             QString be = QString(moduleName.c_str()).trimmed() + QString(" (")
