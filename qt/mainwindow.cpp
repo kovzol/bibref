@@ -10,6 +10,7 @@
 
 #include "swmgr.h"
 #include "swversion.h"
+#include "markupfiltmgr.h"
 
 #include <boost/algorithm/string/find.hpp>
 #include <boost/algorithm/string/replace.hpp>
@@ -1076,6 +1077,9 @@ void MainWindow::tutorial()
 
 void MainWindow::showSwordBibles()
 {
+    QStringList b;
+
+    /*
     collect_info = "";
     showAvailableBibles();
     // E.g.: "Available Bible editions: KJV, StatResGNT."
@@ -1084,9 +1088,30 @@ void MainWindow::showSwordBibles()
     boost::split(bibles,
                  collect_info.substr(start + 2, collect_info.length() - start - 4),
                  boost::is_any_of(","));
-    QStringList b;
     for (string bible : bibles) {
-        b.append(QString(bible.c_str()).trimmed());
+        QString be = QString(bible.c_str()).trimmed();
+        b.append(be);
+    }
+    */ // Old version, without extra information on the modules
+
+    // Retrieving information directly via SWORD:
+    SWMgr manager(new MarkupFilterMgr(FMT_XHTML));
+    ModMap::iterator it;
+    for (it = manager.Modules.begin(); it != manager.Modules.end(); ++it) {
+        if (strcmp((*it).second->getType(), "Biblical Texts") == 0) {
+            string moduleName = (*it).second->getName();
+            /*
+            if (moduleName == "LXX" || moduleName == "SBLGNT" || moduleName == "StatResGNT")
+                moduleName = "<b>" + moduleName + "</b>";
+            */ // It is not possible to highlight an item.
+            string moduleVersion = (*it).second->getConfigEntry("Version");
+            string moduleDescription = (*it).second->getConfigEntry("Description");
+            QString be = QString(moduleName.c_str()).trimmed() + QString(" (")
+                         + QString(moduleDescription.c_str()) + QString(", version ")
+                         + QString(moduleVersion.c_str())
+                         + QString(")");
+            b.append(be);
+        }
     }
 
     QInputDialog inputDialog;
@@ -1098,7 +1123,7 @@ void MainWindow::showSwordBibles()
     inputDialog.setWindowTitle(tr("Show available Bibles"));
     inputDialog.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     inputDialog.setLabelText(tr("Available Bible editions:"));
-    inputDialog.setFixedSize(20 * size, size / 2);
+    inputDialog.setFixedSize(50 * size, size * b.size() * 2 / 3);
 
     inputDialog.exec();
 }
