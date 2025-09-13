@@ -6,8 +6,10 @@
 #include <QtWidgets>
 #ifndef __EMSCRIPTEN__
 #include <QWebEngineView>
+#include <QWebEngineSettings>
 #endif // __EMSCRIPTEN__
 
+#include <boost/algorithm/string/replace.hpp>
 #include <iostream>
 #include <string>
 #include <graphviz/cdt.h>
@@ -83,6 +85,8 @@ VisualizeWindow::VisualizeWindow(QWidget *parent, string input)
         tile->renderer()->setAspectRatioMode(Qt::KeepAspectRatio);
     } else {
 #ifndef __EMSCRIPTEN__
+        // Don't show hints with single spaces:
+        boost::replace_all(svg_s, "<a xlink:title=\" \">", "<a><title></title>");
         QTemporaryFile file;
         file.setFileTemplate("diagram-XXXXXX.html");
         file.setAutoRemove(false);
@@ -97,6 +101,8 @@ VisualizeWindow::VisualizeWindow(QWidget *parent, string input)
                         + "/" + fileName;
             view->setUrl(QUrl::fromLocalFile(fn));
             view->resize(width, height);
+            view->setContextMenuPolicy(Qt::NoContextMenu);
+            view->setToolTipDuration(0);
             view->show();
             setCentralWidget(view->focusWidget());
         } // else: raise an exception, TODO

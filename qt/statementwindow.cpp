@@ -436,7 +436,6 @@ void StatementWindow::analyze()
     widget->showNormal();
 }
 
-
 void StatementWindow::showSvg()
 {
     auto vwindow = new VisualizeWindow(this, graphviz_input);
@@ -447,6 +446,8 @@ void StatementWindow::showSvg()
         vwindow->resize(30 * size, 15 * size); // this should be refined
     } else {
         vwindow->resize(vwindow->width, vwindow->height);
+        vwindow->setFixedWidth(vwindow->width);
+        vwindow->setFixedHeight(vwindow->height);
     }
     vwindow->showNormal();
     vwindow->setWindowIcon(QIcon::fromTheme("emblem-photos"));
