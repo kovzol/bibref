@@ -99,6 +99,10 @@ VisualizeWindow::VisualizeWindow(QWidget *parent, string input)
             QWebEngineView *view = new QWebEngineView(this);
             QString fn = QDir::currentPath()
                         + "/" + fileName;
+            connect(view, &QWebEngineView::loadFinished, this, [=](){
+                QDir dir;
+                dir.remove(fileName); // remove the temporary file when the web page is loaded
+            });
             view->setUrl(QUrl::fromLocalFile(fn));
             view->resize(width, height);
             view->setContextMenuPolicy(Qt::NoContextMenu);
