@@ -3,7 +3,7 @@
 #include "main.h"
 #include "mainwindow.h"
 #include "settings.h"
-#include "graphviz_version.h"
+#include "graphviz/graphviz_version.h"
 #include "boost/version.hpp"
 
 #include <iostream>
@@ -63,6 +63,7 @@ void copy_sword_files() {
 
 int defaultFontSize;
 bool defaultDebug;
+bool defaultDiagramHtml;
 bool defaultUseKoineGreekFont;
 bool defaultTooltipsGreek;
 int defaultMaxClipboardShow;
@@ -78,6 +79,7 @@ int main(int argc, char *argv[])
 
     defaultFontSize = 9;
     defaultDebug = false;
+    defaultDiagramHtml = false; // experimental
     defaultUseKoineGreekFont = true;
     defaultMaxClipboardShow = 100;
 
@@ -116,6 +118,9 @@ int main(int argc, char *argv[])
         std::cout << "Inconsolata font loaded" << endl;
     }
 
+    cout << "Using Boost " << BOOST_VERSION % 100 << "."
+         << BOOST_VERSION / 100 % 1000 << "." << BOOST_VERSION / 100000 << endl;
+    cout << "Using GraphViz " << PACKAGE_VERSION << endl;
 
     window.showNormal();
 #ifdef __EMSCRIPTEN__
@@ -167,8 +172,4 @@ void setLanguage(QString language)
         qApp->installTranslator(&bibrefTranslator);
     }
     // FIXME: the last item should be inserted in a simpler and more flexible way.
-
-    cout << "Using Boost " << BOOST_VERSION % 100 << "."
-         << BOOST_VERSION / 100 % 1000 << "." << BOOST_VERSION / 100000 << endl;
-    cout << "Using GraphViz " << PACKAGE_VERSION << endl;
 }

@@ -3,6 +3,7 @@
 
 extern int defaultFontSize;
 extern bool defaultDebug;
+extern bool defaultDiagramHtml;
 extern bool defaultUseKoineGreekFont;
 extern bool defaultTooltipsGreek;
 extern int defaultMaxClipboardShow;

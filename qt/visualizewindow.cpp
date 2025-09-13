@@ -1,10 +1,14 @@
 #include "visualizewindow.h"
+#include "settings.h"
 
 #include <QtSvg>
 #include <QSvgWidget>
 #include <QtWidgets>
+#ifndef __EMSCRIPTEN__
+#include <QWebEngineView>
+#endif // __EMSCRIPTEN__
 
-#include <cstdio>
+#include <iostream>
 #include <string>
 #include <graphviz/cdt.h>
 #include <graphviz/cgraph.h>
@@ -23,8 +27,12 @@ VisualizeWindow::VisualizeWindow(QWidget *parent, string input)
     : QMainWindow(parent)
 {
     this->setAttribute(::Qt::WA_DeleteOnClose);
-    tile = new QSvgWidget(this);
-    setCentralWidget(tile);
+    QSettings settings;
+    bool diagramHtml = settings.value("Application/diagramHtml", defaultDiagramHtml).toBool();
+    if (!diagramHtml) {
+        tile = new QSvgWidget(this);
+        setCentralWidget(tile);
+    }
 
     GVC_t *gvc= gvContext();
 #if defined(__MINGW32__) || defined(__APPLE__) || defined(__EMSCRIPTEN__)
@@ -58,6 +66,28 @@ VisualizeWindow::VisualizeWindow(QWidget *parent, string input)
     agclose(g);
     gvFreeContext(gvc);
     string svg_s = string(svg);
-    tile->load(QByteArray::fromStdString(svg_s));
-    tile->renderer()->setAspectRatioMode(Qt::KeepAspectRatio);
+    if (!diagramHtml) {
+        tile->load(QByteArray::fromStdString(svg_s));
+        tile->renderer()->setAspectRatioMode(Qt::KeepAspectRatio);
+    } else {
+#ifndef __EMSCRIPTEN__
+        QTemporaryFile file;
+        file.setFileTemplate("XXXXXX.html");
+        file.setAutoRemove(false);
+        if (file.open()) {
+            QString fileName = file.fileName();
+            file.write("<center>\n"); // This is not valid HTML, but works...
+            file.write(svg_s.c_str());
+            file.write("</center>\n"); // This is not valid HTML, but works...
+            file.flush();
+            QWebEngineView *view = new QWebEngineView(this);
+            QString fn = QDir::currentPath()
+                        + "/" + fileName;
+            view->setUrl(QUrl::fromLocalFile(fn));
+            view->resize(1000, 400);
+            view->show();
+            setCentralWidget(view->focusWidget());
+        } // else: raise an exception, TODO
+#endif // __EMSCRIPTEN__
+    }
 }

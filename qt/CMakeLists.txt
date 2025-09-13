@@ -8,6 +8,11 @@ set(HTML_BUILD_DIR html-output CACHE STRING
 
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Concurrent SvgWidgets)
 
+if(EMSCRIPTEN)
+else()
+find_package(Qt6 REQUIRED COMPONENTS WebEngineWidgets)
+endif(EMSCRIPTEN)
+
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(sword REQUIRED sword)
 
@@ -147,6 +152,7 @@ target_link_libraries(bibref-qt PRIVATE
   Qt6::Widgets
   Qt6::Concurrent
   Qt6::SvgWidgets
+  # Qt6::WebEngineWidgets
   ${SWORD_LIB} ${Boost_LIBRARIES}
   ${gvc_LIB} ${gvpr_LIB} ${cdt_LIB} ${cgraph_LIB} ${xdot_LIB} ${pathplan_LIB}
   ${gvplugin_dot_layout_LIB} ${gvplugin_core_LIB}
@@ -173,6 +179,7 @@ target_link_libraries(bibref-qt PRIVATE
     Qt6::Widgets
     Qt6::Concurrent
     Qt6::SvgWidgets
+    Qt6::WebEngineWidgets
     ${sword_LIBRARIES} ${Boost_LIBRARIES} ${readline_LIBRARIES}
     ${ICU_LIBRARIES} ${LIBLZMA_LIBRARIES} ${ZLIB_LIBRARIES} ${BZIP2_LIBRARIES}
     ${gvc_LIBRARIES} ${EXTRA_LIBS} ${sword_LIBRARIES_folder} ${graphviz_LIBRARIES_folder}

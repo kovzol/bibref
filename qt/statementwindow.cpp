@@ -441,8 +441,13 @@ void StatementWindow::showSvg()
 {
     auto vwindow = new VisualizeWindow(this, graphviz_input);
     QSettings settings;
-    int size = settings.value("Application/fontsize", defaultFontSize).toInt();
-    vwindow->resize(30 * size, 15 * size); // this should be refined
+    bool diagramHtml = settings.value("Application/diagramHtml", defaultDiagramHtml).toBool();
+    if (!diagramHtml) {
+        int size = settings.value("Application/fontsize", defaultFontSize).toInt();
+        vwindow->resize(30 * size, 15 * size); // this should be refined
+    } else {
+        vwindow->resize(1000, 400); // this should be the same as set in VisualizeWindow
+    }
     vwindow->showNormal();
     vwindow->setWindowIcon(QIcon::fromTheme("emblem-photos"));
     vwindow->setWindowTitle(tr("Visualize"));

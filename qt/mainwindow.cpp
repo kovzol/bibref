@@ -1406,6 +1406,7 @@ void MainWindow::preferences()
     QString lang = settings.value("Application/language", "").toString();
     int size = settings.value("Application/fontsize", defaultFontSize).toInt();
     bool debug = settings.value("Application/debug", defaultDebug).toBool();
+    bool diagramHtml = settings.value("Application/diagramHtml", defaultDiagramHtml).toBool();
     bool useKoineGreekFont = settings.value("Application/useKoineGreekFont",
         defaultUseKoineGreekFont).toBool();
     bool tooltipsGreek = settings.value("Application/tooltipsGreek",
@@ -1470,6 +1471,24 @@ void MainWindow::preferences()
     hlayout = new QHBoxLayout;
     hlayout->addWidget(debugLabel);
     hlayout->addWidget(debugCheckbox);
+    hlayout->addStretch(1);
+    layout->addLayout(hlayout, 1);
+
+    /* Show diagram as HTML/SVG: */
+    QLabel *diagramHtmlLabel = new QLabel(tr("Diagram as HTML/SVG:"));
+    string diagramHtmlTip
+        = tr("Show visualized diagram as HTML/SVG")
+              .toStdString();
+    diagramHtmlLabel->setToolTip(tr(diagramHtmlTip.c_str()));
+    QCheckBox *diagramHtmlCheckbox = new QCheckBox(this);
+    diagramHtmlCheckbox->setChecked(diagramHtml);
+#ifdef __EMSCRIPTEN__
+    diagramHtmlCheckbox->setChecked(false);
+    diagramHtmlCheckbox->setEnabled(false); // This does not work at the moment.
+#endif //__EMSCRIPTEN__
+    hlayout = new QHBoxLayout;
+    hlayout->addWidget(diagramHtmlLabel);
+    hlayout->addWidget(diagramHtmlCheckbox);
     hlayout->addStretch(1);
     layout->addLayout(hlayout, 1);
 
@@ -1551,6 +1570,8 @@ void MainWindow::preferences()
         }
         bool debug = debugCheckbox->isChecked();
         settings.setValue("Application/debug", debug);
+        bool diagramHtml = diagramHtmlCheckbox->isChecked();
+        settings.setValue("Application/diagramHtml", diagramHtml);
         bool useKoineGreekFont = useKoineGreekFontCheckbox->isChecked();
         settings.setValue("Application/useKoineGreekFont", useKoineGreekFont);
         bool tooltipsGreek = tooltipsGreekCheckbox->isChecked();
