@@ -34,7 +34,7 @@ jobs:
     - name: prerequisites-qt
       run: |
         sudo apt install qt6-base-dev qt6-tools-dev qt6-tools-dev-tools qt6-l10n-tools \
-                         linguist-qt6 libgl1-mesa-dev freeglut3-dev libgraphviz-dev qt6-svg-dev
+                         linguist-qt6 libgl1-mesa-dev freeglut3-dev libgraphviz-dev qt6-svg-dev qt6-webengine-dev
     - name: make-qt
       run: |
         mkdir qt/build

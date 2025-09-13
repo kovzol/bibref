@@ -72,7 +72,7 @@ VisualizeWindow::VisualizeWindow(QWidget *parent, string input)
     } else {
 #ifndef __EMSCRIPTEN__
         QTemporaryFile file;
-        file.setFileTemplate("XXXXXX.html");
+        file.setFileTemplate("diagram-XXXXXX.html");
         file.setAutoRemove(false);
         if (file.open()) {
             QString fileName = file.fileName();
