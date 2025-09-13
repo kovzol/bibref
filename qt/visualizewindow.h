@@ -13,6 +13,8 @@ class VisualizeWindow : public QMainWindow
 
 public:
     VisualizeWindow(QWidget *parent, string input);
+    int width;
+    int height;
 
 private:
     QSvgWidget *tile;

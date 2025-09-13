@@ -446,7 +446,7 @@ void StatementWindow::showSvg()
         int size = settings.value("Application/fontsize", defaultFontSize).toInt();
         vwindow->resize(30 * size, 15 * size); // this should be refined
     } else {
-        vwindow->resize(1000, 400); // this should be the same as set in VisualizeWindow
+        vwindow->resize(vwindow->width, vwindow->height);
     }
     vwindow->showNormal();
     vwindow->setWindowIcon(QIcon::fromTheme("emblem-photos"));

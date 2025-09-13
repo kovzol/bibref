@@ -66,6 +66,18 @@ VisualizeWindow::VisualizeWindow(QWidget *parent, string input)
     agclose(g);
     gvFreeContext(gvc);
     string svg_s = string(svg);
+
+    // This is used only for diagramHtml (at the moment):
+    int widthPosS = svg_s.find("<svg width=\"") + 12;
+    int widthPosE = svg_s.find("\" height=\"");
+    int heightPosS = widthPosE + 10;
+    int heightPosE = svg_s.find("\"\n viewBox=\"");
+    // Subtract 2 to trim "pt":
+    string widthS = svg_s.substr(widthPosS, widthPosE - widthPosS - 2);
+    string heightS = svg_s.substr(heightPosS, heightPosE - heightPosS - 2);
+    width = stoi(widthS) * 1.4; // a bit higher than 1.3333 (1 pt = 1.3333 px)
+    height = stoi(heightS) * 1.5; // a bit more higher than 1.3333
+
     if (!diagramHtml) {
         tile->load(QByteArray::fromStdString(svg_s));
         tile->renderer()->setAspectRatioMode(Qt::KeepAspectRatio);
@@ -84,7 +96,7 @@ VisualizeWindow::VisualizeWindow(QWidget *parent, string input)
             QString fn = QDir::currentPath()
                         + "/" + fileName;
             view->setUrl(QUrl::fromLocalFile(fn));
-            view->resize(1000, 400);
+            view->resize(width, height);
             view->show();
             setCentralWidget(view->focusWidget());
         } // else: raise an exception, TODO
