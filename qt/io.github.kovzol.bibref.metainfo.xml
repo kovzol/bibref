@@ -62,6 +62,16 @@
   <content_rating type="oars-1.1" />
 
   <releases>
+    <release version="2025-09-14" date="2025-09-14">
+    <url type="details">https://github.com/kovzol/bibref/commits/18d3ef566ed4011d9d919390e8612e55f7e55ed6</url>
+      <description>
+        <p>Release description</p>
+          <ul>
+            <li>Better rendering of HTML/SVG diagrams via Qt's WebEngine (see Edit>Preferences)</li>
+            <li>Description and version numbers of the available Bible editions are listed</li>
+          </ul>
+      </description>
+    </release>
     <release version="2025-08-22" date="2025-08-22">
     <url type="details">https://github.com/kovzol/bibref/commits/b6d0698d58599150b86851d682492947b9c75077</url>
       <description>
