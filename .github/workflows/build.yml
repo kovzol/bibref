@@ -39,7 +39,7 @@ jobs:
       run: |
         mkdir qt/build
         cd qt/build
-        cmake ..
+        cmake -DWEBENGINE=ON ..
         make
     - name: install-emscripten
       run: |
@@ -193,5 +193,5 @@ jobs:
         mkdir build
         cd build
         . /Users/runner/.bash_profile
-        cmake ..
+        cmake -DWEBENGINE=ON ..
         make

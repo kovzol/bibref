@@ -1482,10 +1482,10 @@ void MainWindow::preferences()
     diagramHtmlLabel->setToolTip(tr(diagramHtmlTip.c_str()));
     QCheckBox *diagramHtmlCheckbox = new QCheckBox(this);
     diagramHtmlCheckbox->setChecked(diagramHtml);
-#ifdef __EMSCRIPTEN__
+#ifndef USE_WEBENGINE
     diagramHtmlCheckbox->setChecked(false);
     diagramHtmlCheckbox->setEnabled(false); // This does not work at the moment.
-#endif //__EMSCRIPTEN__
+#endif // USE_WEBENGINE
     hlayout = new QHBoxLayout;
     hlayout->addWidget(diagramHtmlLabel);
     hlayout->addWidget(diagramHtmlCheckbox);

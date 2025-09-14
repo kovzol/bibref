@@ -4,10 +4,10 @@
 #include <QtSvg>
 #include <QSvgWidget>
 #include <QtWidgets>
-#ifndef __EMSCRIPTEN__
+#ifdef USE_WEBENGINE
 #include <QWebEngineView>
 #include <QWebEngineSettings>
-#endif // __EMSCRIPTEN__
+#endif // USE_WEBENGINE
 
 #include <boost/algorithm/string/replace.hpp>
 #include <iostream>
@@ -80,11 +80,17 @@ VisualizeWindow::VisualizeWindow(QWidget *parent, string input)
     width = stoi(widthS) * 1.4; // a bit higher than 1.3333 (1 pt = 1.3333 px)
     height = stoi(heightS) * 1.5; // a bit more higher than 1.3333
 
-    if (!diagramHtml) {
+    if
+#ifdef USE_WEBENGINE
+    (!diagramHtml)
+#else
+    (true)
+#endif
+        {
         tile->load(QByteArray::fromStdString(svg_s));
         tile->renderer()->setAspectRatioMode(Qt::KeepAspectRatio);
     } else {
-#ifndef __EMSCRIPTEN__
+#ifdef USE_WEBENGINE
         // Don't show hints with single spaces:
         boost::replace_all(svg_s, "<a xlink:title=\" \">", "<a><title></title>");
         QTemporaryFile file;
@@ -108,8 +114,8 @@ VisualizeWindow::VisualizeWindow(QWidget *parent, string input)
             view->setContextMenuPolicy(Qt::NoContextMenu);
             view->setToolTipDuration(0);
             view->show();
-            setCentralWidget(view->focusWidget());
+            // setCentralWidget(view->focusWidget());
         } // else: raise an exception, TODO
-#endif // __EMSCRIPTEN__
+#endif // USE_WEBENGINE
     }
 }

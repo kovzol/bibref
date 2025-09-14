@@ -5,13 +5,16 @@ set(BIBREF_ADDBOOKS_CACHE_FOLDER "${CMAKE_CURRENT_SOURCE_DIR}/../bibref-addbooks
  "Set the previously created bibref-addbooks-cache folder for the Emscripten build")
 set(HTML_BUILD_DIR html-output CACHE STRING
  "Set the output folder for the Emscripten build")
+option(WEBENGINE "Use QtWebEngine to show diagrams in HTML/SVG format directly" OFF)
 
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Concurrent SvgWidgets)
 
-if(EMSCRIPTEN)
-else()
+set(QTWEBENGINEWIDGETS "") # default
+if(WEBENGINE)
 find_package(Qt6 REQUIRED COMPONENTS WebEngineWidgets)
-endif(EMSCRIPTEN)
+add_definitions(-DUSE_WEBENGINE)
+set(QTWEBENGINEWIDGETS "Qt6::WebEngineWidgets")
+endif(WEBENGINE)
 
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(sword REQUIRED sword)
@@ -152,7 +155,7 @@ target_link_libraries(bibref-qt PRIVATE
   Qt6::Widgets
   Qt6::Concurrent
   Qt6::SvgWidgets
-  # Qt6::WebEngineWidgets
+  # Qt6::WebEngineWidgets # or ${QTWEBENGINEWIDGETS}, maybe it will be supported in the future...
   ${SWORD_LIB} ${Boost_LIBRARIES}
   ${gvc_LIB} ${gvpr_LIB} ${cdt_LIB} ${cgraph_LIB} ${xdot_LIB} ${pathplan_LIB}
   ${gvplugin_dot_layout_LIB} ${gvplugin_core_LIB}
@@ -179,7 +182,7 @@ target_link_libraries(bibref-qt PRIVATE
     Qt6::Widgets
     Qt6::Concurrent
     Qt6::SvgWidgets
-    Qt6::WebEngineWidgets
+    ${QTWEBENGINEWIDGETS}
     ${sword_LIBRARIES} ${Boost_LIBRARIES} ${readline_LIBRARIES}
     ${ICU_LIBRARIES} ${LIBLZMA_LIBRARIES} ${ZLIB_LIBRARIES} ${BZIP2_LIBRARIES}
     ${gvc_LIBRARIES} ${EXTRA_LIBS} ${sword_LIBRARIES_folder} ${graphviz_LIBRARIES_folder}

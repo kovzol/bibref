@@ -79,7 +79,7 @@ int main(int argc, char *argv[])
 
     defaultFontSize = 9;
     defaultDebug = false;
-    defaultDiagramHtml = false; // experimental
+    defaultDiagramHtml = true;
     defaultUseKoineGreekFont = true;
     defaultMaxClipboardShow = 100;
 
