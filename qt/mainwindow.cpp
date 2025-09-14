@@ -1108,6 +1108,9 @@ void MainWindow::showSwordBibles()
                 moduleName= "𝗦𝘁𝗮𝘁𝗥𝗲𝘀𝗚𝗡𝗧";
             string moduleVersion = (*it).second->getConfigEntry("Version");
             string moduleDescription = (*it).second->getConfigEntry("Description");
+            // Remove extra spaces:
+            moduleDescription = (QString::fromStdString(moduleDescription).
+                                 replace(QRegularExpression("\\s+"), QString(" "))).toStdString();
             QString be = QString(moduleName.c_str()).trimmed() + QString(" (")
                          + QString(moduleDescription.c_str()) + QString(", version ")
                          + QString(moduleVersion.c_str())
@@ -1125,7 +1128,7 @@ void MainWindow::showSwordBibles()
     inputDialog.setWindowTitle(tr("Show available Bibles"));
     inputDialog.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     inputDialog.setLabelText(tr("Available Bible editions:"));
-    inputDialog.setFixedSize(50 * size, size * b.size() * 2 / 3);
+    inputDialog.setFixedSize(70 * size, size * b.size() * 1.5);
 
     inputDialog.exec();
 }
