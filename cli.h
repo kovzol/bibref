@@ -1,7 +1,10 @@
 #ifndef CLI_H
 #define CLI_H
 
+// This should be overridden on certain builds (by the Qt build):
+#ifndef BIBREF_VERSION
 #define BIBREF_VERSION "2025-08-22"
+#endif
 
 #include <string>
 
