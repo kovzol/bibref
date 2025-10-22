@@ -110,6 +110,11 @@ VisualizeWindow::VisualizeWindow(QWidget *parent, string input)
                 dir.remove(fileName); // remove the temporary file when the web page is loaded
             });
             view->setUrl(QUrl::fromLocalFile(fn));
+            int size = settings.value("Application/fontsize", defaultFontSize).toInt();
+            double zoomFactor = size/defaultFontSize;
+            view->setZoomFactor(zoomFactor);
+            width *= zoomFactor;
+            height *= zoomFactor;
             view->resize(width, height);
             view->setContextMenuPolicy(Qt::NoContextMenu);
             view->setToolTipDuration(0);
