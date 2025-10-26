@@ -920,7 +920,8 @@ void MainWindow::aboutOther()
             .arg(BIBREF_VERSION)
             .arg(QSysInfo::kernelType() + " " +
             QSysInfo::buildCpuArchitecture() + ", Qt " + QT_VERSION_STR)
-            .arg(to_string(BOOST_VERSION % 100) + "." + to_string(BOOST_VERSION / 100 % 1000) + "." + to_string(BOOST_VERSION / 100000))
+            .arg(QString::fromStdString(
+                to_string(BOOST_VERSION % 100) + "." + to_string(BOOST_VERSION / 100 % 1000) + "." + to_string(BOOST_VERSION / 100000)))
             .arg(PACKAGE_VERSION));
 }
 
