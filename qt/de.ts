@@ -17,566 +17,586 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.cpp" line="54"/>
+        <location filename="mainwindow.cpp" line="55"/>
         <source>Contents of the clipboards in Greek (and in a-z notation)</source>
         <translation>Inhalte der Zwischenablagen auf Griechisch (und in a-z-Notation)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="58"/>
+        <location filename="mainwindow.cpp" line="59"/>
         <source>Clipboard %1 is empty.</source>
         <translation>Zwischenablage %1 ist leer.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="71"/>
+        <location filename="mainwindow.cpp" line="72"/>
         <source>Clipboard %1 contains %2 (%3), length %4.</source>
         <translation>Zwischenablage %1 enthält %2 (%3), Länge %4.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="80"/>
+        <location filename="mainwindow.cpp" line="81"/>
         <source>Their Jaccard distance is %1.</source>
         <translation>Ihr Jaccard-Abstand beträgt %1.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="97"/>
+        <location filename="mainwindow.cpp" line="98"/>
         <source>Show information on the two clipboards.</source>
         <translation>Informationen über die beiden Zwischenablagen anzeigen.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="104"/>
+        <location filename="mainwindow.cpp" line="105"/>
         <source>Show detailed information on lookups and searches.</source>
         <translation>Detaillierte Informationen zu Nachschlagen und Suchen anzeigen.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="115"/>
+        <location filename="mainwindow.cpp" line="116"/>
         <source>Welcome to bibref!</source>
         <translation>Willkommen bei bibref!</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="135"/>
+        <location filename="mainwindow.cpp" line="136"/>
         <source>Bibles are loaded.</source>
         <translation>Bibeltexte sind geladen.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="172"/>
+        <location filename="mainwindow.cpp" line="173"/>
         <source>Finished.</source>
         <translation>Fertig.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="189"/>
-        <location filename="mainwindow.cpp" line="889"/>
+        <location filename="mainwindow.cpp" line="190"/>
+        <location filename="mainwindow.cpp" line="890"/>
         <source>Please wait...</source>
         <translation>Bitte warten…</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="198"/>
+        <location filename="mainwindow.cpp" line="199"/>
         <source>Greek text:</source>
         <translation>Griechischer Text:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="238"/>
+        <location filename="mainwindow.cpp" line="239"/>
         <source>Text does not contain Greek letters, ignored.</source>
         <translation>Text enthält keine griechischen Buchstaben, ignoriert.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="261"/>
+        <location filename="mainwindow.cpp" line="262"/>
         <source>Latin text:</source>
         <translation>Lateinischer Text:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="310"/>
+        <location filename="mainwindow.cpp" line="311"/>
         <source>Both clipboards must contain at least 2 characters.</source>
         <translation>Beide Zwischenablagen müssen mindestens 2 Zeichen enthalten.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="328"/>
+        <location filename="mainwindow.cpp" line="329"/>
         <source>Syntax:</source>
         <translation>Syntax:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="343"/>
-        <location filename="mainwindow.cpp" line="382"/>
-        <location filename="mainwindow.cpp" line="479"/>
+        <location filename="mainwindow.cpp" line="344"/>
+        <location filename="mainwindow.cpp" line="383"/>
+        <location filename="mainwindow.cpp" line="480"/>
         <source>Verse:</source>
         <translation>Vers:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="371"/>
-        <location filename="mainwindow.cpp" line="410"/>
+        <location filename="mainwindow.cpp" line="372"/>
+        <location filename="mainwindow.cpp" line="411"/>
         <source>Invalid input (3 words are needed: Bible edition, book, chapter:verse).</source>
         <translation>Ungültige Eingabe (3 Wörter erforderlich: Bibelausgabe, Buch, Kapitel:Vers).</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="402"/>
+        <location filename="mainwindow.cpp" line="403"/>
         <source>tokens</source>
         <translation>Token</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="406"/>
-        <location filename="mainwindow.cpp" line="797"/>
-        <location filename="mainwindow.cpp" line="859"/>
-        <location filename="mainwindow.cpp" line="874"/>
-        <location filename="mainwindow.cpp" line="893"/>
+        <location filename="mainwindow.cpp" line="407"/>
+        <location filename="mainwindow.cpp" line="798"/>
+        <location filename="mainwindow.cpp" line="860"/>
+        <location filename="mainwindow.cpp" line="875"/>
+        <location filename="mainwindow.cpp" line="894"/>
         <source>Computation error.</source>
         <translation>Berechnungsfehler.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="420"/>
-        <location filename="mainwindow.cpp" line="548"/>
-        <location filename="mainwindow.cpp" line="581"/>
-        <location filename="mainwindow.cpp" line="745"/>
-        <location filename="mainwindow.cpp" line="821"/>
+        <location filename="mainwindow.cpp" line="421"/>
+        <location filename="mainwindow.cpp" line="549"/>
+        <location filename="mainwindow.cpp" line="582"/>
+        <location filename="mainwindow.cpp" line="746"/>
+        <location filename="mainwindow.cpp" line="822"/>
         <source>Parameters:</source>
         <translation>Parameter:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="453"/>
+        <location filename="mainwindow.cpp" line="454"/>
         <source>%1 tokens given, search for an extension of max. %2 tokens.</source>
         <translation>%1 Token angegeben, Suche nach einer Erweiterung von maximal %2 Token.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="458"/>
+        <location filename="mainwindow.cpp" line="459"/>
         <source>Impossible.</source>
         <translation>Unmöglich.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="500"/>
-        <location filename="mainwindow.cpp" line="524"/>
-        <location filename="mainwindow.cpp" line="605"/>
+        <location filename="mainwindow.cpp" line="501"/>
+        <location filename="mainwindow.cpp" line="525"/>
+        <location filename="mainwindow.cpp" line="606"/>
         <source>Stored.</source>
         <translation>Gespeichert.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="503"/>
-        <location filename="mainwindow.cpp" line="527"/>
+        <location filename="mainwindow.cpp" line="504"/>
+        <location filename="mainwindow.cpp" line="528"/>
         <source>Unsuccessful lookup.</source>
         <translation>Erfolgloses Nachschlagen.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="531"/>
+        <location filename="mainwindow.cpp" line="532"/>
         <source>Wrong amount of parameters is given.</source>
         <translation>Falsche Anzahl von Parametern angegeben.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="572"/>
+        <location filename="mainwindow.cpp" line="573"/>
         <source>Wrong amount of parameters.</source>
         <translation>Falsche Anzahl von Parametern.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="609"/>
+        <location filename="mainwindow.cpp" line="610"/>
         <source>Error in the parameters.</source>
         <translation>Fehler in den Parametern.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="613"/>
-        <location filename="mainwindow.cpp" line="770"/>
-        <location filename="mainwindow.cpp" line="836"/>
+        <location filename="mainwindow.cpp" line="614"/>
+        <location filename="mainwindow.cpp" line="771"/>
+        <location filename="mainwindow.cpp" line="837"/>
         <source>Wrong number of parameters.</source>
         <translation>Falsche Anzahl von Parametern.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="648"/>
-        <location filename="mainwindow.cpp" line="689"/>
+        <location filename="mainwindow.cpp" line="649"/>
+        <location filename="mainwindow.cpp" line="690"/>
         <source>Clipboard is empty, no search possible.</source>
         <translation>Zwischenablage ist leer, keine Suche möglich.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="660"/>
-        <location filename="mainwindow.cpp" line="701"/>
+        <location filename="mainwindow.cpp" line="661"/>
+        <location filename="mainwindow.cpp" line="702"/>
         <source>Select a Bible edition:</source>
         <translation>Wähle eine Bibelausgabe:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="678"/>
+        <location filename="mainwindow.cpp" line="679"/>
         <source>Minimal unique subtexts of %1 in %2</source>
         <translation>Minimale eindeutige Untertexte von %1 in %2</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="720"/>
+        <location filename="mainwindow.cpp" line="721"/>
         <source>Searching for %1 in %2</source>
         <translation>Suche nach %1 in %2</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="844"/>
+        <location filename="mainwindow.cpp" line="845"/>
         <source>Getting references from full books is not yet implemented, sorry.</source>
         <translation>Das Abrufen von Referenzen aus vollständigen Büchern ist noch nicht implementiert, entschuldigen Sie bitte.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="903"/>
+        <location filename="mainwindow.cpp" line="904"/>
         <source>About bibref</source>
         <translation>Über bibref</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="904"/>
+        <location filename="mainwindow.cpp" line="905"/>
         <source>&lt;a href=&quot;https://github.com/kovzol/bibref&quot;&gt;bibref&lt;/a&gt; is a tool that helps discovering internal references in the Bible.&lt;br&gt;It aims at finding quotations of the &lt;a href=&quot;https://en.wikipedia.org/wiki/Septuagint&quot;&gt;Septuagint&lt;/a&gt; in the &lt;a href=&quot;https://en.wikipedia.org/wiki/New_Testament&quot;&gt;Greek New Testament&lt;/a&gt; in a mechanical way.</source>
         <translation>&lt;a href=&quot;https://github.com/kovzol/bibref&quot;&gt;bibref&lt;/a&gt; ist ein Werkzeug, das dabei hilft, interne Bezüge in der Bibel zu entdecken.&lt;br&gt;Es hat zum Ziel, Zitate der &lt;a href=&quot;https://de.wikipedia.org/wiki/Septuaginta&quot;&gt;Septuaginta&lt;/a&gt; im &lt;a href=&quot;https://de.wikipedia.org/wiki/Neues_Testament&quot;&gt;griechischen Neuen Testament&lt;/a&gt; auf mechanische Weise zu finden.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="935"/>
+        <location filename="mainwindow.cpp" line="917"/>
+        <source>Technical information</source>
+        <translation>Technische Informationen</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="918"/>
+        <source>The version %0 (%1) of the bibref program you are currently running is built with Boost %2 and GraphViz %3.</source>
+        <translation>Die verwendete Version %0 (%1) von bibref wurde mit Boost %2 und GraphViz %3 kompiliert.</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="950"/>
         <source>&lt;a href=&quot;https://www.crosswire.org/sword/index.jsp&quot;&gt;The SWORD Project&lt;/a&gt; is an effort to create an ever-expanding software package for research and study of God and His Word. The SWORD Project framework allows easy use and study of Bible texts, commentaries, lexicons, dictionaries, and other books. Many frontends are built using this framework. An installed set of books may be shared among all frontends using the framework.</source>
         <translation>&lt;a href=&quot;https://www.crosswire.org/sword/index.jsp&quot;&gt;Das SWORD-Projekt&lt;/a&gt; ist ein Bemühen, ein ständig wachsendes Softwarepaket für die Erforschung und das Studium von Gottes Wort zu schaffen. Das SWORD-Framework ermöglicht eine einfache Nutzung und das Studium von Bibeltexten, Kommentaren, Lexika, Wörterbüchern und anderen Büchern. Viele Oberflächen basieren auf diesem Framework. Ein installiertes Set von Büchern kann von allen Oberflächen, die dieses Framework verwenden, gemeinsam genutzt werden.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="942"/>
+        <location filename="mainwindow.cpp" line="957"/>
         <source>This program uses version %1 of the SWORD library.</source>
         <translation>Dieses Programm verwendet Version %1 der SWORD-Bibliothek.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="948"/>
+        <location filename="mainwindow.cpp" line="963"/>
         <source>About SWORD</source>
         <translation>Über SWORD</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="969"/>
+        <location filename="mainwindow.cpp" line="984"/>
         <source>Introduction</source>
         <translation>Einführung</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="970"/>
+        <location filename="mainwindow.cpp" line="985"/>
         <source>This Bible study tool offers work on texts that are close to the oldest manuscripts. Since there are no punctuation (spaces, commas, periods) in the old texts, and there is no verse numbering, we consider each book of a Bible edition as a continuous raw text of Greek characters from α to ω. (To simplify working with texts, Greek characters are transcribed to latin characters a-z.)</source>
         <translation>Dieses Bibelstudienwerkzeug arbeitet mit Texten, die den ältesten Handschriften sehr nahekommen. Da die alten Texte keine Interpunktion (Leerzeichen, Kommas, Punkte) enthalten und keine Versnummerierung besitzen, wird jedes Buch einer Bibelausgabe als durchgehender Rohtext griechischer Zeichen von α bis ω betrachtet. (Um die Arbeit mit den Texten zu vereinfachen, werden die griechischen Buchstaben in die lateinischen Zeichen a–z transkribiert.)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="978"/>
+        <location filename="mainwindow.cpp" line="993"/>
         <source>A Bible edition is defined as an old compilation of books that are considered canonical. Definitely, we work with a set of Old Testament books, translated into Greek and presented as the electronic version of the Septuagint, identified with the name &lt;a href=&quot;https://www.crosswire.org/sword/modules/ModInfo.jsp?modName=LXX&quot;&gt;LXX&lt;/a&gt;. Also, a set of Greek New Testament books are present, identified with the name &lt;a href=&quot;https://www.crosswire.org/sword/modules/ModInfo.jsp?modName=StatResGNT&quot;&gt;StatResGNT&lt;/a&gt;.</source>
         <translation>Eine Bibelausgabe ist eine alte Zusammenstellung von Büchern, die als kanonisch gelten. Konkret arbeiten wir mit einer Reihe von Büchern des Alten Testaments, die ins Griechische übersetzt wurden und als elektronische Version der Septuaginta vorliegen, mit dem Namen &lt;a href=&quot;https://www.crosswire.org/sword/modules/ModInfo.jsp?modName=LXX&quot;&gt;LXX&lt;/a&gt;. Ebenso sind eine Reihe von Büchern des griechischen Neuen Testaments enthalten, die unter dem Namen &lt;a href=&quot;https://www.crosswire.org/sword/modules/ModInfo.jsp?modName=StatResGNT&quot;&gt;StatResGNT&lt;/a&gt; verfügbar sind.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="989"/>
+        <location filename="mainwindow.cpp" line="1004"/>
         <source>Research questions like &lt;i&gt;Is an Old Testament passage quoted properly?&lt;/i&gt; can be studied with this program. Non-punctuated texts can be compared without loading Bible databases. Also, if the default databases are loaded (via File&amp;gt;Add books), Greek Bible texts can also be compared directly.</source>
         <translation>Forschungsfragen wie &lt;i&gt;Wird eine Passage des Alten Testaments korrekt zitiert?&lt;/i&gt; können mit diesem Programm untersucht werden. Unpunktierte Texte lassen sich vergleichen, ohne Bibeldatenbanken zu laden. Wenn die Standarddatenbanken geladen sind (über Datei&amp;gt;Add books), können griechische Bibeltexte auch direkt verglichen werden.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="995"/>
+        <location filename="mainwindow.cpp" line="1010"/>
         <source>The program is command-driven. Its graphical user interface follows the conventions of the terminal based application. Therefore, the commands provided by the menus are literally the same as in the terminal based application and not translated into other languages, either.</source>
         <translation>Das Programm ist befehlsorientiert. Seine grafische Benutzeroberfläche folgt den Konventionen der terminalbasierten Anwendung. Daher sind die im Menü bereitgestellten Befehle buchstäblich dieselben wie in der terminalbasierten Anwendung und werden auch nicht in andere Sprachen übersetzt.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="999"/>
+        <location filename="mainwindow.cpp" line="1014"/>
         <source>Example uses</source>
         <translation>Beispiele</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1000"/>
+        <location filename="mainwindow.cpp" line="1015"/>
         <source>In Romans 2:21 Paul seems to quote the Law. In the program in menu Passage&amp;gt;Lookup… the user types &lt;b&gt;KJV Romans 2:21&lt;/b&gt; to check the English version of the text, and similarly, &lt;b&gt;StatResGNT Romans 2:21&lt;/b&gt; to get the Greek version. (Importantly, the modules KJV and StatResGNT need to be installed by the system administrator in advance. See Help&amp;gt;Show available Bibles… for your options in simple lookups.) By doing the same for Romans 2:22, and for LXX Exodus 20:13 and 20:14, the user decides to compare the Greek texts &lt;b&gt;ου μοιχευσεις ου κλεψεις&lt;/b&gt; and &lt;b&gt;κλεπτεις ο λεγων μη μοιχευειν μοιχευεις&lt;/b&gt;. These should be copied and pasted in Edit&amp;gt;Text 1… and Edit&amp;gt;Text 2… After then, the program informs the user that the two texts have a Jaccard distance near 0.63 (which is a substantial distance).</source>
         <translation>In Römer 2:21 scheint Paulus das Gesetz zu zitieren. Im Programm gibt der Benutzer im Menü Passage&amp;gt;Lookup… &lt;b&gt;KJV Romans 2:21&lt;/b&gt; ein, um die englische Version des Textes zu prüfen, und entsprechend &lt;b&gt;StatResGNT Romans 2:21&lt;/b&gt;, um die griechische Version zu erhalten. (Wichtig: Die Module KJV und StatResGNT müssen zuvor vom Systemadministrator installiert werden. Siehe Hilfe&amp;gt;Verfügbare Bibeln anzeigen… für Ihre Möglichkeiten bei einfachen Abfragen.) Durch denselben Vorgang für Römer 2:22 sowie für LXX Exodus 20:13 und 20:14 beschließt der Benutzer, die griechischen Texte &lt;b&gt;ου μοιχευσεις ου κλεψεις&lt;/b&gt; und &lt;b&gt;κλεπτεις ο λεγων μη μοιχευειν μοιχευεις&lt;/b&gt; zu vergleichen. Diese sollten in Bearbeiten&amp;gt;Text 1… und Bearbeiten&amp;gt;Text 2… kopiert und eingefügt werden. Anschließend informiert das Programm den Benutzer, dass die beiden Texte eine Jaccard-Distanz von etwa 0,63 haben (was eine beträchtliche Distanz ist).</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1014"/>
+        <location filename="mainwindow.cpp" line="1029"/>
         <source>The words κλεψεις and κλεπτεις are similar. In the a-z transcription they are shown as &lt;b&gt;kleceis&lt;/b&gt; and &lt;b&gt;klepteis&lt;/b&gt;. The user may want to enter these words with their a-z transcriptions in Edit&amp;gt;Latin Text 1… and Edit&amp;gt;Latin Text 2… Their Jaccard distance is near 0.42 (which is a bit closer).</source>
         <translation>Die Wörter κλεψεις und κλεπτεις sind ähnlich. In der a-z-Transkription erscheinen sie als &lt;b&gt;kleceis&lt;/b&gt; und &lt;b&gt;klepteis&lt;/b&gt;. Der Benutzer kann diese Wörter mitsamt ihren a-z-Transkriptionen in Bearbeiten&amp;gt;Latin Text 1… und Bearbeiten&amp;gt;Latin Text 2… eingeben. Ihre Jaccard-Distanz beträgt etwa 0,42 (was etwas näher ist).</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1020"/>
+        <location filename="mainwindow.cpp" line="1035"/>
         <source>Now, the user loads the indexed Bibles via File&amp;gt;Add books. Several features of the program can be used from now on. For example, the user can put the a-z transcription of a part of Psalms 39:14-18 and 69:1-6 in the two clipboards. (Note that these texts are numbered as 40:14-18 and 70:1-6 in some Bible editions.) This is achievable via Passage&amp;gt;Lookup 1… and Passage&amp;gt;Lookup 2… by typing &lt;b&gt;LXX Psalms 39:14+23 39:18&lt;/b&gt; and &lt;b&gt;LXX Psalms 69:1+37 69:6&lt;/b&gt;, respectively. This notation allows to cut the first 23 or 37 letters of the passages. (Analogously, appending a number with a minus sign to the end of the passage definition, it is possible to cut some of the last letters of the passages.) The Jaccard distance is near 0.19 (which means a close relationship).</source>
         <translation>Nun lädt der Benutzer die indizierten Bibeln über Datei&amp;gt;Add books hinzufügen. Ab jetzt können mehrere Funktionen des Programms genutzt werden. Zum Beispiel kann der Benutzer die a-z-Transkription eines Teils von Psalm 39:14–18 und 69:1–6 in die beiden Zwischenablagen legen. (Beachten Sie, dass diese Texte in einigen Bibelausgaben als 40:14–18 und 70:1–6 nummeriert sind.) Dies ist über Passage&amp;gt;Lookup 1… und Passage&amp;gt;Lookup 2… möglich, indem man &lt;b&gt;LXX Psalms 39:14+23 39:18&lt;/b&gt; bzw. &lt;b&gt;LXX Psalms 69:1+37 69:6&lt;/b&gt; eingibt. Diese Notation ermöglicht es, die ersten 23 bzw. 37 Buchstaben der Stellen abzuschneiden. (Analog dazu kann durch Anhängen einer Zahl mit Minuszeichen am Ende der Passage einige der letzten Buchstaben abgeschnitten werden.) Die Jaccard-Distanz beträgt etwa 0,19 (was eine enge Beziehung bedeutet).</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1034"/>
+        <location filename="mainwindow.cpp" line="1049"/>
         <source>The user wants to check if Exodus 20:13 is repeated in the Old Testament. By putting this passage in Passage&amp;gt;Lookup 1… by typing &lt;b&gt;LXX Exodus 20:13&lt;/b&gt; it is possible to start a search for an exact match via Edit&amp;gt;Search 1… By selecting &lt;b&gt;LXX&lt;/b&gt;, the program finds another match in Deuteronomy 5:17. Book position 19880-19891 means that the second match can be found in Raw&amp;gt;Raw… by entering &lt;b&gt;LXX Deuteronomy 19880 12&lt;/b&gt; (here 12 is the length), or stored in clipboard 2 with the same input in Raw&amp;gt;Raw 2… Here, the Jaccard distance of the texts in the clipboards is 0 (because they are identical).</source>
         <translation>Der Benutzer möchte prüfen, ob Exodus 20:13 im Alten Testament wiederholt wird. Durch Eingabe dieser Stelle in Passage&amp;gt;Lookup 1… mit &lt;b&gt;LXX Exodus 20:13&lt;/b&gt; kann eine Suche nach einem exakten Treffer über Bearbeiten&amp;gt;Suche 1… gestartet werden. Bei Auswahl von &lt;b&gt;LXX&lt;/b&gt; findet das Programm einen weiteren Treffer in Deuteronomium 5:17. Die Buchposition 19880–19891 bedeutet, dass der zweite Treffer in Roh&amp;gt;Raw… gefunden werden kann, indem man &lt;b&gt;LXX Deuteronomy 19880 12&lt;/b&gt; eingibt (hier ist 12 die Länge), oder mit demselben Input in Roh&amp;gt;Raw 2… in Zwischenablage 2 gespeichert wird. Hier beträgt die Jaccard-Distanz der Texte in den Zwischenablagen 0 (weil sie identisch sind).</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1045"/>
+        <location filename="mainwindow.cpp" line="1060"/>
         <source>The user thinks that parts of Psalm 116 are quoted somewhere in the New Testament. The command Quotation&amp;gt;Get refs… with parameters &lt;b&gt;StatResGNT LXX Psalms 116&lt;/b&gt; starts a search for all possible matches where the Old Testament passage can be a unique text that is quoted in the New Testament. Here, Romans 15:11 seems to be a plausible result.</source>
         <translation>Der Benutzer vermutet, dass Teile von Psalm 116 irgendwo im Neuen Testament zitiert werden. Der Befehl Zitat&amp;gt;Get refs… mit den Parametern &lt;b&gt;StatResGNT LXX Psalms 116&lt;/b&gt; startet eine Suche nach allen möglichen Übereinstimmungen, bei denen die alttestamentliche Stelle ein einzigartiger Text ist, der im Neuen Testament zitiert wird. Hier scheint Römer 15:11 ein plausibles Ergebnis zu sein.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1053"/>
+        <location filename="mainwindow.cpp" line="1068"/>
         <source>The user would like to identify the quotation mentioned by Paul in I Corinthians 1:31. This is a difficult task, so a tokenized transcription of the verse is obtained via the command Passage&amp;gt;Tokens… with parameters &lt;b&gt;StatResGNT I_Corinthians 1:31&lt;/b&gt; (note the underscore) and the tokens 2443 2531 1125 3588 2744 1722 2962 2744 are shown. (Currently, these are &lt;a href=&quot;https://en.wikipedia.org/wiki/Strong%27s_Concordance#Strong&apos;s_numbers&quot;&gt;Strong&apos;s numbers&lt;/a&gt;.) After checking these numbers, 2744, 1722 and 2962 seem relevant. A search via Edit&amp;gt;Search… with parameters &lt;b&gt;LXX 2744 1722 2962 6&lt;/b&gt; shows that on a length of 6 tokens there is only one match in the Old Testament, namely, in Jeremiah 9:22, and, among the deuterocanonical books, in Sirach 39:8. Another search with parameters &lt;b&gt;StatResGNT 2744 1722 2962 3&lt;/b&gt; informs the user on a second match in the New Testament, namely, in II Corinthians 10:17.</source>
         <translation>Der Benutzer möchte das von Paulus in 1. Korinther 1:31 erwähnte Zitat identifizieren. Dies ist eine schwierige Aufgabe, daher wird eine tokenisierte Transkription des Verses über den Befehl Passage&amp;gt;Tokens… mit den Parametern &lt;b&gt;StatResGNT I_Corinthians 1:31&lt;/b&gt; (beachten Sie den Unterstrich) erzeugt, und die Token 2443 2531 1125 3588 2744 1722 2962 2744 werden angezeigt. (Derzeit handelt es sich um &lt;a href=&quot;https://en.wikipedia.org/wiki/Strong%27s_Concordance#Strong&apos;s_numbers&gt;Strong-Nummern&lt;/a&gt;.) Nach Prüfung dieser Nummern scheinen 2744, 1722 und 2962 relevant zu sein. Eine Suche über Bearbeiten&gt;Suche… mit den Parametern &lt;b&gt;LXX 2744 1722 2962 6&lt;/b&gt; zeigt, dass es mit einer Länge von 6 Token nur einen Treffer im Alten Testament gibt, nämlich in Jeremia 9:22 und unter den deuterokanonischen Büchern in Sirach 39:8. Eine weitere Suche mit den Parametern &lt;b&gt;StatResGNT 2744 1722 2962 3&lt;/b&gt; informiert den Benutzer über einen zweiten Treffer im Neuen Testament, nämlich in 2. Korinther 10:17.</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1074"/>
+        <location filename="mainwindow.cpp" line="1089"/>
         <source>Quick tutorial</source>
         <translation>Kurzanleitung</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1125"/>
+        <location filename="mainwindow.cpp" line="1143"/>
         <source>Show available Bibles</source>
         <translation>Verfügbare Bibeln anzeigen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1127"/>
+        <location filename="mainwindow.cpp" line="1145"/>
         <source>Available Bible editions:</source>
         <translation>Verfügbare Bibelausgaben:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1152"/>
+        <location filename="mainwindow.cpp" line="1170"/>
         <source>Load and index the default Bible editions</source>
         <translation>Standard-Bibelausgaben laden und indizieren</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1158"/>
+        <location filename="mainwindow.cpp" line="1176"/>
         <source>Exit the application</source>
         <translation>Anwendung beenden</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1162"/>
+        <location filename="mainwindow.cpp" line="1180"/>
         <source>Define a Greek text and put its Latin transcription in clipboard %1</source>
         <translation>Griechischen Text definieren und dessen lateinische Transkription in die Zwischenablage %1 einfügen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1173"/>
+        <location filename="mainwindow.cpp" line="1191"/>
         <source>Put a Latin (a-z) transcription in clipboard %1</source>
         <translation>Lateinische (a-z) Transkription in die Zwischenablage %1 einfügen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1185"/>
+        <location filename="mainwindow.cpp" line="1203"/>
         <source>Find the nearest subtext of clipboard 1 to clipboard 2</source>
         <translation>Nächstgelegenen Untertext von Zwischenablage 1 zu Zwischenablage 2 suchen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1191"/>
+        <location filename="mainwindow.cpp" line="1209"/>
         <source>Search for the text of clipboard %1 in a Bible</source>
         <translation>Nach dem Text der Zwischenablage %1 in einer Bibel suchen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1210"/>
+        <location filename="mainwindow.cpp" line="1228"/>
         <source>Search for minimal unique passages in clipboard 1 in a Bible</source>
         <translation>Nach minimalen eindeutigen Passagen in der Zwischenablage 1 in einer Bibel suchen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1219"/>
+        <location filename="mainwindow.cpp" line="1237"/>
         <source>Extend a passage to the longest possible quotation from another Bible</source>
         <translation>Eine Passage auf das längste mögliche Zitat aus einer anderen Bibel erweitern</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1228"/>
+        <location filename="mainwindow.cpp" line="1246"/>
         <source>Search for references in a Bible on the passage in another Bible</source>
         <translation>In einer Bibel nach Verweisen auf die Passage in einer anderen Bibel suchen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1237"/>
+        <location filename="mainwindow.cpp" line="1255"/>
         <source>Open a text editor to edit a statement</source>
         <translation>Einen Texteditor öffnen, um eine Aussage zu bearbeiten</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1245"/>
+        <location filename="mainwindow.cpp" line="1263"/>
         <source>Search for a verse in a book in the given Bible</source>
         <translation>Suche nach einem Vers in einem Buch in der angegebenen Bibel</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1249"/>
+        <location filename="mainwindow.cpp" line="1267"/>
         <source>Search for a passage in a book in the given Bible and put it in clipboard %1</source>
         <translation>Suche nach einer Passage in einem Buch in der angegebenen Bibel und füge sie in die Zwischenablage %1 ein</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1267"/>
+        <location filename="mainwindow.cpp" line="1285"/>
         <source>Search for a tokenized verse in a book in the given Bible</source>
         <translation>Suche nach einem tokenisierten Vers in einem Buch in der angegebenen Bibel</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1275"/>
+        <location filename="mainwindow.cpp" line="1293"/>
         <source>Search for a set of tokens on a maximal length in a Bible</source>
         <translation>Suche nach einer Menge von Tokens mit maximaler Länge in einer Bibel</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1281"/>
+        <location filename="mainwindow.cpp" line="1299"/>
         <source>Pr&amp;eferences…</source>
         <translation>&amp;Einstellungen…</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1283"/>
+        <location filename="mainwindow.cpp" line="1301"/>
         <source>Set preferences in the application</source>
         <translation>Einstellungen in der Anwendung festlegen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1288"/>
+        <location filename="mainwindow.cpp" line="1306"/>
         <source>Show the a-z transcription of a positioned text in a given book</source>
         <translation>Die a-z-Transkription eines positionierten Textes in einem bestimmten Buch anzeigen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1295"/>
+        <location filename="mainwindow.cpp" line="1313"/>
         <source>Put the a-z transcription of a positioned text in a given book in clipboard %1</source>
         <translation>Die a-z-Transkription eines positionierten Textes in einem bestimmten Buch in die Zwischenablage %1 einfügen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1311"/>
+        <location filename="mainwindow.cpp" line="1329"/>
         <source>About &amp;bibref…</source>
         <translation>Über &amp;bibref…</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1313"/>
+        <location filename="mainwindow.cpp" line="1331"/>
         <source>Show a short description of the program</source>
         <translation>Eine kurze Beschreibung des Programms anzeigen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1316"/>
+        <location filename="mainwindow.cpp" line="1334"/>
         <source>About &amp;SWORD…</source>
         <translation>Über &amp;SWORD…</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1317"/>
+        <location filename="mainwindow.cpp" line="1335"/>
         <source>Show information on the SWORD library</source>
         <translation>Informationen zur SWORD-Bibliothek anzeigen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1320"/>
+        <location filename="mainwindow.cpp" line="1338"/>
         <source>About &amp;Qt…</source>
         <translation>Über &amp;Qt…</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1321"/>
+        <location filename="mainwindow.cpp" line="1339"/>
         <source>Show the Qt library&apos;s About box</source>
         <translation>Das Infofenster der Qt-Bibliothek anzeigen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1325"/>
+        <location filename="mainwindow.cpp" line="1343"/>
+        <source>Technical information…</source>
+        <translation>Technische Informationen…</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1344"/>
+        <source>Show information on other libraries used in bibref</source>
+        <translation>Informationen über andere Bibliotheken, die in bibref verwendet sind</translation>
+    </message>
+    <message>
+        <location filename="mainwindow.cpp" line="1347"/>
         <source>Quick tutorial…</source>
         <translation>Kurzanleitung…</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1327"/>
+        <location filename="mainwindow.cpp" line="1349"/>
         <source>Show a short introduction to the program</source>
         <translation>Zeige eine kurze Einführung zum Programm</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1330"/>
+        <location filename="mainwindow.cpp" line="1352"/>
         <source>Wiki…</source>
         <translation>Wiki…</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1332"/>
+        <location filename="mainwindow.cpp" line="1354"/>
         <source>Open documentation of the program in a web browser</source>
         <translation>Öffne die Dokumentation des Programms in einem Webbrowser</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1335"/>
+        <location filename="mainwindow.cpp" line="1357"/>
         <source>Show available Bibles…</source>
         <translation>Zeige verfügbare Bibeln…</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1337"/>
+        <location filename="mainwindow.cpp" line="1359"/>
         <source>Show available Bibles via SWORD</source>
         <translation>Zeige verfügbare Bibeln über SWORD</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1340"/>
+        <location filename="mainwindow.cpp" line="1362"/>
         <source>Start bibref in a web &amp;terminal</source>
         <translation>Starte bibref in einem Web-&amp;Terminal</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1342"/>
+        <location filename="mainwindow.cpp" line="1364"/>
         <source>Start a web version of bibref in a web based terminal</source>
         <translation>Starte eine Webversion von bibref in einem webbasierten Terminal</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1348"/>
+        <location filename="mainwindow.cpp" line="1370"/>
         <source>&amp;File</source>
         <translation>&amp;Datei</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1355"/>
+        <location filename="mainwindow.cpp" line="1377"/>
         <source>&amp;Edit</source>
         <translation>&amp;Bearbeiten</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1368"/>
+        <location filename="mainwindow.cpp" line="1390"/>
         <source>&amp;Passage</source>
         <translation>&amp;Passage</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1376"/>
+        <location filename="mainwindow.cpp" line="1398"/>
         <source>&amp;Quotation</source>
         <translation>&amp;Zitat</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1383"/>
+        <location filename="mainwindow.cpp" line="1405"/>
         <source>&amp;Raw</source>
         <translation>&amp;Rohdaten</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1389"/>
+        <location filename="mainwindow.cpp" line="1411"/>
         <source>&amp;Help</source>
         <translation>&amp;Hilfe</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1422"/>
+        <location filename="mainwindow.cpp" line="1445"/>
         <source>Application language:</source>
         <translation>Sprache des Programms:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1424"/>
+        <location filename="mainwindow.cpp" line="1447"/>
         <source>Set the language used in the application</source>
         <translation>Einstellung der in der Anwendung verwendeten Sprache</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1428"/>
+        <location filename="mainwindow.cpp" line="1451"/>
         <source>System default</source>
         <translation>Systemstandard</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1446"/>
+        <location filename="mainwindow.cpp" line="1469"/>
         <source>Font size:</source>
         <translation>Schriftgröße:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1448"/>
+        <location filename="mainwindow.cpp" line="1471"/>
         <source>Set general font size in the application (default: %1)</source>
         <translation>Allgemeine Schriftgröße in der Anwendung festlegen (Standard: %1)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1464"/>
+        <location filename="mainwindow.cpp" line="1487"/>
         <source>Debug mode:</source>
         <translation>Debug-Modus:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1466"/>
+        <location filename="mainwindow.cpp" line="1489"/>
         <source>Show debug messages in the Analyze window</source>
         <translation>Debug-Meldungen im Analysefenster anzeigen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1478"/>
+        <location filename="mainwindow.cpp" line="1501"/>
         <source>Diagram as HTML/SVG:</source>
         <translation>Diagramm als HTML/SVG:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1480"/>
+        <location filename="mainwindow.cpp" line="1503"/>
         <source>Show visualized diagram as HTML/SVG</source>
         <translation>Visualisiertes Diagramm als HTML/SVG anzeigen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1496"/>
+        <location filename="mainwindow.cpp" line="1519"/>
         <source>Use Koine Greek font:</source>
         <translation>Koine-Griechisch-Schriftart verwenden:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1498"/>
+        <location filename="mainwindow.cpp" line="1521"/>
         <source>Show Greek text with Koine Greek font whenever possible</source>
         <translation>Griechischen Text nach Möglichkeit mit Koine-Griechisch-Schriftart anzeigen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1510"/>
+        <location filename="mainwindow.cpp" line="1533"/>
         <source>Tooltips in Greek:</source>
         <translation>Tooltips auf Griechisch:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1512"/>
+        <location filename="mainwindow.cpp" line="1535"/>
         <source>Show tooltips in Greek in the visualized outputs</source>
         <translation>Tooltips in den visualisierten Ausgaben auf Griechisch anzeigen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1524"/>
+        <location filename="mainwindow.cpp" line="1547"/>
         <source>Maximal shown size of clipboard:</source>
         <translation>Maximal angezeigte Größe der Zwischenablage:</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1526"/>
+        <location filename="mainwindow.cpp" line="1549"/>
         <source>Set maximal shown size of the clipboard (default: %1)</source>
         <translation>Maximal angezeigte Größe der Zwischenablage festlegen (Standard: %1)</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1542"/>
+        <location filename="mainwindow.cpp" line="1565"/>
         <source>Preferences</source>
         <translation>Einstellungen</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1563"/>
+        <location filename="mainwindow.cpp" line="1586"/>
         <source>Information</source>
         <translation>Information</translation>
     </message>
     <message>
-        <location filename="mainwindow.cpp" line="1564"/>
+        <location filename="mainwindow.cpp" line="1587"/>
         <source>Please restart the application to change the language in the whole program.</source>
         <translation>Bitte starten Sie die Anwendung neu, um die Sprache im gesamten Programm zu ändern.</translation>
     </message>
@@ -695,32 +715,32 @@
         <translation>Meldung</translation>
     </message>
     <message>
-        <location filename="statementwindow.cpp" line="453"/>
+        <location filename="statementwindow.cpp" line="454"/>
         <source>Visualize</source>
         <translation>Visualisieren</translation>
     </message>
     <message>
-        <location filename="statementwindow.cpp" line="458"/>
+        <location filename="statementwindow.cpp" line="459"/>
         <source>&amp;Prove</source>
         <translation>&amp;Beweisen</translation>
     </message>
     <message>
-        <location filename="statementwindow.cpp" line="461"/>
+        <location filename="statementwindow.cpp" line="462"/>
         <source>&amp;Parse</source>
         <translation>&amp;Parsen</translation>
     </message>
     <message>
-        <location filename="statementwindow.cpp" line="463"/>
+        <location filename="statementwindow.cpp" line="464"/>
         <source>&amp;Analyze</source>
         <translation>&amp;Analysieren</translation>
     </message>
     <message>
-        <location filename="statementwindow.cpp" line="468"/>
+        <location filename="statementwindow.cpp" line="469"/>
         <source>&amp;Help</source>
         <translation>&amp;Hilfe</translation>
     </message>
     <message>
-        <location filename="statementwindow.cpp" line="471"/>
+        <location filename="statementwindow.cpp" line="472"/>
         <source>Wiki…</source>
         <translation>Wiki…</translation>
     </message>

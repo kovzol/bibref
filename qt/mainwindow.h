@@ -62,6 +62,7 @@ private slots:
     void about();
     void aboutSword();
     void aboutQt();
+    void aboutOther();
     void tutorial();
     void wiki();
     void showSwordBibles();
@@ -94,6 +95,7 @@ private:
     QAction *aboutAct;
     QAction *aboutSwordAct;
     QAction *aboutQtAct;
+    QAction *aboutOtherAct;
     QAction *tutorialAct;
     QAction *wikiAct;
     QAction *showAvailableBiblesAct;

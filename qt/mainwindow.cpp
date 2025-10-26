@@ -16,6 +16,7 @@
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/trim.hpp>
+#include <graphviz/graphviz_version.h>
 
 #include <QCoreApplication>
 #include <QLineEdit>
@@ -909,6 +910,20 @@ void MainWindow::about()
            " in a mechanical way."));
 }
 
+void MainWindow::aboutOther()
+{
+    QMessageBox::about(
+        this,
+        tr("Technical information"),
+        tr("The version %0 (%1) of the bibref program you are currently running is built with "
+            "Boost %2 and GraphViz %3.")
+            .arg(BIBREF_VERSION)
+            .arg(QSysInfo::kernelType() + " " +
+            QSysInfo::buildCpuArchitecture() + ", Qt " + QT_VERSION_STR)
+            .arg(to_string(BOOST_VERSION % 100) + "." + to_string(BOOST_VERSION / 100 % 1000) + "." + to_string(BOOST_VERSION / 100000))
+            .arg(PACKAGE_VERSION));
+}
+
 void setWindowLogo(QWidget *widget)
 {
     widget->setWindowIcon(QIcon(":/" LOGO_FILE));
@@ -1323,7 +1338,11 @@ void MainWindow::createActions()
     aboutQtAct = new QAction(tr("About &Qt…"), this);
     aboutQtAct->setStatusTip(tr("Show the Qt library's About box"));
     connect(aboutQtAct, &QAction::triggered, qApp, &QApplication::aboutQt);
-    connect(aboutQtAct, &QAction::triggered, this, &MainWindow::aboutQt);
+    // connect(aboutQtAct, &QAction::triggered, this, &MainWindow::aboutQt);
+
+    aboutOtherAct = new QAction(tr("Technical information…"), this);
+    aboutOtherAct->setStatusTip(tr("Show information on other libraries used in bibref"));
+    connect(aboutOtherAct, &QAction::triggered, this, &MainWindow::aboutOther);
 
     tutorialAct = new QAction(tr("Quick tutorial…"), this);
     tutorialAct->setIcon(QIcon::fromTheme("system-help"));
@@ -1398,6 +1417,7 @@ void MainWindow::createMenus()
     helpMenu->addSeparator();
     helpMenu->addAction(aboutSwordAct);
     helpMenu->addAction(aboutQtAct);
+    helpMenu->addAction(aboutOtherAct);
 }
 
 void MainWindow::preferences()
