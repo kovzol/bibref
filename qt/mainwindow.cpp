@@ -378,14 +378,18 @@ void MainWindow::performLookup(QLineEdit *lookupEdit) {
 
 void MainWindow::lookup()
 {
+    QSettings settings;
+    int size = settings.value("Application/fontsize", defaultFontSize).toInt();
+
     QWidget *widget = new QWidget;
     setWindowLogo(widget);
 
     QLabel *lookupLabel = new QLabel(tr("Verse:"));
     lookupLabel->setToolTip(toolTipHelp("lookup"));
-    lookupLabel->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
+    lookupLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     QLineEdit *lookupEdit = new QLineEdit(this);
     lookupEdit->setText(lookupText.c_str());
+    lookupEdit->setMinimumWidth(30 * size);
 
     QStringList wordList;
     for (auto word : qt_wordlist) {
