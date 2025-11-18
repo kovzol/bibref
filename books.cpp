@@ -601,12 +601,14 @@ int addBooks_cached(string moduleName, string installedModuleVersion)
 
         fclose(verseFile);
         add_vocabulary_item(bookName);  // add readline entry for this book
+        add_qt_wordlist(moduleName + " " + bookName);
         book.setModuleName(moduleName); // put this book in the given Bible edition
         removeBook(moduleName, bookName); // if it exists, remove the old version first
         books.push_back(book);
     }
     psalmsInfos.push_back(pi); // store Psalm database
     info("Done loading books of " + moduleName + " (cached).");
+    add_qt_wordlist(moduleName);
     return 0; // Success!
 }
 
@@ -660,6 +662,7 @@ int addBooks(string moduleName, string firstVerse, string lastVerse, bool remove
 #endif
     add_vocabulary_item(
         moduleName); // Add the name of this Bible edition to the readline vocabulary.
+    add_qt_wordlist(moduleName);
 
     string lastBookName = splitVerseInfo(firstVerse).m_bookName;
     Book lastBook = Book(lastBookName);
@@ -720,6 +723,7 @@ int addBooks(string moduleName, string firstVerse, string lastVerse, bool remove
                          + " characters,");
                     add_vocabulary_item(
                         lastBookName); // Add the name of the current book to the readline vocabulary.
+                    add_qt_wordlist(moduleName + " " + lastBookName);
                     // new book
                     Book book = Book(bookName);
                     book.setModuleName(module->getBibliography().c_str());
@@ -788,6 +792,7 @@ int addBooks(string moduleName, string firstVerse, string lastVerse, bool remove
                          + to_string(lastBook.getText().length()) + " characters.");
                     add_vocabulary_item(
                         lastBookName); // Add the name of the last book to the readline vocabulary.
+                    add_qt_wordlist(moduleName + " " + lastBookName);
                 }
             }
         }
@@ -1433,6 +1438,7 @@ void showAvailableBibles()
             }
             string moduleName = (*it).second->getName();
             add_vocabulary_item(moduleName);
+            add_qt_wordlist(moduleName);
             translations += moduleName.c_str();
             first = 0;
         }

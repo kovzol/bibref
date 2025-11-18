@@ -46,6 +46,7 @@ private slots:
     void latinText2();
     void nearest12();
     void lookup();
+    void performLookup(QLineEdit *lookupEdit);
     void tokens();
     void search();
     void lookup1();
@@ -77,7 +78,7 @@ private:
     void findN(int n);
     void rawN(int n);
 
-    void setToolTipHelp(QInputDialog *dialog, std::string command);
+    QString toolTipHelp(std::string command);
 
     QMenu *fileMenu;
     QMenu *editMenu;

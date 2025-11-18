@@ -139,11 +139,17 @@ vector<string> commands{addbooksCmd,
                         searchCmd,
                         statementCmd};
 vector<string> vocabulary = commands;
+vector<string> qt_wordlist;
 
 void add_vocabulary_item(string item)
 {
     replace(item.begin(), item.end(), ' ', '_');
     vocabulary.push_back(item);
+}
+
+void add_qt_wordlist(string item)
+{
+    qt_wordlist.push_back(item);
 }
 
 string collect_info = "";

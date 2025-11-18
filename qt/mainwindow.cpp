@@ -36,6 +36,7 @@ extern vector<bool> textset;
 extern string collect_info;
 extern string ot_color, nt_color, reset_color, error_color;
 extern char* output_prepend_set;
+extern vector<string> qt_wordlist;
 
 string lookupText = "LXX Genesis 1:1";              // example
 string extendText = "LXX StatResGNT Romans 3:13";   // example
@@ -197,7 +198,7 @@ void MainWindow::greekTextN(int index)
     QInputDialog inputDialog(this);
     inputDialog.setWindowTitle("Text " + QString::number(index + 1));
     inputDialog.setLabelText(tr("Greek text:"));
-    setToolTipHelp(&inputDialog, "textN");
+    inputDialog.setToolTip(toolTipHelp("textN"));
     if (textset[index]) {
         inputDialog.setTextValue(latinToGreek(text[index]).c_str());
     }
@@ -241,6 +242,7 @@ void MainWindow::greekTextN(int index)
     }
     text[index] = processed; // Store result.
     textset[index] = true;   // activate clipboard
+    statusBar()->clearMessage(); // proper operation
 
     clipboardInfos->setText(getClipboardInfos());
 }
@@ -260,7 +262,7 @@ void MainWindow::latinTextN(int index)
     QInputDialog inputDialog(this);
     inputDialog.setWindowTitle("Latin text " + QString::number(index + 1));
     inputDialog.setLabelText(tr("Latin text:"));
-    setToolTipHelp(&inputDialog, "latintextN");
+    inputDialog.setToolTip(toolTipHelp("latintextN"));
     if (textset[index]) {
         inputDialog.setTextValue(text[index].c_str());
     }
@@ -319,7 +321,7 @@ void MainWindow::nearest12()
     moveCursorEnd(passageInfos);
 }
 
-void MainWindow::setToolTipHelp(QInputDialog *dialog, std::string command)
+QString MainWindow::toolTipHelp(std::string command)
 {
     // Retrieve help syntax for the current command:
     string helpLines = getHelp(command);
@@ -327,7 +329,7 @@ void MainWindow::setToolTipHelp(QInputDialog *dialog, std::string command)
     boost::split(help, helpLines, boost::is_any_of("\n"));
     QTextDocument d;
     d.setMarkdown(tr("Syntax:") + " " + help.at(0).c_str());
-    dialog->setToolTip(d.toHtml());
+    return d.toHtml();
 }
 
 void MainWindow::moveCursorEnd(QTextEdit *b)
@@ -337,17 +339,14 @@ void MainWindow::moveCursorEnd(QTextEdit *b)
     b->setTextCursor(tc); // Move cursor to the end.
 }
 
-void MainWindow::lookup()
-{
-    QInputDialog inputDialog(this);
-    inputDialog.setWindowTitle("Lookup");
-    inputDialog.setLabelText(tr("Verse:"));
-    inputDialog.setTextValue(lookupText.c_str());
-    setToolTipHelp(&inputDialog, "lookup");
 
-    if (inputDialog.exec() != QDialog::Accepted)
-        return;
-    const QString value = inputDialog.textValue().trimmed();
+void setWindowLogo(QWidget *widget)
+{
+    widget->setWindowIcon(QIcon(":/" LOGO_FILE));
+}
+
+void MainWindow::performLookup(QLineEdit *lookupEdit) {
+    QString value = lookupEdit->text().trimmed();
     if (value.isEmpty())
         return;
     lookupText = value.toStdString();
@@ -365,15 +364,72 @@ void MainWindow::lookup()
         bool useKoineGreekFont = settings.value("Application/useKoineGreekFont", defaultUseKoineGreekFont).toBool();
         if (useKoineGreekFont && (tokens[0] == "LXX" || tokens[0] == "StatResGNT" || tokens[0] == "SBLGNT"))
             collect_info = "<span style=\"font-family:'KoineGreekBibref';\">"
-                  + collect_info + "</span><br>";
+                           + collect_info + "</span><br>";
         passageInfos->append(collect_info.c_str());
         moveCursorEnd(passageInfos);
+        statusBar()->clearMessage(); // proper operation
     } else {
         QString message = tr(
             "Invalid input (3 words are needed: Bible edition, book, chapter:verse).");
         statusBar()->showMessage(message);
     }
-    return; // Success!
+
+}
+
+void MainWindow::lookup()
+{
+    QWidget *widget = new QWidget;
+    setWindowLogo(widget);
+
+    QLabel *lookupLabel = new QLabel(tr("Verse:"));
+    lookupLabel->setToolTip(toolTipHelp("lookup"));
+    lookupLabel->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
+    QLineEdit *lookupEdit = new QLineEdit(this);
+    lookupEdit->setText(lookupText.c_str());
+
+    QStringList wordList;
+    for (auto word : qt_wordlist) {
+        wordList.append(QString(word.c_str()));
+    }
+    wordList.sort();
+
+    QCompleter *completer = new QCompleter(wordList, this);
+    completer->setCaseSensitivity(Qt::CaseInsensitive);
+    completer->setCompletionMode(QCompleter::InlineCompletion);
+    lookupEdit->setCompleter(completer);
+
+    buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, Qt::Horizontal);
+
+    QVBoxLayout *layout = new QVBoxLayout;
+    layout->setSizeConstraint(QLayout::SetMinAndMaxSize);
+    layout->addWidget(lookupLabel);
+    layout->addWidget(lookupEdit);
+    layout->addWidget(buttonBox);
+
+    widget->setLayout(layout);
+    widget->setWindowTitle("Lookup");
+
+    auto escAction = new QAction(lookupEdit);
+    escAction->setShortcut(Qt::Key_Escape);
+    lookupEdit->addAction(escAction);
+
+    // The widget will be finally closed unless Return is pressed.
+    connect(lookupEdit, &QLineEdit::returnPressed, [=](){
+        performLookup(lookupEdit);
+    });
+    connect(buttonBox, &QDialogButtonBox::accepted, [=]() {
+        performLookup(lookupEdit);
+        widget->close();
+    });
+
+    connect(escAction, &QAction::triggered, [=](){
+        widget->close();
+    });
+    connect(buttonBox, &QDialogButtonBox::rejected, [=]() {
+        widget->close();
+    });
+
+    widget->showNormal();
 }
 
 void MainWindow::tokens()
@@ -382,7 +438,7 @@ void MainWindow::tokens()
     inputDialog.setWindowTitle("Tokens");
     inputDialog.setLabelText(tr("Verse:"));
     inputDialog.setTextValue(lookupText.c_str());
-    setToolTipHelp(&inputDialog, "tokens");
+    inputDialog.setToolTip(toolTipHelp("tokens"));
     if (inputDialog.exec() != QDialog::Accepted)
         return;
     const QString value = inputDialog.textValue().trimmed();
@@ -412,6 +468,7 @@ void MainWindow::tokens()
             "Invalid input (3 words are needed: Bible edition, book, chapter:verse).");
         statusBar()->showMessage(message);
     }
+    statusBar()->clearMessage(); // proper operation
 }
 
 void MainWindow::search()
@@ -420,7 +477,7 @@ void MainWindow::search()
     inputDialog.setWindowTitle("Search");
     inputDialog.setLabelText(tr("Parameters:"));
     inputDialog.setTextValue(searchText.c_str());
-    setToolTipHelp(&inputDialog, "search");
+    inputDialog.setToolTip(toolTipHelp("search"));
     if (inputDialog.exec() != QDialog::Accepted)
         return;
     const QString value = inputDialog.textValue().trimmed();
@@ -470,6 +527,7 @@ void MainWindow::search()
             ("<b>Search " + moduleName + " " + rest + "</b>" + "<br>" + collect_info).c_str());
         moveCursorEnd(passageInfos);
     }
+    statusBar()->clearMessage(); // proper operation
 }
 
 
@@ -479,7 +537,7 @@ void MainWindow::lookupN(int index)
     inputDialog.setWindowTitle("Lookup " + QString::number(index + 1));
     inputDialog.setLabelText(tr("Verse:"));
     inputDialog.setTextValue(lookupText.c_str());
-    setToolTipHelp(&inputDialog, "lookupN");
+    inputDialog.setToolTip(toolTipHelp("lookupN"));
     if (inputDialog.exec() != QDialog::Accepted)
         return;
     const QString value = inputDialog.textValue().trimmed();
@@ -548,7 +606,7 @@ void MainWindow::raw()
     inputDialog.setWindowTitle("Raw");
     inputDialog.setLabelText(tr("Parameters:"));
     inputDialog.setTextValue(rawText.c_str());
-    setToolTipHelp(&inputDialog, "raw");
+    inputDialog.setToolTip(toolTipHelp("raw"));
     if (inputDialog.exec() != QDialog::Accepted)
         return;
     const QString value = inputDialog.textValue().trimmed();
@@ -573,6 +631,7 @@ void MainWindow::raw()
         QString message = tr("Wrong amount of parameters.");
         statusBar()->showMessage(message);
     }
+    statusBar()->clearMessage(); // proper operation
 }
 
 void MainWindow::rawN(int index)
@@ -581,7 +640,7 @@ void MainWindow::rawN(int index)
     inputDialog.setWindowTitle("Raw " + QString::number(index + 1));
     inputDialog.setLabelText(tr("Parameters:"));
     inputDialog.setTextValue(rawText.c_str());
-    setToolTipHelp(&inputDialog, "rawN");
+    inputDialog.setToolTip(toolTipHelp("rawN"));
     if (inputDialog.exec() != QDialog::Accepted)
         return;
     const QString value = inputDialog.textValue().trimmed();
@@ -681,6 +740,7 @@ void MainWindow::minunique1()
                              .arg(QString(rest.c_str()));
     passageInfos->append(("<b>" + translated.toStdString() + "</b><br>" + collect_info).c_str());
     moveCursorEnd(passageInfos);
+    statusBar()->clearMessage(); // proper operation
 }
 
 void MainWindow::findN(int index)
@@ -721,6 +781,7 @@ void MainWindow::findN(int index)
         = tr("Searching for %1 in %2").arg(QString(text[index].c_str())).arg(QString(rest.c_str()));
     passageInfos->append(("<b>" + translated.toStdString() + "</b><br>" + collect_info).c_str());
     moveCursorEnd(passageInfos);
+    statusBar()->clearMessage(); // proper operation
 }
 
 void MainWindow::find1()
@@ -742,7 +803,7 @@ void MainWindow::extend()
     inputDialog.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     inputDialog.setFixedSize(30 * size, 3);
     inputDialog.setWindowTitle("Extend");
-    setToolTipHelp(&inputDialog, "extend");
+    inputDialog.setToolTip(toolTipHelp("extend"));
     inputDialog.setLabelText(tr("Parameters:"));
     inputDialog.setTextValue(extendText.c_str());
     if (inputDialog.exec() != QDialog::Accepted)
@@ -798,6 +859,7 @@ void MainWindow::extend()
         statusBar()->showMessage(tr("Computation error."));
         return;
     }
+    statusBar()->clearMessage(); // proper operation
     return; // Success!
 }
 
@@ -818,7 +880,7 @@ void MainWindow::getrefs()
     inputDialog.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     inputDialog.setFixedSize(30 * size, 3);
     inputDialog.setWindowTitle("Get refs");
-    setToolTipHelp(&inputDialog, "getrefs");
+    inputDialog.setToolTip(toolTipHelp("getrefs"));
     inputDialog.setLabelText(tr("Parameters:"));
     inputDialog.setTextValue(getrefsText.c_str());
     if (inputDialog.exec() != QDialog::Accepted)
@@ -894,6 +956,7 @@ void MainWindow::getrefs()
         statusBar()->showMessage(tr("Computation error."));
         return;
     }
+    statusBar()->clearMessage(); // proper operation
     return; // Success!
 }
 
@@ -923,11 +986,6 @@ void MainWindow::aboutOther()
             .arg(QString::fromStdString(
                 to_string(BOOST_VERSION % 100) + "." + to_string(BOOST_VERSION / 100 % 1000) + "." + to_string(BOOST_VERSION / 100000)))
             .arg(PACKAGE_VERSION));
-}
-
-void setWindowLogo(QWidget *widget)
-{
-    widget->setWindowIcon(QIcon(":/" LOGO_FILE));
 }
 
 void MainWindow::aboutSword()
