@@ -1048,7 +1048,9 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
     // Load the readline history...
     char *bufline;
     struct passwd *pw = getpwuid(getuid());
-    char *histfile = pw->pw_dir;
+    char *histfile;
+    if ((histfile = getenv("SNAP_USER_DATA")) == NULL) // if bibref is called via snap, let's use the user's folder
+        histfile = pw->pw_dir;
     strcat(histfile, "/.bibref_history");
     read_history(histfile);
 #endif
