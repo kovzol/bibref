@@ -444,6 +444,39 @@ void MainWindow::performLookupN(QLineEdit *lookupEdit, int index) {
     statusBar()->showMessage(tr("Wrong amount of parameters is given."));
 }
 
+void MainWindow::performTokens(QLineEdit* lookupEdit) {
+    const QString value = lookupEdit->text().trimmed();
+    if (value.isEmpty())
+        return;
+    lookupText = value.toStdString();
+    string rest = lookupText;
+
+    // Mostly taken from cli:
+    vector<string> tokens;
+    boost::split(tokens, rest, boost::is_any_of(" "));
+    int restSize = tokens.size();
+    if (restSize == 3) {
+        try {
+            collect_info = ""; // reset communication buffer
+            getTokens(tokens[0], tokens[1], tokens[2]);
+            passageInfos->append(
+                ("<b>" + rest + ", " + tr("tokens").toStdString() + "</b>" + "<br>" + collect_info)
+                    .c_str());
+            moveCursorEnd(passageInfos);
+        } catch (exception &e) {
+            QString message = tr("Computation error.");
+            statusBar()->showMessage(message);
+            return;
+        }
+    } else {
+        QString message = tr(
+            "Invalid input (3 words are needed: Bible edition, book, chapter:verse).");
+        statusBar()->showMessage(message);
+        return;
+    }
+    statusBar()->clearMessage(); // proper operation
+}
+
 void MainWindow::lookup()
 {
     QSettings settings;
@@ -506,41 +539,62 @@ void MainWindow::lookup()
 
 void MainWindow::tokens()
 {
-    QInputDialog inputDialog(this);
-    inputDialog.setWindowTitle("Tokens");
-    inputDialog.setLabelText(tr("Verse:"));
-    inputDialog.setTextValue(lookupText.c_str());
-    inputDialog.setToolTip(toolTipHelp("tokens"));
-    if (inputDialog.exec() != QDialog::Accepted)
-        return;
-    const QString value = inputDialog.textValue().trimmed();
-    if (value.isEmpty())
-        return;
-    lookupText = value.toStdString();
-    string rest = lookupText;
+    QSettings settings;
+    int size = settings.value("Application/fontsize", defaultFontSize).toInt();
 
-    // Mostly taken from cli:
-    vector<string> tokens;
-    boost::split(tokens, rest, boost::is_any_of(" "));
-    int restSize = tokens.size();
-    if (restSize == 3) {
-        try {
-            collect_info = ""; // reset communication buffer
-            getTokens(tokens[0], tokens[1], tokens[2]);
-            passageInfos->append(
-                ("<b>" + rest + ", " + tr("tokens").toStdString() + "</b>" + "<br>" + collect_info)
-                    .c_str());
-            moveCursorEnd(passageInfos);
-        } catch (exception &e) {
-            QString message = tr("Computation error.");
-            statusBar()->showMessage(message);
-        }
-    } else {
-        QString message = tr(
-            "Invalid input (3 words are needed: Bible edition, book, chapter:verse).");
-        statusBar()->showMessage(message);
+    QWidget *widget = new QWidget;
+    setWindowLogo(widget);
+
+    QLabel *lookupLabel = new QLabel(tr("Verse:"));
+    lookupLabel->setToolTip(toolTipHelp("tokens"));
+    lookupLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    QLineEdit *lookupEdit = new QLineEdit(this);
+    lookupEdit->setText(lookupText.c_str());
+    lookupEdit->setMinimumWidth(30 * size);
+
+    QStringList wordList; // do not use non-indexed modules
+    for (auto word : qt_wordlist) {
+        wordList.append(QString(word.c_str()));
     }
-    statusBar()->clearMessage(); // proper operation
+    wordList.sort();
+
+    QCompleter *completer = new QCompleter(wordList, this);
+    completer->setCaseSensitivity(Qt::CaseInsensitive);
+    completer->setCompletionMode(QCompleter::InlineCompletion);
+    lookupEdit->setCompleter(completer);
+
+    buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, Qt::Horizontal);
+
+    QVBoxLayout *layout = new QVBoxLayout;
+    layout->setSizeConstraint(QLayout::SetMinAndMaxSize);
+    layout->addWidget(lookupLabel);
+    layout->addWidget(lookupEdit);
+    layout->addWidget(buttonBox);
+
+    widget->setLayout(layout);
+    widget->setWindowTitle("Tokens");
+
+    auto escAction = new QAction(lookupEdit);
+    escAction->setShortcut(Qt::Key_Escape);
+    lookupEdit->addAction(escAction);
+
+    // The widget will be finally closed unless Return is pressed.
+    connect(lookupEdit, &QLineEdit::returnPressed, [=](){
+        performTokens(lookupEdit);
+    });
+    connect(buttonBox, &QDialogButtonBox::accepted, [=]() {
+        performTokens(lookupEdit);
+        widget->close();
+    });
+
+    connect(escAction, &QAction::triggered, [=](){
+        widget->close();
+    });
+    connect(buttonBox, &QDialogButtonBox::rejected, [=]() {
+        widget->close();
+    });
+
+    widget->showNormal();
 }
 
 void MainWindow::search()
@@ -599,7 +653,6 @@ void MainWindow::search()
             ("<b>Search " + moduleName + " " + rest + "</b>" + "<br>" + collect_info).c_str());
         moveCursorEnd(passageInfos);
     }
-    statusBar()->clearMessage(); // proper operation
 }
 
 
@@ -700,11 +753,11 @@ void MainWindow::raw()
         string text = getRaw(module, book, startPos - 1, length);
         passageInfos->append(("<b>Raw " + rest + "</b>" + "<br>" + text).c_str());
         moveCursorEnd(passageInfos);
+        statusBar()->clearMessage(); // proper operation
     } else {
         QString message = tr("Wrong amount of parameters.");
         statusBar()->showMessage(message);
     }
-    statusBar()->clearMessage(); // proper operation
 }
 
 void MainWindow::rawN(int index)

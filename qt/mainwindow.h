@@ -48,6 +48,7 @@ private slots:
     void lookup();
     void performLookup(QLineEdit *lookupEdit);
     void performLookupN(QLineEdit *lookupEdit, int index);
+    void performTokens(QLineEdit *lookupEdit);
     void tokens();
     void search();
     void lookup1();
