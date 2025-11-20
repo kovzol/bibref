@@ -131,6 +131,23 @@ MainWindow::MainWindow()
     output_prepend_set[0] = '\0';
 }
 
+QStringList getAvailableBibles() {
+    QStringList b;
+    collect_info = "";
+    showAvailableBibles();
+    // E.g.: "Available Bible editions: KJV, StatResGNT."
+    int start = collect_info.find(":");
+    vector<string> bibles;
+    boost::split(bibles,
+                 collect_info.substr(start + 2, collect_info.length() - start - 4),
+                 boost::is_any_of(","));
+    for (string bible : bibles) {
+        QString be = QString(bible.c_str()).trimmed();
+        b.append(be);
+    }
+    return b;
+}
+
 void addBiblesThread(MainWindow *window)
 {
     addBibles();
@@ -391,7 +408,7 @@ void MainWindow::lookup()
     lookupEdit->setText(lookupText.c_str());
     lookupEdit->setMinimumWidth(30 * size);
 
-    QStringList wordList;
+    QStringList wordList = getAvailableBibles();
     for (auto word : qt_wordlist) {
         wordList.append(QString(word.c_str()));
     }

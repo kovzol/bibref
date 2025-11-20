@@ -608,7 +608,6 @@ int addBooks_cached(string moduleName, string installedModuleVersion)
     }
     psalmsInfos.push_back(pi); // store Psalm database
     info("Done loading books of " + moduleName + " (cached).");
-    add_qt_wordlist(moduleName);
     return 0; // Success!
 }
 
@@ -662,7 +661,6 @@ int addBooks(string moduleName, string firstVerse, string lastVerse, bool remove
 #endif
     add_vocabulary_item(
         moduleName); // Add the name of this Bible edition to the readline vocabulary.
-    add_qt_wordlist(moduleName);
 
     string lastBookName = splitVerseInfo(firstVerse).m_bookName;
     Book lastBook = Book(lastBookName);
@@ -1438,7 +1436,6 @@ void showAvailableBibles()
             }
             string moduleName = (*it).second->getName();
             add_vocabulary_item(moduleName);
-            add_qt_wordlist(moduleName);
             translations += moduleName.c_str();
             first = 0;
         }
