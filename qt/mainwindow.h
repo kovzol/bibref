@@ -47,6 +47,7 @@ private slots:
     void nearest12();
     void lookup();
     void performLookup(QLineEdit *lookupEdit);
+    void performLookupN(QLineEdit *lookupEdit, int index);
     void tokens();
     void search();
     void lookup1();

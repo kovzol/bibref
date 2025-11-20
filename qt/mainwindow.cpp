@@ -390,7 +390,58 @@ void MainWindow::performLookup(QLineEdit *lookupEdit) {
             "Invalid input (3 words are needed: Bible edition, book, chapter:verse).");
         statusBar()->showMessage(message);
     }
+}
 
+void MainWindow::performLookupN(QLineEdit *lookupEdit, int index) {
+    QString value = lookupEdit->text().trimmed();
+    if (value.isEmpty())
+        return;
+    lookupText = value.toStdString();
+    string rest = lookupText;
+
+    // Mostly taken from cli:
+    // Mostly taken from cli:
+    vector<string> tokens;
+    boost::split(tokens, rest, boost::is_any_of(" "));
+    int restSize = tokens.size();
+    if (restSize == 3) {
+        string verse = "";
+        try {                                                     // e.g. lookup1 LXX Genesis 1:1
+            verse = lookupVerse(tokens[1], tokens[0], tokens[2]); // lookup in the a-z database
+            text[index] = verse;                                  // Store result.
+            textset[index] = true;                                // activate clipboard
+            statusBar()->showMessage(tr("Stored."));
+            clipboardInfos->setText(getClipboardInfos());
+        } catch (exception &e) {
+            statusBar()->showMessage(tr("Unsuccessful lookup."));
+        }
+        return; // Success!
+    }
+    if (restSize == 4) { // e.g. lookup1 LXX Genesis 1:1+3 1:2-4
+        string verse = "";
+        try {
+            vector<string> tokens2, tokens3;
+            int start = 0, end = 0;
+            boost::split(tokens2, tokens[2], boost::is_any_of("+"));
+            if (tokens2.size() > 1) {
+                start = stoi(tokens2[1]); // read off the plus shift
+            }
+            boost::split(tokens3, tokens[3], boost::is_any_of("-"));
+            if (tokens3.size() > 1) {
+                end = stoi(tokens3[1]); // read off the minus shift
+            }
+            // Shift-allowed lookup in the a-z database...
+            verse = getText(tokens[1], tokens[0], tokens2.at(0), tokens3.at(0), start, end);
+            text[index] = verse;   // Store result.
+            textset[index] = true; // activate clipboard
+            statusBar()->showMessage(tr("Stored."));
+            clipboardInfos->setText(getClipboardInfos());
+        } catch (exception &e) {
+            statusBar()->showMessage(tr("Unsuccessful lookup."));
+        }
+        return; // Success!
+    }
+    statusBar()->showMessage(tr("Wrong amount of parameters is given."));
 }
 
 void MainWindow::lookup()
@@ -554,61 +605,62 @@ void MainWindow::search()
 
 void MainWindow::lookupN(int index)
 {
-    QInputDialog inputDialog(this);
-    inputDialog.setWindowTitle("Lookup " + QString::number(index + 1));
-    inputDialog.setLabelText(tr("Verse:"));
-    inputDialog.setTextValue(lookupText.c_str());
-    inputDialog.setToolTip(toolTipHelp("lookupN"));
-    if (inputDialog.exec() != QDialog::Accepted)
-        return;
-    const QString value = inputDialog.textValue().trimmed();
-    if (value.isEmpty())
-        return;
-    lookupText = value.toStdString();
-    string rest = lookupText;
+    QSettings settings;
+    int size = settings.value("Application/fontsize", defaultFontSize).toInt();
 
-    // Mostly taken from cli:
-    vector<string> tokens;
-    boost::split(tokens, rest, boost::is_any_of(" "));
-    int restSize = tokens.size();
-    if (restSize == 3) {
-        string verse = "";
-        try {                                                     // e.g. lookup1 LXX Genesis 1:1
-            verse = lookupVerse(tokens[1], tokens[0], tokens[2]); // lookup in the a-z database
-            text[index] = verse;                                  // Store result.
-            textset[index] = true;                                // activate clipboard
-            statusBar()->showMessage(tr("Stored."));
-            clipboardInfos->setText(getClipboardInfos());
-        } catch (exception &e) {
-            statusBar()->showMessage(tr("Unsuccessful lookup."));
-        }
-        return; // Success!
+    QWidget *widget = new QWidget;
+    setWindowLogo(widget);
+
+    QLabel *lookupLabel = new QLabel(tr("Verse:"));
+    lookupLabel->setToolTip(toolTipHelp("lookupN"));
+    lookupLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    QLineEdit *lookupEdit = new QLineEdit(this);
+    lookupEdit->setText(lookupText.c_str());
+    lookupEdit->setMinimumWidth(30 * size);
+
+    QStringList wordList; // do not use non-indexed modules
+    for (auto word : qt_wordlist) {
+        wordList.append(QString(word.c_str()));
     }
-    if (restSize == 4) { // e.g. lookup1 LXX Genesis 1:1+3 1:2-4
-        string verse = "";
-        try {
-            vector<string> tokens2, tokens3;
-            int start = 0, end = 0;
-            boost::split(tokens2, tokens[2], boost::is_any_of("+"));
-            if (tokens2.size() > 1) {
-                start = stoi(tokens2[1]); // read off the plus shift
-            }
-            boost::split(tokens3, tokens[3], boost::is_any_of("-"));
-            if (tokens3.size() > 1) {
-                end = stoi(tokens3[1]); // read off the minus shift
-            }
-            // Shift-allowed lookup in the a-z database...
-            verse = getText(tokens[1], tokens[0], tokens2.at(0), tokens3.at(0), start, end);
-            text[index] = verse;   // Store result.
-            textset[index] = true; // activate clipboard
-            statusBar()->showMessage(tr("Stored."));
-            clipboardInfos->setText(getClipboardInfos());
-        } catch (exception &e) {
-            statusBar()->showMessage(tr("Unsuccessful lookup."));
-        }
-        return; // Success!
-    }
-    statusBar()->showMessage(tr("Wrong amount of parameters is given."));
+    wordList.sort();
+
+    QCompleter *completer = new QCompleter(wordList, this);
+    completer->setCaseSensitivity(Qt::CaseInsensitive);
+    completer->setCompletionMode(QCompleter::InlineCompletion);
+    lookupEdit->setCompleter(completer);
+
+    buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, Qt::Horizontal);
+
+    QVBoxLayout *layout = new QVBoxLayout;
+    layout->setSizeConstraint(QLayout::SetMinAndMaxSize);
+    layout->addWidget(lookupLabel);
+    layout->addWidget(lookupEdit);
+    layout->addWidget(buttonBox);
+
+    widget->setLayout(layout);
+    widget->setWindowTitle("Lookup " + QString::number(index + 1));
+
+    auto escAction = new QAction(lookupEdit);
+    escAction->setShortcut(Qt::Key_Escape);
+    lookupEdit->addAction(escAction);
+
+    // The widget will be finally closed unless Return is pressed.
+    connect(lookupEdit, &QLineEdit::returnPressed, [=](){
+        performLookupN(lookupEdit, index);
+    });
+    connect(buttonBox, &QDialogButtonBox::accepted, [=]() {
+        performLookupN(lookupEdit, index);
+        widget->close();
+    });
+
+    connect(escAction, &QAction::triggered, [=](){
+        widget->close();
+    });
+    connect(buttonBox, &QDialogButtonBox::rejected, [=]() {
+        widget->close();
+    });
+
+    widget->showNormal();
 }
 
 void MainWindow::lookup1()
