@@ -110,6 +110,7 @@ private:
     void performTokens(QLineEdit *lookupEdit);
     void performRaw(QLineEdit *lookupEdit);
     void performRawN(QLineEdit *lookupEdit, int index);
+    void performExtend(QLineEdit *lookupEdit);
     void perform(std::string command, QLineEdit *lookupEdit, int clipboard);
 };
 

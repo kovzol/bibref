@@ -542,6 +542,63 @@ void MainWindow::performRawN(QLineEdit *lookupEdit, int index) {
     }
 }
 
+void MainWindow::performExtend(QLineEdit *lookupEdit) {
+    const QString value = lookupEdit->text().trimmed();
+    if (value.isEmpty())
+        return;
+    extendText = value.toStdString();
+    string rest = extendText;
+
+    // Mostly taken from cli:
+    vector<string> tokens;
+    boost::split(tokens, rest, boost::is_any_of(" "));
+    int restSize = tokens.size();
+    string moduleName1 = tokens[0]; // Old Testament
+    string moduleName2 = tokens[1]; // New Testament
+    string book2 = tokens[2];       // a book from the New Testament
+    string verse2S, verse2E;
+    if (restSize == 4) {            // e.g. extend LXX StatResGNT Romans 3:13
+        verse2S = tokens[3] + "+0"; // add zero plus shift implicitly
+        verse2E = tokens[3] + "-0"; // add zero minus shift implicitly
+    } else if (restSize == 5) {     // e.g. extend LXX StatResGNT Romans 15:11+38 15:11-22
+        verse2S = tokens[3];
+        verse2E = tokens[4];
+    } else {
+        statusBar()->showMessage(tr("Wrong number of parameters."));
+        return;
+    }
+    vector<string> verse2ST, verse2ET;
+    int start = 0, end = 0;
+    boost::split(verse2ST, verse2S, boost::is_any_of("+"));
+    if (verse2ST.size() > 1) {
+        start = stoi(verse2ST[1]); // read off plus shift
+    }
+    boost::split(verse2ET, verse2E, boost::is_any_of("-"));
+    if (verse2ET.size() > 1) {
+        end = stoi(verse2ET[1]); // read off minus shift
+    }
+    try {
+        // Compute...
+        collect_info = "";
+        extern void extend(const string &moduleName1,
+                           const string &moduleName2,
+                           const string &book2,
+                           const string &verse2S,
+                           int start,
+                           const string &verse2E,
+                           int end);
+        extend(moduleName1, moduleName2, book2, verse2ST[0], start, verse2ET[0], end);
+        passageInfos->append(("<b>Extend " + rest + "</b>" + "<br>" + collect_info).c_str());
+        moveCursorEnd(passageInfos);
+    } catch (exception &e) {
+        statusBar()->showMessage(tr("Computation error."));
+        return;
+    }
+    statusBar()->clearMessage(); // proper operation
+    return; // Success!
+
+}
+
 void MainWindow::perform(string command, QLineEdit *lookupEdit, int clipboard) {
     if (command == "lookup")
         performLookup(lookupEdit);
@@ -553,6 +610,8 @@ void MainWindow::perform(string command, QLineEdit *lookupEdit, int clipboard) {
         performRaw(lookupEdit);
     if (command == "rawN")
         performRawN(lookupEdit, clipboard);
+    if (command == "extend")
+        performExtend(lookupEdit);
 }
 
 void MainWindow::dialogBoxVerse(string command, QString windowTitle, const char* label, int clipboard, string defaultText)
@@ -573,8 +632,20 @@ void MainWindow::dialogBoxVerse(string command, QString windowTitle, const char*
     QStringList wordList;
     if (command == "lookup")
         wordList = getAvailableBibles();
-    for (auto word : qt_wordlist) {
-        wordList.append(QString(word.c_str()));
+    if (command == "extend") {
+        // format: "LXX StatResGNT Romans"
+        for (auto word : qt_wordlist) {
+            QString qword = QString(word.c_str());
+            if (!qword.startsWith("LXX")) {
+                wordList.append("LXX " + qword);
+            }
+        }
+    } else {
+        // format: "LXX Genesis" or "SBLGNT Romans"
+        for (auto word : qt_wordlist) {
+            QString qword = QString(word.c_str());
+            wordList.append(qword);
+        }
     }
     wordList.sort();
 
@@ -832,71 +903,7 @@ void MainWindow::find2()
 
 void MainWindow::extend()
 {
-    QInputDialog inputDialog(this);
-    QSettings settings;
-    int size = settings.value("Application/fontsize", defaultFontSize).toInt();
-
-    inputDialog.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    inputDialog.setFixedSize(30 * size, 3);
-    inputDialog.setWindowTitle("Extend");
-    inputDialog.setToolTip(toolTipHelp("extend"));
-    inputDialog.setLabelText(tr("Parameters:"));
-    inputDialog.setTextValue(extendText.c_str());
-    if (inputDialog.exec() != QDialog::Accepted)
-        return;
-    const QString value = inputDialog.textValue().trimmed();
-    if (value.isEmpty())
-        return;
-    extendText = value.toStdString();
-    string rest = extendText;
-
-    // Mostly taken from cli:
-    vector<string> tokens;
-    boost::split(tokens, rest, boost::is_any_of(" "));
-    int restSize = tokens.size();
-    string moduleName1 = tokens[0]; // Old Testament
-    string moduleName2 = tokens[1]; // New Testament
-    string book2 = tokens[2];       // a book from the New Testament
-    string verse2S, verse2E;
-    if (restSize == 4) {            // e.g. extend LXX StatResGNT Romans 3:13
-        verse2S = tokens[3] + "+0"; // add zero plus shift implicitly
-        verse2E = tokens[3] + "-0"; // add zero minus shift implicitly
-    } else if (restSize == 5) {     // e.g. extend LXX StatResGNT Romans 15:11+38 15:11-22
-        verse2S = tokens[3];
-        verse2E = tokens[4];
-    } else {
-        statusBar()->showMessage(tr("Wrong number of parameters."));
-        return;
-    }
-    vector<string> verse2ST, verse2ET;
-    int start = 0, end = 0;
-    boost::split(verse2ST, verse2S, boost::is_any_of("+"));
-    if (verse2ST.size() > 1) {
-        start = stoi(verse2ST[1]); // read off plus shift
-    }
-    boost::split(verse2ET, verse2E, boost::is_any_of("-"));
-    if (verse2ET.size() > 1) {
-        end = stoi(verse2ET[1]); // read off minus shift
-    }
-    try {
-        // Compute...
-        collect_info = "";
-        extern void extend(const string &moduleName1,
-                           const string &moduleName2,
-                           const string &book2,
-                           const string &verse2S,
-                           int start,
-                           const string &verse2E,
-                           int end);
-        extend(moduleName1, moduleName2, book2, verse2ST[0], start, verse2ET[0], end);
-        passageInfos->append(("<b>Extend " + rest + "</b>" + "<br>" + collect_info).c_str());
-        moveCursorEnd(passageInfos);
-    } catch (exception &e) {
-        statusBar()->showMessage(tr("Computation error."));
-        return;
-    }
-    statusBar()->clearMessage(); // proper operation
-    return; // Success!
+    dialogBoxVerse("extend", "Extend", "Parameters:", 0, extendText);
 }
 
 void MainWindow::statement() {
