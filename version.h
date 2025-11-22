@@ -1,0 +1,1 @@
+#define BIBREF_VERSION "2025-11-22"
