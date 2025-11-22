@@ -477,7 +477,7 @@ void MainWindow::performTokens(QLineEdit* lookupEdit) {
     statusBar()->clearMessage(); // proper operation
 }
 
-void MainWindow::lookup()
+void MainWindow::dialogBoxVerse(string command, QString windowTitle, int clipboard, string defaultText)
 {
     QSettings settings;
     int size = settings.value("Application/fontsize", defaultFontSize).toInt();
@@ -486,13 +486,15 @@ void MainWindow::lookup()
     setWindowLogo(widget);
 
     QLabel *lookupLabel = new QLabel(tr("Verse:"));
-    lookupLabel->setToolTip(toolTipHelp("lookup"));
+    lookupLabel->setToolTip(toolTipHelp(command));
     lookupLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     QLineEdit *lookupEdit = new QLineEdit(this);
-    lookupEdit->setText(lookupText.c_str());
+    lookupEdit->setText(defaultText.c_str());
     lookupEdit->setMinimumWidth(30 * size);
 
-    QStringList wordList = getAvailableBibles();
+    QStringList wordList;
+    if (command == "lookup")
+        wordList = getAvailableBibles();
     for (auto word : qt_wordlist) {
         wordList.append(QString(word.c_str()));
     }
@@ -512,7 +514,7 @@ void MainWindow::lookup()
     layout->addWidget(buttonBox);
 
     widget->setLayout(layout);
-    widget->setWindowTitle("Lookup");
+    widget->setWindowTitle(windowTitle);
 
     auto escAction = new QAction(lookupEdit);
     escAction->setShortcut(Qt::Key_Escape);
@@ -520,10 +522,20 @@ void MainWindow::lookup()
 
     // The widget will be finally closed unless Return is pressed.
     connect(lookupEdit, &QLineEdit::returnPressed, [=](){
-        performLookup(lookupEdit);
+        if (command == "lookup")
+            performLookup(lookupEdit);
+        if (command == "lookupN")
+            performLookupN(lookupEdit, clipboard);
+        if (command == "tokens")
+            performTokens(lookupEdit);
     });
     connect(buttonBox, &QDialogButtonBox::accepted, [=]() {
-        performLookup(lookupEdit);
+        if (command == "lookup")
+            performLookup(lookupEdit);
+        if (command == "lookupN")
+            performLookupN(lookupEdit, clipboard);
+        if (command == "tokens")
+            performTokens(lookupEdit);
         widget->close();
     });
 
@@ -537,64 +549,14 @@ void MainWindow::lookup()
     widget->showNormal();
 }
 
+void MainWindow::lookup()
+{
+    dialogBoxVerse("lookup", "Lookup", 0, lookupText);
+}
+
 void MainWindow::tokens()
 {
-    QSettings settings;
-    int size = settings.value("Application/fontsize", defaultFontSize).toInt();
-
-    QWidget *widget = new QWidget;
-    setWindowLogo(widget);
-
-    QLabel *lookupLabel = new QLabel(tr("Verse:"));
-    lookupLabel->setToolTip(toolTipHelp("tokens"));
-    lookupLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-    QLineEdit *lookupEdit = new QLineEdit(this);
-    lookupEdit->setText(lookupText.c_str());
-    lookupEdit->setMinimumWidth(30 * size);
-
-    QStringList wordList; // do not use non-indexed modules
-    for (auto word : qt_wordlist) {
-        wordList.append(QString(word.c_str()));
-    }
-    wordList.sort();
-
-    QCompleter *completer = new QCompleter(wordList, this);
-    completer->setCaseSensitivity(Qt::CaseInsensitive);
-    completer->setCompletionMode(QCompleter::InlineCompletion);
-    lookupEdit->setCompleter(completer);
-
-    buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, Qt::Horizontal);
-
-    QVBoxLayout *layout = new QVBoxLayout;
-    layout->setSizeConstraint(QLayout::SetMinAndMaxSize);
-    layout->addWidget(lookupLabel);
-    layout->addWidget(lookupEdit);
-    layout->addWidget(buttonBox);
-
-    widget->setLayout(layout);
-    widget->setWindowTitle("Tokens");
-
-    auto escAction = new QAction(lookupEdit);
-    escAction->setShortcut(Qt::Key_Escape);
-    lookupEdit->addAction(escAction);
-
-    // The widget will be finally closed unless Return is pressed.
-    connect(lookupEdit, &QLineEdit::returnPressed, [=](){
-        performTokens(lookupEdit);
-    });
-    connect(buttonBox, &QDialogButtonBox::accepted, [=]() {
-        performTokens(lookupEdit);
-        widget->close();
-    });
-
-    connect(escAction, &QAction::triggered, [=](){
-        widget->close();
-    });
-    connect(buttonBox, &QDialogButtonBox::rejected, [=]() {
-        widget->close();
-    });
-
-    widget->showNormal();
+    dialogBoxVerse("tokens", "Tokens", 0, lookupText);
 }
 
 void MainWindow::search()
@@ -658,62 +620,7 @@ void MainWindow::search()
 
 void MainWindow::lookupN(int index)
 {
-    QSettings settings;
-    int size = settings.value("Application/fontsize", defaultFontSize).toInt();
-
-    QWidget *widget = new QWidget;
-    setWindowLogo(widget);
-
-    QLabel *lookupLabel = new QLabel(tr("Verse:"));
-    lookupLabel->setToolTip(toolTipHelp("lookupN"));
-    lookupLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
-    QLineEdit *lookupEdit = new QLineEdit(this);
-    lookupEdit->setText(lookupText.c_str());
-    lookupEdit->setMinimumWidth(30 * size);
-
-    QStringList wordList; // do not use non-indexed modules
-    for (auto word : qt_wordlist) {
-        wordList.append(QString(word.c_str()));
-    }
-    wordList.sort();
-
-    QCompleter *completer = new QCompleter(wordList, this);
-    completer->setCaseSensitivity(Qt::CaseInsensitive);
-    completer->setCompletionMode(QCompleter::InlineCompletion);
-    lookupEdit->setCompleter(completer);
-
-    buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, Qt::Horizontal);
-
-    QVBoxLayout *layout = new QVBoxLayout;
-    layout->setSizeConstraint(QLayout::SetMinAndMaxSize);
-    layout->addWidget(lookupLabel);
-    layout->addWidget(lookupEdit);
-    layout->addWidget(buttonBox);
-
-    widget->setLayout(layout);
-    widget->setWindowTitle("Lookup " + QString::number(index + 1));
-
-    auto escAction = new QAction(lookupEdit);
-    escAction->setShortcut(Qt::Key_Escape);
-    lookupEdit->addAction(escAction);
-
-    // The widget will be finally closed unless Return is pressed.
-    connect(lookupEdit, &QLineEdit::returnPressed, [=](){
-        performLookupN(lookupEdit, index);
-    });
-    connect(buttonBox, &QDialogButtonBox::accepted, [=]() {
-        performLookupN(lookupEdit, index);
-        widget->close();
-    });
-
-    connect(escAction, &QAction::triggered, [=](){
-        widget->close();
-    });
-    connect(buttonBox, &QDialogButtonBox::rejected, [=]() {
-        widget->close();
-    });
-
-    widget->showNormal();
+    dialogBoxVerse("lookupN", "Lookup " + QString::number(index + 1), index, lookupText);
 }
 
 void MainWindow::lookup1()

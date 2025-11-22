@@ -37,6 +37,10 @@ public:
     void moveCursorEnd(QTextEdit *b);
     void preferences();
 
+    void performLookup(QLineEdit *lookupEdit);
+    void performLookupN(QLineEdit *lookupEdit, int index);
+    void performTokens(QLineEdit *lookupEdit);
+
 protected:
 private slots:
     void addBibles();
@@ -46,9 +50,6 @@ private slots:
     void latinText2();
     void nearest12();
     void lookup();
-    void performLookup(QLineEdit *lookupEdit);
-    void performLookupN(QLineEdit *lookupEdit, int index);
-    void performTokens(QLineEdit *lookupEdit);
     void tokens();
     void search();
     void lookup1();
@@ -79,6 +80,8 @@ private:
     void lookupN(int n);
     void findN(int n);
     void rawN(int n);
+
+    void dialogBoxVerse(std::string command, QString windowTitle, int clipboard, std::string defaultText);
 
     QString toolTipHelp(std::string command);
 

@@ -62,7 +62,7 @@ SET(PBRST_SRCS
  ${PARSER_DIR}/pbrst.tab.h "${LEXER_OUT}" "${PARSER_OUT}"
 )
 
-add_executable(bibref main.cpp book.cpp book.h books.cpp books.h fingerprint.cpp fingerprint.h cli.cpp cli.h psalmsinfo.cpp psalmsinfo.h
+add_executable(bibref main.cpp book.cpp book.h books.cpp books.h fingerprint.cpp fingerprint.h cli.cpp cli.h psalmsinfo.cpp psalmsinfo.h version.h
  ${PBRST_SRCS}
 )
 

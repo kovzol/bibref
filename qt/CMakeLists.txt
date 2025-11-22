@@ -19,6 +19,8 @@ endif(WEBENGINE)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(sword REQUIRED sword)
 
+set(CMAKE_CXX_FLAGS "-fpermissive")
+
 if(EMSCRIPTEN)
 find_library(SWORD_LIB NAMES libsword.a)
 
@@ -128,6 +130,7 @@ qt_add_executable(bibref-qt MACOSX_BUNDLE
     bibref.qrc
     ${bibref_qt_ICON}
     editor.h editor.cpp
+    version.h
 )
 
 set_target_properties(bibref-qt PROPERTIES
