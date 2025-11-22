@@ -152,6 +152,7 @@ void addBiblesThread(MainWindow *window)
 {
     addBibles();
     QString message = MainWindow::tr("Bibles are loaded.");
+    window->setCursor(Qt::ArrowCursor);
     window->statusBar()->showMessage(message);
     booksAdded = true;
     window->addBiblesAct->setEnabled(false);
@@ -188,6 +189,7 @@ void getrefsThread(MainWindow *window)
                             const string &verse1E,
                             int end);
         getrefs(moduleName2, moduleName1, book1, verse1ST0, getrefsStart, verse1ET0, getrefsEnd);
+        window->setCursor(Qt::ArrowCursor);
         QString message = MainWindow::tr("Finished.");
         window->statusBar()->showMessage(message);
 
@@ -207,6 +209,7 @@ void MainWindow::addBibles()
 {
     QString message = tr("Please wait...");
     statusBar()->showMessage(message);
+    setCursor(Qt::WaitCursor);
     QFuture<void> future = QtConcurrent::run(addBiblesThread, this);
 }
 
@@ -665,14 +668,13 @@ void MainWindow::performGetrefs(QLineEdit *lookupEdit) {
     try {
         QString message = tr("Please wait...");
         statusBar()->showMessage(message);
+        setCursor(Qt::WaitCursor);
         QFuture<void> future = QtConcurrent::run(getrefsThread, this);
     } catch (exception &e) {
         statusBar()->showMessage(tr("Computation error."));
         return;
     }
-    statusBar()->clearMessage(); // proper operation
     return; // Success!
-
 }
 
 void MainWindow::perform(string command, QLineEdit *lookupEdit, int clipboard) {
