@@ -37,10 +37,6 @@ public:
     void moveCursorEnd(QTextEdit *b);
     void preferences();
 
-    void performLookup(QLineEdit *lookupEdit);
-    void performLookupN(QLineEdit *lookupEdit, int index);
-    void performTokens(QLineEdit *lookupEdit);
-
 protected:
 private slots:
     void addBibles();
@@ -81,7 +77,7 @@ private:
     void findN(int n);
     void rawN(int n);
 
-    void dialogBoxVerse(std::string command, QString windowTitle, int clipboard, std::string defaultText);
+    void dialogBoxVerse(std::string command, QString windowTitle, const char* label, int clipboard, std::string defaultText);
 
     QString toolTipHelp(std::string command);
 
@@ -108,6 +104,13 @@ private:
     QAction *webTerminalAct;
     QLabel *clipboardInfos;
     QDialogButtonBox *buttonBox;
+
+    void performLookup(QLineEdit *lookupEdit);
+    void performLookupN(QLineEdit *lookupEdit, int index);
+    void performTokens(QLineEdit *lookupEdit);
+    void performRaw(QLineEdit *lookupEdit);
+    void performRawN(QLineEdit *lookupEdit, int index);
+    void perform(std::string command, QLineEdit *lookupEdit, int clipboard);
 };
 
 #endif

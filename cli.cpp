@@ -275,19 +275,20 @@ string getHelp(const string &key)
         "tokens on a maximal length of *maxlength* in the given *Bible*.",
         "* `raw` *Bible* *book* *start* *length*: Show the raw Latin transcription of a passage in "
         "the given *book* in the given *Bible*, beginning with the *start* position on *length* "
-        "characters.",
+        "characters. The whole book can be retrieved with *start*=0 and *length*=-1.",
         "* `rawN` *Bible* *book* *start* *length*: Put a passage in the given *book* in the given "
-        "*Bible*, beginning with the *start* position on *length* characters, in clipboard N.",
+        "*Bible*, beginning with the *start* position on *length* characters, in clipboard N. "
+        "The whole book can be retrieved with *start*=0 and *length*=-1.",
         "* `minunique1` *Bible*: Search for minimal unique passages in clipboard 1 in the given "
         "*Bible*.",
         "* `extend` *Bible1* *Bible2* *book2* *passage2*: Extend the given passage in *Bible2* "
         "according to the longest possible citation from *Bible1*, based on the text of *book2* in "
-        "*passage2*. In most cases `LXX` is used for *Bible1* and `SBLGNT` for *Bible2*.",
+        "*passage2*. In most cases `LXX` is used for *Bible1* and `SBLGNT` or `StatResGNT` for *Bible2*.",
         "* `psalminfo` *Bible* *number*: Show the number of verses in Psalm *number* in the given "
         "*Bible*.",
         "* `getrefs` *Bible2* *Bible1* *book1* *passage1*: Search for references in *Bible2* on "
         "the "
-        "passage in *Bible1* in book *book1* in *passage1*. Usually `SBLGNT` stands for *Bible2* "
+        "passage in *Bible1* in book *book1* in *passage1*. Usually `SBLGNT` or `StatResGNT` stands for *Bible2* "
         "and "
         "`LXX` for *Bible1*. If *book1* is `Psalms`, the passage can also be its number only.",
         "* `maxresults` *number*: Set the maximal amount of results to be shown to *number*.",

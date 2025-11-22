@@ -477,7 +477,85 @@ void MainWindow::performTokens(QLineEdit* lookupEdit) {
     statusBar()->clearMessage(); // proper operation
 }
 
-void MainWindow::dialogBoxVerse(string command, QString windowTitle, int clipboard, string defaultText)
+void MainWindow::performRaw(QLineEdit *lookupEdit) {
+    const QString value = lookupEdit->text().trimmed();
+    if (value.isEmpty())
+        return;
+    rawText = value.toStdString();
+    string rest = rawText;
+
+    // Mostly taken from cli:
+    vector<string> tokens;
+    boost::split(tokens, rest, boost::is_any_of(" "));
+    int restSize = tokens.size();
+    if (restSize == 4) {
+        try {
+            // e.g. raw LXX Genesis 1 10
+            string module = tokens[0];      // LXX
+            string book = tokens[1];        // Genesis
+            int startPos = stoi(tokens[2]); // 1
+            int length = stoi(tokens[3]);   // 10
+            string text = getRaw(module, book, startPos - 1, length);
+            passageInfos->append(("<b>Raw " + rest + "</b>" + "<br>" + text).c_str());
+            moveCursorEnd(passageInfos);
+            statusBar()->clearMessage(); // proper operation
+        } catch (exception &e) {
+            statusBar()->showMessage(tr("Error in the parameters."));
+            return;
+        }
+    } else {
+        QString message = tr("Wrong amount of parameters.");
+        statusBar()->showMessage(message);
+    }
+}
+
+void MainWindow::performRawN(QLineEdit *lookupEdit, int index) {
+    const QString value = lookupEdit->text().trimmed();
+    if (value.isEmpty())
+        return;
+    rawText = value.toStdString();
+    string rest = rawText;
+
+    // Mostly taken from cli:
+    vector<string> tokens;
+    boost::split(tokens, rest, boost::is_any_of(" "));
+    int restSize = tokens.size();
+    if (restSize == 4) { // e.g. raw1 LXX Genesis 1 10
+        // TODO: This part is same as above. Unify.
+        try {
+            string module = tokens[0];                                // LXX
+            string book = tokens[1];                                  // Genesis
+            int startPos = stoi(tokens[2]);                           // 1
+            int length = stoi(tokens[3]);                             // 10
+            text[index] = getRaw(module, book, startPos - 1, length); // Obtain the raw text...
+            textset[index] = true;                                    // Report the result.
+            statusBar()->showMessage(tr("Stored."));
+            clipboardInfos->setText(getClipboardInfos());
+            return; // Success!
+        } catch (exception &e) {
+            statusBar()->showMessage(tr("Error in the parameters."));
+            return;
+        }
+    } else {
+        statusBar()->showMessage(tr("Wrong number of parameters."));
+        return;
+    }
+}
+
+void MainWindow::perform(string command, QLineEdit *lookupEdit, int clipboard) {
+    if (command == "lookup")
+        performLookup(lookupEdit);
+    if (command == "lookupN")
+        performLookupN(lookupEdit, clipboard);
+    if (command == "tokens")
+        performTokens(lookupEdit);
+    if (command == "raw")
+        performRaw(lookupEdit);
+    if (command == "rawN")
+        performRawN(lookupEdit, clipboard);
+}
+
+void MainWindow::dialogBoxVerse(string command, QString windowTitle, const char* label, int clipboard, string defaultText)
 {
     QSettings settings;
     int size = settings.value("Application/fontsize", defaultFontSize).toInt();
@@ -485,7 +563,7 @@ void MainWindow::dialogBoxVerse(string command, QString windowTitle, int clipboa
     QWidget *widget = new QWidget;
     setWindowLogo(widget);
 
-    QLabel *lookupLabel = new QLabel(tr("Verse:"));
+    QLabel *lookupLabel = new QLabel(tr(label));
     lookupLabel->setToolTip(toolTipHelp(command));
     lookupLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     QLineEdit *lookupEdit = new QLineEdit(this);
@@ -522,20 +600,10 @@ void MainWindow::dialogBoxVerse(string command, QString windowTitle, int clipboa
 
     // The widget will be finally closed unless Return is pressed.
     connect(lookupEdit, &QLineEdit::returnPressed, [=](){
-        if (command == "lookup")
-            performLookup(lookupEdit);
-        if (command == "lookupN")
-            performLookupN(lookupEdit, clipboard);
-        if (command == "tokens")
-            performTokens(lookupEdit);
+        perform(command, lookupEdit, clipboard);
     });
     connect(buttonBox, &QDialogButtonBox::accepted, [=]() {
-        if (command == "lookup")
-            performLookup(lookupEdit);
-        if (command == "lookupN")
-            performLookupN(lookupEdit, clipboard);
-        if (command == "tokens")
-            performTokens(lookupEdit);
+        perform(command, lookupEdit, clipboard);
         widget->close();
     });
 
@@ -551,12 +619,12 @@ void MainWindow::dialogBoxVerse(string command, QString windowTitle, int clipboa
 
 void MainWindow::lookup()
 {
-    dialogBoxVerse("lookup", "Lookup", 0, lookupText);
+    dialogBoxVerse("lookup", "Lookup", "Verse:", 0, lookupText);
 }
 
 void MainWindow::tokens()
 {
-    dialogBoxVerse("tokens", "Tokens", 0, lookupText);
+    dialogBoxVerse("tokens", "Tokens", "Verse:", 0, lookupText);
 }
 
 void MainWindow::search()
@@ -620,7 +688,7 @@ void MainWindow::search()
 
 void MainWindow::lookupN(int index)
 {
-    dialogBoxVerse("lookupN", "Lookup " + QString::number(index + 1), index, lookupText);
+    dialogBoxVerse("lookupN", "Lookup " + QString::number(index + 1), "Verse:", index, lookupText);
 }
 
 void MainWindow::lookup1()
@@ -635,77 +703,12 @@ void MainWindow::lookup2()
 
 void MainWindow::raw()
 {
-    QInputDialog inputDialog(this);
-    inputDialog.setWindowTitle("Raw");
-    inputDialog.setLabelText(tr("Parameters:"));
-    inputDialog.setTextValue(rawText.c_str());
-    inputDialog.setToolTip(toolTipHelp("raw"));
-    if (inputDialog.exec() != QDialog::Accepted)
-        return;
-    const QString value = inputDialog.textValue().trimmed();
-    if (value.isEmpty())
-        return;
-    rawText = value.toStdString();
-    string rest = rawText;
-
-    // Mostly taken from cli:
-    vector<string> tokens;
-    boost::split(tokens, rest, boost::is_any_of(" "));
-    int restSize = tokens.size();
-    if (restSize == 4) {                // e.g. raw LXX Genesis 1 10
-        string module = tokens[0];      // LXX
-        string book = tokens[1];        // Genesis
-        int startPos = stoi(tokens[2]); // 1
-        int length = stoi(tokens[3]);   // 10
-        string text = getRaw(module, book, startPos - 1, length);
-        passageInfos->append(("<b>Raw " + rest + "</b>" + "<br>" + text).c_str());
-        moveCursorEnd(passageInfos);
-        statusBar()->clearMessage(); // proper operation
-    } else {
-        QString message = tr("Wrong amount of parameters.");
-        statusBar()->showMessage(message);
-    }
+    dialogBoxVerse("raw", "Raw", "Parameters:", 0, rawText);
 }
 
 void MainWindow::rawN(int index)
 {
-    QInputDialog inputDialog(this);
-    inputDialog.setWindowTitle("Raw " + QString::number(index + 1));
-    inputDialog.setLabelText(tr("Parameters:"));
-    inputDialog.setTextValue(rawText.c_str());
-    inputDialog.setToolTip(toolTipHelp("rawN"));
-    if (inputDialog.exec() != QDialog::Accepted)
-        return;
-    const QString value = inputDialog.textValue().trimmed();
-    if (value.isEmpty())
-        return;
-    rawText = value.toStdString();
-    string rest = rawText;
-
-    // Mostly taken from cli:
-    vector<string> tokens;
-    boost::split(tokens, rest, boost::is_any_of(" "));
-    int restSize = tokens.size();
-    if (restSize == 4) { // e.g. raw1 LXX Genesis 1 10
-        // TODO: This part is same as above. Unify.
-        try {
-            string module = tokens[0];                                // LXX
-            string book = tokens[1];                                  // Genesis
-            int startPos = stoi(tokens[2]);                           // 1
-            int length = stoi(tokens[3]);                             // 10
-            text[index] = getRaw(module, book, startPos - 1, length); // Obtain the raw text...
-            textset[index] = true;                                    // Report the result.
-            statusBar()->showMessage(tr("Stored."));
-            clipboardInfos->setText(getClipboardInfos());
-            return; // Success!
-        } catch (exception &e) {
-            statusBar()->showMessage(tr("Error in the parameters."));
-            return;
-        }
-    } else {
-        statusBar()->showMessage(tr("Wrong number of parameters."));
-        return;
-    }
+    dialogBoxVerse("rawN", "Raw " + QString::number(index + 1), "Parameters:", index, rawText);
 }
 
 void MainWindow::raw1()
