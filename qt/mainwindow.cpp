@@ -596,6 +596,82 @@ void MainWindow::performExtend(QLineEdit *lookupEdit) {
     }
     statusBar()->clearMessage(); // proper operation
     return; // Success!
+}
+
+void MainWindow::performGetrefs(QLineEdit *lookupEdit) {
+    const QString value = lookupEdit->text().trimmed();
+    if (value.isEmpty())
+        return;
+    getrefsText = value.toStdString();
+    getrefsRest = getrefsText;
+
+    // Mostly taken from cli:
+    vector<string> tokens;
+    boost::split(tokens, getrefsRest, boost::is_any_of(" "));
+    int restSize = tokens.size();
+    if (restSize < 3) {
+        statusBar()->showMessage(tr("Wrong number of parameters."));
+        return;
+    }
+    moduleName2 = tokens[0]; // New Testament
+    moduleName1 = tokens[1]; // Old Testament
+    book1 = tokens[2];       // a book from the Old Testament
+    if (restSize == 3) {     // TODO: implement this
+        statusBar()->showMessage(
+            tr("Getting references from full books is not yet implemented, sorry."));
+        return;
+    }
+    string verse1S, verse1E;
+    if (restSize == 4) { // e.g. getrefs StatResGNT LXX Isaiah 9:2
+        if (book1 == "Psalms") {
+            vector<string> r;
+            boost::split(r, tokens[3], boost::is_any_of(":"));
+            if (r.size()
+                == 1) { // only the psalm number is given, e.g. getrefs StatResGNT LXX Psalms 51
+                verse1S = r[0] + ":1+0";
+                try {
+                    verse1E = r[0] + ":" + to_string(getPsalmLastVerse(moduleName1, stoi(r[0])))
+                    + "-0";
+                } catch (exception &e) {
+                    statusBar()->showMessage(tr("Computation error."));
+                    return;
+                }
+            } else { // one verse is given in the psalm, e.g. getrefs StatResGNT LXX Psalms 51:4
+                verse1S = tokens[3] + "+0"; // add zero plus shift implicitly
+                verse1E = tokens[3] + "-0"; // add zero minus shift implicitly
+            }
+        } else {                        // this is not a psalm and one verse is given
+            verse1S = tokens[3] + "+0"; // add zero plus shift implicitly
+            verse1E = tokens[3] + "-0"; // add zero negative shift implicitly
+        }
+    } else if (restSize == 5) { // e.g. getrefs StatResGNT LXX Psalms 51:4 51:5
+        verse1S = tokens[3];
+        verse1E = tokens[4];
+    } else {
+        statusBar()->showMessage(tr("Computation error."));
+        return;
+    }
+    vector<string> verse1ST, verse1ET;
+    boost::split(verse1ST, verse1S, boost::is_any_of("+"));
+    if (verse1ST.size() > 1) {
+        getrefsStart = stoi(verse1ST[1]); // read off plus shift
+    }
+    boost::split(verse1ET, verse1E, boost::is_any_of("-"));
+    if (verse1ET.size() > 1) {
+        getrefsEnd = stoi(verse1ET[1]); // read off minus shift
+    }
+    verse1ST0 = verse1ST[0];
+    verse1ET0 = verse1ET[0];
+    try {
+        QString message = tr("Please wait...");
+        statusBar()->showMessage(message);
+        QFuture<void> future = QtConcurrent::run(getrefsThread, this);
+    } catch (exception &e) {
+        statusBar()->showMessage(tr("Computation error."));
+        return;
+    }
+    statusBar()->clearMessage(); // proper operation
+    return; // Success!
 
 }
 
@@ -612,6 +688,8 @@ void MainWindow::perform(string command, QLineEdit *lookupEdit, int clipboard) {
         performRawN(lookupEdit, clipboard);
     if (command == "extend")
         performExtend(lookupEdit);
+    if (command == "getrefs")
+        performGetrefs(lookupEdit);
 }
 
 void MainWindow::dialogBoxVerse(string command, QString windowTitle, const char* label, int clipboard, string defaultText)
@@ -634,10 +712,22 @@ void MainWindow::dialogBoxVerse(string command, QString windowTitle, const char*
         wordList = getAvailableBibles();
     if (command == "extend") {
         // format: "LXX StatResGNT Romans"
+        wordList.append("LXX"); // a single entry is useful
         for (auto word : qt_wordlist) {
             QString qword = QString(word.c_str());
             if (!qword.startsWith("LXX")) {
                 wordList.append("LXX " + qword);
+            }
+        }
+    } else if (command == "getrefs") {
+        // format: "StatResGNT LXX Romans"
+        wordList.append("SBLGNT"); // a single entry is useful
+        wordList.append("StatResGNT"); // a single entry is useful
+        for (auto word : qt_wordlist) {
+            QString qword = QString(word.c_str());
+            if (qword.startsWith("LXX")) {
+                wordList.append("SBLGNT " + qword);
+                wordList.append("StatResGNT " + qword);
             }
         }
     } else {
@@ -917,90 +1007,7 @@ void MainWindow::statement() {
 
 void MainWindow::getrefs()
 {
-    QInputDialog inputDialog(this);
-    QSettings settings;
-    int size = settings.value("Application/fontsize", defaultFontSize).toInt();
-    inputDialog.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    inputDialog.setFixedSize(30 * size, 3);
-    inputDialog.setWindowTitle("Get refs");
-    inputDialog.setToolTip(toolTipHelp("getrefs"));
-    inputDialog.setLabelText(tr("Parameters:"));
-    inputDialog.setTextValue(getrefsText.c_str());
-    if (inputDialog.exec() != QDialog::Accepted)
-        return;
-    const QString value = inputDialog.textValue().trimmed();
-    if (value.isEmpty())
-        return;
-    getrefsText = value.toStdString();
-    getrefsRest = getrefsText;
-
-    // Mostly taken from cli:
-    vector<string> tokens;
-    boost::split(tokens, getrefsRest, boost::is_any_of(" "));
-    int restSize = tokens.size();
-    if (restSize < 3) {
-        statusBar()->showMessage(tr("Wrong number of parameters."));
-        return;
-    }
-    moduleName2 = tokens[0]; // New Testament
-    moduleName1 = tokens[1]; // Old Testament
-    book1 = tokens[2];       // a book from the Old Testament
-    if (restSize == 3) {     // TODO: implement this
-        statusBar()->showMessage(
-            tr("Getting references from full books is not yet implemented, sorry."));
-        return;
-    }
-    string verse1S, verse1E;
-    if (restSize == 4) { // e.g. getrefs StatResGNT LXX Isaiah 9:2
-        if (book1 == "Psalms") {
-            vector<string> r;
-            boost::split(r, tokens[3], boost::is_any_of(":"));
-            if (r.size()
-                == 1) { // only the psalm number is given, e.g. getrefs StatResGNT LXX Psalms 51
-                verse1S = r[0] + ":1+0";
-                try {
-                    verse1E = r[0] + ":" + to_string(getPsalmLastVerse(moduleName1, stoi(r[0])))
-                              + "-0";
-                } catch (exception &e) {
-                    statusBar()->showMessage(tr("Computation error."));
-                    return;
-                }
-            } else { // one verse is given in the psalm, e.g. getrefs StatResGNT LXX Psalms 51:4
-                verse1S = tokens[3] + "+0"; // add zero plus shift implicitly
-                verse1E = tokens[3] + "-0"; // add zero minus shift implicitly
-            }
-        } else {                        // this is not a psalm and one verse is given
-            verse1S = tokens[3] + "+0"; // add zero plus shift implicitly
-            verse1E = tokens[3] + "-0"; // add zero negative shift implicitly
-        }
-    } else if (restSize == 5) { // e.g. getrefs StatResGNT LXX Psalms 51:4 51:5
-        verse1S = tokens[3];
-        verse1E = tokens[4];
-    } else {
-        statusBar()->showMessage(tr("Computation error."));
-        return;
-    }
-    vector<string> verse1ST, verse1ET;
-    boost::split(verse1ST, verse1S, boost::is_any_of("+"));
-    if (verse1ST.size() > 1) {
-        getrefsStart = stoi(verse1ST[1]); // read off plus shift
-    }
-    boost::split(verse1ET, verse1E, boost::is_any_of("-"));
-    if (verse1ET.size() > 1) {
-        getrefsEnd = stoi(verse1ET[1]); // read off minus shift
-    }
-    verse1ST0 = verse1ST[0];
-    verse1ET0 = verse1ET[0];
-    try {
-        QString message = tr("Please wait...");
-        statusBar()->showMessage(message);
-        QFuture<void> future = QtConcurrent::run(getrefsThread, this);
-    } catch (exception &e) {
-        statusBar()->showMessage(tr("Computation error."));
-        return;
-    }
-    statusBar()->clearMessage(); // proper operation
-    return; // Success!
+    dialogBoxVerse("getrefs", "Get refs", "Parameters:", 0, getrefsText);
 }
 
 void MainWindow::about()
