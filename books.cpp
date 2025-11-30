@@ -647,6 +647,7 @@ int addBooks(string moduleName, string firstVerse, string lastVerse, bool remove
     SWOptionFilter *filter = new UTF8GreekAccents();
     filter->setOptionValue("off");
     library.setGlobalOption("Strong's Numbers", "On");
+    library.setGlobalOption("Greek Accents", "Off");
 
     info("Loading " + moduleName + "...");
     string path = "bibref-addbooks-cache/" + moduleName;
