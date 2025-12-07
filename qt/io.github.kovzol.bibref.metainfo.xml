@@ -62,6 +62,22 @@
   <content_rating type="oars-1.1" />
 
   <releases>
+    <release version="2025-12-07" date="2025-12-07">
+    <url type="details">https://github.com/kovzol/bibref/commits/0092fcc74d8b4751a4f826938ad6505bebc2a606</url>
+      <description>
+        <p>Release description</p>
+          <ul>
+            <li>Update to SWORD modules LXX 3.2 and StatResGNT 1.4</li>
+            <li>Change cursor on waiting for finishing an action</li>
+            <li>Autocompletion for the commands lookup, tokens, raw, extend, getrefs</li>
+            <li>Better input window user experience</li>
+            <li>New menu: Help &gt; Technical information</li>
+            <li>Zoom factor is applied for Qt WebEngine diagrams</li>
+            <li>Some Hungarian translations have been fixed</li>
+            <li>Minor bug fixes</li>
+          </ul>
+      </description>
+    </release>
     <release version="2025-09-14" date="2025-09-14">
     <url type="details">https://github.com/kovzol/bibref/commits/18d3ef566ed4011d9d919390e8612e55f7e55ed6</url>
       <description>
