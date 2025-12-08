@@ -40,8 +40,9 @@ void copy_sword_files() {
     d1 += QString(".sword");
     const QFileInfo f1(d1);
     if (f1.exists() && f1.isDir()) {
-      cout << d1.toStdString() << " exists, no changes will be made" << endl;
-      return;
+      cout << d1.toStdString() << " exists, it will be removed and recreated" << endl;
+      QDir dir1(d1);
+      dir1.removeRecursively();
       }
     QString appDirectory = qApp -> applicationDirPath();
     QString d2 = appDirectory;
@@ -51,7 +52,7 @@ void copy_sword_files() {
     d2 += QDir::separator() + QString("sword");
     const QFileInfo f2(d2);
     if (f2.exists() && f2.isDir()) {
-      cout << d1.toStdString() << " does not exist, creating it from bundle" << endl;
+      cout << d1.toStdString() << " will be created from bundle" << endl;
       // copyAndReplaceFolderContents(d2, d1, false);
       copyPath(d2,d1);
       }

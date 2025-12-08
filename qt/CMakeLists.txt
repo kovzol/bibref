@@ -134,7 +134,7 @@ qt_add_executable(bibref-qt MACOSX_BUNDLE
 )
 
 set_target_properties(bibref-qt PROPERTIES
-    WIN32_EXECUTABLE TRUE
+    WIN32_EXECUTABLE TRUE # this disables console logging, when debugging, remove this
     MACOSX_BUNDLE TRUE
 )
 

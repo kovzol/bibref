@@ -33,7 +33,7 @@ test -x $1/bibref-qt.exe || {
  exit 2
  }
 
-BIBREF_VERSION=`cat main.h | grep BIBREF_VERSION | awk '{print $3}' | tr -d \"`
+BIBREF_VERSION=`cat version.h | grep BIBREF_VERSION | awk '{print $3}' | tr -d \"`
 FOLDER=bibref-qt-$BIBREF_VERSION
 test -d $FOLDER && {
  echo "Folder $FOLDER exists. Remove it first."
@@ -63,7 +63,15 @@ if [ "$2" != "-f" ]; then
 
 # Copy the DLLs...
 
-ntldd -R $FOLDER/bibref-qt.exe | grep mingw64 | awk '{print "/mingw64/bin/" $1}' | xargs cp -t $FOLDER
+ntldd -R $FOLDER/bibref-qt.exe > libs.txt
+cat libs.txt | grep mingw64\\\\bin | awk '{print "/mingw64/bin/" $1}' | xargs cp -t $FOLDER
+cat libs.txt | grep mingw64\\\\lib | awk '{print "/mingw64/lib/" $1}' | xargs cp -t $FOLDER
+
+cp /mingw64/lib/libsword.dll $FOLDER
+ntldd -R $FOLDER/libsword.dll > libs-sword.txt
+cat libs-sword.txt | grep mingw64\\\\bin | awk '{print "/mingw64/bin/" $1}' | xargs cp -t $FOLDER
+cat libs-sword.txt | grep mingw64\\\\lib | awk '{print "/mingw64/lib/" $1}' | xargs cp -t $FOLDER
+cat libs-sword.txt | grep \\\\usr\\\\bin | awk '{print "/usr/bin/" $1}' | xargs cp -t $FOLDER
 
 # Create the SWORD databases...
 
