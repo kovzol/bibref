@@ -152,7 +152,9 @@ void addBiblesThread(MainWindow *window)
 {
     addBibles();
     QString message = MainWindow::tr("Bibles are loaded.");
+#ifndef __EMSCRIPTEN__
     window->setCursor(Qt::ArrowCursor);
+#endif
     window->statusBar()->showMessage(message);
     booksAdded = true;
     window->addBiblesAct->setEnabled(false);
@@ -189,7 +191,9 @@ void getrefsThread(MainWindow *window)
                             const string &verse1E,
                             int end);
         getrefs(moduleName2, moduleName1, book1, verse1ST0, getrefsStart, verse1ET0, getrefsEnd);
+#ifndef __EMSCRIPTEN__
         window->setCursor(Qt::ArrowCursor);
+#endif
         QString message = MainWindow::tr("Finished.");
         window->statusBar()->showMessage(message);
 
@@ -209,7 +213,9 @@ void MainWindow::addBibles()
 {
     QString message = tr("Please wait...");
     statusBar()->showMessage(message);
+#ifndef __EMSCRIPTEN__
     setCursor(Qt::WaitCursor);
+#endif
     QFuture<void> future = QtConcurrent::run(addBiblesThread, this);
 }
 
@@ -668,7 +674,9 @@ void MainWindow::performGetrefs(QLineEdit *lookupEdit) {
     try {
         QString message = tr("Please wait...");
         statusBar()->showMessage(message);
+#ifndef __EMSCRIPTEN__
         setCursor(Qt::WaitCursor);
+#endif
         QFuture<void> future = QtConcurrent::run(getrefsThread, this);
     } catch (exception &e) {
         statusBar()->showMessage(tr("Computation error."));
@@ -1226,12 +1234,14 @@ void MainWindow::showSwordBibles()
     for (it = manager.Modules.begin(); it != manager.Modules.end(); ++it) {
         if (strcmp((*it).second->getType(), "Biblical Texts") == 0) {
             string moduleName = (*it).second->getName();
+#ifndef __EMSCRIPTEN__ // a full UTF-8 character set is probably missing
             if (moduleName == "LXX")
                 moduleName= "𝗟𝗫𝗫";
             if (moduleName == "SBLGNT")
                 moduleName= "𝗦𝗕𝗟𝗚𝗡𝗧";
             if (moduleName == "StatResGNT")
                 moduleName= "𝗦𝘁𝗮𝘁𝗥𝗲𝘀𝗚𝗡𝗧";
+#endif
             string moduleVersion = (*it).second->getConfigEntry("Version");
             string moduleDescription = (*it).second->getConfigEntry("Description");
             // Remove extra spaces:
