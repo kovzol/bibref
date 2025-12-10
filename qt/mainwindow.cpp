@@ -159,6 +159,7 @@ void addBiblesThread(MainWindow *window)
 #endif
     window->statusBar()->showMessage(message);
     booksAdded = true;
+    // FIXME: Maybe put all window operations outside thread...?
     window->addBiblesAct->setEnabled(false);
     window->lookup1Act->setEnabled(true);
     window->lookup2Act->setEnabled(true);
@@ -180,7 +181,7 @@ void addBiblesThread(MainWindow *window)
 string moduleName2, moduleName1, book1, getrefsRest, verse1ST0, verse1ET0;
 int getrefsStart, getrefsEnd;
 
-void getrefsThread(MainWindow *window)
+QString getrefsThread(MainWindow *window)
 {
     try {
         // Compute...
@@ -192,8 +193,9 @@ void getrefsThread(MainWindow *window)
                             int start,
                             const string &verse1E,
                             int end);
+        // Since QFuture::result() blocks and waits for the result, it makes no sense to count getrefsCalls.
+        // Either a non-blocking solution (preferred) should be done, or getrefsCalls should be removed.
         getrefsCalls++; // it is possible that the computation was called multiple times
-        window->passageInfos->append(("<b>Get refs " + getrefsRest + "</b><br>").c_str());
         getrefs(moduleName2, moduleName1, book1, verse1ST0, getrefsStart, verse1ET0, getrefsEnd);
         getrefsCalls--;
 #ifndef __EMSCRIPTEN__
@@ -206,14 +208,13 @@ void getrefsThread(MainWindow *window)
         boost::trim(collect_info);
         boost::replace_all(collect_info, "\n", "<br>");
 
-        QString collect_info_qs = QString::fromStdString(collect_info);
-        window->passageInfos->append(collect_info_qs); // FIXME: this may crash, because
-        // widget updates in threads are disallowed: https://doc.qt.io/qt-6/threads-qobject.html#qobject-reentrancy,
-        // see also https://github.com/kovzol/bibref/issues/21
-        window->moveCursorEnd(window->passageInfos);
+        QString collect_info_qs = ("<b>Get refs " + getrefsRest + "</b><br>").c_str();
+        collect_info_qs += QString::fromStdString(collect_info);
+
+        return collect_info_qs;
     } catch (exception &e) {
         window->statusBar()->showMessage("Computation error.");
-        return;
+        return "";
     }
 }
 
@@ -683,9 +684,12 @@ void MainWindow::performGetrefs(QLineEdit *lookupEdit) {
         QString message = tr("Please wait...");
         statusBar()->showMessage(message);
 #ifndef __EMSCRIPTEN__
-        QGuiApplication::setOverrideCursor(Qt::BusyCursor);
+        QGuiApplication::setOverrideCursor(Qt::WaitCursor);
 #endif
-        QFuture<void> future = QtConcurrent::run(getrefsThread, this);
+        QFuture<QString> future = QtConcurrent::run(getrefsThread, this);
+        QString result = future.result();
+        passageInfos->append(result);
+        moveCursorEnd(passageInfos);
     } catch (exception &e) {
         statusBar()->showMessage(tr("Computation error."));
         return;
