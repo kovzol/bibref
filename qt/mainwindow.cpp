@@ -44,6 +44,8 @@ string getrefsText = "StatResGNT LXX Psalms 116:1"; // example
 string rawText = "LXX Genesis 1 10";                // example
 string searchText = "LXX 2097 1515 189 3";          // example
 
+int getrefsCalls = 0;
+
 QString getClipboardInfos()
 {
     QSettings settings;
@@ -153,7 +155,7 @@ void addBiblesThread(MainWindow *window)
     addBibles();
     QString message = MainWindow::tr("Bibles are loaded.");
 #ifndef __EMSCRIPTEN__
-    window->setCursor(Qt::ArrowCursor);
+    QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
 #endif
     window->statusBar()->showMessage(message);
     booksAdded = true;
@@ -190,9 +192,13 @@ void getrefsThread(MainWindow *window)
                             int start,
                             const string &verse1E,
                             int end);
+        getrefsCalls++; // it is possible that the computation was called multiple times
+        window->passageInfos->append(("<b>Get refs " + getrefsRest + "</b><br>").c_str());
         getrefs(moduleName2, moduleName1, book1, verse1ST0, getrefsStart, verse1ET0, getrefsEnd);
+        getrefsCalls--;
 #ifndef __EMSCRIPTEN__
-        window->setCursor(Qt::ArrowCursor);
+        if (getrefsCalls == 0) // only after the last call finishes, we need to set the cursor back
+            QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
 #endif
         QString message = MainWindow::tr("Finished.");
         window->statusBar()->showMessage(message);
@@ -200,8 +206,10 @@ void getrefsThread(MainWindow *window)
         boost::trim(collect_info);
         boost::replace_all(collect_info, "\n", "<br>");
 
-        window->passageInfos->append(
-            ("<b>Get refs " + getrefsRest + "</b>" + "<br>" + collect_info).c_str());
+        QString collect_info_qs = QString::fromStdString(collect_info);
+        window->passageInfos->append(collect_info_qs); // FIXME: this may crash, because
+        // widget updates in threads are disallowed: https://doc.qt.io/qt-6/threads-qobject.html#qobject-reentrancy,
+        // see also https://github.com/kovzol/bibref/issues/21
         window->moveCursorEnd(window->passageInfos);
     } catch (exception &e) {
         window->statusBar()->showMessage("Computation error.");
@@ -214,7 +222,7 @@ void MainWindow::addBibles()
     QString message = tr("Please wait...");
     statusBar()->showMessage(message);
 #ifndef __EMSCRIPTEN__
-    setCursor(Qt::WaitCursor);
+    QGuiApplication::setOverrideCursor(Qt::BusyCursor);
 #endif
     QFuture<void> future = QtConcurrent::run(addBiblesThread, this);
 }
@@ -675,7 +683,7 @@ void MainWindow::performGetrefs(QLineEdit *lookupEdit) {
         QString message = tr("Please wait...");
         statusBar()->showMessage(message);
 #ifndef __EMSCRIPTEN__
-        setCursor(Qt::WaitCursor);
+        QGuiApplication::setOverrideCursor(Qt::BusyCursor);
 #endif
         QFuture<void> future = QtConcurrent::run(getrefsThread, this);
     } catch (exception &e) {
