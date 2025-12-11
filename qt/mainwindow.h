@@ -67,6 +67,7 @@ private slots:
     void wiki();
     void showSwordBibles();
     void webTerminal();
+    void handleFinishedGetrefs();
 
 private:
     void createActions();

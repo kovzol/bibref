@@ -44,7 +44,7 @@ string getrefsText = "StatResGNT LXX Psalms 116:1"; // example
 string rawText = "LXX Genesis 1 10";                // example
 string searchText = "LXX 2097 1515 189 3";          // example
 
-int getrefsCalls = 0;
+QFutureWatcher<QString> watcher;
 
 QString getClipboardInfos()
 {
@@ -193,14 +193,9 @@ QString getrefsThread(MainWindow *window)
                             int start,
                             const string &verse1E,
                             int end);
-        // Since QFuture::result() blocks and waits for the result, it makes no sense to count getrefsCalls.
-        // Either a non-blocking solution (preferred) should be done, or getrefsCalls should be removed.
-        getrefsCalls++; // it is possible that the computation was called multiple times
         getrefs(moduleName2, moduleName1, book1, verse1ST0, getrefsStart, verse1ET0, getrefsEnd);
-        getrefsCalls--;
 #ifndef __EMSCRIPTEN__
-        if (getrefsCalls == 0) // only after the last call finishes, we need to set the cursor back
-            QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
+        QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
 #endif
         QString message = MainWindow::tr("Finished.");
         window->statusBar()->showMessage(message);
@@ -616,7 +611,20 @@ void MainWindow::performExtend(QLineEdit *lookupEdit) {
     return; // Success!
 }
 
+void MainWindow::handleFinishedGetrefs() {
+    QString result = watcher.result();
+    passageInfos->append(result);
+    moveCursorEnd(passageInfos);
+}
+
 void MainWindow::performGetrefs(QLineEdit *lookupEdit) {
+    if (watcher.isRunning()) {
+        QMessageBox messageBox;
+        messageBox.critical(0, tr("Error"),
+                            tr("Another getrefs command is running, please wait for the computation being finished."));
+        messageBox.setFixedSize(500,200);
+        return;
+    }
     const QString value = lookupEdit->text().trimmed();
     if (value.isEmpty())
         return;
@@ -684,12 +692,13 @@ void MainWindow::performGetrefs(QLineEdit *lookupEdit) {
         QString message = tr("Please wait...");
         statusBar()->showMessage(message);
 #ifndef __EMSCRIPTEN__
-        QGuiApplication::setOverrideCursor(Qt::WaitCursor);
+        QGuiApplication::setOverrideCursor(Qt::BusyCursor);
 #endif
+
+        connect(&watcher, &QFutureWatcher<QString>::finished, this, &MainWindow::handleFinishedGetrefs);
         QFuture<QString> future = QtConcurrent::run(getrefsThread, this);
-        QString result = future.result();
-        passageInfos->append(result);
-        moveCursorEnd(passageInfos);
+        watcher.setFuture(future);
+
     } catch (exception &e) {
         statusBar()->showMessage(tr("Computation error."));
         return;
