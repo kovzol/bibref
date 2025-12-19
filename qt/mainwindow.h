@@ -68,6 +68,7 @@ private slots:
     void showSwordBibles();
     void webTerminal();
     void handleFinishedGetrefs();
+    void handleFinishedAddBibles();
 
 private:
     void createActions();

@@ -44,7 +44,8 @@ string getrefsText = "StatResGNT LXX Psalms 116:1"; // example
 string rawText = "LXX Genesis 1 10";                // example
 string searchText = "LXX 2097 1515 189 3";          // example
 
-QFutureWatcher<QString> watcher;
+QFutureWatcher<void> aWatcher;
+QFutureWatcher<QString> gWatcher;
 
 QString getClipboardInfos()
 {
@@ -154,27 +155,8 @@ void addBiblesThread(MainWindow *window)
 {
     addBibles();
     QString message = MainWindow::tr("Bibles are loaded.");
-#ifndef __EMSCRIPTEN__
-    QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
-#endif
     window->statusBar()->showMessage(message);
     booksAdded = true;
-    // FIXME: Maybe put all window operations outside thread...?
-    window->addBiblesAct->setEnabled(false);
-    window->lookup1Act->setEnabled(true);
-    window->lookup2Act->setEnabled(true);
-    window->lookup2Act->setEnabled(true);
-    window->find1Act->setEnabled(true);
-    window->find2Act->setEnabled(true);
-    window->minunique1Act->setEnabled(true);
-    window->extendAct->setEnabled(true);
-    window->getrefsAct->setEnabled(true);
-    window->statementAct->setEnabled(true);
-    window->rawAct->setEnabled(true);
-    window->raw1Act->setEnabled(true);
-    window->raw2Act->setEnabled(true);
-    window->tokensAct->setEnabled(true);
-    window->searchAct->setEnabled(true);
 }
 
 // Used for communication between caller and thread:
@@ -194,9 +176,6 @@ QString getrefsThread(MainWindow *window)
                             const string &verse1E,
                             int end);
         getrefs(moduleName2, moduleName1, book1, verse1ST0, getrefsStart, verse1ET0, getrefsEnd);
-#ifndef __EMSCRIPTEN__
-        QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
-#endif
         QString message = MainWindow::tr("Finished.");
         window->statusBar()->showMessage(message);
 
@@ -213,14 +192,33 @@ QString getrefsThread(MainWindow *window)
     }
 }
 
+void MainWindow::handleFinishedAddBibles() {
+    addBiblesAct->setEnabled(false);
+    lookup1Act->setEnabled(true);
+    lookup2Act->setEnabled(true);
+    lookup2Act->setEnabled(true);
+    find1Act->setEnabled(true);
+    find2Act->setEnabled(true);
+    minunique1Act->setEnabled(true);
+    extendAct->setEnabled(true);
+    getrefsAct->setEnabled(true);
+    statementAct->setEnabled(true);
+    rawAct->setEnabled(true);
+    raw1Act->setEnabled(true);
+    raw2Act->setEnabled(true);
+    tokensAct->setEnabled(true);
+    searchAct->setEnabled(true);
+    QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
+}
+
 void MainWindow::addBibles()
 {
     QString message = tr("Please wait...");
     statusBar()->showMessage(message);
-#ifndef __EMSCRIPTEN__
+    connect(&aWatcher, &QFutureWatcher<void>::finished, this, &MainWindow::handleFinishedAddBibles);
     QGuiApplication::setOverrideCursor(Qt::BusyCursor);
-#endif
     QFuture<void> future = QtConcurrent::run(addBiblesThread, this);
+    aWatcher.setFuture(future);
 }
 
 void MainWindow::greekTextN(int index)
@@ -612,13 +610,14 @@ void MainWindow::performExtend(QLineEdit *lookupEdit) {
 }
 
 void MainWindow::handleFinishedGetrefs() {
-    QString result = watcher.result();
+    QString result = gWatcher.result();
     passageInfos->append(result);
     moveCursorEnd(passageInfos);
+    QGuiApplication::setOverrideCursor(Qt::ArrowCursor);
 }
 
 void MainWindow::performGetrefs(QLineEdit *lookupEdit) {
-    if (watcher.isRunning()) {
+    if (gWatcher.isRunning()) {
         QMessageBox messageBox;
         messageBox.critical(0, tr("Error"),
                             tr("Another getrefs command is running, please wait for the computation being finished."));
@@ -691,13 +690,10 @@ void MainWindow::performGetrefs(QLineEdit *lookupEdit) {
     try {
         QString message = tr("Please wait...");
         statusBar()->showMessage(message);
-#ifndef __EMSCRIPTEN__
+        connect(&gWatcher, &QFutureWatcher<QString>::finished, this, &MainWindow::handleFinishedGetrefs);
         QGuiApplication::setOverrideCursor(Qt::BusyCursor);
-#endif
-
-        connect(&watcher, &QFutureWatcher<QString>::finished, this, &MainWindow::handleFinishedGetrefs);
         QFuture<QString> future = QtConcurrent::run(getrefsThread, this);
-        watcher.setFuture(future);
+        gWatcher.setFuture(future);
 
     } catch (exception &e) {
         statusBar()->showMessage(tr("Computation error."));
