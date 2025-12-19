@@ -1349,52 +1349,40 @@ void MainWindow::createActions()
     find1Act->setIcon(QIcon::fromTheme("edit-find"));
     find1Act->setStatusTip(tr(findStatusTip.c_str()).arg(1));
     connect(find1Act, &QAction::triggered, this, &MainWindow::find1);
-#ifndef __APPLE__
     find1Act->setDisabled(true);
-#endif
 
     find2Act = new QAction("Find 2…", this);
     find2Act->setIcon(QIcon::fromTheme("edit-find"));
     find2Act->setStatusTip(tr(findStatusTip.c_str()).arg(2));
     connect(find2Act, &QAction::triggered, this, &MainWindow::find2);
-#ifndef __APPLE__
     find2Act->setDisabled(true);
-#endif
 
     minunique1Act = new QAction("&Min. unique 1…", this);
     minunique1Act->setIcon(QIcon::fromTheme("go-previous"));
     minunique1Act->setStatusTip(tr("Search for minimal unique passages in clipboard 1 in a Bible"));
     connect(minunique1Act, &QAction::triggered, this, &MainWindow::minunique1);
-#ifndef __APPLE__
     minunique1Act->setDisabled(true);
-#endif
 
     extendAct = new QAction("&Extend…", this);
     extendAct->setIcon(QIcon::fromTheme("go-next"));
     extendAct->setStatusTip(
         tr("Extend a passage to the longest possible quotation from another Bible"));
     connect(extendAct, &QAction::triggered, this, &MainWindow::extend);
-#ifndef __APPLE__
     extendAct->setDisabled(true);
-#endif
 
     getrefsAct = new QAction("&Get refs…", this);
     getrefsAct->setIcon(QIcon::fromTheme("scanner"));
     getrefsAct->setStatusTip(
         tr("Search for references in a Bible on the passage in another Bible"));
     connect(getrefsAct, &QAction::triggered, this, &MainWindow::getrefs);
-#ifndef __APPLE__
     getrefsAct->setDisabled(true);
-#endif
 
     statementAct = new QAction("&Statement…", this);
     statementAct->setIcon(QIcon::fromTheme("input-keyboard"));
     statementAct->setStatusTip(
         tr("Open a text editor to edit a statement"));
     connect(statementAct, &QAction::triggered, this, &MainWindow::statement);
-#ifndef __APPLE__
     statementAct->setDisabled(true);
-#endif
 
     lookupAct = new QAction("&Lookup…", this);
     lookupAct->setIcon(QIcon::fromTheme("document-open"));
@@ -1407,32 +1395,24 @@ void MainWindow::createActions()
     lookup1Act = new QAction("Lookup &1…", this);
     lookup1Act->setStatusTip(tr(lookupStatusTip.c_str()).arg(1));
     connect(lookup1Act, &QAction::triggered, this, &MainWindow::lookup1);
-#ifndef __APPLE__
     lookup1Act->setDisabled(true);
-#endif
 
     lookup2Act = new QAction("Lookup &2…", this);
     lookup2Act->setStatusTip(tr(lookupStatusTip.c_str()).arg(2));
     connect(lookup2Act, &QAction::triggered, this, &MainWindow::lookup2);
-#ifndef __APPLE__
     lookup2Act->setDisabled(true);
-#endif
 
     tokensAct = new QAction("&Tokens…", this);
     tokensAct->setIcon(QIcon::fromTheme("view-sort-ascending"));
     tokensAct->setStatusTip(tr("Search for a tokenized verse in a book in the given Bible"));
     connect(tokensAct, &QAction::triggered, this, &MainWindow::tokens);
-#ifndef __APPLE__
     tokensAct->setDisabled(true);
-#endif
 
     searchAct = new QAction("&Search…", this);
     searchAct->setIcon(QIcon::fromTheme("view-sort-ascending"));
     searchAct->setStatusTip(tr("Search for a set of tokens on a maximal length in a Bible"));
     connect(searchAct, &QAction::triggered, this, &MainWindow::search);
-#ifndef __APPLE__
     searchAct->setDisabled(true);
-#endif
 
     preferencesAct = new QAction(tr("Pr&eferences…"), this);
     preferencesAct->setIcon(QIcon::fromTheme("preferences-desktop-font"));
@@ -1443,9 +1423,7 @@ void MainWindow::createActions()
     rawAct->setIcon(QIcon::fromTheme("media-flash"));
     rawAct->setStatusTip(tr("Show the a-z transcription of a positioned text in a given book"));
     connect(rawAct, &QAction::triggered, this, &MainWindow::raw);
-#ifndef __APPLE__
     rawAct->setDisabled(true);
-#endif
 
     string rawStatusTip
         = tr("Put the a-z transcription of a positioned text in a given book in clipboard %1")
@@ -1453,16 +1431,12 @@ void MainWindow::createActions()
     raw1Act = new QAction("Raw &1…", this);
     raw1Act->setStatusTip(tr(rawStatusTip.c_str()).arg(1));
     connect(raw1Act, &QAction::triggered, this, &MainWindow::raw1);
-#ifndef __APPLE__
     raw1Act->setDisabled(true);
-#endif
 
     raw2Act = new QAction("Raw &2…", this);
     raw2Act->setStatusTip(tr(rawStatusTip.c_str()).arg(2));
     connect(raw2Act, &QAction::triggered, this, &MainWindow::raw2);
-#ifndef __APPLE__
     raw2Act->setDisabled(true);
-#endif
 
     aboutAct = new QAction(tr("About &bibref…"), this);
     aboutAct->setIcon(QIcon::fromTheme("help-about"));
