@@ -49,3 +49,9 @@
   the files `bibref-qt.js` and  `bibref-qt.data` from the build folder of the web version (if they already exist),
   build the Qt web version and install it, then copy the folder `html-output` from the web build
   folder over the public web folder, finally, put a symlink `index.html` to `bibref-qt.html`
+
+## Further steps to do
+
+* If everything works, symlink the new web versions as stable version.
+* Do a release on GitHub.
+* Update GitHub Wiki by mentioning new features.
