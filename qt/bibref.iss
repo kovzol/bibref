@@ -1,8 +1,8 @@
-#define BIBREF_VERSION "2025-12-07"
+#define BIBREF_GUI_VERSION "2025-12-20"
 
 [Setup]
 AppName=bibref
-AppVersion={#BIBREF_VERSION}
+AppVersion={#BIBREF_GUI_VERSION}
 WizardStyle=modern
 DefaultDirName={commonpf32}\bibref-qt
 DefaultGroupName=bibref
@@ -12,7 +12,7 @@ SolidCompression=yes
 OutputBaseFilename=bibref-setup
 
 [Files]
-Source: "bibref-qt-{#BIBREF_VERSION}\*.*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
+Source: "bibref-qt-{#BIBREF_GUI_VERSION}\*.*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
 
 [Icons]
 Name: "{group}\bibref-qt"; Filename: "{app}\bibref-qt.exe"; IconFilename: "{app}\bibref.ico"
