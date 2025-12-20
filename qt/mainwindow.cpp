@@ -1283,7 +1283,7 @@ void MainWindow::showSwordBibles()
     inputDialog.setWindowTitle(tr("Show available Bibles"));
     inputDialog.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     inputDialog.setLabelText(tr("Available Bible editions:"));
-    inputDialog.setFixedSize(70 * size, size * b.size() * 1.5);
+    inputDialog.setFixedSize(70 * size, size * b.size() * 2);
 
     inputDialog.exec();
 }
