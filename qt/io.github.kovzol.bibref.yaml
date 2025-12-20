@@ -1,8 +1,8 @@
 id: io.github.kovzol.bibref
 runtime: org.kde.Platform
-runtime-version: '6.9'
+runtime-version: '6.10'
 base: io.qt.qtwebengine.BaseApp
-base-version: '6.9'
+base-version: '6.10'
 sdk: org.kde.Sdk
 command: bibref-qt
 finish-args:
@@ -19,6 +19,8 @@ modules:
     config-opts:
       - -DSWORD_BUILD_UTILS=No
       - -DSWORD_BUILD_EXAMPLES=No
+      - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+      - -DSWORD_LINK_LIBRARIES="curl"
     cleanup:
       - /bin/*
     sources:
@@ -37,8 +39,8 @@ modules:
       - ./b2 -j $FLATPAK_BUILDER_N_JOBS install
     sources:
       - type: archive
-        url: https://archives.boost.io/release/1.89.0/source/boost_1_89_0.tar.gz
-        sha256: 9de758db755e8330a01d995b0a24d09798048400ac25c03fc5ea9be364b13c93
+        url: https://archives.boost.io/release/1.90.0/source/boost_1_90_0.tar.gz
+        sha256: 5e93d582aff26868d581a52ae78c7d8edf3f3064742c6e77901a1f18a437eea9
         x-checker-data:
           type: anitya
           project-id: 6845
@@ -52,8 +54,8 @@ modules:
       - /bin/*
     sources:
       - type: archive
-        url: https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/14.1.0/graphviz-14.1.0.tar.gz
-        sha256: 094e87ed6946ff71f5d27cd754d46bd62429ac7ff3ca20b5648a3977c62df556
+        url: https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/14.1.1/graphviz-14.1.1.tar.gz
+        sha256: f7a709b59872f49ab996d68102822a331a66cce80dd6b8e3c0c944cdb4ce599b
         x-checker-data:
           type: anitya
           project-id: 1249
@@ -77,10 +79,10 @@ modules:
     sources:
       # - type: git
       # url: https://github.com/kovzol/bibref
-      # tag: 2025-12-07 # does not yet exist
+      # tag: 2025-12-20 # does not yet exist
       - type: archive
-        url: https://github.com/kovzol/bibref/archive/f30d0c687f5c74d665bf969677fa87500fc6e858.zip
-        sha256: 0472189b2542b9f6336dd66016f89a7800d3ee8cd51ea4fa57ee47891bcfcbd3
+        url: https://github.com/kovzol/bibref/archive/0b7d07fa218bc96bd4dbb12cba0381238e4258e9.zip
+        sha256: 49637414f1f48876787ebd86f8ec9910a98735dd852a887568984fd1049dfa60
     post-install:
       - mv /app/tmp/.sword/* /app/share/sword
 
