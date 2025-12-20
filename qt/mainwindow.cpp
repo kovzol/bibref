@@ -126,6 +126,9 @@ MainWindow::MainWindow()
     setMinimumSize(16 * size, 16 * size);
     resize(48 * size, 32 * size);
 
+    connect(&aWatcher, &QFutureWatcher<void>::finished, this, &MainWindow::handleFinishedAddBibles);
+    connect(&gWatcher, &QFutureWatcher<QString>::finished, this, &MainWindow::handleFinishedGetrefs);
+
     ot_color = "<span style=\"color: #626600\">";
     nt_color = "<span style=\"color: #006662\">";
     reset_color = "</span>";
@@ -215,7 +218,6 @@ void MainWindow::addBibles()
 {
     QString message = tr("Please wait...");
     statusBar()->showMessage(message);
-    connect(&aWatcher, &QFutureWatcher<void>::finished, this, &MainWindow::handleFinishedAddBibles);
     QGuiApplication::setOverrideCursor(Qt::BusyCursor);
     QFuture<void> future = QtConcurrent::run(addBiblesThread, this);
     aWatcher.setFuture(future);
@@ -690,7 +692,6 @@ void MainWindow::performGetrefs(QLineEdit *lookupEdit) {
     try {
         QString message = tr("Please wait...");
         statusBar()->showMessage(message);
-        connect(&gWatcher, &QFutureWatcher<QString>::finished, this, &MainWindow::handleFinishedGetrefs);
         QGuiApplication::setOverrideCursor(Qt::BusyCursor);
         QFuture<QString> future = QtConcurrent::run(getrefsThread, this);
         gWatcher.setFuture(future);
