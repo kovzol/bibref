@@ -1030,7 +1030,7 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
     rl_attempted_completion_function = completer; // Initialize readline.
 #endif
 #endif
-    info("This is bibref " BIBREF_VERSION ", nice to meet you.");
+    info("This is bibref " BIBREF_GUI_VERSION " (database version " BIBREF_VERSION "), nice to meet you.");
     showAvailableBibles();
     if (addbooks) {
         if (addBibles() == 0) {

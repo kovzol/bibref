@@ -72,7 +72,7 @@ int defaultMaxClipboardShow;
 int main(int argc, char *argv[])
 {
     QCoreApplication::setApplicationName("bibref");
-    QCoreApplication::setApplicationVersion(BIBREF_VERSION);
+    QCoreApplication::setApplicationVersion(BIBREF_GUI_VERSION);
     QCoreApplication::setOrganizationName("Zoltán Kovács");
     QCoreApplication::setOrganizationDomain("kovzol.github.io");
     QApplication app(argc, argv);

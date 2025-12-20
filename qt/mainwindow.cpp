@@ -1057,9 +1057,10 @@ void MainWindow::aboutOther()
         tr("Technical information"),
         tr("The version %0 (%1) of the bibref program you are currently running is built with "
             "Boost %2 and GraphViz %3.")
-            .arg(BIBREF_VERSION)
+            .arg(BIBREF_GUI_VERSION)
             .arg(QSysInfo::kernelType() + " " +
-            QSysInfo::buildCpuArchitecture() + ", Qt " + QT_VERSION_STR)
+            QSysInfo::buildCpuArchitecture() + ", Qt " + QT_VERSION_STR
+                 + ", db " + BIBREF_VERSION)
             .arg(QString::fromStdString(
                 to_string(BOOST_VERSION % 100) + "." + to_string(BOOST_VERSION / 100 % 1000) + "." + to_string(BOOST_VERSION / 100000)))
             .arg(PACKAGE_VERSION));
