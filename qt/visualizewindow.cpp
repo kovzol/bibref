@@ -31,6 +31,9 @@ VisualizeWindow::VisualizeWindow(QWidget *parent, string input)
     this->setAttribute(::Qt::WA_DeleteOnClose);
     QSettings settings;
     bool diagramHtml = settings.value("Application/diagramHtml", defaultDiagramHtml).toBool();
+#ifndef USE_WEBENGINE
+    diagramHtml = false;
+#endif
     if (!diagramHtml) {
         tile = new QSvgWidget(this);
         setCentralWidget(tile);
