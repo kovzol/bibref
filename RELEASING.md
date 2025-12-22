@@ -30,7 +30,7 @@
 * Copy the `bibref-addbooks-cache` folder from a working platform in the build folder
 * Change working directory to `qt/`.
 * Run the `./create-windows-folder` script and add the build folder as parameter
-* Optionally, change the working folder temporarily to bibref-qt-YYYY-MM-DD/ and test the program by running the executable `bibref-qt.exe`
+* Optionally, open a native Windows command prompt, change the working folder to bibref-qt-YYYY-MM-DD\ and test the program by running the executable `bibref-qt.exe`
 * Run the `./create-windows-zip` script (in the `qt/` folder)
 * Get `bibref-qt-YYYY-MM-DD.zip` and share it on GitHub/Releases later
 * Start the Inno Setup Compiler with config file `bibref.iss` and create the installer
