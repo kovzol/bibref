@@ -225,12 +225,12 @@ void MainWindow::addBibles()
 
 void MainWindow::greekTextN(int index)
 {
-    QInputDialog inputDialog(this);
-    inputDialog.setWindowTitle("Text " + QString::number(index + 1));
-    inputDialog.setLabelText(tr("Greek text:"));
-    inputDialog.setToolTip(toolTipHelp("textN"));
+    QInputDialog* inputDialog = new QInputDialog;
+    inputDialog->setWindowTitle("Text " + QString::number(index + 1));
+    inputDialog->setLabelText(tr("Greek text:"));
+    inputDialog->setToolTip(toolTipHelp("textN"));
     if (textset[index]) {
-        inputDialog.setTextValue(latinToGreek(text[index]).c_str());
+        inputDialog->setTextValue(latinToGreek(text[index]).c_str());
     }
     // inputDialog.setFont(QFont("KoineGreek")); // This would change all fonts in the whole dialog.
     // It's not what we want.
@@ -239,43 +239,50 @@ void MainWindow::greekTextN(int index)
     // Otherwise, the QLineEdit field does not exist yet and cannot be found via findChild.
     QSettings settings;
     bool useKoineGreekFont = settings.value("Application/useKoineGreekFont", defaultUseKoineGreekFont).toBool();
+    inputDialog->showNormal();
     if (useKoineGreekFont) {
-        inputDialog.showNormal();
-        QLineEdit *inputField = inputDialog.findChild<QLineEdit *>();
+        QLineEdit *inputField = inputDialog->findChild<QLineEdit *>();
         inputField->setFont(QFont("KoineGreekBibref"));
     }
+    QTimer::singleShot(0, inputDialog, [inputDialog]() {
+        if (auto *edit = inputDialog->findChild<QLineEdit *>()) {
+            edit->setFocus(Qt::OtherFocusReason);
+            edit->selectAll();
+            }
+        });
 
-    if (inputDialog.exec() != QDialog::Accepted)
-        return;
-    const QString value = inputDialog.textValue().trimmed();
-    if (value.isEmpty())
-        return;
-    string rest = value.toStdString();
+    connect(inputDialog, &QInputDialog::accepted, this, [=](){
 
-    if (useKoineGreekFont) {
-        // Maybe the user typed the input with a-z notation, and they are displayed
-        // with the Koine font. In such cases we want to convert the user input
-        // (or parts of it) into Greek.
-        rest = latinToGreek(rest);
+        const QString value = inputDialog->textValue().trimmed();
+        if (value.isEmpty())
+            return;
+        string rest = value.toStdString();
+
+        if (useKoineGreekFont) {
+            // Maybe the user typed the input with a-z notation, and they are displayed
+            // with the Koine font. In such cases we want to convert the user input
+            // (or parts of it) into Greek.
+            rest = latinToGreek(rest);
+        }
+
+        // Taken from cli:
+        SWMgr manager;
+        manager.setGlobalOption("Greek Accents", "Off"); // disable accents
+        SWBuf to_convert = rest.data();
+        manager.filterText("Greek Accents", to_convert);
+        // Convert Greek to Latin:
+        string processed = processVerse(to_convert.c_str());
+        if (processed.length() == 0) {
+            statusBar()->showMessage(tr("Text does not contain Greek letters, ignored."));
+            return; // Success, but nothing happened.
+        }
+        text[index] = processed; // Store result.
+        textset[index] = true;   // activate clipboard
+        statusBar()->clearMessage(); // proper operation
+
+        clipboardInfos->setText(getClipboardInfos());
+        });
     }
-
-    // Taken from cli:
-    SWMgr manager;
-    manager.setGlobalOption("Greek Accents", "Off"); // disable accents
-    SWBuf to_convert = rest.data();
-    manager.filterText("Greek Accents", to_convert);
-    // Convert Greek to Latin:
-    string processed = processVerse(to_convert.c_str());
-    if (processed.length() == 0) {
-        statusBar()->showMessage(tr("Text does not contain Greek letters, ignored."));
-        return; // Success, but nothing happened.
-    }
-    text[index] = processed; // Store result.
-    textset[index] = true;   // activate clipboard
-    statusBar()->clearMessage(); // proper operation
-
-    clipboardInfos->setText(getClipboardInfos());
-}
 
 void MainWindow::greekText1()
 {
@@ -289,38 +296,47 @@ void MainWindow::greekText2()
 
 void MainWindow::latinTextN(int index)
 {
-    QInputDialog inputDialog(this);
-    inputDialog.setWindowTitle("Latin text " + QString::number(index + 1));
-    inputDialog.setLabelText(tr("Latin text:"));
-    inputDialog.setToolTip(toolTipHelp("latintextN"));
+    QInputDialog* inputDialog = new QInputDialog;
+    inputDialog->setWindowTitle("Latin text " + QString::number(index + 1));
+    inputDialog->setLabelText(tr("Latin text:"));
+    inputDialog->setToolTip(toolTipHelp("latintextN"));
     if (textset[index]) {
-        inputDialog.setTextValue(text[index].c_str());
+        inputDialog->setTextValue(text[index].c_str());
     }
-    if (inputDialog.exec() != QDialog::Accepted)
-        return;
-    const QString value = inputDialog.textValue().trimmed();
-    if (value.isEmpty())
-        return;
+    inputDialog->showNormal();
+    QTimer::singleShot(0, inputDialog, [inputDialog]() {
+        if (auto *edit = inputDialog->findChild<QLineEdit *>()) {
+            edit->setFocus(Qt::OtherFocusReason);
+            edit->selectAll();
+            }
+        });
 
-    text[index] = "";
-    for (int i = 0; i < value.length(); i++) {
-        QChar c = value.at(i);
-        if (c >= 'a' && c <= 'z') {
-            text[index] += c.toLatin1();
-        }
-        if (c >= 'A' && c <= 'Z') {
-            text[index] += c.toLower().toLatin1();
-        }
-        if (text[index].back() == 'q') {
-            text[index].back() = 'z';
-        }
-        if (text[index].back() == 'w') {
-            text[index].back() = 's';
-        }
-    }
-    textset[index] = true; // activate clipboard
+    connect(inputDialog, &QInputDialog::accepted, this, [=](){
 
-    clipboardInfos->setText(getClipboardInfos());
+        const QString value = inputDialog->textValue().trimmed();
+        if (value.isEmpty())
+            return;
+
+        text[index] = "";
+        for (int i = 0; i < value.length(); i++) {
+            QChar c = value.at(i);
+            if (c >= 'a' && c <= 'z') {
+                text[index] += c.toLatin1();
+            }
+            if (c >= 'A' && c <= 'Z') {
+                text[index] += c.toLower().toLatin1();
+            }
+            if (text[index].back() == 'q') {
+                text[index].back() = 'z';
+            }
+            if (text[index].back() == 'w') {
+                text[index].back() = 's';
+            }
+        }
+        textset[index] = true; // activate clipboard
+
+        clipboardInfos->setText(getClipboardInfos());
+    });
 }
 
 void MainWindow::latinText1()
@@ -339,10 +355,10 @@ void MainWindow::nearest12()
     vector<string> tokens;
     boost::split(tokens, best_c_d, boost::is_any_of(" "));
     if (tokens.size() < 2) {
-        QMessageBox msgBox;
-        msgBox.setText(MainWindow::tr("Both clipboards must contain at least 2 characters."));
-        msgBox.setIcon(QMessageBox::Critical);
-        msgBox.exec();
+        QMessageBox* msgBox = new QMessageBox;
+        msgBox->setText(MainWindow::tr("Both clipboards must contain at least 2 characters."));
+        msgBox->setIcon(QMessageBox::Critical);
+        msgBox->showNormal();
         return;
     }
     string message = "Nearest Jaccard distance is " + tokens[1] + " with substring " + tokens[0] + ".";
@@ -620,10 +636,14 @@ void MainWindow::handleFinishedGetrefs() {
 
 void MainWindow::performGetrefs(QLineEdit *lookupEdit) {
     if (gWatcher.isRunning()) {
-        QMessageBox messageBox;
-        messageBox.critical(0, tr("Error"),
-                            tr("Another getrefs command is running, please wait for the computation being finished."));
-        messageBox.setFixedSize(500,200);
+        QMessageBox *messageBox = new QMessageBox;
+        messageBox->setIcon(QMessageBox::Critical);
+        messageBox->setWindowTitle(tr("Error"));
+        messageBox->setText(
+            tr("Another getrefs command is running, please wait for the computation being finished."));
+        messageBox->setStandardButtons(QMessageBox::Ok);
+        messageBox->setFixedSize(500, 200);
+        messageBox->showNormal();
         return;
     }
     const QString value = lookupEdit->text().trimmed();
@@ -804,6 +824,13 @@ void MainWindow::dialogBoxVerse(string command, QString windowTitle, const char*
     });
 
     widget->showNormal();
+
+    QTimer::singleShot(0, lookupEdit, [lookupEdit]() {
+        if (auto *edit = lookupEdit->findChild<QLineEdit *>()) {
+            edit->setFocus(Qt::OtherFocusReason);
+            edit->selectAll();
+            }
+        });
 }
 
 void MainWindow::lookup()
@@ -818,60 +845,69 @@ void MainWindow::tokens()
 
 void MainWindow::search()
 {
-    QInputDialog inputDialog(this);
-    inputDialog.setWindowTitle("Search");
-    inputDialog.setLabelText(tr("Parameters:"));
-    inputDialog.setTextValue(searchText.c_str());
-    inputDialog.setToolTip(toolTipHelp("search"));
-    if (inputDialog.exec() != QDialog::Accepted)
-        return;
-    const QString value = inputDialog.textValue().trimmed();
-    if (value.isEmpty())
-        return;
-    searchText = value.toStdString();
-    string rest = searchText;
+    QInputDialog* inputDialog = new QInputDialog;
+    inputDialog->setWindowTitle("Search");
+    inputDialog->setLabelText(tr("Parameters:"));
+    inputDialog->setTextValue(searchText.c_str());
+    inputDialog->setToolTip(toolTipHelp("search"));
+    inputDialog->showNormal();
+    QTimer::singleShot(0, inputDialog, [inputDialog]() {
+        if (auto *edit = inputDialog->findChild<QLineEdit *>()) {
+            edit->setFocus(Qt::OtherFocusReason);
+            edit->selectAll();
+            }
+        });
 
-    // Taken mostly from cli:
-    int index = rest.find(" ");
-    string moduleName = rest.substr(0, index); // Search in the given Bible edition...
-    rest = rest.substr(index + 1);
+    connect(inputDialog, &QInputDialog::accepted, this, [=](){
 
-    vector<int> pattern; // the token pattern to be searched
-    std::stringstream ss(rest);
+        const QString value = inputDialog->textValue().trimmed();
+        if (value.isEmpty())
+            return;
+        searchText = value.toStdString();
+        string rest = searchText;
 
-    int s = 0;
-    int t;
-    while (ss >> t) {
-        pattern.push_back(t);
-        s += 1; // count the tokens in the pattern
-    }
-    if (s == 0) { // no pattern was defined
-        statusBar()->showMessage("No pattern was defined.");
-        return;
-    }
+        // Taken mostly from cli:
+        int index = rest.find(" ");
+        string moduleName = rest.substr(0, index); // Search in the given Bible edition...
+        rest = rest.substr(index + 1);
 
-    s--;
-    int length = pattern.at(s); // the last parameter
-    pattern.pop_back();         // remove it from the token pattern
-    string info = tr("%1 tokens given, search for an extension of max. %2 tokens.")
-                      .arg(s)
-                      .arg(length)
-                      .toStdString();
-    if (length < s) { // the length must be at least the length of the pattern
-        info += " " + tr("Impossible.").toStdString();
-        statusBar()->showMessage(info.c_str());
-    } else {
-        statusBar()->showMessage(info.c_str());
-        collect_info = "";                                 // reset communication buffer
-        searchTokenset(moduleName, pattern, length, true); // Start search...
+        vector<int> pattern; // the token pattern to be searched
+        std::stringstream ss(rest);
 
-        boost::trim(collect_info);
-        boost::replace_all(collect_info, "\n", "<br>");
+        int s = 0;
+        int t;
+        while (ss >> t) {
+            pattern.push_back(t);
+            s += 1; // count the tokens in the pattern
+        }
+        if (s == 0) { // no pattern was defined
+            statusBar()->showMessage("No pattern was defined.");
+            return;
+        }
 
-        passageInfos->append(
-            ("<b>Search " + moduleName + " " + rest + "</b>" + "<br>" + collect_info).c_str());
-        moveCursorEnd(passageInfos);
-    }
+        s--;
+        int length = pattern.at(s); // the last parameter
+        pattern.pop_back();         // remove it from the token pattern
+        string info = tr("%1 tokens given, search for an extension of max. %2 tokens.")
+                          .arg(s)
+                          .arg(length)
+                          .toStdString();
+        if (length < s) { // the length must be at least the length of the pattern
+            info += " " + tr("Impossible.").toStdString();
+            statusBar()->showMessage(info.c_str());
+        } else {
+            statusBar()->showMessage(info.c_str());
+            collect_info = "";                                 // reset communication buffer
+            searchTokenset(moduleName, pattern, length, true); // Start search...
+
+            boost::trim(collect_info);
+            boost::replace_all(collect_info, "\n", "<br>");
+
+            passageInfos->append(
+                ("<b>Search " + moduleName + " " + rest + "</b>" + "<br>" + collect_info).c_str());
+            moveCursorEnd(passageInfos);
+        }
+    });
 }
 
 
@@ -934,38 +970,41 @@ void MainWindow::minunique1()
         return;
     }
 
-    QInputDialog inputDialog;
+    QInputDialog* inputDialog = new QInputDialog;
     QSettings settings;
     int size = settings.value("Application/fontsize", defaultFontSize).toInt();
 
-    inputDialog.setOptions(QInputDialog::UseListViewForComboBoxItems);
-    inputDialog.setComboBoxItems(getModuleNames());
-    inputDialog.setWindowTitle("Min. unique 1");
-    inputDialog.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    inputDialog.setLabelText(tr("Select a Bible edition:"));
-    inputDialog.setFixedSize(20 * size, 3);
+    inputDialog->setOptions(QInputDialog::UseListViewForComboBoxItems);
+    inputDialog->setComboBoxItems(getModuleNames());
+    inputDialog->setWindowTitle("Min. unique 1");
+    inputDialog->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    inputDialog->setLabelText(tr("Select a Bible edition:"));
+    inputDialog->setFixedSize(20 * size, 3);
+    inputDialog->showNormal();
 
-    if (inputDialog.exec() != QDialog::Accepted)
-        return;
-    const QString value = inputDialog.textValue().trimmed();
-    if (value.isEmpty())
-        return;
-    string rest = value.toStdString();
+    connect(inputDialog, &QInputDialog::accepted, this, [=](){
 
-    collect_info = "";
+        const QString value = inputDialog->textValue().trimmed();
+        if (value.isEmpty())
+            return;
+        string rest = value.toStdString();
 
-    extern vector<string> find_min_unique(string text, const string &moduleName, bool verbose);
-    find_min_unique(text[0], rest, true);
+        collect_info = "";
 
-    boost::trim(collect_info);
-    boost::replace_all(collect_info, "\n", "<br>");
+        extern vector<string> find_min_unique(string text, const string &moduleName, bool verbose);
+        find_min_unique(text[0], rest, true);
 
-    QString translated = tr("Minimal unique subtexts of %1 in %2")
-                             .arg(QString(text[0].c_str()))
-                             .arg(QString(rest.c_str()));
-    passageInfos->append(("<b>" + translated.toStdString() + "</b><br>" + collect_info).c_str());
-    moveCursorEnd(passageInfos);
-    statusBar()->clearMessage(); // proper operation
+        boost::trim(collect_info);
+        boost::replace_all(collect_info, "\n", "<br>");
+
+        QString translated = tr("Minimal unique subtexts of %1 in %2")
+                                 .arg(QString(text[0].c_str()))
+                                 .arg(QString(rest.c_str()));
+        passageInfos->append(("<b>" + translated.toStdString() + "</b><br>" + collect_info).c_str());
+        moveCursorEnd(passageInfos);
+        statusBar()->clearMessage(); // proper operation
+
+    });
 }
 
 void MainWindow::findN(int index)
@@ -976,37 +1015,39 @@ void MainWindow::findN(int index)
         return;
     }
 
-    QInputDialog inputDialog;
+    QInputDialog* inputDialog = new QInputDialog;
     QSettings settings;
     int size = settings.value("Application/fontsize", defaultFontSize).toInt();
 
-    inputDialog.setOptions(QInputDialog::UseListViewForComboBoxItems);
-    inputDialog.setComboBoxItems(getModuleNames());
-    inputDialog.setWindowTitle("Find " + QString::number(index + 1));
-    inputDialog.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    inputDialog.setLabelText(tr("Select a Bible edition:"));
-    inputDialog.setFixedSize(6 * size, 3);
+    inputDialog->setOptions(QInputDialog::UseListViewForComboBoxItems);
+    inputDialog->setComboBoxItems(getModuleNames());
+    inputDialog->setWindowTitle("Find " + QString::number(index + 1));
+    inputDialog->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    inputDialog->setLabelText(tr("Select a Bible edition:"));
+    inputDialog->setFixedSize(6 * size, 3);
+    inputDialog->showNormal();
 
-    if (inputDialog.exec() != QDialog::Accepted)
-        return;
-    const QString value = inputDialog.textValue().trimmed();
-    if (value.isEmpty())
-        return;
-    string rest = value.toStdString();
+    connect(inputDialog, &QInputDialog::accepted, this, [=](){
 
-    collect_info = "";
+        const QString value = inputDialog->textValue().trimmed();
+        if (value.isEmpty())
+            return;
+        string rest = value.toStdString();
 
-    extern int find(const string &text, const string &moduleName, int maxFound, bool verbose);
-    find(text[index], rest, maxresults, true);
+        collect_info = "";
 
-    boost::trim(collect_info);
-    boost::replace_all(collect_info, "\n", "<br>");
+        extern int find(const string &text, const string &moduleName, int maxFound, bool verbose);
+        find(text[index], rest, maxresults, true);
 
-    QString translated
-        = tr("Searching for %1 in %2").arg(QString(text[index].c_str())).arg(QString(rest.c_str()));
-    passageInfos->append(("<b>" + translated.toStdString() + "</b><br>" + collect_info).c_str());
-    moveCursorEnd(passageInfos);
-    statusBar()->clearMessage(); // proper operation
+        boost::trim(collect_info);
+        boost::replace_all(collect_info, "\n", "<br>");
+
+        QString translated
+            = tr("Searching for %1 in %2").arg(QString(text[index].c_str())).arg(QString(rest.c_str()));
+        passageInfos->append(("<b>" + translated.toStdString() + "</b><br>" + collect_info).c_str());
+        moveCursorEnd(passageInfos);
+        statusBar()->clearMessage(); // proper operation
+    });
 }
 
 void MainWindow::find1()
@@ -1040,23 +1081,28 @@ void MainWindow::getrefs()
 
 void MainWindow::about()
 {
-    QMessageBox::about(
-        this,
-        tr("About bibref") + " (" + BIBREF_VERSION + ")",
-        tr("<a href=\"https://github.com/kovzol/bibref\">bibref</a> is a tool that helps "
-           "discovering internal references in the Bible."
-           "<br>It aims at finding quotations of the <a "
-           "href=\"https://en.wikipedia.org/wiki/Septuagint\">Septuagint</a>"
-           " in the <a href=\"https://en.wikipedia.org/wiki/New_Testament\">Greek New Testament</a>"
-           " in a mechanical way."));
+    QMessageBox *msgBox = new QMessageBox;
+    msgBox->setWindowTitle(tr("About bibref") + " (" + BIBREF_GUI_VERSION + ")");
+    msgBox->setText(
+    tr("<a href=\"https://github.com/kovzol/bibref\">bibref</a> is a tool that helps "
+       "discovering internal references in the Bible."
+       "<br>It aims at finding quotations of the <a "
+       "href=\"https://en.wikipedia.org/wiki/Septuagint\">Septuagint</a>"
+       " in the <a href=\"https://en.wikipedia.org/wiki/New_Testament\">Greek New Testament</a>"
+       " in a mechanical way."));
+    msgBox->setIcon(QMessageBox::Information);
+    msgBox->setStandardButtons(QMessageBox::Ok);
+    msgBox->setTextFormat(Qt::RichText);
+    msgBox->setTextInteractionFlags(Qt::TextBrowserInteraction);
+    msgBox->showNormal();
 }
 
 void MainWindow::aboutOther()
 {
-    QMessageBox::about(
-        this,
-        tr("Technical information"),
-        tr("The version %0 (%1) of the bibref program you are currently running is built with "
+    QMessageBox *msgBox = new QMessageBox;
+    msgBox->setWindowTitle(tr("Technical information"));
+    msgBox->setText(
+    tr("The version %0 (%1) of the bibref program you are currently running is built with "
             "Boost %2 and GraphViz %3.")
             .arg(BIBREF_GUI_VERSION)
             .arg(QSysInfo::kernelType() + " " +
@@ -1065,6 +1111,11 @@ void MainWindow::aboutOther()
             .arg(QString::fromStdString(
                 to_string(BOOST_VERSION % 100) + "." + to_string(BOOST_VERSION / 100 % 1000) + "." + to_string(BOOST_VERSION / 100000)))
             .arg(PACKAGE_VERSION));
+    msgBox->setIcon(QMessageBox::Information);
+    msgBox->setStandardButtons(QMessageBox::Ok);
+    msgBox->setTextFormat(Qt::RichText);
+    msgBox->setTextInteractionFlags(Qt::TextBrowserInteraction);
+    msgBox->showNormal();
 }
 
 void MainWindow::aboutSword()
@@ -1232,21 +1283,6 @@ void MainWindow::showSwordBibles()
 {
     QStringList b;
 
-    /*
-    collect_info = "";
-    showAvailableBibles();
-    // E.g.: "Available Bible editions: KJV, StatResGNT."
-    int start = collect_info.find(":");
-    vector<string> bibles;
-    boost::split(bibles,
-                 collect_info.substr(start + 2, collect_info.length() - start - 4),
-                 boost::is_any_of(","));
-    for (string bible : bibles) {
-        QString be = QString(bible.c_str()).trimmed();
-        b.append(be);
-    }
-    */ // Old version, without extra information on the modules
-
     // Retrieving information directly via SWORD:
     SWMgr manager(new MarkupFilterMgr(FMT_XHTML));
     ModMap::iterator it;
@@ -1274,18 +1310,31 @@ void MainWindow::showSwordBibles()
         }
     }
 
-    QInputDialog inputDialog;
+    QLabel *label = new QLabel(tr("Available Bible editions:"));
+    label->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+
+    auto *model = new QStringListModel(b);
+    auto *view = new QListView;
+    view->setModel(model);
+    view->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    view->setSelectionMode(QAbstractItemView::NoSelection);
+
+    QWidget *widget = new QWidget;
+    setWindowLogo(widget);
+
+    QVBoxLayout *layout = new QVBoxLayout;
+    layout->setSizeConstraint(QLayout::SetMinAndMaxSize);
+    layout->addWidget(label);
+    layout->addWidget(view);
+
     QSettings settings;
     int size = settings.value("Application/fontsize", defaultFontSize).toInt();
+    widget->setLayout(layout);
+    widget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    widget->setFixedSize(70 * size, 12 * size);
+    widget->setWindowTitle(tr("Show available Bibles"));
+    widget->showNormal();
 
-    inputDialog.setOptions(QInputDialog::UseListViewForComboBoxItems | QInputDialog::NoButtons);
-    inputDialog.setComboBoxItems(b);
-    inputDialog.setWindowTitle(tr("Show available Bibles"));
-    inputDialog.setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    inputDialog.setLabelText(tr("Available Bible editions:"));
-    inputDialog.setFixedSize(70 * size, size * b.size() * 2);
-
-    inputDialog.exec();
 }
 
 void MainWindow::webTerminal()
@@ -1449,9 +1498,11 @@ void MainWindow::createActions()
     aboutSwordAct->setStatusTip(tr("Show information on the SWORD library"));
     connect(aboutSwordAct, &QAction::triggered, this, &MainWindow::aboutSword);
 
+#ifndef __EMSCRIPTEN__
     aboutQtAct = new QAction(tr("About &Qt…"), this);
     aboutQtAct->setStatusTip(tr("Show the Qt library's About box"));
     connect(aboutQtAct, &QAction::triggered, qApp, &QApplication::aboutQt);
+#endif
     // connect(aboutQtAct, &QAction::triggered, this, &MainWindow::aboutQt);
 
     aboutOtherAct = new QAction(tr("Technical information…"), this);
@@ -1530,7 +1581,9 @@ void MainWindow::createMenus()
     helpMenu->addAction(webTerminalAct);
     helpMenu->addSeparator();
     helpMenu->addAction(aboutSwordAct);
+#ifndef __EMSCRIPTEN__
     helpMenu->addAction(aboutQtAct);
+#endif
     helpMenu->addAction(aboutOtherAct);
 }
 
@@ -1697,8 +1750,16 @@ void MainWindow::preferences()
         setLanguage(newlang);
         settings.setValue("Application/language", newlang);
         if (lang != newlang) {
-            QMessageBox::information(this, tr("Information"),
-                                     tr("Please restart the application to change the language in the whole program."));
+            // QMessageBox::information(this, tr("Information"),
+            //                          tr("Please restart the application to change the language in the whole program."));
+            QMessageBox *msgBox = new QMessageBox;
+            msgBox->setWindowTitle(tr("Information"));
+            msgBox->setText(tr("Please restart the application to change the language in the whole program."));
+            msgBox->setIcon(QMessageBox::Information);
+            msgBox->setStandardButtons(QMessageBox::Ok);
+            msgBox->setTextFormat(Qt::RichText);
+            msgBox->setTextInteractionFlags(Qt::TextBrowserInteraction);
+            msgBox->showNormal();
         }
 
         int size = fontSizeEdit->text().toInt();

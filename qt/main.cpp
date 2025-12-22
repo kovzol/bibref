@@ -69,14 +69,17 @@ bool defaultUseKoineGreekFont;
 bool defaultTooltipsGreek;
 int defaultMaxClipboardShow;
 
+QApplication *app = nullptr;
+MainWindow *window = nullptr;
+
 int main(int argc, char *argv[])
 {
     QCoreApplication::setApplicationName("bibref");
     QCoreApplication::setApplicationVersion(BIBREF_GUI_VERSION);
     QCoreApplication::setOrganizationName("Zoltán Kovács");
     QCoreApplication::setOrganizationDomain("kovzol.github.io");
-    QApplication app(argc, argv);
-    app.setStyle("fusion");
+    app = new QApplication(argc, argv);
+    app->setStyle("fusion");
 
     defaultFontSize = 9;
     defaultDebug = false;
@@ -84,19 +87,19 @@ int main(int argc, char *argv[])
     defaultUseKoineGreekFont = true;
     defaultMaxClipboardShow = 100;
 
-    QFont f = app.font();
+    QFont f = app->font();
     QSettings settings;
     if (settings.contains("Application/fontsize")) {
         int size = settings.value("Application/fontsize", defaultFontSize).toInt();
         f.setPointSize(size);
-        app.setFont(f);
+        app->setFont(f);
     }
 
     QString lang = settings.value("Application/language", "").toString();
     setLanguage(lang);
 
-    MainWindow window;
-    window.setWindowIcon(QIcon(":/" LOGO_FILE));
+    window = new MainWindow();
+    window->setWindowIcon(QIcon(":/" LOGO_FILE));
 
     // Set working directory to home if XDG standards are used (e.g., for flatpak):
     char *home = std::getenv("XDG_DATA_HOME");
@@ -123,11 +126,13 @@ int main(int argc, char *argv[])
          << BOOST_VERSION / 100 % 1000 << "." << BOOST_VERSION / 100000 << endl;
     cout << "Using GraphViz " << PACKAGE_VERSION << endl;
 
-    window.showNormal();
+    window->showNormal();
 #ifdef __EMSCRIPTEN__
-    window.showMaximized();
+    window->showMaximized();
+    return 0;
+#else
+    return app->exec();
 #endif
-    return app.exec();
 }
 
 QTranslator qtTranslator;

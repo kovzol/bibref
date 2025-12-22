@@ -163,7 +163,13 @@ target_link_libraries(bibref-qt PRIVATE
   ${gvc_LIB} ${gvpr_LIB} ${cdt_LIB} ${cgraph_LIB} ${xdot_LIB} ${pathplan_LIB}
   ${gvplugin_dot_layout_LIB} ${gvplugin_core_LIB}
 )
-target_link_options(bibref-qt PUBLIC -sSINGLE_FILE -sALLOW_MEMORY_GROWTH -O3 -fexceptions -sASYNCIFY -O3 -flto)
+# If bibref-qt is built with ASYNCIFY, there is no error handling via exceptions:
+#target_link_options(bibref-qt PUBLIC -sSINGLE_FILE -sALLOW_MEMORY_GROWTH -O3 -fexceptions -sASYNCIFY -O3 -flto)
+# Thus, bibref-qt must be currently built with -fwasm-exceptions and without ASYNCIFY (a full recompile of Qt-WASM is required
+# by adding -feature-thread and -feature-wasm-exceptions on configuring and using the modules
+# "-t qtbase -t qtdeclarative -t qtimageformats -t qsvgicon -t qsvg -t qtsvg -t SvgWidgets" on building).
+target_link_options(bibref-qt PUBLIC -sSINGLE_FILE -sALLOW_MEMORY_GROWTH -O3 -fwasm-exceptions -O3 -flto)
+
 target_link_options(bibref-qt PUBLIC "SHELL:
   --preload-file '$ENV{HOME}/.sword@/'")
 target_link_options(bibref-qt PUBLIC "SHELL:

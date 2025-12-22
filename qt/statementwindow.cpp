@@ -64,19 +64,56 @@ StatementWindow::~StatementWindow() {
 
 void StatementWindow::newFile()
 {
-    QMessageBox::StandardButton reply;
-    reply = QMessageBox::question(this, tr("Confirmation"), tr("Are you sure you want to clear the text in the editor?"),
-                                  QMessageBox::Yes|QMessageBox::No);
-    if (reply == QMessageBox::Yes) {
-        editor->clear();
+    QMessageBox *msgBox = new QMessageBox;
+
+    msgBox->setWindowTitle(tr("Confirmation"));
+    msgBox->setText(tr("Are you sure you want to clear the text in the editor?"));
+    msgBox->setIcon(QMessageBox::Question);
+
+    auto *yesBtn = msgBox->addButton(QMessageBox::Yes);
+    auto *noBtn  = msgBox->addButton(QMessageBox::No);
+    msgBox->setDefaultButton(noBtn);
+
+    connect(msgBox, &QMessageBox::buttonClicked, this, [=](QAbstractButton *button) {
+        if (button == yesBtn) {
+            editor->clear();
+        }
+        msgBox->deleteLater();
+    });
+
+    msgBox->showNormal();
+}
+
+static void disableAllDragAndDrop(QWidget *root)
+{
+    root->setAcceptDrops(false);
+    root->setAttribute(Qt::WA_AcceptDrops, false);
+
+    const auto views = root->findChildren<QAbstractItemView *>();
+    for (QAbstractItemView *view : views) {
+        view->setAcceptDrops(false);
+        view->setDragEnabled(false);
+        view->setDropIndicatorShown(false);
+        view->setDefaultDropAction(Qt::IgnoreAction);
+    }
+
+    const auto widgets = root->findChildren<QWidget *>();
+    for (QWidget *w : widgets) {
+        w->setAcceptDrops(false);
+        w->setAttribute(Qt::WA_AcceptDrops, false);
     }
 }
+
 
 void StatementWindow::openFile(const QString &path)
 {
     QString fileName = path;
     if (directory.isEmpty()) {
-      directory = qApp -> applicationDirPath();
+#ifndef __EMSCRIPTEN__
+      directory = qApp->applicationDirPath();
+#else
+      directory = "";
+#endif
       QString d1 = directory + QDir::separator() + "statements";
       const QFileInfo f1(d1);
       QString d2 = directory + QDir::separator() + ".." + QDir::separator() + "statements";
@@ -103,13 +140,32 @@ void StatementWindow::openFile(const QString &path)
       }
 
     if (fileName.isNull()) {
-        fileName = QFileDialog::getOpenFileName(this, tr("Open File"), directory, tr("bibref statement files (*.brst)"));
-        QString basename = QUrl(fileName).fileName();
-        directory = fileName;
-        directory.remove(basename);
+        QFileDialog* dialog = new QFileDialog(this, tr("Open File"), directory, tr("bibref statement files (*.brst)"));
+        dialog->setFileMode(QFileDialog::ExistingFile); // select only one file
+#ifdef __EMSCRIPTEN__
+        dialog->setOption(QFileDialog::DontUseNativeDialog, true);
+#endif
+        dialog->showNormal();
+#ifdef __EMSCRIPTEN__
+        disableAllDragAndDrop(dialog);
+#endif
+        connect(dialog, &QFileDialog::fileSelected, this, [=](){
+            QStringList selectedFiles = dialog->selectedFiles();
+            if (!selectedFiles.isEmpty()) {
+                QString fileName = selectedFiles.first();
+                QString basename = QUrl(fileName).fileName();
+                directory = fileName;
+                directory.remove(basename);
+                if (!fileName.isEmpty()) {
+                   QFile file(fileName);
+                   if (file.open(QFile::ReadOnly | QFile::Text))
+                       editor->setPlainText(file.readAll());
+                   }
+                }
+            });
         }
 
-    if (!fileName.isEmpty()) {
+    if (!fileName.isEmpty()) { // TODO: allow file loading via argument "path"
         QFile file(fileName);
         if (file.open(QFile::ReadOnly | QFile::Text))
             editor->setPlainText(file.readAll());
@@ -120,9 +176,13 @@ void StatementWindow::openFile(const QString &path)
 void StatementWindow::saveFileAs(const QString &path)
 {
     QString fileName = path;
-    // TODO: Unify this openFile():
+    // TODO: Unify this with openFile():
     if (directory.isEmpty()) {
-        directory = qApp -> applicationDirPath();
+#ifndef __EMSCRIPTEN__
+        directory = qApp->applicationDirPath();
+#else
+        directory = "";
+#endif
         QString d1 = directory + QDir::separator() + "statements";
         const QFileInfo f1(d1);
         QString d2 = directory + QDir::separator() + ".." + QDir::separator() + "statements";
@@ -152,17 +212,63 @@ void StatementWindow::saveFileAs(const QString &path)
     QString defaultName = "statement.brst";
 
     if (fileName.isNull()) {
-        fileName = QFileDialog::getSaveFileName(this, tr("Save File"), directory
-            + QDir::separator() + defaultName, tr("bibref statement files (*.brst)"));
-        QString basename = QUrl(fileName).fileName();
-        directory = fileName;
-        directory.remove(basename);
+
+        QFileDialog* dialog = new QFileDialog(this, tr("Save File"),
+            directory + QDir::separator() + defaultName,
+            tr("bibref statement files (*.brst)"));
+
+        dialog->setAcceptMode(QFileDialog::AcceptSave);
+        dialog->setFileMode(QFileDialog::AnyFile);
+        dialog->setDefaultSuffix("brst");
+        dialog->setAttribute(Qt::WA_DeleteOnClose);
+#ifdef __EMSCRIPTEN__
+        dialog->setOption(QFileDialog::DontConfirmOverwrite, true); // otherwise the application will crash on WASM
+        dialog->setOption(QFileDialog::DontUseNativeDialog, true);
+        dialog->setAcceptDrops(false);
+#endif
+        dialog->showNormal();
+#ifdef __EMSCRIPTEN__
+        disableAllDragAndDrop(dialog);
+#endif
+
+        connect(dialog, &QFileDialog::fileSelected, this, [=](const QString &fileName) {
+            QString basename = QUrl(fileName).fileName();
+            directory = fileName;
+            directory.remove(basename);
+            if (!fileName.isEmpty()) {
+                QFile* file = new QFile(fileName);
+#ifdef __EMSCRIPTEN__
+                if (QFile::exists(fileName)) {
+                    auto *confirm = new QMessageBox;
+                    confirm->setWindowTitle(tr("Confirmation"));
+                    confirm->setText(tr("The file already exists.\nDo you want to overwrite it?"));
+                    confirm->setIcon(QMessageBox::Question);
+                    auto *yesBtn = confirm->addButton(QMessageBox::Yes);
+                    auto *noBtn  = confirm->addButton(QMessageBox::No);
+                    confirm->setDefaultButton(noBtn);
+                    confirm->showNormal();
+                    connect(confirm, &QMessageBox::buttonClicked, this, [=](QAbstractButton *btn) {
+                        if (confirm->standardButton(btn) == QMessageBox::Yes) {
+                            file->open(QFile::WriteOnly | QFile::Text);
+                            file->write(editor->toPlainText().toUtf8());
+                            file->close();
+                            }
+                        confirm->deleteLater();
+                        });
+                    }
+#endif
+                file->open(QFile::WriteOnly | QFile::Text);
+                file->write(editor->toPlainText().toUtf8());
+                file->close();
+            }
+        });
     }
 
-    if (!fileName.isEmpty()) {
+    if (!fileName.isEmpty()) { // TODO: allow file saving via argument "path"
         QFile file(fileName);
         file.open(QFile::WriteOnly | QFile::Text);
         file.write(editor->toPlainText().toUtf8());
+        file.close();
     }
 }
 
@@ -251,42 +357,42 @@ void StatementWindow::parse()
         }
     }
 
-    QMessageBox msgBox;
-    msgBox.setWindowTitle(tr("Parse"));
-    msgBox.setText(tr("%1 successful tests, %2 warnings, %3 errors.").arg(infos).arg(warnings).arg(errors));
+    QMessageBox* msgBox = new QMessageBox;
+    msgBox->setWindowTitle(tr("Parse"));
+    msgBox->setText(tr("%1 successful tests, %2 warnings, %3 errors.").arg(infos).arg(warnings).arg(errors));
     QPushButton* visualizeButton;
     QPushButton* visualizeXButton;
-    QPushButton* backButton = msgBox.addButton(tr("Back to &Editor"), QMessageBox::RejectRole);
+    QPushButton* backButton = msgBox->addButton(tr("Back to &Editor"), QMessageBox::RejectRole);
     if (!diagram_defined) {
-        msgBox.setIcon(QMessageBox::Critical);
+        msgBox->setIcon(QMessageBox::Critical);
     } else {
         if (warnings>0) {
-            msgBox.setIcon(QMessageBox::Warning);
+            msgBox->setIcon(QMessageBox::Warning);
         } else {
-            msgBox.setIcon(QMessageBox::Information);
+            msgBox->setIcon(QMessageBox::Information);
         }
         if (diagram_defined) {
-            visualizeButton = msgBox.addButton(tr("&Visualize"), QMessageBox::ActionRole);
-            visualizeXButton = msgBox.addButton(tr("E&xport graph"), QMessageBox::ActionRole);
+            visualizeButton = msgBox->addButton(tr("&Visualize"), QMessageBox::ActionRole);
+            visualizeXButton = msgBox->addButton(tr("E&xport graph"), QMessageBox::ActionRole);
         }
     }
 
-    msgBox.setDetailedText(details);
+    msgBox->setDetailedText(details);
 
     QSpacerItem* horizontalSpacer = new QSpacerItem(500, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
-    QGridLayout* layout = (QGridLayout*)msgBox.layout();
+    QGridLayout* layout = (QGridLayout*)msgBox->layout();
     layout->addItem(horizontalSpacer, layout->rowCount(), 0, 1, layout->columnCount());
 
-    int ret = msgBox.exec();
+    msgBox->showNormal();
 
-    if (msgBox.clickedButton() == visualizeButton) {
+    connect(visualizeButton, &QPushButton::clicked, this, [=](){
         showSvg();
-    }
-    if (msgBox.clickedButton() == visualizeXButton) {
+        });
+    connect(visualizeXButton, &QPushButton::clicked, this, [=](){
         QString link = "https://dreampuf.github.io/GraphvizOnline/?engine=dot#";
         link += QUrl::toPercentEncoding(QString::fromStdString(graphviz_input));
         QDesktopServices::openUrl(QUrl(link));
-    }
+        });
 }
 
 void StatementWindow::analyze()
