@@ -62,6 +62,16 @@
   <content_rating type="oars-1.1" />
 
   <releases>
+    <release version="2025-12-23" date="2025-12-23">
+    <url type="details">https://github.com/kovzol/bibref/commits/30849b6b29b3d55385fe0146c638f56fc7d81c33</url>
+      <description>
+        <p>Release description</p>
+          <ul>
+            <li>Fix diagram crash if no config file exists</li>
+            <li>Improved info window on available Bible editions</li>
+          </ul>
+      </description>
+    </release>
     <release version="2025-12-20" date="2025-12-20">
     <url type="details">https://github.com/kovzol/bibref/commits/172164cf390e31a55f00c076d59c53b3d5cbe83a</url>
       <description>
