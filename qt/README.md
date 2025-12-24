@@ -41,3 +41,7 @@ More details can be found in `../RELEASING.md`.
 ## Running
 
 Testing the translated texts is possible if you set the **LANG** environment variable before running the executable.
+
+## Copyright
+
+Breeze icons copyright KDE and licenced under the GNU LGPL version 3 or later.

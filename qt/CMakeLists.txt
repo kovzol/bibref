@@ -41,7 +41,9 @@ file(GLOB TRANSLATION_FILES ${CMAKE_CURRENT_SOURCE_DIR}/*.ts)
 set_source_files_properties(${TRANSLATION_FILES}
     PROPERTIES OUTPUT_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}")
 if(EMSCRIPTEN)
+  set(BIBREF_QRC_EXTRA "bibref-wasm.qrc")
 else()
+  set(BIBREF_QRC_EXTRA "")
   qt6_add_translation(QM_FILES ${TRANSLATION_FILES})
 endif(EMSCRIPTEN)
 
@@ -127,7 +129,7 @@ qt_add_executable(bibref-qt MACOSX_BUNDLE
     psalmsinfo.cpp psalmsinfo.h
     ${PBRST_SRCS}
     # ${QM_FILES} # this is handled via bibref.qrc
-    bibref.qrc
+    bibref.qrc ${BIBREF_QRC_EXTRA}
     ${bibref_qt_ICON}
     editor.h editor.cpp
     version.h

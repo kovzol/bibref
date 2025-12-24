@@ -157,10 +157,12 @@ void setLanguage(QString language)
         qApp->installTranslator(&qtTranslator);
     }
 
+#ifndef __EMSCRIPTEN__
     if (qtBaseTranslator.load("qtbase_" + language,
                               QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {
         qApp->installTranslator(&qtBaseTranslator);
     }
+#endif
 
     QString qmDir;
 #ifdef __EMSCRIPTEN__
@@ -177,5 +179,10 @@ void setLanguage(QString language)
     if (bibrefTranslator.load(language, qmDir)) {
         qApp->installTranslator(&bibrefTranslator);
     }
+#ifdef __EMSCRIPTEN__
+    if (qtBaseTranslator.load("qtbase_" + language, qmDir)) {
+        qApp->installTranslator(&qtBaseTranslator);
+    }
+#endif
     // FIXME: the last item should be inserted in a simpler and more flexible way.
 }

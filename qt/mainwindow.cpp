@@ -1351,16 +1351,22 @@ void MainWindow::wiki()
 
 void MainWindow::aboutQt() {}
 
+static void setIcon(QAction* action, QString icon) {
+    action->setIcon(QIcon::fromTheme(icon, QIcon(":/icons/" + icon + ".svg")));
+}
+
 void MainWindow::createActions()
 {
     addBiblesAct = new QAction("&Add books", this);
-    addBiblesAct->setIcon(QIcon::fromTheme("document-new"));
+    // addBiblesAct->setIcon(QIcon::fromTheme("document-new", QIcon(":/icons/hicolor/scalable/actions/document-new.svg")));
+    setIcon(addBiblesAct, "document-new");
     addBiblesAct->setShortcuts(QKeySequence::New);
     addBiblesAct->setStatusTip(tr("Load and index the default Bible editions"));
     connect(addBiblesAct, &QAction::triggered, this, &MainWindow::addBibles);
 
     exitAct = new QAction("&Quit", this);
-    exitAct->setIcon(QIcon::fromTheme("application-exit"));
+    // exitAct->setIcon(QIcon::fromTheme("application-exit"));
+    setIcon(exitAct, "application-exit");
     exitAct->setShortcuts(QKeySequence::Quit);
     exitAct->setStatusTip(tr("Exit the application"));
     connect(exitAct, &QAction::triggered, this, &QWidget::close);
@@ -1368,75 +1374,87 @@ void MainWindow::createActions()
     string greekStatusTip
         = tr("Define a Greek text and put its Latin transcription in clipboard %1").toStdString();
     greekText1Act = new QAction("&Text 1…", this);
-    greekText1Act->setIcon(QIcon::fromTheme("flag-gr"));
+    // greekText1Act->setIcon(QIcon::fromTheme("flag-gr"));
+    setIcon(greekText1Act, "flag-gr");
     greekText1Act->setStatusTip(tr(greekStatusTip.c_str()).arg(1));
     connect(greekText1Act, &QAction::triggered, this, &MainWindow::greekText1);
 
     greekText2Act = new QAction("Text 2…", this);
-    greekText2Act->setIcon(QIcon::fromTheme("flag-gr"));
+    // greekText2Act->setIcon(QIcon::fromTheme("flag-gr"));
+    setIcon(greekText2Act, "flag-gr");
     greekText2Act->setStatusTip(tr(greekStatusTip.c_str()).arg(2));
     connect(greekText2Act, &QAction::triggered, this, &MainWindow::greekText2);
 
     string latinStatusTip = tr("Put a Latin (a-z) transcription in clipboard %1").toStdString();
     latinText1Act = new QAction("&Latin text 1…", this);
-    latinText1Act->setIcon(QIcon::fromTheme("insert-text"));
+    // latinText1Act->setIcon(QIcon::fromTheme("insert-text"));
+    setIcon(latinText1Act, "insert-text");
     latinText1Act->setStatusTip(tr(latinStatusTip.c_str()).arg(1));
     connect(latinText1Act, &QAction::triggered, this, &MainWindow::latinText1);
 
     latinText2Act = new QAction("Latin text 2…", this);
-    latinText2Act->setIcon(QIcon::fromTheme("insert-text"));
+    // latinText2Act->setIcon(QIcon::fromTheme("insert-text"));
+    setIcon(latinText2Act, "insert-text");
     latinText2Act->setStatusTip(tr(latinStatusTip.c_str()).arg(2));
     connect(latinText2Act, &QAction::triggered, this, &MainWindow::latinText2);
 
     string nearest12StatusTip
         = tr("Find the nearest subtext of clipboard 1 to clipboard 2").toStdString();
     nearest12Act = new QAction("Nearest 12", this);
-    nearest12Act->setIcon(QIcon::fromTheme("go-down"));
+    // nearest12Act->setIcon(QIcon::fromTheme("go-down"));
+    setIcon(nearest12Act, "go-down");
     nearest12Act->setStatusTip(tr(nearest12StatusTip.c_str()));
     connect(nearest12Act, &QAction::triggered, this, &MainWindow::nearest12);
 
     string findStatusTip = tr("Search for the text of clipboard %1 in a Bible").toStdString();
     find1Act = new QAction("&Find 1…", this);
-    find1Act->setIcon(QIcon::fromTheme("edit-find"));
+    // find1Act->setIcon(QIcon::fromTheme("edit-find"));
+    setIcon(find1Act, "edit-find");
     find1Act->setStatusTip(tr(findStatusTip.c_str()).arg(1));
     connect(find1Act, &QAction::triggered, this, &MainWindow::find1);
     find1Act->setDisabled(true);
 
     find2Act = new QAction("Find 2…", this);
-    find2Act->setIcon(QIcon::fromTheme("edit-find"));
+    // find2Act->setIcon(QIcon::fromTheme("edit-find"));
+    setIcon(find2Act, "edit-find");
     find2Act->setStatusTip(tr(findStatusTip.c_str()).arg(2));
     connect(find2Act, &QAction::triggered, this, &MainWindow::find2);
     find2Act->setDisabled(true);
 
     minunique1Act = new QAction("&Min. unique 1…", this);
-    minunique1Act->setIcon(QIcon::fromTheme("go-previous"));
+    // minunique1Act->setIcon(QIcon::fromTheme("go-previous"));
+    setIcon(minunique1Act, "go-previous");
     minunique1Act->setStatusTip(tr("Search for minimal unique passages in clipboard 1 in a Bible"));
     connect(minunique1Act, &QAction::triggered, this, &MainWindow::minunique1);
     minunique1Act->setDisabled(true);
 
     extendAct = new QAction("&Extend…", this);
-    extendAct->setIcon(QIcon::fromTheme("go-next"));
+    // extendAct->setIcon(QIcon::fromTheme("go-next"));
+    setIcon(extendAct, "go-next");
     extendAct->setStatusTip(
         tr("Extend a passage to the longest possible quotation from another Bible"));
     connect(extendAct, &QAction::triggered, this, &MainWindow::extend);
     extendAct->setDisabled(true);
 
     getrefsAct = new QAction("&Get refs…", this);
-    getrefsAct->setIcon(QIcon::fromTheme("scanner"));
+    // getrefsAct->setIcon(QIcon::fromTheme("scanner"));
+    setIcon(getrefsAct, "scanner");
     getrefsAct->setStatusTip(
         tr("Search for references in a Bible on the passage in another Bible"));
     connect(getrefsAct, &QAction::triggered, this, &MainWindow::getrefs);
     getrefsAct->setDisabled(true);
 
     statementAct = new QAction("&Statement…", this);
-    statementAct->setIcon(QIcon::fromTheme("input-keyboard"));
+    // statementAct->setIcon(QIcon::fromTheme("input-keyboard"));
+    setIcon(statementAct, "input-keyboard");
     statementAct->setStatusTip(
         tr("Open a text editor to edit a statement"));
     connect(statementAct, &QAction::triggered, this, &MainWindow::statement);
     statementAct->setDisabled(true);
 
     lookupAct = new QAction("&Lookup…", this);
-    lookupAct->setIcon(QIcon::fromTheme("document-open"));
+    // lookupAct->setIcon(QIcon::fromTheme("document-open"));
+    setIcon(lookupAct, "document-open");
     lookupAct->setStatusTip(tr("Search for a verse in a book in the given Bible"));
     connect(lookupAct, &QAction::triggered, this, &MainWindow::lookup);
 
@@ -1454,24 +1472,28 @@ void MainWindow::createActions()
     lookup2Act->setDisabled(true);
 
     tokensAct = new QAction("&Tokens…", this);
-    tokensAct->setIcon(QIcon::fromTheme("view-sort-ascending"));
+    // tokensAct->setIcon(QIcon::fromTheme("view-sort-ascending"));
+    setIcon(tokensAct, "view-sort-ascending");
     tokensAct->setStatusTip(tr("Search for a tokenized verse in a book in the given Bible"));
     connect(tokensAct, &QAction::triggered, this, &MainWindow::tokens);
     tokensAct->setDisabled(true);
 
     searchAct = new QAction("&Search…", this);
-    searchAct->setIcon(QIcon::fromTheme("view-sort-ascending"));
+    // searchAct->setIcon(QIcon::fromTheme("view-sort-ascending"));
+    setIcon(searchAct, "view-sort-ascending");
     searchAct->setStatusTip(tr("Search for a set of tokens on a maximal length in a Bible"));
     connect(searchAct, &QAction::triggered, this, &MainWindow::search);
     searchAct->setDisabled(true);
 
     preferencesAct = new QAction(tr("Pr&eferences…"), this);
-    preferencesAct->setIcon(QIcon::fromTheme("preferences-desktop-font"));
+    // preferencesAct->setIcon(QIcon::fromTheme("preferences-desktop-font"));
+    setIcon(preferencesAct, "preferences-desktop-font");
     preferencesAct->setStatusTip(tr("Set preferences in the application"));
     connect(preferencesAct, &QAction::triggered, this, &MainWindow::preferences);
 
     rawAct = new QAction("&Raw…", this);
-    rawAct->setIcon(QIcon::fromTheme("media-flash"));
+    // rawAct->setIcon(QIcon::fromTheme("media-flash"));
+    setIcon(rawAct, "media-flash");
     rawAct->setStatusTip(tr("Show the a-z transcription of a positioned text in a given book"));
     connect(rawAct, &QAction::triggered, this, &MainWindow::raw);
     rawAct->setDisabled(true);
@@ -1490,7 +1512,8 @@ void MainWindow::createActions()
     raw2Act->setDisabled(true);
 
     aboutAct = new QAction(tr("About &bibref…"), this);
-    aboutAct->setIcon(QIcon::fromTheme("help-about"));
+    // aboutAct->setIcon(QIcon::fromTheme("help-about"));
+    setIcon(aboutAct, "help-about");
     aboutAct->setStatusTip(tr("Show a short description of the program"));
     connect(aboutAct, &QAction::triggered, this, &MainWindow::about);
 
@@ -1510,22 +1533,26 @@ void MainWindow::createActions()
     connect(aboutOtherAct, &QAction::triggered, this, &MainWindow::aboutOther);
 
     tutorialAct = new QAction(tr("Quick tutorial…"), this);
-    tutorialAct->setIcon(QIcon::fromTheme("system-help"));
+    // tutorialAct->setIcon(QIcon::fromTheme("system-help"));
+    setIcon(tutorialAct, "system-help");
     tutorialAct->setStatusTip(tr("Show a short introduction to the program"));
     connect(tutorialAct, &QAction::triggered, this, &MainWindow::tutorial);
 
     wikiAct = new QAction(tr("Wiki…"), this);
-    wikiAct->setIcon(QIcon::fromTheme("help-contents"));
+    // wikiAct->setIcon(QIcon::fromTheme("help-contents"));
+    setIcon(wikiAct, "help-contents");
     wikiAct->setStatusTip(tr("Open documentation of the program in a web browser"));
     connect(wikiAct, &QAction::triggered, this, &MainWindow::wiki);
 
     showAvailableBiblesAct = new QAction(tr("Show available Bibles…"), this);
-    showAvailableBiblesAct->setIcon(QIcon::fromTheme("system-file-manager"));
+    // showAvailableBiblesAct->setIcon(QIcon::fromTheme("system-file-manager"));
+    setIcon(showAvailableBiblesAct, "system-file-manager");
     showAvailableBiblesAct->setStatusTip(tr("Show available Bibles via SWORD"));
     connect(showAvailableBiblesAct, &QAction::triggered, this, &MainWindow::showSwordBibles);
 
     webTerminalAct = new QAction(tr("Start bibref in a web &terminal"), this);
-    webTerminalAct->setIcon(QIcon::fromTheme("utilities-terminal"));
+    // webTerminalAct->setIcon(QIcon::fromTheme("utilities-terminal"));
+    setIcon(webTerminalAct, "utilities-terminal");
     webTerminalAct->setStatusTip(tr("Start a web version of bibref in a web based terminal"));
     connect(webTerminalAct, &QAction::triggered, this, &MainWindow::webTerminal);
 }
