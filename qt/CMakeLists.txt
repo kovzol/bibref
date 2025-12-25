@@ -7,6 +7,8 @@ set(HTML_BUILD_DIR html-output CACHE STRING
  "Set the output folder for the Emscripten build")
 option(WEBENGINE "Use QtWebEngine to show diagrams in HTML/SVG format directly" OFF)
 
+set(LANGUAGES de hu)
+
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Concurrent SvgWidgets)
 
 set(QTWEBENGINEWIDGETS "") # default
@@ -37,14 +39,22 @@ set(CMAKE_CXX_FLAGS "-sUSE_BOOST_HEADERS -sUSE_ZLIB")
 endif(EMSCRIPTEN)
 
 find_package(Qt6LinguistTools)
-file(GLOB TRANSLATION_FILES ${CMAKE_CURRENT_SOURCE_DIR}/*.ts)
+set(TRANSLATION_FILES "")
+set(QTBASE_TRANSLATION_FILES "")
+foreach(lang IN LISTS LANGUAGES)
+    list(APPEND TRANSLATION_FILES "${CMAKE_CURRENT_SOURCE_DIR}/${lang}.ts")
+    list(APPEND QTBASE_TRANSLATION_FILES "${CMAKE_CURRENT_SOURCE_DIR}/qtbase_${lang}.ts")
+endforeach()
 set_source_files_properties(${TRANSLATION_FILES}
+    PROPERTIES OUTPUT_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}")
+set_source_files_properties(${QTBASE_TRANSLATION_FILES}
     PROPERTIES OUTPUT_LOCATION "${CMAKE_CURRENT_SOURCE_DIR}")
 if(EMSCRIPTEN)
   set(BIBREF_QRC_EXTRA "bibref-wasm.qrc")
 else()
   set(BIBREF_QRC_EXTRA "")
   qt6_add_translation(QM_FILES ${TRANSLATION_FILES})
+  qt6_add_translation(QTBASE_QM_FILES ${QTBASE_TRANSLATION_FILES})
 endif(EMSCRIPTEN)
 
 set(Boost_USE_STATIC_LIBS OFF)

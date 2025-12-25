@@ -1,7 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>qtbase_hu.qm</file>
-        <file>qtbase_de.qm</file>
         <file>hu.qm</file>
         <file>de.qm</file>
         <file>KoineGreekBibref.ttf</file>
