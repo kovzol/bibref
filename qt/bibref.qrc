@@ -2,9 +2,6 @@
     <qresource prefix="/">
         <file>hu.qm</file>
         <file>de.qm</file>
-        <!-- These two are required for the WASM version. TODO: Remove them and allow TS->QM conversion for a WASM build also. -->
-        <file>qtbase_hu.qm</file>
-        <file>qtbase_de.qm</file>
         <file>KoineGreekBibref.ttf</file>
         <file>Inconsolata.ttf</file>
         <file>logo-Psalm40-192.png</file>
