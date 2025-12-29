@@ -45,7 +45,7 @@
 * Build the web version and install it
 * Copy the folder `html-output` from the web build folder over the public web folder,
   rename `index.html` to `index-midi.html` and put a symlink `index.html` to `index-jt-dt.html`
-* To create the Qt version (as WebAssembly build): build the Qt native version, remove
+* To create the Qt version (as WebAssembly build): remove
   the files `bibref-qt.js` and  `bibref-qt.data` from the build folder of the web version (if they already exist),
   build the Qt web version and install it, then copy the folder `html-output` from the web build
   folder over the public web folder, finally, put a symlink `index.html` to `bibref-qt.html`
