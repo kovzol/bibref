@@ -10,11 +10,12 @@
 
 # Restrictions (known bugs):
 # * In Edit>Preferences, disable Diagram as HTML/SVG (otherwise the program will crash when trying to display a statement graph).
-# * The names of the indexed Bible editions are displayed incorrectly.
+# * The names of the indexed Bible editions are displayed incorrectly. (Probably, the provided font is incomplete.)
+# * Settings cannot be saved and reused in another launch.
 
 
 # Install prerequisites:
-FROM debian:bookworm
+FROM debian:trixie
 RUN apt-get update && \
     apt-get -y install libsword-common libsword-dev git cmake build-essential \
         libreadline-dev libboost-dev libboost-filesystem-dev bison flex pkgconf unzip \
