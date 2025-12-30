@@ -7,6 +7,9 @@
 # 3. Run bibref (the command line version) by entering `sudo docker run -it ID`
 #    where ID stands for the obtained image ID in step 2.
 
+# Restrictions (known bugs):
+# * The command line history (via readline) is not retrieved between sessions.
+
 
 # Install prerequisites:
 FROM ubuntu:24.04
