@@ -24,12 +24,13 @@ pkg_check_modules(sword REQUIRED sword)
 if(EMSCRIPTEN)
 find_library(SWORD_LIB NAMES libsword.a)
 set(CMAKE_CXX_FLAGS "-sUSE_BOOST_HEADERS -sUSE_ZLIB")
+else()
+find_package(Boost REQUIRED COMPONENTS system filesystem)
 endif(EMSCRIPTEN)
 
 set(Boost_USE_STATIC_LIBS OFF)
 set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_RUNTIME OFF)
-find_package(Boost CONFIG COMPONENTS system filesystem)
 
 if(APPLE OR EMSCRIPTEN) # readline seems to have trouble on macOS, unsupported on emscripten
 else()
