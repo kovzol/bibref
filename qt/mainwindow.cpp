@@ -1359,7 +1359,7 @@ void MainWindow::showSwordBibles()
     int size = settings.value("Application/fontsize", defaultFontSize).toInt();
     widget->setLayout(layout);
     widget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    widget->setFixedSize(70 * size, 20 * size);
+    widget->setFixedSize(80 * size, 20 * size);
     widget->setWindowTitle(tr("Show available Bibles"));
     widget->showNormal();
 
