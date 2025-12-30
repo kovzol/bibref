@@ -25,7 +25,11 @@ if(EMSCRIPTEN)
 find_library(SWORD_LIB NAMES libsword.a)
 set(CMAKE_CXX_FLAGS "-sUSE_BOOST_HEADERS -sUSE_ZLIB")
 else()
-find_package(Boost REQUIRED COMPONENTS system filesystem)
+if(APPLE)
+find_package(Boost CONFIG REQUIRED COMPONENTS filesystem) # Seemingly, system is not there on homebrew
+else()
+find_package(Boost CONFIG REQUIRED COMPONENTS system filesystem)
+endif(APPLE)
 endif(EMSCRIPTEN)
 
 set(Boost_USE_STATIC_LIBS OFF)
