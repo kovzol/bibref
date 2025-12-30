@@ -1322,8 +1322,6 @@ void MainWindow::showSwordBibles()
     for (it = manager.Modules.begin(); it != manager.Modules.end(); ++it) {
         if (strcmp((*it).second->getType(), "Biblical Texts") == 0) {
             string moduleName = (*it).second->getName();
-            if (moduleName == "LXX" || moduleName == "SBLGNT" || moduleName == "StatResGNT")
-                moduleName= "<b>" + moduleName + "</b>";
             string moduleVersion = (*it).second->getConfigEntry("Version");
             string moduleDescription = (*it).second->getConfigEntry("Description");
             // Remove extra spaces:
@@ -1333,6 +1331,8 @@ void MainWindow::showSwordBibles()
                          + QString(moduleDescription.c_str()) + QString(", version ")
                          + QString(moduleVersion.c_str())
                          + QString(")");
+            if (moduleName == "LXX" || moduleName == "SBLGNT" || moduleName == "StatResGNT")
+                be = "<b>" + be + "</b>";
             b.append(be);
         }
     }
