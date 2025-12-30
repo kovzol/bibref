@@ -1279,6 +1279,39 @@ void MainWindow::tutorial()
     widget->showNormal();
 }
 
+class HtmlDelegate : public QStyledItemDelegate
+{
+public:
+    using QStyledItemDelegate::QStyledItemDelegate;
+
+    void paint(QPainter *painter,
+               const QStyleOptionViewItem &option,
+               const QModelIndex &index) const override
+    {
+        painter->save();
+
+        QTextDocument doc;
+        doc.setHtml(index.data().toString());
+
+        doc.setTextWidth(option.rect.width());
+
+        painter->translate(option.rect.topLeft());
+        doc.drawContents(painter);
+
+        painter->restore();
+    }
+
+    QSize sizeHint(const QStyleOptionViewItem &option,
+                   const QModelIndex &index) const override
+    {
+        QTextDocument doc;
+        doc.setHtml(index.data().toString());
+        doc.setTextWidth(option.rect.width());
+        return QSize(doc.idealWidth(), doc.size().height());
+    }
+};
+
+
 void MainWindow::showSwordBibles()
 {
     QStringList b;
@@ -1289,14 +1322,8 @@ void MainWindow::showSwordBibles()
     for (it = manager.Modules.begin(); it != manager.Modules.end(); ++it) {
         if (strcmp((*it).second->getType(), "Biblical Texts") == 0) {
             string moduleName = (*it).second->getName();
-#ifndef __EMSCRIPTEN__ // a full UTF-8 character set is probably missing
-            if (moduleName == "LXX")
-                moduleName= "𝗟𝗫𝗫";
-            if (moduleName == "SBLGNT")
-                moduleName= "𝗦𝗕𝗟𝗚𝗡𝗧";
-            if (moduleName == "StatResGNT")
-                moduleName= "𝗦𝘁𝗮𝘁𝗥𝗲𝘀𝗚𝗡𝗧";
-#endif
+            if (moduleName == "LXX" || moduleName == "SBLGNT" || moduleName == "StatResGNT")
+                moduleName= "<b>" + moduleName + "</b>";
             string moduleVersion = (*it).second->getConfigEntry("Version");
             string moduleDescription = (*it).second->getConfigEntry("Description");
             // Remove extra spaces:
@@ -1315,6 +1342,7 @@ void MainWindow::showSwordBibles()
 
     auto *model = new QStringListModel(b);
     auto *view = new QListView;
+    view->setItemDelegate(new HtmlDelegate());
     view->setModel(model);
     view->setEditTriggers(QAbstractItemView::NoEditTriggers);
     view->setSelectionMode(QAbstractItemView::NoSelection);
@@ -1331,7 +1359,7 @@ void MainWindow::showSwordBibles()
     int size = settings.value("Application/fontsize", defaultFontSize).toInt();
     widget->setLayout(layout);
     widget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    widget->setFixedSize(70 * size, 12 * size);
+    widget->setFixedSize(70 * size, 20 * size);
     widget->setWindowTitle(tr("Show available Bibles"));
     widget->showNormal();
 
