@@ -10,7 +10,6 @@
 
 # Restrictions (known bugs):
 # * In Edit>Preferences, disable Diagram as HTML/SVG (otherwise the program will crash when trying to display a statement graph).
-# * The names of the indexed Bible editions are displayed incorrectly. (Probably, the provided font is incomplete.)
 # * Settings cannot be saved and reused in another launch.
 # * Icons are missing.
 
