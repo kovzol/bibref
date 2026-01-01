@@ -26,7 +26,7 @@ RUN ./emsdk activate 4.0.3
 WORKDIR ..
 
 # Build SWORD:
-RUN svn co https://crosswire.org/svn/sword/trunk/ sword
+RUN until svn co https://crosswire.org/svn/sword/trunk/ sword; do [ -d sword ] && (cd sword && svn cleanup && svn update); sleep 5; done
 WORKDIR sword
 RUN mkdir build
 WORKDIR build
