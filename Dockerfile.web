@@ -1,13 +1,15 @@
 # This file makes it easier to run bibref (the command line version in web) in a Docker virtualization.
 
 # How to use this file:
-# 1. On Ubuntu Linux, install the package **docker.io**.
+# 1. On an Ubuntu Linux, install the package **docker.io**. This machine will be called your container's host.
 # 2. Build the image by entering `sudo docker build -f Dockerfile.web .`.
 #    You will get an image ID at the end of the process.
 # 3. Start the web server and allow a network connection to it by issuing `sudo docker run -d -p 8080:80 ID`
 #    where ID stands for the obtained image ID in step 2.
 #    You will get a container identifier CID as output.
 # 4. Open your favorite web browser and open the page **http://localhost:8080/index-jt-dt.html**. This starts the program.
+#    In case you want to start the program from a different machine than the container's host,
+#    use the IP address of the container's host instead of "localhost" in the URL.
 # 5. When finished, stop the web server by using the command `sudo docker kill CID`
 #    where CID stands for the obtained container identifier in step 3.
 
@@ -21,8 +23,9 @@ RUN apt-get update && \
         libreadline-dev libboost-dev libboost-filesystem-dev bison flex pkgconf unzip
 RUN git clone https://github.com/emscripten-core/emsdk.git
 WORKDIR emsdk
-RUN ./emsdk install 4.0.3
-RUN ./emsdk activate 4.0.3
+ENV EMSDK_VER=4.0.3
+RUN ./emsdk install $EMSDK_VER
+RUN ./emsdk activate $EMSDK_VER
 WORKDIR ..
 
 # Build SWORD:
