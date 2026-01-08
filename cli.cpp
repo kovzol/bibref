@@ -18,8 +18,10 @@ using namespace std;
 
 #ifndef __EMSCRIPTEN__
 #ifndef __APPLE__
+#ifdef WITH_READLINE
 #include <readline/history.h>
 #include <readline/readline.h>
+#endif
 #endif
 #endif
 #include <boost/algorithm/string/predicate.hpp>
@@ -166,6 +168,7 @@ void info(const string &message)
 
 #ifndef __EMSCRIPTEN__
 #ifndef __APPLE__
+#ifdef WITH_READLINE
 // readline related code was taken mostly from https://eli.thegreenplace.net/2016/basics-of-using-the-readline-library/
 char *completion_generator(const char *text, int state)
 {
@@ -208,6 +211,7 @@ char **completer(const char *text, int start, int end)
     // completer.
     return rl_completion_matches(text, completion_generator);
 }
+#endif
 #endif
 #endif
 
@@ -1027,7 +1031,9 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
     strcpy(output_prepend_set, output_prepend);
 #ifndef __EMSCRIPTEN__
 #ifndef __APPLE__
+#ifdef WITH_READLINE
     rl_attempted_completion_function = completer; // Initialize readline.
+#endif
 #endif
 #endif
     info("This is bibref " BIBREF_GUI_VERSION " (database version " BIBREF_VERSION "), nice to meet you.");
@@ -1046,6 +1052,7 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
 #ifndef __EMSCRIPTEN__
 #ifndef __MINGW32__
 #ifndef __APPLE__
+#ifdef WITH_READLINE
     // Load the readline history...
     char *bufline;
     struct passwd *pw = getpwuid(getuid());
@@ -1057,8 +1064,9 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
 #endif
 #endif
 #endif
+#endif
 
-#if defined(__EMSCRIPTEN__) || defined(__MINGW32__) || defined(__APPLE__)
+#if defined(__EMSCRIPTEN__) || defined(__MINGW32__) || defined(__APPLE__) || !defined(WITH_READLINE)
 #define MAX_LINE_LENGTH 1024
     char bufline[MAX_LINE_LENGTH + 1];
 #endif
@@ -1069,13 +1077,13 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
     bool multiline = false;
     // The main input/output loop...
     while (
-#if !defined(__EMSCRIPTEN__) && !defined(__MINGW32__) && !defined(__APPLE__)
+#if !defined(__EMSCRIPTEN__) && !defined(__MINGW32__) && !defined(__APPLE__) && defined(WITH_READLINE)
         (bufline = readline(input_prepend)) != nullptr
 #else
         (getline(cin, line) && (strcpy(bufline, line.c_str())))
 #endif
     ) {
-#if !defined(__EMSCRIPTEN__) && !defined(__MINGW32__) && !defined(__APPLE__)
+#if !defined(__EMSCRIPTEN__) && !defined(__MINGW32__) && !defined(__APPLE__) && defined(WITH_READLINE)
         if (strlen(bufline) > 0) {
             add_history(bufline);
             write_history(histfile);
@@ -1098,8 +1106,10 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
         } else
             strcat(buf, "\n");
 #if !(defined(__EMSCRIPTEN__) || defined(__MINGW32__) || defined(__APPLE__))
+#ifdef WITH_READLINE
         // readline malloc's a new buffer every time.
         free(bufline);
+#endif
 #endif
     }
 }

@@ -40,6 +40,7 @@ if(APPLE OR EMSCRIPTEN) # readline seems to have trouble on macOS, unsupported o
 else()
 # One needs readline >= 8.0 to make this work:
 pkg_check_modules (readline REQUIRED readline)
+add_compile_definitions(WITH_READLINE)
 endif()
 
 include_directories(${sword_INCLUDE_DIRS})

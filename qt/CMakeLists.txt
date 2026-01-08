@@ -84,14 +84,9 @@ find_library(sword NAMES sword
  "${CMAKE_SOURCE_DIR}/../sword-1.9.0/lib/.libs"
 )
 else()
-# One needs readline >= 8.0 to make this work:
-if (EMSCRIPTEN)
-else()
-  pkg_check_modules (readline REQUIRED readline)
-endif(EMSCRIPTEN)
 endif()
 
-include_directories(${sword_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} ${readline_INCLUDE_DIRS} ${gvc_INCLUDE_DIRS})
+include_directories(${sword_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS} ${gvc_INCLUDE_DIRS})
 
 # This works when Qt >= 6.3:
 # qt_standard_project_setup()
@@ -208,7 +203,7 @@ target_link_libraries(bibref-qt PRIVATE
     Qt6::Concurrent
     Qt6::SvgWidgets
     ${QTWEBENGINEWIDGETS}
-    ${sword_LIBRARIES} ${Boost_LIBRARIES} ${readline_LIBRARIES}
+    ${sword_LIBRARIES} ${Boost_LIBRARIES}
     ${ICU_LIBRARIES} ${LIBLZMA_LIBRARIES} ${ZLIB_LIBRARIES} ${BZIP2_LIBRARIES}
     ${gvc_LIBRARIES} ${EXTRA_LIBS} ${sword_LIBRARIES_folder} ${graphviz_LIBRARIES_folder}
 )
