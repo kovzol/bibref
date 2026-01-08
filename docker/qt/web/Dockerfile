@@ -4,7 +4,7 @@
 
 # How to use this file:
 # 1. On Ubuntu Linux, install the package **docker.io**.
-# 2. Build the image by entering `sudo docker build -f Dockerfile.web .`.
+# 2. Build the image by entering `sudo docker build -f Dockerfile .`.
 #    You will get an image ID at the end of the process.
 # 3. Start the web server and allow a network connection to it by issuing `sudo docker run -d -p 8080:80 ID`
 #    where ID stands for the obtained image ID in step 2.
@@ -37,7 +37,7 @@ WORKDIR ..
 WORKDIR bibref
 RUN mkdir build
 WORKDIR build
-RUN cmake .. && make && make install || true
+RUN cmake .. && make -j$(nproc) && make install || true
 
 # Create the addbooks-cache:
 RUN bibref -a
@@ -50,7 +50,7 @@ RUN mkdir build
 WORKDIR build
 RUN . ../../emsdk/emsdk_env.sh && \
     emcmake cmake -DSWORD_BUILD_UTILS=No -DSWORD_BUILD_EXAMPLES=No -DLIBSWORD_LIBRARY_TYPE=Static -DCMAKE_CXX_FLAGS=-sUSE_ZLIB -DCMAKE_POLICY_VERSION_MINIMUM=3.5 ..
-RUN yes | make sword_static
+RUN yes | make -j$(nproc) sword_static
 RUN make install
 WORKDIR ../..
 
@@ -62,7 +62,7 @@ WORKDIR graphviz-$GRAPHVIZ_VER
 RUN . ../emsdk/emsdk_env.sh && \
     emconfigure ./configure CFLAGS="-sUSE_ZLIB -pthread" LDFLAGS="-sUSE_ZLIB -pthread" \
         --disable-shared --enable-static --with-qt=no --prefix=$EMSDK/upstream/emscripten/cache/sysroot
-RUN make -i
+RUN make -i -j$(nproc)
 RUN make -i install
 WORKDIR ..
 
@@ -79,7 +79,7 @@ RUN mkdir qt6-host-build
 WORKDIR qt6-host-build
 
 RUN ../qt6/configure -prefix `pwd`/../qt6-host-install
-RUN cmake --build .
+RUN cmake --build --parallel -j$(nproc) .
 RUN cmake --install .
 ## Compile Qt for WebAssembly...
 WORKDIR ..
@@ -88,7 +88,7 @@ WORKDIR qt6-wasm-build
 RUN . ../emsdk/emsdk_env.sh && \
     ../qt6/configure -xplatform wasm-emscripten -nomake examples -prefix $PWD/qtbase \
         -opensource -confirm-license -qt-host-path `pwd`/../qt6-host-install -feature-thread -feature-wasm-exceptions
-RUN cmake --build . -t qtbase -t qtdeclarative -t qtimageformats -t qsvgicon -t qsvg -t qtsvg -t SvgWidgets
+RUN cmake --build . --parallel -j$(nproc) -t qtbase -t qtdeclarative -t qtimageformats -t qsvgicon -t qsvg -t qtsvg -t SvgWidgets
 WORKDIR ..
 
 # Build bibref (qt-web):
@@ -97,7 +97,7 @@ RUN mkdir build-wasm
 WORKDIR build-wasm
 RUN . ../../../emsdk/emsdk_env.sh && \
     ../../../qt6-wasm-build/qtbase/bin/qt-cmake -DBIBREF_ADDBOOKS_CACHE_FOLDER=../../../bibref/build/bibref-addbooks-cache ..
-RUN yes | make
+RUN yes | make -j$(nproc)
 RUN make install
 
 # Set up web server:

@@ -22,7 +22,7 @@ RUN git clone https://github.com/kovzol/bibref
 WORKDIR bibref
 RUN mkdir build
 WORKDIR build
-RUN cmake .. && make && make install || true
+RUN cmake .. && make -j$(nproc) && make install || true
 
 # Create the addbooks-cache:
 RUN bibref -a
