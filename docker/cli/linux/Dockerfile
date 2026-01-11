@@ -6,6 +6,9 @@
 #    You will get an image ID at the end of the process.
 # 3. Run bibref (the command line version) by entering `sudo docker run -it ID`
 #    where ID stands for the obtained image ID in step 2.
+# 4. If no longer used, you can remove the Docker container and image by entering
+#    `sudo docker rm CID` and `sudo docker rmi ID`. The CID can be found by using
+#    `sudo docker ps -a`.
 
 # Restrictions (known bugs):
 # * The command line history (via readline) is not retrieved between sessions.

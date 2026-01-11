@@ -14,6 +14,8 @@
 #    this link works only with localhost.
 # 5. When finished, stop the web server by using the command `sudo docker kill CID`
 #    where CID stands for the obtained container identifier in step 3.
+# 6. If no longer used, you can remove the Docker container and image by entering
+#    `sudo docker rm CID` and `sudo docker rmi ID`.
 
 
 # Install prerequisites:

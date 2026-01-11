@@ -7,6 +7,11 @@
 # 3. Allow connection to the host's X11 server by issuing `xhost +local:docker`.
 # 4. Run bibref (the GUI version) by entering `sudo docker run -it -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix ID`.
 #    where ID stands for the obtained image ID in step 2.
+# 5. When finished, stop the web server by using the command `sudo docker kill CID`
+#    where CID stands for the obtained container identifier. You can find it by running `sudo docker ps`.
+# 6. If no longer used, you can remove the Docker container and image by entering
+#    `sudo docker rm CID` and `sudo docker rmi ID`.
+
 
 # Restrictions (known bugs):
 # * In Edit>Preferences, disable Diagram as HTML/SVG (otherwise the program will crash when trying to display a statement graph).
