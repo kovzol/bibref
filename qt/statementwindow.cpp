@@ -385,14 +385,16 @@ void StatementWindow::parse()
 
     msgBox->showNormal();
 
-    connect(visualizeButton, &QPushButton::clicked, this, [=](){
-        showSvg();
-        });
-    connect(visualizeXButton, &QPushButton::clicked, this, [=](){
-        QString link = "https://dreampuf.github.io/GraphvizOnline/?engine=dot#";
-        link += QUrl::toPercentEncoding(QString::fromStdString(graphviz_input));
-        QDesktopServices::openUrl(QUrl(link));
-        });
+    if (diagram_defined) {
+        connect(visualizeButton, &QPushButton::clicked, this, [=](){
+            showSvg();
+            });
+        connect(visualizeXButton, &QPushButton::clicked, this, [=](){
+            QString link = "https://dreampuf.github.io/GraphvizOnline/?engine=dot#";
+            link += QUrl::toPercentEncoding(QString::fromStdString(graphviz_input));
+            QDesktopServices::openUrl(QUrl(link));
+            });
+    }
 }
 
 void StatementWindow::analyze()
