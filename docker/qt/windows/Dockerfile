@@ -178,7 +178,51 @@ RUN sed -i '/find_package(Boost/ s/\(\bCOMPONENTS\b[^(]*\) system/\1/' CMakeList
 RUN sed -i '/^[[:space:]]*find_package[[:space:]]*(BZip2[[:space:]]\+REQUIRED[[:space:]]*)[[:space:]]*$/d' CMakeLists.txt
 RUN sed -i '/^[[:space:]]*find_package[[:space:]]*(LibLZMA[[:space:]]\+REQUIRED[[:space:]]*)[[:space:]]*$/d' CMakeLists.txt
 RUN sed -i '/^[[:space:]]*find_package[[:space:]]*(ICU[[:space:]]\+REQUIRED[[:space:]]\+uc[[:space:]]\+in[[:space:]]*)[[:space:]]*$/d' CMakeLists.txt
-## 7/2. Configure cross-compiling and build...
+## 7/2. Add embedded files (icons, translations) in the executable...
+RUN sed -i 's/^[[:space:]]*set[[:space:]]*(BIBREF_QRC_EXTRA[[:space:]]*""[[:space:]]*)/set(BIBREF_QRC_EXTRA "bibref-wasm.qrc")\nqt6_add_translation(QTBASE_QM_FILES ${QTBASE_TRANSLATION_FILES})/' CMakeLists.txt
+## 7/3. Patch main.cpp (FIXME, this does not seem to work yet):
+WORKDIR /build/bibref
+RUN patch -p1 <<'EOF'
+diff --git a/qt/main.cpp b/qt/main.cpp
+index c1e37c5..1b58fd6 100644
+--- a/qt/main.cpp
++++ b/qt/main.cpp
+@@ -157,32 +157,13 @@ void setLanguage(QString language)
+         qApp->installTranslator(&qtTranslator);
+     }
+
+-#ifndef __EMSCRIPTEN__
+-    if (qtBaseTranslator.load("qtbase_" + language,
+-                              QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {
+-        qApp->installTranslator(&qtBaseTranslator);
+-    }
+-#endif
+-
+     QString qmDir;
+-#ifdef __EMSCRIPTEN__
+     qmDir = ":/";
+-#else
+-    if (std::filesystem::exists(PROJECT_SOURCE_DIR "/hu.qm"))
+-        qmDir = PROJECT_SOURCE_DIR; // This must be set externally, currently done via cmake
+-    else if (std::filesystem::exists(INSTALL_PREFIX "/" SHARE_FOLDER "/hu.qm"))
+-        qmDir = INSTALL_PREFIX // This must be set externally, currently done via cmake
+-            "/" SHARE_FOLDER;
+-    else
+-        qmDir = SHARE_FOLDER; // for relative path (when extracted from a .zip)
+-#endif
+     if (bibrefTranslator.load(language, qmDir)) {
+         qApp->installTranslator(&bibrefTranslator);
+     }
+-#ifdef __EMSCRIPTEN__
+     if (qtBaseTranslator.load("qtbase_" + language, qmDir)) {
+         qApp->installTranslator(&qtBaseTranslator);
+     }
+-#endif
+     // FIXME: the last item should be inserted in a simpler and more flexible way.
+ }
+EOF
+## 7/4. Configure cross-compiling and build...
+WORKDIR /build/bibref/qt
 RUN mkdir build
 WORKDIR build
 RUN cmake .. -G Ninja \
@@ -257,7 +301,7 @@ RUN cp /build/bibref/bibref.ico /build/dist
 RUN echo "[Install]\n\
 DataPath=sword" > /build/dist/sword.conf
 # 9/8. Create additional Qt related settings...
-RUN for d in styles platforms; do \
+RUN for d in styles platforms imageformats; do \
         cp -a /build/qt6-mingw-build/qtbase/plugins/$d /build/dist; \
     done
 # 9/9. Create statements folder...
