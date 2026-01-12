@@ -180,47 +180,46 @@ RUN sed -i '/^[[:space:]]*find_package[[:space:]]*(LibLZMA[[:space:]]\+REQUIRED[
 RUN sed -i '/^[[:space:]]*find_package[[:space:]]*(ICU[[:space:]]\+REQUIRED[[:space:]]\+uc[[:space:]]\+in[[:space:]]*)[[:space:]]*$/d' CMakeLists.txt
 ## 7/2. Add embedded files (icons, translations) in the executable...
 RUN sed -i 's/^[[:space:]]*set[[:space:]]*(BIBREF_QRC_EXTRA[[:space:]]*""[[:space:]]*)/set(BIBREF_QRC_EXTRA "bibref-wasm.qrc")\nqt6_add_translation(QTBASE_QM_FILES ${QTBASE_TRANSLATION_FILES})/' CMakeLists.txt
-## 7/3. Patch main.cpp (FIXME, this does not seem to work yet):
+## 7/3. Patch main.cpp...
 WORKDIR /build/bibref
-RUN patch -p1 <<'EOF'
-diff --git a/qt/main.cpp b/qt/main.cpp
-index c1e37c5..1b58fd6 100644
---- a/qt/main.cpp
-+++ b/qt/main.cpp
-@@ -157,32 +157,13 @@ void setLanguage(QString language)
-         qApp->installTranslator(&qtTranslator);
-     }
-
--#ifndef __EMSCRIPTEN__
--    if (qtBaseTranslator.load("qtbase_" + language,
--                              QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {
--        qApp->installTranslator(&qtBaseTranslator);
--    }
--#endif
--
-     QString qmDir;
--#ifdef __EMSCRIPTEN__
-     qmDir = ":/";
--#else
--    if (std::filesystem::exists(PROJECT_SOURCE_DIR "/hu.qm"))
--        qmDir = PROJECT_SOURCE_DIR; // This must be set externally, currently done via cmake
--    else if (std::filesystem::exists(INSTALL_PREFIX "/" SHARE_FOLDER "/hu.qm"))
--        qmDir = INSTALL_PREFIX // This must be set externally, currently done via cmake
--            "/" SHARE_FOLDER;
--    else
--        qmDir = SHARE_FOLDER; // for relative path (when extracted from a .zip)
--#endif
-     if (bibrefTranslator.load(language, qmDir)) {
-         qApp->installTranslator(&bibrefTranslator);
-     }
--#ifdef __EMSCRIPTEN__
-     if (qtBaseTranslator.load("qtbase_" + language, qmDir)) {
-         qApp->installTranslator(&qtBaseTranslator);
-     }
--#endif
-     // FIXME: the last item should be inserted in a simpler and more flexible way.
- }
-EOF
+RUN echo "diff --git a/qt/main.cpp b/qt/main.cpp\n\
+index c1e37c5..1b58fd6 100644\n\
+--- a/qt/main.cpp\n\
++++ b/qt/main.cpp\n\
+@@ -157,32 +157,13 @@ void setLanguage(QString language)\n\
+         qApp->installTranslator(&qtTranslator);\n\
+     }\n\
+\n\
+-#ifndef __EMSCRIPTEN__\n\
+-    if (qtBaseTranslator.load(\"qtbase_\" + language,\n\
+-                              QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {\n\
+-        qApp->installTranslator(&qtBaseTranslator);\n\
+-    }\n\
+-#endif\n\
+-\n\
+     QString qmDir;\n\
+-#ifdef __EMSCRIPTEN__\n\
+     qmDir = \":/\";\n\
+-#else\n\
+-    if (std::filesystem::exists(PROJECT_SOURCE_DIR \"/hu.qm\"))\n\
+-        qmDir = PROJECT_SOURCE_DIR; // This must be set externally, currently done via cmake\n\
+-    else if (std::filesystem::exists(INSTALL_PREFIX \"/\" SHARE_FOLDER \"/hu.qm\"))\n\
+-        qmDir = INSTALL_PREFIX // This must be set externally, currently done via cmake\n\
+-            \"/\" SHARE_FOLDER;\n\
+-    else\n\
+-        qmDir = SHARE_FOLDER; // for relative path (when extracted from a .zip)\n\
+-#endif\n\
+     if (bibrefTranslator.load(language, qmDir)) {\n\
+         qApp->installTranslator(&bibrefTranslator);\n\
+     }\n\
+-#ifdef __EMSCRIPTEN__\n\
+     if (qtBaseTranslator.load(\"qtbase_\" + language, qmDir)) {\n\
+         qApp->installTranslator(&qtBaseTranslator);\n\
+     }\n\
+-#endif\n\
+     // FIXME: the last item should be inserted in a simpler and more flexible way.\n\
+ }\n" > qt/main.cpp.diff
+RUN patch --verbose -p1 < qt/main.cpp.diff
 ## 7/4. Configure cross-compiling and build...
 WORKDIR /build/bibref/qt
 RUN mkdir build
