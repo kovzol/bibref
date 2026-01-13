@@ -15,7 +15,6 @@
 
 
 # Restrictions (known bugs):
-# * In Edit>Preferences, disable Diagram as HTML/SVG (otherwise the program will crash when trying to display a statement graph).
 # * Icons are missing.
 
 
@@ -35,15 +34,24 @@ RUN mkdir build
 WORKDIR build
 RUN cmake .. && make -j$(nproc) && make install || true
 
-# Create the addbooks-cache:
+# Create the addbooks-cache and copy it and the installed Bibles in /tmp:
 RUN bibref -a
+RUN cp -a bibref-addbooks-cache /tmp
+RUN cp -a ~/.sword /tmp
+
+# Create normal user:
+RUN useradd -ms /bin/bash user
+RUN chown -R user:user /tmp/bibref-addbooks-cache /tmp/.sword
 
 # Build bibref (gui):
 WORKDIR ../qt
 RUN mkdir build
 WORKDIR build
 RUN cmake -DWEBENGINE=ON .. && make -j$(nproc) && make install
-RUN cp -a ../../build/bibref-addbooks-cache .
 
 # Run bibref (cli) when running the container:
-CMD bibref-qt
+USER user
+WORKDIR /home/user
+RUN mv /tmp/bibref-addbooks-cache .
+RUN mv /tmp/.sword .
+CMD QT_QUICK_BACKEND=software QT_OPENGL=software QTWEBENGINE_DISABLE_GPU=1 QTWEBENGINE_CHROMIUM_FLAGS="--disable-gpu --disable-software-rasterizer --no-sandbox" bibref-qt
