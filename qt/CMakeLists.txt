@@ -63,11 +63,7 @@ set(Boost_USE_STATIC_RUNTIME OFF)
 
 if (EMSCRIPTEN)
 else()
-  if(APPLE)
-  find_package(Boost CONFIG REQUIRED COMPONENTS filesystem) # Seemingly, system is not there on homebrew
-  else()
-  find_package(Boost CONFIG REQUIRED COMPONENTS system filesystem)
-  endif(APPLE)
+  find_package(Boost CONFIG REQUIRED COMPONENTS filesystem)
   pkg_check_modules(gvc REQUIRED libgvc)
 endif(EMSCRIPTEN)
 
