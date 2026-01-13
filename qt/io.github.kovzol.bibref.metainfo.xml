@@ -62,6 +62,15 @@
   <content_rating type="oars-1.1" />
 
   <releases>
+    <release version="2026-01-13" date="2026-01-13">
+    <url type="details">https://github.com/kovzol/bibref/commits/44e3ab7efc4e872e4250d7467db20fbef64a1bc1</url>
+      <description>
+        <p>Release description</p>
+          <ul>
+            <li>Fix diagram crash if the edited statement has an error</li>
+          </ul>
+      </description>
+    </release>
     <release version="2025-12-23" date="2025-12-23">
     <url type="details">https://github.com/kovzol/bibref/commits/30849b6b29b3d55385fe0146c638f56fc7d81c33</url>
       <description>
