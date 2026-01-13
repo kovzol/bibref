@@ -1,8 +1,9 @@
 # This file makes it easier to compile the Windows version of bibref (the GUI version)
-# in a Docker virtualization in a Linux guest. Cross-compilation is performed with the Linux
+# in a Docker virtualization in a Linux guest. It creates both a portable ZIP and
+# an installable EXE for Windows. Cross-compilation is performed with the Linux
 # version of MINGW64. Most dependencies are provided by the MSYS2/MINGW64 packages,
 # except for Qt6 (which is compiled twice: first for Linux, then for Linux/MINGW64), SWORD, and for bibref-qt.
-# Warning: You need about about 76 GB of disk space to create the Docker image, and several hours
+# Warning: You need about about 79.6 GB of disk space to create the Docker image, and several hours
 # of downloading (please use a stable Internet connection) and reasonable compilation time to make everything work.
 
 # How to use this file:
@@ -11,10 +12,11 @@
 #    You will get an image ID at the end of the process.
 # 3. Run the image by typing `sudo docker run ID`.
 # 4. Run `sudo docker ps -a | head -2` to find out the container identifier CID as output.
-# 5. Copy the finished folder with the executable and the required DLLs and extra files by entering
-#    `sudo docker cp CID:/build/dist FOLDER` in an arbitrary FOLDER.
-# 6. To test the Windows version on Linux, change the working directory to FOLDER and
-#    type `wine bibref-qt.exe`.
+# 5. Copy the finished folder with the executable and the required DLLs and extra files,
+#    plus the created .zip and .exe installer in an arbitrary FOLDER by entering
+#    `sudo docker cp CID:/build/dist FOLDER`.
+# 6. To test the Windows version on Linux, change the working directory to FOLDER,
+#    find its subdirectory bibref-qt-YYYY-MM-DD/ and type `wine bibref-qt.exe` there.
 # 7. If no longer used, you can remove the Docker container and image by entering
 #    `sudo docker rm CID` and `sudo docker rmi ID`.
 
@@ -22,13 +24,17 @@
 # 1. Get prerequisites and cross compiling tools:
 FROM debian:trixie
 RUN apt-get update && apt-get install -y \
-    build-essential cmake git wget unzip xz-utils zstd pkg-config \
+    build-essential cmake git wget zip unzip xz-utils zstd pkg-config \
     mingw-w64 mingw-w64-tools g++-mingw-w64-x86-64 \
     flex bison autoconf automake libtool \
     qt6-base-dev qt6-tools-dev qt6-base-dev-tools \
     perl python3 ninja-build libdbus-1-dev \
     libsword-common libsword-dev \
-    libreadline-dev libboost-dev libboost-filesystem-dev
+    libreadline-dev libboost-dev libboost-filesystem-dev wine
+RUN apt-get install -y xvfb
+RUN wget -q https://jrsoftware.org/download.php/is.exe -O inno.exe
+RUN dpkg --add-architecture i386 && apt-get update && apt-get install -y wine32:i386
+RUN xvfb-run wine inno.exe /VERYSILENT /SUPPRESSMSGBOXES /NORESTART
 
 # 2. Create toolchain file for cmake (it will be used to cross-compile SWORD and bibref-qt for Windows):
 WORKDIR /build
@@ -42,52 +48,26 @@ RUN echo "set(CMAKE_SYSTEM_NAME Windows)\n\
     set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)" \
         > /build/toolchain-mingw64.cmake
 
-# 3. Download bibref and SWORD:
-RUN git clone --depth=1 https://github.com/kovzol/bibref.git
-RUN wget -q https://www.crosswire.org/ftpmirror/pub/sword/source/v1.9/sword-1.9.0.tar.gz
-RUN tar xzf sword-1.9.0.tar.gz
-
-# 4. Cross-compile SWORD for Windows via Linux/MINGW64:
+# 3. Build Qt for Windows via Linux/MINGW64:
+## 3/1. Clone repository...
 WORKDIR /build
-RUN mkdir orig
-RUN mv sword-1.9.0 orig
-WORKDIR orig
-RUN patch -i ../bibref/sword-patch-mingw64.diff -p1
-RUN cp ../bibref/FindRegex.cmake sword-1.9.0/cmake
-RUN sed -i 's/2.6.0/3.5.0/' sword-1.9.0/CMakeLists.txt
-WORKDIR sword-1.9.0
-RUN mkdir build
-WORKDIR build
-RUN cmake .. \
-        -DCMAKE_TOOLCHAIN_FILE=/build/toolchain-mingw64.cmake \
-        -DCMAKE_INSTALL_PREFIX=/opt/mingw64 \
-        -DCMAKE_BUILD_TYPE=Release \
-        -DWITH_CURL=No -DLIBSWORD_LIBRARY_TYPE=Static \
-        -DSWORD_BUILD_UTILS=No -DSWORD_BUILD_EXAMPLES=No \
-        -DCMAKE_CXX_FLAGS="-fpermissive"
-RUN make -j$(nproc) sword_static
-RUN make install
-
-# 5. Build Qt for Windows via Linux/MINGW64:
-## 5/1. Clone repository...
-WORKDIR /build
-ENV QT6_VERSION=6.10.0
+ARG QT6_VERSION=6.10.0
 RUN git clone git://code.qt.io/qt/qt5.git qt6
 WORKDIR qt6
 RUN git switch $QT6_VERSION
 RUN perl init-repository
-## 5/2. Compile Qt for the Linux host...
+## 3/2. Compile Qt for the Linux host...
 WORKDIR ..
 RUN mkdir qt6-host-build
 WORKDIR qt6-host-build
 RUN ../qt6/configure -prefix /opt/qt6-host -opensource -confirm-license -nomake examples -nomake tests
 RUN cmake --build . -j$(nproc)
 RUN cmake --install .
-## 5/3. Cross-compile Qt for Windows...
+## 3/3. Cross-compile Qt for Windows...
 WORKDIR ..
 RUN mkdir qt6-mingw-build
 WORKDIR qt6-mingw-build
-ENV CC=x86_64-w64-mingw32-gcc \
+ARG CC=x86_64-w64-mingw32-gcc \
     CXX=x86_64-w64-mingw32-g++ \
     AR=x86_64-w64-mingw32-ar \
     RANLIB=x86_64-w64-mingw32-ranlib \
@@ -117,7 +97,7 @@ RUN cmake --install . --component tools
 RUN cmake --install . --component qml
 RUN cmake --install . --component libraries
 
-# 6. Download MSYS2/MINGW64 packages:
+# 4. Download MSYS2/MINGW64 packages:
 WORKDIR /build
 ARG MSYS2_MIRROR=https://repo.msys2.org/mingw/mingw64
 ARG MSYS2_BOOST_VERSION=1.90.0-1 \
@@ -156,7 +136,7 @@ ARG MSYS2_BOOST_VERSION=1.90.0-1 \
     MSYS2_XZ_VERSION=5.8.2-1 \
     MSYS2_ZSTD_VERSION=1.5.7-1 \
     MSYS2_ZLIB_VERSION=1.3.1-1
-ENV DEST=/opt
+ARG DEST=/opt
 RUN set | grep ^MSYS2_ | grep _VERSION= | while read SETTING; do \
         PACKAGE=`echo $SETTING | cut -d= -f1 | sed s/MSYS2_// | sed s/_VERSION// | tr _ - | awk '{print tolower($0)}'`; \
         VERSION=`echo $SETTING | cut -d= -f2 | sed s/"'"//g`; \
@@ -166,17 +146,36 @@ RUN set | grep ^MSYS2_ | grep _VERSION= | while read SETTING; do \
         echo $FILENAME; \
     done
 
+# 5. Download bibref and SWORD:
+RUN git clone --depth=1 https://github.com/kovzol/bibref.git
+RUN wget -q https://www.crosswire.org/ftpmirror/pub/sword/source/v1.9/sword-1.9.0.tar.gz
+RUN tar xzf sword-1.9.0.tar.gz
+
+# 6. Cross-compile SWORD for Windows via Linux/MINGW64:
+WORKDIR /build
+RUN mkdir orig
+RUN mv sword-1.9.0 orig
+WORKDIR orig
+RUN patch -i ../bibref/sword-patch-mingw64.diff -p1
+RUN cp ../bibref/FindRegex.cmake sword-1.9.0/cmake
+RUN sed -i 's/2.6.0/3.5.0/' sword-1.9.0/CMakeLists.txt
+WORKDIR sword-1.9.0
+RUN mkdir build
+WORKDIR build
+RUN cmake .. \
+        -DCMAKE_TOOLCHAIN_FILE=/build/toolchain-mingw64.cmake \
+        -DCMAKE_INSTALL_PREFIX=/opt/mingw64 \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DWITH_CURL=No -DLIBSWORD_LIBRARY_TYPE=Static \
+        -DSWORD_BUILD_UTILS=No -DSWORD_BUILD_EXAMPLES=No \
+        -DCMAKE_CXX_FLAGS="-fpermissive"
+RUN make -j$(nproc) sword_static
+RUN make install
+
 # 7. Build bibref-qt:
-ENV CC= \
-    CXX= \
-    AR= \
-    RANLIB= \
-    STRIP=
 WORKDIR /build/bibref/qt
-## 7/1. Prepare cmake configuration by removing bzip2, liblzma and icu...
+## 7/1. Prepare cmake configuration by removing boost/system and icu...
 RUN sed -i '/find_package(Boost/ s/\(\bCOMPONENTS\b[^(]*\) system/\1/' CMakeLists.txt
-RUN sed -i '/^[[:space:]]*find_package[[:space:]]*(BZip2[[:space:]]\+REQUIRED[[:space:]]*)[[:space:]]*$/d' CMakeLists.txt
-RUN sed -i '/^[[:space:]]*find_package[[:space:]]*(LibLZMA[[:space:]]\+REQUIRED[[:space:]]*)[[:space:]]*$/d' CMakeLists.txt
 RUN sed -i '/^[[:space:]]*find_package[[:space:]]*(ICU[[:space:]]\+REQUIRED[[:space:]]\+uc[[:space:]]\+in[[:space:]]*)[[:space:]]*$/d' CMakeLists.txt
 ## 7/2. Add embedded files (icons, translations) in the executable...
 RUN sed -i 's/^[[:space:]]*set[[:space:]]*(BIBREF_QRC_EXTRA[[:space:]]*""[[:space:]]*)/set(BIBREF_QRC_EXTRA "bibref-wasm.qrc")\nqt6_add_translation(QTBASE_QM_FILES ${QTBASE_TRANSLATION_FILES})/' CMakeLists.txt
@@ -234,11 +233,17 @@ RUN cmake .. -G Ninja \
         -DBoost_USE_STATIC_LIBS=ON \
         -DBoost_USE_MULTITHREADED=ON \
         -DCMAKE_POLICY_DEFAULT_CMP0144=NEW \
-        -DCMAKE_EXE_LINKER_FLAGS="-L/opt/mingw64/lib"
+        -DCMAKE_EXE_LINKER_FLAGS="-L/opt/mingw64/lib" \
+        -DSWORD_DIR=/opt/mingw64
 RUN ninja -j$(nproc)
 RUN ninja install || true
 
 # 8. Build bibref for Linux (cli) and create bibref-addbooks-cache:
+ARG CC= \
+    CXX= \
+    AR= \
+    RANLIB= \
+    STRIP=
 ## 8/1. Build bibref for Linux (cli)...
 WORKDIR /build/bibref
 RUN mkdir build
@@ -250,8 +255,8 @@ RUN make install || true
 RUN bibref -a
 
 # 9. Create Windows folder with all required files:
-WORKDIR /build
-RUN mkdir dist
+ARG DIST=/build/dist/bibref-qt-VERSION
+RUN mkdir -p $DIST
 # 9/1. Collect MSYS2/MINGW64 DLLs (this may change when versions change)...
 ARG MSYS2_MINGW64_DLLS="libboost_filesystem-mt libbrotlicommon libbrotlidec \
     libbrotlienc libbz2-1 libcairo-2 libcairo-gobject-2 \
@@ -271,14 +276,14 @@ ARG MSYS2_MINGW64_DLLS="libboost_filesystem-mt libbrotlicommon libbrotlidec \
 RUN for i in $MSYS2_MINGW64_DLLS; do \
         DLL=`find /opt -name $i.dll | head -1`; \
         echo $DLL; \
-        cp $DLL /build/dist; \
+        cp $DLL $DIST; \
         done
 # 9/2. Collect runtimes from cross compiler...
 ARG LINUX_MINGW64_DLLS="libgcc_s_seh-1 libstdc++-6"
 RUN for i in $LINUX_MINGW64_DLLS; do \
         DLL=`find /usr/lib/gcc/x86_64-w64-mingw32 -name $i.dll | grep win32 | head -1`; \
         echo $DLL; \
-        cp $DLL /build/dist; \
+        cp $DLL $DIST; \
         done
 # 9/3. Collect Qt DLLs (some of them take place in the build folder)...
 ARG LINUX_MINGW64_QT6_DLLS="Core DBus Gui Network PrintSupport \
@@ -286,28 +291,43 @@ ARG LINUX_MINGW64_QT6_DLLS="Core DBus Gui Network PrintSupport \
 RUN for i in $LINUX_MINGW64_QT6_DLLS; do \
         DLL=`find /build/qt6-mingw-build -name Qt6$i.dll | head -1`; \
         echo $DLL; \
-        cp $DLL /build/dist; \
+        cp $DLL $DIST; \
         done
 # 9/4. Create sword folder...
-WORKDIR /build/dist
+WORKDIR $DIST
 RUN unzip /build/bibref/sword-lxx-sblgnt-statresgnt-kjv-fallback.zip
 RUN mv .sword sword
 # 9/5. Copy addbooks-cache from native build...
-RUN cp -a /build/bibref/build/bibref-addbooks-cache /build/dist
+RUN cp -a /build/bibref/build/bibref-addbooks-cache $DIST
 # 9/6. Put the .ico file there...
-RUN cp /build/bibref/bibref.ico /build/dist
+RUN cp /build/bibref/bibref.ico $DIST
 # 9/7. Create sword.conf...
 RUN echo "[Install]\n\
-DataPath=sword" > /build/dist/sword.conf
+DataPath=sword" > $DIST/sword.conf
 # 9/8. Create additional Qt related settings...
 RUN for d in styles platforms imageformats; do \
-        cp -a /build/qt6-mingw-build/qtbase/plugins/$d /build/dist; \
+        cp -a /build/qt6-mingw-build/qtbase/plugins/$d $DIST; \
     done
 # 9/9. Create statements folder...
-RUN mkdir /build/dist/statements
-RUN cp -a /build/bibref/statements/SBLGNT /build/dist/statements
-RUN rm -fr /build/dist/statements/SBLGNT/all
-RUN cp -a /build/bibref/statements/StatResGNT /build/dist/statements
-RUN rm -fr /build/dist/statements/StatResGNT/all
+RUN mkdir $DIST/statements
+RUN cp -a /build/bibref/statements/SBLGNT $DIST/statements
+RUN rm -fr $DIST/statements/SBLGNT/all
+RUN cp -a /build/bibref/statements/StatResGNT $DIST/statements
+RUN rm -fr $DIST/statements/StatResGNT/all
 # 9/10. Copy executable...
-RUN cp /build/bibref/qt/build/bibref-qt.exe /build/dist
+RUN cp /build/bibref/qt/build/bibref-qt.exe $DIST
+# 9/11. Get version number...
+RUN cat /build/bibref/version.h | grep BIBREF_GUI_VERSION | awk '{print $3}' | tr -d \" > /build/version
+WORKDIR /build/dist
+RUN mv bibref-qt-VERSION bibref-qt-`cat /build/version`
+
+# 9/11. Create .zip...
+WORKDIR /build/dist
+RUN VERSION=`cat /build/version` && zip -9r bibref-qt-$VERSION.zip bibref-qt-$VERSION
+
+# 10. Create Inno Setup installer:
+WORKDIR /build/bibref/qt
+RUN VERSION=`cat /build/version` && ln -s /build/dist/bibref-qt-`cat /build/version` bibref-qt-`cat /build/version`
+RUN VERSION=`cat /build/version` && cat bibref.iss | sed s/2025-12-23/$VERSION/ > bibref-current.iss
+RUN wine "C:\\Program Files (x86)\\Inno Setup 6\\ISCC.exe" bibref-current.iss
+RUN mv Output/bibref-setup.exe /build/dist
