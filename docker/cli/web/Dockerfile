@@ -10,9 +10,11 @@
 # 4. Open your favorite web browser and open the page **http://localhost:8080/index-jt-dt.html**. This starts the program.
 #    In case you want to start the program from a different machine than the container's host,
 #    use the IP address of the container's host instead of "localhost" in the URL.
-# 5. When finished, stop the web server by using the command `sudo docker kill CID`
+# 5. If you want to get the created files for a deployment in FOLDER, use
+#    `sudo docker cp CID:/bibref/build-wasm/html-output FOLDER`
 #    where CID stands for the obtained container identifier in step 3.
-# 6. If no longer used, you can remove the Docker container and image by entering
+# 6. When finished, stop the web server by using the command `sudo docker kill CID`.
+# 7. If no longer used, you can remove the Docker container and image by entering
 #    `sudo docker rm CID` and `sudo docker rmi ID`.
 
 
