@@ -12,9 +12,11 @@
 # 4. Open your favorite web browser and open the page **http://localhost:8080/bibref-qt.html**. This starts the program.
 #    Note that the current Docker version does not provide a https connection and therefore
 #    this link works only with localhost.
-# 5. When finished, stop the web server by using the command `sudo docker kill CID`
+# 5. If you want to get the created files for a deployment in FOLDER, use
+#    `sudo docker cp CID:/bibref/qt/build-wasm/html-output FOLDER`
 #    where CID stands for the obtained container identifier in step 3.
-# 6. If no longer used, you can remove the Docker container and image by entering
+# 6. When finished, stop the web server by using the command `sudo docker kill CID`.
+# 7. If no longer used, you can remove the Docker container and image by entering
 #    `sudo docker rm CID` and `sudo docker rmi ID`.
 
 
