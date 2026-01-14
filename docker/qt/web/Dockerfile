@@ -83,7 +83,7 @@ RUN mkdir qt6-host-build
 WORKDIR qt6-host-build
 
 RUN ../qt6/configure -prefix `pwd`/../qt6-host-install
-RUN cmake --build --parallel -j$(nproc) .
+RUN cmake --build . -j$(nproc)
 RUN cmake --install .
 ## Compile Qt for WebAssembly...
 WORKDIR ..
@@ -92,7 +92,7 @@ WORKDIR qt6-wasm-build
 RUN . ../emsdk/emsdk_env.sh && \
     ../qt6/configure -xplatform wasm-emscripten -nomake examples -prefix $PWD/qtbase \
         -opensource -confirm-license -qt-host-path `pwd`/../qt6-host-install -feature-thread -feature-wasm-exceptions
-RUN cmake --build . --parallel -j$(nproc) -t qtbase -t qtdeclarative -t qtimageformats -t qsvgicon -t qsvg -t qtsvg -t SvgWidgets
+RUN cmake --build . -j$(nproc) -t qtbase -t qtdeclarative -t qtimageformats -t qsvgicon -t qsvg -t qtsvg -t SvgWidgets
 WORKDIR ..
 
 # Build bibref (qt-web):
