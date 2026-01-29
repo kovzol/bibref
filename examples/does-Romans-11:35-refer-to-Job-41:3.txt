@@ -1,0 +1,78 @@
+## Some Bible editions and commentaries suggest that Romans 11:35 is an allusion of Job 41:3.
+## There is, however, not much evidence on this by checking the Greek texts.
+## In fact, by using bibref, we can find the closest text from Job that may be similar to Romans 11:35,
+## but the obtained result is still too far, at least contextually not really an evidence, see below.
+
+lookup KJV Romans 11:35
+# Or who hath first given to him, and it shall be recompensed unto him again?
+
+lookup KJV Job 41:3
+# Will he make many supplications unto thee? will he speak soft words unto thee?
+
+lookup StatResGNT Romans 11:35
+# “Η τις προεδωκεν αυτω, και ανταποδοθησεται αυτω;”
+
+lookup2 StatResGNT Romans 11:35
+# Stored internally as htisproedvkenaytvkaiantapodouhsetaiaytv.
+
+lookup LXX Job 41:3
+# η τις αντιστησεται μοι και υπομενει ει πασα η υπ ουρανον εμη εστιν
+lookup1 LXX Job 41:3
+# Stored internally as htisantisthsetaimoikaiypomeneieipasahypoyranonemhestin.
+jaccard12
+# Jaccard distance is 0.735849.
+
+## Now we have a look in Job in general...
+
+lookup1 LXX Job 1:1 42:17
+# ...
+
+length1
+# Length of text 1 is 66243.
+
+nearest12
+## This will take a couple of seconds...
+# Nearest Jaccard distance is 0.394737 with substring oykaiaytosepoihsentisantapodvseiaytvkai.
+
+latintext1 oykaiaytosepoihsentisantapodvseiaytvkai
+# Stored.
+
+find1 LXX
+# Found in Job 21:31+38 21:32-42 (book position 32561-32599)
+# 1 occurrences.
+
+lookup LXX Job 21:31
+# τις απαγγελει επι προσωπου αυτου την οδον αυτου και αυτος εποιησεν τις ανταποδωσει αυτω
+lookup LXX Job 21:32
+# και αυτος εις ταφους απηνεχθη και επι σορω ηγρυπνησεν
+
+## An attempt to check the second-best match...
+
+lookup1 LXX Job 1:1 21:30
+nearest12
+Nearest Jaccard distance is 0.473684 with substring aytoyantapodvseiprosaytonkaignvsetaiido.
+latintext1 aytoyantapodvseiprosaytonkaignvsetaiido
+# Stored.
+find1 LXX
+# Found in Job 21:19+23 21:20-56 (book position 31856-31894)
+# 1 occurrences.
+lookup KJV Job 21:19
+# God layeth up his iniquity for his children: he rewardeth him, and he shall know it.
+lookup KJV Job 21:20
+# His eyes shall see his destruction, and he shall drink of the wrath of the Almighty.
+
+lookup1 LXX Job 21:33 42:17
+# nearest12
+Nearest Jaccard distance is 0.473684 with substring uhnaiprosvpaaytvnkenadeaytoisapobhsetai.
+latintext1 uhnaiprosvpaaytvnkenadeaytoisapobhsetai
+# Stored.
+find1 LXX
+# Found in Job 34:19+61 34:20-69 (book position 51257-51295)
+# 1 occurrences.
+lookup KJV Job 34:19
+# How much less to him that accepteth not the persons of princes, nor regardeth the rich more than the poor? for they all are the work of his hands.
+lookup KJV Job 34:20
+# In a moment shall they die, and the people shall be troubled at midnight, and pass away: and the mighty shall be taken away without hand.
+
+## Both of these matches (from Job 21:19-20 and 34:19-20) seem to be contextually too far.
+## As a conclusion, it seems that Paul does not refer to Job, at least not by quoting a text from Job.

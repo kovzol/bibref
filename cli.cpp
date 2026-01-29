@@ -302,7 +302,7 @@ string getHelp(const string &key)
         "* `jaccard12`: Compare the two clipboards the same way how `compare12` does but use the "
         "\"Jaccard similarity for bags\" algorithm, best match is reached at 0.",
         "* `nearest12`: Find a substring of clipboard1 such that its Jaccard similarity for bags "
-        " to clipboard2 is minimal.",
+        "to clipboard2 is minimal.",
         "\"Jaccard similarity for bags\" algorithm, best match is reached at 0.",
         "* `sql` *switch*: Set some outputs to be shown also as an SQL query if *switch* is `on`.",
         "* `colors` *switch*: Show some outputs colored if *switch* is `on`.",
@@ -313,8 +313,8 @@ string getHelp(const string &key)
         "* `help` *command*: Show some hints on usage of *command*, or get general help if no "
         "parameter is given.",
         "* `statement` ...: Analyze the given statement, see "
-        "https://matek.hu/zoltan/blog-20250102.php "
-        "for some explanations.",
+        "https://github.com/kovzol/bibref/wiki/Statements "
+        "for further information.",
         "* `quit`: Exit program."};
     string retval;
     for (int i = 0; i < helpStr.size(); i++) {
@@ -352,7 +352,7 @@ void processHelpCmd(string input)
 #ifdef __EMSCRIPTEN__
     showAvailableBibles();
 #endif
-    info("Please visit https://github.com/kovzol/bibref#bibref to get online help.");
+    info("Please visit https://github.com/kovzol/bibref/wiki/Terminal-based-interface to get online help.");
 }
 
 void processTextCmd(string input)
