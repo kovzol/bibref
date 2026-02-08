@@ -159,32 +159,14 @@ void setLanguage(QString language)
         qApp->installTranslator(&qtTranslator);
     }
 
-#ifndef __EMSCRIPTEN__
-    if (qtBaseTranslator.load("qtbase_" + language,
-                              QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {
-        qApp->installTranslator(&qtBaseTranslator);
-    }
-#endif
 
     QString qmDir;
-#ifdef __EMSCRIPTEN__
     qmDir = ":/";
-#else
-    if (std::filesystem::exists(PROJECT_SOURCE_DIR "/hu.qm"))
-        qmDir = PROJECT_SOURCE_DIR; // This must be set externally, currently done via cmake
-    else if (std::filesystem::exists(INSTALL_PREFIX "/" SHARE_FOLDER "/hu.qm"))
-        qmDir = INSTALL_PREFIX // This must be set externally, currently done via cmake
-            "/" SHARE_FOLDER;
-    else
-        qmDir = SHARE_FOLDER; // for relative path (when extracted from a .zip)
-#endif
     if (bibrefTranslator.load(language, qmDir)) {
         qApp->installTranslator(&bibrefTranslator);
     }
-#ifdef __EMSCRIPTEN__
     if (qtBaseTranslator.load("qtbase_" + language, qmDir)) {
         qApp->installTranslator(&qtBaseTranslator);
     }
-#endif
     // FIXME: the last item should be inserted in a simpler and more flexible way.
 }

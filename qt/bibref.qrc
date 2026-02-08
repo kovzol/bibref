@@ -2,8 +2,34 @@
     <qresource prefix="/">
         <file>hu.qm</file>
         <file>de.qm</file>
+        <file>qtbase_hu.qm</file>
+        <file>qtbase_de.qm</file>
         <file>KoineGreekBibref.ttf</file>
         <file>Inconsolata.ttf</file>
         <file>logo-Psalm40-192.png</file>
+        <file>icons/application-exit.svg</file>
+        <file>icons/document-new.svg</file>
+        <file>icons/document-open.svg</file>
+        <file>icons/document-save.svg</file>
+        <file>icons/edit-find.svg</file>
+        <file>icons/emblem-photos.svg</file>
+        <file>icons/flag-gr.svg</file>
+        <file>icons/go-down.svg</file>
+        <file>icons/go-next.svg</file>
+        <file>icons/go-previous.svg</file>
+        <file>icons/help-about.svg</file>
+        <file>icons/help-contents.svg</file>
+        <file>icons/input-keyboard.svg</file>
+        <file>icons/insert-text.svg</file>
+        <file>icons/media-flash.svg</file>
+        <file>icons/preferences-desktop-font.svg</file>
+        <file>icons/scanner.svg</file>
+        <file>icons/system-file-manager.svg</file>
+        <file>icons/system-help.svg</file>
+        <file>icons/tools-check-spelling.svg</file>
+        <file>icons/utilities-system-monitor.svg</file>
+        <file>icons/utilities-terminal.svg</file>
+        <file>icons/view-sort-ascending.svg</file>
+        <file>icons/view-sort-descending.svg</file>
     </qresource>
 </RCC>
