@@ -6,6 +6,13 @@
   <summary>Discover references in the Bible</summary>
 
   <url type="homepage">https://kovzol.github.io/bibref</url>
+  <url type="vcs-browser">https://github.com/kovzol/bibref</url>
+
+  <branding>
+    <color type="primary" scheme_preference="light">#a0a4ee</color>
+    <color type="primary" scheme_preference="dark">#220222</color>
+  </branding>
+
 
   <developer id="io.github.kovzol">
     <name>Zoltán Kovács</name>
