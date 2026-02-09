@@ -2,7 +2,7 @@
 
 # How to use this file:
 # 1. On an Ubuntu Linux, install the package **docker.io**. This machine will be called your container's host.
-# 2. Build the image by entering `sudo docker build -f Dockerfile .`.
+# 2. Build the image by entering `sudo docker build .`.
 #    You will get an image ID at the end of the process.
 # 3. Start the web server and allow a network connection to it by issuing `sudo docker run -d -p 8080:80 ID`
 #    where ID stands for the obtained image ID in step 2.
@@ -27,7 +27,7 @@ RUN apt-get update && \
         libreadline-dev libboost-dev libboost-filesystem-dev bison flex pkgconf unzip
 RUN git clone https://github.com/emscripten-core/emsdk.git
 WORKDIR emsdk
-ENV EMSDK_VER=4.0.3
+ARG EMSDK_VER=4.0.3
 RUN ./emsdk install $EMSDK_VER
 RUN ./emsdk activate $EMSDK_VER
 WORKDIR ..
@@ -43,8 +43,12 @@ RUN yes | make -j$(nproc) sword_static
 RUN make install
 WORKDIR ../..
 
+# Download bibref:
+ARG GIT_COMMIT=
+RUN git clone https://github.com/kovzol/bibref && \
+    if [ -n "$GIT_COMMIT" ]; then git checkout $GIT_COMMIT; fi
+
 # Build bibref (cli):
-RUN git clone https://github.com/kovzol/bibref
 WORKDIR bibref
 RUN mkdir build
 WORKDIR build

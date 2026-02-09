@@ -8,7 +8,7 @@
 
 # How to use this file:
 # 1. On Ubuntu Linux, install the package **docker.io**.
-# 2. Build the image by entering `sudo docker build -f Dockerfile .`.
+# 2. Build the image by entering `sudo docker build .`.
 #    You will get an image ID at the end of the process.
 # 3. Run the image by typing `sudo docker run ID`.
 # 4. Run `sudo docker ps -a | head -2` to find out the container identifier CID as output.
@@ -147,7 +147,9 @@ RUN set | grep ^MSYS2_ | grep _VERSION= | while read SETTING; do \
     done
 
 # 5. Download bibref and SWORD:
-RUN git clone --depth=1 https://github.com/kovzol/bibref.git
+ARG GIT_COMMIT=
+RUN git clone https://github.com/kovzol/bibref && \
+    if [ -n "$GIT_COMMIT" ]; then git checkout $GIT_COMMIT; fi
 RUN wget -q https://www.crosswire.org/ftpmirror/pub/sword/source/v1.9/sword-1.9.0.tar.gz
 RUN tar xzf sword-1.9.0.tar.gz
 
@@ -177,49 +179,7 @@ WORKDIR /build/bibref/qt
 ## 7/1. Prepare cmake configuration by removing boost/system and icu...
 RUN sed -i '/find_package(Boost/ s/\(\bCOMPONENTS\b[^(]*\) system/\1/' CMakeLists.txt
 RUN sed -i '/^[[:space:]]*find_package[[:space:]]*(ICU[[:space:]]\+REQUIRED[[:space:]]\+uc[[:space:]]\+in[[:space:]]*)[[:space:]]*$/d' CMakeLists.txt
-## 7/2. Add embedded files (icons, translations) in the executable...
-RUN sed -i 's/^[[:space:]]*set[[:space:]]*(BIBREF_QRC_EXTRA[[:space:]]*""[[:space:]]*)/set(BIBREF_QRC_EXTRA "bibref-wasm.qrc")\nqt6_add_translation(QTBASE_QM_FILES ${QTBASE_TRANSLATION_FILES})/' CMakeLists.txt
-## 7/3. Patch main.cpp...
-WORKDIR /build/bibref
-RUN echo "diff --git a/qt/main.cpp b/qt/main.cpp\n\
-index c1e37c5..1b58fd6 100644\n\
---- a/qt/main.cpp\n\
-+++ b/qt/main.cpp\n\
-@@ -157,32 +157,13 @@ void setLanguage(QString language)\n\
-         qApp->installTranslator(&qtTranslator);\n\
-     }\n\
-\n\
--#ifndef __EMSCRIPTEN__\n\
--    if (qtBaseTranslator.load(\"qtbase_\" + language,\n\
--                              QLibraryInfo::path(QLibraryInfo::TranslationsPath))) {\n\
--        qApp->installTranslator(&qtBaseTranslator);\n\
--    }\n\
--#endif\n\
--\n\
-     QString qmDir;\n\
--#ifdef __EMSCRIPTEN__\n\
-     qmDir = \":/\";\n\
--#else\n\
--    if (std::filesystem::exists(PROJECT_SOURCE_DIR \"/hu.qm\"))\n\
--        qmDir = PROJECT_SOURCE_DIR; // This must be set externally, currently done via cmake\n\
--    else if (std::filesystem::exists(INSTALL_PREFIX \"/\" SHARE_FOLDER \"/hu.qm\"))\n\
--        qmDir = INSTALL_PREFIX // This must be set externally, currently done via cmake\n\
--            \"/\" SHARE_FOLDER;\n\
--    else\n\
--        qmDir = SHARE_FOLDER; // for relative path (when extracted from a .zip)\n\
--#endif\n\
-     if (bibrefTranslator.load(language, qmDir)) {\n\
-         qApp->installTranslator(&bibrefTranslator);\n\
-     }\n\
--#ifdef __EMSCRIPTEN__\n\
-     if (qtBaseTranslator.load(\"qtbase_\" + language, qmDir)) {\n\
-         qApp->installTranslator(&qtBaseTranslator);\n\
-     }\n\
--#endif\n\
-     // FIXME: the last item should be inserted in a simpler and more flexible way.\n\
- }\n" > qt/main.cpp.diff
-RUN patch --verbose -p1 < qt/main.cpp.diff
-## 7/4. Configure cross-compiling and build...
+## 7/2. Configure cross-compiling and build...
 WORKDIR /build/bibref/qt
 RUN mkdir build
 WORKDIR build

@@ -17,7 +17,9 @@ FROM ubuntu:24.04
 RUN apt-get update && \
     apt-get -y install libsword-common libsword-dev git cmake build-essential \
         libreadline-dev libboost-dev libboost-filesystem-dev bison flex pkgconf unzip
-RUN git clone https://github.com/kovzol/bibref
+ARG GIT_COMMIT=
+RUN git clone https://github.com/kovzol/bibref && \
+    if [ -n "$GIT_COMMIT" ]; then git checkout $GIT_COMMIT; fi
 
 # Build bibref (cli):
 WORKDIR bibref

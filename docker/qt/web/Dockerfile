@@ -4,7 +4,7 @@
 
 # How to use this file:
 # 1. On Ubuntu Linux, install the package **docker.io**.
-# 2. Build the image by entering `sudo docker build -f Dockerfile .`.
+# 2. Build the image by entering `sudo docker build .`.
 #    You will get an image ID at the end of the process.
 # 3. Start the web server and allow a network connection to it by issuing `sudo docker run -d -p 8080:80 ID`
 #    where ID stands for the obtained image ID in step 2.
@@ -29,24 +29,12 @@ RUN apt-get update && \
         libreadline-dev libboost-dev libboost-filesystem-dev bison flex pkgconf unzip \
         perl qt6-base-dev qt6-tools-dev qt6-tools-dev-tools qt6-l10n-tools \
         linguist-qt6 wget ninja-build libdbus-1-dev
-RUN git clone https://github.com/kovzol/bibref
 RUN git clone https://github.com/emscripten-core/emsdk.git
 WORKDIR emsdk
-ENV EMSDK_VER=4.0.7
+ARG EMSDK_VER=4.0.7
 RUN ./emsdk install $EMSDK_VER
 RUN ./emsdk activate $EMSDK_VER
 WORKDIR ..
-
-# Build bibref (cli):
-WORKDIR bibref
-RUN mkdir build
-WORKDIR build
-RUN cmake .. && make -j$(nproc) && make install || true
-
-# Create the addbooks-cache:
-RUN bibref -a
-WORKDIR ../..
-
 # Build SWORD:
 RUN until svn co https://crosswire.org/svn/sword/trunk/ sword; do [ -d sword ] && (cd sword && svn cleanup && svn update); sleep 5; done
 WORKDIR sword
@@ -94,6 +82,21 @@ RUN . ../emsdk/emsdk_env.sh && \
         -opensource -confirm-license -qt-host-path `pwd`/../qt6-host-install -feature-thread -feature-wasm-exceptions
 RUN cmake --build . -j$(nproc) -t qtbase -t qtdeclarative -t qtimageformats -t qsvgicon -t qsvg -t qtsvg -t SvgWidgets
 WORKDIR ..
+
+# Download bibref:
+ARG GIT_COMMIT=
+RUN git clone https://github.com/kovzol/bibref && \
+    if [ -n "$GIT_COMMIT" ]; then git checkout $GIT_COMMIT; fi
+
+# Build bibref (cli):
+WORKDIR bibref
+RUN mkdir build
+WORKDIR build
+RUN cmake .. && make -j$(nproc) && make install || true
+
+# Create the addbooks-cache:
+RUN bibref -a
+WORKDIR ../..
 
 # Build bibref (qt-web):
 WORKDIR bibref/qt
