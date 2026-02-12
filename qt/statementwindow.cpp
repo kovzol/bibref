@@ -309,11 +309,11 @@ void StatementWindow::setupFileMenu()
     QMenu *fileMenu = new QMenu(tr("&File"), this);
     menuBar()->addMenu(fileMenu);
 
-    fileMenu->addAction(QIcon::fromTheme("document-new", QIcon(":/icons/document-new.svg")), tr("&New"), QKeySequence::New,
+    fileMenu->addAction(QIcon(":/icons/document-new.svg"), tr("&New"), QKeySequence::New,
                         this, &StatementWindow::newFile);
-    fileMenu->addAction(QIcon::fromTheme("document-open", QIcon(":/icons/document-open.svg")), tr("&Open…"), QKeySequence::Open,
+    fileMenu->addAction(QIcon(":/icons/document-open.svg"), tr("&Open…"), QKeySequence::Open,
                         this, [this](){ openFile(); });
-    fileMenu->addAction(QIcon::fromTheme("document-save", QIcon(":/icons/document-save.svg")), tr("&Save As…"), QKeySequence::Save,
+    fileMenu->addAction(QIcon(":/icons/document-save.svg"), tr("&Save As…"), QKeySequence::Save,
                         this, [this](){ saveFileAs(); });
 }
 
@@ -409,7 +409,7 @@ void StatementWindow::analyze()
 
     QWidget *widget = new QWidget;
     widget->setWindowTitle(tr("Analyze"));
-    widget->setWindowIcon(QIcon::fromTheme("utilities-system-monitor", QIcon(":/icons/utilities-system-monitor.svg")));
+    widget->setWindowIcon(QIcon(":/icons/utilities-system-monitor.svg"));
 
     QSettings settings;
     int size = settings.value("Application/fontsize", defaultFontSize).toInt();
@@ -558,7 +558,7 @@ void StatementWindow::showSvg()
         vwindow->setFixedHeight(vwindow->height);
     }
     vwindow->showNormal();
-    vwindow->setWindowIcon(QIcon::fromTheme("emblem-photos", QIcon(":/icons/emblem-photos.svg")));
+    vwindow->setWindowIcon(QIcon(":/icons/emblem-photos.svg"));
     vwindow->setWindowTitle(tr("Visualize"));
 }
 
@@ -567,9 +567,9 @@ void StatementWindow::setupProveMenu()
     QMenu *proveMenu = new QMenu(tr("&Prove"), this);
     menuBar()->addMenu(proveMenu);
 
-    proveMenu->addAction(QIcon::fromTheme("tools-check-spelling", QIcon(":/icons/tools-check-spelling.svg")), tr("&Parse"), QKeySequence::Forward,
+    proveMenu->addAction(QIcon(":/icons/tools-check-spelling.svg"), tr("&Parse"), QKeySequence::Forward,
                         this, &StatementWindow::parse);
-    proveMenu->addAction(QIcon::fromTheme("utilities-system-monitor", QIcon(":/icons/utilities-system-monitor.svg")), tr("&Analyze"), this, &StatementWindow::analyze);
+    proveMenu->addAction(QIcon(":/icons/utilities-system-monitor.svg"), tr("&Analyze"), this, &StatementWindow::analyze);
 }
 
 void StatementWindow::setupHelpMenu()
@@ -577,7 +577,7 @@ void StatementWindow::setupHelpMenu()
     QMenu *helpMenu = new QMenu(tr("&Help"), this);
     menuBar()->addMenu(helpMenu);
 
-    helpMenu->addAction(QIcon::fromTheme("help-contents", QIcon(":/icons/help-contents.svg")), tr("Wiki…"), this,
+    helpMenu->addAction(QIcon(":/icons/help-contents.svg"), tr("Wiki…"), this,
                         [this]() {
                             QString link = "https://github.com/kovzol/bibref/wiki/Statements";
                             QDesktopServices::openUrl(QUrl(link)); });
