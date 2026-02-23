@@ -1,4 +1,4 @@
-# This file makes it easier to run bibref (the command line version in web) in a Docker virtualization.
+# This file makes it easier to run bibref (the GUI version) in a Docker virtualization.
 # Warning: You need about about 70 GB of disk space to create the Docker image, and several hours
 # of downloading (please use a stable Internet connection) and reasonable compilation time to make everything work.
 
