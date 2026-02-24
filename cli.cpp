@@ -38,15 +38,15 @@ using namespace std;
 #include "cli.h"
 #include "swmgr.h"
 
+#define OT_COLOR_TM "\002scheme:(assign \"color\" \"orange\")\005"
+#define NT_COLOR_TM "\002scheme:(assign \"color\" \"blue\")\005"
+#define RESET_COLOR_TM "\002scheme:(assign \"color\" \"black\")\005"
+#define ERROR_COLOR_TM "\002scheme:(assign \"color\" \"red\")\005"
 #ifndef __EMSCRIPTEN__
 #define OT_COLOR "\033[1;33m"
 #define NT_COLOR "\033[1;36m"
 #define RESET_COLOR "\033[0m"
 #define ERROR_COLOR "\033[1;31m"
-#define OT_COLOR_TM "\002scheme:(assign \"color\" \"orange\")\005"
-#define NT_COLOR_TM "\002scheme:(assign \"color\" \"blue\")\005"
-#define RESET_COLOR_TM "\002scheme:(assign \"color\" \"black\")\005"
-#define ERROR_COLOR_TM "\002scheme:(assign \"color\" \"red\")\005"
 #else
 #define OT_COLOR "<span style=\"color: #626600\">"
 #define NT_COLOR "<span style=\"color: #006662\">"
@@ -164,8 +164,10 @@ string collect_info = "";
 void info(const string &message)
 {
 #ifndef __EMSCRIPTEN__
-    if (texmacs_mode)
-        cout << output_prepend_set << message << endl << flush;
+    if (texmacs_mode) {
+        if (collect_info.size() > 0) cout << endl;
+        cout << "\002verbatim:" << message << "\005" << flush;
+        }
     else
         cerr << output_prepend_set << message << endl << flush;
 #else
@@ -1052,6 +1054,7 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
 #endif
 #endif
 #endif
+    collect_info = "";
     info("This is bibref " BIBREF_GUI_VERSION " (database version " BIBREF_VERSION "), nice to meet you.");
     showAvailableBibles();
     if (addbooks) {
@@ -1093,7 +1096,11 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
     string line;
     bool multiline = false;
     // The main input/output loop...
-    if (texmacs) info("\002channel:prompt\005> \005");
+    collect_info = "";
+    if (texmacs) {
+        info("\002channel:prompt\005> \005");
+        collect_info = "";
+        }
     while (
 #if !defined(__EMSCRIPTEN__) && !defined(__MINGW32__) && !defined(__APPLE__) && defined(WITH_READLINE)
         (bufline = readline(input_prepend)) != nullptr
@@ -1129,7 +1136,10 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
         free(bufline);
 #endif
 #endif
-    if (texmacs) info("\005\002channel:prompt\005> \005");
+    if (texmacs) {
+        info("\005\002channel:prompt\005> \005");
+        collect_info = "";
+        }
     }
 }
 
