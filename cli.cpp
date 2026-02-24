@@ -43,6 +43,10 @@ using namespace std;
 #define NT_COLOR "\033[1;36m"
 #define RESET_COLOR "\033[0m"
 #define ERROR_COLOR "\033[1;31m"
+#define OT_COLOR_TM "\002scheme:(assign \"color\" \"orange\")\005"
+#define NT_COLOR_TM "\002scheme:(assign \"color\" \"blue\")\005"
+#define RESET_COLOR_TM "\002scheme:(assign \"color\" \"black\")\005"
+#define ERROR_COLOR_TM "\002scheme:(assign \"color\" \"red\")\005"
 #else
 #define OT_COLOR "<span style=\"color: #626600\">"
 #define NT_COLOR "<span style=\"color: #006662\">"
@@ -55,6 +59,7 @@ using namespace sword;
 bool booksAdded = false;
 string text[2];
 vector<bool> textset = {false, false};
+bool texmacs_mode = false;
 
 string addbooksCmd = "addbooks";
 string compareCmd = "compare";
@@ -159,7 +164,10 @@ string collect_info = "";
 void info(const string &message)
 {
 #ifndef __EMSCRIPTEN__
-    cerr << output_prepend_set << message << endl << flush;
+    if (texmacs_mode)
+        cout << output_prepend_set << message << endl << flush;
+    else
+        cerr << output_prepend_set << message << endl << flush;
 #else
     cout << message << endl << flush;
 #endif
@@ -228,10 +236,17 @@ void set_colors(bool colored)
     error_color = "";
 
     if (colored) {
-        ot_color = OT_COLOR;
-        nt_color = NT_COLOR;
-        reset_color = RESET_COLOR;
-        error_color = ERROR_COLOR;
+        if (texmacs_mode) {
+            ot_color = OT_COLOR_TM;
+            nt_color = NT_COLOR_TM;
+            reset_color = RESET_COLOR_TM;
+            error_color = ERROR_COLOR_TM;
+        } else {
+            ot_color = OT_COLOR;
+            nt_color = NT_COLOR;
+            reset_color = RESET_COLOR;
+            error_color = ERROR_COLOR;
+        }
     }
 }
 
@@ -1025,7 +1040,7 @@ string cli_process(char *buf)
     return ret;
 }
 
-void cli(const char *input_prepend, const char *output_prepend, bool addbooks, bool colored)
+void cli(const char *input_prepend, const char *output_prepend, bool addbooks, bool colored, bool texmacs)
 {
     output_prepend_set = new char[4]; // FIXME: this is hardcoded.
     strcpy(output_prepend_set, output_prepend);
@@ -1033,6 +1048,7 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
 #ifndef __APPLE__
 #ifdef WITH_READLINE
     rl_attempted_completion_function = completer; // Initialize readline.
+    if (texmacs) rl_outstream = fopen("/dev/null", "w");
 #endif
 #endif
 #endif
@@ -1046,6 +1062,7 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
 
     maxresults = 100; // Query results are maximized in 100 results by default.
     sql = false;      // SQL output is disabled by default.
+    texmacs_mode = texmacs;
 
     set_colors(colored); // Set default coloring.
 
@@ -1076,6 +1093,7 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
     string line;
     bool multiline = false;
     // The main input/output loop...
+    if (texmacs) info("\002channel:prompt\005> \005");
     while (
 #if !defined(__EMSCRIPTEN__) && !defined(__MINGW32__) && !defined(__APPLE__) && defined(WITH_READLINE)
         (bufline = readline(input_prepend)) != nullptr
@@ -1111,6 +1129,7 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
         free(bufline);
 #endif
 #endif
+    if (texmacs) info("\005\002channel:prompt\005> \005");
     }
 }
 

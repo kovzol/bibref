@@ -54,6 +54,7 @@ void showHelp(const string &executable)
     cout << " -e            show input/output to fit examples\n";
     cout << " -a            run the addbooks command on startup\n";
     cout << " -c            use colored output\n";
+    cout << " -t            start TeXmacs mode\n";
 }
 
 #ifndef __EMSCRIPTEN__
@@ -75,10 +76,15 @@ int main(int argc, char **argv)
         c = true;
     }
 
+    bool t = false;
+    if (input.cmdOptionExists("-t")) {
+        t = true;
+    }
+
     if (input.cmdOptionExists("-e")) {
-        cli("", "# ", ab, c);
+        cli("", "# ", ab, c, t);
     } else {
-        cli(">> ", "", ab, c);
+        cli(">> ", "", ab, c, t);
     }
 
     exit(0);

@@ -3,7 +3,7 @@
  * Command line interface (CLI) related code.
  */
 
-void cli(const char *input_prepend, const char* output_prepend, bool addbooks, bool colored) {
+void cli(const char *input_prepend, const char* output_prepend, bool addbooks, bool colored, bool texmacs) {
  /**
   * @short Start the CLI.
   * Start the command line interface.
@@ -11,6 +11,7 @@ void cli(const char *input_prepend, const char* output_prepend, bool addbooks, b
   * @param output_prepend Prepend a string before all output lines.
   * @param addbooks Load book databases immediately on startup.
   * @param colored Show all texts colored if possible.
+  * @param texmacs Start TeXmacs plugin mode.
   */
 }
 
