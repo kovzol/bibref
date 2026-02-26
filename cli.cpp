@@ -1042,6 +1042,88 @@ string cli_process(char *buf)
     return ret;
 }
 
+void texmacs_autocomplete(string line) { // A possible input from texmacs: (complete "ge" 2) or (complete "getrefs SB" 10)
+    if (line.length() == 0) { // An empty input should not be completed. TODO: Maybe return here "help" or similar hints.
+        return;
+    }
+    vector<string> tokens;
+    boost::split(tokens, line, boost::is_any_of("\""));
+    string word = tokens[1]; // word = "ge" (without quotation marks), it is the second entry
+    boost::split(tokens, line, boost::is_any_of(" "));
+    int cur = stoi(tokens[tokens.size()-1]); // cur = 2, it is the last entry
+        if (word.length() != cur) { // the cursor is not at the end of the word, do nothing. TODO: do something useful instead.
+        return;
+    }
+
+    vector <string> completions;
+    for (string v: vocabulary) {
+        if (boost::starts_with(v, word)) {
+            completions.push_back(v.substr(cur));
+        }
+    }
+    if (completions.size() == 0) { // no completion is possible
+        return;
+    }
+    cout << "\002scheme:(tuple \"" << word << "\""; // send back data to TeXmacs
+    for (string c: completions) {
+       cout << " \"" << c << "\"";
+       }
+    cout << ")\005" << flush;
+}
+
+char *texmacs_readline() {
+#define MAX_TM_LINE_LENGTH 1024
+#define FRAME_START 0x10
+#define FRAME_END   0x0a
+
+    static char buf[MAX_TM_LINE_LENGTH];
+    int pos = 0;
+    int in_frame = 0;
+    int c;
+
+    while ((c = getchar()) != EOF) {
+
+        if (c == FRAME_START) {
+            in_frame = 1;
+            pos = 0;
+            continue;
+        }
+        if (c == FRAME_END) {
+            buf[pos] = '\0';
+            in_frame = 0;
+
+            if (strncmp(buf, "(complete", 9) == 0) {
+                string line(buf);
+                texmacs_autocomplete(line);
+                pos = 0;
+                continue;
+            } else {
+                return buf;
+            }
+        }
+
+        if (in_frame) {
+            if (pos < MAX_TM_LINE_LENGTH - 1)
+                buf[pos++] = (char)c;
+            } else {
+            if (c == '\n') {
+                buf[pos] = '\0';
+                return buf;
+                }
+            if (pos < MAX_TM_LINE_LENGTH - 1)
+                buf[pos++] = (char)c;
+            }
+        }
+
+    if (pos > 0) {
+        buf[pos] = '\0';
+        return buf;
+    }
+
+    return NULL;
+}
+
+
 void cli(const char *input_prepend, const char *output_prepend, bool addbooks, bool colored, bool texmacs)
 {
     output_prepend_set = new char[4]; // FIXME: this is hardcoded.
@@ -1103,13 +1185,14 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
         }
     while (
 #if !defined(__EMSCRIPTEN__) && !defined(__MINGW32__) && !defined(__APPLE__) && defined(WITH_READLINE)
-        (bufline = readline(input_prepend)) != nullptr
+        (texmacs && ((bufline = texmacs_readline()) != nullptr)) ||
+        (!texmacs && ((bufline = readline(input_prepend)) != nullptr))
 #else
         (getline(cin, line) && (strcpy(bufline, line.c_str())))
 #endif
     ) {
 #if !defined(__EMSCRIPTEN__) && !defined(__MINGW32__) && !defined(__APPLE__) && defined(WITH_READLINE)
-        if (strlen(bufline) > 0) {
+        if (!texmacs && strlen(bufline) > 0) {
             add_history(bufline);
             write_history(histfile);
         }
@@ -1117,6 +1200,7 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
         line = string(bufline);
         // Handle multiline inputs (for the statement command)...
         boost::algorithm::trim(line); // Trim the input.
+
         if (!multiline
             && (boost::starts_with(line, statementCmd) || boost::starts_with(line, statementCmd2))) {
             multiline = true;
@@ -1133,7 +1217,7 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
 #if !(defined(__EMSCRIPTEN__) || defined(__MINGW32__) || defined(__APPLE__))
 #ifdef WITH_READLINE
         // readline malloc's a new buffer every time.
-        free(bufline);
+        if (!texmacs) free(bufline);
 #endif
 #endif
     if (texmacs) {
