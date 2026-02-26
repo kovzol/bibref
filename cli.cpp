@@ -1042,29 +1042,51 @@ string cli_process(char *buf)
     return ret;
 }
 
+void texmacs_no_hint() { // there is no hint for texmacs to be sent
+    cout << "\002scheme:(tuple \"\" \"\")\005" << flush;
+}
+
 void texmacs_autocomplete(string line) { // A possible input from texmacs: (complete "ge" 2) or (complete "getrefs SB" 10)
     if (line.length() == 0) { // An empty input should not be completed. TODO: Maybe return here "help" or similar hints.
+        texmacs_no_hint();
         return;
     }
     vector<string> tokens;
     boost::split(tokens, line, boost::is_any_of("\""));
-    string word = tokens[1]; // word = "ge" (without quotation marks), it is the second entry
+    string to_complete = tokens[1]; // word = "ge" (without quotation marks), it is the second entry
     boost::split(tokens, line, boost::is_any_of(" "));
     int cur = stoi(tokens[tokens.size()-1]); // cur = 2, it is the last entry
-        if (word.length() != cur) { // the cursor is not at the end of the word, do nothing. TODO: do something useful instead.
-        return;
-    }
+    if (to_complete.length() != cur) { // the cursor is not at the end of the text to complete, that is, it's before the end
+        // e.g. (complete "getrefs SB" 7) means, it is after the "s"
+        if (to_complete[cur] != ' ') { // it should be a space character
+            texmacs_no_hint();
+            return;
+            }
+        }
+
+    int start = cur; // at which position to start the word in the input (to be searched in the vocabulary)
+
+    // find the previous space character or the very beginning of to_complete
+    while ((start >= 0) && (to_complete[--start] != ' '));
+    while ((start < cur) && (to_complete[++start] == ' '));
+
+    to_complete = to_complete.substr(start, cur-start); // continue with the word before the cursor
+
+    int len = to_complete.length();
 
     vector <string> completions;
     for (string v: vocabulary) {
-        if (boost::starts_with(v, word)) {
-            completions.push_back(v.substr(cur));
+        if (boost::starts_with(v, to_complete)) {
+            completions.push_back(v.substr(len));
         }
     }
     if (completions.size() == 0) { // no completion is possible
+        texmacs_no_hint();
         return;
     }
-    cout << "\002scheme:(tuple \"" << word << "\""; // send back data to TeXmacs
+
+    // send hint back to TeXmacs
+    cout << "\002scheme:(tuple \"" << to_complete << "\"";
     for (string c: completions) {
        cout << " \"" << c << "\"";
        }
