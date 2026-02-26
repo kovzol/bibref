@@ -345,10 +345,10 @@ string getHelp(const string &key)
         "tokens on a maximal length of *maxlength* in the given *Bible*.",
         "* `raw` *Bible* *book* *start* *length*: Show the raw Latin transcription of a passage in "
         "the given *book* in the given *Bible*, beginning with the *start* position on *length* "
-        "characters. The whole book can be retrieved with *start*=0 and *length*=-1.",
+        "characters. The whole book can be retrieved with *start*=1 and *length*=-1.",
         "* `rawN` *Bible* *book* *start* *length*: Put a passage in the given *book* in the given "
         "*Bible*, beginning with the *start* position on *length* characters, in clipboard N. "
-        "The whole book can be retrieved with *start*=0 and *length*=-1.",
+        "The whole book can be retrieved with *start*=1 and *length*=-1.",
         "* `minunique1` *Bible*: Search for minimal unique passages in clipboard 1 in the given "
         "*Bible*.",
         "* `extend` *Bible1* *Bible2* *book2* *passage2*: Extend the given passage in *Bible2* "
