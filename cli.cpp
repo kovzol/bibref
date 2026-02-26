@@ -161,12 +161,61 @@ void add_qt_wordlist(string item)
 
 string collect_info = "";
 
+#include <string>
+#include <cctype>
+
+static string hyphenate_word_utf8(const string& word, std::size_t N) {
+    string result;
+    std::size_t char_count = 0;
+
+    for (std::size_t i = 0; i < word.size(); ++i) {
+        unsigned char c = static_cast<unsigned char>(word[i]);
+
+        if ((c & 0xC0) != 0x80) {
+            if (char_count > 0 && char_count % N == 0) {
+                result += '-';
+            }
+            ++char_count;
+        }
+
+        result += word[i];
+    }
+
+    return result;
+}
+
+string hyphenate_long_words_utf8(const string& input, std::size_t N) {
+    string result;
+    string current_word;
+
+    auto flush_word = [&](void) {
+        if (!current_word.empty()) {
+            result += hyphenate_word_utf8(current_word, N);
+            current_word.clear();
+        }
+    };
+
+    for (unsigned char c : input) {
+        if (std::isspace(c)) {
+            flush_word();
+            result += c;
+        } else {
+            current_word += c;
+        }
+    }
+
+    flush_word();
+
+    return result;
+}
+
 void info(const string &message)
 {
 #ifndef __EMSCRIPTEN__
+#define MAX_WORD_LENGTH 50
     if (texmacs_mode) {
         if (collect_info.size() > 0) cout << endl;
-        cout << "\002verbatim:" << message << "\005" << flush;
+        cout << "\002verbatim:" << hyphenate_long_words_utf8(message, MAX_WORD_LENGTH) << "\005" << flush;
         }
     else
         cerr << output_prepend_set << message << endl << flush;
@@ -426,7 +475,7 @@ void processSearchCmd(string input)
     rest = rest.substr(index + 1);
 
     vector<int> pattern; // the token pattern to be searched
-    std::stringstream ss(rest);
+    stringstream ss(rest);
 
     int s = 0;
     int t;
@@ -1253,7 +1302,7 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
 #include <emscripten.h>
 // Taken from https://github.com/emscripten-core/emscripten/issues/6433
 extern "C" {
-inline const char *cstr(const std::string &message)
+inline const char *cstr(const string &message)
 {
     auto buffer = (char *) malloc(message.length() + 1);
     buffer[message.length()] = '\0';
