@@ -3,6 +3,7 @@
 #include <sstream>
 #include <string.h>
 #include <string>
+#include <cctype>
 #include <vector>
 
 extern "C" char *brst_scan_string(char *string,
@@ -85,6 +86,7 @@ string helpCmd = "help";
 string statementCmd = "statement";
 string statementCmd2 = "Statement";
 string nearestCmd = "nearest";
+string diagramCmd = "diagram";
 
 string errorNotRecognized
     = "Sorry, the command you entered was not recognized or its syntax is invalid.";
@@ -111,6 +113,7 @@ string errorRawIncomplete = "Either " + rawCmd + "1 or " + rawCmd + "2 must be u
 string errorColorsParameters = colorsCmd + " requires one parameter.";
 string errorTokensParameters = tokensCmd + " requires 3 or 4 parameters.";
 string errorSearchParameters = searchCmd + " requires at least one parameter.";
+string errorDiagramParameters = diagramCmd + " requires one parameter.";
 string errorMisc = "Sorry, there were some problems with the command you entered.";
 
 vector<string> commands{addbooksCmd,
@@ -144,7 +147,8 @@ vector<string> commands{addbooksCmd,
                         colorsCmd,
                         tokensCmd,
                         searchCmd,
-                        statementCmd};
+                        statementCmd,
+                        diagramCmd};
 vector<string> vocabulary = commands;
 vector<string> qt_wordlist;
 
@@ -161,14 +165,20 @@ void add_qt_wordlist(string item)
 
 string collect_info = "";
 
-#include <string>
-#include <cctype>
+static string hyphenate_word_utf8(const string& word, size_t N)
+{
+    if (word.size() <= N)
+        return word;
 
-static string hyphenate_word_utf8(const string& word, std::size_t N) {
+    for (unsigned char c : word) {
+        if ((c < 'a' || c > 'z') && c != '.')
+            return word;
+    } // hyphenate only words containing a-z or .
+
     string result;
-    std::size_t char_count = 0;
+    size_t char_count = 0;
 
-    for (std::size_t i = 0; i < word.size(); ++i) {
+    for (size_t i = 0; i < word.size(); ++i) {
         unsigned char c = static_cast<unsigned char>(word[i]);
 
         if ((c & 0xC0) != 0x80) {
@@ -184,11 +194,12 @@ static string hyphenate_word_utf8(const string& word, std::size_t N) {
     return result;
 }
 
-string hyphenate_long_words_utf8(const string& input, std::size_t N) {
+string hyphenate_long_words_utf8(const string& input, size_t N)
+{
     string result;
     string current_word;
 
-    auto flush_word = [&](void) {
+    auto flush_word = [&]() {
         if (!current_word.empty()) {
             result += hyphenate_word_utf8(current_word, N);
             current_word.clear();
@@ -196,10 +207,11 @@ string hyphenate_long_words_utf8(const string& input, std::size_t N) {
     };
 
     for (unsigned char c : input) {
-        if (std::isspace(c)) {
+        if (isspace(c)) {
             flush_word();
             result += c;
-        } else {
+        }
+        else {
             current_word += c;
         }
     }
@@ -278,6 +290,7 @@ int maxresults;
 bool sql;
 char *output_prepend_set;
 string ot_color, nt_color, reset_color, error_color;
+string diagram;
 
 void set_colors(bool colored)
 {
@@ -381,6 +394,7 @@ string getHelp(const string &key)
         "* `statement` ...: Analyze the given statement, see "
         "https://github.com/kovzol/bibref/wiki/Statements "
         "for further information.",
+        "* `diagram` *format*: Set the diagram output to *format* ('info' or 'graphviz').",
         "* `quit`: Exit program."};
     string retval;
     for (int i = 0; i < helpStr.size(); i++) {
@@ -749,6 +763,23 @@ void processColorsCmd(string input)
     }
 }
 
+void processDiagramCmd(string input)
+{
+    int index;
+    int commandLength = diagramCmd.length();
+    if (input.length() == commandLength) {
+        error(errorDiagramParameters);
+        return;
+    }
+    string rest = input.substr(input.find(" ") + 1);
+    if (rest.compare("info") == 0 || rest.compare("graphviz") == 0) {
+        diagram = rest;
+        info("Diagram output is set to " + diagram + ".");
+    } else {
+        error("Invalid setting, use 'info' or 'graphviz'.");
+    }
+}
+
 void processCompareCmd()
 {
     if (textset.at(0) && textset.at(1)) {
@@ -1005,17 +1036,45 @@ void processGetrefsCmd(string input)
 
 void processStatementCmd(string input)
 {
-    char *output = brst_scan_string((char *) input.c_str(), 0, 0, 0, 0, 0, 0);
+    int greek_tooltip = 0; // TODO: allow changing
+    char *output = brst_scan_string((char *) input.c_str(), 0, 0, 0, 0, 0, greek_tooltip);
     string output_s(output);
     vector<string> statementAnalysis;
     boost::split(statementAnalysis, output_s, boost::is_any_of("\n"));
-    for (auto l : statementAnalysis) {
-        if (l.find(": info: ") != string::npos || l.find(": warning: ") != string::npos)
-            info(l);
+
+    string details;
+    bool dmode = false;
+    string graphviz_input = "";
+    bool diagram_defined = false;
+
+    for (auto l: statementAnalysis) {
+        if (diagram.compare("info")==0 && (l.find(": info: ") != string::npos || l.find(": warning: ") != string::npos))
+            info(l); // print this only if diagram is in info mode, otherwise mute it
         if (l.find(": error: ") != string::npos)
             error(l);
+        if (l.find(": debug: ")==string::npos &&
+            l.find("diagram: graphviz: ")==string::npos && !dmode) {
+            details += l;
+            details += "\n";
+            }
+        if (l.find("diagram: graphviz: end")!=string::npos) {
+            dmode = false;
+        }
+        if (dmode) {
+            graphviz_input += l + "\n";
+        }
+        if (l.find("diagram: graphviz: start")!=string::npos) {
+            dmode = true;
+            diagram_defined = true;
+        }
     }
-    info("Finished"); // Success!
+
+    if (diagram.compare("info")==0)
+        info("Finished"); // Success!
+    else {
+        if (diagram.compare("graphviz")==0)
+            info(graphviz_input);
+    }
 }
 
 string cli_process(char *buf)
@@ -1061,17 +1120,9 @@ string cli_process(char *buf)
         processSqlCmd(input);
     else if (boost::starts_with(input, colorsCmd))
         processColorsCmd(input);
-    // Commands that require an appendix...
-    else if (boost::starts_with(input, compareCmd + "12"))
-        processCompareCmd();
-    else if (boost::starts_with(input, jaccardCmd + "12"))
-        processJaccardCmd();
-    else if (boost::starts_with(input, nearestCmd + "12"))
-        processNearestCmd();
-    else if (boost::starts_with(input, minuniqueCmd + "1"))
-        processMinuniqueCmd(input);
-    // TODO: Consider using this trick for the other commands:
-    else if (boost::starts_with(input, psalminfoCmd + " "))
+    else if (boost::starts_with(input, diagramCmd))
+        processDiagramCmd(input);
+    else if (boost::starts_with(input, psalminfoCmd))
         processPsalminfoCmd(input);
     else if (boost::starts_with(input, rawCmd))
         processRawCmd(input);
@@ -1081,6 +1132,15 @@ string cli_process(char *buf)
         processGetrefsCmd(input);
     else if (boost::starts_with(input, statementCmd) || boost::starts_with(input, statementCmd2))
         processStatementCmd(input);
+    // Commands that require an appendix...
+    else if (boost::starts_with(input, compareCmd + "12"))
+        processCompareCmd();
+    else if (boost::starts_with(input, jaccardCmd + "12"))
+        processJaccardCmd();
+    else if (boost::starts_with(input, nearestCmd + "12"))
+        processNearestCmd();
+    else if (boost::starts_with(input, minuniqueCmd + "1"))
+        processMinuniqueCmd(input);
     // If the input is not recognized, we show an error...
     else if (input.length() != 0) // unless there was no input at all
         error(errorNotRecognized);
@@ -1218,6 +1278,7 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
 
     maxresults = 100; // Query results are maximized in 100 results by default.
     sql = false;      // SQL output is disabled by default.
+    diagram = "info"; // By default, raw graphviz output is set.
     texmacs_mode = texmacs;
 
     set_colors(colored); // Set default coloring.
