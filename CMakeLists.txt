@@ -23,9 +23,18 @@ pkg_check_modules(sword REQUIRED sword)
 
 if(EMSCRIPTEN)
 find_library(SWORD_LIB NAMES libsword.a)
+find_library(gvc_LIB NAMES libgvc.a)
+find_library(gvpr_LIB NAMES libgvpr.a)
+find_library(gvplugin_dot_layout_LIB NAMES libgvplugin_dot_layout.a PATHS "$ENV{EMSDK}/upstream/emscripten/cache/sysroot/lib/graphviz")
+find_library(gvplugin_core_LIB NAMES libgvplugin_core.a PATHS "$ENV{EMSDK}/upstream/emscripten/cache/sysroot/lib/graphviz")
+find_library(cdt_LIB NAMES libcdt.a)
+find_library(cgraph_LIB NAMES libcgraph.a)
+find_library(xdot_LIB NAMES libxdot.a)
+find_library(pathplan_LIB NAMES libpathplan.a)
 set(CMAKE_CXX_FLAGS "-sUSE_BOOST_HEADERS -sUSE_ZLIB")
 else()
 find_package(Boost CONFIG REQUIRED COMPONENTS filesystem)
+pkg_check_modules(gvc REQUIRED libgvc)
 endif(EMSCRIPTEN)
 
 set(Boost_USE_STATIC_LIBS OFF)
@@ -74,12 +83,20 @@ SET_SOURCE_FILES_PROPERTIES(
   GENERATED true
 )
 
+if(MINGW OR APPLE)
+SET(EXTRA_LIBS -lgvplugin_dot_layout -lgvplugin_rsvg -lgvplugin_core -lgvplugin_pango)
+endif(MINGW OR APPLE)
+
 if(APPLE)
 set(sword_LIBRARIES_folder "-L/usr/local/lib") # this is hardcoded (via configure/make install), FIXME
+set(graphviz_LIBRARIES_folder "-L/opt/homebrew/lib -L/opt/homebrew/lib/graphviz -L/usr/local/lib -L/usr/local/lib/graphviz")
 endif()
 
 if(EMSCRIPTEN)
-target_link_libraries(bibref ${SWORD_LIB} ${Boost_LIBRARIES})
+target_link_libraries(bibref ${SWORD_LIB} ${Boost_LIBRARIES}
+  ${gvc_LIB} ${gvpr_LIB} ${cdt_LIB} ${cgraph_LIB} ${xdot_LIB} ${pathplan_LIB}
+  ${gvplugin_dot_layout_LIB} ${gvplugin_core_LIB})
+
 target_link_options(bibref PUBLIC -sSINGLE_FILE -sALLOW_MEMORY_GROWTH -O3 -fexceptions)
 target_link_options(bibref PUBLIC "SHELL:
   --preload-file '$ENV{HOME}/.sword@/'")
@@ -91,7 +108,8 @@ file(GLOB HTML_FILES ${CMAKE_CURRENT_SOURCE_DIR}/html/*)
 install(FILES ${HTML_FILES} ${CMAKE_BINARY_DIR}/bibref.data DESTINATION "${CMAKE_BINARY_DIR}/${HTML_BUILD_DIR}")
 
 else()
-target_link_libraries(bibref ${sword_LIBRARIES} ${sword_LIBRARIES_folder} ${Boost_LIBRARIES} ${readline_LIBRARIES})
+target_link_libraries(bibref ${sword_LIBRARIES} ${sword_LIBRARIES_folder} ${Boost_LIBRARIES} ${readline_LIBRARIES}
+${gvc_LIBRARIES} ${graphviz_LIBRARIES_folder})
 
 install(
  CODE " set(ENV{SWORD_PATH} \"$ENV{HOME}/.sword\") "
