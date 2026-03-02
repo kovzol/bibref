@@ -13,7 +13,7 @@ jobs:
          sudo apt install libsword-common libsword-dev git cmake build-essential libreadline-dev libboost-dev libboost-filesystem-dev \
               sqlite3 python3 python3-pexpect \
               texlive-latex-recommended texlive-latex-extra texlive-science texlive-lang-european texlive-lang-german \
-              r-base-core pdf2svg highlight bison flex subversion
+              r-base-core pdf2svg highlight bison flex subversion libgraphviz-dev
     - name: prerequisites2
       run: |
          wget http://http.us.debian.org/debian/pool/main/s/sm/r-cran-sm_2.2-5.6-1+b2_amd64.deb &&
@@ -35,7 +35,7 @@ jobs:
     - name: prerequisites-qt
       run: |
         sudo apt install qt6-base-dev qt6-tools-dev qt6-tools-dev-tools qt6-l10n-tools \
-                         linguist-qt6 libgl1-mesa-dev freeglut3-dev libgraphviz-dev qt6-svg-dev qt6-webengine-dev
+                         linguist-qt6 libgl1-mesa-dev freeglut3-dev qt6-svg-dev qt6-webengine-dev
     - name: make-qt
       run: |
         mkdir qt/build
@@ -164,7 +164,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: prerequisites
-      run: brew install boost # cmake
+      run: brew install boost graphviz # cmake
     - name: Build SWORD
       run: |
         curl -O https://www.crosswire.org/ftpmirror/pub/sword/source/v1.9/sword-1.9.0.tar.gz
@@ -187,7 +187,7 @@ jobs:
         sudo make install
     - name: prerequisites-qt
       run: |
-        brew install qt graphviz
+        brew install qt
     - name: Build bibref-qt
       run: |
         cd qt
