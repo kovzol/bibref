@@ -3,7 +3,7 @@
  * Computing fingerprint of a passage and mathematical distances of two passages.
  */
 
-// Set the number of characters in the a-y alphabet.
+/// Set the number of characters in the a-y alphabet.
 #define N 25
 
 /// Number of 2-shingles for a text, called "fingerprint" in this program.
@@ -35,7 +35,7 @@ void printDist(Fingerprint f1, Fingerprint f2);
 /// Inputs must be in a-z format and at least 2 characters long.
 double jaccard_dist(const string& text1, const string& text2);
 
-// Find a substring of a text that has the minimal Jaccard similarity for bag for a fixed text.
+/// Find a substring of a text that has the minimal Jaccard similarity for bag for a fixed text.
 string best_jaccard_substr(const string &fixtext, const string &subtext) {
  /// @param fixtext The fixed text.
  /// @param subtext The text for which a substring must be found.
