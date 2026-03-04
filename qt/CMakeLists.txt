@@ -127,6 +127,7 @@ qt_add_executable(bibref-qt MACOSX_BUNDLE
     settings.h descriptions.h
     fingerprint.cpp fingerprint.h
     psalmsinfo.cpp psalmsinfo.h
+    gv-export.cpp gv-export.h
     ${PBRST_SRCS}
     # ${QM_FILES} # this is handled via bibref.qrc
     bibref.qrc
