@@ -110,7 +110,7 @@ install(FILES ${HTML_FILES} ${CMAKE_BINARY_DIR}/bibref.data DESTINATION "${CMAKE
 
 else()
 target_link_libraries(bibref ${sword_LIBRARIES} ${sword_LIBRARIES_folder} ${Boost_LIBRARIES} ${readline_LIBRARIES}
-${gvc_LIBRARIES} ${graphviz_LIBRARIES_folder})
+${gvc_LIBRARIES} ${graphviz_LIBRARIES_folder} ${EXTRA_LIBS})
 
 install(
  CODE " set(ENV{SWORD_PATH} \"$ENV{HOME}/.sword\") "
