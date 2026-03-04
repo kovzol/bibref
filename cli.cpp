@@ -228,9 +228,11 @@ void info(const string &message)
 #define MAX_WORD_LENGTH 50
     if (texmacs_mode) {
         if (collect_info.size() > 0) cout << endl;
-        cout << "\002verbatim:" << hyphenate_long_words_utf8(message, MAX_WORD_LENGTH) << "\005" << flush;
-        }
-    else
+        if (boost::starts_with(message, "%!PS-Adobe")) {
+            cout << "\002ps:" << message << "\005" << flush;
+        } else
+            cout << "\002verbatim:" << hyphenate_long_words_utf8(message, MAX_WORD_LENGTH) << "\005" << flush;
+    } else
         cerr << output_prepend_set << message << endl << flush;
 #else
     cout << message << endl << flush;

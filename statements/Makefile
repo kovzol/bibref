@@ -6,9 +6,9 @@ CFLAGS = -DYYDEBUG=1
 
 all:	pbrst-cli
 
-pbrst-cli:	pbrst.tab.o pbrst.o pbrst-cli.o books-wrapper.o fingerprint-wrapper.o books.o cli.o book.o psalmsinfo.o fingerprint.o
-	${CXX} -o $@ books-wrapper.o fingerprint-wrapper.o pbrst.tab.o pbrst.o pbrst-cli.o books.o cli.o book.o psalmsinfo.o fingerprint.o \
-         -lsword -lboost_system -lboost_filesystem -lreadline
+pbrst-cli:	pbrst.tab.o pbrst.o pbrst-cli.o books-wrapper.o fingerprint-wrapper.o books.o cli.o book.o psalmsinfo.o fingerprint.o gv-export.o
+	${CXX} -o $@ books-wrapper.o fingerprint-wrapper.o pbrst.tab.o pbrst.o pbrst-cli.o books.o cli.o book.o psalmsinfo.o fingerprint.o gv-export.o\
+         -lsword -lboost_system -lboost_filesystem -lreadline -lgvc -lcgraph -lcdt
 
 pbrst.tab.c pbrst.tab.h:	pbrst.y
 	${YACC} -vd pbrst.y
@@ -32,6 +32,9 @@ book.o:		book.cpp book.h
 fingerprint.o:	fingerprint.cpp fingerprint.h
 	${CXX} -o $@ -c $<
 
+gv-export.o:	gv-export.cpp gv-export.h
+	${CXX} -o $@ -c $<
+
 psalmsinfo.o:	psalmsinfo.cpp psalmsinfo.h
 	${CXX} -o $@ -c $<
 
@@ -46,7 +49,7 @@ test: pbrst-cli
 
 clean:
 	rm -f pbrst-cli pbrst-cli.o pbrst.tab.c pbrst.tab.h pbrst.c pbrst.tab.o pbrst.o pbrst.output \
-         books-wrapper.o fingerprint-wrapper.o book.o fingerprint.o psalmsinfo.o books.o cli.o
+         books-wrapper.o fingerprint-wrapper.o book.o fingerprint.o psalmsinfo.o books.o cli.o gv-export.o
 
 .SUFFIXES:	.l .y .c
 
