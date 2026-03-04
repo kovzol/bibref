@@ -1305,7 +1305,7 @@ void create_diagram() {
       strcat(D, ",fillcolor=");
       if (fragment != 0) { // this OT block is used in the NT passage somewhere
         add_parseinfo(" interval %d", fragment);
-        strcat(D, "green,fontcolor=");
+        strcat(D, "\"#008000\",fontcolor=");
         if (fabs(intervals_data[fragment]-1)<EPS) // this is a unique OT fragment
           strcat(D, "gold");
         else
@@ -1440,7 +1440,7 @@ void create_diagram() {
             pd_printed[j-1]=true;
           }
           // constraint=false: do not count this edge when computing the positions of the edges:
-          strcat(refs, "constraint=0,color=green];\n");
+          strcat(refs, "constraint=0,color=\"#008000\"];\n");
           nodetype = FRAGMENT;
         }
         else { // it's an introduction
