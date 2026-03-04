@@ -229,7 +229,8 @@ void info(const string &message)
     if (texmacs_mode) {
         if (collect_info.size() > 0) cout << endl;
         if (boost::starts_with(message, "%!PS-Adobe")) {
-            cout << "\002ps:" << message << "\005" << flush;
+            // See Data/Convert/Generic/input.cpp in TeXmacs's source code for more details (ps_flush):
+            cout << "\002ps:width=80%\n" << message << "\005" << flush;
         } else
             cout << "\002verbatim:" << hyphenate_long_words_utf8(message, MAX_WORD_LENGTH) << "\005" << flush;
     } else
