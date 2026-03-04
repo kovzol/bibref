@@ -37,6 +37,7 @@ using namespace std;
 
 #include "books.h"
 #include "cli.h"
+#include "gv-export.h"
 #include "swmgr.h"
 
 #define OT_COLOR_TM "\002scheme:(assign \"color\" \"orange\")\005"
@@ -394,7 +395,7 @@ string getHelp(const string &key)
         "* `statement` ...: Analyze the given statement, see "
         "https://github.com/kovzol/bibref/wiki/Statements "
         "for further information.",
-        "* `diagram` *format*: Set the diagram output to *format* ('info' or 'graphviz').",
+        "* `diagram` *format*: Set the diagram output to *format* ('info', 'graphviz', 'ps' or 'svg').",
         "* `quit`: Exit program."};
     string retval;
     for (int i = 0; i < helpStr.size(); i++) {
@@ -772,11 +773,11 @@ void processDiagramCmd(string input)
         return;
     }
     string rest = input.substr(input.find(" ") + 1);
-    if (rest.compare("info") == 0 || rest.compare("graphviz") == 0) {
+    if (rest.compare("info") == 0 || rest.compare("graphviz") == 0 || rest.compare("ps") == 0 || rest.compare("svg") == 0) {
         diagram = rest;
         info("Diagram output is set to " + diagram + ".");
     } else {
-        error("Invalid setting, use 'info' or 'graphviz'.");
+        error("Invalid setting, use 'info', 'graphviz', 'ps' or 'svg'.");
     }
 }
 
@@ -1046,12 +1047,15 @@ void processStatementCmd(string input)
     bool dmode = false;
     string graphviz_input = "";
     bool diagram_defined = false;
+    bool error_found = false;
 
     for (auto l: statementAnalysis) {
         if (diagram.compare("info")==0 && (l.find(": info: ") != string::npos || l.find(": warning: ") != string::npos))
             info(l); // print this only if diagram is in info mode, otherwise mute it
-        if (l.find(": error: ") != string::npos)
+        if (l.find(": error: ") != string::npos) {
             error(l);
+            error_found = true;
+            }
         if (l.find(": debug: ")==string::npos &&
             l.find("diagram: graphviz: ")==string::npos && !dmode) {
             details += l;
@@ -1074,6 +1078,12 @@ void processStatementCmd(string input)
     else {
         if (diagram.compare("graphviz")==0)
             info(graphviz_input);
+        else { // ps or svg
+            if (error_found) return; // don't try to feed graphviz with incorrect data
+            string graphviz_output = gv_export(graphviz_input, diagram.c_str());
+            if (graphviz_output.length() == 0) error("No diagram was generated");
+            else info(graphviz_output);
+        }
     }
 }
 

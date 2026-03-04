@@ -74,6 +74,7 @@ SET(PBRST_SRCS
 )
 
 add_executable(bibref main.cpp book.cpp book.h books.cpp books.h fingerprint.cpp fingerprint.h cli.cpp cli.h psalmsinfo.cpp psalmsinfo.h version.h
+ gv-export.cpp gv-export.h
  ${PBRST_SRCS}
 )
 

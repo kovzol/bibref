@@ -1,0 +1,11 @@
+/**
+ * @file gv-export.cpp
+ * Graphviz to ps or svg conversion routines.
+ */
+
+/// Convert the graphviz input to the given format.
+string gv_export(string input, const char* format) {
+ /// @param input The input graphviz code.
+ /// @param format "ps" or "svg" (in theory, all supported formats in graphviz could be used).
+ /// @return The output in the requested format.
+};
