@@ -1216,7 +1216,7 @@ void texmacs_autocomplete(string line) { // A possible input from texmacs: (comp
 }
 
 char *texmacs_readline() {
-#define MAX_TM_LINE_LENGTH 1024
+#define MAX_TM_LINE_LENGTH 16384
 #define FRAME_START 0x10
 #define FRAME_END   0x0a
 
@@ -1314,11 +1314,11 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
 #endif
 
 #if defined(__EMSCRIPTEN__) || defined(__MINGW32__) || defined(__APPLE__) || !defined(WITH_READLINE)
-#define MAX_LINE_LENGTH 1024
+#define MAX_LINE_LENGTH 16384
     char bufline[MAX_LINE_LENGTH + 1];
 #endif
 
-#define MAX_BUFFER_LENGTH 8192
+#define MAX_BUFFER_LENGTH 65536
     char buf[MAX_BUFFER_LENGTH + 1] = "";
     string line;
     bool multiline = false;
