@@ -17,6 +17,8 @@ int yycolumn = 1;
 
 %x COMMENT
 
+WS      [ \t]*
+NUM     [0-9]+
 
 %%
 
@@ -131,11 +133,11 @@ REVELATION_OF_JOHN { yylval.strval = strdup(yytext); return REVELATION_OF_JOHN; 
 "." { return PERIOD; }
 
   /* numbers */
-[0-9]+	{ yylval.intval = atoi(yytext);
+{NUM}	{ yylval.intval = atoi(yytext);
                   return INTNUM; }
 
-[0-9]+"."[0-9]*"%" |
-"."[0-9]+"%"	{ yylval.strval = strdup(yytext);
+{NUM}"."[0-9]*"%" |
+"."{NUM}"%"	{ yylval.strval = strdup(yytext);
                   yylval.strval[yyleng-1] = 0;
                   yylval.floatval = myatof(yylval.strval);
                   return APPROXNUM; }
@@ -158,13 +160,12 @@ REVELATION_OF_JOHN { yylval.strval = strdup(yytext); return REVELATION_OF_JOHN; 
 #.*		;
 
   /* verses */
-[0-9]+":"[0-9]+ { yylval.strval = strdup(yytext); return VERSE; }
-[0-9]+":"[0-9]+[+][0-9]+ { yylval.strval = strdup(yytext); return VERSESTART; }
-[0-9]+":"[0-9]+[-][0-9]+ { yylval.strval = strdup(yytext); return VERSEEND; }
+{NUM}":"{NUM} { yylval.strval = strdup(yytext); return VERSE; }
+{NUM}":"{NUM}[+]{NUM} { yylval.strval = strdup(yytext); return VERSESTART; }
+{NUM}":"{NUM}[-]{NUM} { yylval.strval = strdup(yytext); return VERSEEND; }
 
   /* raw positions */
-"("[0-9]+"-"[0-9]+")" |
-"("[0-9]+"-"[0-9]+","[ ]length[ ][0-9]+")"  { yylval.strval = strdup(yytext); return RAWPOSITION; }
+\({WS}{NUM}-{NUM}({WS},{WS}length{WS}{NUM})?{WS}\) { yylval.strval = strdup(yytext); return RAWPOSITION; }
 
   /* everything else */
 [ \t]         /* white space */ { }

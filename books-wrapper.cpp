@@ -76,6 +76,9 @@ EXTERNC char *greekToLatin1(const char *greek)
 
     vector<string> parts;
     string to_convert_string = string(to_convert);
+    // Handle exotic TeXmacs inputs:
+    boost::replace_all(to_convert_string, "\xE2\x80\xA6", "...");
+    
     boost::replace_all(to_convert_string, "...", ".");
     boost::split(parts, to_convert_string, boost::is_any_of("."));
     string processed;
