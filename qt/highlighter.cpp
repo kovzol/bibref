@@ -91,10 +91,7 @@ Highlighter::Highlighter(QTextDocument *parent)
     highlightingRules.append(rule);
 
     positionFormat.setForeground(Qt::magenta);
-    rule.pattern = QRegularExpression(QStringLiteral("\\([\\d]+\\-[\\d]+\\)"));
-    rule.format = positionFormat;
-    highlightingRules.append(rule);
-    rule.pattern = QRegularExpression(QStringLiteral("\\([\\d]+\\-[\\d]+,[\\s]+length[\\s]+[\\d]+\\)"));
+    rule.pattern = QRegularExpression(QStringLiteral("\\(\\s*\\d+-\\d+(\\s*,\\s*length\\s+\\d+)?\\s*\\)"));
     rule.format = positionFormat;
     highlightingRules.append(rule);
 }
