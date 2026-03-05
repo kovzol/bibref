@@ -150,8 +150,8 @@ REVELATION_OF_JOHN { yylval.strval = DUPTEXT; return REVELATION_OF_JOHN; }
 '(\\.|[^'\n])*$	        { yyerror("Unterminated string %s E21", yytext); }
 \"(\\.|[^"\n])*$	{ yyerror("Unterminated string %s E21", yytext); }
 
-  /* a-z literals, change q to z */
-[a-z]+	{ yylval.strval = replace_char(DUPTEXT, 'q', 'z'); return AZLITERAL;}
+  /* a-z literals, change q to z, allow - and \ but remove them immediately */
+[a-z\\-]+	{ yylval.strval = clean_literal(DUPTEXT); return AZLITERAL;}
 
   /* name */
 {ID}	{ yylval.strval = DUPTEXT;

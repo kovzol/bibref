@@ -231,7 +231,8 @@ void init_addbooks() {
 %start brst_stmt
 
 %code provides {
-char *replace_char(char *str, char find, char replace);
+// char *replace_char(char *str, char find, char replace);
+char *clean_literal(char *str);
 char *mystrcat(char *a, char *b);
 void add_parseinfo(char *s, ...);
 int yylex (void);
@@ -1198,6 +1199,18 @@ char* replace_char(char* str, char find, char replace){
         current_pos = strchr(current_pos,find);
     }
     return str;
+}
+
+char* clean_literal(char* s) {
+    char* dst = s;
+    for (char* src = s; *src; ++src) {
+        if (*src != '\\' && *src != '-') {
+            *dst++ = *src;
+        }
+    }
+    *dst = '\0';
+    replace_char(s, 'q', 'z');
+    return s;
 }
 
 #define MAX_CODE_SIZE 16384
