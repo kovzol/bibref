@@ -32,12 +32,6 @@
       hosts; Zion shall be plowed like a field, and Jerusalem shall become
       heaps, and the mountain of the house as the high places of a forest.
     </unfolded-io>
-
-    <\input>
-      \<gtr\>\ 
-    <|input>
-      \;
-    </input>
   </session>
 
   Jeremiah mentions prophet Micah in KJV Jeremiah 26:18. In fact, the LXX
@@ -187,12 +181,6 @@
     <|unfolded-io>
       Length of text 2 is 83.
     </unfolded-io>
-
-    <\input>
-      \<gtr\>\ 
-    <|input>
-      \;
-    </input>
   </session>
 
   In fact, Jeremiah quotes quite a long verbatim text from Micah (38
@@ -247,12 +235,6 @@
 
       1 occurrences.
     </unfolded-io>
-
-    <\input>
-      \<gtr\>\ 
-    <|input>
-      \;
-    </input>
   </session>
 </body>
 
