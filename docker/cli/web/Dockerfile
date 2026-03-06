@@ -24,7 +24,7 @@ SHELL ["/bin/bash", "-c"]
 RUN apt-get update && \
     apt-get -y install python3 xz-utils subversion git nginx \
         libsword-common libsword-dev build-essential cmake \
-        libreadline-dev libboost-dev libboost-filesystem-dev bison flex pkgconf unzip
+        libreadline-dev libboost-dev libboost-filesystem-dev bison flex pkgconf unzip wget libgraphviz-dev
 RUN git clone https://github.com/emscripten-core/emsdk.git
 WORKDIR emsdk
 ARG EMSDK_VER=4.0.3
@@ -42,6 +42,18 @@ RUN . ../../emsdk/emsdk_env.sh && \
 RUN yes | make -j$(nproc) sword_static
 RUN make install
 WORKDIR ../..
+
+# Build Graphviz:
+ENV GRAPHVIZ_VER=14.1.1
+RUN wget https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/$GRAPHVIZ_VER/graphviz-$GRAPHVIZ_VER.tar.gz
+RUN tar xzf graphviz-$GRAPHVIZ_VER.tar.gz
+WORKDIR graphviz-$GRAPHVIZ_VER
+RUN . ../emsdk/emsdk_env.sh && \
+    emconfigure ./configure CFLAGS="-sUSE_ZLIB -pthread" LDFLAGS="-sUSE_ZLIB -pthread" \
+        --disable-shared --enable-static --with-qt=no --prefix=$EMSDK/upstream/emscripten/cache/sysroot
+RUN make -i -j$(nproc)
+RUN make -i install
+WORKDIR ..
 
 # Download bibref:
 ARG GIT_COMMIT=

@@ -23,8 +23,16 @@ bibref().then(function(Module) {
             var output = "";
             try {
                 output = bibref_wasm(input);
-                term.echo(output.replaceAll("\n","<br>"), {raw: true, newline: true});
-                keywords = [...new Set(bibref_wasm_vocabulary().split(",").sort())]; // updating
+
+                var svg_start = output.indexOf('<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"\n "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">');
+                if (svg_start > -1) {
+                    // TODO: This could be improved. We assume that there is only one image in the output, and it is the entire content:
+                    term.echo(output.substring(svg_start), {raw: true});
+                    }
+                else {
+                    term.echo(output.replaceAll("\n","<br>"), {raw: true, newline: true});
+                    keywords = [...new Set(bibref_wasm_vocabulary().split(",").sort())]; // updating
+                    }
             }
             catch (error) {
                 term.echo("[[b;red;]Sorry, an internal error is occurred.]");
