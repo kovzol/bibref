@@ -69,6 +69,15 @@
   <content_rating type="oars-1.1" />
 
   <releases>
+    <release version="2026-03-08" date="2026-03-08">
+    <url type="details">https://github.com/kovzol/bibref/commits/85b3a7f54bcea4e1cb5ee771f73fdb0aa6f1362a</url>
+      <description>
+        <p>Release description</p>
+          <ul>
+            <li>Allow hyphenation and line break via backslash in long latintext passages in statements</li>
+          </ul>
+      </description>
+    </release>
     <release version="2026-01-13" date="2026-01-13">
     <url type="details">https://github.com/kovzol/bibref/commits/44e3ab7efc4e872e4250d7467db20fbef64a1bc1</url>
       <description>
