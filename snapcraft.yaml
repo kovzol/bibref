@@ -16,21 +16,24 @@ apps:
     environment:
       SWORD_PATH: $SNAP/root/.sword
       LC_ALL: C.UTF-8
-      GV_PLUGIN_PATH: $SNAP/usr/lib/x86_64-linux-gnu/graphviz
+      FONTCONFIG_PATH: $SNAP/etc/fonts
     plugs:
       - home
 
 parts:
   bibref:
-    build-packages: [cmake, libsword-utils, libsword-common, libsword-dev, build-essential, libboost-dev, libboost-filesystem-dev, libreadline-dev, libgraphviz-dev, pkg-config, unzip, bison, flex]
+    build-packages: [cmake, libsword-utils, libsword-common, libsword-dev, build-essential, libboost-dev, libboost-filesystem-dev, libreadline-dev, libgraphviz-dev, pkg-config, unzip, bison, flex, graphviz]
     source: https://github.com/kovzol/bibref.git
     plugin: cmake
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Debug
-    stage-packages: [libsword-1.8.1, libboost-filesystem1.71.0, libgvc6, graphviz]
+    stage-packages: [libsword-1.8.1, libboost-filesystem1.71.0, libgvc6, graphviz, fontconfig, fontconfig-config, fonts-dejavu-core]
+    override-build: |
+      snapcraftctl build
+      dot -c
+      cp /usr/lib/x86_64-linux-gnu/graphviz/config6a $SNAPCRAFT_PART_INSTALL/usr/lib/x86_64-linux-gnu/graphviz
   sword-modules:
     plugin: nil
     override-build: |
       mkdir -p $SNAPCRAFT_PART_INSTALL/root
       cp -a ~/.sword $SNAPCRAFT_PART_INSTALL/root
-      dot -c
