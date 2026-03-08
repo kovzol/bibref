@@ -1,6 +1,6 @@
 name: bibref
 base: core20
-version: '2025-12-07'
+version: '2026-03-08'
 summary: A tool that helps discovering internal references in the Bible
 icon: logo-Psalm40-192.png
 description: |
@@ -21,7 +21,7 @@ apps:
 
 parts:
   bibref:
-    build-packages: [cmake, libsword-utils, libsword-common, libsword-dev, build-essential, libboost-dev, libboost-filesystem-dev, libreadline-dev, pkg-config, unzip, bison, flex]
+    build-packages: [cmake, libsword-utils, libsword-common, libsword-dev, build-essential, libboost-dev, libboost-filesystem-dev, libreadline-dev, libgraphviz-dev, pkg-config, unzip, bison, flex]
     source: https://github.com/kovzol/bibref.git
     plugin: cmake
     cmake-parameters:
