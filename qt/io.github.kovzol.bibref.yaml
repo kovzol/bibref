@@ -54,8 +54,8 @@ modules:
       - /bin/*
     sources:
       - type: archive
-        url: https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/14.1.1/graphviz-14.1.1.tar.gz
-        sha256: f7a709b59872f49ab996d68102822a331a66cce80dd6b8e3c0c944cdb4ce599b
+        url: https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/14.1.3/graphviz-14.1.3.tar.gz
+        sha256: 44fdbfe20c062047ac64185e3339bf90f392c295cf1f4cc1be2d07bcc21be1f1
         x-checker-data:
           type: anitya
           project-id: 1249
@@ -81,8 +81,8 @@ modules:
       # url: https://github.com/kovzol/bibref
       # tag: 2026-01-13 # does not yet exist
       - type: archive
-        url: https://github.com/kovzol/bibref/archive/53a3a2d6c81c04cecd0acc882f3bb4550532ffaa.zip
-        sha256: cd16344877b24f5788834a3ba6cfef04756f5ebef51a7f22b80e61e47fd04af9
+        url: https://github.com/kovzol/bibref/archive/b46b1aa0e1f1877b4b9185baf031a82bd67c500d.zip
+        sha256: 1f47dc9dc16e1b05629de78b7a652fec167757dc089c0599a96034826eaa306a
     post-install:
       - mv /app/tmp/.sword/* /app/share/sword
 

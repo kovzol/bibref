@@ -16,14 +16,19 @@
 ## macOS
 
 * Pull the newest version
-* Build both the cli and Qt versions
+* Build both the cli and Qt versions (the latter with -DWEBENGINE=ON)
 * Run the cli version and recreate the `bibref-addbooks-cache` folder to have it up-to-date
 * Remove `qt/bin/` if it exists
 * Change working directory to `qt/`
+* If needed, add the Qt installation path to the PATH, something like this: `export PATH=/Users/.../Qt/6.10.2/macos/bin/:$PATH`
 * Run `./deploy-mac` by adding the Qt build folder and the `bibref-addbooks-cache` folder locations as parameters
 * Get `bin/bibref-qt.dmg` and share it on GitHub/Releases later
 
 ## Windows
+
+See docker/qt/windows/Dockerfile.
+
+Obsoleted:
 
 * Pull the newest version (via Windows Git)
 * Build the Qt version (via MSYS2/MINGW64)
@@ -37,6 +42,10 @@
 * Get `bibref-setup.exe` and share it on GitHub/Releases later
 
 ## Web
+
+See docker/cli/web/Dockerfile and docker/qt/web/Dockerfile.
+
+Obsoleted:
 
 * Pull the newest version
 * Build the native version
