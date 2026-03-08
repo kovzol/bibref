@@ -76,7 +76,6 @@ string minuniqueCmd = "minunique";
 string extendCmd = "extend";
 string getrefsCmd = "getrefs";
 string maxresultsCmd = "maxresults";
-string sqlCmd = "sql";
 string psalminfoCmd = "psalminfo";
 string rawCmd = "raw";
 string colorsCmd = "colors";
@@ -107,7 +106,6 @@ string errorMinuniqueParameters = minuniqueCmd + " requires one parameter";
 string errorExtendParameters = extendCmd + " requires 4 or 5 parameters.";
 string errorGetrefsParameters = getrefsCmd + " requires 3, 4 or 5 parameters.";
 string errorMaxresultsParameters = maxresultsCmd + " requires one parameter.";
-string errorSqlParameters = sqlCmd + " requires one parameter.";
 string errorPsalminfoParameters = psalminfoCmd + " requires 2 parameters.";
 string errorRawParameters = rawCmd + " requires 4 parameters.";
 string errorRawIncomplete = "Either " + rawCmd + "1 or " + rawCmd + "2 must be used.";
@@ -138,7 +136,6 @@ vector<string> commands{addbooksCmd,
                         getrefsCmd,
                         lookupCmd,
                         maxresultsCmd,
-                        sqlCmd,
                         psalminfoCmd,
                         rawCmd,
                         rawCmd + "1",
@@ -291,7 +288,6 @@ char **completer(const char *text, int start, int end)
 #endif
 
 int maxresults;
-bool sql;
 char *output_prepend_set;
 string ot_color, nt_color, reset_color, error_color;
 string diagram;
@@ -387,7 +383,6 @@ string getHelp(const string &key)
         "* `nearest12`: Find a substring of clipboard1 such that its Jaccard similarity for bags "
         "to clipboard2 is minimal.",
         "\"Jaccard similarity for bags\" algorithm, best match is reached at 0.",
-        "* `sql` *switch*: Set some outputs to be shown also as an SQL query if *switch* is `on`.",
         "* `colors` *switch*: Show some outputs colored if *switch* is `on`.",
         "* `tokens` *Bible* *book* *verse*: Search for the given *verse* in the given *book* in "
         "the "
@@ -729,24 +724,6 @@ void processMaxresultsCmd(string input)
     string rest = input.substr(input.find(" ") + 1);
     maxresults = stoi(rest);
     info("Set to " + to_string(maxresults) + ".");
-}
-
-void processSqlCmd(string input)
-{
-    int index;
-    int commandLength = sqlCmd.length();
-    if (input.length() == commandLength) {
-        error(errorSqlParameters);
-        return;
-    }
-    string rest = input.substr(input.find(" ") + 1);
-    if (rest.compare("on") == 0 || rest.compare("1") == 0 || rest.compare("true") == 0) {
-        sql = true;
-        info("SQL output enabled.");
-    } else {
-        sql = false;
-        info("SQL output disabled.");
-    }
 }
 
 void processColorsCmd(string input)
@@ -1129,8 +1106,6 @@ string cli_process(char *buf)
         processPrintCmd(input);
     else if (boost::starts_with(input, maxresultsCmd))
         processMaxresultsCmd(input);
-    else if (boost::starts_with(input, sqlCmd))
-        processSqlCmd(input);
     else if (boost::starts_with(input, colorsCmd))
         processColorsCmd(input);
     else if (boost::starts_with(input, diagramCmd))
@@ -1290,7 +1265,6 @@ void cli(const char *input_prepend, const char *output_prepend, bool addbooks, b
     }
 
     maxresults = 100; // Query results are maximized in 100 results by default.
-    sql = false;      // SQL output is disabled by default.
     diagram = "info"; // By default, raw graphviz output is set.
     texmacs_mode = texmacs;
 

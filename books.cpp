@@ -1388,41 +1388,6 @@ void getrefs(const string &moduleName2,
         info(r.m_text + " (length=" + to_string(r.m_length) + ", pos1=" + ot_color
              + to_string(r.m_pos1 + 1) + reset_color + ", pos2=" + nt_color
              + to_string(r.m_pos2 + 1) + reset_color + ")");
-        if (sql) { // In sql mode output the required SQL statement skeleton as well.
-            info("insert into quotations (nt_quotation_id, ot_id, nt_id, ot_book, psalm, "
-                 "ot_passage, nt_book, nt_passage, ot_startpos, ot_length, nt_startpos, nt_length, "
-                 "found_method) values");
-            string output = " (?, ?, ?, '" + ot_color + book1 + reset_color + "', ";
-            output += ot_color;
-            if (book1.compare("Psalms")
-                == 0) { // handle Psalms in a special way (because of the SQL database)
-                vector<string> verse1_split;
-                boost::split(verse1_split, verse1S, boost::is_any_of(":"));
-                output += verse1_split[0];
-            } else {
-                output += "null";
-            }
-            output += reset_color;
-            output += ", ";
-            vector<string> reference_split;
-            boost::split(reference_split, r.m_text, boost::is_any_of("="));
-            boost::algorithm::trim(reference_split[0]);
-            boost::algorithm::trim(reference_split[1]);
-            output += "'" + ot_color + reference_split[0] + reset_color + "', ";
-
-            vector<string> verse2_split;
-            boost::split(verse2_split, reference_split[1], boost::is_any_of(" "));
-            output += "'" + nt_color + verse2_split[1] + reset_color + "', ";
-            output += "'" + nt_color + reference_split[1] + reset_color + "', ";
-
-            output += ot_color + to_string(r.m_pos1 + 1) + reset_color + ", ";
-            output += ot_color + to_string(r.m_length) + reset_color + ", ";
-            output += nt_color + to_string(r.m_pos2 + 1) + reset_color + ", ";
-            output += nt_color + to_string(r.m_length) + reset_color + ", ";
-            output += "'getrefs');";
-
-            info(output); // End of sql mode.
-        }
     }
 }
 
