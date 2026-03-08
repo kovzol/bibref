@@ -26,7 +26,7 @@ parts:
     plugin: cmake
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Debug
-    stage-packages: [libsword-1.8.1, libboost-filesystem1.71.0, libgvc6]
+    stage-packages: [libsword-1.8.1, libboost-filesystem1.71.0, libgvc6, graphviz]
   sword-modules:
     plugin: nil
     override-build: |
