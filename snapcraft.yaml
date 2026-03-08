@@ -16,6 +16,7 @@ apps:
     environment:
       SWORD_PATH: $SNAP/root/.sword
       LC_ALL: C.UTF-8
+      GV_PLUGIN_PATH: $SNAP/usr/lib/x86_64-linux-gnu/graphviz
     plugs:
       - home
 
@@ -32,3 +33,4 @@ parts:
     override-build: |
       mkdir -p $SNAPCRAFT_PART_INSTALL/root
       cp -a ~/.sword $SNAPCRAFT_PART_INSTALL/root
+      dot -c
