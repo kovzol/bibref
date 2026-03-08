@@ -28,7 +28,7 @@ RUN apt-get update && \
         libsword-common libsword-dev build-essential cmake \
         libreadline-dev libboost-dev libboost-filesystem-dev bison flex pkgconf unzip \
         perl qt6-base-dev qt6-tools-dev qt6-tools-dev-tools qt6-l10n-tools \
-        linguist-qt6 wget ninja-build libdbus-1-dev
+        linguist-qt6 wget ninja-build libdbus-1-dev libgraphviz-dev
 RUN git clone https://github.com/emscripten-core/emsdk.git
 WORKDIR emsdk
 ARG EMSDK_VER=4.0.7
