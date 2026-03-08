@@ -25,8 +25,8 @@ parts:
     source: https://github.com/kovzol/bibref.git
     plugin: cmake
     cmake-parameters:
-      - -DPBRST=ON -DCMAKE_BUILD_TYPE=Debug
-    stage-packages: [libsword-1.8.1, libboost-filesystem1.71.0]
+      - -DCMAKE_BUILD_TYPE=Debug
+    stage-packages: [libsword-1.8.1, libboost-filesystem1.71.0, libgvc6]
   sword-modules:
     plugin: nil
     override-build: |
