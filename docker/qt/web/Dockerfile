@@ -86,7 +86,7 @@ WORKDIR ..
 # Download bibref:
 ARG GIT_COMMIT=
 RUN git clone https://github.com/kovzol/bibref && \
-    if [ -n "$GIT_COMMIT" ]; then git checkout $GIT_COMMIT; fi
+    if [ -n "$GIT_COMMIT" ]; then cd bibref; git checkout $GIT_COMMIT; fi
 
 # Build bibref (cli):
 WORKDIR bibref

@@ -30,7 +30,7 @@ RUN apt-get update && apt-get install -y \
     qt6-base-dev qt6-tools-dev qt6-base-dev-tools \
     perl python3 ninja-build libdbus-1-dev \
     libsword-common libsword-dev \
-    libreadline-dev libboost-dev libboost-filesystem-dev wine
+    libreadline-dev libboost-dev libboost-filesystem-dev libgraphviz-dev wine
 RUN apt-get install -y xvfb
 RUN wget -q https://jrsoftware.org/download.php/is.exe -O inno.exe
 RUN dpkg --add-architecture i386 && apt-get update && apt-get install -y wine32:i386
@@ -149,7 +149,7 @@ RUN set | grep ^MSYS2_ | grep _VERSION= | while read SETTING; do \
 # 5. Download bibref and SWORD:
 ARG GIT_COMMIT=
 RUN git clone https://github.com/kovzol/bibref && \
-    if [ -n "$GIT_COMMIT" ]; then git checkout $GIT_COMMIT; fi
+    if [ -n "$GIT_COMMIT" ]; then cd bibref; git checkout $GIT_COMMIT; fi
 RUN wget -q https://www.crosswire.org/ftpmirror/pub/sword/source/v1.9/sword-1.9.0.tar.gz
 RUN tar xzf sword-1.9.0.tar.gz
 
