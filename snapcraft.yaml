@@ -31,7 +31,7 @@ parts:
     override-build: |
       snapcraftctl build
       dot -c
-      cp /usr/lib/x86_64-linux-gnu/graphviz/config6a $SNAPCRAFT_PART_INSTALL/usr/lib/x86_64-linux-gnu/graphviz
+      cp /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/graphviz/config6a $SNAPCRAFT_PART_INSTALL/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/graphviz
   sword-modules:
     plugin: nil
     override-build: |
