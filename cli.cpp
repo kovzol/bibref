@@ -393,7 +393,7 @@ string getHelp(const string &key)
         "* `statement` ...: Analyze the given statement, see "
         "https://github.com/kovzol/bibref/wiki/Statements "
         "for further information.",
-        "* `diagram` *format*: Set the diagram output to *format* ('info', 'graphviz', 'ps' or 'svg').",
+        "* `diagram` *format*: Set the diagram output to *format* ('info', 'graphviz', 'eps', 'ps' or 'svg').",
         "* `quit`: Exit program."};
     string retval;
     for (int i = 0; i < helpStr.size(); i++) {
@@ -753,11 +753,11 @@ void processDiagramCmd(string input)
         return;
     }
     string rest = input.substr(input.find(" ") + 1);
-    if (rest.compare("info") == 0 || rest.compare("graphviz") == 0 || rest.compare("ps") == 0 || rest.compare("svg") == 0) {
+    if (rest.compare("info") == 0 || rest.compare("graphviz") == 0 || rest.compare("eps") == 0 || rest.compare("ps") == 0 || rest.compare("svg") == 0) {
         diagram = rest;
         info("Diagram output is set to " + diagram + ".");
     } else {
-        error("Invalid setting, use 'info', 'graphviz', 'ps' or 'svg'.");
+        error("Invalid setting, use 'info', 'graphviz', 'eps', 'ps' or 'svg'.");
     }
 }
 
