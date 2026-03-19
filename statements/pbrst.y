@@ -121,6 +121,8 @@ void init_addbooks() {
 
 %type <strval> RAWPOSITION
 
+%type <strval> opt_identifier
+
 %token STATEMENT;
 %token CONNECTS;
 %token WITH;
@@ -256,14 +258,17 @@ void reset_data(int cr, int cd, int cc, int cv, int sd, int tg);
 
 brst_stmt
     : STATEMENT opt_identifier CONNECTS nt_passage WITH ot_passages BASED ON stmt_basis opt_period {
-      stmt_identifier = strdup($<strval>2);
+      if ($<strval>2 != NULL)
+          stmt_identifier = strdup($<strval>2);
+      else
+          stmt_identifier = NULL;
       };
 
 stmt_basis
     : introductions | introductions MOREOVER fragments | fragments | NO EVIDENCE { no_evidence = true; };
 
 opt_identifier
-    : | NAME | AZLITERAL /* ugly workaround, https://stackoverflow.com/a/71275846/1044586 */;
+    : { $$ = NULL; } | NAME | AZLITERAL /* ugly workaround, https://stackoverflow.com/a/71275846/1044586 */;
 
 nt_passage
     : nt_edition nt_book passage {
