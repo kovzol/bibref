@@ -1,6 +1,6 @@
 name: bibref
 base: core20
-version: '2026-03-08'
+version: '2026-03-25'
 summary: A tool that helps discovering internal references in the Bible
 icon: logo-Psalm40-192.png
 description: |
@@ -22,12 +22,12 @@ apps:
 
 parts:
   bibref:
-    build-packages: [cmake, libsword-utils, libsword-common, libsword-dev, build-essential, libboost-dev, libboost-filesystem-dev, libreadline-dev, libgraphviz-dev, pkg-config, unzip, bison, flex, graphviz]
+    build-packages: [cmake, libsword-utils, libsword-common, libsword-dev, build-essential, libboost-dev, libboost-filesystem-dev, libreadline-dev, libgraphviz-dev, libfribidi-dev, pkg-config, unzip, bison, flex, graphviz]
     source: https://github.com/kovzol/bibref.git
     plugin: cmake
     cmake-parameters:
-      - -DCMAKE_BUILD_TYPE=Debug
-    stage-packages: [libsword-1.8.1, libboost-filesystem1.71.0, libgvc6, graphviz, fontconfig, fontconfig-config, fonts-dejavu-core]
+      - -DCMAKE_BUILD_TYPE=Debug -DWITH_FRIBIDI=ON
+    stage-packages: [libsword-1.8.1, libboost-filesystem1.71.0, libgvc6, graphviz, libfribidi0, fontconfig, fontconfig-config, fonts-dejavu-core]
     override-build: |
       snapcraftctl build
       dot -c

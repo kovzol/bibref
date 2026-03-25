@@ -47,6 +47,10 @@ else()
 pkg_check_modules (readline REQUIRED readline)
 add_compile_definitions(WITH_READLINE)
 endif()
+if(LINUX)
+pkg_check_modules(FRIBIDI REQUIRED fribidi)
+add_compile_definitions(WITH_FRIBIDI)
+endif()
 
 include_directories(${sword_INCLUDE_DIRS})
 
@@ -109,8 +113,9 @@ file(GLOB HTML_FILES ${CMAKE_CURRENT_SOURCE_DIR}/html/*)
 install(FILES ${HTML_FILES} ${CMAKE_BINARY_DIR}/bibref.data DESTINATION "${CMAKE_BINARY_DIR}/${HTML_BUILD_DIR}")
 
 else()
+target_include_directories(bibref PRIVATE ${FRIBIDI_INCLUDE_DIRS})
 target_link_libraries(bibref ${sword_LIBRARIES} ${sword_LIBRARIES_folder} ${Boost_LIBRARIES} ${readline_LIBRARIES}
-${gvc_LIBRARIES} ${graphviz_LIBRARIES_folder} ${EXTRA_LIBS})
+${gvc_LIBRARIES} ${graphviz_LIBRARIES_folder} ${FRIBIDI_LIBRARIES} ${EXTRA_LIBS})
 
 install(
  CODE " set(ENV{SWORD_PATH} \"$ENV{HOME}/.sword\") "

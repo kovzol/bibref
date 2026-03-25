@@ -5,6 +5,9 @@
 #include <string>
 #include <cctype>
 #include <vector>
+#ifdef WITH_FRIBIDI
+#include <fribidi.h>
+#endif // WITH_FRIBIDI
 
 extern "C" char *brst_scan_string(char *string,
                                   int correct_raw,
@@ -219,6 +222,49 @@ string hyphenate_long_words_utf8(const string& input, size_t N)
     return result;
 }
 
+
+#ifdef WITH_FRIBIDI
+string bidi_to_visual(const string& input_utf8) {
+    FriBidiStrIndex len = input_utf8.size();
+
+    // UTF-8 to Unicode (FriBidiChar = uint32_t)
+    vector<FriBidiChar> logical(len);
+    len = fribidi_charset_to_unicode(
+        FRIBIDI_CHAR_SET_UTF8,
+        input_utf8.c_str(),
+        input_utf8.size(),
+        logical.data()
+    );
+
+    vector<FriBidiChar> visual(len);
+
+    FriBidiParType base_dir = FRIBIDI_PAR_ON;
+
+    fribidi_log2vis(
+        logical.data(),
+        len,
+        &base_dir,
+        visual.data(),
+        NULL, NULL, NULL
+    );
+
+    // Unicode to UTF-8
+    std::vector<char> output(len * 4); // worst case
+    fribidi_unicode_to_charset(
+        FRIBIDI_CHAR_SET_UTF8,
+        visual.data(),
+        len,
+        output.data()
+    );
+
+    return string(output.data());
+}
+#else
+string bidi_to_visual(const string& input_utf8) {
+    return input_utf8; // do nothing
+}
+#endif // WITH_FRIBIDI
+
 void info(const string &message)
 {
 #ifndef __EMSCRIPTEN__
@@ -229,7 +275,7 @@ void info(const string &message)
             // See Data/Convert/Generic/input.cpp in TeXmacs's source code for more details (ps_flush):
             cout << "\002ps:width=80%\n" << message << "\005" << flush;
         } else
-            cout << "\002verbatim:" << hyphenate_long_words_utf8(message, MAX_WORD_LENGTH) << "\005" << flush;
+            cout << "\002verbatim:" << bidi_to_visual(hyphenate_long_words_utf8(message, MAX_WORD_LENGTH)) << "\005" << flush;
     } else
         cerr << output_prepend_set << message << endl << flush;
 #else
