@@ -908,8 +908,9 @@ int compare(const string &book1,
             int startOffset2,
             int endOffset2)
 {
-    info("Comparing " + book1 + " (" + info1 + ") " + verseInfo1s + "-" + verseInfo1e + " and "
-         + book2 + " (" + info2 + ") " + verseInfo2s + "-" + verseInfo2e);
+    string output;
+    output = "Comparing " + book1 + " (" + info1 + ") " + verseInfo1s + "-" + verseInfo1e + " and "
+         + book2 + " (" + info2 + ") " + verseInfo2s + "-" + verseInfo2e + "\n";
     Book b1 = getBook(book1, info1);
     Book b2 = getBook(book2, info2);
     int verse1s = b1.getVerseStart(verseInfo1s) + startOffset1;
@@ -923,9 +924,10 @@ int compare(const string &book1,
         = getTextFingerprint(book2, info2, verseInfo2s, verseInfo2e, startOffset2, endOffset2);
     string verse2part = b2.getText().substr(verse2s, verse2e - verse2s + 1);
     int d = dist(f1, f2);
-    info(verse1part + " ~ " + verse2part + " = " + to_string(d));
+    output += verse1part + " ~ " + verse2part + " = " + to_string(d) + "\n";
     float ratio = ((float) d + 1) / (verse1part.length() + verse2part.length());
-    info("difference = " + to_string(ratio));
+    output += "difference = " + to_string(ratio);
+    info(output);
     // printDist(f1, f2);
     return d;
 }
@@ -950,18 +952,20 @@ string getText(const string &book,
 int compareLatin(string verse1, string verse2)
 {
     int d = dist(verse1, verse2);
-    info("Comparing '" + verse1 + "' ~ '" + verse2 + "' = " + to_string(d));
+    string output = "Comparing '" + verse1 + "' ~ '" + verse2 + "' = " + to_string(d) + "\n";
     float ratio = ((float) d + 1) / (verse1.length() + verse2.length());
-    info("difference = " + to_string(ratio));
+    output += "difference = " + to_string(ratio);
+    info(output);
     return d;
 }
 
 int compare(string verse1, string verse2)
 {
     int d = dist(processVerse(verse1), processVerse(verse2));
-    info("Comparing '" + verse1 + "' ~ '" + verse2 + "' = " + to_string(d));
+    string output = "Comparing '" + verse1 + "' ~ '" + verse2 + "' = " + to_string(d) + "\n";
     float ratio = ((float) d + 1) / (verse1.length() + verse2.length());
-    info("difference = " + to_string(ratio));
+    output += "difference = " + to_string(ratio);
+    info(output);
     return d;
 }
 
@@ -1120,6 +1124,7 @@ string _find(string text, string moduleName, int maxFound, bool verbose)
     int found = 0;                           // number of occurrences
     size_t pos;                              // character position of last result
     string book;                             // book to search for
+    string output;                           // collect output to print it in one chunk at the end
     for (int i = 0; i < books.size(); i++) { // iterate on all books...
         Book b = books[i];
         if (b.getModuleName().compare(moduleName) == 0) { // ...in this Bible edition
@@ -1128,10 +1133,10 @@ string _find(string text, string moduleName, int maxFound, bool verbose)
             pos = bookText.find(text);         // find first occurrence
             while (pos != std::string::npos) { // if found
                 if (verbose) {
-                    info("Found in " + book + " " + b.getVerseInfoStart(pos) + " "
+                    output += "Found in " + book + " " + b.getVerseInfoStart(pos) + " "
                          + b.getVerseInfoEnd(pos + text.length() - 1) + " (book position "
                          + to_string(pos + 1) + "-" + to_string(pos + text.length())
-                         + ")"); // report success in verbose mode is on
+                         + ")" + "\n"; // report success in verbose mode is on
                 }
                 maxFound--;
                 found++;
@@ -1144,7 +1149,8 @@ string _find(string text, string moduleName, int maxFound, bool verbose)
     }
 end:
     if (verbose) {
-        info(to_string(found) + " occurrences."); // verbose report the number of occurrences
+        output += to_string(found) + " occurrences."; // verbose report the number of occurrences
+        info(output);
     }
     return to_string(found) + "," + book + "," + to_string(pos); // return concise data
 }
@@ -1192,6 +1198,7 @@ vector<string> find_min_unique(string text, const string &moduleName, bool verbo
             is_unique[i][j] = -1; // no info yet
         }
     }
+    string output;
     for (int i = 0; i < l; ++i) {
         for (int j = 0; j < l - i; ++j) {
             if (i > 0 && (is_unique[i - 1][j + 1] > 0 || is_unique[i - 1][j] > 0)) {
@@ -1202,7 +1209,7 @@ vector<string> find_min_unique(string text, const string &moduleName, bool verbo
                 if (unique == 1) {
                     is_unique[i][j] = 1; // if yes, fill in the database
                     if (verbose) {
-                        info("Text " + subtext + " is minimal unique."); // inform the user if needed
+                        output += "Text " + subtext + " is minimal unique." + "\n"; // inform the user if needed
                     }
                     retval.push_back(subtext); // store this result
                 } else {
@@ -1211,6 +1218,7 @@ vector<string> find_min_unique(string text, const string &moduleName, bool verbo
             }
         }
     }
+    if (verbose) info(output);
     return retval; // return the list of minimally unique subtexts
 }
 
@@ -1267,6 +1275,7 @@ string _extend(const string &moduleName1,
     string verse1infoE = b1.getVerseInfoEnd(pos1E);
     string verse2infoS = b2.getVerseInfoStart(pos2S);
     string verse2infoE = b2.getVerseInfoEnd(pos2E);
+    string output;
     if (verbose) {
         info("Extended match is " + ot_color + moduleName1 + " " + book1 + " " + verse1infoS + " "
              + verse1infoE + reset_color + " = " + nt_color + moduleName2 + " " + book2 + " "
@@ -1384,11 +1393,13 @@ void getrefs(const string &moduleName2,
     vector<Reference>::iterator it;
     it = unique(refs.begin(), refs.end(), equalReference); // Delete duplicates.
     refs.resize(distance(refs.begin(), it));               // Free memory.
+    string output;                                         // Collect all results to print them in one round.
     for (Reference r : refs) {                             // Show all references.
-        info(r.m_text + " (length=" + to_string(r.m_length) + ", pos1=" + ot_color
+        output += r.m_text + " (length=" + to_string(r.m_length) + ", pos1=" + ot_color
              + to_string(r.m_pos1 + 1) + reset_color + ", pos2=" + nt_color
-             + to_string(r.m_pos2 + 1) + reset_color + ")");
+             + to_string(r.m_pos2 + 1) + reset_color + ")" + "\n";
     }
+    info(output + "Finished");
 }
 
 void showAvailableBibles()
@@ -1453,6 +1464,7 @@ vector<string> searchTokenset(string moduleName, vector<int> pattern, int length
     // int found = 0;
     size_t pos;
     string book;
+    string output;
     for (int i = 0; i < books.size(); i++) { // Search in all books in a given Bible edition...
         Book b = books[i];
         if (b.getModuleName().compare(moduleName) == 0) {
@@ -1480,12 +1492,13 @@ vector<string> searchTokenset(string moduleName, vector<int> pattern, int length
                     string infoEnd = b.getVerseTokensInfoEnd(tpos + length - 1);
                     retval.push_back(book + "," + to_string(tpos)); // Store the raw result.
                     if (verbose) { // Return some informative answer...
-                        info("Found in " + book + " " + infoStart + " " + infoEnd + " (tpos="
-                             + to_string(tpos) + "-" + to_string(tpos + length - 1) + ")");
+                        output += "Found in " + book + " " + infoStart + " " + infoEnd + " (tpos="
+                             + to_string(tpos) + "-" + to_string(tpos + length - 1) + ")" + "\n";
                     }
                 }
             }
         }
     }
+    if (verbose) info(output);
     return retval; // Return the raw result as a vector of strings.
 }

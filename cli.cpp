@@ -1058,7 +1058,6 @@ void processGetrefsCmd(string input)
     } catch (exception &e) {
         error(errorMisc);
     }
-    info("Finished"); // Success!
 }
 
 void processStatementCmd(string input)
