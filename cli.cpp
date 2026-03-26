@@ -172,9 +172,9 @@ static string hyphenate_word_utf8(const string& word, size_t N)
         return word;
 
     for (unsigned char c : word) {
-        if ((c < 'a' || c > 'z') && c != '.')
+        if ((c < 'a' || c > 'z') && c != '.' && c != '\'')
             return word;
-    } // hyphenate only words containing a-z or .
+    } // hyphenate only words containing a-z or . or '
 
     string result;
     size_t char_count = 0;
