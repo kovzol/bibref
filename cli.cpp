@@ -386,8 +386,8 @@ string getHelp(const string &key)
         "the "
         "first time (it takes a couple of seconds), a folder named `bibref-addbooks-cache` will be "
         "created in the current working directory to speed up the next startup of this command.",
-        "* `textN` *text*: Define a Greek *text* and put its Latin transcription in clipboard N.",
-        "* `latintextN` *text*: Put the Latin transcription *text* in clipboard N.",
+        "* `textN` *text*: Define a Greek *text* and put its Latin transcription into clipboard N.",
+        "* `latintextN` *text*: Put the Latin transcription *text* into clipboard N.",
         "* `findN` *Bible*: Search for the text of clipboard N in the given *Bible*.",
         "* `lengthN`: Compute the length of the text in clipboard N.",
         "* `printN`: Show the Greek text in clipboard N (without punctuation and spaces).",
@@ -398,7 +398,7 @@ string getHelp(const string &key)
         "computer.",
         "* `lookupN` *Bible* *book* *passage*: Search for the given *passage* in the given *book* "
         "in "
-        "the given *Bible* and put its Latin transcription in clipboard N.",
+        "the given *Bible* and put its Latin transcription into clipboard N.",
         "* `search` *Bible* *token1* *token2* ... *tokenN* *maxlength*: Search for the given set "
         "of "
         "tokens on a maximal length of *maxlength* in the given *Bible*.",
@@ -406,7 +406,7 @@ string getHelp(const string &key)
         "the given *book* in the given *Bible*, beginning with the *start* position on *length* "
         "characters. The whole book can be retrieved with *start*=1 and *length*=-1.",
         "* `rawN` *Bible* *book* *start* *length*: Put a passage in the given *book* in the given "
-        "*Bible*, beginning with the *start* position on *length* characters, in clipboard N. "
+        "*Bible*, beginning with the *start* position on *length* characters, into clipboard N. "
         "The whole book can be retrieved with *start*=1 and *length*=-1.",
         "* `minunique1` *Bible*: Search for minimal unique passages in clipboard 1 in the given "
         "*Bible*.",
