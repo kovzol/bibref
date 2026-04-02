@@ -12,6 +12,6 @@ names = [ "Φαρες", "Ζαρα", "Εσρωμ", "Αραμ", "Αμιναδαβ"
 maxresults(10000)
 
 for name in names:
-    text_n(1, name)
-    occurrences = find_n(1, "LXX")
+    text1(name)
+    occurrences = find1("LXX")
     print(name, len(occurrences))

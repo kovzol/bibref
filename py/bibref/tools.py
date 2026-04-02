@@ -103,6 +103,24 @@ def lookup_n(c, passage):
     form = bibref.match.groups()
     return form[0].decode('utf-8')
 
+def raw_n(c, bible, book, start, length):
+    """
+    Puts a passage in the given book in the given bible, beginning with the start position
+    on length characters, into clipboard c. The whole book can be retrieved with start=1 and length=-1.
+    :param c: Clipboard number (1 or 2)
+    :param bible: the Bible edition
+    :param book: the selected book
+    :param start: the first position
+    :param length: the length of the selected passage
+    """
+    global bibref
+    spawn_bibref()
+    bibref.timeout = bibref_default_timeout
+    command = "raw" + str(c) + " " + bible + " " + book + " " + str(start) + " " + str(length)
+    bibref.sendline(command)
+    bibref.expect("Stored.")
+    form = bibref.match.groups()
+
 def find_n(c, bible):
     """
     Finds the clipboard text in a Bible edition.
@@ -198,7 +216,7 @@ def nearest12():
     """
     global bibref
     spawn_bibref()
-    bibref.timeout = bibref_default_timeout
+    bibref.timeout = bibref_default_timeout_max
     command = "nearest12"
     bibref.sendline(command)
     bibref.expect("Nearest Jaccard distance is ([0-9]+\\.[0-9]+) with substring (\\w+).")
@@ -221,3 +239,32 @@ def maxresults(m):
     maxresults = bibref.match.groups()
     return int(maxresults[0])
 
+def text1(greektext):
+    return text_n(1,greektext)
+
+def text2(greektext):
+    return text_n(2,greektext)
+
+def latintext1(latintext):
+    return latintext_n(1,latintext)
+
+def latintext2(latintext):
+    return latintext_n(2,latintext)
+
+def lookup1(passage):
+    return lookup_n(1,passage)
+
+def lookup2(passage):
+    return lookup_n(2,passage)
+
+def find1(bible):
+    return find_n(1,bible)
+
+def find2(bible):
+    return find_n(2,bible)
+
+def raw1(bible,book,start,length):
+    return raw_n(1,bible,book,start,length)
+
+def raw2(bible,book,start,length):
+    return raw_n(2,bible,book,start,length)
