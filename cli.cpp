@@ -250,6 +250,11 @@ string bidi_to_visual(const string& input_utf8) {
 
     // Unicode to UTF-8
     std::vector<char> output(len * 4); // worst case
+    // convert U+00A0 (NBSP) to normal space (TeXmacs shows <varspace> otherwise)
+    for (auto& ch : visual) {
+        if (ch == 0x00A0)
+             ch = 0x20;
+    }
     fribidi_unicode_to_charset(
         FRIBIDI_CHAR_SET_UTF8,
         visual.data(),
