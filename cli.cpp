@@ -224,11 +224,14 @@ string hyphenate_long_words_utf8(const string& input, size_t N)
 
 
 #ifdef WITH_FRIBIDI
-string bidi_to_visual(const string& input_utf8) {
+string bidi_line_to_visual(const string& input_utf8) {
+    if (input_utf8.empty())
+        return "";
+
     FriBidiStrIndex len = input_utf8.size();
 
     // UTF-8 to Unicode (FriBidiChar = uint32_t)
-    vector<FriBidiChar> logical(len);
+    vector<FriBidiChar> logical(len*2 + 8); // safety buffer
     len = fribidi_charset_to_unicode(
         FRIBIDI_CHAR_SET_UTF8,
         input_utf8.c_str(),
@@ -248,13 +251,14 @@ string bidi_to_visual(const string& input_utf8) {
         NULL, NULL, NULL
     );
 
-    // Unicode to UTF-8
-    std::vector<char> output(len * 4); // worst case
     // convert U+00A0 (NBSP) to normal space (TeXmacs shows <varspace> otherwise)
     for (auto& ch : visual) {
         if (ch == 0x00A0)
              ch = 0x20;
     }
+
+    // Unicode to UTF-8
+    std::vector<char> output(len * 4); // worst case
     fribidi_unicode_to_charset(
         FRIBIDI_CHAR_SET_UTF8,
         visual.data(),
@@ -264,6 +268,35 @@ string bidi_to_visual(const string& input_utf8) {
 
     return string(output.data());
 }
+
+string bidi_to_visual(const string& text) {
+    string result;
+
+    size_t start = 0;
+
+    while (start <= text.size()) {
+        size_t end = text.find('\n', start);
+
+        string line;
+
+        if (end == string::npos)
+            line = text.substr(start);
+        else
+            line = text.substr(start, end - start);
+
+        result += bidi_line_to_visual(line);
+
+        if (end == string::npos)
+            break;
+
+        result += '\n';
+        start = end + 1;
+    }
+
+    return result;
+}
+
+
 #else
 string bidi_to_visual(const string& input_utf8) {
     return input_utf8; // do nothing
