@@ -588,13 +588,7 @@ void processSearchCmd(string input)
     s--;
     int length = pattern.at(s); // the last parameter
     pattern.pop_back();         // remove it from the token pattern
-    info("Read " + to_string(s) + " tokens, searching for an extension of max. " + to_string(length)
-         + " tokens.");
-    if (length < s) { // the length must be at least the length of the pattern
-        error("Surely, this will not be working.");
-    } else {
-        searchTokenset(moduleName, pattern, length, true); // Start search...
-    }
+    searchTokenset(moduleName, pattern, length, true); // Start search...
 }
 
 void processLatintextCmd(string input)

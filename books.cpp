@@ -1460,11 +1460,21 @@ int getTokens(const string &moduleName, const string &book, const string &verse)
 
 vector<string> searchTokenset(string moduleName, vector<int> pattern, int length, bool verbose)
 {
+
     vector<string> retval;
     // int found = 0;
     size_t pos;
     string book;
     string output;
+    int s = pattern.size();
+
+    output += "Read " + to_string(s) + " tokens, searching for an extension of max. " + to_string(length)
+         + " tokens.\n";
+    if (length < s) { // the length must be at least the length of the pattern
+        error(output + "Surely, this will not be working.");
+        return retval; // empty
+        }
+
     for (int i = 0; i < books.size(); i++) { // Search in all books in a given Bible edition...
         Book b = books[i];
         if (b.getModuleName().compare(moduleName) == 0) {
