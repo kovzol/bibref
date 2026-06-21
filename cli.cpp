@@ -497,7 +497,7 @@ void processHelpCmd(string input)
     if (input.length() != commandLength) {
         string rest = input.substr(input.find(" ") + 1);
         if ((boost::ends_with(rest, "1") || boost::ends_with(rest, "2"))
-            && !boost::ends_with(rest, "12"))
+            && !boost::ends_with(rest, "12") && rest != "minunique1")
             rest = rest.substr(0, rest.length() - 1) + "N";
         string helpText = getHelp(rest);
         if (helpText.length() == 0) {
