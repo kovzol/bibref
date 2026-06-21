@@ -19,7 +19,7 @@
 FROM debian:trixie
 RUN apt-get update && \
     apt-get -y install libsword-common libsword-dev git cmake build-essential \
-        libreadline-dev libboost-dev libboost-filesystem-dev bison flex pkgconf unzip \
+        libreadline-dev libboost-dev libboost-filesystem-dev libfribidi-dev bison flex pkgconf unzip \
         qt6-base-dev qt6-tools-dev qt6-tools-dev-tools qt6-l10n-tools \
         linguist-qt6 libgl1-mesa-dev freeglut3-dev libgraphviz-dev qt6-svg-dev qt6-webengine-dev \
         libgl1 mesa-utils x11-apps xdg-utils firefox-esr

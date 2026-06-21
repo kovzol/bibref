@@ -30,7 +30,7 @@ RUN apt-get update && apt-get install -y \
     qt6-base-dev qt6-tools-dev qt6-base-dev-tools \
     perl python3 ninja-build libdbus-1-dev \
     libsword-common libsword-dev \
-    libreadline-dev libboost-dev libboost-filesystem-dev libgraphviz-dev wine
+    libreadline-dev libboost-dev libboost-filesystem-dev libfribidi-dev libgraphviz-dev wine
 RUN apt-get install -y xvfb
 RUN wget -q https://jrsoftware.org/download.php/is.exe -O inno.exe
 RUN dpkg --add-architecture i386 && apt-get update && apt-get install -y wine32:i386
