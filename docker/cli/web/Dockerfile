@@ -24,7 +24,7 @@ SHELL ["/bin/bash", "-c"]
 RUN apt-get update && \
     apt-get -y install python3 xz-utils subversion git nginx \
         libsword-common libsword-dev build-essential cmake \
-        libreadline-dev libboost-dev libboost-filesystem-dev bison flex pkgconf unzip wget libgraphviz-dev
+        libreadline-dev libboost-dev libboost-filesystem-dev libfribidi-dev bison flex pkgconf unzip wget libgraphviz-dev
 RUN git clone https://github.com/emscripten-core/emsdk.git
 WORKDIR emsdk
 ARG EMSDK_VER=4.0.3
