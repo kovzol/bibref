@@ -288,6 +288,6 @@ RUN VERSION=`cat /build/version` && zip -9r bibref-qt-$VERSION.zip bibref-qt-$VE
 # 10. Create Inno Setup installer:
 WORKDIR /build/bibref/qt
 RUN VERSION=`cat /build/version` && ln -s /build/dist/bibref-qt-`cat /build/version` bibref-qt-`cat /build/version`
-RUN VERSION=`cat /build/version` && cat bibref.iss | sed s/2025-12-23/$VERSION/ > bibref-current.iss
+RUN VERSION=`cat /build/version` && cat bibref.iss | sed s/2026-03-08/$VERSION/ > bibref-current.iss
 RUN wine "C:\\Program Files (x86)\\Inno Setup 6\\ISCC.exe" bibref-current.iss
 RUN mv Output/bibref-setup.exe /build/dist

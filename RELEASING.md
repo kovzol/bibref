@@ -1,6 +1,6 @@
 # Steps to release a new version of bibref
 
-* Change version date in version.h, snapcraft.yaml (Linux command line), qt/bibref.iss (Windows/Qt)
+* Change version date in version.h, snapcraft.yaml (Linux command line), eventually in qt/bibref.iss (Windows/Qt) and docker/qt/win/Dockerfile
 * Add new release version and description in qt/io.github.kovzol.bibref.metainfo.xml
 * Commit code and push to GitHub
 
