@@ -55,6 +55,11 @@ class NoCitationException : public exception
     virtual const char *what() const throw() { return "Passage is not a citation."; }
 } NoCitationException;
 
+class NotUniqueException : public exception
+{
+    virtual const char *what() const throw() { return "Passage is not unique."; }
+} NotUniqueException;
+
 using namespace sword;
 
 vector<Book> books;
@@ -1234,8 +1239,12 @@ string _extend(const string &moduleName1,
     string text = b2.getText().substr(pos2S, pos2E - pos2S + 1); // the passage to extend
 
     // checking the input
-    if (find(text, moduleName1, 2, 0) != 1) {
+    int results = find(text, moduleName1, 2, 0);
+    if (results < 1) {
         throw NoCitationException; // this passage is not present in the assumed Bible edition, that's an error
+    }
+    if (results > 1) {
+        throw NotUniqueException; // this passage is not unique in the assumed Bible edition, that's an error
     }
 
     bool citation = true;
