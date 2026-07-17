@@ -1241,7 +1241,7 @@ void texmacs_autocomplete(string line) { // A possible input from texmacs: (comp
     int start = cur; // at which position to start the word in the input (to be searched in the vocabulary)
 
     // find the previous space character or the very beginning of to_complete
-    while ((start >= 0) && (to_complete[--start] != ' '));
+    while ((start >= 0) && (to_complete[start--] != ' '));
     while ((start < cur) && (to_complete[++start] == ' '));
 
     to_complete = to_complete.substr(start, cur-start); // continue with the word before the cursor
