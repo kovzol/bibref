@@ -411,6 +411,14 @@ void processAddbooksCmd()
 
 void processQuitCmd()
 {
+#ifdef __EMSCRIPTEN__
+    error("Unsupported command.");
+    return;
+#endif
+    if (texmacs_mode) {
+       error("Unsupported command.");
+       return;
+    }
     info("Goodbye.");
     exit(0);
 }
