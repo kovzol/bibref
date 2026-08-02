@@ -8,7 +8,7 @@ all:	pbrst-cli
 
 pbrst-cli:	pbrst.tab.o pbrst.o pbrst-cli.o books-wrapper.o fingerprint-wrapper.o books.o cli.o book.o psalmsinfo.o fingerprint.o gv-export.o
 	${CXX} -o $@ books-wrapper.o fingerprint-wrapper.o pbrst.tab.o pbrst.o pbrst-cli.o books.o cli.o book.o psalmsinfo.o fingerprint.o gv-export.o\
-         -lsword -lboost_system -lboost_filesystem -lreadline -lgvc -lcgraph -lcdt
+         -lsword -lboost_filesystem -lreadline -lgvc -lcgraph -lcdt
 
 pbrst.tab.c pbrst.tab.h:	pbrst.y
 	${YACC} -vd pbrst.y
