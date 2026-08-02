@@ -185,6 +185,7 @@ static string hyphenate_word_utf8(const string& word, size_t N)
         if ((c & 0xC0) != 0x80) {
             if (char_count > 0 && char_count % N == 0) {
                 result += '-';
+                result += ' '; // for syntax highlighting
             }
             ++char_count;
         }

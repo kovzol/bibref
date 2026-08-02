@@ -20,6 +20,9 @@ WS      [ \t]*
 DIGIT   [0-9]
 NUM     {DIGIT}+
 ID      [A-Za-z][A-Za-z0-9_,\-\+]*
+LIT     [a-z\\]+
+SEP     -[ \t\n]*
+
 
 %%
 
@@ -151,7 +154,7 @@ REVELATION_OF_JOHN { yylval.strval = DUPTEXT; return REVELATION_OF_JOHN; }
 \"(\\.|[^"\n])*$	{ yyerror("Unterminated string %s E21", yytext); }
 
   /* a-z literals, change q to z, allow - and \ but remove them immediately */
-[a-z\\-]+	{ yylval.strval = clean_literal(DUPTEXT); return AZLITERAL;}
+{LIT}({SEP}{LIT})*	{ yylval.strval = clean_literal(DUPTEXT); return AZLITERAL;}
 
   /* name */
 {ID}	{ yylval.strval = DUPTEXT;

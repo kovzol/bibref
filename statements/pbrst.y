@@ -1209,7 +1209,7 @@ char* replace_char(char* str, char find, char replace){
 char* clean_literal(char* s) {
     char* dst = s;
     for (char* src = s; *src; ++src) {
-        if (*src != '\\' && *src != '-') {
+        if (*src != '\\' && *src != '-' && *src != ' ' && *src != '\n' && *src != '\r' && *src != '\t' ) {
             *dst++ = *src;
         }
     }
