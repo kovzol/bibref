@@ -404,7 +404,13 @@ void MainWindow::performLookup(QLineEdit *lookupEdit) {
     int restSize = tokens.size();
     if (restSize == 3) {                                    // e.g. lookup LXX Genesis 1:1
         collect_info = "";                                  // reset communication buffer
-        lookupTranslation(tokens[0], tokens[1], tokens[2]); // simple lookup via Sword
+        bool retVal = lookupTranslation(tokens[0], tokens[1], tokens[2]); // simple lookup via Sword
+        if (retVal != 0) {
+            QString message = tr(
+                "Invalid input.");
+            statusBar()->showMessage(message);
+            return;
+        }
         passageInfos->append(("<b>" + rest + "</b>").c_str());
         QSettings settings;
         bool useKoineGreekFont = settings.value("Application/useKoineGreekFont", defaultUseKoineGreekFont).toBool();
