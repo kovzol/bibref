@@ -1461,13 +1461,15 @@ EMSCRIPTEN_KEEPALIVE const char *bibref_wasm_vocabulary()
 
 void error(const string &message)
 {
+    string message_sent = "";
 #ifndef __EMSCRIPTEN__
-    cerr << error_color;
+    message_sent += error_color;
 #endif
-    cerr << message;
+    message_sent += message;
 #ifndef __EMSCRIPTEN__
-    cerr << reset_color;
+    message_sent += reset_color;
 #endif
-    cerr << endl << flush;
+    message_sent += "\n";
+    cerr << nounitbuf << message_sent << flush; // For TeXmacs, it is crucial to send the message in one buffer.
     collect_info = collect_info + error_color + message + reset_color + "\n";
 }
