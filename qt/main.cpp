@@ -71,6 +71,10 @@ bool defaultUseKoineGreekFont;
 bool defaultTooltipsGreek;
 int defaultMaxClipboardShow;
 
+QTranslator qtTranslator;
+QTranslator qtBaseTranslator;
+QTranslator bibrefTranslator;
+
 QApplication *app = nullptr;
 MainWindow *window = nullptr;
 
@@ -133,13 +137,15 @@ int main(int argc, char *argv[])
     window->showMaximized();
     return 0;
 #else
-    return app->exec();
+    int rc = app->exec();
+    qApp->removeTranslator(&qtTranslator);
+    qApp->removeTranslator(&qtBaseTranslator);
+    qApp->removeTranslator(&bibrefTranslator);
+    delete window;
+    delete app;
+    return rc;
 #endif
 }
-
-QTranslator qtTranslator;
-QTranslator qtBaseTranslator;
-QTranslator bibrefTranslator;
 
 void setLanguage(QString language)
 // pass language code like "hu" or "en" to override system settings
