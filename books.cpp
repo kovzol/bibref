@@ -414,8 +414,16 @@ int lookupTranslation(string moduleName, string book, const string &verse)
     // the lookup string (e.g. "Psalms 114:9") and then
     // re-read it:
     VerseKey *key = (VerseKey *) module->getKey();
+    if (!key || key->popError()) {
+       error("Invalid book.");
+       return 1;
+    }
     int verseN = key->getVerse();
     key->setVerse(verseN);
+    if (!key || key->popError()) {
+       error("Invalid verse.");
+       return 1;
+    }
     // Maybe, in some cases, this is required because of
     // the internal structure of the module.
     string text;
