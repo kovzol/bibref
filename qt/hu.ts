@@ -89,7 +89,7 @@
     </message>
     <message>
         <source>Verse:</source>
-        <translation type="vanished">Vers:</translation>
+        <translation>Vers:</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="424"/>

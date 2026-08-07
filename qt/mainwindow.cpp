@@ -841,6 +841,7 @@ void MainWindow::dialogBoxVerse(string command, QString windowTitle, const char*
 
 void MainWindow::lookup()
 {
+    if (false) tr("Verse:"); // force lupdate to not mark it as vanished
     dialogBoxVerse("lookup", "Lookup", "Verse:", 0, lookupText);
 }
 
