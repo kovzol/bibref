@@ -69,6 +69,21 @@
   <content_rating type="oars-1.1" />
 
   <releases>
+    <release version="2026-08-08" date="2026-08-08">
+    <url type="details">https://github.com/kovzol/bibref/commits/396e58d1ba9f27cc84b4b7ddea18782591b45a22</url>
+      <description>
+        <p>Release description</p>
+          <ul>
+            <li>Fix some possible crashes on application exit</li>
+            <li>Disallow lookup for non-existent books</li>
+            <li>Improve Hungarian translation</li>
+            <li>Improve the BRST database</li>
+            <li>Use StatResGNT 1.5 to fix quotation marks and apostrophes</li>
+            <li>Fix segfault on empty statement identifier</li>
+            <li>Update to LXX 3.2</li>
+          </ul>
+      </description>
+    </release>
     <release version="2026-03-08" date="2026-03-08">
     <url type="details">https://github.com/kovzol/bibref/commits/85b3a7f54bcea4e1cb5ee771f73fdb0aa6f1362a</url>
       <description>
