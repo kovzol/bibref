@@ -12,6 +12,12 @@ finish-args:
   - --device=dri
   - --env=QTWEBENGINEPROCESS_PATH=/app/bin/QtWebEngineProcess
   - --system-talk-name=org.freedesktop.UDisks2
+cleanup:
+  - /include
+  - /lib/cmake
+  - /lib/pkgconfig
+cleanup-commands:
+  - /app/cleanup-BaseApp.sh
 modules:
   - name: sword
     buildsystem: cmake-ninja
@@ -54,8 +60,8 @@ modules:
       - /bin/*
     sources:
       - type: archive
-        url: https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/14.1.3/graphviz-14.1.3.tar.gz
-        sha256: 44fdbfe20c062047ac64185e3339bf90f392c295cf1f4cc1be2d07bcc21be1f1
+        url: https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/15.1.1/graphviz-15.1.1.tar.gz
+        sha256: d511d8938bbfe985b84506c96d1bbf1acba4ad88e62b51421a8b954e572f30d9
         x-checker-data:
           type: anitya
           project-id: 1249
@@ -79,17 +85,9 @@ modules:
     sources:
       # - type: git
       # url: https://github.com/kovzol/bibref
-      # tag: 2026-01-13 # does not yet exist
+      # tag: 2026-08-08 # does not yet exist
       - type: archive
-        url: https://github.com/kovzol/bibref/archive/b46b1aa0e1f1877b4b9185baf031a82bd67c500d.zip
-        sha256: 1f47dc9dc16e1b05629de78b7a652fec167757dc089c0599a96034826eaa306a
+        url: https://github.com/kovzol/bibref/archive/792d14f7f4801142a803bc710bbf6efe27136b8e.zip
+        sha256: 59a094404e6549de41131b3a0341c11e22c9aec13a95ad6e21bee2c3fc0bef3b
     post-install:
       - mv /app/tmp/.sword/* /app/share/sword
-
-cleanup:
-  - /include
-  - /lib/cmake
-  - /lib/pkgconfig
-
-cleanup-commands:
-  - /app/cleanup-BaseApp.sh
