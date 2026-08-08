@@ -32,7 +32,7 @@ RUN apt-get update && apt-get install -y \
     libsword-common libsword-dev \
     libreadline-dev libboost-dev libboost-filesystem-dev libfribidi-dev libgraphviz-dev wine
 RUN apt-get install -y xvfb
-RUN wget -q https://jrsoftware.org/download.php/is.exe -O inno.exe
+RUN wget -q https://github.com/jrsoftware/issrc/releases/download/is-6_7_3/innosetup-6.7.3.exe -O inno.exe
 RUN dpkg --add-architecture i386 && apt-get update && apt-get install -y wine32:i386
 RUN xvfb-run wine inno.exe /VERYSILENT /SUPPRESSMSGBOXES /NORESTART
 
