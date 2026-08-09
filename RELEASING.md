@@ -7,8 +7,8 @@
 ## Linux
 
 * Get last commit hashcode from GitHub, download latest zip and get sha256sum, then update qt/io.github.kovzol.bibref.yaml accordingly
-* Change working directory to `qt/` and run `flatpak-builder --force-clean --user --install-deps-from=flathub --repo=repo --install builddir io.github.kovzol.bibref.yaml && flatpak build-bundle repo bibref.flatpak io.github.kovzol.bibref && flatpak install bibref.flatpak && flatpak run io.github.kovzol.bibref`
-* Get `bibref.flatpak` and share it on GitHub/Releases later
+* Change working directory to `qt/` and run `flatpak-builder --force-clean --user --install-deps-from=flathub --repo=repo --install builddir io.github.kovzol.bibref.yaml && flatpak build-bundle repo bibref.flatpak io.github.kovzol.bibref && flatpak install bibref.flatpak && flatpak run io.github.kovzol.bibref` (optional)
+* Get `bibref.flatpak` and share it on GitHub/Releases later (optional)
 * Create a new branch at https://github.com/flathub/io.github.kovzol.bibref, update io.github.kovzol.bibref.yaml, commit, make a pull request and finally, merge
 * Commit code and push to GitHub (optional)
 * Update Snapcraft: trigger a new build, release the new version
@@ -16,11 +16,11 @@
 ## macOS
 
 * Pull the newest version
+* If Qt is not unique on the system, add the Qt installation path to the PATH, something like this: `export PATH=/Users/.../Qt/6.10.2/macos/bin/:$PATH`
 * Build both the cli and Qt versions (the latter with -DWEBENGINE=ON)
 * Run the cli version and recreate the `bibref-addbooks-cache` folder to have it up-to-date
 * Remove `qt/bin/` if it exists
 * Change working directory to `qt/`
-* If needed, add the Qt installation path to the PATH, something like this: `export PATH=/Users/.../Qt/6.10.2/macos/bin/:$PATH`
 * Run `./deploy-mac` by adding the Qt build folder and the `bibref-addbooks-cache` folder locations as parameters
 * Get `bin/bibref-qt.dmg` and share it on GitHub/Releases later
 
