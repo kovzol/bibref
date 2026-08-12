@@ -1,5 +1,5 @@
 name: bibref
-base: core20
+base: core24
 version: '2026-08-08'
 summary: A tool that helps discovering internal references in the Bible
 icon: logo-Psalm40-192.png
@@ -26,14 +26,14 @@ parts:
     source: https://github.com/kovzol/bibref.git
     plugin: cmake
     cmake-parameters:
-      - -DCMAKE_BUILD_TYPE=Debug -DWITH_FRIBIDI=ON
-    stage-packages: [libsword-1.8.1, libboost-filesystem1.71.0, libgvc6, graphviz, libfribidi0, fontconfig, fontconfig-config, fonts-dejavu-core]
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo -DWITH_FRIBIDI=ON
+    stage-packages: [libsword-1.9.0, libboost-filesystem1.83.0, libgvc6, graphviz, libfribidi0, fontconfig, fontconfig-config, fonts-dejavu-core]
     override-build: |
-      snapcraftctl build
+      craftctl default
       dot -c
-      cp /usr/lib/$SNAPCRAFT_ARCH_TRIPLET/graphviz/config6a $SNAPCRAFT_PART_INSTALL/usr/lib/$SNAPCRAFT_ARCH_TRIPLET/graphviz
+      cp /usr/lib/$CRAFT_ARCH_TRIPLET/graphviz/config6a $CRAFT_PART_INSTALL/usr/lib/$CRAFT_ARCH_TRIPLET/graphviz
   sword-modules:
     plugin: nil
     override-build: |
-      mkdir -p $SNAPCRAFT_PART_INSTALL/root
-      cp -a ~/.sword $SNAPCRAFT_PART_INSTALL/root
+      mkdir -p $CRAFT_PART_INSTALL/root
+      cp -a ~/.sword $CRAFT_PART_INSTALL/root
