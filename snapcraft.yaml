@@ -27,7 +27,7 @@ parts:
     plugin: cmake
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo -DWITH_FRIBIDI=ON
-    stage-packages: [libsword-1.9.0, libboost-filesystem1.83.0, libgvc6, graphviz, libfribidi0, fontconfig, fontconfig-config, fonts-dejavu-core]
+    stage-packages: [libsword-1.9.0t64, libboost-filesystem1.83.0, libgvc6, graphviz, libfribidi0, fontconfig, fontconfig-config, fonts-dejavu-core]
     override-build: |
       craftctl default
       dot -c
