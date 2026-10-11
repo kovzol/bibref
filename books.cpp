@@ -1376,8 +1376,8 @@ void getrefs(const string &moduleName2,
 {
     vector<Reference> refs;                        // store plausible references in a vector
     Book b1 = getBook(book1, moduleName1);         // the input passage is in book b1
-    int pos1S = b1.getVerseStart(verse1S) + start; // exact start position of the input passage
-    int pos1E = b1.getVerseEnd(verse1E) - end;     // exact end position of the input passage
+    int pos1S = b1.getVerseStartClosest(verse1S) + start; // exact start position of the input passage
+    int pos1E = b1.getVerseEndClosest(verse1E) - end;     // exact end position of the input passage
     string text = b1.getText().substr(pos1S, pos1E - pos1S + 1); // the input passage
     vector<string> minunique = find_min_unique(text,
                                                moduleName1,

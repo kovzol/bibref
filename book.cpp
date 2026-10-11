@@ -108,6 +108,45 @@ int Book::getVerseStart(string i)
     throw InvalidVerseReferenceException;
 }
 
+#define VERSES_MAX 1000 // assume no more than 1000 verses per chapter
+#define CHAPTERS_MAX 200 // assume no more than 200 verses per chapter
+
+// TODO: Unify code for getVerseStartClosest() and getVerseEndClosest()
+int Book::getVerseStartClosest(string i)
+{
+    auto pos = i.find(':');
+    int ihash = 0;
+    if (pos != string::npos) {
+        int ic = stoi(i.substr(0, pos));
+        int iv = stoi(i.substr(pos + 1));
+        ihash = ic * VERSES_MAX + iv;
+       }
+    else throw InvalidVerseReferenceException;
+
+    int mindiff = CHAPTERS_MAX * VERSES_MAX; // be pessimistic
+    int minms;
+    for (int j = 0; j < m_verses.size(); ++j) {
+        string ji = m_verses[j].m_info;
+        int match = ji.compare(i);
+        if (match == 0) {
+            int found = m_verses[j].m_start;
+            return found;
+        }
+        pos = ji.find(':');
+        int jic = stoi(ji.substr(0, pos));
+        int jiv = stoi(ji.substr(pos + 1));
+        int jihash = jic * VERSES_MAX + jiv;
+        int diff = abs(ihash - jihash);
+        if (diff < mindiff) {
+            mindiff = diff;
+            minms = m_verses[j].m_start;
+            }
+    }
+    if (mindiff < CHAPTERS_MAX * VERSES_MAX)
+        return minms;
+    throw InvalidVerseReferenceException;
+}
+
 int Book::getVerseEnd(string i)
 {
     for (int j = 0; j < m_verses.size(); ++j) {
@@ -117,6 +156,41 @@ int Book::getVerseEnd(string i)
             return found;
         }
     }
+    throw InvalidVerseReferenceException;
+}
+
+int Book::getVerseEndClosest(string i)
+{
+    auto pos = i.find(':');
+    int ihash = 0;
+    if (pos != string::npos) {
+        int ic = stoi(i.substr(0, pos));
+        int iv = stoi(i.substr(pos + 1));
+        ihash = ic * VERSES_MAX + iv;
+    }
+    else throw InvalidVerseReferenceException;
+
+    int mindiff = CHAPTERS_MAX * VERSES_MAX; // be pessimistic
+    int minms;
+    for (int j = 0; j < m_verses.size(); ++j) {
+        string ji = m_verses[j].m_info;
+        int match = ji.compare(i);
+        if (match == 0) {
+            int found = m_verses[j].m_start + m_verses[j].m_length - 1;
+            return found;
+        }
+        pos = ji.find(':');
+        int jic = stoi(ji.substr(0, pos));
+        int jiv = stoi(ji.substr(pos + 1));
+        int jihash = jic * VERSES_MAX + jiv;
+        int diff = abs(ihash - jihash);
+        if (diff < mindiff) {
+            mindiff = diff;
+            minms = m_verses[j].m_start + m_verses[j].m_length - 1;
+        }
+    }
+    if (mindiff < CHAPTERS_MAX * VERSES_MAX)
+        return minms;
     throw InvalidVerseReferenceException;
 }
 

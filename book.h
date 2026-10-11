@@ -39,7 +39,9 @@ public:
     vector<int> getVerseTokens(string info);
     vector<int> getTokens();
     int getVerseStart(string info);
+    int getVerseStartClosest(string info);
     int getVerseEnd(string info);
+    int getVerseEndClosest(string info);
     int getVerseTokensStart(string info);
     int getVerseTokensEnd(string info);
     // to load a book from cache:
