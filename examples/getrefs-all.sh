@@ -4,6 +4,7 @@
 # FIXME: Some entries are duplicated, duplums should be removed.
 BIBREF=../build/bibref
 OUTPUT=getrefs-all.csv
+GNT=StatResGNT
 
 echo "Septuagint module,S. book,S. passage start,S. p. end,Greek New Testament module,GNT book,GNT passage start,GNT p. end,length,S. p. start position,GNT p. start position" > $OUTPUT
 
@@ -23,7 +24,7 @@ books[11]="II_Kings 25:30"
 books[12]="I_Chronicles 29:30"
 books[13]="II_Chronicles 36:23"
 books[14]="I_Esdras 9:55"
-books[15]="Esra 10:44"
+books[15]="Ezra 10:44"
 books[16]="Nehemiah 13:31"
 books[17]="Esther 10:3"
 books[18]="Judith 16:25"
@@ -68,9 +69,18 @@ process() {
  # Output format in bibref:
  # LXX Exodus 2:14+37 2:14-110 = SBLGNT Luke 12:14+45 12:14-4 (length=6, pos1=3270, pos2=50522)
  echo $*
- echo $* | $BIBREF -a -e 2>&1 | grep = |\
+ OUT=getrefs-all-`date +%s%N`.out
+ ERR=getrefs-all-`date +%s%N`.err
+ echo $* | $BIBREF -a -e 2>&1 >$OUT 2>$ERR
+ cat $ERR | grep --silent Sorry && {
+  cat $ERR
+  exit 1
+  }
+ cat $ERR | grep = |\
   sed s/\(length=// | sed s/,//g | sed s/pos1=// | sed s/pos2=// | sed s/\)// |\
   sed s/"# "// | sed s/"= "// | sed s/" "/,/g >> $OUTPUT
+ rm -f $OUT
+ rm -f $ERR
  }
 
 # Process all books (but Psalms)
@@ -82,14 +92,14 @@ for book in "${books[@]}"; do
  chapter="${verseinfo[0]}"
  verse="${verseinfo[1]}"
  splitchapter=$((chapter/2))
- command1="getrefs SBLGNT LXX $bookname 1:1 $splitchapter:1"
- command2="getrefs SBLGNT LXX $bookname $splitchapter:1 $lastverse"
+ command1="getrefs $GNT LXX $bookname 1:1 $splitchapter:1"
+ command2="getrefs $GNT LXX $bookname $splitchapter:1 $lastverse"
  process "$command1"
  process "$command2"
  done
 
 # Process Psalms
 for p in `seq 1 151`; do
- command="getrefs SBLGNT LXX Psalms $p"
+ command="getrefs $GNT LXX Psalms $p"
  process "$command"
  done
