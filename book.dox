@@ -80,6 +80,12 @@ public:
   int getVerseStart(string info);
   /// Get the character position of the end of verse defined by traditional numbering, e.g. "3:16".
   int getVerseEnd(string info);
+  /// Get the character position of the start of verse defined by traditional numbering, e.g. "3:16".
+  /// If no such verse exists, one of the closest verses will be used instead.
+  int getVerseStartClosest(string info);
+  /// Get the character position of the end of verse defined by traditional numbering, e.g. "3:16".
+  /// If no such verse exists, one of the closest verses will be used instead.
+  int getVerseEndClosest(string info);
   /// Get the token position of the start of verse defined by traditional numbering, e.g. "3:16".
   int getVerseTokensStart(string info);
   /// Get the token position of the end of verse defined by traditional numbering, e.g. "3:16".
