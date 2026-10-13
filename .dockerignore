@@ -1,0 +1,6 @@
+.git
+build
+build-*
+bibref-addbooks-cache
+
+**/__pycache__
