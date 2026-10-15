@@ -70,17 +70,15 @@ process() {
  # LXX Exodus 2:14+37 2:14-110 = SBLGNT Luke 12:14+45 12:14-4 (length=6, pos1=3270, pos2=50522)
  echo $*
  OUT=getrefs-all-`date +%s%N`.out
- ERR=getrefs-all-`date +%s%N`.err
- echo $* | $BIBREF -a -e 2>&1 >$OUT 2>$ERR
- cat $ERR | grep --silent Sorry && {
-  cat $ERR
+ echo $* | $BIBREF -a -e >$OUT 2>&1
+ cat $OUT | grep --silent Sorry && {
+  cat $OUT
   exit 1
   }
- cat $ERR | grep = |\
+ cat $OUT | grep = |\
   sed s/\(length=// | sed s/,//g | sed s/pos1=// | sed s/pos2=// | sed s/\)// |\
   sed s/"# "// | sed s/"= "// | sed s/" "/,/g >> $OUTPUT
  rm -f $OUT
- rm -f $ERR
  }
 
 # Process all books (but Psalms)
