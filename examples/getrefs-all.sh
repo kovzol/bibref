@@ -1,10 +1,10 @@
 #!/bin/bash
 # This script obtains all getrefs entries. A complete run may take a long time (several hours).
-# Important: You need a quite large amount of RAM to make this work, at least 24 GB recommended.
+# Important: You need a quite large amount of RAM to make this work, at least 40 GB recommended (eventually with swap).
 # FIXME: Some entries are duplicated, duplums should be removed.
 BIBREF=../build/bibref
 OUTPUT=getrefs-all.csv
-GNT=StatResGNT
+GNT=SBLGNT
 
 echo "Septuagint module,S. book,S. passage start,S. p. end,Greek New Testament module,GNT book,GNT passage start,GNT p. end,length,S. p. start position,GNT p. start position" > $OUTPUT
 
@@ -89,11 +89,15 @@ for book in "${books[@]}"; do
  IFS=":" read -r -a verseinfo <<< "${lastverse}"
  chapter="${verseinfo[0]}"
  verse="${verseinfo[1]}"
- splitchapter=$((chapter/2))
- command1="getrefs $GNT LXX $bookname 1:1 $splitchapter:1"
- command2="getrefs $GNT LXX $bookname $splitchapter:1 $lastverse"
- process "$command1"
- process "$command2"
+ if [ "$chapter" = "1" -o "$chapter" = "2" -o "$chapter" = "3" ]; then
+  process "getrefs $GNT LXX $bookname 1:1 $lastverse"
+ else
+  splitchapter=$((chapter/2))
+  command1="getrefs $GNT LXX $bookname 1:1 $splitchapter:1"
+  command2="getrefs $GNT LXX $bookname $splitchapter:1 $lastverse"
+  process "$command1"
+  process "$command2"
+  fi
  done
 
 # Process Psalms
