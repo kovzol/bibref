@@ -69,6 +69,16 @@
   <content_rating type="oars-1.1" />
 
   <releases>
+    <release version="2026-10-19" date="2026-10-19">
+    <url type="details">https://github.com/kovzol/bibref/commits/39918d2f0c151a581df33206332973be266f51b9</url>
+      <description>
+        <p>Release description</p>
+          <ul>
+            <li>Fix getrefs command when bounds are on empty verses</li>
+            <li>Improve the BRST database</li>
+          </ul>
+      </description>
+    </release>
     <release version="2026-08-08" date="2026-08-08">
     <url type="details">https://github.com/kovzol/bibref/commits/396e58d1ba9f27cc84b4b7ddea18782591b45a22</url>
       <description>
