@@ -1,7 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 
-#define LOGO_FILE "logo-Psalm40-192.png"
+#define LOGO_FILE "qtlogo.svg"
 #define SHARE_FOLDER "share/bibref-qt"
 
 #include "version.h"

@@ -105,8 +105,8 @@ include_directories(${PARSER_DIR} "${CMAKE_CURRENT_SOURCE_DIR}/..")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -DYYDEBUG=1")
 
 SET(PBRST_SRCS
- books-wrapper.cpp books-wrapper.h
- fingerprint-wrapper.cpp fingerprint-wrapper.h
+ ../books-wrapper.cpp ../books-wrapper.h
+ ../fingerprint-wrapper.cpp ../fingerprint-wrapper.h
  "${LEXER_OUT}" "${PARSER_OUT}"
 )
 
@@ -121,19 +121,19 @@ qt_add_executable(bibref-qt MACOSX_BUNDLE
     statementwindow.cpp statementwindow.h
     highlighter.cpp highlighter.h
     visualizewindow.cpp visualizewindow.h
-    book.cpp book.h
-    books.cpp books.h
-    cli.cpp cli.h
     settings.h descriptions.h
-    fingerprint.cpp fingerprint.h
-    psalmsinfo.cpp psalmsinfo.h
-    gv-export.cpp gv-export.h
+    ../book.cpp ../book.h
+    ../books.cpp ../books.h
+    ../cli.cpp ../cli.h
+    ../fingerprint.cpp ../fingerprint.h
+    ../psalmsinfo.cpp ../psalmsinfo.h
+    ../gv-export.cpp ../gv-export.h
+    ../version.h
     ${PBRST_SRCS}
     # ${QM_FILES} # this is handled via bibref.qrc
     bibref.qrc
     ${bibref_qt_ICON}
     editor.h editor.cpp
-    version.h
 )
 
 set_target_properties(bibref-qt PROPERTIES
