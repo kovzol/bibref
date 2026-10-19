@@ -1,6 +1,8 @@
 #!/bin/bash
 # This script obtains all getrefs entries. A complete run may take a long time (several hours).
 # Important: You need a quite large amount of RAM to make this work, at least 40 GB recommended (eventually with swap).
+# In case StatResGNT is to be checked, please edit the setting GNT below.
+# To speed things up, you may want to remove the check for the book Odes. In fact, it should not really be a part of LXX.
 # FIXME: Some entries are duplicated, duplums should be removed.
 BIBREF=../build/bibref
 OUTPUT=getrefs-all.csv
