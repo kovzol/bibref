@@ -2,7 +2,7 @@
 
 # How to use this file:
 # 1. On an Ubuntu Linux, install the package **docker.io**. This machine will be called your container's host.
-# 2. Build the image by entering `sudo docker build .`.
+# 2. From the repository root, enter `sudo docker build -f docker/cli/web/Dockerfile .`.
 #    You will get an image ID at the end of the process.
 # 3. Start the web server and allow a network connection to it by issuing `sudo docker run -d -p 8080:80 ID`
 #    where ID stands for the obtained image ID in step 2.
@@ -55,16 +55,18 @@ RUN make -i -j$(nproc)
 RUN make -i install
 WORKDIR ..
 
-# Download bibref:
-ARG GIT_COMMIT=
-RUN git clone https://github.com/kovzol/bibref && \
-    if [ -n "$GIT_COMMIT" ]; then cd bibref; git checkout $GIT_COMMIT; fi
+# Build the source in this checkout, including uncommitted contribution changes:
+COPY . /bibref
 
 # Build bibref (cli):
 WORKDIR bibref
 RUN mkdir build
 WORKDIR build
-RUN cmake .. && make -j$(nproc) && make install || true
+RUN cmake .. && make -j$(nproc) && make install
+
+# Install lookup-only modules before cache generation and WASM filesystem preload.
+RUN python3 ../docker/cli/web/install-modules.py && \
+    python3 ../docker/cli/web/check-modules.py /usr/local/bin/bibref
 
 # Create the addbooks-cache:
 RUN bibref -a
