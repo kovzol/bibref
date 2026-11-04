@@ -1200,33 +1200,31 @@ vector<string> find_min_unique(string text, const string &moduleName, bool verbo
     } else if (l > long_limit) {
         error("Input is very long (" + to_string(l) + " characters), expect very slow operation.");
     }
-    vector<vector<int>> is_unique(l, vector<int>(l)); // TODO: improve this to use just the half
+    // Only the upper triangular part is used, with one byte per entry.
+    vector<unsigned char> is_unique(static_cast<size_t>(l) * (l + 1) / 2);
+    auto index = [l](int i, int j) {
+        return static_cast<size_t>(i) * l - static_cast<size_t>(i) * (i - 1) / 2 + j;
+    };
     if (l > long_limit) {
         error("Memory successfully reserved.");
     }
 
-    // Initialization:
-    for (int i = 0; i < l; ++i) {
-        for (int j = 0; j < l - i; ++j) {
-            is_unique[i][j] = -1; // no info yet
-        }
-    }
     string output;
     for (int i = 0; i < l; ++i) {
         for (int j = 0; j < l - i; ++j) {
-            if (i > 0 && (is_unique[i - 1][j + 1] > 0 || is_unique[i - 1][j] > 0)) {
-                is_unique[i][j] = 2; // this entry can already be ignored
+            if (i > 0 && (is_unique[index(i - 1, j + 1)] > 0 || is_unique[index(i - 1, j)] > 0)) {
+                is_unique[index(i, j)] = 2; // this entry can already be ignored
             } else {
                 string subtext = text.substr(j, i + 1);
                 int unique = find(subtext, moduleName, 2, 0); // decide if this subtext is unique
                 if (unique == 1) {
-                    is_unique[i][j] = 1; // if yes, fill in the database
+                    is_unique[index(i, j)] = 1; // if yes, fill in the database
                     if (verbose) {
                         output += "Text " + subtext + " is minimal unique." + "\n"; // inform the user if needed
                     }
                     retval.push_back(subtext); // store this result
                 } else {
-                    is_unique[i][j] = 0; // if no, fill in the database
+                    is_unique[index(i, j)] = 0; // if no, fill in the database
                 }
             }
         }
