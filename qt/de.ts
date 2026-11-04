@@ -386,8 +386,8 @@
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1502"/>
-        <source>Search for a set of tokens on a maximal length in a Bible</source>
-        <translation>Suche nach einer Menge von Tokens mit maximaler Länge in einer Bibel</translation>
+        <source>Search for a set of tokens within a maximum token length in a Bible</source>
+        <translation>Suche in einer Bibel nach einer Tokenmenge innerhalb einer maximalen Tokenlänge</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1506"/>

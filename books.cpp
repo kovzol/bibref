@@ -111,7 +111,7 @@ string greekToLatin(string word)
         auto c1 = static_cast<unsigned char>(word[i]);     // first Unicode byte
         auto c2 = static_cast<unsigned char>(word[i + 1]); // second Unicode byte
         /* if (D==1) { printf("c1=%x c2=%x\n", c1, c2); } */
-        // keep care of special characters
+        // handle special characters
         if (c1 == 0x80) {
             i--; // jump 1 byte back
         }
@@ -140,7 +140,7 @@ string greekToLatin(string word)
                     c = 'e';
                     break;
                 case 0xB6:
-                    // c = 'q'; // it should be z (zeta) but we change it to free one letter at the end of alphabet
+                    // c = 'q'; // it should be z (zeta) but we change it to free up one letter at the end of the alphabet
                     c = 'z'; // it is not worth winning one character at the price of confusion
                     break;
                 case 0xB7:
@@ -241,7 +241,7 @@ string processWord(string word)
     for (int i = 0; i < word.length(); i += 2) {
         auto c1 = static_cast<unsigned char>(word[i]);
         auto c2 = static_cast<unsigned char>(word[i + 1]);
-        // keep care of special characters
+        // handle special characters
         if (c1 == 0x80) {
             i--;
         }
@@ -288,7 +288,7 @@ int processWordAsToken(string word)
     for (int i = 0; i < word.length(); i += 2) {
         auto c1 = static_cast<unsigned char>(word[i]);
         auto c2 = static_cast<unsigned char>(word[i + 1]);
-        // keep care of special characters
+        // handle special characters
         if (c1 == 0x80) {
             i--;
         }
@@ -438,7 +438,7 @@ int lookupTranslation(string moduleName, string book, const string &verse)
     return 0;
 }
 
-/// Loaded all books of a Bible edition.
+/// Load all books of a Bible edition.
 int addBooks_cached(string moduleName, string installedModuleVersion)
 {
     vector<string> bookNames;
@@ -568,7 +568,7 @@ int addBooks_cached(string moduleName, string installedModuleVersion)
         std::ifstream bookFile(path + "/" + bookName + ".book"); // open a-z encoded raw book
         if (!bookFile.good())
             continue; // do not continue for this book, because it does not exist in the module
-        // TODO: This check should be done for the other file types to handle non-existence properly
+        // TODO: This check should be done for the other file types to handle missing files properly
         std::stringstream buffer;
         buffer << bookFile.rdbuf();
         Book book = Book(bookName);
@@ -664,7 +664,7 @@ int addBooks(string moduleName, string firstVerse, string lastVerse, bool remove
 
     info("Loading " + moduleName + "...");
     string path = "bibref-addbooks-cache/" + moduleName;
-    bool create_cache = true; // Hopefully we can set up a new cache.
+    bool create_cache = true; // We hope to create a new cache.
 
 #ifndef __EMSCRIPTEN__ // In the web version we don't save the cache, but assume that it exists.
     try {

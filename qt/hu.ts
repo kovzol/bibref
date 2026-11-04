@@ -428,8 +428,8 @@
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1502"/>
-        <source>Search for a set of tokens on a maximal length in a Bible</source>
-        <translation>Maximális hosszal korlátozott kódhalmaz keresése egy Bibliában</translation>
+        <source>Search for a set of tokens within a maximum token length in a Bible</source>
+        <translation>Kódhalmaz keresése egy Bibliában, legfeljebb megadott számú tokenből álló szakaszokban</translation>
     </message>
     <message>
         <location filename="mainwindow.cpp" line="1508"/>

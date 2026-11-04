@@ -556,7 +556,7 @@ void MainWindow::performRawN(QLineEdit *lookupEdit, int index) {
     boost::split(tokens, rest, boost::is_any_of(" "));
     int restSize = tokens.size();
     if (restSize == 4) { // e.g. raw1 LXX Genesis 1 10
-        // TODO: This part is same as above. Unify.
+        // TODO: This part is the same as above. Unify.
         try {
             string module = tokens[0];                                // LXX
             string book = tokens[1];                                  // Genesis
@@ -1500,7 +1500,7 @@ void MainWindow::createActions()
 
     searchAct = new QAction("&Search…", this);
     setIcon(searchAct, "view-sort-ascending");
-    searchAct->setStatusTip(tr("Search for a set of tokens on a maximal length in a Bible"));
+    searchAct->setStatusTip(tr("Search for a set of tokens within a maximum token length in a Bible"));
     connect(searchAct, &QAction::triggered, this, &MainWindow::search);
     searchAct->setDisabled(true);
 

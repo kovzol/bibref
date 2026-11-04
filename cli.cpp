@@ -448,7 +448,7 @@ string getHelp(const string &key)
         "the given *Bible* and put its Latin transcription into clipboard N.",
         "* `search` *Bible* *token1* *token2* ... *tokenN* *maxlength*: Search for the given set "
         "of "
-        "tokens on a maximal length of *maxlength* in the given *Bible*.",
+        "tokens within a maximum length of *maxlength* in the given *Bible*.",
         "* `raw` *Bible* *book* *start* *length*: Show the raw Latin transcription of a passage in "
         "the given *book* in the given *Bible*, beginning with the *start* position on *length* "
         "characters. The whole book can be retrieved with *start*=1 and *length*=-1.",
@@ -471,7 +471,7 @@ string getHelp(const string &key)
         "* `compare12`: Compare the two clipboards with a 2-long substring-fingerprint "
         "(2-shingles) "
         "check, best match is reached at 1/(length1+length2).",
-        "* `jaccard12`: Compare the two clipboards the same way how `compare12` does but use the "
+        "* `jaccard12`: Compare the two clipboards the same way as `compare12` but use the "
         "\"Jaccard similarity for bags\" algorithm, best match is reached at 0.",
         "* `nearest12`: Find a substring of clipboard1 such that its Jaccard similarity for bags "
         "to clipboard2 is minimal.",
@@ -960,7 +960,7 @@ void processRawCmd(string input)
     boost::split(tokens, rest, boost::is_any_of(" "));
     int restSize = tokens.size();
     if (restSize == 4) { // e.g. raw1 LXX Genesis 1 10
-        // TODO: This part is same as above. Unify.
+        // TODO: This part is the same as above. Unify.
         try {
             string module = tokens[0];                                // LXX
             string book = tokens[1];                                  // Genesis

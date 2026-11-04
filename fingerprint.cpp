@@ -125,7 +125,7 @@ string best_jaccard_substr(const string &fixtext, const string &subtext)
 
             d2++;
             // If the fix text has more (or equally many) occurrences for this 2-shingle than the
-            // currently considered one from the subtext, then the minimum of
+            // current 2-shingle from the subtext, then the minimum of
             // them has just been increased by 1, so we increase d as well:
             if (f1.m_data[first][second] >= f2.m_data[first][second]) d++;
             // Otherwise, the currently considered 2-shingle of the subtext is already
