@@ -9,12 +9,12 @@ void Book::setModuleName(const string &n)
     m_moduleName = n;
 }
 
-string Book::getName()
+string Book::getName() const
 {
     return m_name;
 }
 
-string Book::getModuleName()
+string Book::getModuleName() const
 {
     return m_moduleName;
 }
@@ -75,7 +75,7 @@ vector<int> Book::getVerseTokens(string i)
     throw InvalidVerseReferenceException;
 }
 
-string Book::getText()
+const string &Book::getText() const
 {
     return m_text;
 }
@@ -218,7 +218,7 @@ int Book::getVerseTokensEnd(string i)
     throw InvalidVerseReferenceException;
 }
 
-string Book::getVerseInfoStart(int position)
+string Book::getVerseInfoStart(int position) const
 {
     for (int j = 0; j < m_verses.size(); ++j) {
         if (m_verses[j].m_start <= position
@@ -237,7 +237,7 @@ string Book::getVerseInfoStart(int position)
     throw InvalidPositionException;
 }
 
-string Book::getVerseInfoEnd(int position)
+string Book::getVerseInfoEnd(int position) const
 {
     for (int j = 0; j < m_verses.size(); ++j) {
         if (m_verses[j].m_start <= position

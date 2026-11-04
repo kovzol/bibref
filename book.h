@@ -27,15 +27,15 @@ public:
     Book(const string &name)
         : m_name(name){};
     void setModuleName(const string &moduleName);
-    string getModuleName();
-    string getName();
+    string getModuleName() const;
+    string getName() const;
     void addVerse(const string &text, const string &info, vector<int> tokens);
     string getVerse(string info);
-    string getVerseInfoStart(int position);
-    string getVerseInfoEnd(int position);
+    string getVerseInfoStart(int position) const;
+    string getVerseInfoEnd(int position) const;
     string getVerseTokensInfoStart(int position);
     string getVerseTokensInfoEnd(int position);
-    string getText();
+    const string &getText() const;
     vector<int> getVerseTokens(string info);
     vector<int> getTokens();
     int getVerseStart(string info);

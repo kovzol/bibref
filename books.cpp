@@ -1132,17 +1132,17 @@ int findBestFit(const string& book1, const string& info1, const string& verseInf
 
 /// Low level algorithm to find exact string match in the a-z encoded books.
 /// @return "f,b,p" where f is the number of occurrences, b is the book name of the last occurrence and p is its position.
-string _find(string text, string moduleName, int maxFound, bool verbose)
+string _find(const string &text, const string &moduleName, int maxFound, bool verbose)
 {
     int found = 0;                           // number of occurrences
     size_t pos;                              // character position of last result
     string book;                             // book to search for
     string output;                           // collect output to print it in one chunk at the end
     for (int i = 0; i < books.size(); i++) { // iterate on all books...
-        Book b = books[i];
+        const Book &b = books[i];
         if (b.getModuleName().compare(moduleName) == 0) { // ...in this Bible edition
             book = b.getName();
-            string bookText = b.getText();
+            const string &bookText = b.getText();
             pos = bookText.find(text);         // find first occurrence
             while (pos != std::string::npos) { // if found
                 if (verbose) {
