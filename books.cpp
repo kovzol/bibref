@@ -1130,12 +1130,18 @@ int findBestFit(const string& book1, const string& info1, const string& verseInf
 
 /* End of experimental code. */
 
+struct FindResult
+{
+    int found;
+    string book;
+    size_t pos;
+};
+
 /// Low level algorithm to find exact string match in the a-z encoded books.
-/// @return "f,b,p" where f is the number of occurrences, b is the book name of the last occurrence and p is its position.
-string _find(const string &text, const string &moduleName, int maxFound, bool verbose)
+FindResult _find(const string &text, const string &moduleName, int maxFound, bool verbose)
 {
     int found = 0;                           // number of occurrences
-    size_t pos;                              // character position of last result
+    size_t pos = string::npos;               // character position of last result
     string book;                             // book to search for
     string output;                           // collect output to print it in one chunk at the end
     for (int i = 0; i < books.size(); i++) { // iterate on all books...
@@ -1165,26 +1171,21 @@ end:
         output += to_string(found) + " occurrences."; // verbose report the number of occurrences
         info(output);
     }
-    return to_string(found) + "," + book + "," + to_string(pos); // return concise data
+    return {found, book, pos};
 }
 
 /// Return the number of occurrences of an a-z encoded text in Bible edition moduleName.
 int find(const string &text, const string &moduleName, int maxFound, bool verbose)
 {
-    string f = _find(text, moduleName, maxFound, verbose);
-    vector<string> info;
-    boost::split(info, f, boost::is_any_of(","));
-    return stoi(info[0]);
+    return _find(text, moduleName, maxFound, verbose).found;
 }
 
 /// Return the book name and position of the last occurrence of an a-z encoded text in Bible edition moduleName.
 /// @return "b,p" where b is the book name of the last occurrence and p is its position.
 string find(const string &text, const string &moduleName)
 {
-    string f = _find(text, moduleName, 1, 0);
-    vector<string> info;
-    boost::split(info, f, boost::is_any_of(","));
-    return info[1] + "," + info[2];
+    FindResult result = _find(text, moduleName, 1, 0);
+    return result.book + "," + to_string(result.pos);
 }
 
 vector<string> find_min_unique(string text, const string &moduleName, bool verbose)
