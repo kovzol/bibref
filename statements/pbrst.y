@@ -504,7 +504,7 @@ int detect_ot_book(char *book, char *info, int start, int end) {
   return -1; // not found
 }
 
-// This is incomplete. Mostly those verses will be fixed that are present in the statement database. FIXME.
+// This is incomplete. This mainly fixes verses that are present in the statement database. FIXME.
 void fix_verse(char *info, int *c, int *v) {
   if (strcmp(info, "Psalms") == 0) {
     // Shifting the verse number by 1 (or 2):
