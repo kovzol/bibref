@@ -8,7 +8,50 @@ BIBREF=../build/bibref
 OUTPUT=getrefs-all.csv
 GNT=SBLGNT
 
-echo "Septuagint module,S. book,S. passage start,S. p. end,Greek New Testament module,GNT book,GNT passage start,GNT p. end,length,S. p. start position,GNT p. start position" > $OUTPUT
+usage() {
+ cat <<EOF
+Usage: $0 [-h] [-b BIBREF] [-g GNT] [-o OUTPUT]
+
+Obtain all getrefs entries. A complete run may take several hours.
+
+Options:
+  -h          Show this help and exit
+  -b BIBREF   Path to the bibref executable (default: $BIBREF)
+  -g GNT      Greek New Testament module (default: $GNT)
+  -o OUTPUT   Output CSV file (default: $OUTPUT)
+EOF
+}
+
+while getopts ":hb:g:o:" option; do
+ case "$option" in
+  h) usage; exit 0 ;;
+  b) BIBREF=$OPTARG ;;
+  g) GNT=$OPTARG ;;
+  o) OUTPUT=$OPTARG ;;
+  :)
+   echo "Option -$OPTARG requires an argument." >&2
+   usage >&2
+   exit 2
+   ;;
+  \?)
+   echo "Unknown option: -$OPTARG" >&2
+   usage >&2
+   exit 2
+   ;;
+ esac
+done
+shift $((OPTIND - 1))
+if [ "$#" -gt 0 ]; then
+ echo "Unexpected argument: $1" >&2
+ usage >&2
+ exit 2
+fi
+if [ "$GNT" != "StatResGNT" ] && [ "$GNT" != "SBLGNT" ]; then
+ echo "Invalid GNT module: $GNT (allowed: StatResGNT, SBLGNT)." >&2
+ exit 2
+fi
+
+echo "Septuagint module,S. book,S. passage start,S. p. end,Greek New Testament module,GNT book,GNT passage start,GNT p. end,length,S. p. start position,GNT p. start position" > "$OUTPUT"
 
 declare -a books
 books[0]="Genesis 50:26"
@@ -72,14 +115,14 @@ process() {
  # LXX Exodus 2:14+37 2:14-110 = SBLGNT Luke 12:14+45 12:14-4 (length=6, pos1=3270, pos2=50522)
  echo $*
  OUT=getrefs-all-`date +%s%N`.out
- echo $* | $BIBREF -a -e >$OUT 2>&1
+ echo $* | "$BIBREF" -a -e >"$OUT" 2>&1
  cat $OUT | grep --silent Sorry && {
   cat $OUT
   exit 1
   }
  cat $OUT | grep = |\
   sed s/\(length=// | sed s/,//g | sed s/pos1=// | sed s/pos2=// | sed s/\)// |\
-  sed s/"# "// | sed s/"= "// | sed s/" "/,/g >> $OUTPUT
+  sed s/"# "// | sed s/"= "// | sed s/" "/,/g >> "$OUTPUT"
  rm -f $OUT
  }
 
