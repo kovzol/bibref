@@ -92,34 +92,45 @@ if [ "$THREADS" -eq 0 ]; then
  echo "Invalid thread count: $THREADS (must be a positive integer)." >&2
  exit 2
 fi
+if [ "$THREADS" -gt 1 ] && { [ "${BASH_VERSINFO[0]}" -lt 5 ] || { [ "${BASH_VERSINFO[0]}" -eq 5 ] && [ "${BASH_VERSINFO[1]}" -lt 1 ]; }; }; then
+ echo "Parallel execution requires Bash 5.1 or newer." >&2
+ exit 2
+fi
 
 WORKDIR=$(mktemp -d "${TMPDIR:-/tmp}/getrefs-all.XXXXXX") || exit 1
 trap 'rm -rf "$WORKDIR"' EXIT
 TASK_COUNT=0
-NEXT_TO_WAIT=1
 JOB_FAILED=0
 declare -a TASK_PIDS
+declare -a ACTIVE_PIDS
+declare -A PID_TASK
 
 handle_interrupt() {
  trap '' INT TERM
  echo "Interrupted; stopping running getrefs commands..." >&2
- for ((task = NEXT_TO_WAIT; task <= TASK_COUNT; task++)); do
-  if [ -n "${TASK_PIDS[$task]}" ]; then
-   kill "${TASK_PIDS[$task]}" 2>/dev/null || true
-  fi
+ for pid in "${ACTIVE_PIDS[@]}"; do
+  kill "$pid" 2>/dev/null || true
  done
- for ((task = NEXT_TO_WAIT; task <= TASK_COUNT; task++)); do
-  if [ -n "${TASK_PIDS[$task]}" ]; then
-   wait "${TASK_PIDS[$task]}" 2>/dev/null || true
-  fi
+ for pid in "${ACTIVE_PIDS[@]}"; do
+  wait "$pid" 2>/dev/null || true
  done
  exit 130
 }
 trap handle_interrupt INT TERM
 
-wait_for_task() {
- local task=$1
- if ! wait "${TASK_PIDS[$task]}"; then
+wait_for_any_task() {
+ local completed_pid status task pid
+ local -a still_active
+ if [ "$THREADS" -eq 1 ]; then
+  completed_pid=${ACTIVE_PIDS[0]}
+  wait "$completed_pid"
+  status=$?
+ else
+  wait -n -p completed_pid "${ACTIVE_PIDS[@]}"
+  status=$?
+ fi
+ task=${PID_TASK[$completed_pid]}
+ if [ "$status" -ne 0 ]; then
   cat "$WORKDIR/$task.out" >&2
   JOB_FAILED=1
  elif grep --silent Sorry "$WORKDIR/$task.out"; then
@@ -130,7 +141,14 @@ wait_for_task() {
    sed s/\(length=// | sed s/,//g | sed s/pos1=// | sed s/pos2=// | sed s/\)// |\
    sed s/"# "// | sed s/"= "// | sed s/" "/,/g > "$WORKDIR/$task.csv"
  fi
- NEXT_TO_WAIT=$((task + 1))
+ unset 'PID_TASK[$completed_pid]'
+ still_active=()
+ for pid in "${ACTIVE_PIDS[@]}"; do
+  if [ "$pid" != "$completed_pid" ]; then
+   still_active+=("$pid")
+  fi
+ done
+ ACTIVE_PIDS=("${still_active[@]}")
 }
 
 echo "Septuagint module,S. book,S. passage start,S. p. end,Greek New Testament module,GNT book,GNT passage start,GNT p. end,length,S. p. start position,GNT p. start position" > "$OUTPUT"
@@ -203,8 +221,10 @@ process() {
  printf '%s\n' "$*" > "$WORKDIR/$task.in"
  "$BIBREF" -a -e <"$WORKDIR/$task.in" >"$out" 2>&1 &
  TASK_PIDS[$task]=$!
- if [ "$((task - NEXT_TO_WAIT + 1))" -ge "$THREADS" ]; then
-  wait_for_task "$NEXT_TO_WAIT"
+ ACTIVE_PIDS+=("${TASK_PIDS[$task]}")
+ PID_TASK["${TASK_PIDS[$task]}"]=$task
+ if [ "${#ACTIVE_PIDS[@]}" -ge "$THREADS" ]; then
+  wait_for_any_task
  fi
  }
 
@@ -236,8 +256,8 @@ for p in `seq 1 151`; do
  process "$command"
  done
 
-while [ "$NEXT_TO_WAIT" -le "$TASK_COUNT" ]; do
- wait_for_task "$NEXT_TO_WAIT"
+while [ "${#ACTIVE_PIDS[@]}" -gt 0 ]; do
+ wait_for_any_task
 done
 
 if [ "$JOB_FAILED" -ne 0 ]; then
