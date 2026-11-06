@@ -1,8 +1,7 @@
 #!/bin/bash
 # This script obtains all getrefs entries. A complete run may take a long time (several hours).
 # Important: You may need a quite large amount of RAM to make this work, at least 5 GB recommended (eventually with swap).
-# To speed things up, you may want to remove the check for the book Odes. In fact, it should not really be a part of LXX.
-# FIXME: Some entries are duplicated, duplums should be removed.
+# To speed things up, check for the book Odes is disabled by default. In fact, it should not really be a part of LXX.
 BIBREF=../build/bibref
 OUTPUT=getrefs-all.csv
 GNT=SBLGNT
@@ -10,10 +9,11 @@ ONE_TURN=0
 INCLUDE_ODES=0
 ODES_OPTION=
 THREADS=1
+SORT_OUTPUT=1
 
 usage() {
  cat <<EOF
-Usage: $0 [-h] [-1 | -2] [-d | -D] [-b BIBREF] [-g GNT] [-o OUTPUT] [-p THREADS]
+Usage: $0 [-h] [-1 | -2] [-d | -D] [-b BIBREF] [-g GNT] [-o OUTPUT] [-p THREADS] [-s | -S]
 
 Obtain all getrefs entries. A complete run may take several hours.
 
@@ -27,10 +27,12 @@ Options:
   -g GNT      Greek New Testament module (default: $GNT)
   -o OUTPUT   Output CSV file (default: $OUTPUT)
   -p THREADS  Run up to THREADS getrefs commands in parallel (default: 1; use with care)
+  -S          Sort the CSV alphabetically and remove duplicate rows (default)
+  -s          Do not sort or remove duplicate rows
 EOF
 }
 
-while getopts ":h12dDb:g:o:p:" option; do
+while getopts ":h12dDb:g:o:p:sS" option; do
  case "$option" in
   h) usage; exit 0 ;;
   1) ONE_TURN=1 ;;
@@ -55,6 +57,8 @@ while getopts ":h12dDb:g:o:p:" option; do
   g) GNT=$OPTARG ;;
   o) OUTPUT=$OPTARG ;;
   p) THREADS=$OPTARG ;;
+  s) SORT_OUTPUT=0 ;;
+  S) SORT_OUTPUT=1 ;;
   :)
    echo "Option -$OPTARG requires an argument." >&2
    usage >&2
@@ -244,3 +248,10 @@ fi
 for ((task = 1; task <= TASK_COUNT; task++)); do
  cat "$WORKDIR/$task.csv" >> "$OUTPUT"
 done
+
+if [ "$SORT_OUTPUT" = "1" ]; then
+ head -n 1 "$OUTPUT" > "$WORKDIR/header.csv"
+ tail -n +2 "$OUTPUT" | sort -u > "$WORKDIR/sorted.csv"
+ cat "$WORKDIR/header.csv" "$WORKDIR/sorted.csv" > "$WORKDIR/final.csv"
+ mv "$WORKDIR/final.csv" "$OUTPUT"
+fi
