@@ -1,30 +1,54 @@
 #!/bin/bash
 # This script obtains all getrefs entries. A complete run may take a long time (several hours).
-# Important: You need a quite large amount of RAM to make this work, at least 40 GB recommended (eventually with swap).
-# In case StatResGNT is to be checked, please edit the setting GNT below.
+# Important: You may need a quite large amount of RAM to make this work, at least 5 GB recommended (eventually with swap).
 # To speed things up, you may want to remove the check for the book Odes. In fact, it should not really be a part of LXX.
 # FIXME: Some entries are duplicated, duplums should be removed.
 BIBREF=../build/bibref
 OUTPUT=getrefs-all.csv
 GNT=SBLGNT
+ONE_TURN=0
+INCLUDE_ODES=0
+ODES_OPTION=
 
 usage() {
  cat <<EOF
-Usage: $0 [-h] [-b BIBREF] [-g GNT] [-o OUTPUT]
+Usage: $0 [-h] [-1 | -2] [-d | -D] [-b BIBREF] [-g GNT] [-o OUTPUT]
 
 Obtain all getrefs entries. A complete run may take several hours.
 
 Options:
   -h          Show this help and exit
+  -1          do in one turn (may need up to 4x more memory; use with care)
+  -2          Process in two parts (default)
+  -d          Exclude Odes (default)
+  -D          Include Odes
   -b BIBREF   Path to the bibref executable (default: $BIBREF)
   -g GNT      Greek New Testament module (default: $GNT)
   -o OUTPUT   Output CSV file (default: $OUTPUT)
 EOF
 }
 
-while getopts ":hb:g:o:" option; do
+while getopts ":h12dDb:g:o:" option; do
  case "$option" in
   h) usage; exit 0 ;;
+  1) ONE_TURN=1 ;;
+  2) ONE_TURN=0 ;;
+  d)
+   if [ -n "$ODES_OPTION" ] && [ "$ODES_OPTION" != "d" ]; then
+    echo "Options -d and -D cannot be used together." >&2
+    exit 2
+   fi
+   ODES_OPTION=d
+   INCLUDE_ODES=0
+   ;;
+  D)
+   if [ -n "$ODES_OPTION" ] && [ "$ODES_OPTION" != "D" ]; then
+    echo "Options -d and -D cannot be used together." >&2
+    exit 2
+   fi
+   ODES_OPTION=D
+   INCLUDE_ODES=1
+   ;;
   b) BIBREF=$OPTARG ;;
   g) GNT=$OPTARG ;;
   o) OUTPUT=$OPTARG ;;
@@ -130,11 +154,14 @@ process() {
 for book in "${books[@]}"; do
  IFS=" " read -r -a row <<< "${book}"
  bookname="${row[0]}"
+ if [ "$bookname" = "Odes" ] && [ "$INCLUDE_ODES" = "0" ]; then
+  continue
+ fi
  lastverse="${row[1]}"
  IFS=":" read -r -a verseinfo <<< "${lastverse}"
  chapter="${verseinfo[0]}"
  verse="${verseinfo[1]}"
- if [ "$chapter" = "1" -o "$chapter" = "2" -o "$chapter" = "3" ]; then
+ if [ "$ONE_TURN" = "1" ] || [ "$chapter" = "1" -o "$chapter" = "2" -o "$chapter" = "3" ]; then
   process "getrefs $GNT LXX $bookname 1:1 $lastverse"
  else
   splitchapter=$((chapter/2))
