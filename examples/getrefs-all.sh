@@ -2,14 +2,17 @@
 # This script obtains all getrefs entries. A complete run may take a long time (several hours).
 # Important: You may need a quite large amount of RAM to make this work, at least 5 GB recommended (eventually with swap).
 # To speed things up, check for the book Odes is disabled by default. In fact, it should not really be a part of LXX.
+
+# Default settings
 BIBREF=../build/bibref
 OUTPUT=getrefs-all.csv
 GNT=SBLGNT
 ONE_TURN=0
 INCLUDE_ODES=0
-ODES_OPTION=
 THREADS=1
 SORT_OUTPUT=1
+
+SCRIPT_START_NS=$(date +%s%N)
 
 usage() {
  cat <<EOF
@@ -32,33 +35,35 @@ Options:
 EOF
 }
 
+declare -A PAIR_SELECTION
+select_pair_option() {
+ local pair=$1 selected=$2 previous=${PAIR_SELECTION[$1]-}
+ if [ -n "$previous" ] && [ "$previous" != "$selected" ]; then
+  echo "Options $previous and $selected cannot be used together." >&2
+  return 1
+ fi
+ PAIR_SELECTION[$pair]=$selected
+}
+
 while getopts ":h12dDb:g:o:p:sS" option; do
  case "$option" in
   h) usage; exit 0 ;;
-  1) ONE_TURN=1 ;;
-  2) ONE_TURN=0 ;;
+  1) select_pair_option turns -1 || exit 2; ONE_TURN=1 ;;
+  2) select_pair_option turns -2 || exit 2; ONE_TURN=0 ;;
   d)
-   if [ -n "$ODES_OPTION" ] && [ "$ODES_OPTION" != "d" ]; then
-    echo "Options -d and -D cannot be used together." >&2
-    exit 2
-   fi
-   ODES_OPTION=d
+   select_pair_option odes -d || exit 2
    INCLUDE_ODES=0
    ;;
   D)
-   if [ -n "$ODES_OPTION" ] && [ "$ODES_OPTION" != "D" ]; then
-    echo "Options -d and -D cannot be used together." >&2
-    exit 2
-   fi
-   ODES_OPTION=D
+   select_pair_option odes -D || exit 2
    INCLUDE_ODES=1
    ;;
   b) BIBREF=$OPTARG ;;
   g) GNT=$OPTARG ;;
   o) OUTPUT=$OPTARG ;;
   p) THREADS=$OPTARG ;;
-  s) SORT_OUTPUT=0 ;;
-  S) SORT_OUTPUT=1 ;;
+  s) select_pair_option sorting -s || exit 2; SORT_OUTPUT=0 ;;
+  S) select_pair_option sorting -S || exit 2; SORT_OUTPUT=1 ;;
   :)
    echo "Option -$OPTARG requires an argument." >&2
    usage >&2
@@ -96,9 +101,13 @@ if [ "$THREADS" -gt 1 ] && { [ "${BASH_VERSINFO[0]}" -lt 5 ] || { [ "${BASH_VERS
  echo "Parallel execution requires Bash 5.1 or newer." >&2
  exit 2
 fi
+TIME_BIN=/usr/bin/time
+if [ ! -x "$TIME_BIN" ]; then
+ echo "GNU time is required to collect execution and memory statistics." >&2
+ exit 2
+fi
 
 WORKDIR=$(mktemp -d "${TMPDIR:-/tmp}/getrefs-all.XXXXXX") || exit 1
-trap 'rm -rf "$WORKDIR"' EXIT
 TASK_COUNT=0
 JOB_FAILED=0
 declare -a TASK_PIDS
@@ -109,7 +118,23 @@ handle_interrupt() {
  trap '' INT TERM
  echo "Interrupted; stopping running getrefs commands..." >&2
  for pid in "${ACTIVE_PIDS[@]}"; do
-  kill "$pid" 2>/dev/null || true
+  child_pids=$(ps -o pid= --ppid "$pid" 2>/dev/null)
+  if [ -n "$child_pids" ]; then
+   while read -r child_pid; do
+    kill -TERM "$child_pid" 2>/dev/null || true
+   done <<< "$child_pids"
+  else
+   kill -TERM "$pid" 2>/dev/null || true
+  fi
+ done
+ sleep 1
+ for pid in "${ACTIVE_PIDS[@]}"; do
+  child_pids=$(ps -o pid= --ppid "$pid" 2>/dev/null)
+  if [ -n "$child_pids" ]; then
+   while read -r child_pid; do
+    kill -KILL "$child_pid" 2>/dev/null || true
+   done <<< "$child_pids"
+  fi
  done
  for pid in "${ACTIVE_PIDS[@]}"; do
   wait "$pid" 2>/dev/null || true
@@ -117,6 +142,37 @@ handle_interrupt() {
  exit 130
 }
 trap handle_interrupt INT TERM
+
+report_summary() {
+ local end_ns elapsed task task_elapsed task_rss max_rss=0 max_task=0 query
+ end_ns=$(date +%s%N)
+ elapsed=$(awk -v start="$SCRIPT_START_NS" -v end="$end_ns" 'BEGIN { printf "%.3f", (end - start) / 1000000000 }')
+ echo "Execution summary:"
+ for ((task = 1; task <= TASK_COUNT; task++)); do
+  if [ -f "$WORKDIR/$task.metrics" ]; then
+   read -r task_elapsed task_rss < "$WORKDIR/$task.metrics"
+   query=$(cat "$WORKDIR/$task.in" 2>/dev/null)
+   printf '  %s: %s s\n' "$query" "$task_elapsed"
+   if [[ "$task_rss" =~ ^[0-9]+$ ]] && [ "$task_rss" -gt "$max_rss" ]; then
+    max_rss=$task_rss
+    max_task=$task
+   fi
+  fi
+ done
+ if [ "$max_task" -gt 0 ]; then
+  query=$(cat "$WORKDIR/$max_task.in" 2>/dev/null)
+  printf 'Maximum thread memory: %s KiB (%s)\n' "$max_rss" "$query"
+ else
+  echo "Maximum thread memory: unavailable (no process metrics collected)"
+ fi
+ printf 'Total script time: %s s\n' "$elapsed"
+}
+
+cleanup() {
+ report_summary
+ rm -rf "$WORKDIR"
+}
+trap cleanup EXIT
 
 wait_for_any_task() {
  local completed_pid status task pid
@@ -219,7 +275,7 @@ process() {
  out="$WORKDIR/$task.out"
  echo "$*"
  printf '%s\n' "$*" > "$WORKDIR/$task.in"
- "$BIBREF" -a -e <"$WORKDIR/$task.in" >"$out" 2>&1 &
+ "$TIME_BIN" -f '%e %M' -o "$WORKDIR/$task.metrics" "$BIBREF" -a -e <"$WORKDIR/$task.in" >"$out" 2>&1 &
  TASK_PIDS[$task]=$!
  ACTIVE_PIDS+=("${TASK_PIDS[$task]}")
  PID_TASK["${TASK_PIDS[$task]}"]=$task
