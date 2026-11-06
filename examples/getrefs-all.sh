@@ -9,10 +9,11 @@ GNT=SBLGNT
 ONE_TURN=0
 INCLUDE_ODES=0
 ODES_OPTION=
+THREADS=1
 
 usage() {
  cat <<EOF
-Usage: $0 [-h] [-1 | -2] [-d | -D] [-b BIBREF] [-g GNT] [-o OUTPUT]
+Usage: $0 [-h] [-1 | -2] [-d | -D] [-b BIBREF] [-g GNT] [-o OUTPUT] [-p THREADS]
 
 Obtain all getrefs entries. A complete run may take several hours.
 
@@ -25,10 +26,11 @@ Options:
   -b BIBREF   Path to the bibref executable (default: $BIBREF)
   -g GNT      Greek New Testament module (default: $GNT)
   -o OUTPUT   Output CSV file (default: $OUTPUT)
+  -p THREADS  Run up to THREADS getrefs commands in parallel (default: 1; use with care)
 EOF
 }
 
-while getopts ":h12dDb:g:o:" option; do
+while getopts ":h12dDb:g:o:p:" option; do
  case "$option" in
   h) usage; exit 0 ;;
   1) ONE_TURN=1 ;;
@@ -52,6 +54,7 @@ while getopts ":h12dDb:g:o:" option; do
   b) BIBREF=$OPTARG ;;
   g) GNT=$OPTARG ;;
   o) OUTPUT=$OPTARG ;;
+  p) THREADS=$OPTARG ;;
   :)
    echo "Option -$OPTARG requires an argument." >&2
    usage >&2
@@ -74,6 +77,57 @@ if [ "$GNT" != "StatResGNT" ] && [ "$GNT" != "SBLGNT" ]; then
  echo "Invalid GNT module: $GNT (allowed: StatResGNT, SBLGNT)." >&2
  exit 2
 fi
+case "$THREADS" in
+ ''|*[!0-9]*)
+ echo "Invalid thread count: $THREADS (must be a positive integer)." >&2
+ exit 2
+ ;;
+esac
+THREADS=$((10#$THREADS))
+if [ "$THREADS" -eq 0 ]; then
+ echo "Invalid thread count: $THREADS (must be a positive integer)." >&2
+ exit 2
+fi
+
+WORKDIR=$(mktemp -d "${TMPDIR:-/tmp}/getrefs-all.XXXXXX") || exit 1
+trap 'rm -rf "$WORKDIR"' EXIT
+TASK_COUNT=0
+NEXT_TO_WAIT=1
+JOB_FAILED=0
+declare -a TASK_PIDS
+
+handle_interrupt() {
+ trap '' INT TERM
+ echo "Interrupted; stopping running getrefs commands..." >&2
+ for ((task = NEXT_TO_WAIT; task <= TASK_COUNT; task++)); do
+  if [ -n "${TASK_PIDS[$task]}" ]; then
+   kill "${TASK_PIDS[$task]}" 2>/dev/null || true
+  fi
+ done
+ for ((task = NEXT_TO_WAIT; task <= TASK_COUNT; task++)); do
+  if [ -n "${TASK_PIDS[$task]}" ]; then
+   wait "${TASK_PIDS[$task]}" 2>/dev/null || true
+  fi
+ done
+ exit 130
+}
+trap handle_interrupt INT TERM
+
+wait_for_task() {
+ local task=$1
+ if ! wait "${TASK_PIDS[$task]}"; then
+  cat "$WORKDIR/$task.out" >&2
+  JOB_FAILED=1
+ elif grep --silent Sorry "$WORKDIR/$task.out"; then
+  cat "$WORKDIR/$task.out" >&2
+  JOB_FAILED=1
+ else
+  grep = "$WORKDIR/$task.out" |\
+   sed s/\(length=// | sed s/,//g | sed s/pos1=// | sed s/pos2=// | sed s/\)// |\
+   sed s/"# "// | sed s/"= "// | sed s/" "/,/g > "$WORKDIR/$task.csv"
+ fi
+ NEXT_TO_WAIT=$((task + 1))
+}
 
 echo "Septuagint module,S. book,S. passage start,S. p. end,Greek New Testament module,GNT book,GNT passage start,GNT p. end,length,S. p. start position,GNT p. start position" > "$OUTPUT"
 
@@ -137,17 +191,17 @@ books[52]="Odes 14:46"
 process() {
  # Output format in bibref:
  # LXX Exodus 2:14+37 2:14-110 = SBLGNT Luke 12:14+45 12:14-4 (length=6, pos1=3270, pos2=50522)
- echo $*
- OUT=getrefs-all-`date +%s%N`.out
- echo $* | "$BIBREF" -a -e >"$OUT" 2>&1
- cat $OUT | grep --silent Sorry && {
-  cat $OUT
-  exit 1
-  }
- cat $OUT | grep = |\
-  sed s/\(length=// | sed s/,//g | sed s/pos1=// | sed s/pos2=// | sed s/\)// |\
-  sed s/"# "// | sed s/"= "// | sed s/" "/,/g >> "$OUTPUT"
- rm -f $OUT
+ local task out
+ TASK_COUNT=$((TASK_COUNT + 1))
+ task=$TASK_COUNT
+ out="$WORKDIR/$task.out"
+ echo "$*"
+ printf '%s\n' "$*" > "$WORKDIR/$task.in"
+ "$BIBREF" -a -e <"$WORKDIR/$task.in" >"$out" 2>&1 &
+ TASK_PIDS[$task]=$!
+ if [ "$((task - NEXT_TO_WAIT + 1))" -ge "$THREADS" ]; then
+  wait_for_task "$NEXT_TO_WAIT"
+ fi
  }
 
 # Process all books (but Psalms)
@@ -177,3 +231,16 @@ for p in `seq 1 151`; do
  command="getrefs $GNT LXX Psalms $p"
  process "$command"
  done
+
+while [ "$NEXT_TO_WAIT" -le "$TASK_COUNT" ]; do
+ wait_for_task "$NEXT_TO_WAIT"
+done
+
+if [ "$JOB_FAILED" -ne 0 ]; then
+ echo "One or more getrefs commands failed; see the output above." >&2
+ exit 1
+fi
+
+for ((task = 1; task <= TASK_COUNT; task++)); do
+ cat "$WORKDIR/$task.csv" >> "$OUTPUT"
+done
