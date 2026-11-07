@@ -35,7 +35,7 @@ modules:
         sha256: 42409cf3de2faf1108523e2c5ac0745d21f9ed2a5c78ed878ee9dcc303426b8a
         x-checker-data:
           type: anitya
-          project-id: 230546
+          project-id: 16287
           url-template: https://www.crosswire.org/ftpmirror/pub/sword/source/v${version0}.${version1}/sword-$version.tar.gz
 
   - name: boost
@@ -45,8 +45,8 @@ modules:
       - ./b2 -j $FLATPAK_BUILDER_N_JOBS install
     sources:
       - type: archive
-        url: https://archives.boost.io/release/1.90.0/source/boost_1_90_0.tar.gz
-        sha256: 5e93d582aff26868d581a52ae78c7d8edf3f3064742c6e77901a1f18a437eea9
+        url: https://archives.boost.io/release/1.92.0/source/boost_1_92_0.tar.gz
+        sha256: c4a3b310ddd2472416e091067166b0713be97c63f38c212c484ada022fd296ce
         x-checker-data:
           type: anitya
           project-id: 6845
@@ -60,8 +60,8 @@ modules:
       - /bin/*
     sources:
       - type: archive
-        url: https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/15.1.1/graphviz-15.1.1.tar.gz
-        sha256: d511d8938bbfe985b84506c96d1bbf1acba4ad88e62b51421a8b954e572f30d9
+        url: https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/16.1.0/graphviz-16.1.0.tar.gz
+        sha256: beea483ab130f456c1c3905f4f2e40778a9c493c3d73ae8012367d552d71ca84
         x-checker-data:
           type: anitya
           project-id: 1249
@@ -87,7 +87,7 @@ modules:
       # url: https://github.com/kovzol/bibref
       # tag: 2026-10-19 # does not yet exist
       - type: archive
-        url: https://github.com/kovzol/bibref/archive/ac1f52cbea22bdf038fd0dbba24702ab218cb5dd.zip
-        sha256: 5772f72c51e615fc31b26ef7afbd20965e4bc8e9faf8cc85ed4e176ce1c536a4
+        url: https://github.com/kovzol/bibref/archive/2930776f2d75236163bc708c2b25a6b1b522c7fb.zip
+        sha256: 40f1e4fd55ffeb9c352bcb04db2dbc2dad0c4ade3ec20d965cd3e0ae8ed45f87
     post-install:
       - mv /app/tmp/.sword/* /app/share/sword
