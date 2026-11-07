@@ -144,28 +144,32 @@ handle_interrupt() {
 trap handle_interrupt INT TERM
 
 report_summary() {
- local end_ns elapsed task task_elapsed task_rss max_rss=0 max_task=0 query
+ local end_ns elapsed_seconds elapsed task task_elapsed task_rss max_rss=0 max_task=0 max_elapsed=0 query memory_mb
  end_ns=$(date +%s%N)
- elapsed=$(awk -v start="$SCRIPT_START_NS" -v end="$end_ns" 'BEGIN { printf "%.3f", (end - start) / 1000000000 }')
+ elapsed_seconds=$(awk -v start="$SCRIPT_START_NS" -v end="$end_ns" 'BEGIN { printf "%.3f", (end - start) / 1000000000 }')
+ elapsed=$(awk -v seconds="$elapsed_seconds" 'BEGIN { seconds=int(seconds); printf "%02d:%02d:%02d", int(seconds / 3600), int(seconds / 60) % 60, seconds % 60 }')
  echo "Execution summary:"
  for ((task = 1; task <= TASK_COUNT; task++)); do
   if [ -f "$WORKDIR/$task.metrics" ]; then
    read -r task_elapsed task_rss < "$WORKDIR/$task.metrics"
-   query=$(cat "$WORKDIR/$task.in" 2>/dev/null)
-   printf '  %s: %s s\n' "$query" "$task_elapsed"
    if [[ "$task_rss" =~ ^[0-9]+$ ]] && [ "$task_rss" -gt "$max_rss" ]; then
     max_rss=$task_rss
     max_task=$task
+    max_elapsed=$task_elapsed
    fi
   fi
  done
  if [ "$max_task" -gt 0 ]; then
   query=$(cat "$WORKDIR/$max_task.in" 2>/dev/null)
-  printf 'Maximum thread memory: %s KiB (%s)\n' "$max_rss" "$query"
+  memory_mb=$(awk -v kib="$max_rss" 'BEGIN { printf "%.1f", kib / 1024 }')
+  max_elapsed=$(awk -v seconds="$max_elapsed" 'BEGIN { seconds=int(seconds); printf "%02d:%02d:%02d", int(seconds / 3600), int(seconds / 60) % 60, seconds % 60 }')
+  printf 'Maximum thread memory: %s MB\n' "$memory_mb"
+  printf '  Process runtime: %s\n' "$max_elapsed"
+  printf '  Process: %s\n' "$query"
  else
   echo "Maximum thread memory: unavailable (no process metrics collected)"
  fi
- printf 'Total script time: %s s\n' "$elapsed"
+ printf 'Total script time: %s\n' "$elapsed"
 }
 
 cleanup() {
