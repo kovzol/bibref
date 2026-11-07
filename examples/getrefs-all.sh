@@ -1,10 +1,11 @@
 #!/bin/bash
 # This script obtains all getrefs entries. A complete run may take a long time (several hours).
-# Important: You may need a quite large amount of RAM to make this work, at least 5 GB recommended (eventually with swap).
+# Important: You may need a quite large amount of RAM to make this work, at least 4 GB recommended (eventually with swap).
 # To speed things up, check for the book Odes is disabled by default. In fact, it should not really be a part of LXX.
 
 # Default settings
-BIBREF=../build/bibref
+BIBREF=bibref
+BIBREF2=../build/bibref
 OUTPUT=getrefs-all.csv
 GNT=SBLGNT
 ONE_TURN=0
@@ -12,6 +13,10 @@ INCLUDE_ODES=0
 THREADS=1
 SORT_OUTPUT=1
 
+BIBREF_CHECK=$(command -v "$BIBREF" 2>/dev/null)
+if [ -z "$BIBREF_CHECK" ]; then
+ BIBREF=$BIBREF2
+fi
 SCRIPT_START_NS=$(date +%s%N)
 
 usage() {
@@ -80,6 +85,11 @@ shift $((OPTIND - 1))
 if [ "$#" -gt 0 ]; then
  echo "Unexpected argument: $1" >&2
  usage >&2
+ exit 2
+fi
+BIBREF_CHECK=$(command -v "$BIBREF" 2>/dev/null)
+if [ -z "$BIBREF_CHECK" ]; then
+ echo "bibref executable not found or not executable: $BIBREF" >&2
  exit 2
 fi
 if [ "$GNT" != "StatResGNT" ] && [ "$GNT" != "SBLGNT" ]; then
