@@ -1201,8 +1201,24 @@ vector<string> find_min_unique(string text, const string &moduleName, bool verbo
     } else if (l > long_limit) {
         error("Input is very long (" + to_string(l) + " characters), expect very slow operation.");
     }
-    // Only the upper triangular part is used, with one byte per entry.
-    vector<unsigned char> is_unique(static_cast<size_t>(l) * (l + 1) / 2);
+    // Only the upper triangular part is used; each byte stores four 2-bit entries.
+    const size_t entry_count = static_cast<size_t>(l) * (l + 1) / 2;
+    vector<unsigned char> is_unique((entry_count + 3) / 4);
+    // Pass -1 to read an entry; pass 0, 1, or 2 to write it.
+    auto is_unique_at = [&is_unique](size_t entry, int value) -> unsigned char {
+        // Select the byte and the 2-bit slot within it (low bits first).
+        const size_t byte_index = entry / 4;
+        const unsigned int shift = static_cast<unsigned int>((entry % 4) * 2);
+        const unsigned char mask = static_cast<unsigned char>(3U << shift);
+        if (value >= 0) {
+            // Clear only this slot, then place the new value there.
+            is_unique[byte_index] = static_cast<unsigned char>(
+                (is_unique[byte_index] & static_cast<unsigned char>(~mask))
+                | (static_cast<unsigned char>(value) << shift));
+        }
+        // Return the selected slot, whether it was just written or only read.
+        return static_cast<unsigned char>((is_unique[byte_index] >> shift) & 3U);
+    };
     auto index = [l](int i, int j) {
         return static_cast<size_t>(i) * l - static_cast<size_t>(i) * (i - 1) / 2 + j;
     };
@@ -1213,19 +1229,19 @@ vector<string> find_min_unique(string text, const string &moduleName, bool verbo
     string output;
     for (int i = 0; i < l; ++i) {
         for (int j = 0; j < l - i; ++j) {
-            if (i > 0 && (is_unique[index(i - 1, j + 1)] > 0 || is_unique[index(i - 1, j)] > 0)) {
-                is_unique[index(i, j)] = 2; // this entry can already be ignored
+            if (i > 0 && (is_unique_at(index(i - 1, j + 1), -1) > 0 || is_unique_at(index(i - 1, j), -1) > 0)) {
+                is_unique_at(index(i, j), 2); // this entry can already be ignored
             } else {
                 string subtext = text.substr(j, i + 1);
                 int unique = find(subtext, moduleName, 2, 0); // decide if this subtext is unique
                 if (unique == 1) {
-                    is_unique[index(i, j)] = 1; // if yes, fill in the database
+                    is_unique_at(index(i, j), 1); // if yes, fill in the database
                     if (verbose) {
                         output += "Text " + subtext + " is minimal unique." + "\n"; // inform the user if needed
                     }
                     retval.push_back(subtext); // store this result
                 } else {
-                    is_unique[index(i, j)] = 0; // if no, fill in the database
+                    is_unique_at(index(i, j), 0); // if no, fill in the database
                 }
             }
         }
