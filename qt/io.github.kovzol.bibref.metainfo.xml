@@ -69,6 +69,15 @@
   <content_rating type="oars-1.1" />
 
   <releases>
+    <release version="2026-11-22" date="2026-11-22">
+    <url type="details">https://github.com/kovzol/bibref/commits/c0afd320512f797ec6a683518cadb012d6e63172</url>
+      <description>
+        <p>Release description</p>
+          <ul>
+            <li>Reduce memory consumption of the getrefs command by 96%</li>
+          </ul>
+      </description>
+    </release>
     <release version="2026-10-19" date="2026-10-19">
     <url type="details">https://github.com/kovzol/bibref/commits/39918d2f0c151a581df33206332973be266f51b9</url>
       <description>
